@@ -1,0 +1,84 @@
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+
+/*UI group index，驱动开发人员需选择*/
+BANK_GROUP_INDEX = DRV_GROUP_LCD;
+
+/*2.从地址map图中获取UI模块的常驻代码段物理地址，只需写低14位，驱动开发人员需填写*/
+/*SRAM_TEXT_ADDR = 0x9c00; /*SRAM_UI_RCODE_ADDR;*/
+SRAM_TEXT_ADDR = SRAM_UI_RCODE_ADDR;
+SRAM_DATA_ADDR = SRAM_UI_DATA_ADDR;
+
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+
+KERNEL_BANK_A_ADDR_BASE = (KERNEL_BANK_A << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_A_ADDR;
+KERNEL_BANK_B_ADDR_BASE = (KERNEL_BANK_B << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_B_ADDR;
+KERNEL_BANK_C_ADDR_BASE = (KERNEL_BANK_C << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_C_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE;
+KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE;
+KERNEL_BANK_C_SIZE = SRAM_BANK_C_SIZE;
+
+/*输出段开头以4字节对齐， .bss 段总大小减4，防止 .data 段大小不是4整倍时溢出几个字节的情况*/
+SRAM_LCD_DATA_SIZE_FILL = SRAM_UI_DATA_SIZE - 4;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+KERNEL_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(led_driver_op)
+
+SECTIONS
+{
+    .text RCODE_TEXT_ADDR  : 
+    {
+        /*API OBJ在此链接*/
+        
+        rcode_led_op_entry.o(.text .rodata)
+        sdrv_clear_screen.o(.text .rodata)
+        sdrv_led_display.o(.text .rodata)
+     	hdrv_hard_deal.o(.text .rodata)
+       	sdrv_flash_screen.o(.text .rodata)
+        . = SRAM_UI_RCODE_SIZE;
+    }
+    
+    .data RDATA_DATA_ADDR   :  AT(ADDR(.text) + SIZEOF(.text)) 
+    {
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        *.o(.data)
+    }
+    .bss :
+    {
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = SRAM_LCD_DATA_SIZE_FILL - SIZEOF(.data);
+    }    
+
+    /*6.链接bank a代码*/
+    . = KERNEL_BANK_A_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_A_0    : 
+    {
+        hdrv_hard_init.o(.text .rodata) 
+        bank_a_led_init.o(.text .rodata)
+        . = KERNEL_BANK_A_SIZE;
+    }=0x0 
+    
+    /*假设还有一个bank a，文件名为bank_a_ui_xx.c*/
+    . = ((. + KERNEL_BANK_SPACE) & (~(KERNEL_BANK_SPACE - 1)))  + OFFSET;
+     BANK_A_1   : 
+    {
+       /*bank_a_lcd_functions.o(.text .rodata) */
+        . = KERNEL_BANK_A_SIZE;
+    }=0x0
+  
+}

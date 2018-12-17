@@ -1,0 +1,128 @@
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+/*1.AP INDEX*/
+AP_INDEX = FRONT_AP;
+
+/*2.从地址map图中获取card模块的常驻代码段物理地址，只需写低14位，开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR;
+SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR;
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+
+/*4.常驻代码段和数据段的大小*/
+RCODE_SIZE = SRAM_AP_FRONT_RCODE_SIZE;
+DATA_BSS_SIZE = SRAM_AP_FRONT_DATA_SIZE;
+
+/*只是建议起始地址，也可以往后偏移，如control_2一般不是从这个地址，如果要占全部的空间，则使用control_1*/
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_FRONT_CONTROL_1 << 24) + SRAM_AP_BANK_FRONT_CONTROL_ADDR;
+/*back ap 没有UI段*/
+BANK_UI_1_ADDR_BASE = (AP_BANK_FRONT_UI_1 << 24) + SRAM_AP_BANK_FRONT_UI_ADDR;
+/*固定复用basal或者codec的空间，不能跨空间使用，跟control1和control2不一样*/
+BANK_ENHANCED_1_ADDR_BASE = (AP_BANK_FRONT_ENHANCED_1 << 24) + SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR;
+BANK_ENHANCED_2_ADDR_BASE = (AP_BANK_FRONT_ENHANCED_2 << 24) + SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE;
+BANK_UI_SIZE = SRAM_AP_BANK_FRONT_UI_SIZE;
+BANK_ENHANCED1_SIZE = SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE;
+BANK_ENHANCED2_SIZE = SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(__start)
+
+SECTIONS
+{      
+	/* 常驻代码段: .text */
+    .text RCODE_TEXT_ADDR	: 
+    {
+        /*4.填写rcode输入节*/
+        /*从这里开始 .text 固定链接地址*/
+        KEEP(sys_op_entry.o(.text))
+        KEEP(libc_op_entry.o(.text))
+        KEEP(audio_device_op_entry.o(.text))
+        KEEP(key_op_entry.o(.text))
+        KEEP(lcd_op_entry.o(.text))
+        KEEP(tts_op_entry.o(.text))
+        KEEP(ccd_op_entry.o(.text))
+        KEEP(base_op_entry.o(.text))
+        KEEP(stub_mod_cmd.o(.text))
+		KEEP(app_timer_rcode.o(.text))
+        KEEP(message_rcode.o(.text))
+        KEEP(message_key_rcode.o(.text))
+        KEEP(common_view_loop.o(.text .rodata))
+        KEEP(common_view_manager.o(.rcode))
+        /*到这里结束 .text 固定链接地址*/ 
+        /*其他API OBJ在此链接*/
+        
+        btplay_message_loop.o(.text)
+        btplay_message_handle.o(.rodata.ke_maplist .rodata.se_maplist)
+    }
+
+	/* 未初始化的全局数据段，系统会自动清零*/
+    .bss RDATA_DATA_ADDR	:
+    {  
+    	 bss_begin = ABSOLUTE(.);
+		/*从这里开始 .bss 固定链接地址*/
+        KEEP(applib_app_data.o(.bss))
+    	KEEP(common_func_data.o(.bss))
+    	/*到这里结束 .bss 固定链接地址*/ 
+    	
+    	btplay_main.o(.bss)
+      	  	 
+        *(.sbss)
+        *(.common)/*小普通符号*/
+        *(common)/*标准普通符号*/
+    }
+    
+    /* 初始化了的全局数据段*/
+    .data :
+    {
+        bss_end = ABSOLUTE(.);
+		/*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        btplay_main.o(.data)
+        *.o(.data)
+    }
+
+    /*6.链接bank control 1代码*/
+    /*bank0 预留给运行时库ctor */
+    . = BANK_CONTROL_1_ADDR_BASE;
+    /*OFFSET为ui bank 1组的实际物理地址*/
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_0	: 
+    {
+        ctor.o(.text .rodata)
+        btplay_main.o(.text .rodata)
+        
+    }=0x0/*对定位符的赋值而产生的空隙由0x0填充*/    
+    
+    /*另一个bank control 1*/
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_CONTROL_1_1	: 
+    {
+        btplay_message_handle.o(.text .rodata)  
+           
+    }=0x0
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_CONTROL_1_2	: 
+    {
+        btplay_message_handle.o(.text.autoplay)
+        btplay_display.o(.text .rodata)
+        btplay_message_loop.o(.text.autoplay)
+    }=0x0
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_CONTROL_1_3	: 
+    {
+        btplay_message_loop.o(.bank_2) 
+        btplay_tts_play.o(.text .rodata)
+    }=0x0
+
+}

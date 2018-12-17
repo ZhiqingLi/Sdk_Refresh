@@ -1,0 +1,555 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD ./../../../psp_rel/include/link_base.xn
+                0x0000000000000000                DRV_GROUP_STG_BASE = 0x0
+                0x0000000000000001                DRV_GROUP_STG_CARD = 0x1
+                0x0000000000000002                DRV_GROUP_STG_UHOST = 0x2
+                0x0000000000000003                DRV_GROUP_FAT32 = 0x3
+                0x0000000000000004                DRV_GROUP_EXFAT = 0x4
+                0x0000000000000005                DRV_GROUP_UD = 0x5
+                0x0000000000000006                DRV_GROUP_LCD = 0x6
+                0x0000000000000007                DRV_GROUP_FM = 0x7
+                0x0000000000000008                DRV_GROUP_KEY = 0x8
+                0x0000000000000009                DRV_GROUP_CCD = 0x9
+                0x000000000000000a                DRV_GROUP_AUDIO_DEVICE = 0xa
+                0x000000000000000b                DRV_GROUP_TTS = 0xb
+                0x000000000000000c                DRV_GROUP_BT = 0xc
+                0x000000000000000f                DRV_GROUP_SYS = 0xf
+                0x000000000003ffff                SRAM_SIZE_MASK = 0x3ffff
+                0x000000009fc00000                RDATA_ADDR_BASE = 0x9fc00000
+                0x00000000bfc00000                RCODE_ADDR_BASE = 0xbfc00000
+                0x0000000000000001                KERNEL_BANK_A = 0x1
+                0x0000000000000002                KERNEL_BANK_B = 0x2
+                0x0000000000000003                KERNEL_BANK_C = 0x3
+                0x0000000000040000                BANK_SPACE = 0x40000
+                0x0000000000000000                FRONT_AP = 0x0
+                0x0000000000000001                BACK_AP = 0x1
+                0x0000000000000002                PROCESS_MANAGER_AP = 0x2
+                0x0000000000000000                FRONT_CODEC = 0x0
+                0x0000000000000001                BACK_CODEC = 0x1
+                0x0000000000000040                AP_BANK_FRONT_CONTROL_1 = 0x40
+                0x0000000000000048                AP_BANK_FRONT_UI_1 = 0x48
+                0x0000000000000050                AP_BANK_FRONT_BASAL = 0x50
+                0x0000000000000058                AP_BANK_FRONT_CODEC = 0x58
+                0x0000000000000060                AP_BANK_BACK_CONTROL_1 = 0x60
+                0x0000000000000068                AP_BANK_BACK_BASAL = 0x68
+                0x0000000000000070                AP_BANK_BACK_CODEC = 0x70
+                0x0000000000000078                AP_BANK_FRONT_ENHANCED_1 = 0x78
+                0x0000000000000071                AP_BANK_FRONT_ENHANCED_2 = 0x71
+                0x000000000000007a                AP_BANK_BACK_ENHANCED_1 = 0x7a
+                0x000000000000007b                AP_BANK_BACK_ENHANCED_2 = 0x7b
+                0x0000000000000072                AP_BANK_BTENGINE_CONTROL_1 = 0x72
+                0x0000000000000073                AP_BANK_BTENGINE_LIB_1 = 0x73
+                0x0000000000000074                AP_BANK_BTENGINE_LIB_2 = 0x74
+                0x0000000000000075                AP_BANK_BTENGINE_EXTEND_1 = 0x75
+                0x0000000000000076                AP_BANK_BTENGINE_EXTEND_2 = 0x76
+                0x0000000000000077                AP_BANK_BTENGINE_EXTEND_3 = 0x77
+                0x000000000000007c                AP_BANK_BTENGINE_EXTEND_4 = 0x7c
+                0x0000000000000079                AP_BANK_BTENGINE_EXTEND_5 = 0x79
+                0x000000000000007f                AP_BANK_MANAGER = 0x7f
+                0x0000000000000041                AP_BANK_AUTOTEST = 0x41
+                0x0000000000000000                SROM_BROM_ADDR = 0x0
+                0x0000000000002600                SROM_BROM_SIZE = 0x2600
+                0x0000000000002600                SROM_SPINOR_ADDR = (SROM_BROM_ADDR + SROM_BROM_SIZE)
+                0x0000000000000c00                SROM_SPINOR_SIZE = 0xc00
+                0x0000000000003200                SROM_TWI_ADDR = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE)
+                0x0000000000000700                SROM_TWI_SIZE = 0x700
+                0x0000000000003900                SROM_STUB_ADDR = (SROM_TWI_ADDR + SROM_TWI_SIZE)
+                0x0000000000000700                SROM_STUB_SIZE = 0x700
+                0x0000000000000e00                SROM_SPINOR_SIZE_MDY = 0xe00
+                0x0000000000003400                SROM_TWI_ADDR_MDY = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE_MDY)
+                0x0000000000000700                SROM_TWI_SIZE_MDY = 0x700
+                0x0000000000003b00                SROM_STUB_ADDR_MDY = (SROM_TWI_ADDR_MDY + SROM_TWI_SIZE_MDY)
+                0x0000000000000500                SROM_STUB_SIZE_MDY = 0x500
+                0x0000000000004000                SROM_KERNEL_ADDR = (SROM_STUB_ADDR + SROM_STUB_SIZE)
+                0x0000000000004000                SROM_KERNEL_SIZE = 0x4000
+                0x000000000000c000                SROM_FS_ADDR = 0xc000
+                0x0000000000001c00                SROM_FS_SIZE = 0x1c00
+                0x000000000000dc00                SROM_SPINOR1_ADDR = (SROM_FS_ADDR + SROM_FS_SIZE)
+                0x0000000000000400                SROM_SPINOR1_SIZE = 0x400
+                0x0000000000008000                SRAM_OS_RCODE_ADDR = 0x8000
+                0x0000000000000c00                SRAM_OS_RCODE_SIZE = 0xc00
+                0x0000000000008c00                SRAM_SPINOR_RCODE_ADDR = 0x8c00
+                0x0000000000000400                SRAM_SPINOR_RCODE_SIZE = 0x400
+                0x0000000000009000                SRAM_BANK_A_ADDR = 0x9000
+                0x0000000000000400                SRAM_BANK_A_SIZE = 0x400
+                0x0000000000009400                SRAM_BANK_B_ADDR = 0x9400
+                0x0000000000000800                SRAM_BANK_B_SIZE = 0x800
+                0x0000000000009c00                SRAM_UI_RCODE_ADDR = 0x9c00
+                0x0000000000000300                SRAM_UI_RCODE_SIZE = 0x300
+                0x0000000000009f00                SRAM_AUDIO_GLOBAL_DATA_ADDR = 0x9f00
+                0x0000000000000060                SRAM_AUDIO_GLOBAL_DATA_SIZE = 0x60
+                0x0000000000009f60                SRAM_UHOST_GLOBAL_DATA_ADDR = 0x9f60
+                0x0000000000000010                SRAM_UHOST_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f70                SRAM_CARD_GLOBAL_DATA_ADDR = 0x9f70
+                0x0000000000000010                SRAM_CARD_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f80                SRAM_SYS_SHARE_DATA_ADDR = 0x9f80
+                0x0000000000000040                SRAM_SYS_SHARE_DATA_SIZE = 0x40
+                0x0000000000009fc0                SRAM_RAM6_CCD_GLOBAL_DATA_ADDR = 0x9fc0
+                0x0000000000000040                SRAM_RAM6_CCD_GLOBAL_DATA_SIZE = 0x40
+                0x000000000000a000                SRAM_BT_LIB1_BANK_ADDR = 0xa000
+                0x0000000000000800                SRAM_BT_LIB1_BANK_SIZE = 0x800
+                0x000000000000a800                SRAM_BT_EXT1_BANK_ADDR = (SRAM_BT_LIB1_BANK_ADDR + SRAM_BT_LIB1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT1_BANK_SIZE = 0x800
+                0x000000000000b000                SRAM_BT_EXT2_BANK_ADDR = (SRAM_BT_EXT1_BANK_ADDR + SRAM_BT_EXT1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT2_BANK_SIZE = 0x800
+                0x000000000000f000                SRAM_BT_STACK_RCODE1_ADDR = 0xf000
+                0x0000000000000a00                SRAM_BT_STACK_RCODE1_SIZE = 0xa00
+                0x000000000000b000                SRAM_AP_BANK_MANAGER_ADDR = SRAM_BT_EXT2_BANK_ADDR
+                0x0000000000000800                SRAM_AP_BANK_MANAGER_SIZE = SRAM_BT_EXT2_BANK_SIZE
+                0x000000000000be00                SRAM_KEY_MESSAGE_DATA_ADDR = 0xbe00
+                0x0000000000000100                SRAM_KEY_MESSAGE_DATA_SIZE = 0x100
+                0x000000000000bf00                SRAM_UI_DATA_ADDR = 0xbf00
+                0x0000000000000100                SRAM_UI_DATA_SIZE = 0x100
+                0x0000000000010000                SRAM_BT_CONTROLLER_RCODE_ADDR = 0x10000
+                0x0000000000000500                SRAM_BT_CONTROLLER_RCODE_SIZE = 0x500
+                0x0000000000010500                SRAM_COMMON_BT_MANAGER_RCODE = (SRAM_BT_CONTROLLER_RCODE_ADDR + SRAM_BT_CONTROLLER_RCODE_SIZE)
+                0x0000000000000b00                SRAM_COMMON_BT_MANAGER_SIZE = 0xb00
+                0x0000000000011000                SRAM_BT_BACK_RCODE_ADDR = (SRAM_COMMON_BT_MANAGER_RCODE + SRAM_COMMON_BT_MANAGER_SIZE)
+                0x0000000000002900                SRAM_BT_BACK_RCODE_SIZE = 0x2900
+                0x00000000000140d0                SRAM_IRQ_PRINT_BUFFER_ADDR = 0x140d0
+                0x0000000000000130                SRAM_IRQ_PRINT_BUFFER_SIZE = 0x130
+                0x0000000000013900                SRAM_BT_LIB2_BANK_ADDR = 0x13900
+                0x0000000000000d00                SRAM_BT_LIB2_BANK_SIZE = 0xd00
+                0x0000000000013900                SRAM_BT_EXT3_BANK_ADDR = SRAM_BT_LIB2_BANK_ADDR
+                0x0000000000000d00                SRAM_BT_EXT3_BANK_SIZE = SRAM_BT_LIB2_BANK_SIZE
+                0x0000000000021e00                SRAM_BT_EXT4_BANK_ADDR = 0x21e00
+                0x0000000000000600                SRAM_BT_EXT4_BANK_SIZE = 0x600
+                0x0000000000014600                SRAM_BT_EXT5_BANK_ADDR = 0x14600
+                0x0000000000000600                SRAM_BT_EXT5_BANK_SIZE = 0x600
+                0x000000000000fa00                SRAM_COM_DAE_RCODE_ADDR = 0xfa00
+                0x0000000000000100                SRAM_COM_DAE_RCODE_SIZE = 0x100
+                0x000000000000fb00                SRAM_BTCALL_EXT_RCODE_ADDR = 0xfb00
+                0x0000000000000100                SRAM_BTCALL_EXT_RCODE_SIZE = 0x100
+                0x000000000001e900                SRAM_AP_FRONT_RCODE_ADDR = 0x1e900
+                0x0000000000000800                SRAM_AP_FRONT_RCODE_SIZE = 0x800
+                0x0000000000016c00                SRAM_FS_RCODE_ADDR = 0x16c00
+                0x0000000000000800                SRAM_FS_RCODE_SIZE = 0x800
+                0x0000000000017400                SRAM_CARD_UD_RCODE_ADDR = 0x17400
+                0x0000000000000c00                SRAM_CARD_UD_RCODE_SIZE = 0xc00
+                0x0000000000017400                SRAM_UHOST_UD_RCODE_ADDR = SRAM_CARD_UD_RCODE_ADDR
+                0x0000000000000c00                SRAM_UHOST_UD_RCODE_SIZE = SRAM_CARD_UD_RCODE_SIZE
+                0x0000000000016c00                SRAM_USOUND_RCODE_ADDR = 0x16c00
+                0x0000000000002800                SRAM_USOUND_RCODE_SIZE = 0x2800
+                0x0000000000016c00                SRAM_BTSTACK_AVDTP_DATA_ADDR = 0x16c00
+                0x0000000000002980                SRAM_BTSTACK_AVDTP_DATA_SIZE = 0x2980
+                0x0000000000016c00                SRAM_BTCALL_CALLRING_BUF_ADDR = 0x16c00
+                0x0000000000001000                SRAM_BTCALL_CALLRING_BUF_SIZE = 0x1000
+                0x0000000000016c00                SRAM_BTCALL_ASQT_BUF_ADDR = 0x16c00
+                0x0000000000002800                SRAM_BTCALL_ASQT_BUF_SIZE = 0x2800
+                0x0000000000018000                SRAM_FS_DATA_ADDR = 0x18000
+                0x0000000000000300                SRAM_FS_DATA_SIZE = 0x300
+                0x0000000000018300                SRAM_FS_BUF_ADDR = 0x18300
+                0x0000000000000a00                SRAM_FS_BUF_SIZE = 0xa00
+                0x0000000000018d00                SRAM_CARD_UD_CACHE_ADDR = 0x18d00
+                0x0000000000000800                SRAM_CARD_UD_CACHE_SIZE = 0x800
+                0x0000000000018d00                SRAM_UHOST_UD_CACHE_ADDR = SRAM_CARD_UD_CACHE_ADDR
+                0x0000000000000800                SRAM_UHOST_UD_CACHE_SIZE = SRAM_CARD_UD_CACHE_SIZE
+                0x0000000000019500                SRAM_CARD_DATA_ADDR = 0x19500
+                0x0000000000000080                SRAM_CARD_DATA_SIZE = 0x80
+                0x0000000000019500                SRAM_UHOST_DATA_ADDR = SRAM_CARD_DATA_ADDR
+                0x0000000000000080                SRAM_UHOST_DATA_SIZE = SRAM_CARD_DATA_SIZE
+                0x0000000000019580                SRAM_AP_BACK_DATA_ADDR = 0x19580
+                0x0000000000000400                SRAM_AP_BACK_DATA_SIZE = 0x400
+                0x0000000000019980                SRAM_AP_FRONT_DATA_ADDR = 0x19980
+                0x0000000000000700                SRAM_AP_FRONT_DATA_SIZE = 0x700
+                0x000000000001a080                SRAM_APPLIB_GLOBAL_DATA_ADDR = 0x1a080
+                0x0000000000000040                SRAM_APPLIB_GLOBAL_DATA_SIZE = 0x40
+                0x000000000001a0c0                SRAM_APPLIB_DATA_ADDR = 0x1a0c0
+                0x0000000000000200                SRAM_APPLIB_DATA_SIZE = 0x200
+                0x000000000001a2c0                SRAM_BTMANAGER_DATA_ADDR = 0x1a2c0
+                0x0000000000000140                SRAM_BTMANAGER_DATA_SIZE = 0x140
+                0x000000000001a400                SRAM_OS_DATA_ADDR = 0x1a400
+                0x0000000000000880                SRAM_OS_DATA_SIZE = 0x880
+                0x000000000001ac80                SRAM_OS_HEAP_ADDR = 0x1ac80
+                0x0000000000000680                SRAM_OS_HEAP_SIZE = 0x680
+                0x000000000001b300                SRAM_AP_MANAGER_RCODE_ADDR = 0x1b300
+                0x0000000000000100                SRAM_AP_MANAGER_RCODE_SIZE = 0x100
+                0x000000000001b400                SRAM_OS_SD_SWAP_BUF_ADDR = 0x1b400
+                0x0000000000000200                SRAM_OS_SD_SWAP_BUF_SIZE = 0x200
+                0x000000000001b600                SRAM_OS_TASK_STACK_ADDR = 0x1b600
+                0x0000000000001e00                SRAM_OS_TASK_STACK_SIZE = 0x1e00
+                0x000000000001d500                SRAM_BANK_C_ADDR = 0x1d500
+                0x0000000000000400                SRAM_BANK_C_SIZE = 0x400
+                0x000000000001d900                SRAM_BT_HCI_BUF_ADDR = 0x1d900
+                0x0000000000001000                SRAM_BT_HCI_BUF_SIZE = 0x1000
+                0x0000000000016400                SRAM_BT_UART_BUF_ADDR = 0x16400
+                0x0000000000000800                SRAM_BT_UART_BUF_SIZE = 0x800
+                0x000000000001f100                SRAM_BT_RCODE_DATA_ADDR = 0x1f100
+                0x0000000000000700                SRAM_BT_RCODE_DATA_SIZE = 0x700
+                0x000000000001f800                SRAM_KEY_MESSAGE_RCODE_ADDR = 0x1f800
+                0x0000000000000800                SRAM_KEY_MESSAGE_RCODE_SIZE = 0x800
+                0x0000000000020000                SRAM_DSP_IRQ_TABLE_ADDR = 0x20000
+                0x0000000000000120                SRAM_DSP_IRQ_TABLE_SIZE = 0x120
+                0x0000000000020120                SRAM_RAM2_RESEVER_ADDR = 0x20120
+                0x00000000000000e0                SRAM_RAM2_RESEVER_SIZE = 0xe0
+                0x0000000000020200                SRAM_AP_BANK_FRONT_CONTROL_ADDR = 0x20200
+                0x0000000000000800                SRAM_AP_BANK_FRONT_CONTROL_SIZE = 0x800
+                0x0000000000020a00                SRAM_KERNEL_XSYS_ADDR = 0x20a00
+                0x0000000000000e00                SRAM_KERNEL_XSYS_SIZE = 0xe00
+                0x0000000000021800                SRAM_AP_BACK_BASAL_RCODE_ADDR = 0x21800
+                0x0000000000000600                SRAM_AP_BACK_BASAL_RCODE_SIZE = 0x600
+                0x0000000000021e00                SRAM_AP_BANK_BACK_BASAL_ADDR = 0x21e00
+                0x0000000000000600                SRAM_AP_BANK_BACK_BASAL_SIZE = 0x600
+                0x0000000000022400                SRAM_BT_HEAD_ADDR = 0x22400
+                0x0000000000003400                SRAM_BT_HEAD_SIZE = 0x3400
+                0x0000000000025000                SRAM_UART_STUB_RCODE_ADDR = 0x25000
+                0x0000000000000800                SRAM_UART_STUB_RCODE_SIZE = 0x800
+                0x0000000000027e00                SRAM_AP_FRONT_BASAL_RCODE_ADDR = 0x27e00
+                0x0000000000000400                SRAM_AP_FRONT_BASAL_RCODE_SIZE = 0x400
+                0x000000000000b000                SRAM_AP_BANK_FRONT_BASAL_ADDR = 0xb000
+                0x0000000000000800                SRAM_AP_BANK_FRONT_BASAL_SIZE = 0x800
+                0x0000000000025800                SRAM_AP_BANK_FRONT_UI_ADDR = 0x25800
+                0x0000000000000800                SRAM_AP_BANK_FRONT_UI_SIZE = 0x800
+                0x0000000000026000                SRAM_AP_RCP_COMMAND_BUFFER_ADDR = 0x26000
+                0x0000000000000220                SRAM_AP_RCP_COMMAND_BUFFER_SIZE = 0x220
+                0x0000000000026000                SRAM_AP_BACK_RCODE_ADDR = 0x26000
+                0x0000000000000800                SRAM_AP_BACK_RCODE_SIZE = 0x800
+                0x0000000000026800                SRAM_AP_BANK_BACK_CONTROL_ADDR = 0x26800
+                0x0000000000000800                SRAM_AP_BANK_BACK_CONTROL_SIZE = 0x800
+                0x0000000000027000                SRAM_RAM2_RESEVER2_ADDR = 0x27000
+                0x0000000000000e00                SRAM_RAM2_RESEVER2_SIZE = 0xe00
+                0x0000000000027e00                SRAM_BTPLAY_MMM_RCODE2_ADDR = 0x27e00
+                0x0000000000000e00                SRAM_BTPLAY_MMM_RCODE2_SIZE = 0xe00
+                0x0000000000028c00                SRAM_BTPLAY_SWAP_BUFFER_ADDR = 0x28c00
+                0x0000000000000400                SRAM_BTPLAY_SWAP_BUFFER_SIZE = 0x400
+                0x0000000000028200                SRAM_AP_BACK_CODEC_RCODE_ADDR = 0x28200
+                0x0000000000000a00                SRAM_AP_BACK_CODEC_RCODE_SIZE = 0xa00
+                0x0000000000028c00                SRAM_AP_BANK_BACK_CODEC_ADDR = 0x28c00
+                0x0000000000000400                SRAM_AP_BANK_BACK_CODEC_SIZE = 0x400
+                0x0000000000029000                SRAM_AP_BACK_AL_RCODE_1_ADDR = 0x29000
+                0x0000000000007000                SRAM_AP_BACK_AL_RCODE_1_SIZE = 0x7000
+                0x000000000002e000                SRAM_AP_BANK_BACK_AL_4_ADDR = 0x2e000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_4_SIZE = 0x2000
+                0x0000000000030000                SRAM_AP_BANK_BACK_AL_1_ADDR = 0x30000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_1_SIZE = 0x4000
+                0x0000000000034000                SRAM_AP_BACK_AL_RCODE_2_ADDR = 0x34000
+                0x0000000000002000                SRAM_AP_BACK_AL_RCODE_2_SIZE = 0x2000
+                0x0000000000036000                SRAM_AP_BANK_BACK_AL_2_ADDR = 0x36000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_2_SIZE = 0x2000
+                0x0000000000038000                SRAM_AP_BANK_BACK_AL_3_ADDR = 0x38000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_3_SIZE = 0x4000
+                0x000000000000e000                SRAM_ASRC_BUF_0_ADDR = 0xe000
+                0x0000000000000e00                SRAM_ASRC_BUF_0_SIZE = 0xe00
+                0x000000000000f000                SRAM_ASRC_BUF_1_ADDR = 0xf000
+                0x0000000000000c00                SRAM_ASRC_BUF_1_SIZE = 0xc00
+                0x000000000000fc00                SRAM_CARD_BUF_0_ADDR = 0xfc00
+                0x0000000000000200                SRAM_CARD_BUF_0_SIZE = 0x200
+                0x000000000000fe00                SRAM_CARD_BUF_1_ADDR = 0xfe00
+                0x0000000000000200                SRAM_CARD_BUF_1_SIZE = 0x200
+                0x000000000000fc00                SRAM_CARD_FIFO_ADDR = SRAM_CARD_BUF_0_ADDR
+                0x0000000000000400                SRAM_CARD_FIFO_SIZE = (SRAM_CARD_BUF_0_SIZE + SRAM_CARD_BUF_1_SIZE)
+                0x000000000003c000                SRAM_PCMRAM_0_ADDR = 0x3c000
+                0x0000000000001000                SRAM_PCMRAM_0_SIZE = 0x1000
+                0x000000000003d000                SRAM_PCMRAM_1_ADDR = 0x3d000
+                0x0000000000001000                SRAM_PCMRAM_1_SIZE = 0x1000
+                0x000000000003e000                SRAM_PCMRAM_2_ADDR = 0x3e000
+                0x0000000000001000                SRAM_PCMRAM_2_SIZE = 0x1000
+                0x000000000003c000                SRAM_PCMRAM_H5_FIFO_ADDR = SRAM_PCMRAM_0_ADDR
+                0x0000000000001000                SRAM_PCMRAM_H5_FIFO_SIZE = SRAM_PCMRAM_0_SIZE
+                0x000000000003d000                SRAM_PCMRAM_PCMFIFO_ADDR = SRAM_PCMRAM_1_ADDR
+                0x0000000000002000                SRAM_PCMRAM_FIFO_SIZE = (SRAM_PCMRAM_1_SIZE + SRAM_PCMRAM_2_SIZE)
+                0x000000000003f000                SRAM_URAM_0_ADDR = 0x3f000
+                0x0000000000000800                SRAM_URAM_0_SIZE = 0x800
+                0x000000000003f800                SRAM_URAM_1_ADDR = 0x3f800
+                0x0000000000000800                SRAM_URAM_1_SIZE = 0x800
+                0x000000000003f000                SRAM_URAM_UDISK_FIFO_ADDR = SRAM_URAM_0_ADDR
+                0x0000000000001000                SRAM_URAM_UDISK_FIFO_SIZE = (SRAM_URAM_0_SIZE + SRAM_URAM_1_SIZE)
+                0x000000000003f800                SRAM_URAM_UHOST_FIFO_ADDR = SRAM_URAM_1_ADDR
+                0x0000000000000800                SRAM_URAM_UHOST_FIFO_SIZE = SRAM_URAM_1_SIZE
+                0x0000000000026800                SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_CONTROL_ADDR
+                0x0000000000000800                SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE = 0x800
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE = 0x0
+                0x0000000000021e00                SRAM_AP_BANK_BACK_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_BASAL_ADDR
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_1_SIZE = SRAM_AP_BANK_BACK_BASAL_SIZE
+                0x0000000000028a00                SRAM_AP_BANK_BACK_ENHANCED_2_ADDR = 0x28a00
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_2_SIZE = 0x600
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_SIZE = 0x0
+                0x000000000003b800                SRAM_TTS_DRV_RCODE_ADDR = 0x3b800
+                0x0000000000000800                SRAM_TTS_DRV_RCODE_SIZE = 0x800
+                0x0000000000019580                SRAM_FM_ENG_RDATA_ADDR = SRAM_AP_BACK_DATA_ADDR
+                0x0000000000000200                SRAM_FM_ENG_RDATA_SIZE = 0x200
+                0x0000000000016c00                SRAM_FM_DRV_RCODE_ADDR = SRAM_FS_RCODE_ADDR
+                0x0000000000000800                SRAM_FM_DRV_RCODE_SIZE = 0x800
+                0x0000000000019780                SRAM_FM_DRV_RDATA_ADDR = (SRAM_FM_ENG_RDATA_ADDR + SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000000200                SRAM_FM_DRV_RDATA_SIZE = (SRAM_AP_BACK_DATA_SIZE - SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000021800                SRAM_AP_USB_DEVICE_RCODE_ADDR = 0x21800
+                0x0000000000004000                SRAM_AP_USB_DEVICE_RCODE_SIZE = SRAM_AP_BANK_BACK_AL_1_SIZE
+                0x0000000000040000                SRAM_INVALID_RCODE_ADDR = 0x40000
+                0x0000000000000007                BANK_GROUP_INDEX = DRV_GROUP_FM
+                0x0000000000016c00                SRAM_TEXT_ADDR = SRAM_FM_DRV_RCODE_ADDR
+                0x00000000bfc16c00                RCODE_TEXT_ADDR = (RCODE_ADDR_BASE + SRAM_TEXT_ADDR)
+                0x0000000000000800                RCODE_SIZE = SRAM_FM_DRV_RCODE_SIZE
+                0x0000000000019780                SRAM_DATA_ADDR = SRAM_FM_DRV_RDATA_ADDR
+                0x000000009fc19780                RDATA_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_DATA_ADDR)
+                0x0000000000000200                DATA_BSS_SIZE = SRAM_FM_DRV_RDATA_SIZE
+                0x00000000bfc03400                ROM_TEXT_ADDR = (RCODE_ADDR_BASE + SROM_TWI_ADDR_MDY)
+                0x0000000000000700                ROM_TEXT_SIZE = SROM_TWI_SIZE_MDY
+                0x0000000017009000                KERNEL_BANK_A_ADDR_BASE = (((KERNEL_BANK_A << 0x1c) + (BANK_GROUP_INDEX << 0x18)) + SRAM_BANK_A_ADDR)
+                0x0000000027009400                KERNEL_BANK_B_ADDR_BASE = (((KERNEL_BANK_B << 0x1c) + (BANK_GROUP_INDEX << 0x18)) + SRAM_BANK_B_ADDR)
+                0x0000000000000400                KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE
+                0x0000000000000800                KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE
+                0x0000000000040000                KERNEL_BANK_SPACE = BANK_SPACE
+
+.text           0x00000000bfc16c00      0x800
+ sys_op_entry.o(.text)
+ .text          0x00000000bfc16c00        0x4 ./../../../psp_rel/lib/sys_op_entry.o
+                0x00000000bfc16c01                sys_op_entry
+ libc_op_entry.o(.text)
+ .text          0x00000000bfc16c04        0x4 ./../../../psp_rel/lib/libc_op_entry.o
+                0x00000000bfc16c05                libc_op_entry
+ rcode_fm_op_entry.o(.text)
+ rcode_fm_deal.o(.text .rodata)
+ .text          0x00000000bfc16c08      0x12c rcode_fm_deal.o
+                0x00000000bfc16c9d                sFM_BreakSeek
+                0x00000000bfc16cf5                sFM_GetFreq
+                0x00000000bfc16c89                sFM_HardSeek
+                0x00000000bfc16c09                sFM_SetFreq
+                0x00000000bfc16cc5                sFM_GetStatus
+                0x00000000bfc16c35                sFM_Search
+                0x00000000bfc16cb1                sFM_GetHardSeekflag
+ qndriver.o(.rocode)
+ .rocode        0x00000000bfc16d34      0x47c qndriver.o
+                0x00000000bfc16d8d                QNF_SetRegBit
+                0x00000000bfc16fbd                QND_TuneToCH
+                0x00000000bfc17199                QND_RXSeekCH
+                0x00000000bfc170c9                QND_RXValidCH
+                0x00000000bfc16d35                QNF_RXInit
+                0x00000000bfc16f0d                QNF_ConfigScan
+                0x00000000bfc16e31                QNF_SetCh
+                0x00000000bfc16de5                QNF_GetCh
+ qnio.o(.text .rodata)
+ .text          0x00000000bfc171b0      0x220 qnio.o
+                0x00000000bfc1728d                QND_ReadReg
+                0x00000000bfc171b1                SwitchGPIO
+                0x00000000bfc171f1                QND_WriteReg
+                0x0000000000000800                . = RCODE_SIZE
+ *fill*         0x00000000bfc173d0       0x30 00
+
+.rom            0x00000000bfc03400      0x700
+ rom_TWI.o(.text .rodata)
+ .text          0x00000000bfc03400      0x6b0 ./../../drv/rom_TWI_lib/rom_TWI.o
+                0x00000000bfc03601                TWI_SCL_Output_Dis
+                0x00000000bfc03509                TWI_SCL_high_hold
+                0x00000000bfc03641                TWI_SCL_Input_Dis
+                0x00000000bfc03489                TWI_Delay
+                0x00000000bfc035c1                TWI_SDA_Input_Dis
+                0x00000000bfc035a1                TWI_SDA_Input_En
+                0x00000000bfc036d9                TWI_Start
+                0x00000000bfc03a31                TWI_GetAck
+                0x00000000bfc03455                TWI_Exit
+                0x00000000bfc03535                TWI_SCL_low_hold
+                0x00000000bfc03661                TWI_Data_Bit
+                0x00000000bfc034b1                TWI_SDA_high_hold
+                0x00000000bfc03955                TWI_ReadByte
+                0x00000000bfc03401                TWI_Init
+                0x00000000bfc03721                TWI_Stop
+                0x00000000bfc034dd                TWI_SDA_low_hold
+                0x00000000bfc03759                TWI_Trans_Bytes
+                0x00000000bfc03561                TWI_SDA_Output_En
+                0x00000000bfc0380d                TWI_Recev_Bytes
+                0x00000000bfc03621                TWI_SCL_Input_En
+                0x00000000bfc038e9                TWI_WriteByte
+                0x00000000bfc03581                TWI_SDA_Output_Dis
+                0x00000000bfc035e1                TWI_SCL_Output_En
+                0x00000000bfc039e1                TWI_SendAck
+                0x00000000bfc03699                TWI_Data_Input
+                0x0000000000000700                . = ROM_TEXT_SIZE
+ *fill*         0x00000000bfc03ab0       0x50 00
+
+.data           0x000000009fc19780       0x6c load address 0x00000000bfc17400
+                0x000000009fc19780                _resident_data = <code 340> (.)
+ *.o(.data)
+ .data          0x000000009fc19780       0x6c rcode_fm_op_entry.o
+                0x000000009fc197a8                fm_drv_op
+                0x000000009fc19784                gpio_twi
+                0x000000009fc197a4                delay_twi
+                0x000000009fc19780                twi_gpio
+
+.bss            0x000000009fc197ec      0x194
+                0x000000009fc197ec                _resident_data_end = <code 340> (.)
+ *(.bss)
+ .bss           0x000000009fc197ec       0x18 rcode_fm_deal.o
+                0x000000009fc197f0                g_set_value
+                0x000000009fc19800                qnd_xtal_div0
+                0x000000009fc197fc                fm_init_parm
+                0x000000009fc19802                qnd_xtal_div2
+                0x000000009fc19801                qnd_xtal_div1
+                0x000000009fc197ec                g_freq_855
+ .bss           0x000000009fc19804        0x3 qndriver.o
+                0x000000009fc19804                qnd_div1
+                0x000000009fc19806                qnd_nco
+                0x000000009fc19805                qnd_div2
+ *(.sbss)
+ *(.common)
+ *(common)
+                0x0000000000000194                . = (DATA_BSS_SIZE - (_resident_data_end - _resident_data))
+ *fill*         0x000000009fc19807      0x179 00
+                0x0000000017009000                . = KERNEL_BANK_A_ADDR_BASE
+                0x0000000000009000                OFFSET = (. & (KERNEL_BANK_SPACE - 0x1))
+
+BANK_A_0        0x0000000017009000      0x234
+ bank_a_fm_init.o(.text .rodata)
+ .text          0x0000000017009000       0xc4 bank_a_fm_init.o
+                0x000000001700909d                fmdrv_exit
+                0x000000001700909d                cleanup_module
+                0x0000000017009001                init_module
+                0x0000000017009001                fmdrv_init
+ rcode_fm_deal.o(.bank)
+ .bank          0x00000000170090c4      0x170 rcode_fm_deal.o
+                0x00000000170091f9                sFM_GetIntsity
+                0x000000001700920d                sFM_GetStereo
+                0x00000000170090c5                sFM_SetBand
+                0x00000000170091a1                sFM_GetBand
+                0x0000000017009161                sFM_Mute
+                0x0000000017009221                sFM_Debug
+                0x0000000017009181                sFM_SetThrod
+                0x0000000027009400                . = KERNEL_BANK_B_ADDR_BASE
+                0x0000000000009400                OFFSET = (. & (KERNEL_BANK_SPACE - 0x1))
+
+BANK_B_0        0x0000000027009400      0x388
+ bank_b_fm_init_deal.o(.text .rodata)
+ .text          0x0000000027009400       0x90 bank_b_fm_init_deal.o
+                0x0000000027009465                sFM_Standby
+                0x0000000027009401                sFM_Init
+ qndriver.o(.text .rodata)
+ .text          0x0000000027009490      0x2e4 qndriver.o
+                0x0000000027009491                QNF_SetMute
+                0x00000000270094bd                QN_ChipInitialization
+                0x00000000270096ad                QND_Init
+                0x00000000270096d5                QND_RXSetTH
+ .rodata        0x0000000027009774       0x14 qndriver.o
+                0x0000000027049400                . = (((. + KERNEL_BANK_SPACE) & ~ ((KERNEL_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_B_1        0x0000000027049400       0x40
+ bank_b_fm_get_deal.o(.text .rodata)
+ .text          0x0000000027049400       0x40 bank_b_fm_get_deal.o
+                0x0000000027049401                sFM_GetAnten
+
+.rel.dyn
+LOAD bank_b_fm_get_deal.o
+LOAD bank_b_fm_init_deal.o
+LOAD rcode_fm_deal.o
+LOAD bank_a_fm_init.o
+LOAD rcode_fm_op_entry.o
+LOAD qndriver.o
+LOAD qnio.o
+OUTPUT(drv_fm.exe elf32-tradlittlemips)
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 ./../../../psp_rel/lib/sys_op_entry.o
+
+.pdr            0x0000000000000000      0x7a0
+ .pdr           0x0000000000000000       0x20 ./../../../psp_rel/lib/sys_op_entry.o
+ .pdr           0x0000000000000020       0x20 ./../../../psp_rel/lib/libc_op_entry.o
+ .pdr           0x0000000000000040      0x1c0 rcode_fm_deal.o
+ .pdr           0x0000000000000200      0x180 qndriver.o
+ .pdr           0x0000000000000380       0x60 qnio.o
+ .pdr           0x00000000000003e0      0x320 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .pdr           0x0000000000000700       0x40 bank_a_fm_init.o
+ .pdr           0x0000000000000740       0x40 bank_b_fm_init_deal.o
+ .pdr           0x0000000000000780       0x20 bank_b_fm_get_deal.o
+
+.mdebug.abi32   0x0000000000000000        0x0
+
+.debug_abbrev   0x0000000000000000      0x6f4
+ .debug_abbrev  0x0000000000000000       0x98 rcode_fm_op_entry.o
+ .debug_abbrev  0x0000000000000098       0xf5 rcode_fm_deal.o
+ .debug_abbrev  0x000000000000018d      0x18c qndriver.o
+ .debug_abbrev  0x0000000000000319       0xda qnio.o
+ .debug_abbrev  0x00000000000003f3      0x149 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_abbrev  0x000000000000053c       0xa9 bank_a_fm_init.o
+ .debug_abbrev  0x00000000000005e5       0x93 bank_b_fm_init_deal.o
+ .debug_abbrev  0x0000000000000678       0x7c bank_b_fm_get_deal.o
+
+.debug_info     0x0000000000000000     0x27f7
+ .debug_info    0x0000000000000000      0x3e1 rcode_fm_op_entry.o
+ .debug_info    0x00000000000003e1      0xa09 rcode_fm_deal.o
+ .debug_info    0x0000000000000dea      0x76b qndriver.o
+ .debug_info    0x0000000000001555      0x328 qnio.o
+ .debug_info    0x000000000000187d      0x8ce ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_info    0x000000000000214b      0x28d bank_a_fm_init.o
+ .debug_info    0x00000000000023d8      0x251 bank_b_fm_init_deal.o
+ .debug_info    0x0000000000002629      0x1ce bank_b_fm_get_deal.o
+
+.debug_line     0x0000000000000000      0x74f
+ .debug_line    0x0000000000000000       0x96 rcode_fm_op_entry.o
+ .debug_line    0x0000000000000096      0x11d rcode_fm_deal.o
+ .debug_line    0x00000000000001b3      0x1a8 qndriver.o
+ .debug_line    0x000000000000035b       0xf1 qnio.o
+ .debug_line    0x000000000000044c      0x138 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_line    0x0000000000000584       0xc9 bank_a_fm_init.o
+ .debug_line    0x000000000000064d       0x94 bank_b_fm_init_deal.o
+ .debug_line    0x00000000000006e1       0x6e bank_b_fm_get_deal.o
+
+.debug_pubnames
+                0x0000000000000000      0x55d
+ .debug_pubnames
+                0x0000000000000000       0x48 rcode_fm_op_entry.o
+ .debug_pubnames
+                0x0000000000000048      0x165 rcode_fm_deal.o
+ .debug_pubnames
+                0x00000000000001ad      0x103 qndriver.o
+ .debug_pubnames
+                0x00000000000002b0       0x42 qnio.o
+ .debug_pubnames
+                0x00000000000002f2      0x1e9 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_pubnames
+                0x00000000000004db       0x30 bank_a_fm_init.o
+ .debug_pubnames
+                0x000000000000050b       0x2f bank_b_fm_init_deal.o
+ .debug_pubnames
+                0x000000000000053a       0x23 bank_b_fm_get_deal.o
+
+.debug_str      0x0000000000000000       0xbb
+ .debug_str     0x0000000000000000       0x12 rcode_fm_op_entry.o
+ .debug_str     0x0000000000000012       0x1e rcode_fm_deal.o
+ .debug_str     0x0000000000000030       0x12 qndriver.o
+ .debug_str     0x0000000000000042       0x1d qnio.o
+ .debug_str     0x000000000000005f       0x26 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_str     0x0000000000000085       0x12 bank_a_fm_init.o
+ .debug_str     0x0000000000000097       0x12 bank_b_fm_init_deal.o
+ .debug_str     0x00000000000000a9       0x12 bank_b_fm_get_deal.o
+
+.comment        0x0000000000000000      0x158
+ .comment       0x0000000000000000       0x2b rcode_fm_op_entry.o
+ .comment       0x000000000000002b       0x2b rcode_fm_deal.o
+ .comment       0x0000000000000056       0x2b qndriver.o
+ .comment       0x0000000000000081       0x2b qnio.o
+ .comment       0x00000000000000ac       0x2b ./../../drv/rom_TWI_lib/rom_TWI.o
+ .comment       0x00000000000000d7       0x2b bank_a_fm_init.o
+ .comment       0x0000000000000102       0x2b bank_b_fm_init_deal.o
+ .comment       0x000000000000012d       0x2b bank_b_fm_get_deal.o
+
+.debug_frame    0x0000000000000000      0x81c
+ .debug_frame   0x0000000000000000      0x1d0 rcode_fm_deal.o
+ .debug_frame   0x00000000000001d0      0x1b8 qndriver.o
+ .debug_frame   0x0000000000000388       0x7c qnio.o
+ .debug_frame   0x0000000000000404      0x344 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_frame   0x0000000000000748       0x50 bank_a_fm_init.o
+ .debug_frame   0x0000000000000798       0x58 bank_b_fm_init_deal.o
+ .debug_frame   0x00000000000007f0       0x2c bank_b_fm_get_deal.o
+
+.debug_aranges  0x0000000000000000      0x158
+ .debug_aranges
+                0x0000000000000000       0x58 rcode_fm_deal.o
+ .debug_aranges
+                0x0000000000000058       0x60 qndriver.o
+ .debug_aranges
+                0x00000000000000b8       0x20 qnio.o
+ .debug_aranges
+                0x00000000000000d8       0x20 ./../../drv/rom_TWI_lib/rom_TWI.o
+ .debug_aranges
+                0x00000000000000f8       0x20 bank_a_fm_init.o
+ .debug_aranges
+                0x0000000000000118       0x20 bank_b_fm_init_deal.o
+ .debug_aranges
+                0x0000000000000138       0x20 bank_b_fm_get_deal.o

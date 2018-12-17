@@ -1,0 +1,1464 @@
+Archive member included because of file (symbol)
+
+./../../../psp_rel/lib/api.a(audio_device_op_entry.o)
+                              (audio_device_op_entry)
+./../../../psp_rel/lib/api.a(key_op_entry.o)
+                              (key_op_entry)
+./../../../psp_rel/lib/api.a(libc_op_entry.o)
+                              (libc_op_entry)
+./../../../psp_rel/lib/api.a(mmm_hfp_cmd.o)
+                              (mmm_hfp_cmd)
+./../../../psp_rel/lib/api.a(sys_op_entry.o)
+                              (sys_op_entry)
+./../../../psp_rel/lib/api.a(vfs_op_entry.o)
+                              (vfs_op_entry)
+./../../../psp_rel/lib/api.a(bt_op_entry.o)
+                              ./obj/ap_autotest_mptest.o (bt_op_entry)
+./../../../psp_rel/lib/api.a(stub_mod_cmd.o)
+                              ./obj/ap_autotest_main.o (stub_mod_cmd)
+./../../../psp_rel/lib/api.a(base_op_entry.o)
+                              ./obj/ap_autotest_mptest.o (base_op_entry)
+
+Allocating common symbols
+Common symbol       size              file
+
+tempx_043           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+lambda2_051         0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+lambda_052          0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+PCFWDecrypt_BufferHeader
+                    0x200             ./ap_upgrade/fw_decrypt/ABC_39.o
+temp_043            0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+tempy_047           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp1_051           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp2_051           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+lambda2_052         0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp1_053           0x80              ./ap_upgrade/fw_decrypt/ABC_13.o
+tempv_043           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp2_052           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp2_053           0x80              ./ap_upgrade/fw_decrypt/ABC_13.o
+temp1_052           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+PCFWDecrypt_seed    0x20              ./ap_upgrade/fw_decrypt/ABC_39.o
+temp_046            0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+lambda_051          0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp3_051           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp1_061           0x80              ./ap_upgrade/fw_decrypt/ABC_13.o
+temp3_052           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+tempc_043           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+temp2_061           0x80              ./ap_upgrade/fw_decrypt/ABC_13.o
+tempx_047           0x100             ./ap_upgrade/fw_decrypt/ABC_13.o
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD ./../../../psp_rel/include/link_base.xn
+                0x0000000000000000                DRV_GROUP_STG_BASE = 0x0
+                0x0000000000000001                DRV_GROUP_STG_CARD = 0x1
+                0x0000000000000002                DRV_GROUP_STG_UHOST = 0x2
+                0x0000000000000003                DRV_GROUP_FAT32 = 0x3
+                0x0000000000000004                DRV_GROUP_EXFAT = 0x4
+                0x0000000000000005                DRV_GROUP_UD = 0x5
+                0x0000000000000006                DRV_GROUP_LCD = 0x6
+                0x0000000000000007                DRV_GROUP_FM = 0x7
+                0x0000000000000008                DRV_GROUP_KEY = 0x8
+                0x0000000000000009                DRV_GROUP_CCD = 0x9
+                0x000000000000000a                DRV_GROUP_AUDIO_DEVICE = 0xa
+                0x000000000000000b                DRV_GROUP_TTS = 0xb
+                0x000000000000000c                DRV_GROUP_BT = 0xc
+                0x000000000000000f                DRV_GROUP_SYS = 0xf
+                0x000000000003ffff                SRAM_SIZE_MASK = 0x3ffff
+                0x000000009fc00000                RDATA_ADDR_BASE = 0x9fc00000
+                0x00000000bfc00000                RCODE_ADDR_BASE = 0xbfc00000
+                0x0000000000000001                KERNEL_BANK_A = 0x1
+                0x0000000000000002                KERNEL_BANK_B = 0x2
+                0x0000000000000003                KERNEL_BANK_C = 0x3
+                0x0000000000040000                BANK_SPACE = 0x40000
+                0x0000000000000000                FRONT_AP = 0x0
+                0x0000000000000001                BACK_AP = 0x1
+                0x0000000000000002                PROCESS_MANAGER_AP = 0x2
+                0x0000000000000000                FRONT_CODEC = 0x0
+                0x0000000000000001                BACK_CODEC = 0x1
+                0x0000000000000040                AP_BANK_FRONT_CONTROL_1 = 0x40
+                0x0000000000000048                AP_BANK_FRONT_UI_1 = 0x48
+                0x0000000000000050                AP_BANK_FRONT_BASAL = 0x50
+                0x0000000000000058                AP_BANK_FRONT_CODEC = 0x58
+                0x0000000000000060                AP_BANK_BACK_CONTROL_1 = 0x60
+                0x0000000000000068                AP_BANK_BACK_BASAL = 0x68
+                0x0000000000000070                AP_BANK_BACK_CODEC = 0x70
+                0x0000000000000078                AP_BANK_FRONT_ENHANCED_1 = 0x78
+                0x0000000000000071                AP_BANK_FRONT_ENHANCED_2 = 0x71
+                0x000000000000007a                AP_BANK_BACK_ENHANCED_1 = 0x7a
+                0x000000000000007b                AP_BANK_BACK_ENHANCED_2 = 0x7b
+                0x0000000000000072                AP_BANK_BTENGINE_CONTROL_1 = 0x72
+                0x0000000000000073                AP_BANK_BTENGINE_LIB_1 = 0x73
+                0x0000000000000074                AP_BANK_BTENGINE_LIB_2 = 0x74
+                0x0000000000000075                AP_BANK_BTENGINE_EXTEND_1 = 0x75
+                0x0000000000000076                AP_BANK_BTENGINE_EXTEND_2 = 0x76
+                0x0000000000000077                AP_BANK_BTENGINE_EXTEND_3 = 0x77
+                0x000000000000007c                AP_BANK_BTENGINE_EXTEND_4 = 0x7c
+                0x0000000000000079                AP_BANK_BTENGINE_EXTEND_5 = 0x79
+                0x000000000000007f                AP_BANK_MANAGER = 0x7f
+                0x0000000000000041                AP_BANK_AUTOTEST = 0x41
+                0x0000000000000000                SROM_BROM_ADDR = 0x0
+                0x0000000000002600                SROM_BROM_SIZE = 0x2600
+                0x0000000000002600                SROM_SPINOR_ADDR = (SROM_BROM_ADDR + SROM_BROM_SIZE)
+                0x0000000000000c00                SROM_SPINOR_SIZE = 0xc00
+                0x0000000000003200                SROM_TWI_ADDR = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE)
+                0x0000000000000700                SROM_TWI_SIZE = 0x700
+                0x0000000000003900                SROM_STUB_ADDR = (SROM_TWI_ADDR + SROM_TWI_SIZE)
+                0x0000000000000700                SROM_STUB_SIZE = 0x700
+                0x0000000000000e00                SROM_SPINOR_SIZE_MDY = 0xe00
+                0x0000000000003400                SROM_TWI_ADDR_MDY = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE_MDY)
+                0x0000000000000700                SROM_TWI_SIZE_MDY = 0x700
+                0x0000000000003b00                SROM_STUB_ADDR_MDY = (SROM_TWI_ADDR_MDY + SROM_TWI_SIZE_MDY)
+                0x0000000000000500                SROM_STUB_SIZE_MDY = 0x500
+                0x0000000000004000                SROM_KERNEL_ADDR = (SROM_STUB_ADDR + SROM_STUB_SIZE)
+                0x0000000000004000                SROM_KERNEL_SIZE = 0x4000
+                0x000000000000c000                SROM_FS_ADDR = 0xc000
+                0x0000000000001c00                SROM_FS_SIZE = 0x1c00
+                0x000000000000dc00                SROM_SPINOR1_ADDR = (SROM_FS_ADDR + SROM_FS_SIZE)
+                0x0000000000000400                SROM_SPINOR1_SIZE = 0x400
+                0x0000000000008000                SRAM_OS_RCODE_ADDR = 0x8000
+                0x0000000000000c00                SRAM_OS_RCODE_SIZE = 0xc00
+                0x0000000000008c00                SRAM_SPINOR_RCODE_ADDR = 0x8c00
+                0x0000000000000400                SRAM_SPINOR_RCODE_SIZE = 0x400
+                0x0000000000009000                SRAM_BANK_A_ADDR = 0x9000
+                0x0000000000000400                SRAM_BANK_A_SIZE = 0x400
+                0x0000000000009400                SRAM_BANK_B_ADDR = 0x9400
+                0x0000000000000800                SRAM_BANK_B_SIZE = 0x800
+                0x0000000000009c00                SRAM_UI_RCODE_ADDR = 0x9c00
+                0x0000000000000300                SRAM_UI_RCODE_SIZE = 0x300
+                0x0000000000009f00                SRAM_AUDIO_GLOBAL_DATA_ADDR = 0x9f00
+                0x0000000000000060                SRAM_AUDIO_GLOBAL_DATA_SIZE = 0x60
+                0x0000000000009f60                SRAM_UHOST_GLOBAL_DATA_ADDR = 0x9f60
+                0x0000000000000010                SRAM_UHOST_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f70                SRAM_CARD_GLOBAL_DATA_ADDR = 0x9f70
+                0x0000000000000010                SRAM_CARD_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f80                SRAM_SYS_SHARE_DATA_ADDR = 0x9f80
+                0x0000000000000040                SRAM_SYS_SHARE_DATA_SIZE = 0x40
+                0x0000000000009fc0                SRAM_RAM6_CCD_GLOBAL_DATA_ADDR = 0x9fc0
+                0x0000000000000040                SRAM_RAM6_CCD_GLOBAL_DATA_SIZE = 0x40
+                0x000000000000a000                SRAM_BT_LIB1_BANK_ADDR = 0xa000
+                0x0000000000000800                SRAM_BT_LIB1_BANK_SIZE = 0x800
+                0x000000000000a800                SRAM_BT_EXT1_BANK_ADDR = (SRAM_BT_LIB1_BANK_ADDR + SRAM_BT_LIB1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT1_BANK_SIZE = 0x800
+                0x000000000000b000                SRAM_BT_EXT2_BANK_ADDR = (SRAM_BT_EXT1_BANK_ADDR + SRAM_BT_EXT1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT2_BANK_SIZE = 0x800
+                0x000000000000f000                SRAM_BT_STACK_RCODE1_ADDR = 0xf000
+                0x0000000000000a00                SRAM_BT_STACK_RCODE1_SIZE = 0xa00
+                0x000000000000b000                SRAM_AP_BANK_MANAGER_ADDR = SRAM_BT_EXT2_BANK_ADDR
+                0x0000000000000800                SRAM_AP_BANK_MANAGER_SIZE = SRAM_BT_EXT2_BANK_SIZE
+                0x000000000000be00                SRAM_KEY_MESSAGE_DATA_ADDR = 0xbe00
+                0x0000000000000100                SRAM_KEY_MESSAGE_DATA_SIZE = 0x100
+                0x000000000000bf00                SRAM_UI_DATA_ADDR = 0xbf00
+                0x0000000000000100                SRAM_UI_DATA_SIZE = 0x100
+                0x0000000000010000                SRAM_BT_CONTROLLER_RCODE_ADDR = 0x10000
+                0x0000000000000500                SRAM_BT_CONTROLLER_RCODE_SIZE = 0x500
+                0x0000000000010500                SRAM_COMMON_BT_MANAGER_RCODE = (SRAM_BT_CONTROLLER_RCODE_ADDR + SRAM_BT_CONTROLLER_RCODE_SIZE)
+                0x0000000000000b00                SRAM_COMMON_BT_MANAGER_SIZE = 0xb00
+                0x0000000000011000                SRAM_BT_BACK_RCODE_ADDR = (SRAM_COMMON_BT_MANAGER_RCODE + SRAM_COMMON_BT_MANAGER_SIZE)
+                0x0000000000002900                SRAM_BT_BACK_RCODE_SIZE = 0x2900
+                0x00000000000140d0                SRAM_IRQ_PRINT_BUFFER_ADDR = 0x140d0
+                0x0000000000000130                SRAM_IRQ_PRINT_BUFFER_SIZE = 0x130
+                0x0000000000013900                SRAM_BT_LIB2_BANK_ADDR = 0x13900
+                0x0000000000000d00                SRAM_BT_LIB2_BANK_SIZE = 0xd00
+                0x0000000000013900                SRAM_BT_EXT3_BANK_ADDR = SRAM_BT_LIB2_BANK_ADDR
+                0x0000000000000d00                SRAM_BT_EXT3_BANK_SIZE = SRAM_BT_LIB2_BANK_SIZE
+                0x0000000000021e00                SRAM_BT_EXT4_BANK_ADDR = 0x21e00
+                0x0000000000000600                SRAM_BT_EXT4_BANK_SIZE = 0x600
+                0x0000000000014600                SRAM_BT_EXT5_BANK_ADDR = 0x14600
+                0x0000000000000600                SRAM_BT_EXT5_BANK_SIZE = 0x600
+                0x000000000000fa00                SRAM_COM_DAE_RCODE_ADDR = 0xfa00
+                0x0000000000000100                SRAM_COM_DAE_RCODE_SIZE = 0x100
+                0x000000000000fb00                SRAM_BTCALL_EXT_RCODE_ADDR = 0xfb00
+                0x0000000000000100                SRAM_BTCALL_EXT_RCODE_SIZE = 0x100
+                0x000000000001e900                SRAM_AP_FRONT_RCODE_ADDR = 0x1e900
+                0x0000000000000800                SRAM_AP_FRONT_RCODE_SIZE = 0x800
+                0x0000000000016c00                SRAM_FS_RCODE_ADDR = 0x16c00
+                0x0000000000000800                SRAM_FS_RCODE_SIZE = 0x800
+                0x0000000000017400                SRAM_CARD_UD_RCODE_ADDR = 0x17400
+                0x0000000000000c00                SRAM_CARD_UD_RCODE_SIZE = 0xc00
+                0x0000000000017400                SRAM_UHOST_UD_RCODE_ADDR = SRAM_CARD_UD_RCODE_ADDR
+                0x0000000000000c00                SRAM_UHOST_UD_RCODE_SIZE = SRAM_CARD_UD_RCODE_SIZE
+                0x0000000000016c00                SRAM_USOUND_RCODE_ADDR = 0x16c00
+                0x0000000000002800                SRAM_USOUND_RCODE_SIZE = 0x2800
+                0x0000000000016c00                SRAM_BTSTACK_AVDTP_DATA_ADDR = 0x16c00
+                0x0000000000002980                SRAM_BTSTACK_AVDTP_DATA_SIZE = 0x2980
+                0x0000000000016c00                SRAM_BTCALL_CALLRING_BUF_ADDR = 0x16c00
+                0x0000000000001000                SRAM_BTCALL_CALLRING_BUF_SIZE = 0x1000
+                0x0000000000016c00                SRAM_BTCALL_ASQT_BUF_ADDR = 0x16c00
+                0x0000000000002800                SRAM_BTCALL_ASQT_BUF_SIZE = 0x2800
+                0x0000000000018000                SRAM_FS_DATA_ADDR = 0x18000
+                0x0000000000000300                SRAM_FS_DATA_SIZE = 0x300
+                0x0000000000018300                SRAM_FS_BUF_ADDR = 0x18300
+                0x0000000000000a00                SRAM_FS_BUF_SIZE = 0xa00
+                0x0000000000018d00                SRAM_CARD_UD_CACHE_ADDR = 0x18d00
+                0x0000000000000800                SRAM_CARD_UD_CACHE_SIZE = 0x800
+                0x0000000000018d00                SRAM_UHOST_UD_CACHE_ADDR = SRAM_CARD_UD_CACHE_ADDR
+                0x0000000000000800                SRAM_UHOST_UD_CACHE_SIZE = SRAM_CARD_UD_CACHE_SIZE
+                0x0000000000019500                SRAM_CARD_DATA_ADDR = 0x19500
+                0x0000000000000080                SRAM_CARD_DATA_SIZE = 0x80
+                0x0000000000019500                SRAM_UHOST_DATA_ADDR = SRAM_CARD_DATA_ADDR
+                0x0000000000000080                SRAM_UHOST_DATA_SIZE = SRAM_CARD_DATA_SIZE
+                0x0000000000019580                SRAM_AP_BACK_DATA_ADDR = 0x19580
+                0x0000000000000400                SRAM_AP_BACK_DATA_SIZE = 0x400
+                0x0000000000019980                SRAM_AP_FRONT_DATA_ADDR = 0x19980
+                0x0000000000000700                SRAM_AP_FRONT_DATA_SIZE = 0x700
+                0x000000000001a080                SRAM_APPLIB_GLOBAL_DATA_ADDR = 0x1a080
+                0x0000000000000040                SRAM_APPLIB_GLOBAL_DATA_SIZE = 0x40
+                0x000000000001a0c0                SRAM_APPLIB_DATA_ADDR = 0x1a0c0
+                0x0000000000000200                SRAM_APPLIB_DATA_SIZE = 0x200
+                0x000000000001a2c0                SRAM_BTMANAGER_DATA_ADDR = 0x1a2c0
+                0x0000000000000140                SRAM_BTMANAGER_DATA_SIZE = 0x140
+                0x000000000001a400                SRAM_OS_DATA_ADDR = 0x1a400
+                0x0000000000000880                SRAM_OS_DATA_SIZE = 0x880
+                0x000000000001ac80                SRAM_OS_HEAP_ADDR = 0x1ac80
+                0x0000000000000680                SRAM_OS_HEAP_SIZE = 0x680
+                0x000000000001b300                SRAM_AP_MANAGER_RCODE_ADDR = 0x1b300
+                0x0000000000000100                SRAM_AP_MANAGER_RCODE_SIZE = 0x100
+                0x000000000001b400                SRAM_OS_SD_SWAP_BUF_ADDR = 0x1b400
+                0x0000000000000200                SRAM_OS_SD_SWAP_BUF_SIZE = 0x200
+                0x000000000001b600                SRAM_OS_TASK_STACK_ADDR = 0x1b600
+                0x0000000000001e00                SRAM_OS_TASK_STACK_SIZE = 0x1e00
+                0x000000000001d500                SRAM_BANK_C_ADDR = 0x1d500
+                0x0000000000000400                SRAM_BANK_C_SIZE = 0x400
+                0x000000000001d900                SRAM_BT_HCI_BUF_ADDR = 0x1d900
+                0x0000000000001000                SRAM_BT_HCI_BUF_SIZE = 0x1000
+                0x0000000000016400                SRAM_BT_UART_BUF_ADDR = 0x16400
+                0x0000000000000800                SRAM_BT_UART_BUF_SIZE = 0x800
+                0x000000000001f100                SRAM_BT_RCODE_DATA_ADDR = 0x1f100
+                0x0000000000000700                SRAM_BT_RCODE_DATA_SIZE = 0x700
+                0x000000000001f800                SRAM_KEY_MESSAGE_RCODE_ADDR = 0x1f800
+                0x0000000000000800                SRAM_KEY_MESSAGE_RCODE_SIZE = 0x800
+                0x0000000000020000                SRAM_DSP_IRQ_TABLE_ADDR = 0x20000
+                0x0000000000000120                SRAM_DSP_IRQ_TABLE_SIZE = 0x120
+                0x0000000000020120                SRAM_RAM2_RESEVER_ADDR = 0x20120
+                0x00000000000000e0                SRAM_RAM2_RESEVER_SIZE = 0xe0
+                0x0000000000020200                SRAM_AP_BANK_FRONT_CONTROL_ADDR = 0x20200
+                0x0000000000000800                SRAM_AP_BANK_FRONT_CONTROL_SIZE = 0x800
+                0x0000000000020a00                SRAM_KERNEL_XSYS_ADDR = 0x20a00
+                0x0000000000000e00                SRAM_KERNEL_XSYS_SIZE = 0xe00
+                0x0000000000021800                SRAM_AP_BACK_BASAL_RCODE_ADDR = 0x21800
+                0x0000000000000600                SRAM_AP_BACK_BASAL_RCODE_SIZE = 0x600
+                0x0000000000021e00                SRAM_AP_BANK_BACK_BASAL_ADDR = 0x21e00
+                0x0000000000000600                SRAM_AP_BANK_BACK_BASAL_SIZE = 0x600
+                0x0000000000022400                SRAM_BT_HEAD_ADDR = 0x22400
+                0x0000000000003400                SRAM_BT_HEAD_SIZE = 0x3400
+                0x0000000000025000                SRAM_UART_STUB_RCODE_ADDR = 0x25000
+                0x0000000000000800                SRAM_UART_STUB_RCODE_SIZE = 0x800
+                0x0000000000027e00                SRAM_AP_FRONT_BASAL_RCODE_ADDR = 0x27e00
+                0x0000000000000400                SRAM_AP_FRONT_BASAL_RCODE_SIZE = 0x400
+                0x000000000000b000                SRAM_AP_BANK_FRONT_BASAL_ADDR = 0xb000
+                0x0000000000000800                SRAM_AP_BANK_FRONT_BASAL_SIZE = 0x800
+                0x0000000000025800                SRAM_AP_BANK_FRONT_UI_ADDR = 0x25800
+                0x0000000000000800                SRAM_AP_BANK_FRONT_UI_SIZE = 0x800
+                0x0000000000026000                SRAM_AP_RCP_COMMAND_BUFFER_ADDR = 0x26000
+                0x0000000000000220                SRAM_AP_RCP_COMMAND_BUFFER_SIZE = 0x220
+                0x0000000000026000                SRAM_AP_BACK_RCODE_ADDR = 0x26000
+                0x0000000000000800                SRAM_AP_BACK_RCODE_SIZE = 0x800
+                0x0000000000026800                SRAM_AP_BANK_BACK_CONTROL_ADDR = 0x26800
+                0x0000000000000800                SRAM_AP_BANK_BACK_CONTROL_SIZE = 0x800
+                0x0000000000027000                SRAM_RAM2_RESEVER2_ADDR = 0x27000
+                0x0000000000000e00                SRAM_RAM2_RESEVER2_SIZE = 0xe00
+                0x0000000000027e00                SRAM_BTPLAY_MMM_RCODE2_ADDR = 0x27e00
+                0x0000000000000e00                SRAM_BTPLAY_MMM_RCODE2_SIZE = 0xe00
+                0x0000000000028c00                SRAM_BTPLAY_SWAP_BUFFER_ADDR = 0x28c00
+                0x0000000000000400                SRAM_BTPLAY_SWAP_BUFFER_SIZE = 0x400
+                0x0000000000028200                SRAM_AP_BACK_CODEC_RCODE_ADDR = 0x28200
+                0x0000000000000a00                SRAM_AP_BACK_CODEC_RCODE_SIZE = 0xa00
+                0x0000000000028c00                SRAM_AP_BANK_BACK_CODEC_ADDR = 0x28c00
+                0x0000000000000400                SRAM_AP_BANK_BACK_CODEC_SIZE = 0x400
+                0x0000000000029000                SRAM_AP_BACK_AL_RCODE_1_ADDR = 0x29000
+                0x0000000000007000                SRAM_AP_BACK_AL_RCODE_1_SIZE = 0x7000
+                0x000000000002e000                SRAM_AP_BANK_BACK_AL_4_ADDR = 0x2e000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_4_SIZE = 0x2000
+                0x0000000000030000                SRAM_AP_BANK_BACK_AL_1_ADDR = 0x30000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_1_SIZE = 0x4000
+                0x0000000000034000                SRAM_AP_BACK_AL_RCODE_2_ADDR = 0x34000
+                0x0000000000002000                SRAM_AP_BACK_AL_RCODE_2_SIZE = 0x2000
+                0x0000000000036000                SRAM_AP_BANK_BACK_AL_2_ADDR = 0x36000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_2_SIZE = 0x2000
+                0x0000000000038000                SRAM_AP_BANK_BACK_AL_3_ADDR = 0x38000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_3_SIZE = 0x4000
+                0x000000000000e000                SRAM_ASRC_BUF_0_ADDR = 0xe000
+                0x0000000000000e00                SRAM_ASRC_BUF_0_SIZE = 0xe00
+                0x000000000000f000                SRAM_ASRC_BUF_1_ADDR = 0xf000
+                0x0000000000000c00                SRAM_ASRC_BUF_1_SIZE = 0xc00
+                0x000000000000fc00                SRAM_CARD_BUF_0_ADDR = 0xfc00
+                0x0000000000000200                SRAM_CARD_BUF_0_SIZE = 0x200
+                0x000000000000fe00                SRAM_CARD_BUF_1_ADDR = 0xfe00
+                0x0000000000000200                SRAM_CARD_BUF_1_SIZE = 0x200
+                0x000000000000fc00                SRAM_CARD_FIFO_ADDR = SRAM_CARD_BUF_0_ADDR
+                0x0000000000000400                SRAM_CARD_FIFO_SIZE = (SRAM_CARD_BUF_0_SIZE + SRAM_CARD_BUF_1_SIZE)
+                0x000000000003c000                SRAM_PCMRAM_0_ADDR = 0x3c000
+                0x0000000000001000                SRAM_PCMRAM_0_SIZE = 0x1000
+                0x000000000003d000                SRAM_PCMRAM_1_ADDR = 0x3d000
+                0x0000000000001000                SRAM_PCMRAM_1_SIZE = 0x1000
+                0x000000000003e000                SRAM_PCMRAM_2_ADDR = 0x3e000
+                0x0000000000001000                SRAM_PCMRAM_2_SIZE = 0x1000
+                0x000000000003c000                SRAM_PCMRAM_H5_FIFO_ADDR = SRAM_PCMRAM_0_ADDR
+                0x0000000000001000                SRAM_PCMRAM_H5_FIFO_SIZE = SRAM_PCMRAM_0_SIZE
+                0x000000000003d000                SRAM_PCMRAM_PCMFIFO_ADDR = SRAM_PCMRAM_1_ADDR
+                0x0000000000002000                SRAM_PCMRAM_FIFO_SIZE = (SRAM_PCMRAM_1_SIZE + SRAM_PCMRAM_2_SIZE)
+                0x000000000003f000                SRAM_URAM_0_ADDR = 0x3f000
+                0x0000000000000800                SRAM_URAM_0_SIZE = 0x800
+                0x000000000003f800                SRAM_URAM_1_ADDR = 0x3f800
+                0x0000000000000800                SRAM_URAM_1_SIZE = 0x800
+                0x000000000003f000                SRAM_URAM_UDISK_FIFO_ADDR = SRAM_URAM_0_ADDR
+                0x0000000000001000                SRAM_URAM_UDISK_FIFO_SIZE = (SRAM_URAM_0_SIZE + SRAM_URAM_1_SIZE)
+                0x000000000003f800                SRAM_URAM_UHOST_FIFO_ADDR = SRAM_URAM_1_ADDR
+                0x0000000000000800                SRAM_URAM_UHOST_FIFO_SIZE = SRAM_URAM_1_SIZE
+                0x0000000000026800                SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_CONTROL_ADDR
+                0x0000000000000800                SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE = 0x800
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE = 0x0
+                0x0000000000021e00                SRAM_AP_BANK_BACK_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_BASAL_ADDR
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_1_SIZE = SRAM_AP_BANK_BACK_BASAL_SIZE
+                0x0000000000028a00                SRAM_AP_BANK_BACK_ENHANCED_2_ADDR = 0x28a00
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_2_SIZE = 0x600
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_SIZE = 0x0
+                0x000000000003b800                SRAM_TTS_DRV_RCODE_ADDR = 0x3b800
+                0x0000000000000800                SRAM_TTS_DRV_RCODE_SIZE = 0x800
+                0x0000000000019580                SRAM_FM_ENG_RDATA_ADDR = SRAM_AP_BACK_DATA_ADDR
+                0x0000000000000200                SRAM_FM_ENG_RDATA_SIZE = 0x200
+                0x0000000000016c00                SRAM_FM_DRV_RCODE_ADDR = SRAM_FS_RCODE_ADDR
+                0x0000000000000800                SRAM_FM_DRV_RCODE_SIZE = 0x800
+                0x0000000000019780                SRAM_FM_DRV_RDATA_ADDR = (SRAM_FM_ENG_RDATA_ADDR + SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000000200                SRAM_FM_DRV_RDATA_SIZE = (SRAM_AP_BACK_DATA_SIZE - SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000021800                SRAM_AP_USB_DEVICE_RCODE_ADDR = 0x21800
+                0x0000000000004000                SRAM_AP_USB_DEVICE_RCODE_SIZE = SRAM_AP_BANK_BACK_AL_1_SIZE
+                0x0000000000040000                SRAM_INVALID_RCODE_ADDR = 0x40000
+LOAD ..//memory_map.xn
+                0x0000000000038800                AP_MANAGER_TEST_RCODE_ADDR = 0x38800
+                0x0000000000000800                AP_MANAGER_TEST_RCODE_SIZE = 0x800
+                0x0000000000039000                AP_MANAGER_TEST_BANK0_ADDR = 0x39000
+                0x0000000000000a00                AP_MANAGER_TEST_BANK0_SIZE = 0xa00
+                0x0000000000039a00                AP_MANAGER_TEST_BANK1_ADDR = 0x39a00
+                0x0000000000000600                AP_MANAGER_TEST_BANK1_SIZE = 0x600
+                0x0000000000000000                AP_INDEX = FRONT_AP
+                0x0000000000038800                SRAM_TEXT_ADDR = AP_MANAGER_TEST_RCODE_ADDR
+                0x00000000bfc38800                RCODE_TEXT_ADDR = (RCODE_ADDR_BASE + SRAM_TEXT_ADDR)
+                0x0000000041039000                BANK_CONTROL_1_ADDR_BASE = ((AP_BANK_AUTOTEST << 0x18) + AP_MANAGER_TEST_BANK0_ADDR)
+                0x0000000041039a00                BANK_CONTROL_2_ADDR_BASE = ((AP_BANK_AUTOTEST << 0x18) + AP_MANAGER_TEST_BANK1_ADDR)
+                0x0000000041010000                BANK_CONTROL_3_ADDR_BASE = ((AP_BANK_AUTOTEST << 0x18) + 0x10000)
+                0x0000000041024800                BANK_CONTROL_4_ADDR_BASE = ((AP_BANK_AUTOTEST << 0x18) + 0x24800)
+                0x0000000000040000                AP_BANK_SPACE = BANK_SPACE
+
+.text           0x00000000bfc38800      0x7e0
+ ctor.o(.text .rodata)
+ .text          0x00000000bfc38800       0xcc ./../../../psp_rel/lib/ctor.o
+                0x00000000bfc38801                process_start
+                0x00000000bfc38831                __start
+ api.a(.text)
+ .text          0x00000000bfc388cc        0x4 ./../../../psp_rel/lib/api.a(audio_device_op_entry.o)
+                0x00000000bfc388cd                audio_device_op_entry
+ .text          0x00000000bfc388d0        0x4 ./../../../psp_rel/lib/api.a(key_op_entry.o)
+                0x00000000bfc388d1                key_op_entry
+ .text          0x00000000bfc388d4        0x4 ./../../../psp_rel/lib/api.a(libc_op_entry.o)
+                0x00000000bfc388d5                libc_op_entry
+ .text          0x00000000bfc388d8        0x4 ./../../../psp_rel/lib/api.a(mmm_hfp_cmd.o)
+                0x00000000bfc388d9                mmm_hfp_cmd
+ .text          0x00000000bfc388dc        0x4 ./../../../psp_rel/lib/api.a(sys_op_entry.o)
+                0x00000000bfc388dd                sys_op_entry
+ .text          0x00000000bfc388e0        0x4 ./../../../psp_rel/lib/api.a(vfs_op_entry.o)
+                0x00000000bfc388e1                vfs_op_entry
+ ap_autotest_main.o(.text .data .bss .rodata)
+ .text          0x00000000bfc388e4      0x4d0 ./obj/ap_autotest_main.o
+                0x00000000bfc38b11                wriet_log_data
+                0x00000000bfc38a09                load_ap_bank
+                0x00000000bfc38b89                att_write_test_info
+                0x00000000bfc38cbd                test_exit
+                0x00000000bfc38d39                main
+                0x00000000bfc38bcd                test_init
+                0x00000000bfc388e5                att_write_data
+                0x00000000bfc3890d                att_read_data
+                0x00000000bfc38d11                test_set_share_data
+                0x00000000bfc3892d                att_test_fread
+ .data          0x00000000bfc38db4        0x1 ./obj/ap_autotest_main.o
+                0x00000000bfc38db4                test_stg_type
+ *fill*         0x00000000bfc38db5        0x3 00
+ .bss           0x00000000bfc38db8       0x60 ./obj/ap_autotest_main.o
+                0x00000000bfc38e00                g_epc_addr
+                0x00000000bfc38dcc                g_cur_line_num
+                0x00000000bfc38dcb                g_skip_product_test
+                0x00000000bfc38dc4                g_test_base_time
+                0x00000000bfc38df0                g_old_test_info
+                0x00000000bfc38de4                g_write_file_len
+                0x00000000bfc38dec                g_test_file_handle
+                0x00000000bfc38dd0                g_test_share_info
+                0x00000000bfc38dc0                g_support_norflash_wp
+                0x00000000bfc38dfc                g_p_test_ap_info_bak
+                0x00000000bfc38dbc                g_app_func_id
+                0x00000000bfc38de8                g_file_sys_id
+                0x00000000bfc38dc9                g_test_mode
+                0x00000000bfc38dd4                g_test_info
+                0x00000000bfc38df8                thread_mutex
+                0x00000000bfc38dc8                g_att_version
+                0x00000000bfc38dca                g_read_code_mode
+                0x00000000bfc38ddc                g_r_old_test_info
+                0x00000000bfc38db8                tick_cnt
+                0x00000000bfc38e08                g_r_test_ap_info
+                0x00000000bfc38df4                g_test_ap_info
+ .rodata        0x00000000bfc38e18       0x24 ./obj/ap_autotest_main.o
+                0x00000000bfc38e18                g_ap_name
+ common_func_rcode.o(.text .rcode .rodata)
+ .text          0x00000000bfc38e3c      0x138 ./obj/common_func_rcode.o
+                0x00000000bfc38e3d                tick_ISR
+                0x00000000bfc38e4d                send_sync_msg
+                0x00000000bfc38f2d                send_async_msg
+ ap_autotest_btstack_test.o(.data .bss)
+ .bss           0x00000000bfc38f74        0xc ./obj/ap_autotest_btstack_test.o
+                0x00000000bfc38f74                g_connect_cnt
+                0x00000000bfc38f78                g_bt_status
+ ap_autotest_mptest.o(.bss .data)
+ .bss           0x00000000bfc38f80       0x4c ./obj/ap_autotest_mptest.o
+                0x00000000bfc38f80                g_hci_event_rev_flag
+                0x00000000bfc38f8c                g_update_timer_id
+                0x00000000bfc38f85                g_cfo_return_num
+                0x00000000bfc38f9c                g_hci_deal
+                0x00000000bfc38f88                g_mpdata_bin_len
+                0x00000000bfc38f87                g_cfo_test_retry_num
+                0x00000000bfc38f86                g_add_cfo_result_flag
+                0x00000000bfc38f90                g_ringbuf_rw
+                0x00000000bfc38f84                g_SUT_state
+ ap_autotest_bertest.o(.bss .data)
+ .bss           0x00000000bfc38fcc        0x8 ./obj/ap_autotest_bertest.o
+                0x00000000bfc38fcc                g_ber_control
+                0x00000000bfc38fd0                hci_cmd_time
+ .text          0x00000000bfc38fd4        0x4 ./../../../psp_rel/lib/api.a(bt_op_entry.o)
+                0x00000000bfc38fd5                bt_op_entry
+ .text          0x00000000bfc38fd8        0x4 ./../../../psp_rel/lib/api.a(stub_mod_cmd.o)
+                0x00000000bfc38fd9                stub_mod_cmd
+ .text          0x00000000bfc38fdc        0x4 ./../../../psp_rel/lib/api.a(base_op_entry.o)
+                0x00000000bfc38fdd                base_op_entry
+                0x0000000041039000                . = BANK_CONTROL_1_ADDR_BASE
+                0x0000000000039000                OFFSET = (. & 0x3ffff)
+
+BANK_CONTROL_1_0
+                0x0000000041039000      0xa00
+ ap_autotest_main.o(.text.bank_test)
+ common_func.o(.text .rodata)
+ .text          0x0000000041039000      0x140 ./obj/common_func.o
+                0x0000000041039001                _config_fs_init
+                0x00000000410390dd                act_test_report_test_log
+                0x00000000410390c9                tick_ISR_uninstall
+                0x000000004103904d                _config_fs_deinit
+                0x00000000410390a1                tick_ISR_install
+ .rodata        0x0000000041039140        0xc ./obj/common_func.o
+ ap_autotest_btstack_test.o(.text .rodata .data .bss)
+ .text          0x000000004103914c      0x4fc ./obj/ap_autotest_btstack_test.o
+                0x0000000041039291                test_bt_manager_loop_deal
+                0x00000000410393e1                act_test_btstack_install
+                0x0000000041039189                connect_source
+                0x000000004103914d                test_get_btstack_status
+                0x000000004103916d                bt_clear_error
+                0x00000000410391b1                test_bstack_status_deal
+                0x0000000041039241                bt_connect_proc
+                0x000000004103947d                act_test_bt_test
+ ap_autotest_btstack_test_dev.o(.text .rodata .data .bss)
+ .text          0x0000000041039648      0x2e4 ./obj/ap_autotest_btstack_test_dev.o
+                0x0000000041039865                test_btstack_save_paired_dev_info
+                0x0000000041039649                att_test_open_file
+                0x00000000410397b5                att_test_close_file
+                0x00000000410397e5                test_btstack_read_paired_dev_info
+                0x0000000041039739                att_test_open_record_file
+                0x0000000041039845                test_btstack_get_paired_dev_info
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x000000004103992c       0xd4 00
+                0x0000000041079a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_1
+                0x0000000041079000      0xa00
+ ap_autotest_start_deal.o(.text .rodata)
+ .text          0x0000000041079000      0x1e0 ./obj/ap_autotest_start_deal.o
+                0x00000000410790ed                act_test_start_deal
+                0x0000000041079001                read_bt_addr
+                0x00000000410790d5                get_sdk_version
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000410791e0      0x820 00
+                0x00000000410b9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_2
+                0x00000000410b9000      0xa00
+ ap_autotest_gpio.o(.xdata .text .rodata)
+ .text          0x00000000410b9000      0x764 ./obj/ap_autotest_gpio.o
+                0x00000000410b9001                test_gpio_short
+                0x00000000410b95a5                test_gpio_open
+                0x00000000410b93b1                test_gpio_short_gnd
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000410b9764      0x29c 00
+                0x00000000410f9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_3
+                0x00000000410f9000      0xa00
+ ap_autotest_music_test.o(.xdata .text .rodata)
+ .text          0x00000000410f9000      0x2f0 ./obj/ap_autotest_music_test.o
+                0x00000000410f9219                act_test_sdcard_play_test
+                0x00000000410f90b5                act_test_report_music_test_result
+                0x00000000410f906d                music_test_fs_exit
+                0x00000000410f9001                music_test_fs_init
+                0x00000000410f92ed                act_test_linein_play_test
+                0x00000000410f90e9                act_test_uhost_play_test
+ .rodata        0x00000000410f92f0       0x3c ./obj/ap_autotest_music_test.o
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000410f932c      0x6d4 00
+                0x0000000041139a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_4
+                0x0000000041139000      0xa00
+ ap_autotest_record_file.o(.xdata .text .rodata)
+ .text          0x0000000041139000      0x740 ./obj/ap_autotest_record_file.o
+                0x0000000041139141                read_att_test_info
+                0x0000000041139165                make_log_dir
+                0x0000000041139001                create_record_file
+                0x00000000411390e1                close_log_file
+                0x00000000411393bd                enter_log_dir
+                0x0000000041139419                write_log_file
+ .xdata         0x0000000041139740       0x50 ./obj/ap_autotest_record_file.o
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x0000000041139790      0x270 00
+                0x0000000041179a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_5
+                0x0000000041179000      0xa00
+ ap_autotest_read_args.o(.xdata .text .rodata)
+ .text          0x0000000041179000      0x964 ./obj/ap_autotest_read_args.o
+                0x000000004117963d                act_test_read_ber_test_arg
+                0x00000000411798f5                act_test_read_test_arg
+                0x0000000041179449                act_test_read_mptest_arg
+                0x0000000041179929                act_test_read_test_info
+                0x0000000041179209                act_test_read_test_id
+                0x00000000411797dd                act_test_read_channel_test_arg
+                0x00000000411796f5                act_test_read_lradc_test_arg
+                0x0000000041179001                act_test_read_cfg_file
+                0x00000000411795c9                act_test_read_btname_arg
+ .rodata        0x0000000041179964       0x80 ./obj/ap_autotest_read_args.o
+                0x0000000041179964                autotest_readarg_ops
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000411799e4       0x1c 00
+                0x00000000411b9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_6
+                0x00000000411b9000      0xa00
+ ap_autotest_modify_bt_attr.o(.xdata .text .rodata)
+ .text          0x00000000411b9000      0x8c0 ./obj/ap_autotest_modify_bt_attr.o
+                0x00000000411b9729                act_test_modify_bt_name
+                0x00000000411b9571                act_test_read_bt_addr_from_log
+                0x00000000411b9789                act_test_report_modify_ble_name_result
+                0x00000000411b9859                act_test_modify_bt_ble_name
+                0x00000000411b91c9                act_test_report_modify_bt_addr_result
+                0x00000000411b9595                read_att_test_count
+                0x00000000411b9659                act_test_report_modify_bt_name_result
+                0x00000000411b9385                act_test_modify_bt_addr
+                0x00000000411b907d                act_test_write_att_record_file
+                0x00000000411b93f5                act_open_att_record_file
+ .rodata        0x00000000411b98c0       0x20 ./obj/ap_autotest_modify_bt_attr.o
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000411b98e0      0x120 00
+                0x00000000411f9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_7
+                0x00000000411f9000      0xa00
+ ap_autotest_mptest.o(.bss .data .text .rodata)
+ .text          0x00000000411f9000      0x84c ./obj/ap_autotest_mptest.o
+                0x00000000411f93f9                att_cfo_test_tx_stop
+                0x00000000411f94a1                att_get_cfo_val
+                0x00000000411f9001                dut_re_trigger_tx
+                0x00000000411f95dd                read_cfo_index
+                0x00000000411f961d                att_cfo_test
+                0x00000000411f9039                put_hci_data_to_ringbuf
+                0x00000000411f9161                att_cfo_test_tx_begin
+                0x00000000411f925d                att_parse_cfo_result
+                0x00000000411f906d                att_write_hci_pkt
+ .rodata        0x00000000411f984c       0x18 ./obj/ap_autotest_mptest.o
+                0x00000000411f984c                update_cmd2
+                0x00000000411f9854                update_cmd1
+                0x00000000411f985c                update_cmd0
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000411f9864      0x19c 00
+                0x0000000041239a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_8
+                0x0000000041239000      0xa00
+ ap_autotest_mptest_sub.o(.bss .data .text .rodata)
+ .text          0x0000000041239000      0x91c ./obj/ap_autotest_mptest_sub.o
+                0x0000000041239381                att_modify_mp_data
+                0x0000000041239001                act_test_report_mptest_result
+                0x0000000041239411                ringbuf_init
+                0x000000004123959d                do_mp_test
+                0x0000000041239429                att_cfo_test_init
+                0x00000000412394dd                att_mptest_init
+                0x0000000041239305                att_modify_mp_data_sub
+                0x00000000412393a1                att_read_mpdata
+                0x00000000412397e1                att_mp_read_test
+                0x00000000412395c1                att_mp_test
+                0x00000000412392fd                att_modify_tx_channel
+ .rodata        0x000000004123991c       0x20 ./obj/ap_autotest_mptest_sub.o
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x000000004123993c       0xc4 00
+                0x0000000041279a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_9
+                0x0000000041279000      0xa00
+ ap_autotest_channel_test.o(.xdata .text .rodata .data)
+ .text          0x0000000041279000      0x958 ./obj/ap_autotest_channel_test.o
+                0x0000000041279001                init_dac_buffer
+                0x0000000041279721                act_test_report_channel_result
+                0x0000000041279131                init_dma_to_adc
+                0x00000000412798d5                act_test_mic_channel_test
+                0x00000000412798c9                act_test_linein_channel_test_ATS2823
+                0x00000000412798bd                act_test_linein_channel_test_ATS2825
+                0x00000000412795e5                channel_test
+                0x00000000412792b9                play_pcm_exit
+                0x00000000412791d5                play_pcm_init
+                0x00000000412790e1                print_channel_data
+                0x000000004127934d                analyse_power_val_valid
+                0x0000000041279035                sco_dac_dma_config
+                0x00000000412794f9                adc_data_deal
+                0x000000004127980d                act_test_linein_channel_test
+ .rodata        0x0000000041279958       0x20 ./obj/ap_autotest_channel_test.o
+                0x0000000041279958                pcm_table
+ .xdata         0x0000000041279978       0x34 ./obj/ap_autotest_channel_test.o
+                0x0000000041279978                g_adc_buffer_ptr
+                0x0000000041279984                power_val_array
+                0x0000000041279979                g_sample_count
+                0x000000004127997c                g_power_val_left
+                0x0000000041279980                g_power_val_right
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000412799ac       0x54 00
+                0x00000000412b9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_10
+                0x00000000412b9000      0xa00
+ ap_autotest_read_param.o(.xdata .text .rodata)
+ .text          0x00000000412b9000      0x4f8 ./obj/ap_autotest_read_param.o
+                0x00000000412b928d                act_test_read_bt_name
+                0x00000000412b9001                act_test_read_bt_addr
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000412b94f8      0x508 00
+                0x00000000412f9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_11
+                0x00000000412f9000      0xa00
+ ap_autotest_bertest.o(.text .rodata .xdata)
+ .text          0x00000000412f9000      0x8ac ./obj/ap_autotest_bertest.o
+                0x00000000412f94a9                ber_clear_report
+                0x00000000412f91dd                _ber_test_get_pktinfo_cb
+                0x00000000412f91c5                send_bt_data
+                0x00000000412f91a5                update_hci_cmd_time
+                0x00000000412f91f1                att_parse_ber_result
+                0x00000000412f9515                ber_test_loop_deal
+                0x00000000412f9005                _ber_test_read_hci_data
+                0x00000000412f93ad                _ber_test_write_berdata
+ .rodata        0x00000000412f98ac       0x48 ./obj/ap_autotest_bertest.o
+                0x00000000412f98ec                pkt_num_cmd
+                0x00000000412f98dc                grssi_cmd
+                0x00000000412f98cc                clear_report1_cmd1
+                0x00000000412f98ac                clear_report_cmd3
+                0x00000000412f98c4                clear_report_cmd0
+                0x00000000412f98d4                clear_report1_cmd0
+                0x00000000412f98e4                error_bit_cmd
+                0x00000000412f98bc                clear_report_cmd1
+                0x00000000412f98b4                clear_report_cmd2
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x00000000412f98f4      0x10c 00
+                0x0000000041339a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_12
+                0x0000000041339000      0xa00
+ ap_autotest_lradc_test.o(.text .rodata .xdata)
+ .text          0x0000000041339000      0x2a4 ./obj/ap_autotest_lradc_test.o
+                0x000000004133912d                act_test_report_lradc_result
+                0x0000000041339161                act_test_lradc_test
+                0x0000000041339001                get_adc_data
+ ap_autotest_misc_test.o(.text .rodata .data .bss)
+ .text          0x00000000413392a4      0x3d8 ./obj/ap_autotest_misc_test.o
+                0x0000000041339381                act_test_enter_ft_mode
+                0x000000004133947d                act_test_enter_BQB_mode
+                0x0000000041339331                act_test_flashtest
+                0x00000000413392a5                card_adfu_launcher
+                0x0000000041339581                att_write_trim_cap
+                0x000000004133955d                read_trim_cap_efuse
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x000000004133967c      0x384 00
+                0x0000000041379a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_13
+                0x0000000041379000      0xa00
+ ap_autotest_bertest_sub.o(.text .rodata .xdata)
+ .text          0x0000000041379000      0x634 ./obj/ap_autotest_bertest_sub.o
+                0x0000000041379201                _ber_test_init
+                0x0000000041379165                att_modify_ber_data_sub
+                0x00000000413791e1                att_modify_ber_rx_channel
+                0x0000000041379151                att_modify_rx_channel
+                0x0000000041379391                do_ber_test
+                0x0000000041379575                act_test_ber_test
+                0x00000000413795d5                act_test_rssi_test
+ .rodata        0x0000000041379634       0x14 ./obj/ap_autotest_bertest_sub.o
+                0x0000000000000a00                . = AP_MANAGER_TEST_BANK0_SIZE
+ *fill*         0x0000000041379648      0x3b8 00
+                0x00000000413b9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_14
+                0x00000000413b9000      0x578
+ ap_autotest_channel_test_SNR.o(.xdata .text .rodata)
+ .text          0x00000000413b9000      0x578 ./obj/ap_autotest_channel_test_SNR.o
+                0x00000000413b9001                DoBitRev
+                0x00000000413b9441                thd_test
+                0x00000000413b9421                cal_threadshold
+                0x00000000413b9205                analyse_sound_data
+                0x00000000413b9051                InitBitRev
+                0x00000000413b9071                FftInput
+                0x00000000413b91ed                mul64
+                0x00000000413b91c5                sqrt_fixed
+                0x00000000413b90a1                FftExe
+                0x00000000413f9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_15
+                0x00000000413f9000        0x0
+ ap_autotest_channel_test_log_file.o(.xdata .text .rodata)
+                0x00000000419e4800                . = (BANK_CONTROL_4_ADDR_BASE + (AP_BANK_SPACE * 0x27))
+
+BANK_CONTROL_1_39
+                0x00000000419e4800      0x704
+ ap_autotest_channel_test_SNR_data.o(.xdata .text .rodata .data .bss)
+ .text          0x00000000419e4800        0x4 ./obj/ap_autotest_channel_test_SNR_data.o
+                0x00000000419e4801                load_win_data
+ .bss           0x00000000419e4804      0x600 ./obj/ap_autotest_channel_test_SNR_data.o
+                0x00000000419e4804                BitRev
+                0x00000000419e4a04                Re
+                0x00000000419e4c04                Im
+ .rodata        0x00000000419e4e04      0x100 ./obj/ap_autotest_channel_test_SNR_data.o
+                0x00000000419e4e04                SIN_TABLE
+                0x00000000419e4e84                COS_TABLE
+                0x0000000041a10000                . = (BANK_CONTROL_3_ADDR_BASE + (AP_BANK_SPACE * 0x28))
+
+BANK_CONTROL_1_40
+                0x0000000041a10000     0x37e4
+ ABC_03.o(.text .rodata .data .bss)
+ .text          0x0000000041a10000      0x174 ./ap_upgrade/fw_decrypt/ABC_03.o
+                0x0000000041a10000                XYZ_072
+ ABC_05.o(.text .rodata .data .bss)
+ .text          0x0000000041a10174      0x1a0 ./ap_upgrade/fw_decrypt/ABC_05.o
+                0x0000000041a10174                XYZ_070
+                0x0000000041a102b4                XYZ_071
+ ABC_06.o(.text .rodata .data .bss)
+ .text          0x0000000041a10314       0xf8 ./ap_upgrade/fw_decrypt/ABC_06.o
+                0x0000000041a10314                XYZ_069
+ .data          0x0000000041a1040c      0x400 ./ap_upgrade/fw_decrypt/ABC_06.o
+                0x0000000041a1040c                XYZ_900
+ ABC_08.o(.text .rodata .data .bss)
+ .text          0x0000000041a1080c      0x1c4 ./ap_upgrade/fw_decrypt/ABC_08.o
+                0x0000000041a108a4                XYZ_063
+                0x0000000041a10924                XYZ_064
+                0x0000000041a10970                XYZ_065
+                0x0000000041a10978                XYZ_067
+                0x0000000041a1080c                XYZ_062
+ ABC_13.o(.text .rodata .data .bss)
+ .text          0x0000000041a109d0      0xd44 ./ap_upgrade/fw_decrypt/ABC_13.o
+                0x0000000041a1163c                XYZ_057
+                0x0000000041a10a50                XYZ_036
+                0x0000000041a10b5c                XYZ_042
+                0x0000000041a10b20                XYZ_041
+                0x0000000041a10eb0                XYZ_047
+                0x0000000041a11430                XYZ_053
+                0x0000000041a11258                XYZ_052
+                0x0000000041a10af0                XYZ_039
+                0x0000000041a10d80                XYZ_045
+                0x0000000041a11020                XYZ_049
+                0x0000000041a11088                XYZ_051
+                0x0000000041a10ad0                XYZ_038
+                0x0000000041a11680                XYZ_061
+                0x0000000041a10ff0                XYZ_048
+                0x0000000041a109d0                XYZ_034
+                0x0000000041a10aac                XYZ_037
+                0x0000000041a10e00                XYZ_046
+                0x0000000041a10c28                XYZ_043
+ .data          0x0000000041a11714       0x84 ./ap_upgrade/fw_decrypt/ABC_13.o
+                0x0000000041a11754                XYZ_911
+                0x0000000041a11774                xyz_910
+                0x0000000041a11734                XYZ_912
+                0x0000000041a11714                tab_m
+ .bss           0x0000000041a11798       0x20 ./ap_upgrade/fw_decrypt/ABC_13.o
+                0x0000000041a11798                XYZ_913
+ ABC_23.o(.text .rodata .data .bss)
+ .text          0x0000000041a117b8       0x6c ./ap_upgrade/fw_decrypt/ABC_23.o
+                0x0000000041a117b8                XYZ_023
+ ABC_29.o(.text .rodata .data .bss)
+ .text          0x0000000041a11824      0x118 ./ap_upgrade/fw_decrypt/ABC_29.o
+                0x0000000041a11824                XYZ_010
+                0x0000000041a118cc                XYZ_011
+ .data          0x0000000041a1193c       0x14 ./ap_upgrade/fw_decrypt/ABC_29.o
+                0x0000000041a1193c                XYZ_902
+ ABC_33.o(.text .rodata .data .bss)
+ .text          0x0000000041a11950      0x114 ./ap_upgrade/fw_decrypt/ABC_33.o
+                0x0000000041a11950                XYZ_001
+ ABC_39.o(.text .rodata .data .bss)
+ .text          0x0000000041a11a64      0x8d8 ./ap_upgrade/fw_decrypt/ABC_39.o
+                0x0000000041a121fc                PCFWDecrypt
+                0x0000000041a11f84                PCFWDecryptInit
+                0x0000000041a11a64                XYZ_107
+ .data          0x0000000041a1233c       0x30 ./ap_upgrade/fw_decrypt/ABC_39.o
+                0x0000000041a12350                Version_Number_major_FW
+                0x0000000041a12354                ContentID_FW
+                0x0000000041a1233c                FileID
+                0x0000000041a12364                fw_decrypt_op
+                0x0000000041a1234c                Version_Number_minor_FW
+ ABC_N2.o(.text .rodata .data .bss)
+ .text          0x0000000041a1236c      0x1a0 ./ap_upgrade/fw_decrypt/ABC_N2.o
+                0x0000000041a1236c                XYZ_N02
+ .rodata        0x0000000041a1250c       0x20 ./ap_upgrade/fw_decrypt/ABC_N2.o
+ ap_upgrade_rcode.o(.text .rodata)
+ .text          0x0000000041a1252c      0x8c4 ./obj/ap_upgrade_rcode.o
+                0x0000000041a125e9                check_sum16
+                0x0000000041a12689                ud_sector_read
+                0x0000000041a1279d                check_sum32
+                0x0000000041a12da1                upgrade_fw_write
+                0x0000000041a12a91                lfi_write
+                0x0000000041a12c09                part_write
+                0x0000000041a12889                mbrec_write
+                0x0000000041a1252d                fresh_display
+                0x0000000041a12601                ud_sector_write
+                0x0000000041a12955                lfi_check
+                0x0000000041a126cd                brec_sector_write
+                0x0000000041a127b1                brec_write
+ decrypt.o(.text .rodata)
+ .text          0x0000000041a12df0      0x1c0 ./obj/decrypt.o
+                0x0000000041a12df1                _read_file_translate
+                0x0000000041a12f39                decrypt_init
+                0x0000000041a12f99                _read_file
+ ap_upgrade_bank.o(.text .rodata)
+ .text          0x0000000041a12fb0      0x770 ./obj/ap_upgrade_bank.o
+                0x0000000041a13629                act_test_product_test
+                0x0000000041a13475                att_fw_swtch_deal
+                0x0000000041a130b9                search_content
+                0x0000000041a13531                check_upg_drv
+                0x0000000041a136a9                act_test_prepare_product
+                0x0000000041a12ff1                parse_firmware
+                0x0000000041a1355d                upgrade_deal
+                0x0000000041a134bd                reboot_to_card_product
+ .rodata        0x0000000041a13720       0x54 ./obj/ap_upgrade_bank.o
+ ap_upgrade_fw_check.o(.text .rodata)
+ .text          0x0000000041a13774       0x64 ./obj/ap_upgrade_fw_check.o
+                0x0000000041a13775                upgrade_fw_check
+ .rodata        0x0000000041a137d8        0xc ./obj/ap_upgrade_fw_check.o
+                0x0000000041a137d8                fw_ascfile_name
+                0x0000000041cb9a00                . = (BANK_CONTROL_2_ADDR_BASE + (AP_BANK_SPACE * 0x32))
+                0x0000000000039a00                OFFSET = (. & 0x3ffff)
+
+BANK_CONTROL_1_50
+                0x0000000041cb9a00      0x600
+ ap_autotest_common.o(.text .rodata)
+ .text          0x0000000041cb9a00      0x184 ./obj/ap_autotest_common.o
+                0x0000000041cb9a5d                bytes_to_unicode
+                0x0000000041cb9a91                uint32_to_unicode
+                0x0000000041cb9b41                act_test_report_result
+                0x0000000041cb9a25                two_bytes_to_unicode
+                0x0000000041cb9a01                byte_to_unicode
+                0x0000000041cb9ad5                int32_to_unicode
+ ap_autotest_fsm.o(.xdata .text .rodata)
+ .text          0x0000000041cb9b84      0x388 ./obj/ap_autotest_fsm.o
+                0x0000000041cb9d65                att_power_off
+                0x0000000041cb9d0d                att_flush_rtc_reg
+                0x0000000041cb9b85                act_test_change_test_timeout
+                0x0000000041cb9bd1                act_test_read_testid
+                0x0000000041cb9d3d                en_play_wake_up
+                0x0000000041cb9de9                test_dispatch
+ .rodata        0x0000000041cb9f0c       0xc0 ./obj/ap_autotest_fsm.o
+                0x0000000041cb9f0c                autotest_ops
+                0x0000000000000600                . = AP_MANAGER_TEST_BANK1_SIZE
+ *fill*         0x0000000041cb9fcc       0x34 00
+                0x0000000041cf9a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_51
+                0x0000000041cf9a00      0x600
+ ap_autotest_printk.o(.xdata .text .rodata)
+ .text          0x0000000041cf9a00      0x1f4 ./obj/ap_autotest_printk.o
+                0x0000000041cf9a01                vsnprintf
+                0x0000000041cf9b59                print_log
+ .rodata        0x0000000041cf9bf4       0x10 ./obj/ap_autotest_printk.o
+                0x0000000041cf9bf4                digits
+                0x0000000000000600                . = AP_MANAGER_TEST_BANK1_SIZE
+ *fill*         0x0000000041cf9c04      0x3fc 00
+                0x0000000041d39a00                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_52
+                0x0000000041d39a00      0x600
+ ap_autotest_gpio_sub.o(.xdata .text .rodata)
+ .text          0x0000000041d39a00      0x474 ./obj/ap_autotest_gpio_sub.o
+                0x0000000041d39d3d                test_gpio
+                0x0000000041d39b0d                led_flash_fail
+                0x0000000041d39c01                act_test_report_gpio_result
+                0x0000000041d39e59                act_test_gpio_test_ATS2823
+                0x0000000041d39a01                led_flash_ok
+                0x0000000041d39e3d                act_test_gpio_test
+                0x0000000000000600                . = AP_MANAGER_TEST_BANK1_SIZE
+ *fill*         0x0000000041d39e74      0x18c 00
+
+.data           0x0000000041d3a000        0x0
+
+.bss            0x0000000041d3a000     0x15e0
+ COMMON         0x0000000041d3a000     0x1300 ./ap_upgrade/fw_decrypt/ABC_13.o
+                0x0000000041d3a000                tempx_043
+                0x0000000041d3a100                lambda2_051
+                0x0000000041d3a200                lambda_052
+                0x0000000041d3a300                temp_043
+                0x0000000041d3a400                tempy_047
+                0x0000000041d3a500                temp1_051
+                0x0000000041d3a600                temp2_051
+                0x0000000041d3a700                lambda2_052
+                0x0000000041d3a800                temp1_053
+                0x0000000041d3a880                tempv_043
+                0x0000000041d3a980                temp2_052
+                0x0000000041d3aa80                temp2_053
+                0x0000000041d3ab00                temp1_052
+                0x0000000041d3ac00                temp_046
+                0x0000000041d3ad00                lambda_051
+                0x0000000041d3ae00                temp3_051
+                0x0000000041d3af00                temp1_061
+                0x0000000041d3af80                temp3_052
+                0x0000000041d3b080                tempc_043
+                0x0000000041d3b180                temp2_061
+                0x0000000041d3b200                tempx_047
+ COMMON         0x0000000041d3b300      0x220 ./ap_upgrade/fw_decrypt/ABC_39.o
+                0x0000000041d3b300                PCFWDecrypt_BufferHeader
+                0x0000000041d3b500                PCFWDecrypt_seed
+ .bss           0x0000000041d3b520       0x9c ./obj/ap_upgrade_rcode.o
+                0x0000000041d3b52c                g_write_percent
+                0x0000000041d3b524                g_decrypt_cache
+                0x0000000041d3b530                _para
+                0x0000000041d3b520                g_firmware_offset
+ .bss           0x0000000041d3b5bc       0x18 ./obj/decrypt.o
+                0x0000000041d3b5bc                g_decrypt
+ .bss           0x0000000041d3b5d4        0xc ./obj/ap_upgrade_bank.o
+                0x0000000041d3b5dc                g_upg_file_pos
+                0x0000000041d3b5d4                g_upgrade_file_offset
+                0x0000000041d3b5d8                g_upg_file_len
+
+.rel.dyn
+LOAD ./../../../psp_rel/lib/api.a
+OUTPUT(acttest.exe elf32-tradlittlemips)
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 ./../../../psp_rel/lib/ctor.o
+
+.pdr            0x0000000000000000     0x1fc0
+ .pdr           0x0000000000000000       0x40 ./../../../psp_rel/lib/ctor.o
+ .pdr           0x0000000000000040       0x20 ./../../../psp_rel/lib/api.a(audio_device_op_entry.o)
+ .pdr           0x0000000000000060       0x20 ./../../../psp_rel/lib/api.a(key_op_entry.o)
+ .pdr           0x0000000000000080       0x20 ./../../../psp_rel/lib/api.a(libc_op_entry.o)
+ .pdr           0x00000000000000a0       0x20 ./../../../psp_rel/lib/api.a(mmm_hfp_cmd.o)
+ .pdr           0x00000000000000c0       0x20 ./../../../psp_rel/lib/api.a(sys_op_entry.o)
+ .pdr           0x00000000000000e0       0x20 ./../../../psp_rel/lib/api.a(vfs_op_entry.o)
+ .pdr           0x0000000000000100      0x140 ./obj/ap_autotest_main.o
+ .pdr           0x0000000000000240       0x60 ./obj/common_func_rcode.o
+ .pdr           0x00000000000002a0      0x120 ./obj/ap_autotest_btstack_test.o
+ .pdr           0x00000000000003c0      0x140 ./obj/ap_autotest_mptest.o
+ .pdr           0x0000000000000500      0x120 ./obj/ap_autotest_bertest.o
+ .pdr           0x0000000000000620       0xa0 ./obj/common_func.o
+ .pdr           0x00000000000006c0       0xc0 ./obj/ap_autotest_btstack_test_dev.o
+ .pdr           0x0000000000000780       0x60 ./obj/ap_autotest_start_deal.o
+ .pdr           0x00000000000007e0       0x60 ./obj/ap_autotest_gpio.o
+ .pdr           0x0000000000000840       0xc0 ./obj/ap_autotest_music_test.o
+ .pdr           0x0000000000000900       0xc0 ./obj/ap_autotest_record_file.o
+ .pdr           0x00000000000009c0      0x280 ./obj/ap_autotest_read_args.o
+ .pdr           0x0000000000000c40      0x1c0 ./obj/ap_autotest_modify_bt_attr.o
+ .pdr           0x0000000000000e00      0x160 ./obj/ap_autotest_mptest_sub.o
+ .pdr           0x0000000000000f60      0x200 ./obj/ap_autotest_channel_test.o
+ .pdr           0x0000000000001160       0x80 ./obj/ap_autotest_read_param.o
+ .pdr           0x00000000000011e0       0x60 ./obj/ap_autotest_lradc_test.o
+ .pdr           0x0000000000001240       0xc0 ./obj/ap_autotest_misc_test.o
+ .pdr           0x0000000000001300      0x100 ./obj/ap_autotest_bertest_sub.o
+ .pdr           0x0000000000001400      0x140 ./obj/ap_autotest_channel_test_SNR.o
+ .pdr           0x0000000000001540       0x20 ./obj/ap_autotest_channel_test_SNR_data.o
+ .pdr           0x0000000000001560       0x20 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .pdr           0x0000000000001580       0x40 ./ap_upgrade/fw_decrypt/ABC_05.o
+ .pdr           0x00000000000015c0       0x20 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .pdr           0x00000000000015e0       0xa0 ./ap_upgrade/fw_decrypt/ABC_08.o
+ .pdr           0x0000000000001680      0x240 ./ap_upgrade/fw_decrypt/ABC_13.o
+ .pdr           0x00000000000018c0       0x20 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .pdr           0x00000000000018e0       0x40 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .pdr           0x0000000000001920       0x20 ./ap_upgrade/fw_decrypt/ABC_33.o
+ .pdr           0x0000000000001940       0x60 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .pdr           0x00000000000019a0       0x20 ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .pdr           0x00000000000019c0      0x180 ./obj/ap_upgrade_rcode.o
+ .pdr           0x0000000000001b40       0x60 ./obj/decrypt.o
+ .pdr           0x0000000000001ba0      0x120 ./obj/ap_upgrade_bank.o
+ .pdr           0x0000000000001cc0       0x20 ./obj/ap_upgrade_fw_check.o
+ .pdr           0x0000000000001ce0       0xc0 ./obj/ap_autotest_common.o
+ .pdr           0x0000000000001da0       0xc0 ./obj/ap_autotest_fsm.o
+ .pdr           0x0000000000001e60       0x40 ./obj/ap_autotest_printk.o
+ .pdr           0x0000000000001ea0       0xc0 ./obj/ap_autotest_gpio_sub.o
+ .pdr           0x0000000000001f60       0x20 ./../../../psp_rel/lib/api.a(bt_op_entry.o)
+ .pdr           0x0000000000001f80       0x20 ./../../../psp_rel/lib/api.a(stub_mod_cmd.o)
+ .pdr           0x0000000000001fa0       0x20 ./../../../psp_rel/lib/api.a(base_op_entry.o)
+
+.mdebug.abi32   0x0000000000000000        0x0
+
+.comment        0x0000000000000000      0x6e3
+ .comment       0x0000000000000000       0x2b ./../../../psp_rel/lib/ctor.o
+ .comment       0x000000000000002b       0x2b ./obj/ap_autotest_main.o
+ .comment       0x0000000000000056       0x2b ./obj/common_func_rcode.o
+ .comment       0x0000000000000081       0x2b ./obj/ap_autotest_btstack_test.o
+ .comment       0x00000000000000ac       0x2b ./obj/ap_autotest_mptest.o
+ .comment       0x00000000000000d7       0x2b ./obj/ap_autotest_bertest.o
+ .comment       0x0000000000000102       0x2b ./obj/common_func.o
+ .comment       0x000000000000012d       0x2b ./obj/ap_autotest_btstack_test_dev.o
+ .comment       0x0000000000000158       0x2b ./obj/ap_autotest_start_deal.o
+ .comment       0x0000000000000183       0x2b ./obj/ap_autotest_gpio.o
+ .comment       0x00000000000001ae       0x2b ./obj/ap_autotest_music_test.o
+ .comment       0x00000000000001d9       0x2b ./obj/ap_autotest_record_file.o
+ .comment       0x0000000000000204       0x2b ./obj/ap_autotest_read_args.o
+ .comment       0x000000000000022f       0x2b ./obj/ap_autotest_modify_bt_attr.o
+ .comment       0x000000000000025a       0x2b ./obj/ap_autotest_mptest_sub.o
+ .comment       0x0000000000000285       0x2b ./obj/ap_autotest_channel_test.o
+ .comment       0x00000000000002b0       0x2b ./obj/ap_autotest_read_param.o
+ .comment       0x00000000000002db       0x2b ./obj/ap_autotest_lradc_test.o
+ .comment       0x0000000000000306       0x2b ./obj/ap_autotest_misc_test.o
+ .comment       0x0000000000000331       0x2b ./obj/ap_autotest_bertest_sub.o
+ .comment       0x000000000000035c       0x2b ./obj/ap_autotest_channel_test_SNR.o
+ .comment       0x0000000000000387       0x2b ./obj/ap_autotest_channel_test_log_file.o
+ .comment       0x00000000000003b2       0x2b ./obj/ap_autotest_channel_test_SNR_data.o
+ .comment       0x00000000000003dd       0x2b ./ap_upgrade/fw_decrypt/ABC_03.o
+ .comment       0x0000000000000408       0x2b ./ap_upgrade/fw_decrypt/ABC_05.o
+ .comment       0x0000000000000433       0x2b ./ap_upgrade/fw_decrypt/ABC_06.o
+ .comment       0x000000000000045e       0x2b ./ap_upgrade/fw_decrypt/ABC_08.o
+ .comment       0x0000000000000489       0x2b ./ap_upgrade/fw_decrypt/ABC_13.o
+ .comment       0x00000000000004b4       0x2b ./ap_upgrade/fw_decrypt/ABC_23.o
+ .comment       0x00000000000004df       0x2b ./ap_upgrade/fw_decrypt/ABC_29.o
+ .comment       0x000000000000050a       0x2b ./ap_upgrade/fw_decrypt/ABC_33.o
+ .comment       0x0000000000000535       0x2b ./ap_upgrade/fw_decrypt/ABC_39.o
+ .comment       0x0000000000000560       0x2b ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .comment       0x000000000000058b       0x2b ./obj/ap_upgrade_rcode.o
+ .comment       0x00000000000005b6       0x2b ./obj/decrypt.o
+ .comment       0x00000000000005e1       0x2b ./obj/ap_upgrade_bank.o
+ .comment       0x000000000000060c       0x2b ./obj/ap_upgrade_fw_check.o
+ .comment       0x0000000000000637       0x2b ./obj/ap_autotest_common.o
+ .comment       0x0000000000000662       0x2b ./obj/ap_autotest_fsm.o
+ .comment       0x000000000000068d       0x2b ./obj/ap_autotest_printk.o
+ .comment       0x00000000000006b8       0x2b ./obj/ap_autotest_gpio_sub.o
+
+.debug_abbrev   0x0000000000000000     0x3864
+ .debug_abbrev  0x0000000000000000      0x184 ./obj/ap_autotest_main.o
+ .debug_abbrev  0x0000000000000184      0x142 ./obj/common_func_rcode.o
+ .debug_abbrev  0x00000000000002c6      0x24a ./obj/ap_autotest_btstack_test.o
+ .debug_abbrev  0x0000000000000510      0x1db ./obj/ap_autotest_mptest.o
+ .debug_abbrev  0x00000000000006eb      0x217 ./obj/ap_autotest_bertest.o
+ .debug_abbrev  0x0000000000000902       0xf3 ./obj/common_func.o
+ .debug_abbrev  0x00000000000009f5      0x193 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_abbrev  0x0000000000000b88      0x122 ./obj/ap_autotest_start_deal.o
+ .debug_abbrev  0x0000000000000caa      0x111 ./obj/ap_autotest_gpio.o
+ .debug_abbrev  0x0000000000000dbb      0x140 ./obj/ap_autotest_music_test.o
+ .debug_abbrev  0x0000000000000efb      0x1b3 ./obj/ap_autotest_record_file.o
+ .debug_abbrev  0x00000000000010ae      0x20d ./obj/ap_autotest_read_args.o
+ .debug_abbrev  0x00000000000012bb      0x23e ./obj/ap_autotest_modify_bt_attr.o
+ .debug_abbrev  0x00000000000014f9      0x21b ./obj/ap_autotest_mptest_sub.o
+ .debug_abbrev  0x0000000000001714      0x209 ./obj/ap_autotest_channel_test.o
+ .debug_abbrev  0x000000000000191d      0x1ec ./obj/ap_autotest_read_param.o
+ .debug_abbrev  0x0000000000001b09      0x137 ./obj/ap_autotest_lradc_test.o
+ .debug_abbrev  0x0000000000001c40      0x257 ./obj/ap_autotest_misc_test.o
+ .debug_abbrev  0x0000000000001e97      0x295 ./obj/ap_autotest_bertest_sub.o
+ .debug_abbrev  0x000000000000212c      0x1c7 ./obj/ap_autotest_channel_test_SNR.o
+ .debug_abbrev  0x00000000000022f3       0x2a ./obj/ap_autotest_channel_test_log_file.o
+ .debug_abbrev  0x000000000000231d       0x7a ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_abbrev  0x0000000000002397       0xd2 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_abbrev  0x0000000000002469       0xaf ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_abbrev  0x0000000000002518       0xa7 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_abbrev  0x00000000000025bf       0xe8 ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_abbrev  0x00000000000026a7      0x1ab ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_abbrev  0x0000000000002852       0x75 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_abbrev  0x00000000000028c7       0xe1 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_abbrev  0x00000000000029a8       0xc3 ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_abbrev  0x0000000000002a6b      0x1a3 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_abbrev  0x0000000000002c0e       0x8b ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_abbrev  0x0000000000002c99      0x1b4 ./obj/ap_upgrade_rcode.o
+ .debug_abbrev  0x0000000000002e4d       0xeb ./obj/decrypt.o
+ .debug_abbrev  0x0000000000002f38      0x223 ./obj/ap_upgrade_bank.o
+ .debug_abbrev  0x000000000000315b       0xe8 ./obj/ap_upgrade_fw_check.o
+ .debug_abbrev  0x0000000000003243       0xfc ./obj/ap_autotest_common.o
+ .debug_abbrev  0x000000000000333f      0x1fa ./obj/ap_autotest_fsm.o
+ .debug_abbrev  0x0000000000003539      0x174 ./obj/ap_autotest_printk.o
+ .debug_abbrev  0x00000000000036ad      0x1b7 ./obj/ap_autotest_gpio_sub.o
+
+.debug_info     0x0000000000000000     0xe7b4
+ .debug_info    0x0000000000000000      0x8eb ./obj/ap_autotest_main.o
+ .debug_info    0x00000000000008eb      0x324 ./obj/common_func_rcode.o
+ .debug_info    0x0000000000000c0f      0x8c0 ./obj/ap_autotest_btstack_test.o
+ .debug_info    0x00000000000014cf      0xb3e ./obj/ap_autotest_mptest.o
+ .debug_info    0x000000000000200d      0x951 ./obj/ap_autotest_bertest.o
+ .debug_info    0x000000000000295e      0x252 ./obj/common_func.o
+ .debug_info    0x0000000000002bb0      0x622 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_info    0x00000000000031d2      0x54b ./obj/ap_autotest_start_deal.o
+ .debug_info    0x000000000000371d      0x373 ./obj/ap_autotest_gpio.o
+ .debug_info    0x0000000000003a90      0x451 ./obj/ap_autotest_music_test.o
+ .debug_info    0x0000000000003ee1      0x58a ./obj/ap_autotest_record_file.o
+ .debug_info    0x000000000000446b      0xf55 ./obj/ap_autotest_read_args.o
+ .debug_info    0x00000000000053c0      0xb4a ./obj/ap_autotest_modify_bt_attr.o
+ .debug_info    0x0000000000005f0a      0xd5d ./obj/ap_autotest_mptest_sub.o
+ .debug_info    0x0000000000006c67      0x7fe ./obj/ap_autotest_channel_test.o
+ .debug_info    0x0000000000007465      0x55e ./obj/ap_autotest_read_param.o
+ .debug_info    0x00000000000079c3      0x3a2 ./obj/ap_autotest_lradc_test.o
+ .debug_info    0x0000000000007d65      0x66e ./obj/ap_autotest_misc_test.o
+ .debug_info    0x00000000000083d3      0xe39 ./obj/ap_autotest_bertest_sub.o
+ .debug_info    0x000000000000920c      0x630 ./obj/ap_autotest_channel_test_SNR.o
+ .debug_info    0x000000000000983c       0x88 ./obj/ap_autotest_channel_test_log_file.o
+ .debug_info    0x00000000000098c4      0x123 ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_info    0x00000000000099e7      0x330 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_info    0x0000000000009d17      0x167 ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_info    0x0000000000009e7e       0xf6 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_info    0x0000000000009f74      0x2c2 ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_info    0x000000000000a236      0x91b ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_info    0x000000000000ab51       0xf8 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_info    0x000000000000ac49      0x177 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_info    0x000000000000adc0      0x31c ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_info    0x000000000000b0dc      0xb13 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_info    0x000000000000bbef       0xca ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_info    0x000000000000bcb9      0xa6a ./obj/ap_upgrade_rcode.o
+ .debug_info    0x000000000000c723      0x3e1 ./obj/decrypt.o
+ .debug_info    0x000000000000cb04      0xab1 ./obj/ap_upgrade_bank.o
+ .debug_info    0x000000000000d5b5      0x241 ./obj/ap_upgrade_fw_check.o
+ .debug_info    0x000000000000d7f6      0x388 ./obj/ap_autotest_common.o
+ .debug_info    0x000000000000db7e      0x45d ./obj/ap_autotest_fsm.o
+ .debug_info    0x000000000000dfdb      0x331 ./obj/ap_autotest_printk.o
+ .debug_info    0x000000000000e30c      0x4a8 ./obj/ap_autotest_gpio_sub.o
+
+.debug_line     0x0000000000000000     0x3a48
+ .debug_line    0x0000000000000000      0x204 ./obj/ap_autotest_main.o
+ .debug_line    0x0000000000000204      0x109 ./obj/common_func_rcode.o
+ .debug_line    0x000000000000030d      0x1fa ./obj/ap_autotest_btstack_test.o
+ .debug_line    0x0000000000000507      0x2f4 ./obj/ap_autotest_mptest.o
+ .debug_line    0x00000000000007fb      0x298 ./obj/ap_autotest_bertest.o
+ .debug_line    0x0000000000000a93       0xf4 ./obj/common_func.o
+ .debug_line    0x0000000000000b87      0x18d ./obj/ap_autotest_btstack_test_dev.o
+ .debug_line    0x0000000000000d14      0x12e ./obj/ap_autotest_start_deal.o
+ .debug_line    0x0000000000000e42      0x274 ./obj/ap_autotest_gpio.o
+ .debug_line    0x00000000000010b6      0x140 ./obj/ap_autotest_music_test.o
+ .debug_line    0x00000000000011f6      0x235 ./obj/ap_autotest_record_file.o
+ .debug_line    0x000000000000142b      0x287 ./obj/ap_autotest_read_args.o
+ .debug_line    0x00000000000016b2      0x268 ./obj/ap_autotest_modify_bt_attr.o
+ .debug_line    0x000000000000191a      0x298 ./obj/ap_autotest_mptest_sub.o
+ .debug_line    0x0000000000001bb2      0x278 ./obj/ap_autotest_channel_test.o
+ .debug_line    0x0000000000001e2a      0x1c6 ./obj/ap_autotest_read_param.o
+ .debug_line    0x0000000000001ff0      0x121 ./obj/ap_autotest_lradc_test.o
+ .debug_line    0x0000000000002111      0x1b8 ./obj/ap_autotest_misc_test.o
+ .debug_line    0x00000000000022c9      0x241 ./obj/ap_autotest_bertest_sub.o
+ .debug_line    0x000000000000250a      0x204 ./obj/ap_autotest_channel_test_SNR.o
+ .debug_line    0x000000000000270e       0x51 ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_line    0x000000000000275f       0x88 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_line    0x00000000000027e7       0x61 ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_line    0x0000000000002848       0x60 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_line    0x00000000000028a8       0x7e ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_line    0x0000000000002926      0x1fc ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_line    0x0000000000002b22       0x43 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_line    0x0000000000002b65       0x5c ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_line    0x0000000000002bc1       0x75 ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_line    0x0000000000002c36      0x205 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_line    0x0000000000002e3b       0x97 ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_line    0x0000000000002ed2      0x29e ./obj/ap_upgrade_rcode.o
+ .debug_line    0x0000000000003170      0x102 ./obj/decrypt.o
+ .debug_line    0x0000000000003272      0x1fb ./obj/ap_upgrade_bank.o
+ .debug_line    0x000000000000346d       0xef ./obj/ap_upgrade_fw_check.o
+ .debug_line    0x000000000000355c      0x100 ./obj/ap_autotest_common.o
+ .debug_line    0x000000000000365c      0x114 ./obj/ap_autotest_fsm.o
+ .debug_line    0x0000000000003770      0x15e ./obj/ap_autotest_printk.o
+ .debug_line    0x00000000000038ce      0x17a ./obj/ap_autotest_gpio_sub.o
+
+.debug_frame    0x0000000000000000     0x1ff8
+ .debug_frame   0x0000000000000000      0x150 ./obj/ap_autotest_main.o
+ .debug_frame   0x0000000000000150       0x64 ./obj/common_func_rcode.o
+ .debug_frame   0x00000000000001b4      0x120 ./obj/ap_autotest_btstack_test.o
+ .debug_frame   0x00000000000002d4      0x154 ./obj/ap_autotest_mptest.o
+ .debug_frame   0x0000000000000428      0x108 ./obj/ap_autotest_bertest.o
+ .debug_frame   0x0000000000000530       0xa8 ./obj/common_func.o
+ .debug_frame   0x00000000000005d8       0xd8 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_frame   0x00000000000006b0       0x64 ./obj/ap_autotest_start_deal.o
+ .debug_frame   0x0000000000000714       0x7c ./obj/ap_autotest_gpio.o
+ .debug_frame   0x0000000000000790       0xc8 ./obj/ap_autotest_music_test.o
+ .debug_frame   0x0000000000000858       0xdc ./obj/ap_autotest_record_file.o
+ .debug_frame   0x0000000000000934      0x290 ./obj/ap_autotest_read_args.o
+ .debug_frame   0x0000000000000bc4      0x1d4 ./obj/ap_autotest_modify_bt_attr.o
+ .debug_frame   0x0000000000000d98      0x168 ./obj/ap_autotest_mptest_sub.o
+ .debug_frame   0x0000000000000f00      0x210 ./obj/ap_autotest_channel_test.o
+ .debug_frame   0x0000000000001110       0x84 ./obj/ap_autotest_read_param.o
+ .debug_frame   0x0000000000001194       0x70 ./obj/ap_autotest_lradc_test.o
+ .debug_frame   0x0000000000001204       0xc8 ./obj/ap_autotest_misc_test.o
+ .debug_frame   0x00000000000012cc      0x110 ./obj/ap_autotest_bertest_sub.o
+ .debug_frame   0x00000000000013dc      0x11c ./obj/ap_autotest_channel_test_SNR.o
+ .debug_frame   0x00000000000014f8       0x20 ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_frame   0x0000000000001518       0x38 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_frame   0x0000000000001550       0x50 ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_frame   0x00000000000015a0       0x28 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_frame   0x00000000000015c8       0x84 ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_frame   0x000000000000164c      0x204 ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_frame   0x0000000000001850       0x30 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_frame   0x0000000000001880       0x44 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_frame   0x00000000000018c4       0x3c ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_frame   0x0000000000001900       0xa8 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_frame   0x00000000000019a8       0x3c ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_frame   0x00000000000019e4      0x170 ./obj/ap_upgrade_rcode.o
+ .debug_frame   0x0000000000001b54       0x64 ./obj/decrypt.o
+ .debug_frame   0x0000000000001bb8      0x138 ./obj/ap_upgrade_bank.o
+ .debug_frame   0x0000000000001cf0       0x34 ./obj/ap_upgrade_fw_check.o
+ .debug_frame   0x0000000000001d24       0xd4 ./obj/ap_autotest_common.o
+ .debug_frame   0x0000000000001df8       0xc4 ./obj/ap_autotest_fsm.o
+ .debug_frame   0x0000000000001ebc       0x54 ./obj/ap_autotest_printk.o
+ .debug_frame   0x0000000000001f10       0xe8 ./obj/ap_autotest_gpio_sub.o
+
+.debug_pubnames
+                0x0000000000000000     0x1c3d
+ .debug_pubnames
+                0x0000000000000000      0x282 ./obj/ap_autotest_main.o
+ .debug_pubnames
+                0x0000000000000282       0x44 ./obj/common_func_rcode.o
+ .debug_pubnames
+                0x00000000000002c6       0xf6 ./obj/ap_autotest_btstack_test.o
+ .debug_pubnames
+                0x00000000000003bc      0x1ca ./obj/ap_autotest_mptest.o
+ .debug_pubnames
+                0x0000000000000586      0x1ae ./obj/ap_autotest_bertest.o
+ .debug_pubnames
+                0x0000000000000734       0x85 ./obj/common_func.o
+ .debug_pubnames
+                0x00000000000007b9       0xd0 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_pubnames
+                0x0000000000000889       0x4f ./obj/ap_autotest_start_deal.o
+ .debug_pubnames
+                0x00000000000008d8       0x51 ./obj/ap_autotest_gpio.o
+ .debug_pubnames
+                0x0000000000000929       0xbf ./obj/ap_autotest_music_test.o
+ .debug_pubnames
+                0x00000000000009e8       0x89 ./obj/ap_autotest_record_file.o
+ .debug_pubnames
+                0x0000000000000a71      0x134 ./obj/ap_autotest_read_args.o
+ .debug_pubnames
+                0x0000000000000ba5      0x164 ./obj/ap_autotest_modify_bt_attr.o
+ .debug_pubnames
+                0x0000000000000d09      0x103 ./obj/ap_autotest_mptest_sub.o
+ .debug_pubnames
+                0x0000000000000e0c      0x1f4 ./obj/ap_autotest_channel_test.o
+ .debug_pubnames
+                0x0000000000001000       0x46 ./obj/ap_autotest_read_param.o
+ .debug_pubnames
+                0x0000000000001046       0x5c ./obj/ap_autotest_lradc_test.o
+ .debug_pubnames
+                0x00000000000010a2       0xa6 ./obj/ap_autotest_misc_test.o
+ .debug_pubnames
+                0x0000000000001148       0xb6 ./obj/ap_autotest_bertest_sub.o
+ .debug_pubnames
+                0x00000000000011fe       0x97 ./obj/ap_autotest_channel_test_SNR.o
+ .debug_pubnames
+                0x0000000000001295       0x59 ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_pubnames
+                0x00000000000012ee       0x1e ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_pubnames
+                0x000000000000130c       0x2a ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_pubnames
+                0x0000000000001336       0x2a ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_pubnames
+                0x0000000000001360       0x4e ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_pubnames
+                0x00000000000013ae      0x24e ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_pubnames
+                0x00000000000015fc       0x1e ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_pubnames
+                0x000000000000161a       0x36 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_pubnames
+                0x0000000000001650       0x1e ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_pubnames
+                0x000000000000166e       0xda ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_pubnames
+                0x0000000000001748       0x1e ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_pubnames
+                0x0000000000001766      0x128 ./obj/ap_upgrade_rcode.o
+ .debug_pubnames
+                0x000000000000188e       0x59 ./obj/decrypt.o
+ .debug_pubnames
+                0x00000000000018e7      0x103 ./obj/ap_upgrade_bank.o
+ .debug_pubnames
+                0x00000000000019ea       0x3b ./obj/ap_upgrade_fw_check.o
+ .debug_pubnames
+                0x0000000000001a25       0x9a ./obj/ap_autotest_common.o
+ .debug_pubnames
+                0x0000000000001abf       0xab ./obj/ap_autotest_fsm.o
+ .debug_pubnames
+                0x0000000000001b6a       0x39 ./obj/ap_autotest_printk.o
+ .debug_pubnames
+                0x0000000000001ba3       0x9a ./obj/ap_autotest_gpio_sub.o
+
+.debug_aranges  0x0000000000000000      0x4e0
+ .debug_aranges
+                0x0000000000000000       0x20 ./obj/ap_autotest_main.o
+ .debug_aranges
+                0x0000000000000020       0x20 ./obj/common_func_rcode.o
+ .debug_aranges
+                0x0000000000000040       0x20 ./obj/ap_autotest_btstack_test.o
+ .debug_aranges
+                0x0000000000000060       0x20 ./obj/ap_autotest_mptest.o
+ .debug_aranges
+                0x0000000000000080       0x20 ./obj/ap_autotest_bertest.o
+ .debug_aranges
+                0x00000000000000a0       0x20 ./obj/common_func.o
+ .debug_aranges
+                0x00000000000000c0       0x20 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_aranges
+                0x00000000000000e0       0x20 ./obj/ap_autotest_start_deal.o
+ .debug_aranges
+                0x0000000000000100       0x20 ./obj/ap_autotest_gpio.o
+ .debug_aranges
+                0x0000000000000120       0x20 ./obj/ap_autotest_music_test.o
+ .debug_aranges
+                0x0000000000000140       0x20 ./obj/ap_autotest_record_file.o
+ .debug_aranges
+                0x0000000000000160       0x20 ./obj/ap_autotest_read_args.o
+ .debug_aranges
+                0x0000000000000180       0x20 ./obj/ap_autotest_modify_bt_attr.o
+ .debug_aranges
+                0x00000000000001a0       0x20 ./obj/ap_autotest_mptest_sub.o
+ .debug_aranges
+                0x00000000000001c0       0x20 ./obj/ap_autotest_channel_test.o
+ .debug_aranges
+                0x00000000000001e0       0x20 ./obj/ap_autotest_read_param.o
+ .debug_aranges
+                0x0000000000000200       0x20 ./obj/ap_autotest_lradc_test.o
+ .debug_aranges
+                0x0000000000000220       0x20 ./obj/ap_autotest_misc_test.o
+ .debug_aranges
+                0x0000000000000240       0x20 ./obj/ap_autotest_bertest_sub.o
+ .debug_aranges
+                0x0000000000000260       0x20 ./obj/ap_autotest_channel_test_SNR.o
+ .debug_aranges
+                0x0000000000000280       0x20 ./obj/ap_autotest_channel_test_SNR_data.o
+ .debug_aranges
+                0x00000000000002a0       0x20 ./ap_upgrade/fw_decrypt/ABC_03.o
+ .debug_aranges
+                0x00000000000002c0       0x20 ./ap_upgrade/fw_decrypt/ABC_05.o
+ .debug_aranges
+                0x00000000000002e0       0x20 ./ap_upgrade/fw_decrypt/ABC_06.o
+ .debug_aranges
+                0x0000000000000300       0x20 ./ap_upgrade/fw_decrypt/ABC_08.o
+ .debug_aranges
+                0x0000000000000320       0x20 ./ap_upgrade/fw_decrypt/ABC_13.o
+ .debug_aranges
+                0x0000000000000340       0x20 ./ap_upgrade/fw_decrypt/ABC_23.o
+ .debug_aranges
+                0x0000000000000360       0x20 ./ap_upgrade/fw_decrypt/ABC_29.o
+ .debug_aranges
+                0x0000000000000380       0x20 ./ap_upgrade/fw_decrypt/ABC_33.o
+ .debug_aranges
+                0x00000000000003a0       0x20 ./ap_upgrade/fw_decrypt/ABC_39.o
+ .debug_aranges
+                0x00000000000003c0       0x20 ./ap_upgrade/fw_decrypt/ABC_N2.o
+ .debug_aranges
+                0x00000000000003e0       0x20 ./obj/ap_upgrade_rcode.o
+ .debug_aranges
+                0x0000000000000400       0x20 ./obj/decrypt.o
+ .debug_aranges
+                0x0000000000000420       0x20 ./obj/ap_upgrade_bank.o
+ .debug_aranges
+                0x0000000000000440       0x20 ./obj/ap_upgrade_fw_check.o
+ .debug_aranges
+                0x0000000000000460       0x20 ./obj/ap_autotest_common.o
+ .debug_aranges
+                0x0000000000000480       0x20 ./obj/ap_autotest_fsm.o
+ .debug_aranges
+                0x00000000000004a0       0x20 ./obj/ap_autotest_printk.o
+ .debug_aranges
+                0x00000000000004c0       0x20 ./obj/ap_autotest_gpio_sub.o
+
+.debug_str      0x0000000000000000     0x4025
+ .debug_str     0x0000000000000000      0x53f ./obj/ap_autotest_main.o
+                                        0x615 (size before relaxing)
+ .debug_str     0x000000000000053f       0x8e ./obj/common_func_rcode.o
+                                        0x220 (size before relaxing)
+ .debug_str     0x00000000000005cd      0x471 ./obj/ap_autotest_btstack_test.o
+                                        0x74e (size before relaxing)
+ .debug_str     0x0000000000000a3e      0x627 ./obj/ap_autotest_mptest.o
+                                        0x7d2 (size before relaxing)
+ .debug_str     0x0000000000001065      0x36c ./obj/ap_autotest_bertest.o
+                                        0x6a2 (size before relaxing)
+ .debug_str     0x00000000000013d1       0x8b ./obj/common_func.o
+                                        0x1f8 (size before relaxing)
+ .debug_str     0x000000000000145c      0x18e ./obj/ap_autotest_btstack_test_dev.o
+                                        0x44c (size before relaxing)
+ .debug_str     0x00000000000015ea      0x169 ./obj/ap_autotest_start_deal.o
+                                        0x424 (size before relaxing)
+ .debug_str     0x0000000000001753       0xda ./obj/ap_autotest_gpio.o
+                                        0x1eb (size before relaxing)
+ .debug_str     0x000000000000182d       0xc1 ./obj/ap_autotest_music_test.o
+                                        0x45f (size before relaxing)
+ .debug_str     0x00000000000018ee      0x112 ./obj/ap_autotest_record_file.o
+                                        0x3bb (size before relaxing)
+ .debug_str     0x0000000000001a00      0x56b ./obj/ap_autotest_read_args.o
+                                        0x935 (size before relaxing)
+ .debug_str     0x0000000000001f6b      0x1b5 ./obj/ap_autotest_modify_bt_attr.o
+                                        0x7d2 (size before relaxing)
+ .debug_str     0x0000000000002120      0x27b ./obj/ap_autotest_mptest_sub.o
+                                        0x9a5 (size before relaxing)
+ .debug_str     0x000000000000239b      0x275 ./obj/ap_autotest_channel_test.o
+                                        0x743 (size before relaxing)
+ .debug_str     0x0000000000002610       0x9d ./obj/ap_autotest_read_param.o
+                                        0x3c6 (size before relaxing)
+ .debug_str     0x00000000000026ad       0x8c ./obj/ap_autotest_lradc_test.o
+                                        0x462 (size before relaxing)
+ .debug_str     0x0000000000002739      0x116 ./obj/ap_autotest_misc_test.o
+                                        0x57c (size before relaxing)
+ .debug_str     0x000000000000284f      0x14d ./obj/ap_autotest_bertest_sub.o
+                                        0xa53 (size before relaxing)
+ .debug_str     0x000000000000299c      0x198 ./obj/ap_autotest_channel_test_SNR.o
+                                        0x3db (size before relaxing)
+ .debug_str     0x0000000000002b34       0x24 ./obj/ap_autotest_channel_test_log_file.o
+                                        0x116 (size before relaxing)
+ .debug_str     0x0000000000002b58       0x24 ./obj/ap_autotest_channel_test_SNR_data.o
+                                        0x13f (size before relaxing)
+ .debug_str     0x0000000000002b7c      0x204 ./ap_upgrade/fw_decrypt/ABC_03.o
+                                        0x2fa (size before relaxing)
+ .debug_str     0x0000000000002d80       0x3f ./ap_upgrade/fw_decrypt/ABC_05.o
+                                        0x140 (size before relaxing)
+ .debug_str     0x0000000000002dbf       0x2c ./ap_upgrade/fw_decrypt/ABC_06.o
+                                         0xb9 (size before relaxing)
+ .debug_str     0x0000000000002deb       0x96 ./ap_upgrade/fw_decrypt/ABC_08.o
+                                        0x13c (size before relaxing)
+ .debug_str     0x0000000000002e81      0x20a ./ap_upgrade/fw_decrypt/ABC_13.o
+                                        0x331 (size before relaxing)
+ .debug_str     0x000000000000308b       0x1f ./ap_upgrade/fw_decrypt/ABC_23.o
+                                        0x12c (size before relaxing)
+ .debug_str     0x00000000000030aa       0x51 ./ap_upgrade/fw_decrypt/ABC_29.o
+                                         0xf0 (size before relaxing)
+ .debug_str     0x00000000000030fb       0xc7 ./ap_upgrade/fw_decrypt/ABC_33.o
+                                        0x309 (size before relaxing)
+ .debug_str     0x00000000000031c2      0x47e ./ap_upgrade/fw_decrypt/ABC_39.o
+                                        0x891 (size before relaxing)
+ .debug_str     0x0000000000003640       0x20 ./ap_upgrade/fw_decrypt/ABC_N2.o
+                                         0xab (size before relaxing)
+ .debug_str     0x0000000000003660      0x3cd ./obj/ap_upgrade_rcode.o
+                                        0x5ae (size before relaxing)
+ .debug_str     0x0000000000003a2d       0xbd ./obj/decrypt.o
+                                        0x3c0 (size before relaxing)
+ .debug_str     0x0000000000003aea      0x257 ./obj/ap_upgrade_bank.o
+                                        0x87e (size before relaxing)
+ .debug_str     0x0000000000003d41       0x45 ./obj/ap_upgrade_fw_check.o
+                                        0x1f8 (size before relaxing)
+ .debug_str     0x0000000000003d86       0x92 ./obj/ap_autotest_common.o
+                                        0x268 (size before relaxing)
+ .debug_str     0x0000000000003e18       0xfd ./obj/ap_autotest_fsm.o
+                                        0x477 (size before relaxing)
+ .debug_str     0x0000000000003f15       0x6e ./obj/ap_autotest_printk.o
+                                        0x1f7 (size before relaxing)
+ .debug_str     0x0000000000003f83       0xa2 ./obj/ap_autotest_gpio_sub.o
+                                        0x470 (size before relaxing)
+
+.debug_ranges   0x0000000000000000      0x180
+ .debug_ranges  0x0000000000000000       0x18 ./obj/ap_autotest_btstack_test.o
+ .debug_ranges  0x0000000000000018       0x18 ./obj/ap_autotest_btstack_test_dev.o
+ .debug_ranges  0x0000000000000030       0x20 ./obj/ap_autotest_record_file.o
+ .debug_ranges  0x0000000000000050       0x20 ./obj/ap_autotest_read_args.o
+ .debug_ranges  0x0000000000000070       0x18 ./obj/ap_autotest_modify_bt_attr.o
+ .debug_ranges  0x0000000000000088       0x18 ./obj/ap_autotest_read_param.o
+ .debug_ranges  0x00000000000000a0       0x50 ./obj/ap_autotest_misc_test.o
+ .debug_ranges  0x00000000000000f0       0x50 ./obj/ap_autotest_bertest_sub.o
+ .debug_ranges  0x0000000000000140       0x18 ./obj/ap_autotest_fsm.o
+ .debug_ranges  0x0000000000000158       0x28 ./obj/ap_autotest_printk.o

@@ -1,0 +1,90 @@
+INPUT(link_base.xn)
+
+BANK_GROUP_INDEX = DRV_GROUP_FM;
+
+SRAM_TEXT_ADDR = SRAM_FM_DRV_RCODE_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_FM_DRV_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_FM_DRV_RDATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_FM_DRV_RDATA_SIZE;
+
+ROM_TEXT_ADDR = RCODE_ADDR_BASE + SROM_TWI_ADDR_MDY;
+ROM_TEXT_SIZE = SROM_TWI_SIZE_MDY;
+
+KERNEL_BANK_A_ADDR_BASE = (KERNEL_BANK_A << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_A_ADDR;
+KERNEL_BANK_B_ADDR_BASE = (KERNEL_BANK_B << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_B_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE;
+KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+KERNEL_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(fm_drv_op)
+
+SECTIONS
+{
+    .text RCODE_TEXT_ADDR :
+    {
+        /*API OBJ在此链接*/
+        sys_op_entry.o(.text)
+		libc_op_entry.o(.text)
+		
+        rcode_fm_op_entry.o(.text)
+        rcode_fm_deal.o(.text .rodata)
+        qndriver.o(.rocode)
+        qnio.o(.text .rodata)
+        . = RCODE_SIZE;
+    }
+    .rom ROM_TEXT_ADDR :
+    {
+        rom_TWI.o(.text .rodata)
+        . = ROM_TEXT_SIZE;
+    }
+    .data RDATA_DATA_ADDR :  AT(ADDR(.text) + SIZEOF(.text))
+    {
+        _resident_data = ABSOLUTE(.);
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        *.o(.data)
+    }
+
+    .bss :
+    {
+        _resident_data_end = ABSOLUTE(.);
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = DATA_BSS_SIZE - (_resident_data_end - _resident_data);
+    }
+
+    . = KERNEL_BANK_A_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_A_0 :
+    {
+        bank_a_fm_init.o(.text .rodata)
+        rcode_fm_deal.o(.bank)
+
+    }
+
+    . = KERNEL_BANK_B_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_B_0 :
+    {
+        bank_b_fm_init_deal.o(.text .rodata)
+        qndriver.o(.text .rodata)
+
+    }
+
+    . = ((. + KERNEL_BANK_SPACE) & (~(KERNEL_BANK_SPACE - 1)))  + OFFSET;
+     BANK_B_1 :
+    {
+        bank_b_fm_get_deal.o(.text .rodata)
+
+    }
+    
+}

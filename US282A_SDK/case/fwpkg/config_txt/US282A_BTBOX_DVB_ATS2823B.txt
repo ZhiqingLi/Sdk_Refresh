@@ -1,0 +1,286 @@
+//-*- coding: UTF8 -*- 用来指示以什么编码打包字符串内容，从[ANSI, UTF8, UTF-16, UTF-16BE]中选择一种；如果去掉就默认以ANSI编码打包字符串内容；
+//系统配置--应用选项
+SETTING_APP_SUPPORT_CARDPLAY = 0[0,1];        //是否支持卡播放功能，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_UHOSTPLAY = 0[0,1];       //是否支持U盘播放功能，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_LINEIN = 0[0,1];          //是否支持linein播放功能，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_FMRADIO = 0[0,1];         //是否支持FM收音机，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_BT_INBACK = 1[0,1];       //是否支持后台蓝牙，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_BTPLAY = 1[0,1];          //是否支持蓝牙播歌，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_BTCALL = 1[0,1];          //是否支持蓝牙免提，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_USBBOX = 0[0,1];          //是否支持USB音箱，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_USBMSC = 0[0,1];          //是否支持大容量磁盘功能，0表示不支持，1表示支持
+SETTING_APP_SWITCH_SEQUENCE = 0[0,1,2,3,4,5,31]; //应用切换顺序，默认值表示开机默认进入的应用，数值意义参见case_type.h中的宏定义 APP_FUNC_XXX
+//case版本号，pid，vid（用于OTA）
+SETTING_CASE_PID = 0[0~255,1];  
+SETTING_CASE_VID = 0[0~255,1];  
+
+SETTING_APP_SUPPORT_OTA_SONG_TEST   = 0[0,1];    //是否支持OTA歌曲测试功能，0表示不支持，1表示支持
+SETTING_APP_SUPPORT_WAVES_INPUT_PARAM = 0[0,1];  //0x00:WAVES音效固件模式下不支持input参数;0x01:WAVES音效固件模式下支持input参数;
+SETTING_APP_WAVES_BIN_NUMBER		= 0[0~2,1];  //WAVES音效固件模式下,使用第几套音效参数，0表示默认的音效参数
+SETTING_APP_SUPPORT_2823T           = 0[0,1];    //是否支持2823T，0表示不支持，1表示支持
+
+//系统设置--开关机选项
+SETTING_ONOFF_LOWPOWER_MODE{20} = 2[0~2,1];   //低功耗模式，0表示不支持低功耗模式，1表示普通低功耗模式，此模式下唤醒方式较多，支持热拔插，唤醒快
+                                              //2表示超低功耗模式，此模式下唤醒方式有限，有条件的支持热拔插，唤醒较慢
+SETTING_ONOFF_LOWPOWER_TIMER = 1[0~10,1];     //进入低功耗时间，以分钟为单位；0表示一空闲就进入低功耗模式
+SETTING_ONOFF_POWEROFF_TIMER = 1[0~120,1];    //省电关机时间，以分钟为单位；为0表示关闭省电关机；如果支持低功耗模式，那么从进入低功耗后开始计时
+SETTING_ONOFF_POWEROFF_BT_WAITPAIR_TIMER = 5[1~120,1];  //蓝牙等待连接省电关机时间，以分钟为单位；该配置项在“省电关机时间”不为0时有效；如果支持低功耗模式，那么该配置项就无意义了
+
+//系统设置--输入选项
+SETTING_INPUT_SUPPORT_IR{30} = 1[0,1];        //支持红外遥控器，0表示不支持，1表示支持
+SETTING_INPUT_IR_CODE = 1[0~2,1];             //红外遥控编码类型，如果选择不正确，开机后第一次按键将无效
+SETTING_INPUT_SUPPORT_TK = 1[0,1];            //支持触摸按键，0表示不支持，1表示支持
+SETTING_INPUT_TK_KEY_ARRAY = 0[3,2,7,8,5,6,29];//触摸按键映射表，分别为：next/prev/mode/eq/vol+/vol-/AB&REC
+SETTING_INPUT_KEY_ARRAY = 0[3,2,7,8,5,6,29];  //EVB板按键，分别为：next/prev/mode/eq/vol+/vol-/AB&REC
+SETTING_INPUT_ENABLE_DOUBLE_CLICK = 1[0,1];   //双击按键开关，0表示禁止，1表示使能；
+SETTING_INPUT_DOUBLE_CLICK_DELAY_TIMER = 200[100~300,20];  //双击按键延迟时间，单位为ms；该值表示按键按下->按键抬起->按键按下->按键抬起这3个动作间隔的时间；
+
+//系统设置--音频选项
+SETTING_AUDIO_OUTPUT_CHANNAL{40} = 0[0,1,2,3,4];//音频输出通道：0-DAC，1-I2S，2-SPDIF，3-DAC + I2S，4-DAC + SPDIF
+SETTING_AUDIO_INNER_PA_SET_MODE = 0[0,1,2,3]; //IC内部PA工作模式，0 单端+非直驱，1 单端+直驱，2 差分+非直驱，3 差分+直驱 （3暂不支持）
+SETTING_AUDIO_INPUT_CHANNAL = 3[0,1,2,3,4];   //音频输入通道：0 Linein，1 Fm, 2 单端mic，3差分mic，4 数字mic
+SETTING_AUDIO_SAMPLE_RATE_FIXED = 0[0,1];     //音频输出采用率固定：0 采样率不固定， 1 采样率固定为48K
+SETTING_AUDIO_POW_SAVING_MODE = 1[0,1];      //音频性能/功耗配置：0 性能优先， 1 功耗优先
+
+//系统设置--声音选项
+SETTING_SOUND_ENABLE_KEYTONE{50} = 1[0,1];    //按键音开关，0表示禁止，1表示使能；该选项暂时无用
+SETTING_SOUND_ENABLE_KEYTONE_OVERLAY = 1[0,1];//按键音叠加开关，0表示有声音输出时不输出按键音，1表示即使有声音输出也要把按键音叠加上去；
+SETTING_SOUND_ENABLE_TTS = 1[0,1];            //状态语音播报选项，0表示关闭，1表示开启
+SETTING_SOUND_TTS_LANGUAGE = 0[0~1,1];        //TTS播报语音类型，0表示中文，1表示英文
+SETTING_SOUND_UNMUTE_BY_APP_SWITCH = 1[0,1];  //是否切换应用解除静音
+SETTING_SOUND_UNMUTE_BY_INPUT = 1[0,1];       //是否任意按键解除静音
+SETTING_SOUND_VOLUME_GRADE = 31[1~31,1];      //声音最大等级
+SETTING_SOUND_DEFAULT_MAIN_VOLUME = 31[0~31,1];  //升级后首次开机默认主音量，或者也可以作为每次开机的重置主音量
+SETTING_SOUND_DEFAULT_CALL_VOLUME = 15[0~31,1];  //升级后首次开机默认打电话音量，或者也可以作为每次开机的重置打电话音量
+SETTING_SOUND_VOLUME_RESET_POWERON = 0[0,1];     //开机音量重置到默认值选项，0表示不重置，1表示要重置
+SETTING_SOUND_MIN_VOLUME_POWERON = 1[0~31,1];    //开机最小音量，避免开机听不到任何声音
+SETTING_SOUND_MAX_VOLUME_POWERON = 8[0~31,1];   //开机最大音量，避免开机声音太大
+SETTING_SOUND_KT_TTS_MIN_VOLUME = 3[0~31,1];     //按键音和TTS最小音量，0表示在音量为0时没有按键音和TTS
+SETTING_SOUND_KT_TTS_MAX_VOLUME = 15[0~31,1];    //按键音和TTS最大声音
+SETTING_SOUND_MAIN_VOLUME_GAIN = 0[0~9,1];       //主音量负增益（衰减），0 ~ 9 表示 0db ~ -9db
+SETTING_SOUND_CALL_VOLUME_GAIN = 9[0~9,1];       //打电话音量负增益（衰减），0 ~ 9 表示 0db ~ -9db
+
+//系统设置--显示选项
+SETTING_DISPLAY_SUPPORT_LED_SEGMENT{70} = 0[0,1];//是否支持数码管显示 0 不支持 1支持
+SETTING_DISPLAY_LED_SEGMENT_LIGHT_TIMER = 0[0~120,10];//关闭数码管显示时间--单位1秒，0表示不关闭数码管
+
+//系统设置--电池充电选项
+SETTING_BAT_CHARGE_MODE{80} = 0[0,1];            //电池充电方式，0表示内部充电，1表示外部充电
+SETTING_BAT_CHARGE_CURRENT = 6[0,1,2,3,4,5,6,7]; //电池充电电流值，0=25mA, 1=50mA, 2=100mA, 3=200mA, 4=300mA, 5=400mA, 6=500mA, 7=600mA
+SETTING_BAT_CHARGE_VOLTAGE = 2[0,1,2,3,4,5,6,7]; //电池充电恒压值，0=4.2V, 1=4.23V, 2=4.26V, 3=4.29, 4=4.32V, 5=4.35V, 6=4.38V, 7=4.41V
+SETTING_BAT_CHARGE_FULL_TTS = 0[0,1];            //充电已满TTS使能，每分钟播报一次TTS
+
+//系统设置--时间闹钟选项
+SETTING_TIMEALARM_LOOP_PLAY = 0[0,1];            //闹铃是否为无缝播放
+SETTING_TIMEALARM_SNOOZE_TIMER{90} = 9[0~30,1];  //贪睡时间，单位为分钟，0表示不支持贪睡
+SETTING_TIMEALARM_SNOOZE_MAX_TIMES = 3[0~10,1];  //贪睡最多次数，0表示无限次贪睡
+SETTING_TIMEALARM_ALARM_OVERTIME = 5[0~30,1];    //闹钟超时时间，单位为分钟，0表示会一直闹直到用户关闭
+
+//系统设置--card驱动能力设置
+SETTING_CARD_CMD_PAD_LEVEL{100} = 5[0~7,1];      //卡cmd线驱动能力设置
+SETTING_CARD_CLK_PAD_LEVEL = 5[0~7,1];           //卡clk线驱动能力设置
+SETTING_CARD_DAT_PAD_LEVEL = 5[0~7,1];           //卡data线驱动能力设置
+SETTING_CARD_INT_CLK = 0[0,1];                   //卡初始化时钟频率设置 0:13M 1:26M
+SETTING_CARD_RW_CLK = 2[0~2,1];                  //卡读写时钟频率设置 0:13M 1:26M 2:MCUPLL
+SETTING_CARD_MAX_CLK = 35[13,20,26,35,40];       //选择MCUPLL时卡最大工作频率
+SETTING_UHOST_USE_DELAY=0[0,1];                  //是否支持UHOST延时，提高uhsot兼容性
+
+//系统硬件
+SETTING_HARDWARE_26MHz_CYRSTAL_CAPACITOR{110} = 0[0,1]; //硬件26MHz晶振匹配电容:0表示使用内部电容，1表示使用外部电容
+SETTING_HARDWARE_SUPPORT_CARD = 0[0,1];          //硬件是否支持卡，0表示不支持，1表示支持
+SETTING_HARDWARE_SUPPORT_UHOST = 0[0,1];         //硬件是否支持UHOST，0表示不支持，1表示支持
+SETTING_HARDWARE_SUPPORT_HEADPHONE = 0[0,1];     //硬件是否支持Headphone，0表示不支持，1表示支持
+SETTING_HARDWARE_FREQ_COMPENSATION_OFFSET = 0xFFFF; //硬件设置的频偏偏移值,取值范围0x0000-0x1FFFE,默认加上了65535这个偏移值 
+SETTING_HARDWARE_FREQ_COMPENSATION_DEFAULT_VAL = 0x2222; //硬件设置的默认频偏值,取值范围0x0000-0xFFFF
+USING_HARDWARE_FREQ_R_VALUE = 0[0,1];		//是否使用乘以固定系数R的方法校正频偏
+SETTING_HARDWARE_FREQ_R_VALUE = 0x0000;		//频偏配置R值，取值范围0x0000-0xFFFF实际电容值为预设电容值*R/10000
+
+//测试和调试选项
+SETTING_STUB_TEST_DEBUG_ENABLE{120} = 0[0,1];    //STUB 测试调试使能
+SETTING_SYS_DEBUG_MODE_ENABLE{121} = 1[0,1];     //是否启动开看门狗 0 开启看门狗 1不开启看门狗
+SETTING_SYS_RESET_AFTER_PRODUCT{122} = 6[0~6,1]; //量产结束重启时间,0表示不重启 1:352ms 2:703ms 3:1.4s 4:2.8s 5:5.6s 6:11.2s
+SETTING_STUB_PRINT_ENABLE = 0[0,1];              //STUB PRINT 打印使能
+SETTING_UART_PRINT_ENABLE{124} = 1[0,1];              //UART PRINT 打印使能
+SETTING_STUB_PHY_INTERFACE = 0[0,1];		 //STUB默认硬件连接方式 0 USB 1 串口
+
+//music ap参数
+MUSIC_REPLAY_BY_PREV_KEY{200} = 1[0,1];  //当歌曲播放超过5秒钟后，按PREV键是否回到开头重播，0表示切换到上一曲，1表示重播
+
+
+//linein engine参数
+LINEIN_CHANNEL_SEL{205} = 1[0,1];        //line-in通道选择，0:模拟通道，1:数字通道
+LINEIN_GAIN_INPUT = 2[0~7,1];            //line-in增益，0:-12db，1:-3db，2:0db，3:1.5db，4:3db，5:4.5db，6:6db，7:7.5db
+LINEIN_GAIN_ADC = 0[0~15,1];             //ADC line-in增益，0-45db，每级递增3db
+
+
+//radio ap参数
+RADIO_AP_ID_BAND{210} = 0[0,1,2];        //默认电台波段，0表示普通波段，1表示日本波段，2表示欧洲波段
+RADIO_AP_ID_SEEKMODE = 1[0,1];           //默认搜台模式，0表示硬件seek模式，1表示软件seek模式
+RADIO_AP_ID_HINT_MODE = 0[0,1];          //搜台提示模式，0按键音提示，1灯闪灯
+//fm engine参数
+FMENGINE_AP_ID_SEEKTH{220} = 7[0~19,1];  //搜台门限，范围及默认值视模组而定
+FMENGINE_CHANNEL_SEL = 1[0,1];           //fm处理通道选择 0:模拟通道 1:数字通道
+FMENGINE_GAIN_INPUT = 3[0~7,1];          //Fm增益:0:-12db,1:-3db,2:0db,3:1.5db,4:3db,5:4.5db,6:6db,7:7.5db
+FMENGINE_GAIN_ADC = 3[0~15,1];           //ADC Fm增益:0-45db, 每级递增3db
+FMENGINE_FREQ_32K_13M = 1[0,1];          //Fm选择32.768k或13M; 0=32768, 1=13M
+FMENGINE_CLK_PAD_LEVEL = 1[0~7,1];       //cpu输出13M时，gpio驱动能力
+
+
+//record ap参数
+RECORD_FORMAT_TYPE{230} = 1[0,1];        //录音格式:0-wav; 1-mp3
+RECORD_WAV_ENCODE_TYPE = 0[0,1];         //wav编码格式:0-pcm; 1-adpcm
+RECORD_WAV_BITRATE = 7[5~10,1];          //wav比特率:5:256kbps; 6:512kbps; 7:768kbps; 8:1024kbps; 9:1411kbps; 10:1536kbps;
+RECORD_MP3_BITRATE = 3[1~3,1];           //mp3比特率:1:32kbps; 2:64kbps; 3:128kbps; 4:192kbps;
+RECORD_TRACK_MODE = 0[0,1];              //自动分曲模式:0-关闭;1-开启
+RECORD_AVR_MODE = 0[0,1];                //avr模式:0-关闭;1-开启
+RECORD_GAIN_INPUT_LINEIN = 2[0~7,1];     //录音line-in增益:0:-12db,1:-3db,2:0db,3:1.5db,4:3db,5:4.5db,6:6db,7:7.5db
+RECORD_GAIN_ADC_LINEIN = 0[0~15,1];      //ADC line-in增益:0-45db, 每级递增3db
+RECORD_GAIN_INPUT_MIC = 7[0~7,1];        //录音mic-in增益:0:26db,1:30db,2:31.5db,3:33db,4:34.5db,5:36db,6:37.5db,7:39db
+RECORD_GAIN_ADC_MIC = 2[0~15,1];         //ADC mic-in增益:0-45db, 0:0db, 每级递增3db
+RECORD_GAIN_INPUT_FM = 2[0~7,1];         //录音Fm增益:0:-12db,1:-3db,2:0db,3:1.5db,4:3db,5:4.5db,6:6db,7:7.5db
+RECORD_GAIN_ADC_FM = 0[0~15,1];          //ADC Fm增益:0-45db, 每级递增3db
+RECORD_TRACK_LEVEL_BREAKSONG = 80[0~128,1];//自动分曲电压门槛值:0表示采用初始录音的噪声平均值，非零则-0.5dB一级
+RECORD_TRACK_LEVEL_AVR = 65[0~128,1];    //avr电压门槛值:0表示采用初始录音的噪声平均值，非零则-0.5dB一级
+RECORD_TRACK_DELAY = 3[0~10,1];          //avr延时时间:单位：s
+RECORD_SCAN_MAX_SPACE=1[0~4,1];          //一次扫描磁盘用于录音的空间最大值：0-全盘扫描；1-512M;2-1024M(1G);3-1536M(1.5G);4-2048M(2G)
+
+
+//usb
+USOUND_TYPE{250} = 0[0,1];     //usb声卡or音箱选择（0，声卡；1，音箱）
+USB_VID = "0x10D6";            //只能为16进制字符串
+USB_DEVICE_PID = "0xd101";     //USB音箱PID，只能为16进制字符串，三个PID必须都不相同
+USB_SOUND_PID  = "0xdd01";     //USB声卡PID，只能为16进制字符串，三个PID必须都不相同
+USB_CARDREADER_PID = "0x1101"; //读卡器PID，只能为16进制字符串，三个PID必须都不相同
+INF_UDISK_LABEL = "USB DISK AA";                   //最大11字符
+INF_USB_VENDOR = "ACTIONS";                        //最大8字符
+INF_DEVICE_PRODUCT_NAME = "USB COMPOSITE";         //USB音箱设备名，最大16字符
+INF_SOUND_PRODUCT_NAME  = "USB AUDIO";             //USB声卡设备名，最大16字符
+INF_CARDREADER_PRODUCT_NAME = "USB CARDREADER";    //读卡器设备名，最大16字符
+INF_DEVICE_PRODUCER = "Actions Semiconductor";     //最大32字符
+INF_INQUIRY_INFORMATION_FOB = "ACTIONS USB DISK FOB 2.00"; //最大58个字符
+INF_INQUIRY_INFORMATION_CDROM = "ACTIONS USB DISK CDROM  1.00"; //最大58个字符
+INF_CARD_DISPLAY = "YES";   //是否显示卡盘，YES：显示，NO:不显示,最大3字符
+INF_VOLUME_FLAG = 3[0~3,1]; //usb音箱音量调节，0不可调，1小机可调，2PC可调，3小机PC均可调
+USB_CARDREADER_BCD_DEVICE = "0x1234";           //usb读卡器BCD Device设置
+USB_SOUND_BCD_DEVICE = "0x1234";                //usb audio BCD Device设置
+USB_SN_TYPE = 1[0,1];                           //USB设备SerialNumber类型，0随机生成，1用户指定
+USB_CARDREADER_SN = "ureader_sn_test";          //usb读卡器SerialNumber设置，最大16字符
+USB_SOUND_SN = "usound_sn_test";                //usb sound SerialNumber设置，最大16字符
+USOUND_SAMPLE_TYPE = 0[0,1,2];     //usb声卡采样率选择（0，48&44.1；1，48;2,44.1）
+
+
+//蓝牙协议栈
+BTSTACK_DEVICE_NAME{275} = "us282a_ww";        //经典蓝牙设备名称，最大55字节
+BTSTACK_BLE_DEVICE_NAME  = "us282a_ww_ble";    //BLE蓝牙设备名称，最大29字节
+BTSTACK_BLE_ADV_MANUFACTUREER_ID = 1006;          //BLE 广播设备制造商标识符，0 ~ 9999
+BTSTACK_FIX_PIN_CODE             = "0000";        //固定PIN CODE，只对BT2.1之前版本有用，BT2.1及后续版本使用SSP
+BTSTACK_CLASS_OF_DEVICE          = 0x240404;        //高字节表示major service，中字节表示major device，低字节表示minor device
+//BTSTACK_CLASS_OF_DEVICE          = 0x240540;		// HID 功能需要这个 COD
+BTSTACK_BDADD_HIGH3BYTES         = 0xF44EFD;      //设备地址高3字节，低3字节一般在量产时决定
+BTSTACK_LINKKEY_MISS_REJECT      = 0[0,1];        //回连时倘若手机取消配对了，则不弹出提示框并自动停止连接选项，0表示默认行为，1表示不弹出
+BTSTACK_CONNECT_LINK_INFO        = 0[0,1];        //手机第一次发起连接时不弹出配对提示框选项，0表示默认行为，1表示不弹出
+BTSTACK_OUTPUT_POWER_VALUE       = 11[9~12,1];    //蓝牙控制器发射功率，BT内部值，9:-2dbm,10:1dbm, 11:4dbm, 12:7dbm
+BTSTACK_CAPACITANCE_VALUE_ARRAY  = 1[-2,2,1,-1,-2,1];//当前温度相对常温需补偿电容值表:默认值为1表示温度补偿打开,为0表示温度补偿关闭，[]内数值单位为0.1pF，分别对应-20℃，0℃，20℃，40℃，60℃，75℃
+BTSTACK_SNIFF_INTERVAL_VALUE     = 1[1~2,1];      //蓝牙sniff max interval, 1:500ms;2:1.28s
+BTSTACK_ENABLE_WEIXIN            = 0[0,1];        //是否支持微信服务，0表示不支持，1表示支持
+BTSTACK_FST_SERV_UUID = "00006666-0000-1000-8000-00805F9B34FB";        //service uuid
+BTSTACK_FST_CHAR_UUID = "00008888-0000-1000-8000-00805F9B34FB";        //character uuid
+BTSTACK_SEC_SERV_UUID = "00007777-0000-1000-8000-00805F9B34FB";        //service uuid
+BTSTACK_SEC_CHAR_UUID = "00008877-0000-1000-8000-00805F9B34FB";        //character uuid
+//ble广播包数据设置 must be little endian 参见结构体adv_data_t 方括号前的数字为0使用该配置包,其他值不使用该配置包
+BTSTACK_ADV_DATA_ARRAY = 1[2,1,10,3,3,102,102,3,25,208,7,9,255,6,16,54,98,77,0,0,0];
+//ble scan respose包数据设置 结构同广播包 方括号前的数字为0使用该配置包,其他值不使用该配置包
+BTSTACK_SCAN_RSP_ARRAY = 1[9,9,101,108,98,95,121,116,121,116];
+BTSTACK_LINKKEY_PRINT_ENABLE      = 1[0,1];      //linkkey打印开关，0表示关闭,1表示打开
+BTSTACK_NAME_ADD_MAC_FORMAT       = 0[0~12,1];   //name后面连接的MAC地址长度，默认为0，表示不添加MAC地址
+BTSTACK_A2DP_BITPOOL              = 53[35,53];        //设置A2DP的bitpool; 35:Middle Quality; 53:High Quality
+BTSTACK_WEIXIN_FIXADDR            = 0[245,78,253,250,216,34];        //微信固定地址
+BTSTACK_SPP_UUID = "00001101-0000-1000-8000-00805F9B34FB";       //spp service uuid
+
+//蓝牙管理器
+BTMANAGER_ENABLE_A2DP_CP{310}        = 0[0~2,1];  //支持A2DP内容保护，0-不支持，1-支持DTCP，2-支持SCMS-T
+BTMANAGER_ENABLE_AVDTP_AAC           = 0[0,1];    //是否支持AAC格式蓝牙推歌，0表示不支持，1表示支持
+BTMANAGER_ENABLE_AVRCP               = 1[0,1];    //是否支持AVRCP 遥控服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_AVRCP_14            = 1[0,1];    //是否支持AVRCP 1.4 版本，0表示不支持，1表示支持
+BTMANAGER_ENABLE_AVRCP_VOLUME_SYNC   = 1[0,1];    //是否支持AVRCP音量同步服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_HFP                 = 1[0,1];    //是否支持HFP服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_HFP_VOLUME_SYNC     = 1[0,1];    //是否支持HFP音量同步服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_HFP_BAT_REPORT      = 1[0,1];    //是否支持HFP电量上报服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_HFP_PHONEBOOK       = 0[0,1];    //是否支持HFP电话本服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_SPP                 = 1[0,1];    //是否支持SPP服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_BLE                 = 1[0,1];    //是否支持BLE服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_HID                 = 0[0,1];    //是否支持HID服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_AUTO_CONNECT        = 1[0,1];    //支持自动回连功能:0-不支持,1-支持
+BTMANAGER_RECONNECT_ANOTHER_TIMES    = 3[0~20,1]; //尝试回连另外一个服务的次数限制，0表示一直连接，1~20表示有限次
+BTMANAGER_AUTO_CONNECT_COUNT_TIMEOUT = 80[0~99,1]; //超时断开后自动回连次数，0表示一直回连，1~15表示有限次
+BTMANAGER_AUTO_CONNECT_COUNT_STARTUP = 3[0~15,1]; //开机后第一次进入自动回连次数，0表示一直回连，1~15表示有限次
+BTMANAGER_AUTO_CONNECT_COUNT_MODE    = 3[0~15,1]; //切MODE键进入蓝牙自动回连次数，0表示一直回连，1~15表示有限次
+BTMANAGER_AUTO_CONNECT_INTERVAL      = 20[1~60,1];//自动回连时间间隔，单位秒
+BTMANAGER_MAX_PAIRED_LIST_MEMBER     = 8[1~8,1];  //最多保存几台设备连接信息
+BTMANAGER_SUPPORT_DEVICE_NUM         = 2[1~2,1];  //支持同时连接几台设备
+BTMANAGER_VERIFICATION_APK_ENABLE    = 0[0,1];    //音箱校验APK开关，默认关闭，以向后兼容旧版本APK
+BTMANAGER_ENABLE_THREEWAY_CALL       = 1[0,1];    //是否支持三方通话，0表示不支持，1表示支持
+BTMANAGER_ENABLE_ANCS                = 0[0,1];    //是否支持BLE ANCS服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_TIP                 = 0[0,1];    //是否支持BLE tip服务，0表示不支持，1表示支持
+BTMANAGER_ENABLE_SIRI                = 1[0,1];    //是否支持SIRI功能，0表示不支持，1表示支持
+BTMANAGER_ENABLE_MSBC                = 0[0,1];    //是否支持msbc功能，0表示不支持，1表示支持
+
+//蓝牙推歌
+BTPLAY_FRONT_AUTOPLAY_CNT{350} = 0[0~10,1];       //连接成功后自动发送播放命令的次数，0表示不发
+BTPLAY_FRONT_AVRCP_TTS_ENABLE = 1[0,1];           //支持AVRCP状态播报，0-不支持,1-支持
+BTPLAY_AAC_PLAY_DELAY_START = 161[46~161,23];     //aac播放起始延时，单位为ms，间隔为23ms，即解码单元时长
+BTPLAY_AAC_PLAY_DELAY_LOWEST = 161[46~161,23];    //aac播放最低延时，单位为ms，间隔为23ms，即解码单元时长
+BTPLAY_SBC_PLAY_DELAY_START = 161[46~207,23];     //sbc播放起始延时，单位为ms，间隔为23ms，即解码单元时长
+BTPLAY_SBC_PLAY_DELAY_LOWEST = 161[46~207,23];    //sbc播放最低延时，单位为ms，间隔为23ms，即解码单元时长
+BTPLAY_TWS_M_PLAY_OUTPUT_CHANNEL = 3[0~4,1];      //TWS主箱输出声道,0：normal,1：左右互换,2：左右合并,3：左,4:右
+BTPLAY_TWS_S_PLAY_OUTPUT_CHANNEL = 4[0~4,1];      //TWS从箱输出声道,0：normal,1：左右互换,2：左右合并,3：左,4:右
+
+//蓝牙打电话
+BTCALL_FRONT_CHF_CAG_EXCH_ENABLE{370} = 1[0,1];   //支持切换音箱和手机通话:0-不支持,1-支持,按NEXT键进行切换
+BTCALL_SET_MIC_MUTE_ENABLE = 1[0,1];              //支持设置mic静音:0-不支持,1-支持,按PREV键设置
+BTCALL_MICIN_OP_GAIN  = 7[0~7,1];                 //mic-in增益值:0:26db,1:30db,2:31.5db,3:33db,4:34.5db,5:36db,6:37.5db,7:39db
+BTCALL_MICIN_ADC_GAIN = 1[0~15,1];                //打电话 ADC 增益:0-45db, 每级递增3db
+BTCALL_SPEAKER_CHANNEL_ENABLE = 3[1~3,1];         //打电话时喇叭声道使能，1：右声道，2：左声道，3：双声道；（双声道可能会导致回声消除效果变差）
+BTCALL_SPEAKER_CHANNEL_WEAK_SEL = 1[0~2,1];       //通话时喇叭声音衰减选择，0表示不衰减，1表示右声道衰减，2表示左声道衰减
+BTCALL_SPEAKER_CHANNEL_WEAK_VAL = 6[0~18,1];      //通话时喇叭声音衰减程度，0~18db
+BTCALL_IGNORE_UNCALLSCO = 0[0, 1];                //是否过滤非通话状态下的SCO数据
+BTCALL_CALLIN_RING_MODE = 2[0~2,1];               //来电铃声模式，0表示仅铃声，1表示仅电话本播报，2表示铃声+电话本播报
+BTCALL_CALLIN_RING_SPACE_TIME = 5[0~30,1];        //来电铃声间隔时长:以1s为单位，播完来电铃声后等待该时长后再循环播放
+BTCALL_CALLIN_RING_BUILDIN_SPACE_TIME = 2[0~50,1];//内置来电铃声间隔时长:以100ms为单位，播完内置来电铃声后等待该时长后再循环播放
+
+//蓝牙打电话--AEC算法
+BTCALL_AEC_MODULE_ENABLE{390}   = 1[0,1];         //回声消除模块总开关，1：打开，0：关闭
+BTCALL_AEC_NLP_ENABLE           = 1[0,1];         //非线性处理子模块开关，1：打开，0：关闭
+BTCALL_AEC_NLP_AGGRESSIVENESS   = 10[0~15,1];     //非线性处理程度，整数0~15,越大代表非线性处理越厉害
+BTCALL_AEC_DT_THRESHOLD         = 0[0~15,1];     //双讲近端语音保留程度，整数0~15，越大表示双讲是近端语音保留越多，但是可能会带来单讲的回声，需找个折中值。
+BTCALL_AEC_AES_ENABLE           = 1[0,1];         //残留回声抑制子模块开关，1：打开，0：关闭
+BTCALL_AEC_ECHO_SUPPRESS        = 40[0~40,1];     //回声抑制子模块单讲回声抑制比，单位dB， 0~40
+BTCALL_AEC_ECHO_SUPPRESS_ACTIVE = 40[0~40,1];     //回声抑制子模块双讲回声抑制比，单位dB， 0~40
+BTCALL_AEC_ANS_ENABLE           = 1[0,1];         //降噪开关，1：打开，0：关闭
+BTCALL_AEC_NOISE_SUPPRESS       = 25[0~25,1];     //噪声抑制比，单位dB， 0~25
+BTCALL_AEC_CNG_ENABLE           = 1[0,1];         //舒适噪声开关，1：打开，0：关闭
+BTCALL_AEC_NOISE_FLOOR          = -55[-60~-30,1]; //舒适噪声水平，单位 dB Fs，一般应小于-40 dB；
+BTCALL_AEC_TAIL_LENGTH          = 128[32~128,32]; //回声尾长，单位ms，尾长越长效果越好，但是运算量会增多和空间会加大
+BTCALL_AEC_HALF_FULL_MODE       = 0[0,1];         //单双工模式选择1单工，0全双工
+BTCALL_AGC_PRETREAT_ENABLE      = 1[0,1];         //预处理AGC使能:预处理自动增益控制使能，用于放大对方的声音，1：打开，0：关闭
+BTCALL_AGC_PRETREAT_LEVEL       = 10[0~15,1]; //预处理AGC目标值:预处理自动增益控制目标值，默认设置为7。
+BTCALL_AGC_POSTREAT_ENABLE      = 1[0,1];         //后端AGC使能:后端自动增益控制使能，用于放大自己的声音，1：打开，0：关闭
+BTCALL_AGC_POSTREAT_LEVEL       = 8[0~15,1]; //后端AGC目标值:后端自动增益控制目标值，默认设置为10。
+//底噪衰减算法   	
+							   //enable attack_time release_time set0_th(表示采样值在该值以下直接清0 最大值为5) threshold（取值应不小于-750) ratio			
+NOISE_AUX_REDUCTION{419}        = 0[1, 1000, 10, 15, -600, 5];
+
+//多频段开关 
+MULTI_FREQ_BAND_ENABLE{420}     = 0[0,1];         //多频段开关  ，1：打开，0：关闭
+
+//多频点开关 
+MULTI_FREQ_SPETRUM_ENABLE{421}  = 0[0,1];         //多频点开关  ，1：打开，0：关闭
+
+//DAE打印开关
+DAE_PRINT_ENABLE{422}  			= 0[0,1];         //DAE打印开关 ，1：打开，0：关闭
+
+//输出左右通道配置				
+OUTPUT_CHANNEL_CONFIG{423}   	= 0[0~4,1];		  //0:正常;1:左右声道互换;2:左右声道合并后除以2输出到左声道和右声道;3:左右声道都输出左声道;4:左右声道都输出右声道  	 	 
+//BQB固定蓝牙地址
+BQB_FIXED_BLUETOOTH_ADDR_ENABLE{424}   = 1[0,1];	  //1:表示固定蓝牙地址 0:表示不固定				
+BQB_FIXED_BLUETOOTH_ADDR{425}          = 456[0~999,1];	  //固定蓝牙地址为F44EFD0001C8

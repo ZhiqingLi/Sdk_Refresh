@@ -1,0 +1,1169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    test    : 结点名, 定义测试项
+    param   : 结点名, 定义测试参数, test的子节点
+    tid     : 定义测试项ID, test的专有属性；固定分配，与程序相关, 不可修改
+    name    : 定义名称的资源索引, 如: 测试项名称、参数名称等
+    desc    : 定义描述的资源索引, 如: 测试项描述、参数描述等
+    operate : 定义控件类型, param的专有属性
+      > edit    : 编辑框, 有range和type属性 
+      > single  : 下拉框，N选1(N>2), 有sub子结点
+      > checkbox: 二选一,checked属性可选，设置默认选中状态      
+    type    : 定义值类型, 编辑框(operate为edit)的专有属性
+      > string  : 字符串, 与range属性共存, mask属性可选
+      > dec     : 十进制数字, value为十进制形式，range指定值范围, 无需指定mask(默认0123456789-), 支持负数
+      > hex     : 十六进制，value为十六进制形式，range指定固定长度或值范围, 无需指定mask(默认0123456789ABCDEFabcdef)   
+    range   : 定义值范围, 格式min:max, range=5为固定长度(十进制形式)，range=4:8为范围值
+    value   : 定义默认值
+    mask    : 定义有效字符集, 编辑框(operate为edit)的可选属性
+    sub     : 定义下拉框列表项, 下拉框 (operate为single)的专有子结点
+      > name属性定义一个下拉项, 需有value属性定义下拉项的值
+      > range属性定义一组(>1)下拉项集合, 无需value属性, 各项的值由range指定 
+      > select设置默认选中项
+    index   : 定义parm顺序，指定则以编辑顺序为准；也应用于config.txt
+    show    : 在编辑工具中是否显示此参数，未配置或值为true则显示
+    version : config节点新加属性, 表明config.xml的版本
+      > v160301: param节点增加index和show属性
+-->
+
+<config version="160301" name = "/">
+  <!-- 准备量产: 13 -->
+  <test tid = "13" name = "S1500" desc = "S1501"/>
+
+  <!-- 量产测试: 14 -->
+  <test tid = "14" name = "S1600" desc = "S1601"/>
+  
+  <!-- modify BT NAME -->
+  <test tid = "1" name = "S100" desc = "S101">
+    <!-- modify BT classic name -->
+    <param name = "S102" value = "us282a_btbox" operate = "edit" range = "1:29" desc = "S103" type = "string"/>
+  </test>
+
+  <!-- modify BLE NAME -->
+  <test tid = "2" name = "S200" desc = "S200">
+    <!--modify BT BLE name-->
+    <param name = "S200" value = "us282a_btbox_ble" operate = "edit" range = "1:29" desc = "S201" type = "string"/>
+  </test>
+
+  <!-- modify BT ADDR -->
+  <test tid = "192"	name = "S300" >
+    <!-- BT ADDR High 3B-->
+    <param name = "S301"  value = "f44efd" operate = "edit" range = "6" desc = "S302" type = "hex"/>
+    <!-- BT ADDR Low 3B start -->
+    <param name = "S303"  value = "000001" operate = "edit" range = "6" desc = "S304" type = "hex" focus = "true" />
+    <!-- BT ADDR Low 3B end -->
+    <param name = "S322"  value = "ffffff" operate = "edit" range = "6" desc = "S304" type = "hex"/>
+    <!-- BT ADDR generate mode -->
+    <param name = "S305"  operate = "single" desc = "S306">
+      <sub name="S307" value="0" select="true"/>
+      <sub name="S308" value="1" />
+      <sub name="S309" value="2"/>
+      <sub name="S320" value="3"/>
+      <sub name="S321" value="4"/>
+    </param>
+    <!-- enable BT ADDR multiple changes -->
+    <param name = "S310" operate = "checkbox" checked="true" desc = "S311" show = "false" />
+    <!-- print BT ADDR  -->
+    <param name = "S323" operate = "checkbox" checked="false" desc = "S324" />
+  </test>
+  
+  <!-- modify BT ADDR2 -->
+  <test tid = "199"	name = "S330" >
+    <!-- BT ADDR 6B-->
+    <param name = "S300"  value = "f44efd000000" operate = "edit" range = "12" desc = "S330" type = "hex" focus = "true" />
+  </test>  
+  
+  <!--Read BTADDR TEST -->
+  <test tid = "196" name = "S1800" >
+    <!-- check BT ADDR -->
+    <param name = "S325" operate = "checkbox" checked="false" desc = "S326" />
+    <!-- input BT ADDR -->
+    <param name = "S328" value = "005875000001" operate = "edit" range = "12" desc = "S329" type = "hex" focus = "true" />
+    <!-- print BT ADDR  -->
+    <param name = "S327" operate = "checkbox" checked="false" desc = "S324" />
+  </test>
+        
+  <!--READ BTNAME -->
+  <test tid = "22" name = "S2200" desc = "S2201">  
+    <!-- check BT NAME -->
+    <param name = "S2202" operate = "checkbox" checked="false" desc = "S2203" />
+    <!-- input BT NAME -->
+    <param name = "S2204" value = "us282a_btbox" operate = "edit" range = "1:29" desc = "S2205" type = "string"/>
+    <!-- check BLE NAME -->
+    <param name = "S2206" operate = "checkbox" checked="false" desc = "S2207" />
+    <!-- input BT NAME -->
+    <param name = "S2208" value = "us282a_btbox_ble" operate = "edit" range = "1:29" desc = "S2209" type = "string"/>
+  </test>   
+  
+  <!--GPIO TEST ATS2825-->
+  <test tid = "6" name = "S600">
+    <!-- GPIOA Configure value-->
+    <param name = "S601" value = "20ffe2" operate = "edit" range = "0:ffffffff" desc = "S602" type = "hex"/>
+    <!--GPIOB Configure value -->
+    <param name = "S603" value = "b80" operate = "edit" range = "0:ffffffff" desc = "S604" type = "hex"/>
+    <!--SIO Configure value -->
+    <param name = "S605" value = "280" operate = "edit" range = "0:ffffffff" desc = "S606" type = "hex"/>
+  </test>
+  
+  <!--GPIO TEST ATS2823-->
+  <test tid = "21" name = "S650">
+    <!-- GPIOA Configure value-->
+    <param name = "S651" value = "200000" operate = "edit" range = "0:ffffffff" desc = "S652" type = "hex"/>
+    <!--GPIOB Configure value -->
+    <param name = "S653" value = "0" operate = "edit" range = "0:ffffffff" desc = "S654" type = "hex"/>
+    <!--SIO Configure value -->
+    <param name = "S655" value = "200" operate = "edit" range = "0:ffffffff" desc = "S656" type = "hex"/>
+  </test>  
+
+  <!--ATS2825 LINEIN CHANNEL TEST -->
+  <test tid = "7" name = "S700" desc = "S701">
+    <!-- LINEIN Left CH Test or not-->
+    <param name = "S702" operate = "checkbox" checked="true" desc = "S703" />    
+    <!-- LINEIN Left CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- LINEIN Left CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- LINEIN Left CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- LINEIN Left CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />
+            
+    <!-- LINEIN Right CH Test or not-->
+    <param name = "S720" operate = "checkbox" checked="true" desc = "S721" />    
+    <!-- LINEIN Right CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- LINEIN Right CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- LINEIN Right CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- LINEIN Right CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />    
+  </test> 
+  
+  <!--ATS2823 LINEIN CHANNEL TEST -->
+  <test tid = "28" name = "S730" desc = "S701">
+    <!-- LINEIN Left CH Test or not-->
+    <param name = "S702" operate = "checkbox" checked="true" desc = "S703" />    
+    <!-- LINEIN Left CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- LINEIN Left CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- LINEIN Left CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- LINEIN Left CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />
+            
+    <!-- LINEIN Right CH Test or not-->
+    <param name = "S720" operate = "checkbox" checked="true" desc = "S721" />    
+    <!-- LINEIN Right CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- LINEIN Right CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- LINEIN Right CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- LINEIN Right CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />    
+  </test>   
+      
+  <!--MIC CHANNEL TEST -->
+  <test tid = "8" name = "S800" desc = "S801">
+    <!-- MIC Left CH Test or not-->
+    <param name = "S702" operate = "checkbox" checked="true" desc = "S703" />    
+    <!-- MIC Left CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- MIC Left CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- MIC Left CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- MIC Left CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />
+            
+    <!-- MIC Right CH Test or not-->
+    <param name = "S720" operate = "checkbox" checked="true" desc = "S721" />    
+    <!-- MIC Right CH Power ThreadHold-->
+    <param name = "S704" value = "4096" operate = "edit" range = "0:65536" desc = "S705" type = "dec" />
+    <!-- MIC Right CH SNR Test or not-->
+    <param name = "S706" operate = "checkbox" checked="true" desc = "S707" />    
+    <!-- MIC Right CH SNR ThreadHold-->
+    <param name = "S708" value = "30" operate = "edit" range = "0:100" desc = "S709" type = "dec" />
+    <!-- MIC Right CH SigMaxPoint -->
+    <param name = "S710" value = "8" operate = "edit" range = "0:1024" desc = "S711" type = "dec" />  
+  </test> 
+      
+  <!-- FM CHANNEL TEST-->
+  <!--test tid = "9" name = "S900"/-->
+  
+  <!--LRADC  TEST -->
+  <test tid = "27" name = "S2600" desc = "S2601">  
+    <!-- LRADC1 Test or not-->
+    <param name = "S2602" operate = "checkbox" checked="true" desc = "S2603" />
+    <!-- LRADC1 ThreadHoldLow-->
+    <param name = "S2608" value = "110" operate = "edit" range = "0:255" desc = "S2610" type = "dec" />
+    <!-- LRADC1 ThreadHoldHigh-->
+    <param name = "S2609" value = "120" operate = "edit" range = "0:255" desc = "S2611" type = "dec"/>   
+
+    <!-- LRADC2 Test or not-->
+    <param name = "S2604" operate = "checkbox" checked="true" desc = "S2605" />
+    <!-- LRADC2 ThreadHoldLow-->
+    <param name = "S2608" value = "50" operate = "edit" range = "0:255" desc = "S2612" type = "dec" />
+    <!-- LRADC2 ThreadHoldHigh-->
+    <param name = "S2609" value = "80" operate = "edit" range = "0:255" desc = "S2613" type = "dec"/>  
+    
+    <!-- LRADC4 Test or not-->
+    <param name = "S2606" operate = "checkbox" checked="true" desc = "S2607" />
+    <!-- LRADC4 ThreadHoldLow-->
+    <param name = "S2608" value = "42" operate = "edit" range = "0:255" desc = "S2614" type = "dec" />
+    <!-- LRADC4 ThreadHoldHigh-->
+    <param name = "S2609" value = "50" operate = "edit" range = "0:255" desc = "S2615" type = "dec"/>  
+  </test>
+                    
+  <!-- SDCard driver TEST-->
+  <test tid = "10" name = "S1000" desc = "S1001"/>
+
+  <!--Udisk driver TEST -->
+  <test tid = "11" name = "S1100" desc = "S1101"/>  
+ 
+  <!--BTT TEST-->
+  <test tid = "194" name = "S1300" desc = "S1320">    
+    <!-- FreqPoint0 valid or not-->
+    <param name = "S1301" operate = "single" desc = "S1302" show = "false">
+      <sub range="0:26" select="0"/>
+      <sub name="S1307" value="255" />
+    </param>
+
+    <!-- FreqPoint1 valid or not-->
+    <param name = "S1303" operate = "single" desc = "S1304" show = "false">
+      <sub range="27:54"/>
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- FreqPoint2 valid or not-->
+    <param name = "S1305" operate = "single" desc = "S1306" show = "false">
+      <sub range="55:78"/> 
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- CFO Test or not-->
+    <param name = "S1387" operate = "checkbox" checked="true" desc = "S1387"/>
+    
+    <!-- StartIndexLow-->
+    <param name = "S1389" value = "0" operate = "edit" range = "0:160" desc = "S1390" type = "dec"/>
+    <!-- StartIndexHigh-->
+    <param name = "S1391" value = "160" operate = "edit" range = "0:160" desc = "S1392" type = "dec"/>    
+    <!--Change StartIndex or not -->
+    <param name = "S1393" operate = "checkbox" checked="true" desc = "S1394"/>
+     
+    <!-- CFO ThreadHoldLow-->
+    <param name = "S1397" value = "-10" operate = "edit" range = "-100:100" desc = "S1398" type = "dec"/>
+    <!-- CFO ThreadHoldHigh-->
+    <param name = "S1399" value = "10" operate = "edit" range = "-100:100" desc = "S1400" type = "dec"/>       
+    <!-- Efuse Write Mode-->
+    <param name = "S1401" operate = "single" desc = "S1402">
+      <sub name="S1403" value="0" />
+      <sub name="S1404" value="1" select="true"/>
+      <sub name="S1405" value="2" />
+    </param>    
+    <!--UPT CFO OFFSET  HZ -->
+    <param name = "S1406" value = "7000" operate = "edit" range = "-10000:10000" desc = "S1407" type = "dec" show = "false"/>  
+                
+    <!-- TX Power Test or not-->
+    <param name = "S1436" operate = "checkbox" checked="false" desc = "S1437" />
+    <!-- TX Power ThreadHoldLow-->
+    <param name = "S1438" value = "-70" operate = "edit" range = "-70:10" desc = "S1439" type = "dec" />
+    <!-- TX Power ThreadHoldHigh-->
+    <param name = "S1440" value = "20" operate = "edit" range = "-10:20" desc = "S1441" type = "dec" />   
+  </test>
+  
+  <!--BTT READ TEST-->
+  <test tid = "195" name = "S1700" desc = "S1713">    
+    <!-- FreqPoint0 valid or not-->
+    <param name = "S1301" operate = "single" desc = "S1302" show = "false">
+      <sub range="0:26" select="0"/>
+      <sub name="S1307" value="255" />
+    </param>
+
+    <!-- FreqPoint1 valid or not-->
+    <param name = "S1303" operate = "single" desc = "S1304" show = "false">
+      <sub range="27:54"/>
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- FreqPoint2 valid or not-->
+    <param name = "S1305" operate = "single" desc = "S1306" show = "false">
+      <sub range="55:78"/> 
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- CFO Test or not-->
+    <param name = "S1387" operate = "checkbox" checked="true" desc = "S1387"/>
+    
+    <!-- StartIndexLow-->
+    <param name = "S1389" value = "0" operate = "edit" range = "0:160" desc = "S1390" type = "dec"/>
+    <!-- StartIndexHigh-->
+    <param name = "S1391" value = "160" operate = "edit" range = "0:160" desc = "S1392" type = "dec"/>    
+    <!--Change StartIndex or not -->
+    <param name = "S1393" operate = "checkbox" checked="true" desc = "S1394"/>
+     
+    <!-- CFO ThreadHoldLow-->
+    <param name = "S1397" value = "-20" operate = "edit" range = "-100:100" desc = "S1398" type = "dec"/>
+    <!-- CFO ThreadHoldHigh-->
+    <param name = "S1399" value = "20" operate = "edit" range = "-100:100" desc = "S1400" type = "dec"/>       
+    <!-- Efuse Write Mode-->
+    <param name = "S1401" operate = "single" desc = "S1402">
+      <sub name="S1403" value="0" select="true"/>
+      <sub name="S1404" value="1" />
+      <sub name="S1405" value="2" />
+    </param>         
+    <!--UPT CFO OFFSET  HZ -->
+    <param name = "S1406" value = "7000" operate = "edit" range = "-10000:10000" desc = "S1407" type = "dec" show = "false"/>  
+                
+    <!-- TX Power Test or not-->
+    <param name = "S1436" operate = "checkbox" checked="false" desc = "S1437" />
+    <!-- TX Power ThreadHoldLow-->
+    <param name = "S1438" value = "-70" operate = "edit" range = "-70:10" desc = "S1439" type = "dec" />
+    <!-- TX Power ThreadHoldHigh-->
+    <param name = "S1440" value = "20" operate = "edit" range = "-10:20" desc = "S1441" type = "dec" />
+  </test>  
+  
+  <!-- BER TEST -->
+  <test tid = "197" name = "S1705"  desc = "S1714">  
+    <!-- FreqPoint0 valid or not-->
+    <param name = "S1301" operate = "single" desc = "S1302" show = "false">
+      <sub range="0:26" select="0"/>
+      <sub name="S1307" value="255" />
+    </param>
+
+    <!-- FreqPoint1 valid or not-->
+    <param name = "S1303" operate = "single" desc = "S1304" show = "false">
+      <sub range="26:54"/>
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- FreqPoint2 valid or not-->
+    <param name = "S1305" operate = "single" desc = "S1306" show = "false">
+      <sub range="55:78"/> 
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+
+    <!-- BER Thr low-->
+    <param name = "S1703" value = "30" operate = "edit" range = "0:90" desc = "S1704" type = "dec"/> 
+    
+    <!-- BER Thr high-->
+    <param name = "S1706" value = "70" operate = "edit" range = "0:90" desc = "S1707" type = "dec"/> 
+    
+    <!-- RSSI Thr low-->
+    <param name = "S1708" value = "30" operate = "edit" range = "0:90" desc = "S1709" type = "dec" show = "false"/> 
+    
+    <!-- RSSI Thr high-->
+    <param name = "S1710" value = "70" operate = "edit" range = "0:90" desc = "S1711" type = "dec" show = "false"/>           
+  </test> 
+  
+  <!-- RSSI TEST -->
+  <test tid = "198" name = "S1712"  desc = "S1715">  
+    <!-- FreqPoint0 valid or not-->
+    <param name = "S1301" operate = "single" desc = "S1302" show = "false">
+      <sub range="0:26" select="0"/>
+      <sub name="S1307" value="255" />
+    </param>
+
+    <!-- FreqPoint1 valid or not-->
+    <param name = "S1303" operate = "single" desc = "S1304" show = "false">
+      <sub range="26:54"/>
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+    
+    <!-- FreqPoint2 valid or not-->
+    <param name = "S1305" operate = "single" desc = "S1306" show = "false">
+      <sub range="55:78"/> 
+      <sub name="S1307" value="255" select="true"/>
+    </param>
+
+    <!-- BER Thr low-->
+    <param name = "S1703" value = "30" operate = "edit" range = "0:90" desc = "S1704" type = "dec" show = "false"/> 
+    
+    <!-- BER Thr high-->
+    <param name = "S1706" value = "70" operate = "edit" range = "0:90" desc = "S1707" type = "dec" show = "false"/>    
+    
+    <!-- RSSI Thr low-->
+    <param name = "S1708" value = "20" operate = "edit" range = "0:90" desc = "S1709" type = "dec" /> 
+    
+    <!-- RSSI Thr high-->
+    <param name = "S1710" value = "70" operate = "edit" range = "0:90" desc = "S1711" type = "dec" />      
+  </test>     
+      
+  <!--BT TEST -->
+  <test tid = "193" name = "S400" desc = "S408">
+    <!-- BT Transmitter ADDR, 6 MAX -->
+    <param name = "S401" value = "005875000001" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Transmitter ADDR -->
+    <param name = "S401" value = "005875000002" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Transmitter ADDR -->
+    <param name = "S401" value = "005875000003" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Transmitter ADDR -->
+    <param name = "S401" value = "005875000004" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Transmitter ADDR -->
+    <param name = "S401" value = "005875000005" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Transmitter ADDR -->
+    <param name = "S401" value = "005875000006" operate = "edit" range = "12" desc = "S402" type = "hex" />
+    <!-- BT Test Mode -->
+    <param name = "S403" operate = "single" desc = "S404">
+      <sub name="S405" value="0" select="true"/>
+      <sub name="S406" value="1" />
+      <sub name="S407" value="2"/>
+    </param>
+  </test>
+
+  <!--BQB mode test -->
+  <test tid = "25" name = "S2400" desc = "S2401"/>
+  
+  <!--FCC mode test -->
+  <test tid = "24" name = "S2300" desc = "S2301"/>  
+     
+  <!--FLASHTEST -->
+  <test tid = "26" name = "S2500" desc = "S2501"> 
+    <!-- flash size -->
+    <param name = "S2502" operate = "single" desc = "S2503">
+      <sub name="S2504" value="0" />
+      <sub name="S2505" value="1" select="true"/>
+      <sub name="S2506" value="2"/>
+      <sub name="S2507" value="3"/>
+      <sub name="S2508" value="4"/>
+      </param>
+    <!-- wp test -->
+    <param name = "S2509" operate = "checkbox" checked="true" desc = "S2510" />
+    <!-- erase mode -->
+    <param name = "S2511"  operate = "single" desc = "S2512">
+      <sub name="S2513" value="0" select="true"/>
+      <sub name="S2514" value="1" />
+      <sub name="S2515" value="2"/>
+      <sub name="S2516" value="3"/>   
+      <sub name="S2517" value="4"/>
+      </param>      
+  </test> 
+       
+  <L804 desc="Chinese">
+    <S100 value="修改蓝牙名称" />
+    <S101 value="包含一个参数，蓝牙名称" />
+    <S102 value="修改经典蓝牙名称"/>
+    <S103 value="修改经典蓝牙名称，最多29个字节,中文一般3个字节，英文一个字节" />
+    
+    <S200 value="修改BLE蓝牙名称" />
+    <S201 value="修改蓝牙BLE名称，最多29个字节,中文一般3个字节，英文一个字节" />
+    
+    <S300 value="修改蓝牙地址" />
+    <S301 value="蓝牙地址高3字节" />
+    <S302 value="蓝牙地址高3字节，必须是3字节的十六进制数字" />    
+    <S303 value="蓝牙地址低3字节-起始值" />
+    <S304 value="修改蓝牙地址低3字节数据，必须是3字节的十六进制数字" />
+    <S305 value="蓝牙地址生成方式" />
+    <S306 value="0:累加 1:随机 2:固定 3:人工输入(含扫描枪) 4:用户自定义(用户DLL返回蓝牙地址) 卡模式只支持累加形式" />
+    <S307 value="累加" />
+    <S308 value="随机(卡测试不支持)"/>
+    <S309 value="固定"/>
+    <S310 value="允许蓝牙地址多次修改" />
+    <S311 value="允许蓝牙地址多次修改 0:不允许 1:允许" />
+    <S312 value="不允许" />
+    <S313 value="允许"/>
+    <S320 value="人工输入"/>
+    <S321 value="用户自定义"/>
+    <S322 value="蓝牙地址低3字节-结束值" />
+    <S323 value="修改成功后打印蓝牙地址" />
+    <S324 value="ATT工具目录必须存在Printer.exe，如果不存在，ATT工具测试会失败。Printer.exe bd_addr=A1B2C3D4E5F6" />
+    <S325 value="蓝牙地址检查" />
+    <S326 value="用户输入一个蓝牙地址并与小机中的蓝牙地址进行一致性检查" />
+    <S327 value="蓝牙地址打印" />
+    <S328 value="  用户输入蓝牙地址" />
+    <S329 value="用户输入的蓝牙地址必须是6字节的十六进制数字" />
+    <S330 value="修改蓝牙地址(六字节)" />
+    
+    <S400 value="BT测试" />
+    <S401 value="蓝牙发射机地址" />
+    <S402 value="回连使用的蓝牙发射机地址，必须是6字节的十六进制数字" />
+    <S403 value="蓝牙测试模式" />
+    <S404 value="蓝牙测试模式" />
+    <S405 value="连接性测试" />
+    <S406 value="播放测试" />
+    <S407 value="播放测试+SPP+BLE" />
+    <S408 value="BT测试必须放到稍微靠后的位置，可以在BQB测试之前" />
+    
+    <S500 value="FM播放测试" />
+    <S501 value="FM播放频点" />
+    <S502 value="必须是十进制整数值，比如107.1MHZ,值要设为1071" />
+    
+    <S600 value="ATS2825 GPIO测试" />
+    <S601 value="GPIOA配置值" />
+    <S602 value="GPIOA配置值，必须是十六进制数值，每个IO占一个bit" />
+    <S603 value="GPIOB配置值" />
+    <S604 value="GPIOB配置值，必须是十六进制数值，每个IO占一个bit" />
+    <S605 value="SIO配置值" />
+    <S606 value="SIO配置值，必须是十六进制数值，每个IO占一个bit    ATS2825只需测试SIO7、SIO9(VRO_S)" />  
+
+    <S650 value="ATS2823 GPIO测试" />
+    <S651 value="GPIOA配置值" />
+    <S652 value="GPIOA配置值，ATS2823只需测试A21" />
+    <S653 value="GPIOB配置值" />
+    <S654 value="GPIOB配置值，必须是十六进制数值，每个IO占一个bit" />
+    <S655 value="SIO配置值" />
+    <S656 value="SIO配置值，必须是十六进制数值，每个IO占一个bit" />  
+      
+    <S700 value="ATS2825 LINEIN通道测试" />
+    <S701 value="用于测试linein通道工作是否正常" />
+    <S702 value="是否测试左通道" />
+    <S703 value="用于配置是否测试左通路" />
+    <S704 value="   通道能量阈值" />
+    <S705 value="统计得到的允许输出的通道能量最小值" />
+    <S706 value="   是否测试信噪比(SNR)" />  
+    <S707 value="是否对linein通路信噪比做分析" />
+    <S708 value="       信噪比阈值" />
+    <S709 value="分析得到的信噪比阈值，该值为db值,30db代表信噪比值为1000" />           
+    <S710 value="       幅值最大点" />
+    <S711 value="分析得到的信号幅值最大点,16K采样率，128个样本点,则频谱分辨率为125HZ，1KHZ对应第八个点" /> 
+    <S730 value="ATS2823 LINEIN通道测试" />
+
+    <S720 value="是否测试右通道" />
+    <S721 value="用于配置是否测试右通路" />
+                                      
+    <S800 value="MIC通道测试" />
+    <S801 value="用于测试MIC通道工作是否正常" />
+        
+    <S900 value="FM通道测试" />
+    
+    <S1000 value="SD卡驱动测试" />
+    <S1001 value="测试SD卡驱动工作是否正常，需要测试架插入一张SD卡" />
+        
+    <S1100 value="Uhost驱动测试" />
+    <S1101 value="测试u盘驱动工作是否正常，需要测试架插入一个u盘" />
+        
+    <S1200 value="LINEIN播放测试" />
+
+    <S1300 value="蓝牙频偏测试(卡测试不支持)" />
+    <S1301 value="低信道频点"/>
+    <S1302 value="0-26信道可选,可选择测试或不测试"/>
+    <S1303 value="中信道频点"/>
+    <S1304 value="27-54信道可选,可选择测试或不测试"/>
+    <S1305 value="高信道频点"/>
+    <S1306 value="55-78信道可选,可选择测试或不测试"/>    
+    <S1307 value="不测试"/>   
+    <S1387 value="是否测试频偏"/>
+    <S1388 value="测试"/>        
+    <S1389 value="  频偏校正初始最小值" />
+    <S1390 value="搜索最小值，共6个区间，从0到5，值域范围0到160" />
+    <S1391 value="  频偏校正初始最大值" />
+    <S1392 value="第一次校正频偏时，使用该值作为搜索的最大值" />    
+    <S1393 value="  是否修改初始值" />
+    <S1394 value="当频偏调整结束后，是否调整初始搜索的最小值和最大值" />
+    <S1395 value="不修改"/>
+    <S1396 value="修改"/>
+    
+    <S1397 value="  频偏调整范围最小值"/>
+    <S1398 value="范围以khz为单位，如-20代表-20khz"/>   
+    <S1399 value="  频偏调整范围最大值"/>
+    <S1320 value="该测试项会进行电容值的调整，以设定一个合适的频偏值"/>  
+    
+    <S1400 value="范围以khz为单位，如20代表+20khz"/>     
+    <S1401 value="  频偏数值写入模式"/>
+    <S1402 value="对于MCP IC,建议选择先写入efuse,再写入norflash。非MCP IC建议选择写入efuse"/>
+    <S1403 value="不写入"/>
+    <S1404 value="只写入efuse"/>
+    <S1405 value="先写入efuse，后写入norflash"/>          
+    <S1406 value="UPT初始频率偏移"/>   
+    <S1407 value="UPT初始固有频率偏移，范围为HZ"/> 
+              
+    <S1436 value="是否测试发射功率"/>
+    <S1437 value="若选择测试发射功率，则需要配置发射功率阈值，勾选此项，则频偏测试过程中会同时测试发射功率"/>    
+    <S1438 value="  发射功率最小值"/>
+    <S1439 value="范围以db为单位，如-6代表-6db"/>
+    <S1440 value="  发射功率最大值"/>
+    <S1441 value="范围以db为单位，如4代表4db"/>
+    
+    <S1442 value="是否测试灵敏度"/>  
+    <S1443 value="若测试灵敏度，需配置灵敏度的阈值"/>        
+    <S1444 value="  灵敏度最小值"/>
+    <S1445 value="范围以db为单位，如-90代表-90db"/>
+    <S1446 value="  灵敏度最大值"/>
+    <S1447 value="范围以db为单位，如-70代表-70db"/>   
+     
+    <S1500 value="固件升级准备(卡测试不支持)"/> 
+    <S1501 value="该测试项为空测试项，防止量产重启后重新量产，该测试项必须和固件升级测试项放在一起，且在其前面"/>  
+    
+    <S1600 value="固件升级测试(卡测试不支持)"/>  
+    <S1601 value="该测试项为固件升级测试，在该测试项之前必须是准备测试的测试项"/>   
+     
+    <S1700 value="蓝牙频偏读取测试(卡测试不支持)"/>   
+    <S1701 value="是否测试灵敏度"/>  
+    <S1702 value="若测试灵敏度，需配置灵敏度的阈值"/>        
+    <S1703 value="  灵敏度阈值最小值"/>
+    <S1704 value="阈值范围0到90，值越小越好，该值为批量统计值，表示合法的最小值"/>    
+    <S1705 value="灵敏度测试(卡测试不支持)"/>
+    <S1706 value="  灵敏度阈值最大值"/>
+    <S1707 value="阈值范围0到90，值越小越好，该值为批量统计值，表示合法的最大值"/>   
+    <S1708 value="  信号强度最小值"/>
+    <S1709 value="阈值范围0到90，该值为批量统计值，表示合法的最小值"/>  
+    <S1710 value="  信号强度最大值"/>
+    <S1711 value="阈值范围0到90，该值为批量统计值，表示合法的最小值"/>  
+    <S1712 value="信号强度读取测试(卡测试不支持)"/>
+    <S1713 value="该测试项用于读取当前样机的频偏值，但不进行频偏校正"/>  
+    <S1714 value="该测试项用于读取当前样机的灵敏度数值，也就是误码率"/> 
+    <S1715 value="该测试项用于读取当前样机与UPT收发数据的信号强度，用于距离测试"/>  
+                
+    <S1800 value="蓝牙地址读取测试"/>
+    <S1900 value="FLASHDUMP测试"/>
+    <S1901 value="导出数据是否解密"/>
+    <S1902 value="配置导出数据是否解密，默认上传解密数据"/>
+    <S1903 value="起始扇区地址"/>
+    <S1904 value="导出数据起始扇区地址，范围0到32768，最大支持16M数据"/>
+    <S1905 value="结束扇区地址"/>
+    <S1906 value="导出数据结束扇区地址，范围0到32768，最大支持16M数据"/>   
+
+    <S2000 value="FLASHDOWNLOAD测试"/>
+    <S2001 value="下载数据是否加密"/>
+    <S2002 value="配置下载数据是否需要解密处理，默认下载数据需要解密"/>
+    <S2003 value="起始扇区地址"/>
+    <S2004 value="下载数据起始扇区地址，范围0到32768，最大支持16M数据"/>
+    <S2005 value="结束扇区地址"/>
+    <S2006 value="下载数据结束扇区地址，范围0到32768，最大支持16M数据"/>  
+    
+    <S2100 value="IC烧录测试"/>
+    <S2101 value="该测试项用于ATT工具烧写IC测试，测试前请修改fwimage_xxx.cfg文件，添加EBURN_FW关键字描述"/>  
+    
+    <S2102 value="IC校验测试"/>
+    <S2103 value="该测试项用于测试IC和测试的atf文件是否匹配，进而确定IC种类是否正确"/>   
+    
+    <S2200 value="蓝牙名称读取测试"/> 
+    <S2201 value="该测试项用于读取蓝牙名称，也可用于校验读取的蓝牙名称与期望的名称是否一致"/> 
+    <S2202 value="是否校验经典蓝牙名称"/> 
+    <S2203 value="如果打开该配置，则程序会比较读取的名称和期望的名称是否一致"/>   
+    <S2204 value="    待比较经典蓝牙名称"/>  
+    <S2205 value="待比较经典蓝牙名称，最多29个字节,中文一般3个字节，英文一个字节" /> 
+    <S2206 value="是否校验蓝牙BLE名称"/> 
+    <S2207 value="如果打开该配置，则程序会比较读取的名称和期望的名称是否一致"/>   
+    <S2208 value="    待比较蓝牙BLE名称"/>  
+    <S2209 value="待比较蓝牙BLE名称，最多29个字节,中文一般3个字节，英文一个字节" />  
+    
+    <S2300 value="FCC模式测试" />   
+    <S2301 value="进入FCC测试模式后，ATT工具会结束测试，因此该测试项必须是最后一个测试项,FCC模式需要FCC工具配合" />  
+    
+    <S2400 value="BQB模式测试" />   
+    <S2401 value="进入BQB测试模式后，ATT工具会结束测试，因此该测试项必须是最后一个测试项,BQB测试模式进入后小机由CBT控制" />   
+    
+    <S2500 value="NORFLASH测试" />   
+    <S2501 value="该测试用于校验相关norflash的写保护功能是否正常" />  
+    <S2502 value="设置flash固件大小" />
+    <S2503 value="固件大小最小1M,只支持普通固件，不支持OTA固件" />
+    <S2504 value="1M" />
+    <S2505 value="2M" /> 
+    <S2506 value="4M" /> 
+    <S2507 value="8M" /> 
+    <S2508 value="16M" /> 
+    <S2509 value="是否进行写保护测试" /> 
+    <S2510 value="该选项用于对flash写保护进行测试，以确认flash是否支持写保护" /> 
+    <S2511 value="flash擦除模式" /> 
+    <S2512 value="用于设置flash数据写模式" />
+    <S2513 value="不擦除" />  
+    <S2514 value="擦除整片flash" />  
+    <S2515 value="擦除VRAM" />   
+    <S2516 value="擦除VRAM和参数区" />   
+    <S2517 value="写入随机数据" />    
+
+    <S2600 value="LRADC测试" />   
+    <S2601 value="用于测试LRADC硬件是否OK，需要测试架支持" />    
+    <S2602 value="是否测试LRADC1" />   
+    <S2603 value="用于配置是否读取LRADC1数值，并与阈值进行比较" /> 
+    <S2604 value="是否测试LRADC2" />   
+    <S2605 value="用于配置是否读取LRADC2数值，并与阈值进行比较" /> 
+    <S2606 value="是否测试LRADC4" />   
+    <S2607 value="用于配置是否读取LRADC4数值，并与阈值进行比较" />         
+    <S2608 value="  最小值" /> 
+    <S2609 value="  最大值" />      
+    <S2610 value="LRADC1读取数值最小值，电压范围2.80~2.85V" />           
+    <S2611 value="LRADC1读取数值最大值，电压范围2.80~2.85V" />  
+    <S2612 value="LRADC2读取数值最小值，电压范围1.55~1.65V" />           
+    <S2613 value="LRADC2读取数值最大值，电压范围1.55~1.65V" />  
+    <S2614 value="LRADC4读取数值最小值，电压范围1.15~1.25V" />           
+    <S2615 value="LRADC4读取数值最大值，电压范围1.15~1.25V" />                                          
+  </L804>
+  
+  <L409 desc="English (United States)">
+    <S100 value="Modify BT name" />
+    <S101 value="Including one parameter, BT name" />
+    <S102 value="Modify BLE name"/>
+    <S103 value="Modify BLE name, 29 bytes at most" />
+    
+    <S200 value="Modify BLE name" />
+    <S201 value="Modify BLE name, 29 bytess at most" />
+    
+    <S300 value="Modify BT ADDR" />
+    <S301 value="High 3bytes" />
+    <S302 value="3 high bytes of BT ADDR in hexadecimal format" />    
+    <S303 value="Low 3bytes(start)" />
+    <S304 value="3 low bytes of BT ADDR in hexadecimal format" />
+    <S305 value="Generation Mode" />
+    <S306 value="0:cumulative 1:random 2:constant 3:manual(e.g. scanner) 4:customized(user's DLL returns a value) Card mode only supports cumulative method" />
+    <S307 value="cumulative" />
+    <S308 value="random (not support card)"/>
+    <S309 value="constant"/>
+    <S310 value="Allow BT ADDR to be mutiply mutimodified or not" />
+    <S311 value="0:No 1:Yes " />
+    <S312 value="No" />
+    <S313 value="Yes"/>
+    <S320 value="Manual"/>
+    <S321 value="Customized"/>
+    <S322 value="Low 3bytes(end)" />
+    <S323 value="Print BT ADDR" />
+    <S324 value="Printer.exe must be in the ATT installed path, or ATT will fail. Printer.exe bd_addr=A1B2C3D4E5F6" />
+    <S325 value="Check BT ADDR" />
+    <S326 value="Please enter a BT ADDR to check if it is the same with target equipment" />
+    <S327 value="Print BT ADDR" />
+    <S328 value="  Compared ADDR" />
+    <S329 value="The BT ADDR must be a 6-byte hexadecimal number" />
+    <S330 value="Modify BT ADDR(6bytes)" />
+    
+    <S400 value="BT Test" />
+    <S401 value="BT transmitter ADDR" />
+    <S402 value="ADDR of the transmitter for reconnection, must be a 6-byte hexadecimal number" />
+    <S403 value="BT testing mode" />
+    <S404 value="BT testing mode" />
+    <S405 value="Connection testing" />
+    <S406 value="Playing testing" />
+    <S407 value="Playing testing + SPP + BLE" />
+    <S408 value="BT testing is before BQB testing" />
+    
+    <S500 value="FM playing testing" />
+    <S501 value="Frequency" />
+    <S502 value="It must be a decimal integer type number, e.g. 107.1MHz is set as 1071" />
+    
+    <S600 value="ATS2825 GPIO testing" />
+    <S601 value="GPIOA value" />
+    <S602 value="GPIOA value, a hexadecimal number and every bit of it stands for a I/O port" />
+    <S603 value="GPIOB value" />
+    <S604 value="GPIOB value, a hexadecimal number and every bit of it stands for a I/O port" />
+    <S605 value="SIO value" />
+    <S606 value="SIO value, a hexadecimal number and every bit of it stands for a I/O port.    For ATS2825, only need to test SIO7、SIO9(VRO_S)" />  
+
+    <S650 value="ATS2823 GPIO testing" />
+    <S651 value="GPIOA value" />
+    <S652 value="GPIOA value. For ATS2823, only need to test A21" />
+    <S653 value="GPIOB value" />
+    <S654 value="GPIOB value, a hexadecimal number and every bit of it stands for a I/O port" />
+    <S655 value="SIO value" />
+    <S656 value="SIO value, a hexadecimal number and every bit of it stands for a I/O port" />  
+      
+    <S700 value="ATS2825 LINEIN channel testing" />
+    <S701 value="To test whether the LINEIN channel is workable" />
+    <S702 value="Left channel testing" />
+    <S703 value="Test left channel or not" />
+    <S704 value="   CH energy Threshold" />
+    <S705 value="Statistical MIN channel energy output" />
+    <S706 value="   Test SNR or not" />  
+    <S707 value="Analyze SNR of LINEIN channel or not" />
+    <S708 value="       SNR threshold" />
+    <S709 value="The analysis result for SNR threshold in dB unit, and 30dB means SNR is 1000" />           
+    <S710 value="       Max FFT Point" />
+    <S711 value="Analytical frequency of MAX amplitude, 16K sample rate, 128 samples, So spectrum resolution is 125Hz and the 8th point is 1KHz." /> 
+    <S730 value="ATS2823 LINEIN channel testing" />
+
+    <S720 value="Right CH testing" />
+    <S721 value="Test right channel or not" />
+                                      
+    <S800 value="MIC CH testing" />
+    <S801 value="Test whether the MIC channel is workable" />
+        
+    <S900 value="FM channel testing" />
+    
+    <S1000 value="SD card driver testing" />
+    <S1001 value="Test whether SD card driver is workable, a SD card is required" />
+        
+    <S1100 value="Uhost driver testing" />
+    <S1101 value="Test whether Uhost driver is workable, a Udisk is required" />
+        
+    <S1200 value="LINEIN playing testing" />
+
+    <S1300 value="CFO Test(not support card)" />
+    <S1301 value="Low channels"/>
+    <S1302 value="From channel 0 to channel 26, test which ones is optional"/>
+    <S1303 value="Medium channels"/>
+    <S1304 value="From channel 27 to channel 54, test which ones is optional"/>
+    <S1305 value="High channels"/>
+    <S1306 value="From channel 55 to channel 78, test which ones is optional"/>    
+    <S1307 value="No"/>   
+    <S1387 value="Test CFO"/>
+    <S1388 value="Yes"/>        
+    <S1389 value="  MIN index" />
+    <S1390 value="Search for MIN value, from section 0 to 5, value range from 0 to 160" />
+    <S1391 value="  MAX index" />
+    <S1392 value="Use this value as MAX searching value in first adjustment" />    
+    <S1393 value="  Modify initial index" />
+    <S1394 value="Modify initial MIN and MAX searching values or not after frequency offset adjustment" />
+    <S1395 value="No"/>
+    <S1396 value="Yes"/>
+    
+    <S1397 value="  MIN CFO offset"/>
+    <S1398 value="In KHz unit, e.g. -20 stands for -20KHz"/>   
+    <S1399 value="  MAX CFO offset"/>
+    <S1320 value="This test case may adjust cap value of DUT"/>  
+    <S1400 value="In KHz unit, e.g. 20 stands for 20KHz"/> 
+    
+    <S1401 value="  Write record mode"/>
+    <S1402 value="For MCP IC, it's advised to write efuse and norflash. For other ICs, choose write efuse only"/>
+    <S1403 value="Not to write"/>
+    <S1404 value="Only write efuse"/>
+    <S1405 value="Write efuse first and then write norflash"/>          
+    <S1406 value="UPT initial frequency offset"/>   
+    <S1407 value="UPT initial natural frequency offset in Hz unit"/> 
+              
+    <S1436 value="TX Power Test"/>
+    <S1437 value="If test, set the transmitting power threshold first. This issue is together with frequency offset issue by selecting it"/>    
+    <S1438 value="  MIN TX power"/>
+    <S1439 value="In dB unit, e.g. -6 stands for -6dB"/>
+    <S1440 value="  MAX TX power"/>
+    <S1441 value="In dB unit, e.g. 4 stands for 4dB"/>
+    
+    <S1442 value="BER Test"/>  
+    <S1443 value="If test, set the BER threshold first"/>        
+    <S1444 value="  MIN value of BER"/>
+    <S1445 value="In dB unit, e.g. -90 stands for -90db"/>
+    <S1446 value="  MAX value of BER"/>
+    <S1447 value="In dB unit, e.g. -70 stands for -70db"/>   
+     
+    <S1500 value="Firmware upgrade preparation(not support card)"/> 
+    <S1501 value="It do nothing but prevents upgrade and reboot repeatly. This test issue must be just before firmware upgrade test issue"/>  
+    
+    <S1600 value="Firmware upgrade testing(not support card)"/>  
+    <S1601 value="For firmware upgrade"/>   
+     
+    <S1700 value="Read CFO Test(not support card)"/>   
+    <S1701 value="Test BER or not"/>  
+    <S1702 value="If test, set the BER threshold first"/>        
+    <S1703 value="  MIN BER"/>
+    <S1704 value="Threshold range from 0 to 90. The smaller, the better. It's statistical value and stands for legal MIN value"/>    
+    <S1705 value="BER test(not support card)"/>
+    <S1706 value="  MAX BER"/>
+    <S1707 value="Threshold range from 0 to 90. The smaller, the better. It's statistical value and stands for legal MAX value"/>   
+    <S1708 value="  MIN RSSI"/>                                                
+    <S1709 value="Threshold range from 0 to 90.It's statistical value and stands for legal MIN value"/>               
+    <S1710 value="  MAX RSSI"/>                                                
+    <S1711 value="Threshold range from 0 to 90.It's statistical value and stands for legal MAX value"/>               
+    <S1712 value="RSSI Test(not support card)"/>                                  
+    <S1713 value="This test case only read frequency offset of DUT, not adjust its frequency offset"/>              
+    <S1714 value="This test case read sensitivity(or BER) value of DUT"/>              
+    <S1715 value="This test case read RSSI value of DUT"/>  
+         
+    <S1800 value="Read BT ADDR"/>
+    <S1900 value="FLASHDUMP testing"/>
+    <S1901 value="Decrypt the exported data or not"/>
+    <S1902 value="Default is decrypted"/>
+    <S1903 value="Start sector ADDR"/>
+    <S1904 value="Range from 0 to 32768, support 16MB data at most"/>
+    <S1905 value="End sector ADDR"/>
+    <S1906 value="Range from 0 to 32768, support 16MB data at most"/>   
+
+    <S2000 value="FLASHDOWNLOAD testing"/>
+    <S2001 value="Encrypt the downloaded data or not"/>
+    <S2002 value="Default is encrypted"/>
+    <S2003 value="Start sector ADDR"/>
+    <S2004 value="Range from 0 to 32768, support 16MB data at most"/>
+    <S2005 value="End sector ADDR"/>
+    <S2006 value="Range from 0 to 32768, support 16MB data at most"/>  
+    
+    <S2100 value="IC writing testing"/>
+    <S2101 value="Before testing, please modify fwimage_xxx.cfg file by adding EBURN_FW key word"/>  
+    
+    <S2102 value="IC checking testing"/>
+    <S2103 value="For checking the IC type"/>   
+    
+    <S2200 value="Read BT name"/> 
+    <S2201 value="For reading and checking BT name"/> 
+    <S2202 value="Check BT name"/> 
+    <S2203 value="Compare the current name with expected name whether they are the same"/>   
+    <S2204 value="    Classic BT name"/>  
+    <S2205 value="Classic BT name for comparation, 29 bytes at most" /> 
+    <S2206 value="Check BLE name"/> 
+    <S2207 value="Compare the current name with expected name whether they are the same"/>   
+    <S2208 value="    BLE name"/>  
+    <S2209 value="BLE name for comparation, 29 bytes at most" />  
+    
+    <S2300 value="FCC mode testing" />   
+    <S2301 value="ATT will ends all testings after entering FCC mode. So be sure the FCC mode testing is the last one." />  
+    
+    <S2400 value="BQB mode testing" />   
+    <S2401 value="ATT will ends all testings after entering BQB mode. So be sure the BQB mode testing is the last one." />   
+    
+    <S2500 value="NORFLASH testing" />   
+    <S2501 value="For checking whether write-protection function is workable" />  
+    <S2502 value="Set the firmware size" />
+    <S2503 value="Firmware is 1MB at least, nor support OTA firmware" />
+    <S2504 value="1MB" />
+    <S2505 value="2MB" /> 
+    <S2506 value="4MB" /> 
+    <S2507 value="8MB" /> 
+    <S2508 value="16MB" /> 
+    <S2509 value="Write protected test" /> 
+    <S2510 value="For checking whether flash supports write-protection" /> 
+    <S2511 value="Flash erasing testing" /> 
+    <S2512 value="For setting flash write mode" />
+    <S2513 value="Do not erase" />  
+    <S2514 value="Erase the whole flash" />  
+    <S2515 value="Erase VRAM" />   
+    <S2516 value="Erase VRAM and parameter" />   
+    <S2517 value="Write random data" />    
+
+    <S2600 value="LRADC testing" />   
+    <S2601 value="For checking LRADC hardware, the test tool is required" />    
+    <S2602 value="Test LRADC1 or not" />   
+    <S2603 value="For reading LRADC1 value and compare it with threshold" /> 
+    <S2604 value="Test LRADC2 or not" />   
+    <S2605 value="For reading LRADC2 value and compare it with threshold" /> 
+    <S2606 value="Test LRADC4 or not" />   
+    <S2607 value="For reading LRADC4 value and compare it with threshold" />         
+    <S2608 value="  MAX" /> 
+    <S2609 value="  MIN" />      
+    <S2610 value="LRADC1 MIN value, voltage range from 2.80V to 2.85V" />           
+    <S2611 value="LRADC1 MAX value, voltage range from 2.80V to 2.85V" />  
+    <S2612 value="LRADC2 MIN value, voltage range from 1.55V to 1.65V" />           
+    <S2613 value="LRADC2 MAX value, voltage range from 1.55V to 1.65V" />  
+    <S2614 value="LRADC4 MIN value, voltage range from 1.15V to 1.25V" />           
+    <S2615 value="LRADC4 MAX value, voltage range from 1.15V to 1.25V" />                                          
+  </L409>
+  
+  <L404 desc="Chinese (Taiwan)">
+    <S100 value="修改藍牙名稱" />
+    <S101 value="包含一組參數，藍牙名稱" />
+    <S102 value="修改經典藍牙名稱"/>
+    <S103 value="修改經典藍牙名稱，最多29個字節，中文一般3個字節，英文一個字節" />
+    
+    <S200 value="修改BLE藍牙名稱" />
+    <S201 value="修改藍牙BLE名稱，最多29個字節，中文一般3個字節，英文一個字節" />
+    
+    <S300 value="修改藍牙地址" />
+    <S301 value="藍牙地址高3字節" />
+    <S302 value="藍牙地址高3字節，必須為3字節十六進制數字" />    
+    <S303 value="藍牙地址低3字節-起始值" />
+    <S304 value="修改藍牙地址低3字節數據，必須為3字節十六進制數字" />
+    <S305 value="藍牙地址產生方式" />
+    <S306 value="0:累加 1:隨機 2:固定 3:手動輸入 4:用戶自訂(用戶DLL返回藍牙地址)卡模式只支援累加行式" />
+    <S307 value="累加" />
+    <S308 value="隨機"/>
+    <S309 value="固定"/>
+    <S310 value="允許藍牙地址多次修改" />
+    <S311 value="允許藍牙地址多次修改 0:不允許 1:允許" />
+    <S312 value="不允許" />
+    <S313 value="允許"/>
+    <S320 value="手動輸入"/>
+    <S321 value="用戶自訂"/>
+    <S322 value="藍牙地址低3字節-結束值" />
+    <S323 value="修改成功後列印藍牙地址" />
+    <S324 value="ATT工具目錄必須存在Printer.exe，如果不存在，ATT工具測試會失敗。Printer.exe bd_addr=A1B2C3D4E5F6" />
+    <S325 value="藍牙地址檢查" />
+    <S326 value="手動輸入一組藍牙地址並與小機中的藍牙地址進行一致性檢查" />
+    <S327 value="藍牙地址列印" />
+    <S328 value="  用戶輸入藍牙地址" />
+    <S329 value="用戶輸入的藍牙地址，必須為6字節十六進制數字" />
+    <S330 value="修改藍牙地址(6字節)" />
+    
+    <S400 value="BT測試" />
+    <S401 value="藍牙發射機地址" />
+    <S402 value="回連使用的藍牙發射機地址，必須為6字節十六進制數字" />
+    <S403 value="藍牙測試模式" />
+    <S404 value="藍牙測試模式" />
+    <S405 value="連接測試" />
+    <S406 value="播放測試" />
+    <S407 value="播放測試+SPP+BLE" />
+    <S408 value="BT測試必須放至稍微靠後的位置，可以在BQB測試之前" />
+    
+    <S500 value="FM播放測試" />
+    <S501 value="FM播放頻點" />
+    <S502 value="必須為十進制整數數值，例如:107.1MHZ，數值要設為1071" />
+    
+    <S600 value="ATS2825 GPIO測試" />
+    <S601 value="GPIOA配置值" />
+    <S602 value="GPIOA配置值，必須為十六進制數值，每個IO佔一個bit" />
+    <S603 value="GPIOB配置值" />
+    <S604 value="GPIOB配置值，必須為十六進制數值，每個IO佔一個bit" />
+    <S605 value="SIO配置值" />
+    <S606 value="SIO配置值，必須為十六進制數值，每個IO佔一個bit    ATS2825只需測試SIO7、SIO9(VRO_S)" />  
+
+    <S650 value="ATS2823 GPIO測試" />
+    <S651 value="GPIOA配置值" />
+    <S652 value="GPIOA配置值，ATS2823只需測試A21" />
+    <S653 value="GPIOB配置值" />
+    <S654 value="GPIOB配置值，必须是十六進制数值，每個IO佔一個bit" />
+    <S655 value="SIO配置值" />
+    <S656 value="SIO配置值，必须是十六進制数值，每個IO佔一個bit" />  
+      
+    <S700 value="ATS2825 LINEIN通道測試" />
+    <S701 value="用于測試linein通道工作是否正常" />
+    <S702 value="是否測試左通道" />
+    <S703 value="用于配置是否測試左通路" />
+    <S704 value="   通道能量閥值" />
+    <S705 value="統計得到的允許輸出的通道能量最小值" />
+    <S706 value="   是否測試訊噪比(SNR)" />  
+    <S707 value="是否对linein通路訊噪比做分析" />
+    <S708 value="       訊噪比阈值" />
+    <S709 value="分析得到的訊噪比閥值，该值為db值,30db代表訊噪比值為1000" />           
+    <S710 value="       幅值最大點" />
+    <S711 value="分析得到的訊號幅值最大點,16K取樣率，128个樣本點,則頻譜解析度為125HZ，1KHZ對應第八個點" /> 
+    <S730 value="ATS2823 LINEIN通道測試" />
+
+    <S720 value="是否測試右通道" />
+    <S721 value="用于配置是否測試右通路" />
+                                      
+    <S800 value="MIC通道測試" />
+    <S801 value="用于測試MIC通道工作是否正常" />
+        
+    <S900 value="FM通道測試" />
+    
+    <S1000 value="SD卡驅動測試" />
+    <S1001 value="測試SD卡驅動工作是否正常，需要測試架插入一張SD卡" />
+        
+    <S1100 value="USB隨身碟驅動測試" />
+    <S1101 value="測試USB隨身碟驅動工作是否正常，需要測试架插入一個USB隨身碟" />
+        
+    <S1200 value="LINEIN播放測试" />
+
+    <S1300 value="藍牙頻偏測試(卡測试不支援)" />
+    <S1301 value="低頻訊號頻道頻點"/>
+    <S1302 value="0-26訊號頻道可選，可選擇測試或不測試"/>
+    <S1303 value="中頻訊號頻道頻點"/>
+    <S1304 value="27-54訊號頻道可選，可選擇測試或不測試"/>
+    <S1305 value="高頻訊號頻道頻點"/>
+    <S1306 value="55-78訊號頻道可選，可選擇測試或不測試"/>    
+    <S1307 value="不測試"/>   
+    <S1387 value="是否測試頻偏"/>
+    <S1388 value="測試"/>        
+    <S1389 value="  頻偏校正初始最小值" />
+    <S1390 value="搜索最小值，共6個區間，從0到5，值域範圍0到160" />
+    <S1391 value="  頻偏校正初始最大值" />
+    <S1392 value="第一次校正頻偏時，使用該值作為搜索的最大值" />    
+    <S1393 value="  是否修改初始值" />
+    <S1394 value="當頻偏調整結束後，是否調整初始搜索的最小值與最大值" />
+    <S1395 value="不修改"/>
+    <S1396 value="修改"/>
+    
+    <S1397 value="  頻偏調整範圍最小值"/>
+    <S1398 value="範圍以khz為單位，例如-20代表-20khz"/>   
+    <S1399 value="  頻偏調整範圍最大值"/>       
+    <S1320 value="該測試項會進行電容值的校正，以獲取合適的頻偏值"/>    
+    <S1400 value="範圍以khz為單位，例如20代表+20khz"/> 
+    
+    <S1401 value="  頻偏數值寫入模式"/>
+    <S1402 value="對於MCP IC，建議選擇先寫入efuse，再寫入norflash。非MCP IC建議選擇寫入efuse"/>
+    <S1403 value="不寫入"/>
+    <S1404 value="只寫入efuse"/>
+    <S1405 value="先寫入efuse，後寫入norflash"/>          
+    <S1406 value="UPT初始頻率偏移"/>   
+    <S1407 value="UPT初始固有頻率偏移，範圍為HZ"/> 
+              
+    <S1436 value="是否測試發射功率"/>
+    <S1437 value="若選擇測試發射功率，則需要配置發射功率閥值"/>    
+    <S1438 value="  發射功率最小值"/>
+    <S1439 value="範圍以db為單位，例如-6代表-6db"/>
+    <S1440 value="  發射功率最大值"/>
+    <S1441 value="範圍以db為單位，例如4代表4db"/>
+    
+    <S1442 value="是否測試靈敏度"/>  
+    <S1443 value="若測試靈敏度，須配置靈敏度的閥值"/>        
+    <S1444 value="  靈敏度最小值"/>
+    <S1445 value="範圍以db為單位，例如-90代表-90db"/>
+    <S1446 value="  靈敏度最大值"/>
+    <S1447 value="範圍以db為單位，例如-70代表-70db"/>    
+     
+    <S1500 value="固件升級準備"/> 
+    <S1501 value="該測試項為空測試項，防止量產重啟後重新量產，該測試項必須和固件升級測試項放在一起，且在其前面"/>  
+    
+    <S1600 value="固件升級測試(卡測试不支援)"/>  
+    <S1601 value="該測試項為固件升級測試，在該測試項之前必須是準備測試的測試項"/>    
+     
+    <S1700 value="藍牙頻偏讀取測試(卡測试不支持)"/>   
+    <S1701 value="是否測試靈敏度"/>  
+    <S1702 value="若測試靈敏度，須配置靈敏度的閥值"/>        
+    <S1703 value="  靈敏度閥值最小值"/>
+    <S1704 value="閥值範圍0到90，值越小越好，該值為批量統計值，表示合法的最小值"/>    
+    <S1705 value="靈敏度測试(卡測试不支援)"/>
+    <S1706 value="  靈敏度閥值最大值"/>
+    <S1707 value="閥值範圍0到90，值越小越好，該值為批量統計值，表示合法的最大值"/>   
+    <S1708 value="  信號強度最小值"/>
+    <S1709 value="閥值範圍0到90，該值為批量統計值，表示合法的最小值"/>  
+    <S1710 value="  信号强度最大值"/>
+    <S1711 value="閥值範圍0到90，該值為批量統計值，表示合法的最大值"/>  
+    <S1712 value="信號強度讀取測試(卡測试不支援)"/>
+    <S1713 value="該測試項用於讀取當前樣機的頻偏值，但不進行校正"/>  
+    <S1714 value="該測試項用於讀取當前樣機的靈敏度，也就是誤碼率"/> 
+    <S1715 value="該測試項用於讀取樣機與UPT收發數據的信號強度，用於距離測試"/> 
+            
+    <S1800 value="藍牙地址讀取測試"/>
+    <S1900 value="FLASHDUMP測試"/>
+    <S1901 value="導出資料是否解密"/>
+    <S1902 value="配置導出資料是否解密，默認上傳解密資料"/>
+    <S1903 value="起始扇區地址"/>
+    <S1904 value="導出資料起始扇區地址，範圍0到32768，最大支援16M資料"/>
+    <S1905 value="結束扇區地址"/>
+    <S1906 value="導出資料結束扇區地址，範圍0到32768，最大支援16M資料"/>   
+
+    <S2000 value="FLASHDOWNLOAD測試"/>
+    <S2001 value="下載資料是否加密"/>
+    <S2002 value="配置下載資料是否需要加密處理，默認下載數據需要加密"/>
+    <S2003 value="起始扇區地址"/>
+    <S2004 value="下載資料起始扇區地址，範圍0到32768，最大支援16M資料"/>
+    <S2005 value="結束扇區地址"/>
+    <S2006 value="下載資料結束扇區地址，範圍0到32768，最大支援16M資料"/>  
+    
+    <S2100 value="IC燒錄測試"/>
+    <S2101 value="該測試項用于ATT工具燒寫IC測試，測試前請修改fwimage_xxx.cfg檔案，添加EBURN_FW關鍵字描述"/>  
+    
+    <S2102 value="IC校驗測試"/>
+    <S2103 value="該測試項用于測試IC和測試的atf檔案是否匹配，從而確定IC種類是否正確"/>   
+    
+    <S2200 value="藍牙名稱讀取測試"/> 
+    <S2201 value="該測試項用於讀取藍牙名稱，也可用於校驗讀取的藍牙名稱與期望的名稱是否一致"/> 
+    <S2202 value="是否校驗經典藍牙名稱"/> 
+    <S2203 value="如果打開該配置，則程式會比較讀取的名稱和期望的名稱是否一致"/>   
+    <S2204 value="    待比較的經典藍牙名稱"/>  
+    <S2205 value="待比較的經典藍牙名稱，最多29個字節，中文一般3個字節，英文一個字節" /> 
+    <S2206 value="是否校验蓝牙BLE名称"/> 
+    <S2207 value="如果打开该配置，则程序会比较读取的名称和期望的名称是否一致"/>   
+    <S2208 value="    待比較的BLE藍牙名稱"/>  
+    <S2209 value="待比較的BLE藍牙名稱，最多29個字節，中文一般3個字節，英文一個字節" />  
+    
+    <S2300 value="FCC模式測試" />   
+    <S2301 value="进入FCC測試模式後，ATT工具會結束測試，因此該測試項必須為最後一個測試項，FCC模式需要FCC工具配合" />  
+    
+    <S2400 value="BQB模式測試" />   
+    <S2401 value="进入BQB測試模式後，TT工具會結束測試，因此該測試項必須為最後一個測試項，BQB測試模式進入後小機由CBT控制" />   
+    
+    <S2500 value="NORFLASH測試" />   
+    <S2501 value="該測試用于校驗相關norflash的寫保護功能是否正常" />  
+    <S2502 value="設定flash固件大小" />
+    <S2503 value="固件大小最小1M,只支援普通固件，不支援OTA固件" />
+    <S2504 value="1M" />
+    <S2505 value="2M" /> 
+    <S2506 value="4M" /> 
+    <S2507 value="8M" /> 
+    <S2508 value="16M" /> 
+    <S2509 value="是否進行寫保護測試" /> 
+    <S2510 value="該選項用於對flash寫保護進行測試，以確認flash是否支援寫保護" /> 
+    <S2511 value="flash擦除模式" /> 
+    <S2512 value="用于設定flash資料寫模式" />
+    <S2513 value="不擦除" />  
+    <S2514 value="擦除整片flash" />  
+    <S2515 value="擦除VRAM" />   
+    <S2516 value="擦除VRAM和参数區" />   
+    <S2517 value="寫入隨機資料" />    
+
+    <S2600 value="LRADC測試" />   
+    <S2601 value="用于測試LRADC硬體是否OK，需要測試架支援" />    
+    <S2602 value="是否測試LRADC1" />   
+    <S2603 value="用于配置是否讀取LRADC1數值，並與閥值進行比較" /> 
+    <S2604 value="是否測試LRADC2" />   
+    <S2605 value="用于配置是否讀取LRADC2數值，並與閥值進行比較" /> 
+    <S2606 value="是否測試LRADC4" />   
+    <S2607 value="用于配置是否讀取LRADC4數值，並與閥值進行比較" />         
+    <S2608 value="  最小值" /> 
+    <S2609 value="  最大值" />      
+    <S2610 value="LRADC1讀取數值最小值，電位範圍2.80~2.85V" />           
+    <S2611 value="LRADC1讀取數值最大值，電位範圍2.80~2.85V" />  
+    <S2612 value="LRADC2讀取數值最小值，電位範圍1.55~1.65V" />           
+    <S2613 value="LRADC2讀取數值最大值，電位範圍1.55~1.65V" />  
+    <S2614 value="LRADC4讀取數值最小值，電位範圍1.15~1.25V" />           
+    <S2615 value="LRADC4讀取數值最大值，電位範圍1.15~1.25V" />                                          
+  </L404>    
+</config>

@@ -1,0 +1,68 @@
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+/*1.AP INDEX*/
+CODEC_INDEX = FRONT_CODEC;
+
+SRAM_TEXT_ADDR = SRAM_AP_FRONT_BASAL_RCODE_ADDR;
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_DATA_BSS_SIZE = SRAM_AP_FRONT_BASAL_RCODE_SIZE;
+
+BANK_BASAL_ADDR_BASE = (AP_BANK_FRONT_BASAL << 24) + SRAM_AP_BANK_FRONT_BASAL_ADDR;
+/*bank的实际空间大小,不能修改*/
+BANK_BASAL_SIZE = 0x700;
+/*系统允许的bank的最大空间大小，不能修改*/
+MID_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(music_scan_cmd)
+
+SECTIONS
+{
+    .text RCODE_TEXT_ADDR :
+    {
+        /*API OBJ在此链接*/
+        key_op_entry.o(.text)
+        libc_op_entry.o(.text)
+        sys_op_entry.o(.text)
+        vfs_op_entry.o(.text)
+        
+        music_scan_file_thread.o(.rodata)
+        common_share_data.o(.text .rodata)
+    }
+
+    . = (. - 0x20000000);
+    .data :
+    {
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        *.o(.data)
+    }
+    .bss :
+    {
+        *.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = RCODE_DATA_BSS_SIZE - SIZEOF(.text) - SIZEOF(.data);
+    }
+
+    . = BANK_BASAL_ADDR_BASE;
+    OFFSET = . & 0x3ffff;
+    BANK_BASAL_1_0 :
+    {
+        music_scan_interface.o(.text .rodata)
+        music_scan_file_thread.o(.init)
+        music_scan_file_thread.o(.cmd) 
+        . = BANK_BASAL_SIZE;
+    }
+    
+    . = ((. + MID_BANK_SPACE) & (~(MID_BANK_SPACE - 1)))  + OFFSET;
+    BANK_BASAL_1_1 :
+    {
+        music_scan_file_thread.o(.exit .save)
+        music_scan_file2.o(.text)
+        music_scan_file_thread.o(.text)               
+        . = BANK_BASAL_SIZE;
+    }
+}

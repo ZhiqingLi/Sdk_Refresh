@@ -1,0 +1,8 @@
+   text	   data	    bss	    dec	    hex	filename
+   0xf0	    0x0	    0x0	    240	     f0	./obj/linein_eg_control.o
+   0x30	    0x0	    0x0	     48	     30	./obj/linein_eg_event.o
+  0x140	    0x0	    0x0	    320	    140	./obj/linein_eg_event_param.o
+   0x5c	    0x0	    0x0	     92	     5c	./obj/linein_eg_event_volume.o
+  0x288	    0x0	   0x6c	    756	    2f4	./obj/linein_eg_main.o
+  0x1d8	    0x0	    0x0	    472	    1d8	./obj/linein_eg_message_done.o
+  0x188	    0x0	    0x0	    392	    188	./obj/linein_eg_play_deal.o

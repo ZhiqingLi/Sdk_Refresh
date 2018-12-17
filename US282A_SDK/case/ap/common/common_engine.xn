@@ -1,0 +1,63 @@
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+
+APPLIB_GLOBAL_DATA_ADDR = RDATA_ADDR_BASE + SRAM_APPLIB_GLOBAL_DATA_ADDR;
+APPLIB_GLOBAL_DATA_SIZE = SRAM_APPLIB_GLOBAL_DATA_SIZE;
+
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_BACK_CONTROL_1 << 24) + SRAM_AP_BANK_BACK_CONTROL_ADDR;
+/*bank的实际空间大小,不能修改*/
+BANK_CONTROL_SIZE = SRAM_AP_BANK_BACK_CONTROL_SIZE;
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+/*back ap 没有UI段*/
+
+OUTPUT_ARCH(mips)
+EXTERN(key_op_entry)
+EXTERN(audio_device_op_entry)
+
+SECTIONS
+{
+    /* case 全局数据，各AP共享 */
+    . = APPLIB_GLOBAL_DATA_ADDR;
+    APPLIB_GLOBAL_DATA :
+    {
+        /*common globe 数据*/
+        KEEP(applib_globe_data.o(.applib_globe_data.g_app_info_vector))
+        . = 0x10;
+        KEEP(applib_globe_data.o(.applib_globe_data.config_fp))
+        . = 0x14;
+        KEEP(applib_globe_data.o(.applib_globe_data.g_app_info_state_all))
+        . = APPLIB_GLOBAL_DATA_SIZE;
+    }
+
+
+    /*common部分：占用control bank 1组的40-63，共24个bank*/
+    . = BANK_CONTROL_1_ADDR_BASE + AP_BANK_SPACE * 40;
+    /*OFFSET为control bank 1组的实际物理地址*/
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_40 :
+    {
+        app_engine_config.o(.text .rodata .xdata)
+        app_manager_bank.o(.text .rodata .xdata)
+        app_timer_bank_for_engine.o(.text .rodata .xdata)
+        message_bank_broadcast.o(.text .rodata .xdata)
+        message_bank_init_for_engine.o(.text .rodata .xdata)
+        message_bank_send.o(.text .rodata .xdata)
+        message_bank_send_async.o(.text .rodata .xdata)
+        message_bank_send_btmanager.o(.text .bank .rodata .xdata)
+        /*. = BANK_CONTROL_SIZE;*/
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_CONTROL_1_41 :
+    {
+        common_config.o(.text .rodata .xdata)
+        common_sound.o(.text .rodata .xdata)
+        /*. = BANK_CONTROL_SIZE;*/
+    }
+}

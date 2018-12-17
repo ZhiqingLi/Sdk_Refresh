@@ -1,0 +1,92 @@
+INPUT(link_base.xn)
+
+/*1.AP INDEX*/
+AP_INDEX = BACK_AP;
+
+SRAM_TEXT_ADDR = SRAM_AP_BACK_RCODE_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_AP_BACK_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_AP_BACK_DATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_AP_BACK_DATA_SIZE;
+
+/*这里只能用0~39 共40个bank, 40~63被common用了*/
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_BACK_CONTROL_1 << 24) + SRAM_AP_BANK_BACK_CONTROL_ADDR;
+/*bank的实际空间大小,不能修改*/
+BANK_CONTROL_SIZE = SRAM_AP_BANK_BACK_CONTROL_SIZE;
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(__start)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        /*API OBJ在此链接*/
+        audio_device_op_entry.o(.text)
+        key_op_entry.o(.text)
+        libc_op_entry.o(.text)
+        mmm_pp_cmd.o(.text)
+        sys_op_entry.o(.text)
+        
+        linein_eg_control.o(.text)
+        linein_eg_event.o(.text .rodata)
+        app_timer_rcode_for_engine.o(.text)
+        message_rcode_for_engine.o(.text)
+    }
+
+    /* 初始化了的全局数据段*/
+    .data RDATA_DATA_ADDR :  AT(ADDR(.text) + SIZEOF(.text))
+    {
+        /*_resident_data = ABSOLUTE(.);*/
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        linein_eg_main.o(.data)
+        applib_app_data.o(.data)
+    }
+    /*未初始化的全局数据段，系统不会进行清零*/
+    .bss (RDATA_DATA_ADDR + SIZEOF(.data)) :
+    {
+        linein_eg_main.o(.bss)
+        applib_app_data.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+
+    /*6.链接bank control 0代码*/
+    . = BANK_CONTROL_1_ADDR_BASE;
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_0 :
+    {
+        ctor.o(.text .rodata)
+        linein_eg_main.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_1 :
+    {
+        linein_eg_message_done.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_2 :
+    {
+       linein_eg_event_param.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_3 :
+    {
+       linein_eg_play_deal.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_4 :
+    {
+        linein_eg_event_volume.o(.text .rodata .xdata)
+    }
+}

@@ -1,0 +1,140 @@
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+/*1.AP INDEX*/
+AP_INDEX = PROCESS_MANAGER_AP;
+
+/*2.从地址map图中获取card模块的常驻代码段物理地址，只需写低14位，开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+SRAM_TEXT_ADDR = SRAM_AP_MANAGER_RCODE_ADDR;
+/*SRAM_DATA_ADDR = SRAM_OS_DATA_ADDR + 0x1000 - 0x200;*/
+
+APPLIB_GLOBAL_DATA_ADDR = RDATA_ADDR_BASE + SRAM_APPLIB_GLOBAL_DATA_ADDR;
+APPLIB_DATA_ADDR = RDATA_ADDR_BASE + SRAM_APPLIB_DATA_ADDR;
+APPLIB_GLOBAL_DATA_SIZE = SRAM_APPLIB_GLOBAL_DATA_SIZE;
+APPLIB_DATA_SIZE = SRAM_APPLIB_DATA_SIZE;
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+/*RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;*/
+
+/*只是建议起始地址，也可以往后偏移，如control_2一般不是从这个地址，如果要占全部的空间，则使用control_1*/
+BANK_MANAGER_BASE = (AP_BANK_MANAGER << 24) + SRAM_AP_BANK_MANAGER_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+BANK_MANAGER_SIZE = SRAM_AP_BANK_MANAGER_SIZE;
+
+
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(__start)
+
+SECTIONS
+{
+    . = APPLIB_GLOBAL_DATA_ADDR;
+	APPLIB_GLOBAL_DATA :
+    {
+    	/*common globe 数据*/
+    	KEEP(applib_globe_data.o(.applib_globe_data.g_app_info_vector))
+    	. = 0x10;
+    	KEEP(applib_globe_data.o(.applib_globe_data.config_fp))
+    	. = 0x14;
+    	KEEP(applib_globe_data.o(.applib_globe_data.g_app_info_state_all))
+    	. = APPLIB_GLOBAL_DATA_SIZE;
+    }
+
+    . = APPLIB_DATA_ADDR;
+    APPLIB_DATA	:
+    {
+    	KEEP(applib_globe_data_com.o(.g_app_info_state))
+    	KEEP(applib_globe_data_com.o(.gl_rcp_buffer))
+    }
+
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR  : 
+    {
+        /*API OBJ在此链接*/
+        sys_op_entry.o(.text)
+        libc_op_entry.o(.text)
+        audio_device_op_entry.o(.text)
+        ccd_op_entry.o(.text)
+        key_op_entry.o(.text)
+        base_op_entry.o(.text)
+        stub_mod_cmd.o(.text)
+        manager_msg_loop.o(.text .rodata) 
+    }
+
+    . = (. - 0x20000000);
+    .data    : 
+    {
+        manager_main.o(.data)
+    }
+
+    .bss :
+    {
+        manager_main.o(.bss) 
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = 0x100 - SIZEOF(.text) - SIZEOF(.data);
+    } 
+    
+/*    .text1 0xbfc0e000 :
+    {
+        _resident_text = ABSOLUTE(.);
+        KEEP(coefficients.o(.asrc_buf0))
+        _resident_text_end = ABSOLUTE(.);
+    }
+    
+    .text2 0xbfc0f000 :
+    {
+        _resident_text = ABSOLUTE(.);
+        KEEP(coefficients.o(.asrc_buf1))
+        _resident_text_end = ABSOLUTE(.);
+    } 
+*/
+    . = BANK_MANAGER_BASE;
+    OFFSET = . & 0x3ffff;
+    
+    BANK_MANAGER_0    : 
+    {        
+       
+        manager_get_name.o(.text .rodata .xdata)  
+        manager_mem_manager.o(.text .rodata .xdata) 
+    }   
+     
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_MANAGER_1    : 
+    {     
+        ctor.o(.text .rodata .xdata)  
+        manager_main.o(.text .rodata .xdata)                         
+        common_config.o(.text .rodata .xdata)
+        manager_applib_funs.o(.text .rodata .xdata) 
+        app_engine_config.o(.text .rodata .xdata)             
+        common_speaker_control.o(.text .rodata .xdata)
+          
+    }     
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_MANAGER_3    : 
+    {       
+        manager_globe_data_init.o(.text .rodata .xdata)        
+        manager_stub_deal.o(.text .rodata .xdata)        
+        manager_config_hosc_freq.o(.text .rodata .xdata)
+        manager_key_drv_install.o(.text .rodata .xdata)
+        manager_FT_test.o(.text .rodata .xdata) 
+        manager_sub_thread.o(.text .rodata .xdata)           
+    } 
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_MANAGER4    : 
+    {                  
+        manager_msg_handle2.o(.text .rodata .xdata)
+        manager_msg_handle3.o(.text .rodata .xdata)  
+        manager_msg_handle.o(.text .rodata .xdata)       
+    }
+}

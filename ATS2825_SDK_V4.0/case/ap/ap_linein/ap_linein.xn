@@ -1,0 +1,95 @@
+INPUT(link_base.xn)
+
+AP_INDEX = FRONT_AP;
+
+SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_AP_FRONT_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_AP_FRONT_DATA_SIZE;
+
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_FRONT_CONTROL_1 << 24) + SRAM_AP_BANK_FRONT_CONTROL_ADDR;
+BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE;
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(__start)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        /*4.填写rcode输入节*/
+        /*从这里开始 .text 固定链接地址*/
+        KEEP(sys_op_entry.o(.text))
+        KEEP(libc_op_entry.o(.text))
+        KEEP(audio_device_op_entry.o(.text))
+        KEEP(key_op_entry.o(.text))
+        KEEP(lcd_op_entry.o(.text))
+        KEEP(tts_op_entry.o(.text))
+        KEEP(ccd_op_entry.o(.text))
+        KEEP(base_op_entry.o(.text))
+        KEEP(stub_mod_cmd.o(.text))
+        KEEP(app_timer_rcode.o(.text))
+        KEEP(message_rcode.o(.text))
+        KEEP(message_key_rcode.o(.text))
+        KEEP(common_view_loop.o(.text .rodata))
+        KEEP(common_view_manager.o(.rcode))
+        /*到这里结束 .text 固定链接地址*/
+        /*其他API OBJ在此链接*/
+
+        linein_control.o(.rcode)
+        linein_rcp_deal.o(.rodata)
+        linein_control.o(.rodata.ke_maplist .rodata.se_maplist)
+    }
+    
+    /* 未初始化的全局数据段，系统会自动清零*/
+    .bss RDATA_DATA_ADDR	:
+    {
+		/*从这里开始 .bss 固定链接地址*/
+        KEEP(applib_app_data.o(.bss))
+    	KEEP(common_func_data.o(.bss))
+    	/*到这里结束 .bss 固定链接地址*/
+        
+        linein_main.o(.bss)
+        linein_rcp_deal.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+    
+    /* 初始化了的全局数据段*/
+    .data :
+    {
+		linein_main.o(.data)
+        linein_rcp_deal.o(.data)
+        *.o(.data)
+    }
+
+    . = BANK_CONTROL_1_ADDR_BASE;
+    OFFSET = . & 0x3ffff;
+
+    BANK_CONTROL_1_0 :
+    {
+        ctor.o(.text .rodata)
+        linein_main.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_1 :
+    {
+        scene_linein.o(.text .rodata)
+        linein_control.o(.text .rodata)
+        linein_rcp_deal.o(.text .xdata)
+    }
+	
+	. = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_2 :
+    {
+        linein_control.o(.BANK_CONTROL_1_2)
+    }
+
+}

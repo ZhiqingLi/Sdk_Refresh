@@ -1,0 +1,131 @@
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+/*1.AP INDEX*/
+AP_INDEX = BACK_AP;
+
+/*2.从地址map图中获取card模块的常驻代码段物理地址，只需写低14位，开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+SRAM_TEXT_ADDR = SRAM_AP_BACK_RCODE_ADDR;
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_AP_BACK_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_AP_BACK_DATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_AP_BACK_DATA_SIZE;
+
+/*只是建议起始地址，也可以往后偏移，如control_2一般不是从这个地址，如果要占全部的空间，则使用control_1*/
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_BACK_CONTROL_1 << 24) + SRAM_AP_BANK_BACK_CONTROL_ADDR;
+/*bank的实际空间大小,不能修改*/
+BANK_CONTROL_SIZE = SRAM_AP_BANK_BACK_CONTROL_SIZE;
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(__start)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        /*API OBJ在此链接*/
+        audio_device_op_entry.o(.text)
+        key_op_entry.o(.text)
+        libc_op_entry.o(.text)
+        mmm_mp_cmd.o(.text)
+        sys_op_entry.o(.text)
+        vfs_op_entry.o(.text)
+
+        mengine_control.o(.text)
+        mengine_event.o(.text .rodata)
+        app_timer_rcode_for_engine.o(.text)
+        message_rcode_for_engine.o(.text)
+
+        . = RCODE_SIZE;
+    }
+    /* 初始化了的全局数据段*/
+    .data RDATA_DATA_ADDR : AT(ADDR(.text) + SIZEOF(.text))
+    {
+        data_begin = ABSOLUTE(.);
+        /*_resident_data = ABSOLUTE(.);*/
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        mengine_main.o(.data)
+        applib_app_data.o(.data)
+        eh_globle_data.o(.data)
+        eh_id3_rdata.o(.data)
+
+    }
+    /*未初始化的全局数据段，系统不会进行清零*/
+    .bss (RDATA_DATA_ADDR + SIZEOF(.data)) :
+    {
+        _resident_data_end = ABSOLUTE(.);
+        mengine_main.o(.bss)
+        applib_app_data.o(.bss)
+        eh_globle_data.o(.bss)
+        eh_id3_rdata.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+
+    /*6.链接bank control 0代码*/
+    . = BANK_CONTROL_1_ADDR_BASE;
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_0 :
+    {
+        ctor.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_1 :
+    {
+        mengine_main.o(.text .rodata)
+        common_share_data.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_2 :
+    {
+        mengine_message_done.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_3 :
+    {
+       mengine_event_param.o(.xdata .text .rodata)
+       mengine_main.o(.text.BANK2)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_4 :
+    { 
+       mengine_tts_deal.o(.text .rodata) 
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_5 :
+    {
+        mengine_event_volume.o(.text .rodata .xdata)
+        mengine_event_switch.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_6 :
+    {
+        mengine_event_playmode.o(.text .rodata .xdata)
+        mengine_bk_info.o(.text .rodata .xdata)
+    }
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_7 :
+    {
+        mengine_file_init.o(.text .rodata .xdata)
+    }
+	
+	 . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+     BANK_CONTROL_1_8 :
+    {
+		mengine_play_deal.o(.text .rodata .xdata .BANK_CONTROL_1_8) 		
+    }
+}

@@ -1,0 +1,49 @@
+//编写说明：
+//1）脚本文件 tts_flist.txt 必须是ANSI编码，每个词条包含2中语言语音文件，即[中文语音文件;英语语音文件]。
+//2）NULL表示该词条没有此种语言语音文件，[END]表示结尾，这两者不能删除。
+//3）支持英文分号;和中文分号；为语音文件分隔符。支持英文空格，制表符和中文空格为空白符号。
+蓝牙播歌.mp3;       NULL
+蓝牙免提.mp3;       NULL
+等待连接.mp3;       NULL
+蓝牙连接成功.mp3;   NULL
+蓝牙断开.mp3;       NULL
+播放.mp3;           NULL
+暂停.mp3;           NULL
+上一曲.mp3;         NULL
+下一曲.mp3;         NULL
+播放音乐.mp3;       NULL
+U盘播放.mp3;        NULL
+卡播放.mp3;         NULL
+播放录音.mp3;       NULL
+收音机.mp3;         NULL
+搜台中.mp3;         NULL
+音频输入.mp3;       NULL
+USB音箱.mp3;        NULL
+进入U盘.mp3;        NULL
+录音.mp3;           NULL
+电量低请充电.mp3;   NULL
+电量不足.mp3;       NULL
+充电已满.mp3;       NULL
+开机.mp3;           NULL
+关机.mp3;           NULL
+最大音量.mp3;       NULL
+最小音量.mp3;       NULL
+中文语音.mp3;       EN_英文语音.mp3
+第.mp3;             NULL
+零.mp3;             NULL
+一.mp3;             NULL
+二.mp3;             NULL
+三.mp3;             NULL
+四.mp3;             NULL
+五.mp3;             NULL
+六.mp3;             NULL
+七.mp3;             NULL
+八.mp3;             NULL
+九.mp3;             NULL
+十.mp3;             NULL
+百.mp3;             NULL
+千.mp3;             NULL
+点.mp3;             NULL
+首.mp3;             NULL
+FM.mp3;             NULL
+END

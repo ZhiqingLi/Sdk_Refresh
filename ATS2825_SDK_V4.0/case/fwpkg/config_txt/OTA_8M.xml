@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    part        : 结点名, 定义一个分区描述项
+    desc        : 分区描述
+    ID          : 分区ID
+    size        : 分区允许大小(十六进制表示，字节为单位)
+    needbackup  : 是否需要先备份再写
+    name        : 分区包含的文件集合
+    该文件描述norflash大于等于8M的OTA xml文件的配置，其中LFI允许最大大小参见sys_info.h头文件定义
+    注意哪里面大小是扇区为单位，而xml里面分区大小是字节为单位的
+-->
+
+<firmwareupdate name = "/">
+
+  <!-- 第一个分区ID -->
+  <part id = "1" desc = "brec是第一分区，允许最大大小64KB">
+    <param size = '0x10000' needbackup = "1"/>   
+  </part>  
+  
+  <!-- 第二个分区ID -->  
+  <part id = "2" desc = "lfi是第二个分区，允许最大大小2M">
+    <param size = '0x200000' needbackup = "1"/>
+  </part> 
+ 
+  <!-- 默认不包含数据分区，如果需要支持数据分区，请打开下面的语句 -->     
+  <part id = "16" desc = "第一个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="zen.mp3"/> 
+  </part> 
+  
+  <part id = "17" desc = "第二个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="tones.mp3"/>               
+  </part> 
+
+  <part id = "18" desc = "第一个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="ocean.mp3"/> 
+  </part> 
+  
+    
+  <part id = "19" desc = "第二个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="storm.mp3"/>               
+  </part> 
+
+ 
+  <part id = "20" desc = "第一个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="nature.mp3"/> 
+  </part> 
+  
+ 
+  <part id = "21" desc = "第二个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="air.mp3"/>               
+  </part> 
+
+  <part id = "22" desc = "第一个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="focus.mp3"/> 
+  </part> 
+  
+  
+  <part id = "23" desc = "第二个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="quiet.mp3"/>               
+  </part> 
+
+  <part id = "24" desc = "第一个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="peace.mp3"/> 
+  </part> 
+  
+  
+  <part id = "25" desc = "第二个数据分区，允许最大大小1M">
+    <param size = '0x100000' needbackup = "1"/>
+    <sub name="heart.mp3"/>               
+  </part> 
+</firmwareupdate>
+
+
+
+

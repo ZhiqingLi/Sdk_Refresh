@@ -1,0 +1,7 @@
+#Fri Jun 02 16:58:02 CST 2017
+connectType=ICE
+connectionTimeoutSID=15
+targetURI=rse\://LOCALHOST/~target/ADP-AG101P-4GB-N968A-S-32I
+eclipse.preferences.version=1
+iceman.misc.args=-A -N reset-hold-script.tpl -H
+connectionTimeoutICE=15

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project Name="HF30M" Version="1" Language="C">
+  <VirtualDirectory Name="arch">
+    <File Name="arch/crt0.S"/>
+    <File Name="arch/asm32s003_mem_init.c"/>
+    <File Name="ckcpu.ld"/>
+    <File Name="gdb.init"/>
+  </VirtualDirectory>
+  <Description/>
+  <VirtualDirectory Name="inc">
+    <File Name="include/asm32s003.h"/>
+    <File Name="include/asm32s003_adc.h"/>
+    <File Name="include/asm32s003_ck802.h"/>
+    <File Name="include/asm32s003_coret.h"/>
+    <File Name="include/asm32s003_counta.h"/>
+    <File Name="include/asm32s003_gpio.h"/>
+    <File Name="include/asm32s003_gtc.h"/>
+    <File Name="include/asm32s003_i2c.h"/>
+    <File Name="include/asm32s003_ifc.h"/>
+    <File Name="include/asm32s003_led.h"/>
+    <File Name="include/asm32s003_syscon.h"/>
+    <File Name="include/asm32s003_types_local.h"/>
+    <File Name="include/asm32s003_uart.h"/>
+    <File Name="include/app_config.h"/>
+    <File Name="include/asm32s003_pwm.h"/>
+    <File Name="include/app_msg.h"/>
+    <File Name="include/key.h"/>
+    <File Name="include/timeout.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="source">
+    <File Name="main.c"/>
+    <File Name="asm32s003_initial.c"/>
+    <File Name="asm32s003_interrupt.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="FWlib">
+    <File Name="FWlib/asm32s003.c"/>
+    <File Name="FWlib/asm32s003_ck802.c"/>
+    <File Name="FWlib/asm32s003_coret.c"/>
+    <File Name="FWlib/asm32s003_counta.c"/>
+    <File Name="FWlib/asm32s003_gpio.c"/>
+    <File Name="FWlib/asm32s003_gtc.c"/>
+    <File Name="FWlib/asm32s003_ifc.c"/>
+    <File Name="FWlib/asm32s003_syscon.c"/>
+    <File Name="FWlib/asm32s003_uart.c"/>
+    <File Name="FWlib/asm32s003_i2c.c"/>
+    <File Name="FWlib/asm32s003_led.c"/>
+    <File Name="FWlib/asm32s003_adc.c"/>
+    <File Name="FWlib/asm32s003_pwm.c"/>
+    <File Name="FWlib/timeout_api.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="Lib">
+    <File Name="Lib/lib_S003TKey_V1_20.a"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="key">
+    <File Name="key/coding_key.c"/>
+    <File Name="key/gpio_key.c"/>
+    <File Name="key/key.c"/>
+    <File Name="key/power_key.c"/>
+  </VirtualDirectory>
+  <UIControl>
+    <Debug>
+      <DisableSIMConnector>no</DisableSIMConnector>
+      <FrozenDownloadInFlash>no</FrozenDownloadInFlash>
+    </Debug>
+  </UIControl>
+  <Dependencies/>
+  <SDKTemplate ID="NR#ASM32S003_Patch_V01" Version="v1.0.0">
+    <Description/>
+    <algorithmPath>$(CDKPath)/CSKY/SDK/Templates/NR#ASM32S003_Patch_V01/v1.0.0</algorithmPath>
+  </SDKTemplate>
+  <Dependencies Name="BuildSet"/>
+  <BuildConfigs>
+    <BuildConfig Name="BuildSet">
+      <Target>
+        <ROMBank Selected="1">
+          <ROM1>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM1>
+          <ROM2>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM2>
+          <ROM3>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM3>
+          <ROM4>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM4>
+          <ROM5>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+          </ROM5>
+        </ROMBank>
+        <RAMBank>
+          <RAM1>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM1>
+          <RAM2>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM2>
+          <RAM3>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM3>
+          <RAM4>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM4>
+          <RAM5>
+            <InUse>no</InUse>
+            <Start/>
+            <Size/>
+            <Init>yes</Init>
+          </RAM5>
+        </RAMBank>
+        <CPU>ck802</CPU>
+        <UseMiniLib>yes</UseMiniLib>
+        <Endian>little</Endian>
+        <UseHardFloat>no</UseHardFloat>
+        <UseEnhancedLRW>no</UseEnhancedLRW>
+      </Target>
+      <Output>
+        <OutputName>ASM32S003_Release</OutputName>
+        <Type>Executable</Type>
+        <CreateHexFile>yes</CreateHexFile>
+        <Preprocessor>no</Preprocessor>
+        <Disasm>no</Disasm>
+        <CallGraph>no</CallGraph>
+        <Map>no</Map>
+      </Output>
+      <User>
+        <BeforeCompile>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </BeforeCompile>
+        <BeforeMake>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </BeforeMake>
+        <AfterMake>
+          <RunUserProg>no</RunUserProg>
+          <UserProgName/>
+        </AfterMake>
+      </User>
+      <Compiler>
+        <Define/>
+        <Undefine/>
+        <Optim>Optimize more (-O2)</Optim>
+        <DebugLevel>Maximum (-g3)</DebugLevel>
+        <IncludePath>$(ProjectPath);$(ProjectPath)//TK_Parameter;$(ProjectPath)/include</IncludePath>
+        <OtherFlags>-mistack</OtherFlags>
+        <Verbose>no</Verbose>
+        <Ansi>no</Ansi>
+        <Syntax>no</Syntax>
+        <Pedantic>no</Pedantic>
+        <PedanticErr>no</PedanticErr>
+        <InhibitWarn>no</InhibitWarn>
+        <AllWarn>yes</AllWarn>
+        <WarnErr>no</WarnErr>
+        <OneElfS>no</OneElfS>
+        <Fstrict>no</Fstrict>
+      </Compiler>
+      <Asm>
+        <Define/>
+        <Undefine/>
+        <IncludePath>$(ProjectPath);$(ProjectPath)//TK_Parameter;$(ProjectPath)include</IncludePath>
+        <OtherFlags/>
+        <DebugLevel>gdwarf2</DebugLevel>
+      </Asm>
+      <Linker>
+        <Garbage>yes</Garbage>
+        <LDFile>$(ProjectPath)/ckcpu.ld</LDFile>
+        <LibName>lib_S003TKey_V1_20</LibName>
+        <LibPath>$(ProjectPath)</LibPath>
+        <OtherFlags/>
+        <AutoLDFile>no</AutoLDFile>
+      </Linker>
+      <Debug>
+        <LoadApplicationAtStartup>yes</LoadApplicationAtStartup>
+        <Connector>ICE</Connector>
+        <StopAt>yes</StopAt>
+        <StopAtText>main</StopAtText>
+        <InitFile>$(ProjectPath)/gdb.init</InitFile>
+        <AutoRun>yes</AutoRun>
+        <ResetType>Soft Reset</ResetType>
+        <SoftResetVal>abcd1234</SoftResetVal>
+        <ResetAfterLoad>no</ResetAfterLoad>
+        <ConfigICE>
+          <IP>localhost</IP>
+          <PORT>1025</PORT>
+          <Clock>10000</Clock>
+          <Delay>10</Delay>
+          <DDC>yes</DDC>
+          <TRST>no</TRST>
+          <Connect>Normal</Connect>
+          <ResetType>Soft Reset</ResetType>
+          <SoftResetVal>abcd1234</SoftResetVal>
+          <RTOSType>Bare Metal</RTOSType>
+          <DownloadToFlash>yes</DownloadToFlash>
+          <ResetAfterConnect>yes</ResetAfterConnect>
+        </ConfigICE>
+        <ConfigSIM>
+          <SIMTarget>soccfg/cskyv2/smart_card_802_new_cfg.xml</SIMTarget>
+          <OtherFlags/>
+          <NoGraphic>yes</NoGraphic>
+          <Log>no</Log>
+        </ConfigSIM>
+      </Debug>
+      <Flash>
+        <InitFile>$(ProjectPath)/gdb.init</InitFile>
+        <Erase>Erase Sectors</Erase>
+        <Algorithms Path="$(CDKPath)/CSKY/SDK/Templates/NR#ASM32S003_Patch_V01/v1.0.0/">ASM32S003_FLASHDOWN.elf</Algorithms>
+        <Program>yes</Program>
+        <Verify>no</Verify>
+        <ResetAndRun>yes</ResetAndRun>
+      </Flash>
+    </BuildConfig>
+  </BuildConfigs>
+  <DebugSessions>
+    <watchExpressions>CORET_Systick_Count</watchExpressions>
+    <memoryExpressions>;;;</memoryExpressions>
+    <statistics>E0011100;10;MHZ</statistics>
+  </DebugSessions>
+</Project>

@@ -1,0 +1,55 @@
+----------------------------------------------------------------------------------
+			WiFi Demo SDK 使用说明
+----------------------------------------------------------------------------------
+1、WiFi Demo SDK 是在上海发布的标准SDK基础上，根据WiFi Demo实际功能需求
+   做的功能开发，因此关于SDK的基本资料跟发布的标准SDK资料一致。
+
+2、与WiFi功能有关的代码增加了宏“FUNC_WIFI_EN”限制，如果希望移植WiFi相关
+    功能代码参考此宏相关代码部分即可。
+
+3、利用WiFi Demo SDK 做WiFi产品的开发，根据产品功能需求，用户可能需要做
+   修改的主要文件如下：
+1）、app_config.h：
+     此文件包含了目前SDK已实现的功能模块定义和对应的硬件资源配置，用户
+     可以根据实际需求打开或关闭功能模块（例如：如果产品没有蓝牙功能，可
+     以关闭蓝牙宏定义，即注释掉#define FUNC_BT_EN）；尤其注意文件中的各
+     个模块的硬件资源GPIO分配都是根据WiFi Demo做的，用户需要根据实际产品
+     硬件设计做修改调整（例如：WiFi Demo各个模式的LED指示灯对应的GPIO，如
+     果没有蓝牙LED指示灯，请注释掉#define LED_BT_MODE_BIT_MASK 即可；如果
+     指示灯更换成其它GPIO，请修改#define LED_AUX_MODE_BIT_MASK GPIOC1中的
+     GPIOC1为实际的GPIO即可）。
+2）、wifi_function_config.h：
+     此文件包含WiFi模块部分的功能模块宏定义，每一个宏定义对应的功能文件中
+     都有注释，为了测试方便SDK中将所有功能宏定义默认都打开的，用户可以根据
+     实际需求打开或关闭相应的功能宏定义例如：如果产品不需要WiFi多房间播放
+     功能，可以关闭多房间播放功能宏定义，即注
+     释掉#define FUNC_WIFI_MULTIROOM_PLAY_EN）。
+3）、wifi_init_setting.h：
+     此文件是WiFi产品相关功能定制参数配置文件，即WiFi恢复出厂设置后需要设置
+     的一些参数，用户需要根据产品实际WiFi模块功能定义配置这些参数（例如：项目
+     名称定义，WiFi Demo定义的是"MV_WiFiDemo"，也就是
+     #define MCU_CAP_PRJ_PROJECT_NAME	"MV_WiFiDemo"，用户的产品项目名称可能
+     是其它名称，就需要将这里的名称改为自己的项目名称）每一个命
+     令对应的各个位代表的功能可以参见“WiFi的MCU指令文档出厂开机”部分说明。
+4）、wifi_uart_com.c：
+     此文件实现AP8064与WiFi之间的串口通讯，串口命令和数据的接收发送处理，用户
+     可以在此文件中增加命令处理，AP8064对大数据的接收处理方法可以参见
+     “AXX_MCU_UPD” 命令的处理流程，AP8064对大数据的发送可以参见数据透传函数
+      McuSendPassThroughData()的处理。
+5）、wifi_control.c：
+     此文件包含了WiFi模组的相关命令处理控制、按键处理、LED显示控制等操作，用户
+     可以在此文件中增加新的对WiFi的操作处理。
+
+6）、wifi_mcu_command.h：
+     此文件只是AP80xx端发送给WiFi模组端的命令集列表，对应WiFi的MCU指令文档顺序，
+     方便用户直观初步了解指令功能，如果WiFi有新增加命令可以在此文件中相应加上。
+
+7）、wifi_wifi_command.h：
+     此文件只是WiFi模组端发送给AP80xx端的命令集列表，对应WiFi的MCU指令文档顺序，
+     方便用户直观初步了解指令功能，如果WiFi有新增加命令可以在此文件中相应加上。
+
+4、给带有WiFi功能的项目调音，调音工具配置选择注意：
+   （1）、Audio Path选择：“4.Analog-in->I2S-out+Analog-out”；
+   （2）、MCLK Mode选择：“Normal”。
+   
+   

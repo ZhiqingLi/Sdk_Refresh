@@ -1,0 +1,389 @@
+making fw
+
+Support OTA: 0
+Support TWS: 0
+Genbin ver.20160912.01
+Generating bin...
+output text coding: UTF8
+done
+remove tempfile
+*************************Reduce AP Size******************************
+build ap result:
+ap name:manager.AP  old size:b     new size:b     free size:0     
+ap name:music.ap    old size:e9    new size:4d    free size:9c    
+ap name:mengine.ap  old size:2f    new size:2f    free size:0     
+ap name:alarm.ap    old size:b6    new size:16    free size:a0    
+ap name:linein.ap   old size:af    new size:f     free size:a0    
+ap name:lineineg.ap old size:a     new size:a     free size:0     
+ap name:udisk.ap    old size:b1    new size:11    free size:a0    
+ap name:radio.ap    old size:d4    new size:34    free size:a0    
+ap name:fmengine.ap old size:10    new size:10    free size:0     
+ap name:usound.ap   old size:b0    new size:10    free size:a0    
+ap name:uengine.ap  old size:f     new size:f     free size:0     
+ap name:btstack.ap  old size:1be   new size:1be   free size:0     
+ap name:btplayeg.ap old size:d     new size:d     free size:0     
+ap name:btcalleg.ap old size:1a    new size:1a    free size:0     
+ap name:btplay.ap   old size:b5    new size:15    free size:a0    
+ap name:btcall.ap   old size:b7    new size:17    free size:a0    
+ap name:upgrade.ap  old size:d5    new size:35    free size:a0    
+ap name:otatest.ap  old size:14    new size:14    free size:0     
+ap name:config.ap   old size:c0    new size:c0    free size:0     
+ap name:mus_scan.al old size:a     new size:a     free size:0     
+ap name:stub.al     old size:a     new size:a     free size:0     
+ap name:UartStub.al old size:8     new size:8     free size:0     
+*************************Build AFI *****************************
+*************************Build Firmware *****************************
+Making ./US282A_BTBOX_DVB_ATS2825.FW
+Saving database ->  ./US282A_BTBOX_DVB_ATS2825.FW
+Complete making,file at:./US282A_BTBOX_DVB_ATS2825.FW
+*************************CheckSize *****************************
+lfi total sector: 3147
+brec total sector: 36
+data total sector: 0
+data_part_backup sector: 0
+total sector: 3442
+Firmware occupies 3442 sectors, still has 654 sectors free.
+
+0
+*************************Build UPGRADE.HEX*****************************
+File make end
+*************************Build ATF*****************************
+/cygdrive/f/Soft_sdk/US282A_SDK/case/ap_test/ATT
+make[1]: Entering directory `/cygdrive/f/Soft_sdk/US282A_SDK/case/ap_test/ATT'
+rm -f ./ap_autotest_bertest.o ap_autotest_bertest_sub.o ap_autotest_btstack_test.o ap_autotest_btstack_test_dev.o ap_autotest_channel_test.o ap_autotest_channel_test_SNR.o ap_autotest_channel_test_SNR_data.o ap_autotest_channel_test_log_file.o ap_autotest_common.o ap_autotest_fsm.o ap_autotest_gpio.o ap_autotest_gpio_sub.o ap_autotest_lradc_test.o ap_autotest_main.o ap_autotest_misc_test.o ap_autotest_modify_bt_attr.o ap_autotest_mptest.o ap_autotest_mptest_sub.o ap_autotest_music_test.o ap_autotest_printk.o ap_autotest_read_args.o ap_autotest_read_param.o ap_autotest_record_file.o ap_autotest_start_deal.o common_func.o common_func_rcode.o ap_upgrade_bank.o ap_upgrade_fw_check.o ap_upgrade_rcode.o decrypt.o   
+rm -f ./acttest.exe acttest.lst acttest.map acttest.ap acttest.info
+rm -rf ./obj
+make[1]: Leaving directory `/cygdrive/f/Soft_sdk/US282A_SDK/case/ap_test/ATT'
+make[1]: Entering directory `/cygdrive/f/Soft_sdk/US282A_SDK/case/ap_test/ATT'
+mkdir -p ./obj
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_bertest.o ap_autotest_bertest.c
+ap_autotest_bertest.c: In function `_ber_test_read_hci_data':
+ap_autotest_bertest.c:78: warning: unused variable `len'
+ap_autotest_bertest.c: In function `ber_test_loop_deal':
+ap_autotest_bertest.c:694: warning: passing arg 1 of `send_bt_data' discards qualifiers from pointer target type
+ap_autotest_bertest.c:700: warning: passing arg 1 of `send_bt_data' discards qualifiers from pointer target type
+ap_autotest_bertest.c:705: warning: passing arg 1 of `send_bt_data' discards qualifiers from pointer target type
+ap_autotest_bertest.c: In function `att_parse_ber_result':
+ap_autotest_bertest.c:269: warning: 'max_diff_index' might be used uninitialized in this function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_bertest_sub.o ap_autotest_bertest_sub.c
+ap_autotest_bertest_sub.c: In function `_ber_test_report_result':
+ap_autotest_bertest_sub.c:51: warning: implicit declaration of function `int32_to_unicode'
+ap_autotest_bertest_sub.c:73: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_bertest_sub.c: In function `_ber_test_stop_att':
+ap_autotest_bertest_sub.c:118: warning: implicit declaration of function `_ber_test_write_berdata'
+ap_autotest_bertest_sub.c: In function `act_test_ber_test':
+ap_autotest_bertest_sub.c:342: warning: implicit declaration of function `ber_test_loop_deal'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_btstack_test.o ap_autotest_btstack_test.c
+ap_autotest_btstack_test.c: In function `test_bstack_status_deal':
+ap_autotest_btstack_test.c:153: warning: implicit declaration of function `test_btstack_get_paired_dev_info'
+ap_autotest_btstack_test.c: In function `act_test_btstack_install':
+ap_autotest_btstack_test.c:408: warning: implicit declaration of function `test_btstack_read_paired_dev_info'
+ap_autotest_btstack_test.c: In function `act_test_bt_test':
+ap_autotest_btstack_test.c:453: warning: implicit declaration of function `_config_fs_deinit'
+ap_autotest_btstack_test.c:467: warning: implicit declaration of function `test_btstack_save_paired_dev_info'
+ap_autotest_btstack_test.c:482: warning: implicit declaration of function `bytes_to_unicode'
+ap_autotest_btstack_test.c:503: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_btstack_test.c:507: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_btstack_test.c: At top level:
+ap_autotest_btstack_test.c:222: warning: 'test_bt_force_unlink' defined but not used
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_btstack_test_dev.o ap_autotest_btstack_test_dev.c
+ap_autotest_btstack_test_dev.c: In function `att_test_open_file':
+ap_autotest_btstack_test_dev.c:54: warning: implicit declaration of function `bytes_to_unicode'
+ap_autotest_btstack_test_dev.c:76: warning: passing arg 3 of `att_read_data' makes integer from pointer without a cast
+ap_autotest_btstack_test_dev.c:29: warning: unused variable `random_val'
+ap_autotest_btstack_test_dev.c: In function `att_test_open_record_file':
+ap_autotest_btstack_test_dev.c:124: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_btstack_test_dev.c: In function `test_btstack_read_paired_dev_info':
+ap_autotest_btstack_test_dev.c:165: warning: implicit declaration of function `act_open_att_record_file'
+ap_autotest_btstack_test_dev.c:159: warning: unused variable `i'
+ap_autotest_btstack_test_dev.c: In function `test_btstack_save_paired_dev_info':
+ap_autotest_btstack_test_dev.c:228: warning: implicit declaration of function `act_test_write_att_record_file'
+ap_autotest_btstack_test_dev.c:246: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_btstack_test_dev.c:205: warning: unused variable `i'
+ap_autotest_btstack_test_dev.c:211: warning: unused variable `btaddr_log'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_channel_test.o ap_autotest_channel_test.c
+ap_autotest_channel_test.c: In function `init_dma_to_adc':
+ap_autotest_channel_test.c:151: warning: unused variable `status'
+ap_autotest_channel_test.c: In function `adc_data_deal':
+ap_autotest_channel_test.c:498: warning: passing arg 1 of `caculate_power_value' makes integer from pointer without a cast
+ap_autotest_channel_test.c:501: warning: passing arg 1 of `caculate_power_value' makes integer from pointer without a cast
+ap_autotest_channel_test.c: In function `channel_test':
+ap_autotest_channel_test.c:603: warning: passing arg 1 of `thd_test' makes pointer from integer without a cast
+ap_autotest_channel_test.c:528: warning: unused variable `i'
+ap_autotest_channel_test.c: In function `act_test_report_channel_result':
+ap_autotest_channel_test.c:630: warning: implicit declaration of function `int32_to_unicode'
+ap_autotest_channel_test.c:652: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_channel_test.c:656: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_channel_test.c: In function `analyse_power_val_valid':
+ap_autotest_channel_test.c:337: warning: 'max_diff_index' might be used uninitialized in this function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_channel_test_SNR.o ap_autotest_channel_test_SNR.c
+ap_autotest_channel_test_SNR.c: In function `analyse_sound_data':
+ap_autotest_channel_test_SNR.c:266: warning: implicit declaration of function `load_win_data'
+ap_autotest_channel_test_SNR.c:238: warning: unused variable `max_value'
+ap_autotest_channel_test_SNR.c:241: warning: unused variable `total_value'
+ap_autotest_channel_test_SNR.c:252: warning: unused variable `mean_index'
+ap_autotest_channel_test_SNR.c:244: warning: 'Sig_Max_Point' might be used uninitialized in this function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_channel_test_SNR_data.o ap_autotest_channel_test_SNR_data.c
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_channel_test_log_file.o ap_autotest_channel_test_log_file.c
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_common.o ap_autotest_common.c
+ap_autotest_common.c: In function `byte_to_unicode':
+ap_autotest_common.c:22: warning: comparison is always true due to limited range of data type
+ap_autotest_common.c: In function `act_test_report_result':
+ap_autotest_common.c:178: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_common.c:186: warning: passing arg 3 of `att_read_data' makes integer from pointer without a cast
+ap_autotest_common.c:166: warning: unused variable `ext_param'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_fsm.o ap_autotest_fsm.c
+ap_autotest_fsm.c: In function `act_test_read_testid':
+ap_autotest_fsm.c:136: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_fsm.c:140: warning: implicit declaration of function `act_test_read_test_arg'
+ap_autotest_fsm.c:147: warning: passing arg 2 of `act_test_read_test_info' from incompatible pointer type
+ap_autotest_fsm.c: At top level:
+ap_autotest_fsm.c:193: warning: initialization from incompatible pointer type
+ap_autotest_fsm.c:195: warning: initialization from incompatible pointer type
+ap_autotest_fsm.c:201: warning: initialization from incompatible pointer type
+ap_autotest_fsm.c: In function `test_dispatch':
+ap_autotest_fsm.c:343: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_fsm.c:365: warning: implicit declaration of function `led_flash_ok'
+ap_autotest_fsm.c: At top level:
+ap_autotest_fsm.c:33: warning: 'sys_reboot' defined but not used
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_gpio.o ap_autotest_gpio.c
+ap_autotest_gpio.c: In function `test_gpio_short_gnd':
+ap_autotest_gpio.c:267: warning: unused variable `gpio_dat'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_gpio_sub.o ap_autotest_gpio_sub.c
+ap_autotest_gpio_sub.c: In function `led_flash_fail':
+ap_autotest_gpio_sub.c:82: warning: unused variable `loop_cnt'
+ap_autotest_gpio_sub.c: In function `act_test_report_gpio_result':
+ap_autotest_gpio_sub.c:157: warning: implicit declaration of function `uint32_to_unicode'
+ap_autotest_gpio_sub.c:178: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_gpio_sub.c:182: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_gpio_sub.c: In function `test_gpio':
+ap_autotest_gpio_sub.c:222: warning: suggest parentheses around arithmetic in operand of |
+ap_autotest_gpio_sub.c:224: warning: suggest parentheses around arithmetic in operand of |
+ap_autotest_gpio_sub.c:233: warning: implicit declaration of function `test_gpio_short'
+ap_autotest_gpio_sub.c:242: warning: implicit declaration of function `test_gpio_short_gnd'
+ap_autotest_gpio_sub.c:251: warning: implicit declaration of function `test_gpio_open'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_lradc_test.o ap_autotest_lradc_test.c
+ap_autotest_lradc_test.c: In function `act_test_report_lradc_result':
+ap_autotest_lradc_test.c:142: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_lradc_test.c:146: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_lradc_test.c:132: warning: unused variable `trans_bytes'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_main.o ap_autotest_main.c
+ap_autotest_main.c: In function `att_test_fread':
+ap_autotest_main.c:134: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_main.c:155: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+ap_autotest_main.c:106: warning: unused variable `loop_exit'
+ap_autotest_main.c: In function `load_ap_bank':
+ap_autotest_main.c:251: warning: passing arg 1 of `att_test_fread' from incompatible pointer type
+ap_autotest_main.c:253: warning: passing arg 1 of `att_test_fread' makes pointer from integer without a cast
+ap_autotest_main.c:176: warning: unused variable `sd_file_handle'
+ap_autotest_main.c: In function `test_init':
+ap_autotest_main.c:324: warning: assignment makes integer from pointer without a cast
+ap_autotest_main.c: At top level:
+ap_autotest_main.c:445: warning: return type of 'main' is not `int'
+ap_autotest_main.c:445: warning: first argument of 'main' should be `int'
+ap_autotest_main.c:445: warning: 'main' takes only zero or two arguments
+ap_autotest_main.c: In function `att_test_fread':
+ap_autotest_main.c:104: warning: 'ret_val' might be used uninitialized in this function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_misc_test.o ap_autotest_misc_test.c
+ap_autotest_misc_test.c: In function `card_adfu_launcher':
+ap_autotest_misc_test.c:67: warning: assignment makes pointer from integer without a cast
+ap_autotest_misc_test.c:86: warning: assignment makes pointer from integer without a cast
+ap_autotest_misc_test.c:91: warning: assignment makes pointer from integer without a cast
+ap_autotest_misc_test.c: In function `act_test_flashtest':
+ap_autotest_misc_test.c:115: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_misc_test.c:119: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_misc_test.c: In function `act_test_enter_ft_mode':
+ap_autotest_misc_test.c:135: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_misc_test.c:137: warning: implicit declaration of function `act_test_read_testid'
+ap_autotest_misc_test.c: In function `act_test_enter_BQB_mode':
+ap_autotest_misc_test.c:245: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_misc_test.c:188: warning: unused variable `i'
+ap_autotest_misc_test.c:190: warning: unused variable `ret'
+ap_autotest_misc_test.c:256: warning: control reaches end of non-void function
+ap_autotest_misc_test.c: At top level:
+ap_autotest_misc_test.c:24: warning: 'music_test_fs_exit' defined but not used
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_modify_bt_attr.o ap_autotest_modify_bt_attr.c
+ap_autotest_modify_bt_attr.c: In function `write_param_data':
+ap_autotest_modify_bt_attr.c:79: warning: assignment makes integer from pointer without a cast
+ap_autotest_modify_bt_attr.c:85: warning: assignment makes integer from pointer without a cast
+ap_autotest_modify_bt_attr.c: In function `act_test_report_modify_bt_addr_result':
+ap_autotest_modify_bt_attr.c:143: warning: implicit declaration of function `bytes_to_unicode'
+ap_autotest_modify_bt_attr.c:164: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_modify_bt_attr.c:171: warning: implicit declaration of function `act_test_write_att_record_file'
+ap_autotest_modify_bt_attr.c:174: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_modify_bt_attr.c: In function `act_open_att_record_file':
+ap_autotest_modify_bt_attr.c:213: warning: unused variable `pdata'
+ap_autotest_modify_bt_attr.c: In function `act_test_write_att_record_file':
+ap_autotest_modify_bt_attr.c:309: warning: unused variable `pdata'
+ap_autotest_modify_bt_attr.c: In function `act_test_report_modify_bt_name_result':
+ap_autotest_modify_bt_attr.c:545: warning: passing arg 4 of `utf8str_to_unicode' from incompatible pointer type
+ap_autotest_modify_bt_attr.c:547: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_modify_bt_attr.c: In function `act_test_report_modify_ble_name_result':
+ap_autotest_modify_bt_attr.c:633: warning: passing arg 4 of `utf8str_to_unicode' from incompatible pointer type
+ap_autotest_modify_bt_attr.c:636: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_modify_bt_attr.c: In function `act_test_modify_bt_ble_name':
+ap_autotest_modify_bt_attr.c:661: warning: assignment makes integer from pointer without a cast
+ap_autotest_modify_bt_attr.c: In function `act_open_att_record_file':
+ap_autotest_modify_bt_attr.c:209: warning: 'file_handle' might be used uninitialized in this function
+ap_autotest_modify_bt_attr.c: In function `act_test_read_bt_addr_from_log':
+ap_autotest_modify_bt_attr.c:302: warning: control reaches end of non-void function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_mptest.o ap_autotest_mptest.c
+ap_autotest_mptest.c: In function `put_hci_data_to_ringbuf':
+ap_autotest_mptest.c:94: warning: passing arg 1 of pointer to function makes integer from pointer without a cast
+ap_autotest_mptest.c: In function `att_parse_cfo_result':
+ap_autotest_mptest.c:277: warning: 'max_diff_index' might be used uninitialized in this function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_mptest_sub.o ap_autotest_mptest_sub.c
+ap_autotest_mptest_sub.c: In function `act_test_report_mptest_result':
+ap_autotest_mptest_sub.c:95: warning: implicit declaration of function `int32_to_unicode'
+ap_autotest_mptest_sub.c:156: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_mptest_sub.c: In function `att_modify_mp_data':
+ap_autotest_mptest_sub.c:224: warning: passing arg 1 of `att_modify_mp_data_sub' discards qualifiers from pointer target type
+ap_autotest_mptest_sub.c: In function `att_index_to_cap':
+ap_autotest_mptest_sub.c:382: warning: unused variable `ret_val'
+ap_autotest_mptest_sub.c: In function `read_trim_cap_efuse':
+ap_autotest_mptest_sub.c:431: warning: assignment makes integer from pointer without a cast
+ap_autotest_mptest_sub.c: In function `write_trim_cap_efuse':
+ap_autotest_mptest_sub.c:450: warning: assignment makes integer from pointer without a cast
+ap_autotest_mptest_sub.c:455: warning: assignment makes integer from pointer without a cast
+ap_autotest_mptest_sub.c: In function `att_mp_test':
+ap_autotest_mptest_sub.c:529: warning: implicit declaration of function `att_cfo_test'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_music_test.o ap_autotest_music_test.c
+ap_autotest_music_test.c: In function `act_test_report_music_test_result':
+ap_autotest_music_test.c:130: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_music_test.c:134: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_music_test.c:122: warning: unused variable `trans_bytes'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_printk.o ap_autotest_printk.c
+ap_autotest_printk.c: In function `vsnprintf':
+ap_autotest_printk.c:42: warning: unused variable `end'
+ap_autotest_printk.c: In function `print_log':
+ap_autotest_printk.c:199: warning: `return' with no value, in function returning non-void
+ap_autotest_printk.c:217: warning: passing arg 3 of `att_write_data' makes integer from pointer without a cast
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_read_args.o ap_autotest_read_args.c
+ap_autotest_read_args.c:439:9: warning: multi-line comment
+ap_autotest_read_args.c: In function `act_test_read_test_info':
+ap_autotest_read_args.c:790: warning: `return' with no value, in function returning non-void
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_read_param.o ap_autotest_read_param.c
+ap_autotest_read_param.c: In function `act_test_read_bt_addr':
+ap_autotest_read_param.c:67: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:81: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:94: warning: suggest parentheses around assignment used as truth value
+ap_autotest_read_param.c:146: warning: implicit declaration of function `bytes_to_unicode'
+ap_autotest_read_param.c:157: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_read_param.c:161: warning: implicit declaration of function `act_test_report_test_log'
+ap_autotest_read_param.c: In function `act_test_read_bt_name':
+ap_autotest_read_param.c:349: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:360: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:375: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:383: warning: assignment makes integer from pointer without a cast
+ap_autotest_read_param.c:423: warning: passing arg 2 of `att_write_test_info' makes integer from pointer without a cast
+ap_autotest_read_param.c:425: warning: passing arg 2 of `att_write_test_info' makes integer from pointer without a cast
+ap_autotest_read_param.c:474: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+ap_autotest_read_param.c:314: warning: unused variable `i'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_record_file.o ap_autotest_record_file.c
+ap_autotest_record_file.c: In function `create_file_name':
+ap_autotest_record_file.c:43: warning: implicit declaration of function `read_bt_addr'
+ap_autotest_record_file.c:48: warning: implicit declaration of function `bytes_to_unicode'
+ap_autotest_record_file.c:38: warning: unused variable `cur_date'
+ap_autotest_record_file.c:39: warning: unused variable `cur_time'
+ap_autotest_record_file.c: In function `read_att_test_info':
+ap_autotest_record_file.c:169: warning: initialization from incompatible pointer type
+ap_autotest_record_file.c:171: warning: implicit declaration of function `act_open_att_record_file'
+ap_autotest_record_file.c: In function `enter_log_dir':
+ap_autotest_record_file.c:251: warning: passing arg 1 of `make_log_dir' from incompatible pointer type
+ap_autotest_record_file.c: In function `write_log_file':
+ap_autotest_record_file.c:302: warning: implicit declaration of function `act_test_write_att_record_file'
+ap_autotest_record_file.c: In function `read_att_test_info':
+ap_autotest_record_file.c:174: warning: control reaches end of non-void function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_autotest_start_deal.o ap_autotest_start_deal.c
+ap_autotest_start_deal.c: In function `read_bt_addr':
+ap_autotest_start_deal.c:34: warning: assignment makes integer from pointer without a cast
+ap_autotest_start_deal.c:62: warning: assignment makes integer from pointer without a cast
+ap_autotest_start_deal.c: In function `act_test_start_deal':
+ap_autotest_start_deal.c:149: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/common_func.o common_func.c
+common_func.c: In function `act_test_report_test_log':
+common_func.c:158: warning: implicit declaration of function `led_flash_fail'
+common_func.c:166: warning: control reaches end of non-void function
+common_func.c: At top level:
+common_func.c:139: warning: 'sys_reboot' defined but not used
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/common_func_rcode.o common_func_rcode.c
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_upgrade_bank.o ./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `search_content':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:141: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:152: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:163: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:174: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:185: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:192: warning: passing arg 1 of `check_key_offset_exist' makes pointer from integer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `upgrade_deal':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:348: warning: implicit declaration of function `upgrade_fw_check'
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:354: warning: implicit declaration of function `upgrade_fw_write'
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:323: warning: unused variable `fp'
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `act_test_product_test':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:410: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `act_test_prepare_product':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:438: warning: passing arg 1 of `act_test_report_result' from incompatible pointer type
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `att_fw_swtch_deal':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:273: warning: control reaches end of non-void function
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `upgrade_deal':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:322: warning: 'irq_flag' might be used uninitialized in this function
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c: In function `act_test_prepare_product':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_bank.c:439: warning: control reaches end of non-void function
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_upgrade_fw_check.o ./../../ap_test/ATT/ap_upgrade/ap_upgrade_fw_check.c
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/ap_upgrade_rcode.o ./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c: In function `fresh_display':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c:45: warning: implicit declaration of function `print_log'
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c: In function `part_write':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c:542: warning: assignment makes integer from pointer without a cast
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c: In function `upgrade_fw_write':
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c:567: warning: unused variable `ret_val'
+./../../ap_test/ATT/ap_upgrade/ap_upgrade_rcode.c:568: warning: unused variable `p_temp_buffer'
+
+sde-gcc -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas -I./../../../psp_rel/include/ucos -I./../../../psp_rel/include -I./../../inc  -I./../../ap_test/inc -I./ -I./common -I./ap_upgrade  -msoft-float -fsigned-char -fshort-enums -mtune=m4k -mips16e -nostdinc -nostdlib -fno-builtin -EL   -O2 -o	./obj/decrypt.o ./../../ap_test/ATT/ap_upgrade/decrypt.c
+./../../ap_test/ATT/ap_upgrade/decrypt.c: In function `_read_file_translate':
+./../../ap_test/ATT/ap_upgrade/decrypt.c:107: warning: passing arg 2 of `PCFWDecrypt' makes integer from pointer without a cast
+./../../ap_test/ATT/ap_upgrade/decrypt.c:44: warning: unused variable `ret_val'
+./../../ap_test/ATT/ap_upgrade/decrypt.c: In function `decrypt_init':
+./../../ap_test/ATT/ap_upgrade/decrypt.c:154: warning: unused variable `file_len'
+./../../ap_test/ATT/ap_upgrade/decrypt.c: In function `_read_file':
+./../../ap_test/ATT/ap_upgrade/decrypt.c:185: warning: passing arg 1 of `_read_file_translate' makes pointer from integer without a cast
+
+sde-ld -L./obj -L./../../../psp_rel/include -L./../../../psp_rel/lib  -L./../../lib -L./../../../psp_rel/lib/lib_enhanced -L../ -L./ap_upgrade/fw_decrypt -G0 -T ap_manager.xn  -EL ./../../../psp_rel/lib/api.a -o acttest.exe -Map acttest.map
+sde-objdump -S acttest.exe > acttest.lst
+sde-readelf -a acttest.exe > acttest.info
+./../../../psp_rel/tools/ap_builder.exe acttest.exe acttest.ap 0xB 0x38800 0x800
+¹§Ï²£¬³É¹¦£¡
+./att_maker.exe actionstest.fw 9 acttest.ap config.xml  mpdata.bin SutPatch.bin UPGRADE.HEX attcheck.exe berdata.bin US282A.FW config.txt 
+create file: config.txt len:b6 succeed
+create file: actionstest.fw succeed
+date +%T
+22:03:20
+make[1]: Leaving directory `/cygdrive/f/Soft_sdk/US282A_SDK/case/ap_test/ATT'

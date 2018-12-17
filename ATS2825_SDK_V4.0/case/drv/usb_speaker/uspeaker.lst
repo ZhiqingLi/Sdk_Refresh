@@ -1,0 +1,4863 @@
+
+uspeaker.exe:     file format elf32-tradlittlemips
+
+Disassembly of section .text:
+
+bfc16c00 <no_data_control>:
+bfc16c00:	b403      	lw	a0,bfc16c0c <RCODE_TEXT_ADDR+0xc>
+ * \note
+ *******************************************************************************/
+void no_data_control(void)
+{
+    act_writeb(0x02 | act_readb(Ep0cs_hcep0cs), Ep0cs_hcep0cs);
+bfc16c02:	6a02      	li	v0,2
+bfc16c04:	a460      	lbu	v1,0(a0)
+bfc16c06:	ea6d      	or	v0,v1
+bfc16c08:	c440      	sb	v0,0(a0)
+bfc16c0a:	e8a0      	jrc	ra
+bfc16c0c:	0002      	addiu	s0,sp,8
+bfc16c0e:	c008      	sb	s0,8(s0)
+
+bfc16c10 <control_write>:
+bfc16c10:	64b1      	save	8,s0-s1
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   updata by endpoint0.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void control_write(uint8 *data_address, uint8 data_length, uint8 request_length)
+{
+bfc16c12:	ed11      	zeb	a1
+bfc16c14:	ee11      	zeb	a2
+bfc16c16:	eea3      	sltu	a2,a1
+    uint8 transfer_length, temp_count;
+    uint8 *p_temp;
+
+    /* if length of data to be received is more than PC sent, only send data length that pc sent.  */
+    if(data_length <= request_length) {
+bfc16c18:	6704      	move	s0,a0
+bfc16c1a:	6001      	bteqz	bfc16c1e <control_write+0xe>
+bfc16c1c:	67a6      	move	a1,a2
+        transfer_length = data_length;
+    } else {
+        transfer_length = request_length;
+bfc16c1e:	b113      	lw	s1,bfc16c68 <control_write+0x58>
+    }
+    p_temp = data_address;
+
+    /* clear OUT0BC to receive data from PC.  */
+    act_writeb(0x00, Out0bc_hcin0bc);
+bfc16c20:	6a00      	li	v0,0
+bfc16c22:	b413      	lw	a0,bfc16c6c <control_write+0x5c>
+bfc16c24:	b613      	lw	a2,bfc16c70 <control_write+0x60>
+bfc16c26:	c140      	sb	v0,0(s1)
+bfc16c28:	6f08      	li	a3,8
+bfc16c2a:	a460      	lbu	v1,0(a0)
+
+    /* wait transfer complete. */
+    while(1) {
+        /* check if busy.   */
+        if((act_readb(Ep0cs_hcep0cs) & 0x08) == 0x00) {
+bfc16c2c:	ebec      	and	v1,a3
+bfc16c2e:	2307      	beqz	v1,bfc16c3e <control_write+0x2e>
+bfc16c30:	a660      	lbu	v1,0(a2)
+            break;
+        }
+
+        if(USB_CONNECT_STATUS != 0x00) {
+bfc16c32:	6a40      	li	v0,64
+bfc16c34:	ea6c      	and	v0,v1
+bfc16c36:	22f9      	beqz	v0,bfc16c2a <control_write+0x1a>
+bfc16c38:	b60f      	lw	a2,bfc16c74 <control_write+0x64>
+bfc16c3a:	6f01      	li	a3,1
+            g_usb_state = 0x01;
+bfc16c3c:	dee0      	sw	a3,0(a2)
+bfc16c3e:	6e00      	li	a2,0
+            break;
+        }
+    }/* while(1) */
+
+    for(temp_count = 0; temp_count < transfer_length; temp_count++) {
+bfc16c40:	250a      	beqz	a1,bfc16c56 <control_write+0x46>
+bfc16c42:	b70e      	lw	a3,bfc16c78 <control_write+0x68>
+bfc16c44:	e6e9      	addu	v0,a2,a3
+        *(p_temp + temp_count) = act_readb(Ep0outdata + temp_count);
+bfc16c46:	a240      	lbu	v0,0(v0)
+bfc16c48:	e60d      	addu	v1,a2,s0
+bfc16c4a:	c340      	sb	v0,0(v1)
+bfc16c4c:	4641      	addiu	v0,a2,1
+bfc16c4e:	67c2      	move	a2,v0
+bfc16c50:	ee11      	zeb	a2
+bfc16c52:	eea3      	sltu	a2,a1
+bfc16c54:	61f7      	btnez	bfc16c44 <control_write+0x34>
+bfc16c56:	6f01      	li	a3,1
+    }
+    act_writeb(0x01, Out0bc_hcin0bc);
+bfc16c58:	c1e0      	sb	a3,0(s1)
+bfc16c5a:	a4c0      	lbu	a2,0(a0)
+    act_writeb(act_readb(Ep0cs_hcep0cs) | 0x02, Ep0cs_hcep0cs);
+bfc16c5c:	6d02      	li	a1,2
+bfc16c5e:	edcd      	or	a1,a2
+bfc16c60:	c4a0      	sb	a1,0(a0)
+bfc16c62:	6431      	restore	8,s0-s1
+bfc16c64:	e8a0      	jrc	ra
+bfc16c66:	0000      	addiu	s0,sp,0
+bfc16c68:	0000      	addiu	s0,sp,0
+bfc16c6a:	c008      	sb	s0,8(s0)
+bfc16c6c:	0002      	addiu	s0,sp,8
+bfc16c6e:	c008      	sb	s0,8(s0)
+bfc16c70:	018c      	addiu	s1,sp,560
+bfc16c72:	c008      	sb	s0,8(s0)
+bfc16c74:	9448      	lw	a0,288(sp)
+bfc16c76:	9fc1      	lw	a2,4(a3)
+bfc16c78:	0140      	addiu	s1,sp,256
+bfc16c7a:	c008      	sb	s0,8(s0)
+
+bfc16c7c <control_read>:
+bfc16c7c:	64f5      	save	40,ra,s0-s1
+
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   download data by endpoint0.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void control_read(uint8 *d_addr, uint8 actul_dlen, uint8 rqst_dlen)
+{
+bfc16c7e:	ed11      	zeb	a1
+bfc16c80:	6a00      	li	v0,0
+    uint8 translen_sum;
+    uint8 translen_once;
+    uint32 time_out_cnt = 0;
+bfc16c82:	ee11      	zeb	a2
+bfc16c84:	6704      	move	s0,a0
+bfc16c86:	d204      	sw	v0,16(sp)
+bfc16c88:	6725      	move	s1,a1
+    uint8 i;
+    //calucate data length of this control read
+    if(rqst_dlen == 0x00) {
+        translen_sum = actul_dlen;
+bfc16c8a:	2602      	beqz	a2,bfc16c90 <control_read+0x14>
+bfc16c8c:	edc3      	sltu	a1,a2
+    } else if(rqst_dlen > actul_dlen) {
+bfc16c8e:	603f      	bteqz	bfc16d0e <control_read+0x92>
+bfc16c90:	2133      	beqz	s1,bfc16cf8 <control_read+0x7c>
+        translen_sum = actul_dlen;
+    } else {
+        translen_sum = rqst_dlen;
+    }
+
+    //transferring
+    while(translen_sum != 0) {
+        if(translen_sum > 0x40) {
+            translen_once = 0x40;
+            translen_sum = translen_sum - 0x40;
+        } else {
+            translen_once = translen_sum;
+            translen_sum = 0x00;
+        }
+        for(i = 0; i < translen_once; i++) {
+            //write data to ep0infofo
+            act_writeb(*d_addr, (Ep0indata + i));
+            d_addr++;
+        }
+        //wtite in0 conter,it will start packet transfer and set in0busy
+        act_writeb((uint8) translen_once, In0bc_hcout0bc);
+        //wait transfer end,Inbsy_hcoutbsy = b'0'
+        while((act_readb(Ep0cs_hcep0cs) & 0x04) != 0x00) {
+            //5s timeout delay
+            if(time_out_cnt < 100000) {
+                time_out_cnt++;
+                sys_udelay(10);
+            } else {
+                break;
+            }
+        }
+
+        if(USB_CONNECT_STATUS != 0x00) {
+            g_usb_state = 0x01;
+            break;
+bfc16c92:	5941      	sltiu	s1,65
+bfc16c94:	6139      	btnez	bfc16d08 <control_read+0x8c>
+bfc16c96:	67d1      	move	a2,s1
+bfc16c98:	4ec0      	addiu	a2,-64
+bfc16c9a:	6726      	move	s1,a2
+bfc16c9c:	6d40      	li	a1,64
+bfc16c9e:	e911      	zeb	s1
+bfc16ca0:	6c00      	li	a0,0
+bfc16ca2:	250a      	beqz	a1,bfc16cb8 <control_read+0x3c>
+bfc16ca4:	b61c      	lw	a2,bfc16d14 <control_read+0x98>
+bfc16ca6:	44e1      	addiu	a3,a0,1
+bfc16ca8:	e4cd      	addu	v1,a0,a2
+bfc16caa:	6787      	move	a0,a3
+bfc16cac:	a040      	lbu	v0,0(s0)
+bfc16cae:	ec11      	zeb	a0
+bfc16cb0:	eca3      	sltu	a0,a1
+bfc16cb2:	c340      	sb	v0,0(v1)
+bfc16cb4:	4001      	addiu	s0,s0,1
+bfc16cb6:	61f7      	btnez	bfc16ca6 <control_read+0x2a>
+bfc16cb8:	b418      	lw	a0,bfc16d18 <control_read+0x9c>
+bfc16cba:	b719      	lw	a3,bfc16d1c <control_read+0xa0>
+bfc16cbc:	c4a0      	sb	a1,0(a0)
+bfc16cbe:	a7a0      	lbu	a1,0(a3)
+bfc16cc0:	6e04      	li	a2,4
+bfc16cc2:	edcc      	and	a1,a2
+bfc16cc4:	2511      	beqz	a1,bfc16ce8 <control_read+0x6c>
+bfc16cc6:	b217      	lw	v0,bfc16d20 <control_read+0xa4>
+bfc16cc8:	9304      	lw	v1,16(sp)
+bfc16cca:	ea63      	sltu	v0,v1
+bfc16ccc:	610d      	btnez	bfc16ce8 <control_read+0x6c>
+bfc16cce:	4361      	addiu	v1,v1,1
+bfc16cd0:	6d00      	li	a1,0
+bfc16cd2:	b215      	lw	v0,bfc16d24 <control_read+0xa8>
+bfc16cd4:	d304      	sw	v1,16(sp)
+bfc16cd6:	6c0a      	li	a0,10
+bfc16cd8:	67c5      	move	a2,a1
+bfc16cda:	ea40      	jalr	v0
+bfc16cdc:	6f1e      	li	a3,30
+bfc16cde:	b710      	lw	a3,bfc16d1c <control_read+0xa0>
+bfc16ce0:	6e04      	li	a2,4
+bfc16ce2:	a7a0      	lbu	a1,0(a3)
+bfc16ce4:	edcc      	and	a1,a2
+bfc16ce6:	2def      	bnez	a1,bfc16cc6 <control_read+0x4a>
+bfc16ce8:	b610      	lw	a2,bfc16d28 <control_read+0xac>
+bfc16cea:	6c40      	li	a0,64
+bfc16cec:	a6a0      	lbu	a1,0(a2)
+bfc16cee:	ecac      	and	a0,a1
+bfc16cf0:	24cf      	beqz	a0,bfc16c90 <control_read+0x14>
+bfc16cf2:	b40f      	lw	a0,bfc16d2c <control_read+0xb0>
+bfc16cf4:	6b01      	li	v1,1
+bfc16cf6:	dc60      	sw	v1,0(a0)
+bfc16cf8:	b409      	lw	a0,bfc16d1c <control_read+0xa0>
+        }
+    }
+    act_writeb(0x02 | act_readb(Ep0cs_hcep0cs), Ep0cs_hcep0cs);
+bfc16cfa:	b709      	lw	a3,bfc16d1c <control_read+0xa0>
+bfc16cfc:	a460      	lbu	v1,0(a0)
+bfc16cfe:	6a02      	li	v0,2
+bfc16d00:	ea6d      	or	v0,v1
+bfc16d02:	c740      	sb	v0,0(a3)
+bfc16d04:	6475      	restore	40,ra,s0-s1
+bfc16d06:	e8a0      	jrc	ra
+bfc16d08:	67b1      	move	a1,s1
+bfc16d0a:	6900      	li	s1,0
+bfc16d0c:	17c9      	b	bfc16ca0 <control_read+0x24>
+bfc16d0e:	6726      	move	s1,a2
+bfc16d10:	17bf      	b	bfc16c90 <control_read+0x14>
+bfc16d12:	0000      	addiu	s0,sp,0
+bfc16d14:	0100      	addiu	s1,sp,0
+bfc16d16:	c008      	sb	s0,8(s0)
+bfc16d18:	0001      	addiu	s0,sp,4
+bfc16d1a:	c008      	sb	s0,8(s0)
+bfc16d1c:	0002      	addiu	s0,sp,8
+bfc16d1e:	c008      	sb	s0,8(s0)
+bfc16d20:	869f      	lb	a0,31(a2)
+bfc16d22:	0001      	addiu	s0,sp,4
+bfc16d24:	8365      	lb	v1,5(v1)
+bfc16d26:	bfc1      	lwu	a2,4(a3)
+bfc16d28:	018c      	addiu	s1,sp,560
+bfc16d2a:	c008      	sb	s0,8(s0)
+bfc16d2c:	9448      	lw	a0,288(sp)
+bfc16d2e:	9fc1      	lw	a2,4(a3)
+
+bfc16d30 <stall_endpoint>:
+bfc16d30:	6764      	move	v1,a0
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   stall endpoint.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void stall_endpoint(uint8 ep_num)
+{
+bfc16d32:	eb11      	zeb	v1
+bfc16d34:	5b05      	sltiu	v1,5
+    switch(ep_num) {
+bfc16d36:	601c      	bteqz	bfc16d70 <stall_endpoint+0x40>
+bfc16d38:	0a03      	la	v0,bfc16d44 <stall_endpoint+0x14>
+bfc16d3a:	3664      	sll	a2,v1,1
+bfc16d3c:	e655      	addu	a1,a2,v0
+bfc16d3e:	8d80      	lh	a0,0(a1)
+bfc16d40:	e44d      	addu	v1,a0,v0
+bfc16d42:	eb80      	jrc	v1
+bfc16d44:	0023      	addiu	s0,sp,140
+bfc16d46:	002f      	addiu	s0,sp,188
+bfc16d48:	0037      	addiu	s0,sp,220
+bfc16d4a:	000b      	addiu	s0,sp,44
+bfc16d4c:	0017      	addiu	s0,sp,92
+bfc16d4e:	b712      	lw	a3,bfc16d94 <stall_endpoint+0x64>
+        case EP0:
+            //stall ep0
+            act_writeb(0x01 | act_readb(Ep0cs_hcep0cs), Ep0cs_hcep0cs);
+            break;
+        case EP1OUT:
+            //stall ep1out
+            act_writeb(0x40 | act_readb(Out1ctrl_hcin1ctrl), Out1ctrl_hcin1ctrl);
+            break;
+        case EP2OUT:
+            //stall ep2out
+            act_writeb(0x40 | act_readb(Out2ctrl_hcin2ctrl), Out2ctrl_hcin2ctrl);
+            break;
+        case EP1IN:
+            //stall ep1in
+            act_writeb(0x40 | act_readb(In1ctrl_hcout1ctrl), In1ctrl_hcout1ctrl);
+            break;
+        case EP2IN:
+            //stall ep2in
+            act_writeb(0x40 | act_readb(In2ctrl_hcout2ctrl), In2ctrl_hcout2ctrl);
+bfc16d50:	6c40      	li	a0,64
+bfc16d52:	a760      	lbu	v1,0(a3)
+bfc16d54:	ec6d      	or	a0,v1
+bfc16d56:	c780      	sb	a0,0(a3)
+bfc16d58:	e8a0      	jrc	ra
+bfc16d5a:	b40d      	lw	a0,bfc16d8c <stall_endpoint+0x5c>
+bfc16d5c:	6a40      	li	v0,64
+bfc16d5e:	a460      	lbu	v1,0(a0)
+bfc16d60:	ea6d      	or	v0,v1
+bfc16d62:	c440      	sb	v0,0(a0)
+bfc16d64:	e8a0      	jrc	ra
+bfc16d66:	b408      	lw	a0,bfc16d84 <stall_endpoint+0x54>
+bfc16d68:	6a01      	li	v0,1
+bfc16d6a:	a460      	lbu	v1,0(a0)
+bfc16d6c:	ea6d      	or	v0,v1
+bfc16d6e:	c440      	sb	v0,0(a0)
+bfc16d70:	e8a0      	jrc	ra
+bfc16d72:	b408      	lw	a0,bfc16d90 <stall_endpoint+0x60>
+bfc16d74:	6a40      	li	v0,64
+bfc16d76:	a460      	lbu	v1,0(a0)
+bfc16d78:	17f3      	b	bfc16d60 <stall_endpoint+0x30>
+bfc16d7a:	b404      	lw	a0,bfc16d88 <stall_endpoint+0x58>
+bfc16d7c:	6a40      	li	v0,64
+bfc16d7e:	a460      	lbu	v1,0(a0)
+bfc16d80:	17ef      	b	bfc16d60 <stall_endpoint+0x30>
+bfc16d82:	0000      	addiu	s0,sp,0
+bfc16d84:	0002      	addiu	s0,sp,8
+bfc16d86:	c008      	sb	s0,8(s0)
+bfc16d88:	000a      	addiu	s0,sp,40
+bfc16d8a:	c008      	sb	s0,8(s0)
+bfc16d8c:	0012      	addiu	s0,sp,72
+bfc16d8e:	c008      	sb	s0,8(s0)
+bfc16d90:	000e      	addiu	s0,sp,56
+bfc16d92:	c008      	sb	s0,8(s0)
+bfc16d94:	0016      	addiu	s0,sp,88
+bfc16d96:	c008      	sb	s0,8(s0)
+
+bfc16d98 <recover_stall_endpoint>:
+bfc16d98:	6764      	move	v1,a0
+            break;
+        default:
+            break;
+    }
+    return;
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   recover enpoint.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void recover_stall_endpoint(uint8 ep_num)
+{
+bfc16d9a:	eb11      	zeb	v1
+bfc16d9c:	5b05      	sltiu	v1,5
+    switch(ep_num) {
+bfc16d9e:	601f      	bteqz	bfc16dde <recover_stall_endpoint+0x46>
+bfc16da0:	0a03      	la	v0,bfc16dac <recover_stall_endpoint+0x14>
+bfc16da2:	3664      	sll	a2,v1,1
+bfc16da4:	e655      	addu	a1,a2,v0
+bfc16da6:	8d80      	lh	a0,0(a1)
+bfc16da8:	e44d      	addu	v1,a0,v0
+bfc16daa:	eb80      	jrc	v1
+bfc16dac:	0027      	addiu	s0,sp,156
+bfc16dae:	0035      	addiu	s0,sp,212
+bfc16db0:	0039      	addiu	s0,sp,228
+bfc16db2:	000b      	addiu	s0,sp,44
+bfc16db4:	0019      	addiu	s0,sp,100
+bfc16db6:	b411      	lw	a0,bfc16df8 <recover_stall_endpoint+0x60>
+        case EP0:
+            //claer stall bit for ep0
+            act_writeb((uint8) 0xfe & act_readb(Ep0cs_hcep0cs), Ep0cs_hcep0cs);
+            break;
+        case EP1OUT:
+            //claer stall bit for ep1out
+            act_writeb((uint8) 0xbf & act_readb(Out1ctrl_hcin1ctrl), Out1ctrl_hcin1ctrl);
+            break;
+        case EP2OUT:
+            //claer stall bit for ep2out
+            act_writeb((uint8) 0xbf & act_readb(Out2ctrl_hcin2ctrl), Out2ctrl_hcin2ctrl);
+            break;
+        case EP1IN:
+            //claer stall bit for ep1in
+            act_writeb((uint8) 0xbf & act_readb(In1ctrl_hcout1ctrl), In1ctrl_hcout1ctrl);
+            break;
+        case EP2IN:
+            //claer stall bit for ep2in
+            act_writeb((uint8) 0xbf & act_readb(In2ctrl_hcout2ctrl), In2ctrl_hcout2ctrl);
+bfc16db8:	6d41      	li	a1,65
+bfc16dba:	a460      	lbu	v1,0(a0)
+bfc16dbc:	eaab      	neg	v0,a1
+bfc16dbe:	ea6c      	and	v0,v1
+bfc16dc0:	c440      	sb	v0,0(a0)
+bfc16dc2:	e8a0      	jrc	ra
+bfc16dc4:	b40b      	lw	a0,bfc16dec <recover_stall_endpoint+0x54>
+bfc16dc6:	a460      	lbu	v1,0(a0)
+bfc16dc8:	6a41      	li	v0,65
+bfc16dca:	ef4b      	neg	a3,v0
+bfc16dcc:	ef6c      	and	a3,v1
+bfc16dce:	c4e0      	sb	a3,0(a0)
+bfc16dd0:	e8a0      	jrc	ra
+bfc16dd2:	b406      	lw	a0,bfc16de8 <recover_stall_endpoint+0x50>
+bfc16dd4:	6a02      	li	v0,2
+bfc16dd6:	a460      	lbu	v1,0(a0)
+bfc16dd8:	ef4b      	neg	a3,v0
+bfc16dda:	ef6c      	and	a3,v1
+bfc16ddc:	c4e0      	sb	a3,0(a0)
+bfc16dde:	e8a0      	jrc	ra
+bfc16de0:	b405      	lw	a0,bfc16df0 <recover_stall_endpoint+0x58>
+bfc16de2:	17f1      	b	bfc16dc6 <recover_stall_endpoint+0x2e>
+bfc16de4:	b402      	lw	a0,bfc16dec <recover_stall_endpoint+0x54>
+bfc16de6:	17ef      	b	bfc16dc6 <recover_stall_endpoint+0x2e>
+bfc16de8:	0002      	addiu	s0,sp,8
+bfc16dea:	c008      	sb	s0,8(s0)
+bfc16dec:	000a      	addiu	s0,sp,40
+bfc16dee:	c008      	sb	s0,8(s0)
+bfc16df0:	0012      	addiu	s0,sp,72
+bfc16df2:	c008      	sb	s0,8(s0)
+bfc16df4:	000e      	addiu	s0,sp,56
+bfc16df6:	c008      	sb	s0,8(s0)
+bfc16df8:	0016      	addiu	s0,sp,88
+bfc16dfa:	c008      	sb	s0,8(s0)
+
+bfc16dfc <set_out_iso_ep>:
+bfc16dfc:	b60c      	lw	a2,bfc16e2c <set_out_iso_ep+0x30>
+            break;
+        default:
+            break;
+    }
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   set bulk out endpoint.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void set_out_iso_ep(void)
+{
+    act_writeb(0x80, Hcin1maxpckl);
+bfc16dfe:	6f80      	li	a3,128
+bfc16e00:	efeb      	neg	a3
+bfc16e02:	c6e0      	sb	a3,0(a2)
+bfc16e04:	b50b      	lw	a1,bfc16e30 <set_out_iso_ep+0x34>
+    act_writeb(0x01, Hcin1maxpckh);
+bfc16e06:	b40c      	lw	a0,bfc16e34 <set_out_iso_ep+0x38>
+
+    act_writeb(0x84, Out1ctrl_hcin1ctrl);
+bfc16e08:	b70c      	lw	a3,bfc16e38 <set_out_iso_ep+0x3c>
+    //act_writel(0x00000680, OUT1STADDR);
+    act_writel(0x00000000, OUT1STADDR);
+bfc16e0a:	6e01      	li	a2,1
+bfc16e0c:	6b7c      	li	v1,124
+bfc16e0e:	eb6b      	neg	v1
+bfc16e10:	6a00      	li	v0,0
+bfc16e12:	c5c0      	sb	a2,0(a1)
+bfc16e14:	c460      	sb	v1,0(a0)
+bfc16e16:	df40      	sw	v0,0(a3)
+bfc16e18:	b309      	lw	v1,bfc16e3c <set_out_iso_ep+0x40>
+    act_writeb(0x01, EPRST);
+bfc16e1a:	b20a      	lw	v0,bfc16e40 <set_out_iso_ep+0x44>
+    act_writeb(0x21, EPRST);
+    act_writeb(0x41, EPRST);
+    act_writeb(0x21, Fifoctrl); //set inep1 autorun
+bfc16e1c:	6c21      	li	a0,33
+bfc16e1e:	6d41      	li	a1,65
+bfc16e20:	c3c0      	sb	a2,0(v1)
+bfc16e22:	c380      	sb	a0,0(v1)
+bfc16e24:	c3a0      	sb	a1,0(v1)
+bfc16e26:	c280      	sb	a0,0(v0)
+bfc16e28:	e8a0      	jrc	ra
+bfc16e2a:	0000      	addiu	s0,sp,0
+bfc16e2c:	01e2      	addiu	s1,sp,904
+bfc16e2e:	c008      	sb	s0,8(s0)
+bfc16e30:	01e3      	addiu	s1,sp,908
+bfc16e32:	c008      	sb	s0,8(s0)
+bfc16e34:	000a      	addiu	s0,sp,40
+bfc16e36:	c008      	sb	s0,8(s0)
+bfc16e38:	0304      	addiu	v1,sp,16
+bfc16e3a:	c008      	sb	s0,8(s0)
+bfc16e3c:	01a2      	addiu	s1,sp,648
+bfc16e3e:	c008      	sb	s0,8(s0)
+bfc16e40:	01a8      	addiu	s1,sp,672
+bfc16e42:	c008      	sb	s0,8(s0)
+
+bfc16e44 <set_in_int_ep>:
+bfc16e44:	b70c      	lw	a3,bfc16e74 <set_in_int_ep+0x30>
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   set interrupt in endpoint.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void set_in_int_ep(void)
+{
+    act_writeb(0x04, Hcout2maxpckl);
+bfc16e46:	6a04      	li	v0,4
+bfc16e48:	c740      	sb	v0,0(a3)
+bfc16e4a:	b50c      	lw	a1,bfc16e78 <set_in_int_ep+0x34>
+    act_writeb(0x00, Hcout2maxpckh);
+bfc16e4c:	b40c      	lw	a0,bfc16e7c <set_in_int_ep+0x38>
+
+    act_writeb(0x8c, In2ctrl_hcout2ctrl);//single buff、interrupt ep
+bfc16e4e:	b70d      	lw	a3,bfc16e80 <set_in_int_ep+0x3c>
+    //act_writel(0x00000c80, IN2STADDR);
+    act_writel(0x00000600, IN2STADDR);
+bfc16e50:	6e00      	li	a2,0
+bfc16e52:	6b74      	li	v1,116
+bfc16e54:	eb6b      	neg	v1
+bfc16e56:	f600 6a00 	li	v0,1536
+bfc16e5a:	c5c0      	sb	a2,0(a1)
+bfc16e5c:	c460      	sb	v1,0(a0)
+bfc16e5e:	df40      	sw	v0,0(a3)
+bfc16e60:	b309      	lw	v1,bfc16e84 <set_in_int_ep+0x40>
+    act_writeb(0x12, EPRST);
+bfc16e62:	b20a      	lw	v0,bfc16e88 <set_in_int_ep+0x44>
+    act_writeb(0x32, EPRST);
+    act_writeb(0x52, EPRST);
+    act_writeb(0x32, Fifoctrl); //set inep1 autorun
+bfc16e64:	6c32      	li	a0,50
+bfc16e66:	6e12      	li	a2,18
+bfc16e68:	6d52      	li	a1,82
+bfc16e6a:	c3c0      	sb	a2,0(v1)
+bfc16e6c:	c380      	sb	a0,0(v1)
+bfc16e6e:	c3a0      	sb	a1,0(v1)
+bfc16e70:	c280      	sb	a0,0(v0)
+bfc16e72:	e8a0      	jrc	ra
+bfc16e74:	03e4      	addiu	v1,sp,912
+bfc16e76:	c008      	sb	s0,8(s0)
+bfc16e78:	03e5      	addiu	v1,sp,916
+bfc16e7a:	c008      	sb	s0,8(s0)
+bfc16e7c:	0016      	addiu	s0,sp,88
+bfc16e7e:	c008      	sb	s0,8(s0)
+bfc16e80:	0348      	addiu	v1,sp,288
+bfc16e82:	c008      	sb	s0,8(s0)
+bfc16e84:	01a2      	addiu	s1,sp,648
+bfc16e86:	c008      	sb	s0,8(s0)
+bfc16e88:	01a8      	addiu	s1,sp,672
+bfc16e8a:	c008      	sb	s0,8(s0)
+
+bfc16e8c <deal_setup>:
+bfc16e8c:	64f6      	save	48,ra,s0-s1
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   deal endpoint0 data.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void deal_setup(void)
+{
+bfc16e8e:	f4c0 b704 	lw	a3,bfc17350 <.LBE2+0x64>
+    uint8 temp_count;
+    uint8 *p_temp;
+    uint32 new_sample;
+
+    p_temp = &g_setup_data.bmRequestType;
+
+    /* get setup data.*/
+    g_setup_data.bmRequestType = *(volatile uint8 *)(Setupdat0);
+bfc16e92:	f4a0 b01c 	lw	s0,bfc1734c <.LBE2+0x60>
+bfc16e96:	a7a0      	lbu	a1,0(a3)
+bfc16e98:	f4a0 b21c 	lw	v0,bfc17354 <.LBE2+0x68>
+    g_setup_data.bRequest = *(volatile uint8 *)(Setupdat1);
+bfc16e9c:	c0a0      	sb	a1,0(s0)
+bfc16e9e:	a2e0      	lbu	a3,0(v0)
+bfc16ea0:	f4a0 b418 	lw	a0,bfc17358 <.LBE2+0x6c>
+    g_setup_data.wValue = *(volatile uint16 *)(Setupdat2);
+bfc16ea4:	c0e1      	sb	a3,1(s0)
+bfc16ea6:	acc0      	lhu	a2,0(a0)
+bfc16ea8:	6cff      	li	a0,255
+bfc16eaa:	ee31      	zeh	a2
+bfc16eac:	6766      	move	v1,a2
+bfc16eae:	eb8c      	and	v1,a0
+bfc16eb0:	32c2      	srl	v0,a2,8
+bfc16eb2:	673d      	move	s1,sp
+bfc16eb4:	f4a0 b608 	lw	a2,bfc1735c <.LBE2+0x70>
+    g_setup_data.wIndex = *(volatile uint16 *)(Setupdat4);
+bfc16eb8:	c062      	sb	v1,2(s0)
+bfc16eba:	c15c      	sb	v0,28(s1)
+bfc16ebc:	c043      	sb	v0,3(s0)
+bfc16ebe:	ae20      	lhu	s1,0(a2)
+bfc16ec0:	653b      	move	t9,v1
+bfc16ec2:	e931      	zeh	s1
+bfc16ec4:	6771      	move	v1,s1
+bfc16ec6:	eb8c      	and	v1,a0
+bfc16ec8:	c064      	sb	v1,4(s0)
+bfc16eca:	67c3      	move	a2,v1
+bfc16ecc:	f480 b214 	lw	v0,bfc17360 <.LBE2+0x74>
+    g_setup_data.wLength = *(volatile uint16 *)(Setupdat6);
+bfc16ed0:	3322      	srl	v1,s1,8
+bfc16ed2:	c065      	sb	v1,5(s0)
+bfc16ed4:	aa40      	lhu	v0,0(v0)
+bfc16ed6:	6723      	move	s1,v1
+bfc16ed8:	ea31      	zeh	v0
+bfc16eda:	6762      	move	v1,v0
+bfc16edc:	ed11      	zeb	a1
+
+    /* judge type of device request.   */
+    switch(g_setup_data.bmRequestType) {
+bfc16ede:	eb8c      	and	v1,a0
+bfc16ee0:	3242      	srl	v0,8
+bfc16ee2:	679d      	move	a0,sp
+bfc16ee4:	7522      	cmpi	a1,34
+bfc16ee6:	c47d      	sb	v1,29(a0)
+bfc16ee8:	c066      	sb	v1,6(s0)
+bfc16eea:	c047      	sb	v0,7(s0)
+bfc16eec:	603d      	bteqz	bfc16f68 <deal_setup+0xdc>
+bfc16eee:	5523      	slti	a1,35
+bfc16ef0:	6066      	bteqz	bfc16fbe <deal_setup+0x132>
+bfc16ef2:	7501      	cmpi	a1,1
+bfc16ef4:	f080 6019 	bteqz	bfc1702a <deal_setup+0x19e>
+bfc16ef8:	5502      	slti	a1,2
+bfc16efa:	f140 6100 	btnez	bfc1717e <deal_setup+0x2f2>
+bfc16efe:	7521      	cmpi	a1,33
+bfc16f00:	612e      	btnez	bfc16f5e <deal_setup+0xd2>
+bfc16f02:	6786      	move	a0,a2
+        case RD_STD_DEV:
+            if(g_setup_data.bRequest == GET_DESCRIPTOR) {
+                /* get device descriptor. */
+                if(g_setup_data.wValue == VALUE_DEVICE) {
+                    control_read(&Device_Descriptor.bLength, Device_Descriptor.bLength, (uint8) g_setup_data.wLength);
+                }
+
+                /* get device configuration. */
+                else if(g_setup_data.wValue == VALUE_CONFIG) {
+                    //prints("config\n");
+                    control_read((uint8 *) &All_Descriptors_of_Configuration/*.Configuration_Descriptor.bLength*/,
+                                 (uint8)(All_Descriptors_of_Configuration.Configuration_Descriptor.wTotalLength),
+                                 (uint8) g_setup_data.wLength);
+                }
+
+                /* get string of language ID. */
+                else if(g_setup_data.wValue == VALUE_STRING_LANGID) {
+                    control_read(&language_string.bLength, language_string.bLength, (uint8) g_setup_data.wLength);
+                }
+
+                /* get string of manufaturer. */
+                else if(g_setup_data.wValue == VALUE_STRING_MANUFACTURER) {
+                    control_read(&manufacure_string.bLength, manufacure_string.bLength, (uint8) g_setup_data.wLength);
+                }
+
+                /* get string of product. */
+                else if(g_setup_data.wValue == VALUE_STRING_PRODUCT) {
+                    control_read(&device_name_string.bLength, device_name_string.bLength, (uint8) g_setup_data.wLength);
+                }
+
+                /* get string of serial number. */
+                else if(g_setup_data.wValue == VALUE_STRING_SERIAL_NUMBER) {
+                    control_read(&SerialNumber.bLength, SerialNumber.bLength, (uint8) g_setup_data.wLength);
+                }
+
+                /* others error.  */
+                else {
+                    ;//do nothing
+                }
+            } else {
+                stall_endpoint(EP0);
+            }
+
+            break;
+
+        case RD_STD_IF:
+            /* get Descriptor. */
+            if(g_setup_data.bRequest == GET_DESCRIPTOR) {
+                //HID请求
+                if(g_setup_data.wIndex == INDEX_INTERFACE_HID) {
+                    control_read(g_hid_Descriptor, sizeof(g_hid_Descriptor), (uint8) g_setup_data.wLength);
+                }
+            }
+            break;
+
+        case WR_STD_DEV:
+            /* set address. */
+            if(g_setup_data.bRequest == SET_ADDRESS) {
+                no_data_control();
+            }
+
+            /* set configuration. */
+            else if(g_setup_data.bRequest == SET_CONFIGURATION) {
+                //prints("sconfig\n");
+                set_out_iso_ep();
+                //hid device
+                set_in_int_ep();
+
+                no_data_control();
+                //prints("e\n");
+            } else {
+                stall_endpoint(EP0);
+            }
+            break;
+
+        case WR_STD_IF:
+            /* set interface. */
+            if(g_setup_data.bRequest == SET_INTERFACE) {
+                if(g_setup_data.wIndex == INDEX_INTERFACE_PLAY) {
+                    /* setting 0 means that zero-bandwidth. */
+                    //setup_data.wValue == VALUE_ALTERNATE_SETTING0
+                    /* setting 1\2\3 means that pcm data will be sent to device. */
+                    if(g_setup_data.wValue == VALUE_ALTERNATE_SETTING1) {
+                        g_wr_play_ptr = 0;
+
+                        g_rd_play_ptr = 0;
+
+                        g_play_data_count = 0;
+
+                        g_start_play = 0;//need stop play
+                    }
+                }
+
+                no_data_control(); /* set interface. */
+            } else {
+                stall_endpoint(EP0);
+            }
+            break;
+
+        case SPECIFIC_REQUEST_OUT:
+            /* set feature unit. */
+            if((g_setup_data.wIndex == FEATURE_UNIT_INDEX1) || (g_setup_data.wIndex == FEATURE_UNIT_INDEX2)) {
+bfc16f04:	67d1      	move	a2,s1
+bfc16f06:	ee11      	zeb	a2
+bfc16f08:	ec11      	zeb	a0
+bfc16f0a:	33c0      	sll	v1,a2,8
+bfc16f0c:	eb8d      	or	v1,a0
+bfc16f0e:	f101 7300 	cmpi	v1,2304
+bfc16f12:	6004      	bteqz	bfc16f1c <deal_setup+0x90>
+bfc16f14:	f201 7300 	cmpi	v1,2560
+bfc16f18:	f140 6104 	btnez	bfc171a4 <deal_setup+0x318>
+bfc16f1c:	6747      	move	v0,a3
+                /* set current mute or volume of main channel 0,1,2.   */
+                if(g_setup_data.bRequest == SET_CUR) {
+bfc16f1e:	ea11      	zeb	v0
+bfc16f20:	7201      	cmpi	v0,1
+bfc16f22:	f100 611c 	btnez	bfc1715e <deal_setup+0x2d2>
+bfc16f26:	6a02      	li	v0,2
+                    //prints("set_cur\n");
+                    temp_count = VOLUME_LENGTH;
+bfc16f28:	67bd      	move	a1,sp
+bfc16f2a:	c550      	sb	v0,16(a1)
+bfc16f2c:	a063      	lbu	v1,3(s0)
+                    if(g_setup_data.wValue == ((MUTE_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+bfc16f2e:	a0e2      	lbu	a3,2(s0)
+bfc16f30:	3260      	sll	v0,v1,8
+bfc16f32:	eaed      	or	v0,a3
+bfc16f34:	f100 7200 	cmpi	v0,256
+bfc16f38:	f140 6110 	btnez	bfc171dc <deal_setup+0x350>
+bfc16f3c:	6e01      	li	a2,1
+                        //prints("set_mute\n");
+                        p_temp = &g_current_mute_ch0;
+                        temp_count = MUTE_LENGTH;
+bfc16f3e:	679d      	move	a0,sp
+bfc16f40:	f440 b010 	lw	s0,bfc17390 <.LBE2+0xa4>
+bfc16f44:	c4d0      	sb	a2,16(a0)
+bfc16f46:	f440 b710 	lw	a3,bfc17394 <.LBE2+0xa8>
+                        g_volume_chg = 1;
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        //prints("set_volume0\n");
+                        p_temp = (uint8 *) &g_current_volume_ch0;
+                        //flag
+                        g_volume_chg = 1;
+bfc16f4a:	6b01      	li	v1,1
+bfc16f4c:	df60      	sw	v1,0(a3)
+bfc16f4e:	f400 b200 	lw	v0,bfc1734c <.LBE2+0x60>
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER1)) {
+                        //prints("set_volume1\n");
+                        p_temp = (uint8 *) &g_current_volume_ch1;
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER2)) {
+                        //prints("set_volume2\n");
+                        p_temp = (uint8 *) &g_current_volume_ch2;
+                    } else {
+                        ;//do nothing
+                    }
+
+                    //在控制传输中接收参数前先判断是否有同步传输请求
+
+                    control_write(p_temp, temp_count, (uint8) g_setup_data.wLength);
+bfc16f52:	67dd      	move	a2,sp
+bfc16f54:	a6b0      	lbu	a1,16(a2)
+bfc16f56:	a2c6      	lbu	a2,6(v0)
+bfc16f58:	1a1f 5b04 	jal	bfc16c10 <control_write>
+
+                    no_data_control();
+
+                    break;
+                } else if(g_setup_data.bRequest == SET_RES) {
+                    temp_count = 0;
+                    control_write(p_temp, temp_count, (uint8) g_setup_data.wLength);
+                    stall_endpoint(EP0);
+                    break;
+                } else {
+                    ;//nothing
+                }
+            } else if(g_setup_data.wIndex == SELECTOR_UNIT_INDEX) {
+                if(g_setup_data.bRequest == SET_CUR) {
+                    temp_count = 0x01;
+                    p_temp = (uint8 *) &g_cur_selector;
+
+                    control_write(p_temp, temp_count, (uint8) g_setup_data.wLength);
+bfc16f5c:	6790      	move	a0,s0
+bfc16f5e:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+
+                }
+            } else if(g_setup_data.wIndex == INDEX_INTERFACE_HID) { //处理HID设备特殊请求
+                if(g_setup_data.bRequest == SET_IDLE) { //get_idle
+                    g_hid_idle_time = g_setup_data.wValue >> 6; //setup_data.wValue先左移8位再乘以4
+                }
+            } else {
+                //;//do nothing
+                //在控制传输中接收参数前先判断是否有同步传输请求
+                uint32 actions_flag;
+                control_write(&actions_flag, 4, (uint8) g_setup_data.wLength);
+                if(actions_flag == 0x22cb21cb) {
+                    g_pc_switch_flag = 1;//switch to stub
+                    libc_print("swtich", 0, 0);
+                }
+            }
+            no_data_control();
+            break;
+
+        case SPECIFIC_REQUEST_IN:
+            /* get feature unit. */
+            p_temp = (uint8 *) &g_volume_value;
+            temp_count = VOLUME_LENGTH;
+            if((g_setup_data.wIndex == FEATURE_UNIT_INDEX1) || (g_setup_data.wIndex == FEATURE_UNIT_INDEX2)) {
+                temp_count = VOLUME_LENGTH;
+
+                /* get current mute or volume of main channel 0,1,2.   */
+                if(g_setup_data.bRequest == GET_CUR) {
+                    if(g_setup_data.wValue == ((MUTE_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        p_temp = &g_current_mute_ch0;
+                        temp_count = MUTE_LENGTH;
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        p_temp = (uint8 *) &g_current_volume_ch0;
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER1)) {
+                        p_temp = (uint8 *) &g_current_volume_ch1;
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER2)) {
+                        p_temp = (uint8 *) &g_current_volume_ch2;
+                    } else {
+                        ;//for qac
+                    }
+                }
+
+                /* get minimum volume of main channel 0,1,2.   */
+                else if(g_setup_data.bRequest == GET_MIN) {
+                    if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER1)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER2)) {
+                        ;//for qac
+                    } else {
+                        ;//for qac
+                    }
+                    g_volume_value = MINIMUM_VOLUME;
+                }
+
+                /* get maximum volume of main channel 0,1,2.   */
+                else if(g_setup_data.bRequest == GET_MAX) {
+                    if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER1)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER2)) {
+                        ;//for qac
+                    } else {
+                        ;//for qac
+                    }
+                    g_volume_value = MAXIMUM_VOLUME;
+                }
+
+                /* get resolution volume of main channel 0,1,2.   */
+                else if(g_setup_data.bRequest == GET_RES) {
+                    if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER0)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER1)) {
+                        ;//for qac
+                    } else if(g_setup_data.wValue == ((VOLUME_CONTROL << 8) | MAIN_CHANNEL_NUMBER2)) {
+                        ;//for qac
+                    } else {
+                        ;//for qac
+                    }
+                    g_volume_value = RESOTION_VOLUME;
+                } else {
+                    ;//do nothing
+                }
+
+                control_read(p_temp, temp_count, (uint8) g_setup_data.wLength);
+
+            } else if(g_setup_data.wIndex == SELECTOR_UNIT_INDEX) {
+                if(g_setup_data.bRequest == GET_CUR) {
+                    temp_count = 0x01;
+                    p_temp = (uint8 *) &g_cur_selector;
+                    control_read(p_temp, temp_count, (uint8) g_setup_data.wLength);
+                }
+            } else if(g_setup_data.wIndex == INDEX_INTERFACE_HID) { //处理HID设备特殊请求
+                if(g_setup_data.bRequest == GET_REPORT) { //get_report
+                    control_read((uint8 *) &g_hid_report, sizeof(g_hid_report), (uint8) g_setup_data.wLength);
+                } else if(g_setup_data.bRequest == GET_IDLE) { //get_idle
+                    temp_count = (uint8)(g_hid_idle_time >> 2);
+                    control_read((uint8 *) &temp_count, 0x01, (uint8) g_setup_data.wLength);
+                } else {
+                    ;//for qac
+                }
+            } else {
+                ;//for qac
+            }
+            break;
+
+        case SET_ENDPOINT_CONTROL:
+            /* set endpoint control request. */
+            if(g_setup_data.wValue == SAMPLING_FREQ_CONTROL) {
+                /* set sample frequency.   */
+                if(g_setup_data.bRequest == SET_CUR) {
+                    new_sample = 0x00000000;
+                    temp_count = SAMPLE_FREQUENCY_LENGTH;
+                    p_temp = (uint8 *) &new_sample;
+
+                    control_write(p_temp, temp_count, (uint8) g_setup_data.wLength);
+                    no_data_control();
+
+                    if(g_setup_data.wIndex == 0x01) {
+                        /* if new sample is different from current sample, initialize dec again.  */
+                        g_start_play = 0;
+
+                        g_wr_play_ptr = 0;
+
+                        g_rd_play_ptr = 0;
+
+                        g_dac_sample = new_sample;
+
+                        g_set_dac_sample_flag = 1;
+                    }
+
+                    g_play_sample = new_sample;
+
+                    g_set_sample_flag = 1;
+
+                }
+            }
+            break;
+
+        case GET_SAMPLERATE:
+            if((g_setup_data.bRequest == GET_CUR) && (g_setup_data.wValue == 0x0100)) {
+                if(g_play_sample == 44100) {
+                    control_read(All_Descriptors_of_Configuration.Audio_Class_Format_Setting1.tSamFreq2, 0x03, \
+                                 (uint8) g_setup_data.wLength);
+                } else if(g_play_sample == 48000) {
+                    control_read(All_Descriptors_of_Configuration.Audio_Class_Format_Setting1.tSamFreq1, 0x03, \
+                                 (uint8) g_setup_data.wLength);
+                } else {
+                    ;//qac
+                }
+            }
+            no_data_control();
+            break;
+
+        default:
+            no_data_control();//可能会发set clearfeature到en2in
+bfc16f62:	6500      	nop
+bfc16f64:	6476      	restore	48,ra,s0-s1
+            break;
+    }
+
+}
+bfc16f66:	e8a0      	jrc	ra
+bfc16f68:	679d      	move	a0,sp
+bfc16f6a:	a47c      	lbu	v1,28(a0)
+bfc16f6c:	67b9      	move	a1,t9
+bfc16f6e:	eb11      	zeb	v1
+bfc16f70:	ed11      	zeb	a1
+bfc16f72:	3660      	sll	a2,v1,8
+bfc16f74:	eead      	or	a2,a1
+bfc16f76:	f100 7600 	cmpi	a2,256
+bfc16f7a:	61f4      	btnez	bfc16f64 <deal_setup+0xd8>
+bfc16f7c:	6747      	move	v0,a3
+bfc16f7e:	ea11      	zeb	v0
+bfc16f80:	7201      	cmpi	v0,1
+bfc16f82:	61f0      	btnez	bfc16f64 <deal_setup+0xd8>
+bfc16f84:	6b00      	li	v1,0
+bfc16f86:	6d03      	li	a1,3
+bfc16f88:	d306      	sw	v1,24(sp)
+bfc16f8a:	c4b0      	sb	a1,16(a0)
+bfc16f8c:	a0c6      	lbu	a2,6(s0)
+bfc16f8e:	0406      	addiu	a0,sp,24
+bfc16f90:	1a1f 5b04 	jal	bfc16c10 <control_write>
+bfc16f94:	6d03      	li	a1,3
+bfc16f96:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc16f9a:	6500      	nop
+bfc16f9c:	a0c5      	lbu	a2,5(s0)
+bfc16f9e:	a084      	lbu	a0,4(s0)
+bfc16fa0:	37c0      	sll	a3,a2,8
+bfc16fa2:	ef8d      	or	a3,a0
+bfc16fa4:	7701      	cmpi	a3,1
+bfc16fa6:	f0a0 6004 	bteqz	bfc170f2 <deal_setup+0x266>
+bfc16faa:	9406      	lw	a0,24(sp)
+bfc16fac:	f400 b31c 	lw	v1,bfc173c8 <.LBE2+0xdc>
+bfc16fb0:	f400 b61c 	lw	a2,bfc173cc <.LBE2+0xe0>
+bfc16fb4:	6d01      	li	a1,1
+bfc16fb6:	db80      	sw	a0,0(v1)
+bfc16fb8:	c6a0      	sb	a1,0(a2)
+bfc16fba:	6476      	restore	48,ra,s0-s1
+bfc16fbc:	e8a0      	jrc	ra
+bfc16fbe:	7581      	cmpi	a1,129
+bfc16fc0:	6056      	bteqz	bfc1706e <deal_setup+0x1e2>
+bfc16fc2:	5582      	slti	a1,130
+bfc16fc4:	606b      	bteqz	bfc1709c <deal_setup+0x210>
+bfc16fc6:	7580      	cmpi	a1,128
+bfc16fc8:	61ca      	btnez	bfc16f5e <deal_setup+0xd2>
+bfc16fca:	67a7      	move	a1,a3
+bfc16fcc:	ed11      	zeb	a1
+bfc16fce:	7506      	cmpi	a1,6
+bfc16fd0:	f0c0 6110 	btnez	bfc17174 <deal_setup+0x2e8>
+bfc16fd4:	67dd      	move	a2,sp
+bfc16fd6:	a67c      	lbu	v1,28(a2)
+bfc16fd8:	6799      	move	a0,t9
+bfc16fda:	eb11      	zeb	v1
+bfc16fdc:	ec11      	zeb	a0
+bfc16fde:	3360      	sll	v1,8
+bfc16fe0:	eb8d      	or	v1,a0
+bfc16fe2:	f100 7300 	cmpi	v1,256
+bfc16fe6:	f100 600a 	bteqz	bfc171fe <deal_setup+0x372>
+bfc16fea:	f200 7300 	cmpi	v1,512
+bfc16fee:	f120 600f 	bteqz	bfc17250 <deal_setup+0x3c4>
+bfc16ff2:	f300 7300 	cmpi	v1,768
+bfc16ff6:	f140 6003 	bteqz	bfc17280 <deal_setup+0x3f4>
+bfc16ffa:	f300 7301 	cmpi	v1,769
+bfc16ffe:	f140 6016 	bteqz	bfc172ae <deal_setup+0x422>
+bfc17002:	a083      	lbu	a0,3(s0)
+bfc17004:	a0a2      	lbu	a1,2(s0)
+bfc17006:	3380      	sll	v1,a0,8
+bfc17008:	ebad      	or	v1,a1
+bfc1700a:	f300 7302 	cmpi	v1,770
+bfc1700e:	f160 6011 	bteqz	bfc172f4 <.LBE2+0x8>
+bfc17012:	f300 7303 	cmpi	v1,771
+bfc17016:	61a6      	btnez	bfc16f64 <deal_setup+0xd8>
+bfc17018:	b2d8      	lw	v0,bfc17378 <.LBE2+0x8c>
+bfc1701a:	a2a0      	lbu	a1,0(v0)
+bfc1701c:	6782      	move	a0,v0
+bfc1701e:	a0c6      	lbu	a2,6(s0)
+bfc17020:	1a1f 5b1f 	jal	bfc16c7c <control_read>
+bfc17024:	6500      	nop
+bfc17026:	6476      	restore	48,ra,s0-s1
+bfc17028:	e8a0      	jrc	ra
+bfc1702a:	67a7      	move	a1,a3
+bfc1702c:	ed11      	zeb	a1
+bfc1702e:	750b      	cmpi	a1,11
+bfc17030:	f0a0 6100 	btnez	bfc17174 <deal_setup+0x2e8>
+bfc17034:	67e6      	move	a3,a2
+bfc17036:	67d1      	move	a2,s1
+bfc17038:	ee11      	zeb	a2
+bfc1703a:	ef11      	zeb	a3
+bfc1703c:	34c0      	sll	a0,a2,8
+bfc1703e:	eced      	or	a0,a3
+bfc17040:	7401      	cmpi	a0,1
+bfc17042:	618d      	btnez	bfc16f5e <deal_setup+0xd2>
+bfc17044:	679d      	move	a0,sp
+bfc17046:	a4bc      	lbu	a1,28(a0)
+bfc17048:	6759      	move	v0,t9
+bfc1704a:	ed11      	zeb	a1
+bfc1704c:	ea11      	zeb	v0
+bfc1704e:	33a0      	sll	v1,a1,8
+bfc17050:	eb4d      	or	v1,v0
+bfc17052:	7301      	cmpi	v1,1
+bfc17054:	6184      	btnez	bfc16f5e <deal_setup+0xd2>
+bfc17056:	b5cb      	lw	a1,bfc17380 <.LBE2+0x94>
+bfc17058:	b2cb      	lw	v0,bfc17384 <.LBE2+0x98>
+bfc1705a:	b3cc      	lw	v1,bfc17388 <.LBE2+0x9c>
+bfc1705c:	b7cc      	lw	a3,bfc1738c <.LBE2+0xa0>
+bfc1705e:	6e00      	li	a2,0
+bfc17060:	ddc0      	sw	a2,0(a1)
+bfc17062:	dac0      	sw	a2,0(v0)
+bfc17064:	dbc0      	sw	a2,0(v1)
+bfc17066:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc1706a:	c7c0      	sb	a2,0(a3)
+bfc1706c:	177b      	b	bfc16f64 <deal_setup+0xd8>
+bfc1706e:	6747      	move	v0,a3
+bfc17070:	ea11      	zeb	v0
+bfc17072:	7206      	cmpi	v0,6
+bfc17074:	f77f 6116 	btnez	bfc16f64 <deal_setup+0xd8>
+bfc17078:	6771      	move	v1,s1
+bfc1707a:	67e6      	move	a3,a2
+bfc1707c:	eb11      	zeb	v1
+bfc1707e:	ef11      	zeb	a3
+bfc17080:	3660      	sll	a2,v1,8
+bfc17082:	eeed      	or	a2,a3
+bfc17084:	7602      	cmpi	a2,2
+bfc17086:	f77f 610d 	btnez	bfc16f64 <deal_setup+0xd8>
+bfc1708a:	675d      	move	v0,sp
+bfc1708c:	b4bc      	lw	a0,bfc1737c <.LBE2+0x90>
+bfc1708e:	a2dd      	lbu	a2,29(v0)
+bfc17090:	6d30      	li	a1,48
+bfc17092:	ee11      	zeb	a2
+bfc17094:	1a1f 5b1f 	jal	bfc16c7c <control_read>
+bfc17098:	6500      	nop
+bfc1709a:	17c5      	b	bfc17026 <deal_setup+0x19a>
+bfc1709c:	75a1      	cmpi	a1,161
+bfc1709e:	6038      	bteqz	bfc17110 <deal_setup+0x284>
+bfc170a0:	75a2      	cmpi	a1,162
+bfc170a2:	f75f 611c 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc170a6:	6787      	move	a0,a3
+bfc170a8:	ec11      	zeb	a0
+bfc170aa:	7481      	cmpi	a0,129
+bfc170ac:	f75f 6117 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc170b0:	67dd      	move	a2,sp
+bfc170b2:	a6bc      	lbu	a1,28(a2)
+bfc170b4:	6759      	move	v0,t9
+bfc170b6:	ed11      	zeb	a1
+bfc170b8:	ea11      	zeb	v0
+bfc170ba:	37a0      	sll	a3,a1,8
+bfc170bc:	ef4d      	or	a3,v0
+bfc170be:	f100 7700 	cmpi	a3,256
+bfc170c2:	f75f 610c 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc170c6:	b3c1      	lw	v1,bfc173c8 <.LBE2+0xdc>
+bfc170c8:	9b40      	lw	v0,0(v1)
+bfc170ca:	f455 7204 	cmpi	v0,44100
+bfc170ce:	f120 6004 	bteqz	bfc1731a <.LBE2+0x2e>
+bfc170d2:	f397 7200 	cmpi	v0,48000
+bfc170d6:	f75f 6102 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc170da:	b4a4      	lw	a0,bfc17368 <.LBE2+0x7c>
+bfc170dc:	675d      	move	v0,sp
+bfc170de:	a2dd      	lbu	a2,29(v0)
+bfc170e0:	4c5b      	addiu	a0,91
+bfc170e2:	6d03      	li	a1,3
+bfc170e4:	1a1f 5b1f 	jal	bfc16c7c <control_read>
+bfc170e8:	ee11      	zeb	a2
+bfc170ea:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc170ee:	6500      	nop
+bfc170f0:	1739      	b	bfc16f64 <deal_setup+0xd8>
+bfc170f2:	b2a7      	lw	v0,bfc1738c <.LBE2+0xa0>
+bfc170f4:	b3a3      	lw	v1,bfc17380 <.LBE2+0x94>
+bfc170f6:	b5a4      	lw	a1,bfc17384 <.LBE2+0x98>
+bfc170f8:	6c00      	li	a0,0
+bfc170fa:	6f00      	li	a3,0
+bfc170fc:	c2e0      	sb	a3,0(v0)
+bfc170fe:	db80      	sw	a0,0(v1)
+bfc17100:	dd80      	sw	a0,0(a1)
+bfc17102:	9406      	lw	a0,24(sp)
+bfc17104:	b6af      	lw	a2,bfc173c0 <.LBE2+0xd4>
+bfc17106:	b2b0      	lw	v0,bfc173c4 <.LBE2+0xd8>
+bfc17108:	6f01      	li	a3,1
+bfc1710a:	de80      	sw	a0,0(a2)
+bfc1710c:	c2e0      	sb	a3,0(v0)
+bfc1710e:	174e      	b	bfc16fac <deal_setup+0x120>
+bfc17110:	6771      	move	v1,s1
+bfc17112:	6746      	move	v0,a2
+bfc17114:	eb11      	zeb	v1
+bfc17116:	ea11      	zeb	v0
+bfc17118:	3360      	sll	v1,8
+bfc1711a:	eb4d      	or	v1,v0
+bfc1711c:	f101 7300 	cmpi	v1,2304
+bfc17120:	b4a6      	lw	a0,bfc173b8 <.LBE2+0xcc>
+bfc17122:	6d02      	li	a1,2
+bfc17124:	6003      	bteqz	bfc1712c <deal_setup+0x2a0>
+bfc17126:	f201 7300 	cmpi	v1,2560
+bfc1712a:	615d      	btnez	bfc171e6 <deal_setup+0x35a>
+bfc1712c:	6747      	move	v0,a3
+bfc1712e:	ea11      	zeb	v0
+bfc17130:	7281      	cmpi	v0,129
+bfc17132:	6149      	btnez	bfc171c6 <deal_setup+0x33a>
+bfc17134:	67dd      	move	a2,sp
+bfc17136:	a65c      	lbu	v0,28(a2)
+bfc17138:	67f9      	move	a3,t9
+bfc1713a:	ea11      	zeb	v0
+bfc1713c:	ef11      	zeb	a3
+bfc1713e:	3340      	sll	v1,v0,8
+bfc17140:	ebed      	or	v1,a3
+bfc17142:	f100 7300 	cmpi	v1,256
+bfc17146:	6175      	btnez	bfc17232 <deal_setup+0x3a6>
+bfc17148:	6d01      	li	a1,1
+bfc1714a:	b492      	lw	a0,bfc17390 <.LBE2+0xa4>
+bfc1714c:	c6b0      	sb	a1,16(a2)
+bfc1714e:	67fd      	move	a3,sp
+bfc17150:	a7b0      	lbu	a1,16(a3)
+bfc17152:	b27f      	lw	v0,bfc1734c <.LBE2+0x60>
+bfc17154:	a2c6      	lbu	a2,6(v0)
+bfc17156:	1a1f 5b1f 	jal	bfc16c7c <control_read>
+bfc1715a:	6500      	nop
+bfc1715c:	1764      	b	bfc17026 <deal_setup+0x19a>
+bfc1715e:	7204      	cmpi	v0,4
+bfc17160:	f6ff 611d 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc17164:	6c00      	li	a0,0
+bfc17166:	67bd      	move	a1,sp
+bfc17168:	c590      	sb	a0,16(a1)
+bfc1716a:	a0c6      	lbu	a2,6(s0)
+bfc1716c:	6790      	move	a0,s0
+bfc1716e:	1a1f 5b04 	jal	bfc16c10 <control_write>
+bfc17172:	6d00      	li	a1,0
+bfc17174:	1a1f 5b4c 	jal	bfc16d30 <stall_endpoint>
+bfc17178:	6c00      	li	a0,0
+bfc1717a:	6476      	restore	48,ra,s0-s1
+bfc1717c:	e8a0      	jrc	ra
+bfc1717e:	f6ff 2d0e 	bnez	a1,bfc16f5e <deal_setup+0xd2>
+bfc17182:	6747      	move	v0,a3
+bfc17184:	ea11      	zeb	v0
+bfc17186:	7205      	cmpi	v0,5
+bfc17188:	f6ff 6009 	bteqz	bfc16f5e <deal_setup+0xd2>
+bfc1718c:	7209      	cmpi	v0,9
+bfc1718e:	61f2      	btnez	bfc17174 <deal_setup+0x2e8>
+bfc17190:	1a1f 5b7f 	jal	bfc16dfc <set_out_iso_ep>
+bfc17194:	6500      	nop
+bfc17196:	1a1f 5b91 	jal	bfc16e44 <set_in_int_ep>
+bfc1719a:	6500      	nop
+bfc1719c:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc171a0:	6500      	nop
+bfc171a2:	16e0      	b	bfc16f64 <deal_setup+0xd8>
+bfc171a4:	f301 7300 	cmpi	v1,2816
+bfc171a8:	6130      	btnez	bfc1720a <deal_setup+0x37e>
+bfc171aa:	6767      	move	v1,a3
+bfc171ac:	eb11      	zeb	v1
+bfc171ae:	7301      	cmpi	v1,1
+bfc171b0:	f6df 6115 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc171b4:	6a01      	li	v0,1
+bfc171b6:	67fd      	move	a3,sp
+bfc171b8:	c750      	sb	v0,16(a3)
+bfc171ba:	b47b      	lw	a0,bfc173a4 <.LBE2+0xb8>
+bfc171bc:	a0c6      	lbu	a2,6(s0)
+bfc171be:	1a1f 5b04 	jal	bfc16c10 <control_write>
+bfc171c2:	6d01      	li	a1,1
+bfc171c4:	16cc      	b	bfc16f5e <deal_setup+0xd2>
+bfc171c6:	677d      	move	v1,sp
+bfc171c8:	7282      	cmpi	v0,130
+bfc171ca:	c3b0      	sb	a1,16(v1)
+bfc171cc:	613b      	btnez	bfc17244 <deal_setup+0x3b8>
+bfc171ce:	f463 6a00 	li	v0,7264
+bfc171d2:	ea4b      	neg	v0
+bfc171d4:	cc40      	sh	v0,0(a0)
+bfc171d6:	67fd      	move	a3,sp
+bfc171d8:	a7b0      	lbu	a1,16(a3)
+bfc171da:	17bb      	b	bfc17152 <deal_setup+0x2c6>
+bfc171dc:	f200 7200 	cmpi	v0,512
+bfc171e0:	613e      	btnez	bfc1725e <deal_setup+0x3d2>
+bfc171e2:	b06e      	lw	s0,bfc17398 <.LBE2+0xac>
+bfc171e4:	16b0      	b	bfc16f46 <deal_setup+0xba>
+bfc171e6:	f301 7300 	cmpi	v1,2816
+bfc171ea:	613e      	btnez	bfc17268 <deal_setup+0x3dc>
+bfc171ec:	6787      	move	a0,a3
+bfc171ee:	ec11      	zeb	a0
+bfc171f0:	7481      	cmpi	a0,129
+bfc171f2:	f080 600b 	bteqz	bfc1730c <.LBE2+0x20>
+bfc171f6:	679d      	move	a0,sp
+bfc171f8:	c4b0      	sb	a1,16(a0)
+bfc171fa:	6476      	restore	48,ra,s0-s1
+bfc171fc:	e8a0      	jrc	ra
+bfc171fe:	b25a      	lw	v0,bfc17364 <.LBE2+0x78>
+bfc17200:	a2a0      	lbu	a1,0(v0)
+bfc17202:	6782      	move	a0,v0
+bfc17204:	675d      	move	v0,sp
+bfc17206:	a2dd      	lbu	a2,29(v0)
+bfc17208:	1744      	b	bfc17092 <deal_setup+0x206>
+bfc1720a:	7302      	cmpi	v1,2
+bfc1720c:	615a      	btnez	bfc172c2 <.LBB2>
+bfc1720e:	67c7      	move	a2,a3
+bfc17210:	ee11      	zeb	a2
+bfc17212:	760a      	cmpi	a2,10
+bfc17214:	f6bf 6103 	btnez	bfc16f5e <deal_setup+0xd2>
+bfc17218:	67dd      	move	a2,sp
+bfc1721a:	a65c      	lbu	v0,28(a2)
+bfc1721c:	67f9      	move	a3,t9
+bfc1721e:	ea11      	zeb	v0
+bfc17220:	ef11      	zeb	a3
+bfc17222:	3340      	sll	v1,v0,8
+bfc17224:	ebed      	or	v1,a3
+bfc17226:	b561      	lw	a1,bfc173a8 <.LBE2+0xbc>
+bfc17228:	347a      	srl	a0,v1,6
+bfc1722a:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc1722e:	cd80      	sh	a0,0(a1)
+bfc17230:	1699      	b	bfc16f64 <deal_setup+0xd8>
+bfc17232:	67dd      	move	a2,sp
+bfc17234:	f200 7300 	cmpi	v1,512
+bfc17238:	c6b0      	sb	a1,16(a2)
+bfc1723a:	612c      	btnez	bfc17294 <deal_setup+0x408>
+bfc1723c:	67fd      	move	a3,sp
+bfc1723e:	b457      	lw	a0,bfc17398 <.LBE2+0xac>
+bfc17240:	a7b0      	lbu	a1,16(a3)
+bfc17242:	1787      	b	bfc17152 <deal_setup+0x2c6>
+bfc17244:	7283      	cmpi	v0,131
+bfc17246:	6120      	btnez	bfc17288 <deal_setup+0x3fc>
+bfc17248:	6a10      	li	v0,16
+bfc1724a:	ea4b      	neg	v0
+bfc1724c:	cc40      	sh	v0,0(a0)
+bfc1724e:	17c3      	b	bfc171d6 <deal_setup+0x34a>
+bfc17250:	b246      	lw	v0,bfc17368 <.LBE2+0x7c>
+bfc17252:	67fd      	move	a3,sp
+bfc17254:	a2a2      	lbu	a1,2(v0)
+bfc17256:	a7dd      	lbu	a2,29(a3)
+bfc17258:	6782      	move	a0,v0
+bfc1725a:	ee11      	zeb	a2
+bfc1725c:	171b      	b	bfc17094 <deal_setup+0x208>
+bfc1725e:	f200 7201 	cmpi	v0,513
+bfc17262:	611f      	btnez	bfc172a2 <deal_setup+0x416>
+bfc17264:	b04e      	lw	s0,bfc1739c <.LBE2+0xb0>
+bfc17266:	1673      	b	bfc16f4e <deal_setup+0xc2>
+bfc17268:	7302      	cmpi	v1,2
+bfc1726a:	6127      	btnez	bfc172ba <deal_setup+0x42e>
+bfc1726c:	6747      	move	v0,a3
+bfc1726e:	ea11      	zeb	v0
+bfc17270:	7201      	cmpi	v0,1
+bfc17272:	6059      	bteqz	bfc17326 <.LBE2+0x3a>
+bfc17274:	7202      	cmpi	v0,2
+bfc17276:	605c      	bteqz	bfc17330 <.LBE2+0x44>
+bfc17278:	677d      	move	v1,sp
+bfc1727a:	c3b0      	sb	a1,16(v1)
+bfc1727c:	6476      	restore	48,ra,s0-s1
+bfc1727e:	e8a0      	jrc	ra
+bfc17280:	b23b      	lw	v0,bfc17368 <.LBE2+0x7c>
+bfc17282:	a2a0      	lbu	a1,0(v0)
+bfc17284:	6782      	move	a0,v0
+bfc17286:	17be      	b	bfc17204 <deal_setup+0x378>
+bfc17288:	7284      	cmpi	v0,132
+bfc1728a:	f77f 6100 	btnez	bfc1714e <deal_setup+0x2c2>
+bfc1728e:	6a30      	li	v0,48
+bfc17290:	cc40      	sh	v0,0(a0)
+bfc17292:	17a1      	b	bfc171d6 <deal_setup+0x34a>
+bfc17294:	f200 7301 	cmpi	v1,513
+bfc17298:	6131      	btnez	bfc172fc <.LBE2+0x10>
+bfc1729a:	67fd      	move	a3,sp
+bfc1729c:	b440      	lw	a0,bfc1739c <.LBE2+0xb0>
+bfc1729e:	a7b0      	lbu	a1,16(a3)
+bfc172a0:	1758      	b	bfc17152 <deal_setup+0x2c6>
+bfc172a2:	f200 7202 	cmpi	v0,514
+bfc172a6:	f65f 6112 	btnez	bfc16f4e <deal_setup+0xc2>
+bfc172aa:	b03e      	lw	s0,bfc173a0 <.LBE2+0xb4>
+bfc172ac:	1650      	b	bfc16f4e <deal_setup+0xc2>
+bfc172ae:	b331      	lw	v1,bfc17370 <.LBE2+0x84>
+bfc172b0:	67fd      	move	a3,sp
+bfc172b2:	a3a0      	lbu	a1,0(v1)
+bfc172b4:	a7dd      	lbu	a2,29(a3)
+bfc172b6:	6783      	move	a0,v1
+bfc172b8:	17d0      	b	bfc1725a <deal_setup+0x3ce>
+bfc172ba:	67dd      	move	a2,sp
+bfc172bc:	c6b0      	sb	a1,16(a2)
+bfc172be:	6476      	restore	48,ra,s0-s1
+bfc172c0:	e8a0      	jrc	ra
+
+bfc172c2 <.LBB2>:
+bfc172c2:	677d      	move	v1,sp
+bfc172c4:	a3dd      	lbu	a2,29(v1)
+bfc172c6:	0405      	addiu	a0,sp,20
+bfc172c8:	6d04      	li	a1,4
+bfc172ca:	1a1f 5b04 	jal	bfc16c10 <control_write>
+bfc172ce:	ee11      	zeb	a2
+bfc172d0:	9505      	lw	a1,20(sp)
+bfc172d2:	b437      	lw	a0,bfc173ac <.LBE2+0xc0>
+bfc172d4:	ed8e      	xor	a1,a0
+bfc172d6:	f65f 2d02 	bnez	a1,bfc16f5e <deal_setup+0xd2>
+bfc172da:	b736      	lw	a3,bfc173b0 <.LBE2+0xc4>
+bfc172dc:	6d00      	li	a1,0
+bfc172de:	6e01      	li	a2,1
+bfc172e0:	b235      	lw	v0,bfc173b4 <.LBE2+0xc8>
+bfc172e2:	c7c0      	sb	a2,0(a3)
+bfc172e4:	0c18      	la	a0,bfc17344 <.LBE2+0x58>
+bfc172e6:	67c5      	move	a2,a1
+bfc172e8:	ea40      	jalr	v0
+bfc172ea:	6f4b      	li	a3,75
+
+bfc172ec <.LBE2>:
+bfc172ec:	1a1f 5b00 	jal	bfc16c00 <RCODE_TEXT_ADDR>
+bfc172f0:	6500      	nop
+bfc172f2:	1638      	b	bfc16f64 <deal_setup+0xd8>
+bfc172f4:	b220      	lw	v0,bfc17374 <.LBE2+0x88>
+bfc172f6:	a2a0      	lbu	a1,0(v0)
+bfc172f8:	6782      	move	a0,v0
+bfc172fa:	1691      	b	bfc1701e <deal_setup+0x192>
+bfc172fc:	f200 7302 	cmpi	v1,514
+bfc17300:	f73f 6105 	btnez	bfc1714e <deal_setup+0x2c2>
+bfc17304:	67fd      	move	a3,sp
+bfc17306:	b427      	lw	a0,bfc173a0 <.LBE2+0xb4>
+bfc17308:	a7b0      	lbu	a1,16(a3)
+bfc1730a:	1723      	b	bfc17152 <deal_setup+0x2c6>
+bfc1730c:	67bd      	move	a1,sp
+bfc1730e:	6a01      	li	v0,1
+bfc17310:	b425      	lw	a0,bfc173a4 <.LBE2+0xb8>
+bfc17312:	c550      	sb	v0,16(a1)
+bfc17314:	6d01      	li	a1,1
+bfc17316:	a0c6      	lbu	a2,6(s0)
+bfc17318:	1683      	b	bfc17020 <deal_setup+0x194>
+bfc1731a:	b414      	lw	a0,bfc17368 <.LBE2+0x7c>
+bfc1731c:	67fd      	move	a3,sp
+bfc1731e:	a7dd      	lbu	a2,29(a3)
+bfc17320:	4c5e      	addiu	a0,94
+bfc17322:	6d03      	li	a1,3
+bfc17324:	16df      	b	bfc170e4 <deal_setup+0x258>
+bfc17326:	67dd      	move	a2,sp
+bfc17328:	b425      	lw	a0,bfc173bc <.LBE2+0xd0>
+bfc1732a:	c6b0      	sb	a1,16(a2)
+bfc1732c:	6d01      	li	a1,1
+bfc1732e:	17f3      	b	bfc17316 <.LBE2+0x2a>
+bfc17330:	b51e      	lw	a1,bfc173a8 <.LBE2+0xbc>
+bfc17332:	677d      	move	v1,sp
+bfc17334:	ad80      	lhu	a0,0(a1)
+bfc17336:	b206      	lw	v0,bfc1734c <.LBE2+0x60>
+bfc17338:	378a      	srl	a3,a0,2
+bfc1733a:	c3f0      	sb	a3,16(v1)
+bfc1733c:	a2c6      	lbu	a2,6(v0)
+bfc1733e:	0404      	addiu	a0,sp,16
+bfc17340:	6d01      	li	a1,1
+bfc17342:	1709      	b	bfc17156 <deal_setup+0x2ca>
+bfc17344:	7773      	cmpi	a3,115
+bfc17346:	6974      	li	s1,116
+bfc17348:	6863      	li	s0,99
+bfc1734a:	0000      	addiu	s0,sp,0
+bfc1734c:	93e8      	lw	v1,928(sp)
+bfc1734e:	9fc1      	lw	a2,4(a3)
+bfc17350:	0180      	addiu	s1,sp,512
+bfc17352:	c008      	sb	s0,8(s0)
+bfc17354:	0181      	addiu	s1,sp,516
+bfc17356:	c008      	sb	s0,8(s0)
+bfc17358:	0182      	addiu	s1,sp,520
+bfc1735a:	c008      	sb	s0,8(s0)
+bfc1735c:	0184      	addiu	s1,sp,528
+bfc1735e:	c008      	sb	s0,8(s0)
+bfc17360:	0186      	addiu	s1,sp,536
+bfc17362:	c008      	sb	s0,8(s0)
+bfc17364:	9208      	lw	v0,32(sp)
+bfc17366:	9fc1      	lw	a2,4(a3)
+bfc17368:	92b8      	lw	v0,736(sp)
+bfc1736a:	9fc1      	lw	a2,4(a3)
+bfc1736c:	9204      	lw	v0,16(sp)
+bfc1736e:	9fc1      	lw	a2,4(a3)
+bfc17370:	921c      	lw	v0,112(sp)
+bfc17372:	9fc1      	lw	a2,4(a3)
+bfc17374:	9264      	lw	v0,400(sp)
+bfc17376:	9fc1      	lw	a2,4(a3)
+bfc17378:	9240      	lw	v0,256(sp)
+bfc1737a:	9fc1      	lw	a2,4(a3)
+bfc1737c:	9288      	lw	v0,544(sp)
+bfc1737e:	9fc1      	lw	a2,4(a3)
+bfc17380:	9434      	lw	a0,208(sp)
+bfc17382:	9fc1      	lw	a2,4(a3)
+bfc17384:	9438      	lw	a0,224(sp)
+bfc17386:	9fc1      	lw	a2,4(a3)
+bfc17388:	943c      	lw	a0,240(sp)
+bfc1738a:	9fc1      	lw	a2,4(a3)
+bfc1738c:	93e4      	lw	v1,912(sp)
+bfc1738e:	9fc1      	lw	a2,4(a3)
+bfc17390:	93fe      	lw	v1,1016(sp)
+bfc17392:	9fc1      	lw	a2,4(a3)
+bfc17394:	942c      	lw	a0,176(sp)
+bfc17396:	9fc1      	lw	a2,4(a3)
+bfc17398:	9426      	lw	a0,152(sp)
+bfc1739a:	9fc1      	lw	a2,4(a3)
+bfc1739c:	9428      	lw	a0,160(sp)
+bfc1739e:	9fc1      	lw	a2,4(a3)
+bfc173a0:	942a      	lw	a0,168(sp)
+bfc173a2:	9fc1      	lw	a2,4(a3)
+bfc173a4:	93ff      	lw	v1,1020(sp)
+bfc173a6:	9fc1      	lw	a2,4(a3)
+bfc173a8:	9424      	lw	a0,144(sp)
+bfc173aa:	9fc1      	lw	a2,4(a3)
+bfc173ac:	21cb      	beqz	s1,bfc17344 <.LBE2+0x58>
+bfc173ae:	22cb      	beqz	v0,bfc17346 <.LBE2+0x5a>
+bfc173b0:	9401      	lw	a0,4(sp)
+bfc173b2:	9fc1      	lw	a2,4(a3)
+bfc173b4:	8365      	lb	v1,5(v1)
+bfc173b6:	bfc1      	lwu	a2,4(a3)
+bfc173b8:	9422      	lw	a0,136(sp)
+bfc173ba:	9fc1      	lw	a2,4(a3)
+bfc173bc:	9403      	lw	a0,12(sp)
+bfc173be:	9fc1      	lw	a2,4(a3)
+bfc173c0:	9230      	lw	v0,192(sp)
+bfc173c2:	9fc1      	lw	a2,4(a3)
+bfc173c4:	9406      	lw	a0,24(sp)
+bfc173c6:	9fc1      	lw	a2,4(a3)
+bfc173c8:	9238      	lw	v0,224(sp)
+bfc173ca:	9fc1      	lw	a2,4(a3)
+bfc173cc:	9400      	lw	a0,0(sp)
+bfc173ce:	9fc1      	lw	a2,4(a3)
+
+bfc173d0 <reset_data_pos>:
+bfc173d0:	b207      	lw	v0,bfc173ec <reset_data_pos+0x1c>
+ * \note
+ *******************************************************************************/
+void reset_data_pos(void)
+{
+    g_rd_play_ptr = 0;
+bfc173d2:	6d00      	li	a1,0
+bfc173d4:	daa0      	sw	a1,0(v0)
+bfc173d6:	b707      	lw	a3,bfc173f0 <reset_data_pos+0x20>
+
+    g_play_data_count = 0;
+bfc173d8:	b607      	lw	a2,bfc173f4 <reset_data_pos+0x24>
+
+    g_wr_play_ptr = 0;
+bfc173da:	b408      	lw	a0,bfc173f8 <reset_data_pos+0x28>
+
+    g_manul_stop = 0;
+bfc173dc:	b208      	lw	v0,bfc173fc <reset_data_pos+0x2c>
+
+    g_reset_flag = 1;
+bfc173de:	6b01      	li	v1,1
+bfc173e0:	dfa0      	sw	a1,0(a3)
+bfc173e2:	dea0      	sw	a1,0(a2)
+bfc173e4:	dca0      	sw	a1,0(a0)
+bfc173e6:	e820      	jr	ra
+bfc173e8:	c260      	sb	v1,0(v0)
+bfc173ea:	0000      	addiu	s0,sp,0
+bfc173ec:	9438      	lw	a0,224(sp)
+bfc173ee:	9fc1      	lw	a2,4(a3)
+bfc173f0:	943c      	lw	a0,240(sp)
+bfc173f2:	9fc1      	lw	a2,4(a3)
+bfc173f4:	9434      	lw	a0,208(sp)
+bfc173f6:	9fc1      	lw	a2,4(a3)
+bfc173f8:	9444      	lw	a0,272(sp)
+bfc173fa:	9fc1      	lw	a2,4(a3)
+bfc173fc:	93f4      	lw	v1,976(sp)
+bfc173fe:	9fc1      	lw	a2,4(a3)
+
+bfc17400 <usb_disconnect_isr>:
+bfc17400:	b405      	lw	a0,bfc17414 <usb_disconnect_isr+0x14>
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   deal USB disconnect.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_msc.c
+ * \par
+ * \note
+ *******************************************************************************/
+void usb_disconnect_isr(void)
+{
+    if(USB_CONNECT_STATUS != 0x00) {
+bfc17402:	6a40      	li	v0,64
+bfc17404:	a460      	lbu	v1,0(a0)
+bfc17406:	ea6c      	and	v0,v1
+bfc17408:	2203      	beqz	v0,bfc17410 <usb_disconnect_isr+0x10>
+bfc1740a:	b504      	lw	a1,bfc17418 <usb_disconnect_isr+0x18>
+        g_usb_state = 0x01;
+bfc1740c:	6e01      	li	a2,1
+bfc1740e:	ddc0      	sw	a2,0(a1)
+bfc17410:	e8a0      	jrc	ra
+bfc17412:	0000      	addiu	s0,sp,0
+bfc17414:	018c      	addiu	s1,sp,560
+bfc17416:	c008      	sb	s0,8(s0)
+bfc17418:	9448      	lw	a0,288(sp)
+bfc1741a:	9fc1      	lw	a2,4(a3)
+
+bfc1741c <iso_out_token_isr>:
+bfc1741c:	64f4      	save	32,ra,s0-s1
+    }
+
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *  deal iso outtoken intrrupt.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_irq.c
+ * \par
+ * \note
+ *******************************************************************************/
+void iso_out_token_isr(void)
+{
+bfc1741e:	b343      	lw	v1,bfc17528 <.L18+0x62>
+    uint32 data_lenth, get_lenth, buf_addr, temp_data = 0;
+
+    uint32 temp_low, temp_high;
+
+    //act_writel(act_readl(GPIOAOUTEN) |(1<<23),GPIOAOUTEN);
+
+    //act_writel(act_readl(GPIOADAT) |(1<<23),GPIOADAT);
+
+    //sys_us_timer_start(0);
+
+    //for multi fifo clear last frame data
+    g_datain_flag = 1;
+
+    if((g_start_play == 0) && (g_reset_flag == 0)) {
+bfc17420:	b441      	lw	a0,bfc17524 <.L18+0x5e>
+bfc17422:	a340      	lbu	v0,0(v1)
+bfc17424:	6d01      	li	a1,1
+bfc17426:	6800      	li	s0,0
+bfc17428:	c4a0      	sb	a1,0(a0)
+bfc1742a:	2a03      	bnez	v0,bfc17432 <iso_out_token_isr+0x16>
+bfc1742c:	b740      	lw	a3,bfc1752c <.L18+0x66>
+bfc1742e:	a7c0      	lbu	a2,0(a3)
+bfc17430:	2663      	beqz	a2,bfc174f8 <.L18+0x32>
+bfc17432:	b441      	lw	a0,bfc17534 <.L18+0x6e>
+        reset_data_pos();
+    }
+    if(low_energy != 0) {
+bfc17434:	9c60      	lw	v1,0(a0)
+bfc17436:	2301      	beqz	v1,bfc1743a <iso_out_token_isr+0x1e>
+bfc17438:	6b01      	li	v1,1
+        tmp_play_status = 1;
+bfc1743a:	b540      	lw	a1,bfc17538 <.L18+0x72>
+    } else {
+        tmp_play_status = 0;
+bfc1743c:	c560      	sb	v1,0(a1)
+bfc1743e:	b740      	lw	a3,bfc1753c <.L18+0x76>
+    }
+    while(temp_data < 300) {
+        if(0x00 == (act_readb(Out1cs_hcin1cs) & 0x02)) {
+bfc17440:	6e02      	li	a2,2
+bfc17442:	a760      	lbu	v1,0(a3)
+bfc17444:	ee6c      	and	a2,v1
+bfc17446:	260a      	beqz	a2,bfc1745c <iso_out_token_isr+0x40>
+bfc17448:	b33e      	lw	v1,bfc17540 <.L18+0x7a>
+            break;
+        }
+
+        usb_disconnect_isr();
+bfc1744a:	ebc0      	jalrc	v1
+bfc1744c:	b43e      	lw	a0,bfc17540 <.L18+0x7a>
+        if(g_usb_state == 0x01) {
+bfc1744e:	9c40      	lw	v0,0(a0)
+bfc17450:	7201      	cmpi	v0,1
+bfc17452:	6004      	bteqz	bfc1745c <iso_out_token_isr+0x40>
+bfc17454:	4001      	addiu	s0,s0,1
+            break;
+        }
+        temp_data++;
+bfc17456:	f120 580c 	sltiu	s0,300
+bfc1745a:	61f1      	btnez	bfc1743e <iso_out_token_isr+0x22>
+bfc1745c:	f120 700c 	cmpi	s0,300
+    }
+
+    //get data length
+    if(temp_data == 300) {
+bfc17460:	6032      	bteqz	bfc174c6 <.L18>
+bfc17462:	b03b      	lw	s0,bfc1754c <.L18+0x86>
+        data_lenth = 0;
+    } else {
+        //data_lenth = (uint32) act_readb(Out1bcl_hcin1bcl);
+
+        temp_low = act_readb(Out1bcl_hcin1bcl);
+
+        temp_high = act_readb(Out1bch_hcin1bch);
+bfc17464:	b739      	lw	a3,bfc17548 <.L18+0x82>
+bfc17466:	a7a0      	lbu	a1,0(a3)
+bfc17468:	a0c0      	lbu	a2,0(s0)
+bfc1746a:	ed11      	zeb	a1
+bfc1746c:	ee11      	zeb	a2
+bfc1746e:	30c0      	sll	s0,a2,8
+
+        data_lenth = (uint32)((temp_high << 8) | temp_low);
+bfc17470:	e8ad      	or	s0,a1
+bfc17472:	2029      	beqz	s0,bfc174c6 <.L18>
+    }
+
+    if(data_lenth == 0) {
+bfc17474:	b437      	lw	a0,bfc17550 <.L18+0x8a>
+
+        goto exit_iso_out;
+    }
+
+    if((g_tts_start_flag == 0) && (g_mute_flag == 0)) {
+bfc17476:	a440      	lbu	v0,0(a0)
+bfc17478:	2237      	beqz	v0,bfc174e8 <.L18+0x22>
+bfc1747a:	b339      	lw	v1,bfc1755c <.L18+0x96>
+        g_play_data_count += data_lenth;
+    }
+
+    if((g_wr_play_ptr + data_lenth) > PLAY_BUFF_SIZE) {
+bfc1747c:	9bc0      	lw	a2,0(v1)
+bfc1747e:	e611      	addu	a0,a2,s0
+bfc17480:	f002 5c01 	sltiu	a0,4097
+bfc17484:	613f      	btnez	bfc17504 <.L18+0x3e>
+bfc17486:	b137      	lw	s1,bfc17560 <.L18+0x9a>
+        buf_addr = (uint32) g_play_buf + g_wr_play_ptr;
+bfc17488:	f002 6f00 	li	a3,4096
+        get_lenth = PLAY_BUFF_SIZE - g_wr_play_ptr;
+bfc1748c:	e635      	addu	a1,a2,s1
+bfc1748e:	e7c7      	subu	s1,a3,a2
+bfc17490:	2944      	bnez	s1,bfc1751a <.L18+0x54>
+        if(0 != get_lenth) {
+bfc17492:	e023      	subu	s0,s1
+            access_usbfifo_by_cpu(EP1OUT, (uint32 *) buf_addr, get_lenth);
+        }
+        buf_addr = (uint32) g_play_buf;//address
+        get_lenth = data_lenth - get_lenth; //length
+bfc17494:	b533      	lw	a1,bfc17560 <.L18+0x9a>
+        access_usbfifo_by_cpu(EP1OUT, (uint32 *) buf_addr, get_lenth);
+bfc17496:	b334      	lw	v1,bfc17564 <.L18+0x9e>
+bfc17498:	6c02      	li	a0,2
+bfc1749a:	eb40      	jalr	v1
+bfc1749c:	67d0      	move	a2,s0
+bfc1749e:	b530      	lw	a1,bfc1755c <.L18+0x96>
+        g_wr_play_ptr = get_lenth;
+bfc174a0:	dd00      	sw	s0,0(a1)
+bfc174a2:	b632      	lw	a2,bfc17568 <.L18+0xa2>
+    } else {
+        buf_addr = (uint32) g_play_buf + g_wr_play_ptr;
+        get_lenth = data_lenth;
+        access_usbfifo_by_cpu(EP1OUT, (uint32 *) buf_addr, get_lenth);
+        g_wr_play_ptr += data_lenth;
+    }
+
+    if(g_mute_delay != 0) {
+bfc174a4:	a660      	lbu	v1,0(a2)
+bfc174a6:	2b2b      	bnez	v1,bfc174fe <.L18+0x38>
+bfc174a8:	b32c      	lw	v1,bfc17558 <.L18+0x92>
+        reset_data_pos();
+    }
+
+    if(g_play_data_count > PLAY_BUFF_SIZE) {
+bfc174aa:	9b80      	lw	a0,0(v1)
+bfc174ac:	f002 5c01 	sltiu	a0,4097
+bfc174b0:	6103      	btnez	bfc174b8 <iso_out_token_isr+0x9c>
+bfc174b2:	b52b      	lw	a1,bfc1755c <.L18+0x96>
+        //libc_print("full",g_play_data_count,0);
+
+        g_play_data_count = g_wr_play_ptr;
+bfc174b4:	9de0      	lw	a3,0(a1)
+bfc174b6:	dbe0      	sw	a3,0(v1)
+bfc174b8:	b41c      	lw	a0,bfc17528 <.L18+0x62>
+    }
+
+    if(g_start_play == 0) {
+bfc174ba:	a460      	lbu	v1,0(a0)
+bfc174bc:	2b04      	bnez	v1,bfc174c6 <.L18>
+bfc174be:	b61c      	lw	a2,bfc1752c <.L18+0x66>
+        g_start_play = 1;
+        g_reset_flag = 0;
+bfc174c0:	6a01      	li	v0,1
+bfc174c2:	c440      	sb	v0,0(a0)
+bfc174c4:	c660      	sb	v1,0(a2)
+
+bfc174c6 <.L18>:
+bfc174c6:	b71e      	lw	a3,bfc1753c <.L18+0x76>
+    }
+
+exit_iso_out:
+    //set busy
+
+    act_writeb(act_readb(Out1cs_hcin1cs) | 0x02, Out1cs_hcin1cs);
+bfc174c8:	6d02      	li	a1,2
+bfc174ca:	a7c0      	lbu	a2,0(a3)
+bfc174cc:	b428      	lw	a0,bfc1756c <.L18+0xa6>
+    //send data to asrc in
+    /*while (g_play_data_count > 0)
+     {
+     if ((act_readl(ASRC_IN_IP) & (1 << ASRC_IN_IP_WFIFOEmpty)) != 0)
+     {
+     //g_wr_record_ptr += 4;
+     temp_data = *(uint32 *) (g_play_buf + g_rd_play_ptr);
+
+     //set to high word
+     *(volatile uint32 *) ASRC_IN_WFIFO = (temp_data & 0xffff) << 16;
+
+     *(volatile uint32 *) ASRC_IN_WFIFO = (temp_data & 0xffff0000);
+
+     g_rd_play_ptr += 4;
+
+     g_play_data_count -= 4;
+
+     if (g_rd_play_ptr == PLAY_BUFF_SIZE)
+     {
+     g_rd_play_ptr = 0;
+     }
+     }
+
+     }*/
+    if(g_manul_stop != 0) {
+bfc174ce:	edcd      	or	a1,a2
+bfc174d0:	c7a0      	sb	a1,0(a3)
+bfc174d2:	9c60      	lw	v1,0(a0)
+bfc174d4:	2b02      	bnez	v1,bfc174da <.L18+0x14>
+bfc174d6:	6474      	restore	32,ra,s0-s1
+        g_start_play = 0;
+
+        reset_data_pos();
+    }
+
+    //act_writel(act_readl(GPIOADAT) &(~(1<<23)),GPIOADAT);
+    return;
+}
+bfc174d8:	e8a0      	jrc	ra
+bfc174da:	b314      	lw	v1,bfc17528 <.L18+0x62>
+bfc174dc:	6c00      	li	a0,0
+bfc174de:	b215      	lw	v0,bfc17530 <.L18+0x6a>
+bfc174e0:	ea40      	jalr	v0
+bfc174e2:	c380      	sb	a0,0(v1)
+bfc174e4:	6474      	restore	32,ra,s0-s1
+bfc174e6:	e8a0      	jrc	ra
+bfc174e8:	b51b      	lw	a1,bfc17550 <.L18+0x8a>
+bfc174ea:	a560      	lbu	v1,0(a1)
+bfc174ec:	2bc6      	bnez	v1,bfc1747a <iso_out_token_isr+0x5e>
+bfc174ee:	b61b      	lw	a2,bfc17558 <.L18+0x92>
+bfc174f0:	9e40      	lw	v0,0(a2)
+bfc174f2:	e21d      	addu	a3,v0,s0
+bfc174f4:	dee0      	sw	a3,0(a2)
+bfc174f6:	17c1      	b	bfc1747a <iso_out_token_isr+0x5e>
+bfc174f8:	b20e      	lw	v0,bfc17530 <.L18+0x6a>
+bfc174fa:	eac0      	jalrc	v0
+bfc174fc:	179a      	b	bfc17432 <iso_out_token_isr+0x16>
+bfc174fe:	b20d      	lw	v0,bfc17530 <.L18+0x6a>
+bfc17500:	eac0      	jalrc	v0
+bfc17502:	17d2      	b	bfc174a8 <iso_out_token_isr+0x8c>
+bfc17504:	b517      	lw	a1,bfc17560 <.L18+0x9a>
+bfc17506:	b218      	lw	v0,bfc17564 <.L18+0x9e>
+bfc17508:	6c02      	li	a0,2
+bfc1750a:	e6b5      	addu	a1,a2,a1
+bfc1750c:	ea40      	jalr	v0
+bfc1750e:	67d0      	move	a2,s0
+bfc17510:	b613      	lw	a2,bfc1755c <.L18+0x96>
+bfc17512:	9ee0      	lw	a3,0(a2)
+bfc17514:	e711      	addu	a0,a3,s0
+bfc17516:	de80      	sw	a0,0(a2)
+bfc17518:	17c4      	b	bfc174a2 <iso_out_token_isr+0x86>
+bfc1751a:	b213      	lw	v0,bfc17564 <.L18+0x9e>
+bfc1751c:	6c02      	li	a0,2
+bfc1751e:	ea40      	jalr	v0
+bfc17520:	67d1      	move	a2,s1
+bfc17522:	17b7      	b	bfc17492 <iso_out_token_isr+0x76>
+bfc17524:	93f3      	lw	v1,972(sp)
+bfc17526:	9fc1      	lw	a2,4(a3)
+bfc17528:	93e4      	lw	v1,912(sp)
+bfc1752a:	9fc1      	lw	a2,4(a3)
+bfc1752c:	93f4      	lw	v1,976(sp)
+bfc1752e:	9fc1      	lw	a2,4(a3)
+bfc17530:	73d1      	cmpi	v1,209
+bfc17532:	bfc1      	lwu	a2,4(a3)
+bfc17534:	9430      	lw	a0,192(sp)
+bfc17536:	9fc1      	lw	a2,4(a3)
+bfc17538:	93fd      	lw	v1,1012(sp)
+bfc1753a:	9fc1      	lw	a2,4(a3)
+bfc1753c:	000b      	addiu	s0,sp,44
+bfc1753e:	c008      	sb	s0,8(s0)
+bfc17540:	7401      	cmpi	a0,1
+bfc17542:	bfc1      	lwu	a2,4(a3)
+bfc17544:	9448      	lw	a0,288(sp)
+bfc17546:	9fc1      	lw	a2,4(a3)
+bfc17548:	0008      	addiu	s0,sp,32
+bfc1754a:	c008      	sb	s0,8(s0)
+bfc1754c:	0009      	addiu	s0,sp,36
+bfc1754e:	c008      	sb	s0,8(s0)
+bfc17550:	9407      	lw	a0,28(sp)
+bfc17552:	9fc1      	lw	a2,4(a3)
+bfc17554:	93f1      	lw	v1,964(sp)
+bfc17556:	9fc1      	lw	a2,4(a3)
+bfc17558:	943c      	lw	a0,240(sp)
+bfc1755a:	9fc1      	lw	a2,4(a3)
+bfc1755c:	9434      	lw	a0,208(sp)
+bfc1755e:	9fc1      	lw	a2,4(a3)
+bfc17560:	2000      	beqz	s0,bfc17562 <.L18+0x9c>
+bfc17562:	9fc3      	lw	a2,12(a3)
+bfc17564:	79cd      	sd	a2,104(s1)
+bfc17566:	bfc1      	lwu	a2,4(a3)
+bfc17568:	93f2      	lw	v1,968(sp)
+bfc1756a:	9fc1      	lw	a2,4(a3)
+bfc1756c:	9444      	lw	a0,272(sp)
+bfc1756e:	9fc1      	lw	a2,4(a3)
+
+bfc17570 <hid_in_token_isr>:
+bfc17570:	b313      	lw	v1,bfc175bc <hid_in_token_isr+0x4c>
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   deal hid intoken intrrupt.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_irq.c
+ * \par
+ * \note
+ *******************************************************************************/
+void hid_in_token_isr(void)
+{
+
+    if((g_hid_idle_time == 0) || (g_hid_change != 0)) {
+bfc17572:	ab40      	lhu	v0,0(v1)
+bfc17574:	2204      	beqz	v0,bfc1757e <hid_in_token_isr+0xe>
+bfc17576:	b513      	lw	a1,bfc175c0 <hid_in_token_isr+0x50>
+bfc17578:	a580      	lbu	a0,0(a1)
+bfc1757a:	2c02      	bnez	a0,bfc17580 <hid_in_token_isr+0x10>
+bfc1757c:	e8a0      	jrc	ra
+bfc1757e:	b511      	lw	a1,bfc175c0 <hid_in_token_isr+0x50>
+bfc17580:	b412      	lw	a0,bfc175c8 <hid_in_token_isr+0x58>
+        act_writeb(g_hid_report, Fifo2dat);
+bfc17582:	b611      	lw	a2,bfc175c4 <hid_in_token_isr+0x54>
+bfc17584:	a4e0      	lbu	a3,0(a0)
+bfc17586:	6b00      	li	v1,0
+        g_hid_report = 0;
+bfc17588:	c6e0      	sb	a3,0(a2)
+bfc1758a:	c460      	sb	v1,0(a0)
+bfc1758c:	c560      	sb	v1,0(a1)
+        g_hid_change = 0;
+bfc1758e:	b310      	lw	v1,bfc175cc <hid_in_token_isr+0x5c>
+        act_writeb(act_readb(In2cs_hcout2cs) | 0x02, In2cs_hcout2cs);
+bfc17590:	6c02      	li	a0,2
+bfc17592:	a340      	lbu	v0,0(v1)
+bfc17594:	ea8d      	or	v0,a0
+bfc17596:	c340      	sb	v0,0(v1)
+bfc17598:	a3e0      	lbu	a3,0(v1)
+
+        while(0 != (act_readb(In2cs_hcout2cs) & 0x02)) {
+            if(USB_CONNECT_STATUS != 0x00) {
+                g_usb_state = 0x01;
+                break;
+bfc1759a:	ef8c      	and	a3,a0
+bfc1759c:	27ef      	beqz	a3,bfc1757c <hid_in_token_isr+0xc>
+bfc1759e:	b60d      	lw	a2,bfc175d0 <hid_in_token_isr+0x60>
+bfc175a0:	6d40      	li	a1,64
+bfc175a2:	a640      	lbu	v0,0(a2)
+bfc175a4:	eaac      	and	v0,a1
+bfc175a6:	2a06      	bnez	v0,bfc175b4 <hid_in_token_isr+0x44>
+bfc175a8:	a3e0      	lbu	a3,0(v1)
+bfc175aa:	ef8c      	and	a3,a0
+bfc175ac:	27e7      	beqz	a3,bfc1757c <hid_in_token_isr+0xc>
+bfc175ae:	a640      	lbu	v0,0(a2)
+bfc175b0:	eaac      	and	v0,a1
+bfc175b2:	22fa      	beqz	v0,bfc175a8 <hid_in_token_isr+0x38>
+bfc175b4:	b508      	lw	a1,bfc175d4 <hid_in_token_isr+0x64>
+bfc175b6:	6e01      	li	a2,1
+bfc175b8:	e820      	jr	ra
+bfc175ba:	ddc0      	sw	a2,0(a1)
+bfc175bc:	9424      	lw	a0,144(sp)
+bfc175be:	9fc1      	lw	a2,4(a3)
+bfc175c0:	9402      	lw	a0,8(sp)
+bfc175c2:	9fc1      	lw	a2,4(a3)
+bfc175c4:	0088      	addiu	s0,sp,544
+bfc175c6:	c008      	sb	s0,8(s0)
+bfc175c8:	9403      	lw	a0,12(sp)
+bfc175ca:	9fc1      	lw	a2,4(a3)
+bfc175cc:	0017      	addiu	s0,sp,92
+bfc175ce:	c008      	sb	s0,8(s0)
+bfc175d0:	018c      	addiu	s1,sp,560
+bfc175d2:	c008      	sb	s0,8(s0)
+bfc175d4:	9448      	lw	a0,288(sp)
+bfc175d6:	9fc1      	lw	a2,4(a3)
+
+bfc175d8 <hid_token_check>:
+bfc175d8:	64c3      	save	24,ra
+            }
+        }
+    }
+
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   hid intrrupt check and deal.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_irq.c
+ * \par
+ * \note
+ *******************************************************************************/
+void hid_token_check(void)
+{
+bfc175da:	b408      	lw	a0,bfc175f8 <hid_token_check+0x20>
+    if(0 != ((act_readb(IN03TOKIRQ)) & 0x04)) { //hid
+bfc175dc:	6b04      	li	v1,4
+bfc175de:	a440      	lbu	v0,0(a0)
+bfc175e0:	ea6c      	and	v0,v1
+bfc175e2:	2a02      	bnez	v0,bfc175e8 <hid_token_check+0x10>
+bfc175e4:	6443      	restore	24,ra
+        act_writeb(0x04 | act_readb(IN03TOKIRQ), IN03TOKIRQ);
+        hid_in_token_isr();
+    }
+
+}
+bfc175e6:	e8a0      	jrc	ra
+bfc175e8:	a4a0      	lbu	a1,0(a0)
+bfc175ea:	ebad      	or	v1,a1
+bfc175ec:	c460      	sb	v1,0(a0)
+bfc175ee:	1a1f 5d5c 	jal	bfc17570 <hid_in_token_isr>
+bfc175f2:	6500      	nop
+bfc175f4:	6443      	restore	24,ra
+bfc175f6:	e8a0      	jrc	ra
+bfc175f8:	0190      	addiu	s1,sp,576
+bfc175fa:	c008      	sb	s0,8(s0)
+
+bfc175fc <usound_isr>:
+bfc175fc:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   USB intrrupt entry.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_irq.c
+ * \par
+ * \note
+ *******************************************************************************/
+void usound_isr(void)
+{
+bfc175fe:	b616      	lw	a2,bfc17654 <usound_isr+0x58>
+    if((0 != ((act_readb(OUT03TOKIRQ)) & 0x02))) { //ep1 iso out
+bfc17600:	6d02      	li	a1,2
+bfc17602:	a640      	lbu	v0,0(a2)
+bfc17604:	eaac      	and	v0,a1
+bfc17606:	2a17      	bnez	v0,bfc17636 <usound_isr+0x3a>
+bfc17608:	b615      	lw	a2,bfc1765c <usound_isr+0x60>
+        act_writeb((uint8)((0x80 | act_readb(USBEIRQ)) & 0x8f), USBEIRQ);
+        act_writeb(0x02, OUT03TOKIRQ);
+        iso_out_token_isr();
+    } else if(0 != ((act_readb(Usbirq_hcusbirq)) & 0x01)) { //setup
+bfc1760a:	6d01      	li	a1,1
+bfc1760c:	a680      	lbu	a0,0(a2)
+bfc1760e:	ecac      	and	a0,a1
+bfc17610:	2c02      	bnez	a0,bfc17616 <usound_isr+0x1a>
+bfc17612:	6443      	restore	24,ra
+        act_writeb((uint8)((0x80 | act_readb(USBEIRQ)) & 0x8f), USBEIRQ);
+        act_writeb(0x01 | act_readb(Usbirq_hcusbirq), Usbirq_hcusbirq);
+        deal_setup();
+    } else {
+    }
+
+    return;
+}
+bfc17614:	e8a0      	jrc	ra
+bfc17616:	b411      	lw	a0,bfc17658 <usound_isr+0x5c>
+bfc17618:	6a80      	li	v0,128
+bfc1761a:	a460      	lbu	v1,0(a0)
+bfc1761c:	6f71      	li	a3,113
+bfc1761e:	ea4b      	neg	v0
+bfc17620:	ea6d      	or	v0,v1
+bfc17622:	ebeb      	neg	v1,a3
+bfc17624:	ea6c      	and	v0,v1
+bfc17626:	c440      	sb	v0,0(a0)
+bfc17628:	a6e0      	lbu	a3,0(a2)
+bfc1762a:	b30e      	lw	v1,bfc17660 <usound_isr+0x64>
+bfc1762c:	eded      	or	a1,a3
+bfc1762e:	c6a0      	sb	a1,0(a2)
+bfc17630:	ebc0      	jalrc	v1
+bfc17632:	6443      	restore	24,ra
+bfc17634:	e8a0      	jrc	ra
+bfc17636:	b409      	lw	a0,bfc17658 <usound_isr+0x5c>
+bfc17638:	6a80      	li	v0,128
+bfc1763a:	a460      	lbu	v1,0(a0)
+bfc1763c:	ef4b      	neg	a3,v0
+bfc1763e:	ef6d      	or	a3,v1
+bfc17640:	6b71      	li	v1,113
+bfc17642:	eb6b      	neg	v1
+bfc17644:	ef6c      	and	a3,v1
+bfc17646:	c4e0      	sb	a3,0(a0)
+bfc17648:	c6a0      	sb	a1,0(a2)
+bfc1764a:	1a1f 5d07 	jal	bfc1741c <iso_out_token_isr>
+bfc1764e:	6500      	nop
+bfc17650:	6443      	restore	24,ra
+bfc17652:	e8a0      	jrc	ra
+bfc17654:	0191      	addiu	s1,sp,580
+bfc17656:	c008      	sb	s0,8(s0)
+bfc17658:	0400      	addiu	a0,sp,0
+bfc1765a:	c008      	sb	s0,8(s0)
+bfc1765c:	018c      	addiu	s1,sp,560
+bfc1765e:	c008      	sb	s0,8(s0)
+bfc17660:	6e8d      	li	a2,141
+bfc17662:	bfc1      	lwu	a2,4(a3)
+
+bfc17664 <usound_isr_cbk>:
+bfc17664:	64c3      	save	24,ra
+
+//系统pagemiss回调该函数
+void usound_isr_cbk(void)
+{
+bfc17666:	b610      	lw	a2,bfc176a4 <usound_isr_cbk+0x40>
+    uint32 pending = act_readl(INTC_PD);//INTC_PD 由device的pending位控制
+bfc17668:	b510      	lw	a1,bfc176a8 <usound_isr_cbk+0x44>
+    pending &= act_readl(INTC_MSK);
+bfc1766a:	9e40      	lw	v0,0(a2)
+bfc1766c:	9d80      	lw	a0,0(a1)
+bfc1766e:	f400 6b00 	li	v1,1024
+
+    if((pending & (1 << IRQ_USB)) != 0) {
+bfc17672:	ea8c      	and	v0,a0
+bfc17674:	ea6c      	and	v0,v1
+bfc17676:	2205      	beqz	v0,bfc17682 <usound_isr_cbk+0x1e>
+bfc17678:	b60d      	lw	a2,bfc176ac <usound_isr_cbk+0x48>
+        if((0 != ((act_readb(OUT03TOKIRQ)) & 0x02))) { //ep1 iso out
+bfc1767a:	6d02      	li	a1,2
+bfc1767c:	a6e0      	lbu	a3,0(a2)
+bfc1767e:	efac      	and	a3,a1
+bfc17680:	2f02      	bnez	a3,bfc17686 <usound_isr_cbk+0x22>
+bfc17682:	6443      	restore	24,ra
+
+            act_writeb((uint8)((0x80 | act_readb(USBEIRQ)) & 0x8f), USBEIRQ);
+            act_writeb(0x02, OUT03TOKIRQ);
+            iso_out_token_isr();
+        }
+    }
+
+}
+bfc17684:	e8a0      	jrc	ra
+bfc17686:	b40b      	lw	a0,bfc176b0 <usound_isr_cbk+0x4c>
+bfc17688:	6a80      	li	v0,128
+bfc1768a:	a460      	lbu	v1,0(a0)
+bfc1768c:	6f71      	li	a3,113
+bfc1768e:	ea4b      	neg	v0
+bfc17690:	ea6d      	or	v0,v1
+bfc17692:	ebeb      	neg	v1,a3
+bfc17694:	ea6c      	and	v0,v1
+bfc17696:	c440      	sb	v0,0(a0)
+bfc17698:	c6a0      	sb	a1,0(a2)
+bfc1769a:	1a1f 5d07 	jal	bfc1741c <iso_out_token_isr>
+bfc1769e:	6500      	nop
+bfc176a0:	6443      	restore	24,ra
+bfc176a2:	e8a0      	jrc	ra
+bfc176a4:	0000      	addiu	s0,sp,0
+bfc176a6:	c00b      	sb	s0,11(s0)
+bfc176a8:	0004      	addiu	s0,sp,16
+bfc176aa:	c00b      	sb	s0,11(s0)
+bfc176ac:	0191      	addiu	s1,sp,580
+bfc176ae:	c008      	sb	s0,8(s0)
+bfc176b0:	0400      	addiu	a0,sp,0
+bfc176b2:	c008      	sb	s0,8(s0)
+
+bfc176b4 <usound_inner_get_status>:
+bfc176b4:	b222      	lw	v0,bfc1773c <usound_inner_get_status+0x88>
+ *******************************************************************************/
+int usound_inner_get_status(usound_status_t *pstatus)
+{
+
+    pstatus->line_sta = (uint16)g_usb_state;
+bfc176b6:	b623      	lw	a2,bfc17740 <usound_inner_get_status+0x8c>
+
+    pstatus->set_sample = g_set_sample_flag;
+bfc176b8:	9ae0      	lw	a3,0(v0)
+bfc176ba:	b523      	lw	a1,bfc17744 <usound_inner_get_status+0x90>
+
+    pstatus->sample_rate = (g_play_sample / 1000);//has not div 1000 yet
+bfc176bc:	cce3      	sh	a3,6(a0)
+bfc176be:	a660      	lbu	v1,0(a2)
+bfc176c0:	c460      	sb	v1,0(a0)
+bfc176c2:	9d40      	lw	v0,0(a1)
+bfc176c4:	b521      	lw	a1,bfc17748 <usound_inner_get_status+0x94>
+bfc176c6:	b322      	lw	v1,bfc1774c <usound_inner_get_status+0x98>
+
+    if(tmp_play_status != 0) {
+bfc176c8:	eab9      	multu	v0,a1
+bfc176ca:	ef10      	mfhi	a3
+bfc176cc:	36fa      	srl	a2,a3,6
+bfc176ce:	dcc3      	sw	a2,12(a0)
+bfc176d0:	a340      	lbu	v0,0(v1)
+bfc176d2:	2230      	beqz	v0,bfc17734 <usound_inner_get_status+0x80>
+bfc176d4:	6a00      	li	v0,0
+        pstatus->start_play = 0;//play flag
+bfc176d6:	6e00      	li	a2,0
+    } else {
+        pstatus->start_play = g_start_play;
+    }
+
+    pstatus->start_record = 0;//no record for speaker
+bfc176d8:	b31f      	lw	v1,bfc17754 <usound_inner_get_status+0xa0>
+    //{
+    pstatus->volume_chg = g_volume_chg;
+bfc176da:	dc46      	sw	v0,24(a0)
+bfc176dc:	dcc7      	sw	a2,28(a0)
+bfc176de:	9be0      	lw	a3,0(v1)
+bfc176e0:	dce8      	sw	a3,32(a0)
+bfc176e2:	b71e      	lw	a3,bfc17758 <usound_inner_get_status+0xa4>
+    pstatus->volume_value = g_current_volume_ch0;
+bfc176e4:	af40      	lhu	v0,0(a3)
+bfc176e6:	dc49      	sw	v0,36(a0)
+bfc176e8:	b21d      	lw	v0,bfc1775c <usound_inner_get_status+0xa8>
+    pstatus->set_dac_sample = g_set_dac_sample_flag;
+bfc176ea:	a240      	lbu	v0,0(v0)
+bfc176ec:	c442      	sb	v0,2(a0)
+bfc176ee:	b21d      	lw	v0,bfc17760 <usound_inner_get_status+0xac>
+    //pstatus->set_adc_sample = g_set_adc_sample_flag;
+    pstatus->dac_sample_rate = (g_dac_sample / 1000);
+bfc176f0:	9a40      	lw	v0,0(v0)
+bfc176f2:	eab9      	multu	v0,a1
+bfc176f4:	ed10      	mfhi	a1
+bfc176f6:	32ba      	srl	v0,a1,6
+bfc176f8:	dc45      	sw	v0,20(a0)
+bfc176fa:	b21b      	lw	v0,bfc17764 <usound_inner_get_status+0xb0>
+    //pstatus->adc_sample_rate = (g_dac_sample / 1000);
+    pstatus->data_in_flag = g_datain_flag;
+bfc176fc:	a2a0      	lbu	a1,0(v0)
+bfc176fe:	b21b      	lw	v0,bfc17768 <usound_inner_get_status+0xb4>
+    /*///检查USBfifo空的次数，用于判断ESD后，USB获取数据是否异常
+        (现象:usbFIFO 数据正常，而小机暂停)*/
+    if(g_no_empty_count == 50) {
+bfc17700:	c4a4      	sb	a1,4(a0)
+bfc17702:	a2a0      	lbu	a1,0(v0)
+bfc17704:	7532      	cmpi	a1,50
+bfc17706:	6114      	btnez	bfc17730 <usound_inner_get_status+0x7c>
+bfc17708:	6e01      	li	a2,1
+        pstatus->no_empty_fla = 1;
+bfc1770a:	c4c3      	sb	a2,3(a0)
+bfc1770c:	9ba0      	lw	a1,0(v1)
+
+    } else {
+        pstatus->no_empty_fla = 0;
+    }
+
+    if(g_volume_chg == 1) {
+bfc1770e:	7501      	cmpi	a1,1
+bfc17710:	6107      	btnez	bfc17720 <usound_inner_get_status+0x6c>
+bfc17712:	b217      	lw	v0,bfc1776c <usound_inner_get_status+0xb8>
+        if(g_current_mute_ch0 == 1) {
+bfc17714:	a260      	lbu	v1,0(v0)
+bfc17716:	6a00      	li	v0,0
+            pstatus->volume_value = 0;
+bfc17718:	7301      	cmpi	v1,1
+bfc1771a:	6001      	bteqz	bfc1771e <usound_inner_get_status+0x6a>
+bfc1771c:	af40      	lhu	v0,0(a3)
+        } else {
+            pstatus->volume_value = g_current_volume_ch0;
+bfc1771e:	dc49      	sw	v0,36(a0)
+bfc17720:	b314      	lw	v1,bfc17770 <usound_inner_get_status+0xbc>
+        }
+    }
+    pstatus->hid_idle_time = g_hid_idle_time;//ile time
+bfc17722:	b615      	lw	a2,bfc17774 <usound_inner_get_status+0xc0>
+    //}
+    pstatus->switch_flag = g_pc_switch_flag;
+bfc17724:	aba0      	lhu	a1,0(v1)
+bfc17726:	6a00      	li	v0,0
+
+    return 0;
+}
+bfc17728:	dcaa      	sw	a1,40(a0)
+bfc1772a:	a6e0      	lbu	a3,0(a2)
+bfc1772c:	e820      	jr	ra
+bfc1772e:	cce4      	sh	a3,8(a0)
+bfc17730:	c4c3      	sb	a2,3(a0)
+bfc17732:	17ec      	b	bfc1770c <usound_inner_get_status+0x58>
+bfc17734:	b307      	lw	v1,bfc17750 <usound_inner_get_status+0x9c>
+bfc17736:	a340      	lbu	v0,0(v1)
+bfc17738:	17ce      	b	bfc176d6 <usound_inner_get_status+0x22>
+bfc1773a:	0000      	addiu	s0,sp,0
+bfc1773c:	9448      	lw	a0,288(sp)
+bfc1773e:	9fc1      	lw	a2,4(a3)
+bfc17740:	9400      	lw	a0,0(sp)
+bfc17742:	9fc1      	lw	a2,4(a3)
+bfc17744:	9238      	lw	v0,224(sp)
+bfc17746:	9fc1      	lw	a2,4(a3)
+bfc17748:	4dd3      	addiu	a1,-45
+bfc1774a:	1062      	b	bfc17810 <usound_inner_get_info+0x68>
+bfc1774c:	93fd      	lw	v1,1012(sp)
+bfc1774e:	9fc1      	lw	a2,4(a3)
+bfc17750:	93e4      	lw	v1,912(sp)
+bfc17752:	9fc1      	lw	a2,4(a3)
+bfc17754:	942c      	lw	a0,176(sp)
+bfc17756:	9fc1      	lw	a2,4(a3)
+bfc17758:	9426      	lw	a0,152(sp)
+bfc1775a:	9fc1      	lw	a2,4(a3)
+bfc1775c:	9406      	lw	a0,24(sp)
+bfc1775e:	9fc1      	lw	a2,4(a3)
+bfc17760:	9230      	lw	v0,192(sp)
+bfc17762:	9fc1      	lw	a2,4(a3)
+bfc17764:	93f3      	lw	v1,972(sp)
+bfc17766:	9fc1      	lw	a2,4(a3)
+bfc17768:	93fc      	lw	v1,1008(sp)
+bfc1776a:	9fc1      	lw	a2,4(a3)
+bfc1776c:	93fe      	lw	v1,1016(sp)
+bfc1776e:	9fc1      	lw	a2,4(a3)
+bfc17770:	9424      	lw	a0,144(sp)
+bfc17772:	9fc1      	lw	a2,4(a3)
+bfc17774:	9401      	lw	a0,4(sp)
+bfc17776:	9fc1      	lw	a2,4(a3)
+
+bfc17778 <usound_inner_module_start>:
+bfc17778:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:start usb enumerate
+ * \ int usound_inner_module_stop(void)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_module_start(isr_cbk *p_isr_cbk)
+{
+bfc1777a:	b203      	lw	v0,bfc17784 <usound_inner_module_start+0xc>
+    usb_sound_init(p_isr_cbk);
+bfc1777c:	eac0      	jalrc	v0
+bfc1777e:	6a00      	li	v0,0
+
+    return 0;
+}
+bfc17780:	6443      	restore	24,ra
+bfc17782:	e8a0      	jrc	ra
+bfc17784:	8041      	lb	v0,1(s0)
+bfc17786:	bfc1      	lwu	a2,4(a3)
+
+bfc17788 <usound_inner_module_stop>:
+bfc17788:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:stop usb trans and disconnect to pc
+ * \ int usound_inner_module_stop(void)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_module_stop(void)
+{
+bfc1778a:	b203      	lw	v0,bfc17794 <usound_inner_module_stop+0xc>
+    usb_device_exit();
+bfc1778c:	eac0      	jalrc	v0
+bfc1778e:	6a00      	li	v0,0
+    return 0;
+}
+bfc17790:	6443      	restore	24,ra
+bfc17792:	e8a0      	jrc	ra
+bfc17794:	8211      	lb	s0,17(v0)
+bfc17796:	bfc1      	lwu	a2,4(a3)
+
+bfc17798 <usound_inner_set_cfg>:
+bfc17798:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:set some infomation to device
+ * \ int usound_inner_set_cfg(uint32 cfg_index, uint32* pcfg, uint32 cfg_len)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_set_cfg(uint32 cfg_index, uint32 *pcfg, uint32 cfg_len)
+{
+bfc1779a:	b203      	lw	v0,bfc177a4 <usound_inner_set_cfg+0xc>
+    return set_usb_cfg_param(cfg_index, pcfg, cfg_len);
+bfc1779c:	eac0      	jalrc	v0
+bfc1779e:	6443      	restore	24,ra
+}
+bfc177a0:	e8a0      	jrc	ra
+bfc177a2:	0000      	addiu	s0,sp,0
+bfc177a4:	7de9      	sd	a3,72(a1)
+bfc177a6:	bfc1      	lwu	a2,4(a3)
+
+bfc177a8 <usound_inner_get_info>:
+bfc177a8:	f008 64f6 	save	a0-a1,48,ra,s0-s1
+
+/******************************************************************************/
+/*!
+ * \par  Description:get usb some infomation
+ * \ int usound_inner_get_info(uint32 info_index,uint32* pinfor,uint32* info_len)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_get_info(uint32 info_index, uint32 *pinfor, uint32 *info_len)
+{
+bfc177ac:	b324      	lw	v1,bfc1783c <usound_inner_get_info+0x94>
+    uint32 read_len, len_pos;
+
+    read_len = *info_len;
+
+    //int_flag = sys_local_irq_save();
+
+    if(g_play_data_count >= read_len) {
+bfc177ae:	9e20      	lw	s1,0(a2)
+bfc177b0:	9b40      	lw	v0,0(v1)
+bfc177b2:	ea23      	sltu	v0,s1
+bfc177b4:	6129      	btnez	bfc17808 <usound_inner_get_info+0x60>
+bfc177b6:	b624      	lw	a2,bfc17844 <usound_inner_get_info+0x9c>
+        g_no_data_count = 0;
+
+        len_pos = (g_rd_play_ptr + read_len);
+bfc177b8:	b722      	lw	a3,bfc17840 <usound_inner_get_info+0x98>
+bfc177ba:	9e40      	lw	v0,0(a2)
+bfc177bc:	6b00      	li	v1,0
+bfc177be:	e231      	addu	a0,v0,s1
+bfc177c0:	f002 5c01 	sltiu	a0,4097
+
+        if(len_pos > PLAY_BUFF_SIZE) {
+bfc177c4:	df60      	sw	v1,0(a3)
+bfc177c6:	d406      	sw	a0,24(sp)
+bfc177c8:	6025      	bteqz	bfc17814 <usound_inner_get_info+0x6c>
+bfc177ca:	b520      	lw	a1,bfc17848 <usound_inner_get_info+0xa0>
+            libc_memcpy((uint8 *) pinfor, (g_play_buf + g_rd_play_ptr), (PLAY_BUFF_SIZE - g_rd_play_ptr));
+
+            libc_memcpy((uint8 *) pinfor, g_play_buf, (len_pos - PLAY_BUFF_SIZE));
+        } else {
+            libc_memcpy((uint8 *) pinfor, (g_play_buf + g_rd_play_ptr), read_len);
+bfc177cc:	940d      	lw	a0,52(sp)
+bfc177ce:	e2b5      	addu	a1,v0,a1
+bfc177d0:	b21f      	lw	v0,bfc1784c <usound_inner_get_info+0xa4>
+bfc177d2:	67d1      	move	a2,s1
+bfc177d4:	ea40      	jalr	v0
+bfc177d6:	67e3      	move	a3,v1
+bfc177d8:	b319      	lw	v1,bfc1783c <usound_inner_get_info+0x94>
+        }
+
+        g_play_data_count -= read_len;
+bfc177da:	9bc0      	lw	a2,0(v1)
+bfc177dc:	e63f      	subu	a3,a2,s1
+bfc177de:	dbe0      	sw	a3,0(v1)
+bfc177e0:	b319      	lw	v1,bfc17844 <usound_inner_get_info+0x9c>
+
+        g_rd_play_ptr += read_len;
+bfc177e2:	9b80      	lw	a0,0(v1)
+bfc177e4:	e429      	addu	v0,a0,s1
+bfc177e6:	f002 5a00 	sltiu	v0,4096
+
+        if(g_rd_play_ptr >= PLAY_BUFF_SIZE) {
+bfc177ea:	6101      	btnez	bfc177ee <usound_inner_get_info+0x46>
+bfc177ec:	6a00      	li	v0,0
+            g_rd_play_ptr = 0;
+bfc177ee:	b415      	lw	a0,bfc17840 <usound_inner_get_info+0x98>
+bfc177f0:	db40      	sw	v0,0(v1)
+bfc177f2:	9c40      	lw	v0,0(a0)
+bfc177f4:	5a64      	sltiu	v0,100
+        }
+    } else {
+        g_no_data_count++;
+        read_len = 0;
+    }
+
+    if(g_no_data_count >= 100) {
+bfc177f6:	6105      	btnez	bfc17802 <usound_inner_get_info+0x5a>
+bfc177f8:	b516      	lw	a1,bfc17850 <usound_inner_get_info+0xa8>
+
+        //libc_print("stop play",0,0);
+        g_start_play = 0;
+bfc177fa:	6b00      	li	v1,0
+bfc177fc:	6a00      	li	v0,0
+
+        g_no_data_count = 0;
+bfc177fe:	c560      	sb	v1,0(a1)
+bfc17800:	dc40      	sw	v0,0(a0)
+bfc17802:	6751      	move	v0,s1
+    }
+
+    //sys_local_irq_restore(int_flag);
+
+    return read_len;
+}
+bfc17804:	6476      	restore	48,ra,s0-s1
+bfc17806:	e8a0      	jrc	ra
+bfc17808:	b40e      	lw	a0,bfc1783c <usound_inner_get_info+0x94>
+bfc1780a:	9c20      	lw	s1,0(a0)
+bfc1780c:	4141      	addiu	v0,s1,1
+bfc1780e:	6900      	li	s1,0
+bfc17810:	dc40      	sw	v0,0(a0)
+bfc17812:	17f0      	b	bfc177f4 <usound_inner_get_info+0x4c>
+bfc17814:	b60d      	lw	a2,bfc17848 <usound_inner_get_info+0xa0>
+bfc17816:	f002 6800 	li	s0,4096
+bfc1781a:	6785      	move	a0,a1
+bfc1781c:	e2d5      	addu	a1,v0,a2
+bfc1781e:	e05b      	subu	a2,s0,v0
+bfc17820:	b00b      	lw	s0,bfc1784c <usound_inner_get_info+0xa4>
+bfc17822:	67e3      	move	a3,v1
+bfc17824:	e840      	jalr	s0
+bfc17826:	d304      	sw	v1,16(sp)
+bfc17828:	9606      	lw	a2,24(sp)
+bfc1782a:	9204      	lw	v0,16(sp)
+bfc1782c:	940d      	lw	a0,52(sp)
+bfc1782e:	b507      	lw	a1,bfc17848 <usound_inner_get_info+0xa0>
+bfc17830:	f01e 4e00 	addiu	a2,-4096
+bfc17834:	e840      	jalr	s0
+bfc17836:	67e2      	move	a3,v0
+bfc17838:	17cf      	b	bfc177d8 <usound_inner_get_info+0x30>
+bfc1783a:	0000      	addiu	s0,sp,0
+bfc1783c:	943c      	lw	a0,240(sp)
+bfc1783e:	9fc1      	lw	a2,4(a3)
+bfc17840:	9440      	lw	a0,256(sp)
+bfc17842:	9fc1      	lw	a2,4(a3)
+bfc17844:	9438      	lw	a0,224(sp)
+bfc17846:	9fc1      	lw	a2,4(a3)
+bfc17848:	2000      	beqz	s0,bfc1784a <usound_inner_get_info+0xa2>
+bfc1784a:	9fc3      	lw	a2,12(a3)
+bfc1784c:	8361      	lb	v1,1(v1)
+bfc1784e:	bfc1      	lwu	a2,4(a3)
+bfc17850:	93e4      	lw	v1,912(sp)
+bfc17852:	9fc1      	lw	a2,4(a3)
+
+bfc17854 <usound_inner_set_info>:
+bfc17854:	e820      	jr	ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:set some infomation to device
+ * \ int usound_inner_set_info(uint32 info_index,uint32* pinfor,uint32 info_len)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_set_info(uint32 info_index, uint32 *pinfor, uint32 info_len)
+{
+    return 0;
+}
+bfc17856:	6a00      	li	v0,0
+
+bfc17858 <usound_inner_set_cmd>:
+bfc17858:	64e3      	save	24,ra,s0
+
+/******************************************************************************/
+/*!
+ * \par  Description:set cmd to device for human handle
+ * \ int usound_inner_set_cmd(uint32 cmd,uint32 cmd_param)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_set_cmd(uint32 cmd, uint32 cmd_param)
+{
+bfc1785a:	5c0f      	sltiu	a0,15
+    //clear some flag and do something
+    switch(cmd) {
+bfc1785c:	601e      	bteqz	bfc1789a <usound_inner_set_cmd+0x42>
+bfc1785e:	0a04      	la	v0,bfc1786c <usound_inner_set_cmd+0x14>
+bfc17860:	3784      	sll	a3,a0,1
+bfc17862:	e759      	addu	a2,a3,v0
+bfc17864:	8e80      	lh	a0,0(a2)
+bfc17866:	e44d      	addu	v1,a0,v0
+bfc17868:	eb80      	jrc	v1
+bfc1786a:	0000      	addiu	s0,sp,0
+bfc1786c:	0091      	addiu	s0,sp,580
+bfc1786e:	0035      	addiu	s0,sp,212
+bfc17870:	0085      	addiu	s0,sp,532
+bfc17872:	0061      	addiu	s0,sp,388
+bfc17874:	005b      	addiu	s0,sp,364
+bfc17876:	0053      	addiu	s0,sp,332
+bfc17878:	0039      	addiu	s0,sp,228
+bfc1787a:	002f      	addiu	s0,sp,188
+bfc1787c:	002f      	addiu	s0,sp,188
+bfc1787e:	0045      	addiu	s0,sp,276
+bfc17880:	002f      	addiu	s0,sp,188
+bfc17882:	002f      	addiu	s0,sp,188
+bfc17884:	00b7      	addiu	s0,sp,732
+bfc17886:	00af      	addiu	s0,sp,700
+bfc17888:	00a3      	addiu	s0,sp,652
+bfc1788a:	b439      	lw	a0,bfc1796c <usound_inner_set_cmd+0x114>
+
+        case SET_PLAY_FLAG:
+
+            //g_start_play = (uint8) cmd_param;
+            if(cmd_param == 3) {
+                low_energy = 1;
+                g_start_play = 0;
+            } else if(cmd_param == 4) {
+                low_energy = 0;
+            } else {
+                g_manul_stop = cmd_param;
+bfc1788c:	dca0      	sw	a1,0(a0)
+bfc1788e:	2505      	beqz	a1,bfc1789a <usound_inner_set_cmd+0x42>
+
+                if(g_manul_stop != 0) {
+bfc17890:	b636      	lw	a2,bfc17968 <usound_inner_set_cmd+0x110>
+                    g_start_play = 0;
+bfc17892:	6f00      	li	a3,0
+bfc17894:	b237      	lw	v0,bfc17970 <usound_inner_set_cmd+0x118>
+
+                    reset_data_pos();
+bfc17896:	ea40      	jalr	v0
+bfc17898:	c6e0      	sb	a3,0(a2)
+bfc1789a:	6a00      	li	v0,0
+                }
+            }
+
+            break;
+
+        case SET_HID_OPERS:
+            //libc_print("next",g_hid_report,2);
+            g_hid_report = (uint8) cmd_param;
+            g_hid_change = 1;
+            break;
+
+        case SET_SAMPLE_RATE:
+
+            //sample rate is 44100
+
+            g_set_sample_flag = 0;
+            g_set_dac_sample_flag = 0;
+
+            break;
+
+        case SET_ADJUST_TIMER:
+            if(cmd_param == 1) {
+                //start
+                if(g_asrc_adjust_timer == -1) {
+                    init_channel_record(&g_asrc_out1_record);
+                    g_asrc_adjust_timer = sys_set_irq_timer1(deal_timer_process, 50);
+                }
+            } else {
+                //stop
+                //make sure timer over
+                if(g_asrc_adjust_timer != -1) {
+                    sys_del_irq_timer1(g_asrc_adjust_timer);
+                    g_asrc_adjust_timer = -1;
+                }
+
+            }
+
+            break;
+
+        case SET_LINE_STATUS:
+            g_usb_state = cmd_param;
+            break;
+
+        case SET_VOLUME_FLAG:
+            g_volume_chg = 0;
+
+            break;
+
+        case SET_HID_CHANGE:
+            g_hid_change = 1;
+            break;
+
+        case SET_TTS_FLAG:
+            if(cmd_param == 1) {
+                g_tts_start_flag = 1;
+            } else {
+                g_tts_start_flag = 0;
+            }
+            break;
+
+        case SET_MUTE_FLAG:
+            if(cmd_param == 1) {
+                g_mute_flag = 1;
+            } else {
+                g_mute_flag = 0;
+                g_mute_delay = 3;
+            }
+            break;
+
+        case FIX_SAMPLE_RATE:
+#if 0
+            for(g_count = 0; g_count < 3; g_count++) {
+                All_Descriptors_of_Configuration.Audio_Class_Format_Setting1.tSamFreq1[g_count] = g_set_rate[g_count];
+                All_Descriptors_of_Configuration.Audio_Class_Format_Setting1.tSamFreq2[g_count] = g_clear_rate[g_count];
+            }
+#endif
+            break;
+
+        case SET_VOLUME:
+            g_current_volume_ch0 = (uint16)cmd_param;
+            g_current_volume_ch1 = (uint16)cmd_param;
+            g_current_volume_ch2 = (uint16)cmd_param;
+            break;
+
+        case CLR_SWITCH_FLAG:
+            g_pc_switch_flag = 0;
+            break;
+        default:
+
+            break;
+
+    }
+    return 0;
+}
+bfc1789c:	6463      	restore	24,ra,s0
+bfc1789e:	e8a0      	jrc	ra
+bfc178a0:	b335      	lw	v1,bfc17970 <usound_inner_set_cmd+0x118>
+bfc178a2:	c3a0      	sb	a1,0(v1)
+bfc178a4:	b235      	lw	v0,bfc17978 <usound_inner_set_cmd+0x120>
+bfc178a6:	6b01      	li	v1,1
+bfc178a8:	c260      	sb	v1,0(v0)
+bfc178aa:	6a00      	li	v0,0
+bfc178ac:	6463      	restore	24,ra,s0
+bfc178ae:	e8a0      	jrc	ra
+bfc178b0:	7501      	cmpi	a1,1
+bfc178b2:	6b01      	li	v1,1
+bfc178b4:	6001      	bteqz	bfc178b8 <usound_inner_set_cmd+0x60>
+bfc178b6:	6b00      	li	v1,0
+bfc178b8:	b23a      	lw	v0,bfc179a0 <usound_inner_set_cmd+0x148>
+bfc178ba:	c260      	sb	v1,0(v0)
+bfc178bc:	17f6      	b	bfc178aa <usound_inner_set_cmd+0x52>
+bfc178be:	b238      	lw	v0,bfc1799c <usound_inner_set_cmd+0x144>
+bfc178c0:	6b00      	li	v1,0
+bfc178c2:	da60      	sw	v1,0(v0)
+bfc178c4:	17ea      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc178c6:	b635      	lw	a2,bfc17998 <usound_inner_set_cmd+0x140>
+bfc178c8:	dea0      	sw	a1,0(a2)
+bfc178ca:	17e7      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc178cc:	7501      	cmpi	a1,1
+bfc178ce:	6130      	btnez	bfc17930 <usound_inner_set_cmd+0xd8>
+bfc178d0:	b02d      	lw	s0,bfc17984 <usound_inner_set_cmd+0x12c>
+bfc178d2:	98e0      	lw	a3,0(s0)
+bfc178d4:	eeef      	not	a2,a3
+bfc178d6:	2ee1      	bnez	a2,bfc1789a <usound_inner_set_cmd+0x42>
+bfc178d8:	b42c      	lw	a0,bfc17988 <usound_inner_set_cmd+0x130>
+bfc178da:	b32d      	lw	v1,bfc1798c <usound_inner_set_cmd+0x134>
+bfc178dc:	ebc0      	jalrc	v1
+bfc178de:	b42d      	lw	a0,bfc17990 <usound_inner_set_cmd+0x138>
+bfc178e0:	b22d      	lw	v0,bfc17994 <usound_inner_set_cmd+0x13c>
+bfc178e2:	6d32      	li	a1,50
+bfc178e4:	6e00      	li	a2,0
+bfc178e6:	ea40      	jalr	v0
+bfc178e8:	6f21      	li	a3,33
+bfc178ea:	ea91      	seb	v0
+bfc178ec:	d840      	sw	v0,0(s0)
+bfc178ee:	17d5      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc178f0:	b223      	lw	v0,bfc1797c <usound_inner_set_cmd+0x124>
+bfc178f2:	b524      	lw	a1,bfc17980 <usound_inner_set_cmd+0x128>
+bfc178f4:	6c00      	li	a0,0
+bfc178f6:	c280      	sb	a0,0(v0)
+bfc178f8:	c580      	sb	a0,0(a1)
+bfc178fa:	17cf      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc178fc:	7503      	cmpi	a1,3
+bfc178fe:	612c      	btnez	bfc17958 <usound_inner_set_cmd+0x100>
+bfc17900:	b519      	lw	a1,bfc17964 <usound_inner_set_cmd+0x10c>
+bfc17902:	6b01      	li	v1,1
+bfc17904:	b219      	lw	v0,bfc17968 <usound_inner_set_cmd+0x110>
+bfc17906:	dd60      	sw	v1,0(a1)
+bfc17908:	6b00      	li	v1,0
+bfc1790a:	c260      	sb	v1,0(v0)
+bfc1790c:	17ce      	b	bfc178aa <usound_inner_set_cmd+0x52>
+bfc1790e:	7501      	cmpi	a1,1
+bfc17910:	611c      	btnez	bfc1794a <usound_inner_set_cmd+0xf2>
+bfc17912:	b225      	lw	v0,bfc179a4 <usound_inner_set_cmd+0x14c>
+bfc17914:	6b01      	li	v1,1
+bfc17916:	c260      	sb	v1,0(v0)
+bfc17918:	17c8      	b	bfc178aa <usound_inner_set_cmd+0x52>
+bfc1791a:	b228      	lw	v0,bfc179b8 <usound_inner_set_cmd+0x160>
+bfc1791c:	6b00      	li	v1,0
+bfc1791e:	c260      	sb	v1,0(v0)
+bfc17920:	17c4      	b	bfc178aa <usound_inner_set_cmd+0x52>
+bfc17922:	b623      	lw	a2,bfc179ac <usound_inner_set_cmd+0x154>
+bfc17924:	b223      	lw	v0,bfc179b0 <usound_inner_set_cmd+0x158>
+bfc17926:	b424      	lw	a0,bfc179b4 <usound_inner_set_cmd+0x15c>
+bfc17928:	cea0      	sh	a1,0(a2)
+bfc1792a:	caa0      	sh	a1,0(v0)
+bfc1792c:	cca0      	sh	a1,0(a0)
+bfc1792e:	17b5      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc17930:	b015      	lw	s0,bfc17984 <usound_inner_set_cmd+0x12c>
+bfc17932:	9880      	lw	a0,0(s0)
+bfc17934:	ed8f      	not	a1,a0
+bfc17936:	25b1      	beqz	a1,bfc1789a <usound_inner_set_cmd+0x42>
+bfc17938:	6d00      	li	a1,0
+bfc1793a:	b217      	lw	v0,bfc17994 <usound_inner_set_cmd+0x13c>
+bfc1793c:	67c5      	move	a2,a1
+bfc1793e:	ea40      	jalr	v0
+bfc17940:	6f22      	li	a3,34
+bfc17942:	6c01      	li	a0,1
+bfc17944:	ea8b      	neg	v0,a0
+bfc17946:	d840      	sw	v0,0(s0)
+bfc17948:	17a8      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc1794a:	b717      	lw	a3,bfc179a4 <usound_inner_set_cmd+0x14c>
+bfc1794c:	6b00      	li	v1,0
+bfc1794e:	b217      	lw	v0,bfc179a8 <usound_inner_set_cmd+0x150>
+bfc17950:	c760      	sb	v1,0(a3)
+bfc17952:	6b03      	li	v1,3
+bfc17954:	c260      	sb	v1,0(v0)
+bfc17956:	17a9      	b	bfc178aa <usound_inner_set_cmd+0x52>
+bfc17958:	7504      	cmpi	a1,4
+bfc1795a:	6197      	btnez	bfc1788a <usound_inner_set_cmd+0x32>
+bfc1795c:	b202      	lw	v0,bfc17964 <usound_inner_set_cmd+0x10c>
+bfc1795e:	6b00      	li	v1,0
+bfc17960:	da60      	sw	v1,0(v0)
+bfc17962:	179b      	b	bfc1789a <usound_inner_set_cmd+0x42>
+bfc17964:	9430      	lw	a0,192(sp)
+bfc17966:	9fc1      	lw	a2,4(a3)
+bfc17968:	93e4      	lw	v1,912(sp)
+bfc1796a:	9fc1      	lw	a2,4(a3)
+bfc1796c:	9444      	lw	a0,272(sp)
+bfc1796e:	9fc1      	lw	a2,4(a3)
+bfc17970:	73d1      	cmpi	v1,209
+bfc17972:	bfc1      	lwu	a2,4(a3)
+bfc17974:	9403      	lw	a0,12(sp)
+bfc17976:	9fc1      	lw	a2,4(a3)
+bfc17978:	9402      	lw	a0,8(sp)
+bfc1797a:	9fc1      	lw	a2,4(a3)
+bfc1797c:	9400      	lw	a0,0(sp)
+bfc1797e:	9fc1      	lw	a2,4(a3)
+bfc17980:	9406      	lw	a0,24(sp)
+bfc17982:	9fc1      	lw	a2,4(a3)
+bfc17984:	9234      	lw	v0,208(sp)
+bfc17986:	9fc1      	lw	a2,4(a3)
+bfc17988:	9378      	lw	v1,480(sp)
+bfc1798a:	9fc1      	lw	a2,4(a3)
+bfc1798c:	7ae1      	sd	a3,8(v0)
+bfc1798e:	bfc1      	lwu	a2,4(a3)
+bfc17990:	7dcd      	sd	a2,104(a1)
+bfc17992:	bfc1      	lwu	a2,4(a3)
+bfc17994:	8365      	lb	v1,5(v1)
+bfc17996:	bfc1      	lwu	a2,4(a3)
+bfc17998:	9448      	lw	a0,288(sp)
+bfc1799a:	9fc1      	lw	a2,4(a3)
+bfc1799c:	942c      	lw	a0,176(sp)
+bfc1799e:	9fc1      	lw	a2,4(a3)
+bfc179a0:	9407      	lw	a0,28(sp)
+bfc179a2:	9fc1      	lw	a2,4(a3)
+bfc179a4:	93f1      	lw	v1,964(sp)
+bfc179a6:	9fc1      	lw	a2,4(a3)
+bfc179a8:	93f2      	lw	v1,968(sp)
+bfc179aa:	9fc1      	lw	a2,4(a3)
+bfc179ac:	9426      	lw	a0,152(sp)
+bfc179ae:	9fc1      	lw	a2,4(a3)
+bfc179b0:	9428      	lw	a0,160(sp)
+bfc179b2:	9fc1      	lw	a2,4(a3)
+bfc179b4:	942a      	lw	a0,168(sp)
+bfc179b6:	9fc1      	lw	a2,4(a3)
+bfc179b8:	9401      	lw	a0,4(sp)
+bfc179ba:	9fc1      	lw	a2,4(a3)
+
+bfc179bc <usound_inner_hid_deal>:
+bfc179bc:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:check if there has hid intoken,and send data to pc
+ * \ int usound_inner_hid_deal(void)
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_op_entry.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usound_inner_hid_deal(void)
+{
+bfc179be:	b203      	lw	v0,bfc179c8 <usound_inner_hid_deal+0xc>
+    hid_token_check();
+bfc179c0:	eac0      	jalrc	v0
+bfc179c2:	6a00      	li	v0,0
+    return 0;
+}
+bfc179c4:	6443      	restore	24,ra
+bfc179c6:	e8a0      	jrc	ra
+bfc179c8:	75d9      	cmpi	a1,217
+bfc179ca:	bfc1      	lwu	a2,4(a3)
+
+bfc179cc <access_usbfifo_by_cpu>:
+bfc179cc:	f00c 64f6 	save	a0-a2,48,ra,s0-s1
+ * \par
+ * \note
+ *******************************************************************************/
+void access_usbfifo_by_cpu(uint8 epsel, uint32 *address, uint32 data_lenth)
+{
+bfc179d0:	6705      	move	s0,a1
+bfc179d2:	b53b      	lw	a1,bfc17abc <access_usbfifo_by_cpu+0xf0>
+    uint32 i;
+    uint32 temp_data = 0;
+    //libc_print("",data_lenth,2);
+    //必须在数据包为采样点的整数倍时才能开始收数
+
+    if((g_mute_delay != 0) && (epsel == EP1OUT)) {
+bfc179d4:	6724      	move	s1,a0
+bfc179d6:	a580      	lbu	a0,0(a1)
+bfc179d8:	e911      	zeb	s1
+bfc179da:	2402      	beqz	a0,bfc179e0 <access_usbfifo_by_cpu+0x14>
+bfc179dc:	7102      	cmpi	s1,2
+bfc179de:	603f      	bteqz	bfc17a5e <access_usbfifo_by_cpu+0x92>
+bfc179e0:	950e      	lw	a1,56(sp)
+        if(((data_lenth == 0xb0) && (g_dac_sample == 44100)) \
+                || ((data_lenth == 0xc0) && (g_dac_sample == 48000))\
+                || ((data_lenth == 0x180) && (g_dac_sample == 96000))) {
+            g_mute_delay --;
+        } else {
+            g_mute_delay = 3;
+            libc_print("clear", 0, 0);
+        }
+    }
+
+
+    data_lenth >>= 2; //Fifodat是32位
+bfc179e2:	36aa      	srl	a2,a1,2
+bfc179e4:	261c      	beqz	a2,bfc17a1e <access_usbfifo_by_cpu+0x52>
+
+    for(i = 0; i < data_lenth; i++) {
+bfc179e6:	7102      	cmpi	s1,2
+bfc179e8:	6778      	move	v1,t8
+bfc179ea:	6d01      	li	a1,1
+bfc179ec:	5b01      	sltiu	v1,1
+bfc179ee:	b73b      	lw	a3,bfc17ad8 <access_usbfifo_by_cpu+0x10c>
+bfc179f0:	ed2e      	xor	a1,s1
+bfc179f2:	6778      	move	v1,t8
+bfc179f4:	5d01      	sltiu	a1,1
+bfc179f6:	653f      	move	t9,a3
+bfc179f8:	6758      	move	v0,t8
+bfc179fa:	b437      	lw	a0,bfc17ad4 <access_usbfifo_by_cpu+0x108>
+bfc179fc:	b734      	lw	a3,bfc17acc <access_usbfifo_by_cpu+0x100>
+bfc179fe:	d206      	sw	v0,24(sp)
+bfc17a00:	2310      	beqz	v1,bfc17a22 <access_usbfifo_by_cpu+0x56>
+        if(epsel == EP1OUT) {
+bfc17a02:	a740      	lbu	v0,0(a3)
+            if((g_tts_start_flag == 1) || (g_mute_flag == 1) || (g_mute_delay != 0)) {
+bfc17a04:	7201      	cmpi	v0,1
+bfc17a06:	6007      	bteqz	bfc17a16 <access_usbfifo_by_cpu+0x4a>
+bfc17a08:	b232      	lw	v0,bfc17ad0 <access_usbfifo_by_cpu+0x104>
+bfc17a0a:	a2a0      	lbu	a1,0(v0)
+bfc17a0c:	7501      	cmpi	a1,1
+bfc17a0e:	6003      	bteqz	bfc17a16 <access_usbfifo_by_cpu+0x4a>
+bfc17a10:	b22b      	lw	v0,bfc17abc <access_usbfifo_by_cpu+0xf0>
+bfc17a12:	a2a0      	lbu	a1,0(v0)
+bfc17a14:	2511      	beqz	a1,bfc17a38 <access_usbfifo_by_cpu+0x6c>
+bfc17a16:	9c40      	lw	v0,0(a0)
+                temp_data = act_readl(Fifo1dat);
+bfc17a18:	46cf      	addiu	a2,a2,-1
+bfc17a1a:	4004      	addiu	s0,s0,4
+
+                //libc_print("",temp_data,2);
+
+                //*address = 0;
+            } else {
+                *address = act_readl(Fifo1dat);
+                ////检查USBfifo空的次数，用于判断ESD后，USB获取数据是否异常
+                if((*address != 0xffff)
+                        && (*address != 0)
+                        && (*address != 1)) {
+                    if(g_no_empty_count < 50) {
+                        g_no_empty_count++;
+                    }
+                } else {
+                    g_no_empty_count = 0;
+                }
+            }
+        } else if(epsel == EP1IN) {
+            act_writel(*address, Fifo1dat);
+        } else if(epsel == EP2OUT) {
+            *address = act_readl(Fifo2dat);
+        } else {
+            ;//for qac
+        }
+        address++;
+bfc17a1c:	2ef1      	bnez	a2,bfc17a00 <access_usbfifo_by_cpu+0x34>
+bfc17a1e:	6476      	restore	48,ra,s0-s1
+bfc17a20:	e8a0      	jrc	ra
+bfc17a22:	9206      	lw	v0,24(sp)
+bfc17a24:	2203      	beqz	v0,bfc17a2c <access_usbfifo_by_cpu+0x60>
+bfc17a26:	98a0      	lw	a1,0(s0)
+bfc17a28:	dca0      	sw	a1,0(a0)
+bfc17a2a:	17f6      	b	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a2c:	7104      	cmpi	s1,4
+bfc17a2e:	61f4      	btnez	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a30:	b52b      	lw	a1,bfc17adc <access_usbfifo_by_cpu+0x110>
+bfc17a32:	9d40      	lw	v0,0(a1)
+bfc17a34:	d840      	sw	v0,0(s0)
+bfc17a36:	17f0      	b	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a38:	9c40      	lw	v0,0(a0)
+bfc17a3a:	f7ff 721f 	cmpi	v0,65535
+bfc17a3e:	d840      	sw	v0,0(s0)
+bfc17a40:	6024      	bteqz	bfc17a8a <access_usbfifo_by_cpu+0xbe>
+bfc17a42:	2223      	beqz	v0,bfc17a8a <access_usbfifo_by_cpu+0xbe>
+bfc17a44:	7201      	cmpi	v0,1
+bfc17a46:	6021      	bteqz	bfc17a8a <access_usbfifo_by_cpu+0xbe>
+bfc17a48:	67b9      	move	a1,t9
+bfc17a4a:	a540      	lbu	v0,0(a1)
+bfc17a4c:	67bd      	move	a1,sp
+bfc17a4e:	c550      	sb	v0,16(a1)
+bfc17a50:	a5b0      	lbu	a1,16(a1)
+bfc17a52:	5d32      	sltiu	a1,50
+bfc17a54:	60e1      	bteqz	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a56:	45a1      	addiu	a1,a1,1
+bfc17a58:	6759      	move	v0,t9
+bfc17a5a:	c2a0      	sb	a1,0(v0)
+bfc17a5c:	17dd      	b	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a5e:	76b0      	cmpi	a2,176
+bfc17a60:	6018      	bteqz	bfc17a92 <access_usbfifo_by_cpu+0xc6>
+bfc17a62:	960e      	lw	a2,56(sp)
+bfc17a64:	76c0      	cmpi	a2,192
+bfc17a66:	6105      	btnez	bfc17a72 <access_usbfifo_by_cpu+0xa6>
+bfc17a68:	b216      	lw	v0,bfc17ac0 <access_usbfifo_by_cpu+0xf4>
+bfc17a6a:	9ae0      	lw	a3,0(v0)
+bfc17a6c:	f397 7700 	cmpi	a3,48000
+bfc17a70:	6009      	bteqz	bfc17a84 <access_usbfifo_by_cpu+0xb8>
+bfc17a72:	930e      	lw	v1,56(sp)
+bfc17a74:	f180 7300 	cmpi	v1,384
+bfc17a78:	6114      	btnez	bfc17aa2 <access_usbfifo_by_cpu+0xd6>
+bfc17a7a:	b212      	lw	v0,bfc17ac0 <access_usbfifo_by_cpu+0xf4>
+bfc17a7c:	b712      	lw	a3,bfc17ac4 <access_usbfifo_by_cpu+0xf8>
+bfc17a7e:	9ac0      	lw	a2,0(v0)
+bfc17a80:	eeee      	xor	a2,a3
+bfc17a82:	2e0f      	bnez	a2,bfc17aa2 <access_usbfifo_by_cpu+0xd6>
+bfc17a84:	446f      	addiu	v1,a0,-1
+bfc17a86:	c560      	sb	v1,0(a1)
+bfc17a88:	17ab      	b	bfc179e0 <access_usbfifo_by_cpu+0x14>
+bfc17a8a:	b214      	lw	v0,bfc17ad8 <access_usbfifo_by_cpu+0x10c>
+bfc17a8c:	6d00      	li	a1,0
+bfc17a8e:	c2a0      	sb	a1,0(v0)
+bfc17a90:	17c3      	b	bfc17a18 <access_usbfifo_by_cpu+0x4c>
+bfc17a92:	b30c      	lw	v1,bfc17ac0 <access_usbfifo_by_cpu+0xf4>
+bfc17a94:	9b40      	lw	v0,0(v1)
+bfc17a96:	f455 7204 	cmpi	v0,44100
+bfc17a9a:	61e3      	btnez	bfc17a62 <access_usbfifo_by_cpu+0x96>
+bfc17a9c:	446f      	addiu	v1,a0,-1
+bfc17a9e:	c560      	sb	v1,0(a1)
+bfc17aa0:	179f      	b	bfc179e0 <access_usbfifo_by_cpu+0x14>
+bfc17aa2:	6c03      	li	a0,3
+bfc17aa4:	c580      	sb	a0,0(a1)
+bfc17aa6:	b209      	lw	v0,bfc17ac8 <access_usbfifo_by_cpu+0xfc>
+bfc17aa8:	6d00      	li	a1,0
+bfc17aaa:	0c03      	la	a0,bfc17ab4 <access_usbfifo_by_cpu+0xe8>
+bfc17aac:	67c5      	move	a2,a1
+bfc17aae:	ea40      	jalr	v0
+bfc17ab0:	6f4b      	li	a3,75
+bfc17ab2:	1796      	b	bfc179e0 <access_usbfifo_by_cpu+0x14>
+bfc17ab4:	6c63      	li	a0,99
+bfc17ab6:	6165      	btnez	bfc17b82 <init_channel_record+0xa2>
+bfc17ab8:	0072      	addiu	s0,sp,456
+bfc17aba:	0000      	addiu	s0,sp,0
+bfc17abc:	93f2      	lw	v1,968(sp)
+bfc17abe:	9fc1      	lw	a2,4(a3)
+bfc17ac0:	9230      	lw	v0,192(sp)
+bfc17ac2:	9fc1      	lw	a2,4(a3)
+bfc17ac4:	7700      	cmpi	a3,0
+bfc17ac6:	0001      	addiu	s0,sp,4
+bfc17ac8:	8365      	lb	v1,5(v1)
+bfc17aca:	bfc1      	lwu	a2,4(a3)
+bfc17acc:	9407      	lw	a0,28(sp)
+bfc17ace:	9fc1      	lw	a2,4(a3)
+bfc17ad0:	93f1      	lw	v1,964(sp)
+bfc17ad2:	9fc1      	lw	a2,4(a3)
+bfc17ad4:	0084      	addiu	s0,sp,528
+bfc17ad6:	c008      	sb	s0,8(s0)
+bfc17ad8:	93fc      	lw	v1,1008(sp)
+bfc17ada:	9fc1      	lw	a2,4(a3)
+bfc17adc:	0088      	addiu	s0,sp,544
+bfc17ade:	c008      	sb	s0,8(s0)
+
+bfc17ae0 <init_channel_record>:
+bfc17ae0:	64b2      	save	16,s0-s1
+ * \par
+ * \note
+ *******************************************************************************/
+void init_channel_record(asrc_adjust_record_t *pCh)
+{
+bfc17ae2:	b537      	lw	a1,bfc17bbc <init_channel_record+0xdc>
+    uint16 i;
+
+    //uint32 tem_dec0, tem_dec1;
+
+    g_asrc_freq_in = g_play_sample;
+bfc17ae4:	b237      	lw	v0,bfc17bc0 <init_channel_record+0xe0>
+
+#if(SYS_BOARD_TYPE == FOR_FPGA)
+    g_asrc_freq_out = 48000;
+#else
+    //g_asrc_freq_out = g_play_sample;
+    if(g_play_sample == 96000) {
+bfc17ae6:	9d60      	lw	v1,0(a1)
+bfc17ae8:	653c      	move	t9,a0
+bfc17aea:	b434      	lw	a0,bfc17bb8 <init_channel_record+0xd8>
+bfc17aec:	ea6e      	xor	v0,v1
+bfc17aee:	dc60      	sw	v1,0(a0)
+bfc17af0:	2a4e      	bnez	v0,bfc17b8e <init_channel_record+0xae>
+bfc17af2:	b332      	lw	v1,bfc17bb8 <init_channel_record+0xd8>
+        g_asrc_freq_out = 48000;
+bfc17af4:	f397 6e00 	li	a2,48000
+bfc17af8:	dbc1      	sw	a2,4(v1)
+bfc17afa:	6b00      	li	v1,0
+    } else {
+        g_asrc_freq_out = g_play_sample;
+    }
+#endif
+
+    // init record
+    for(i = 0; i < K_RECORD_LEN; i++) {
+bfc17afc:	6783      	move	a0,v1
+bfc17afe:	4301      	addiu	s0,v1,1
+bfc17b00:	3264      	sll	v0,v1,1
+        pCh->nHeToHfVec[i] = 0;
+bfc17b02:	6770      	move	v1,s0
+bfc17b04:	67b9      	move	a1,t9
+bfc17b06:	eb31      	zeh	v1
+bfc17b08:	e2a5      	addu	s1,v0,a1
+bfc17b0a:	5b03      	sltiu	v1,3
+bfc17b0c:	c98a      	sh	a0,20(s1)
+bfc17b0e:	c98f      	sh	a0,30(s1)
+        pCh->nHfToHeVec[i] = 0;
+bfc17b10:	61f6      	btnez	bfc17afe <init_channel_record+0x1e>
+bfc17b12:	6f00      	li	a3,0
+    }
+    //pCh->nGlbHeToHfCounter2 = 0;
+    //pCh->nGlbHfToHeCounter2 = 0;
+    pCh->nGlbHeToHfCounter = 0;
+bfc17b14:	b629      	lw	a2,bfc17bb8 <init_channel_record+0xd8>
+    pCh->nGlbHfToHeCounter = 0;
+    pCh->nAverageHe2Hf = 0;
+    pCh->nAverageHf2He = 0;
+    //pCh->nGlbRecordStartCount = K_REC_START_POS;
+    pCh->nFreqLow = (uint32)((long long) g_asrc_freq_in * (K_ASRC_OUT1_DEC0 - K_DELTA_INIT_DECIMATION0) / 1048576);
+bfc17b16:	ddea      	sw	a3,40(a1)
+bfc17b18:	ddeb      	sw	a3,44(a1)
+bfc17b1a:	ddec      	sw	a3,48(a1)
+bfc17b1c:	dded      	sw	a3,52(a1)
+bfc17b1e:	9e60      	lw	v1,0(a2)
+bfc17b20:	b52a      	lw	a1,bfc17bc8 <init_channel_record+0xe8>
+bfc17b22:	d300      	sw	v1,0(sp)
+bfc17b24:	9400      	lw	a0,0(sp)
+bfc17b26:	ecb9      	multu	a0,a1
+bfc17b28:	ef10      	mfhi	a3
+bfc17b2a:	ee12      	mflo	a2
+bfc17b2c:	5700      	slti	a3,0
+bfc17b2e:	613b      	btnez	bfc17ba6 <init_channel_record+0xc6>
+bfc17b30:	30e0      	sll	s0,a3,8
+bfc17b32:	f500 31c2 	srl	s1,a2,20
+bfc17b36:	b329      	lw	v1,bfc17bd8 <init_channel_record+0xf8>
+    pCh->nFreqHigh = (uint32)((long long) g_asrc_freq_in * (K_ASRC_OUT1_DEC1 + K_DELTA_INIT_DECIMATION1) / 1048576);
+bfc17b38:	9600      	lw	a2,0(sp)
+bfc17b3a:	3210      	sll	v0,s0,4
+bfc17b3c:	ee79      	multu	a2,v1
+bfc17b3e:	6702      	move	s0,v0
+bfc17b40:	e82d      	or	s0,s1
+bfc17b42:	f500 31e3 	sra	s1,a3,20
+bfc17b46:	67f9      	move	a3,t9
+bfc17b48:	df0f      	sw	s0,60(a3)
+bfc17b4a:	ef10      	mfhi	a3
+bfc17b4c:	ee12      	mflo	a2
+bfc17b4e:	5700      	slti	a3,0
+bfc17b50:	6121      	btnez	bfc17b94 <init_channel_record+0xb4>
+bfc17b52:	32e0      	sll	v0,a3,8
+bfc17b54:	3550      	sll	a1,v0,4
+bfc17b56:	f500 34c2 	srl	a0,a2,20
+bfc17b5a:	6765      	move	v1,a1
+bfc17b5c:	eb8d      	or	v1,a0
+bfc17b5e:	6799      	move	a0,t9
+bfc17b60:	dc70      	sw	v1,64(a0)
+bfc17b62:	e069      	addu	v0,s0,v1
+    // calculate nCenterfrequecy
+    pCh->nCenterfrequecy = (pCh->nFreqHigh + pCh->nFreqLow) / 2;
+bfc17b64:	6b02      	li	v1,2
+    // clear decimation ratio modification counter
+    pCh->nModCounter = 0;
+    // last time record (K_NO_RECORD,  K_HF2HE,  K_HE2HF)
+    pCh->nRecord = K_NO_RECORD;
+bfc17b66:	3746      	srl	a3,v0,1
+bfc17b68:	dc79      	sw	v1,100(a0)
+bfc17b6a:	6e00      	li	a2,0
+bfc17b6c:	b313      	lw	v1,bfc17bb8 <init_channel_record+0xd8>
+    // init sample rate parameter
+    pCh->nSampleRate = g_asrc_freq_out;
+bfc17b6e:	dcd8      	sw	a2,96(a0)
+bfc17b70:	dcf3      	sw	a3,76(a0)
+bfc17b72:	9ba1      	lw	a1,4(v1)
+bfc17b74:	b21b      	lw	v0,bfc17be0 <init_channel_record+0x100>
+
+    if(g_asrc_adjust_timer == -1) {
+bfc17b76:	dcba      	sw	a1,104(a0)
+bfc17b78:	9ae0      	lw	a3,0(v0)
+bfc17b7a:	eeef      	not	a2,a3
+bfc17b7c:	2e06      	bnez	a2,bfc17b8a <init_channel_record+0xaa>
+bfc17b7e:	b51a      	lw	a1,bfc17be4 <init_channel_record+0x104>
+        g_asrc_dec0_init = *((REG32)(ASRC_OUT1_DEC0));
+bfc17b80:	b71a      	lw	a3,bfc17be8 <init_channel_record+0x108>
+
+        g_asrc_dec1_init = *((REG32)(ASRC_OUT1_DEC1));
+bfc17b82:	9d80      	lw	a0,0(a1)
+bfc17b84:	db83      	sw	a0,12(v1)
+bfc17b86:	9fc0      	lw	a2,0(a3)
+bfc17b88:	dbc2      	sw	a2,8(v1)
+bfc17b8a:	6432      	restore	16,s0-s1
+    }
+
+    //for test
+    //*((REG32) (GPIOAOUTEN)) |= (1 << 23);
+}
+bfc17b8c:	e8a0      	jrc	ra
+bfc17b8e:	b70b      	lw	a3,bfc17bb8 <init_channel_record+0xd8>
+bfc17b90:	df61      	sw	v1,4(a3)
+bfc17b92:	17b3      	b	bfc17afa <init_channel_record+0x1a>
+bfc17b94:	b40f      	lw	a0,bfc17bd0 <init_channel_record+0xf0>
+bfc17b96:	eb10      	mfhi	v1
+bfc17b98:	e689      	addu	v0,a2,a0
+bfc17b9a:	eac3      	sltu	v0,a2
+bfc17b9c:	67b8      	move	a1,t8
+bfc17b9e:	e571      	addu	a0,a1,v1
+bfc17ba0:	67c2      	move	a2,v0
+bfc17ba2:	67e4      	move	a3,a0
+bfc17ba4:	17d6      	b	bfc17b52 <init_channel_record+0x72>
+bfc17ba6:	b40b      	lw	a0,bfc17bd0 <init_channel_record+0xf0>
+bfc17ba8:	ea10      	mfhi	v0
+bfc17baa:	e685      	addu	s1,a2,a0
+bfc17bac:	e9c3      	sltu	s1,a2
+bfc17bae:	67b8      	move	a1,t8
+bfc17bb0:	e541      	addu	s0,a1,v0
+bfc17bb2:	67d1      	move	a2,s1
+bfc17bb4:	67f0      	move	a3,s0
+bfc17bb6:	17bc      	b	bfc17b30 <init_channel_record+0x50>
+bfc17bb8:	9368      	lw	v1,416(sp)
+bfc17bba:	9fc1      	lw	a2,4(a3)
+bfc17bbc:	9238      	lw	v0,224(sp)
+bfc17bbe:	9fc1      	lw	a2,4(a3)
+bfc17bc0:	7700      	cmpi	a3,0
+bfc17bc2:	0001      	addiu	s0,sp,4
+bfc17bc4:	0000      	addiu	s0,sp,0
+bfc17bc6:	0000      	addiu	s0,sp,0
+bfc17bc8:	ec78      	mult	a0,v1
+bfc17bca:	000f      	addiu	s0,sp,60
+bfc17bcc:	0000      	addiu	s0,sp,0
+bfc17bce:	0000      	addiu	s0,sp,0
+bfc17bd0:	ffff      	daddiu	a3,sp,124
+bfc17bd2:	000f      	addiu	s0,sp,60
+bfc17bd4:	0000      	addiu	s0,sp,0
+bfc17bd6:	0000      	addiu	s0,sp,0
+bfc17bd8:	1388      	b	bfc182ea <usb_device_exit+0xda>
+bfc17bda:	0010      	addiu	s0,sp,64
+bfc17bdc:	0000      	addiu	s0,sp,0
+bfc17bde:	0000      	addiu	s0,sp,0
+bfc17be0:	9234      	lw	v0,208(sp)
+bfc17be2:	9fc1      	lw	a2,4(a3)
+bfc17be4:	0064      	addiu	s0,sp,400
+bfc17be6:	c016      	sb	s0,22(s0)
+bfc17be8:	0068      	addiu	s0,sp,416
+bfc17bea:	c016      	sb	s0,22(s0)
+
+bfc17bec <check_asrc_chanel_fifo_full>:
+bfc17bec:	64f4      	save	32,ra,s0-s1
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *  deal check asrc fifo full
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_asrc_adjust.c
+ * \par
+ * \note
+ *******************************************************************************/
+void check_asrc_chanel_fifo_full(void)
+{
+bfc17bee:	b00c      	lw	s0,bfc17c1c <check_asrc_chanel_fifo_full+0x30>
+    if((*((REG32)(ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_PCMFIFOFull)) != 0) {
+bfc17bf0:	6910      	li	s1,16
+bfc17bf2:	9840      	lw	v0,0(s0)
+bfc17bf4:	ea2c      	and	v0,s1
+bfc17bf6:	2a02      	bnez	v0,bfc17bfc <check_asrc_chanel_fifo_full+0x10>
+bfc17bf8:	6474      	restore	32,ra,s0-s1
+        //libc_print("full", 0, 0);
+        // init channel parameter again
+        init_channel_record(&g_asrc_out1_record);
+        // config default decimation ratio 0
+        *((REG32)(ASRC_OUT1_DEC0)) = g_asrc_dec0_init;
+        // config default decimation ratio 1
+        *((REG32)(ASRC_OUT1_DEC1)) = g_asrc_dec1_init;
+        //while ((*((REG32) (ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_PCMFIFOFull)) != 0)
+        //{
+        // clear pcm full pending
+        *((REG32)(ASRC_OUT1_IP)) = (1 << ASRC_OUT1_IP_PCMFIFOFull);
+        //}
+    }
+}
+bfc17bfa:	e8a0      	jrc	ra
+bfc17bfc:	b409      	lw	a0,bfc17c1c <check_asrc_chanel_fifo_full+0x30>
+bfc17bfe:	b30a      	lw	v1,bfc17c24 <check_asrc_chanel_fifo_full+0x38>
+bfc17c00:	eb40      	jalr	v1
+bfc17c02:	4c10      	addiu	a0,16
+bfc17c04:	b207      	lw	v0,bfc17c20 <check_asrc_chanel_fifo_full+0x34>
+bfc17c06:	b609      	lw	a2,bfc17c28 <check_asrc_chanel_fifo_full+0x3c>
+bfc17c08:	9ae3      	lw	a3,12(v0)
+bfc17c0a:	b506      	lw	a1,bfc17c20 <check_asrc_chanel_fifo_full+0x34>
+bfc17c0c:	dee0      	sw	a3,0(a2)
+bfc17c0e:	9d62      	lw	v1,8(a1)
+bfc17c10:	b407      	lw	a0,bfc17c2c <check_asrc_chanel_fifo_full+0x40>
+bfc17c12:	dc60      	sw	v1,0(a0)
+bfc17c14:	d820      	sw	s1,0(s0)
+bfc17c16:	6474      	restore	32,ra,s0-s1
+bfc17c18:	e8a0      	jrc	ra
+bfc17c1a:	0000      	addiu	s0,sp,0
+bfc17c1c:	0080      	addiu	s0,sp,512
+bfc17c1e:	c016      	sb	s0,22(s0)
+bfc17c20:	9368      	lw	v1,416(sp)
+bfc17c22:	9fc1      	lw	a2,4(a3)
+bfc17c24:	7ae1      	sd	a3,8(v0)
+bfc17c26:	bfc1      	lwu	a2,4(a3)
+bfc17c28:	0064      	addiu	s0,sp,400
+bfc17c2a:	c016      	sb	s0,22(s0)
+bfc17c2c:	0068      	addiu	s0,sp,416
+bfc17c2e:	c016      	sb	s0,22(s0)
+
+bfc17c30 <check_asrc_chanel_fifo_empty>:
+bfc17c30:	64f4      	save	32,ra,s0-s1
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *  deal check asrc fifo empty
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_asrc_adjust.c
+ * \par
+ * \note
+ *******************************************************************************/
+void check_asrc_chanel_fifo_empty(void)
+{
+bfc17c32:	b00c      	lw	s0,bfc17c60 <check_asrc_chanel_fifo_empty+0x30>
+    if((*((REG32)(ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_PCMFIFOEmpty)) != 0) {
+bfc17c34:	6908      	li	s1,8
+bfc17c36:	9840      	lw	v0,0(s0)
+bfc17c38:	ea2c      	and	v0,s1
+bfc17c3a:	2a02      	bnez	v0,bfc17c40 <check_asrc_chanel_fifo_empty+0x10>
+bfc17c3c:	6474      	restore	32,ra,s0-s1
+        //libc_print("empty", 0, 0);
+        // init channel parameter again
+        init_channel_record(&g_asrc_out1_record);
+        // config default decimation ratio 0
+        *((REG32)(ASRC_OUT1_DEC0)) = g_asrc_dec0_init;
+        // config default decimation ratio 1
+        *((REG32)(ASRC_OUT1_DEC1)) = g_asrc_dec1_init;
+        // clear pcm empty pending
+        //while ((*((REG32) (ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_PCMFIFOEmpty)) != 0)
+        //{
+        // clear pcm full pending
+        *((REG32)(ASRC_OUT1_IP)) = (1 << ASRC_OUT1_IP_PCMFIFOEmpty);
+        //}
+    }
+}
+bfc17c3e:	e8a0      	jrc	ra
+bfc17c40:	b409      	lw	a0,bfc17c60 <check_asrc_chanel_fifo_empty+0x30>
+bfc17c42:	b30a      	lw	v1,bfc17c68 <check_asrc_chanel_fifo_empty+0x38>
+bfc17c44:	eb40      	jalr	v1
+bfc17c46:	4c10      	addiu	a0,16
+bfc17c48:	b207      	lw	v0,bfc17c64 <check_asrc_chanel_fifo_empty+0x34>
+bfc17c4a:	b609      	lw	a2,bfc17c6c <check_asrc_chanel_fifo_empty+0x3c>
+bfc17c4c:	9ae3      	lw	a3,12(v0)
+bfc17c4e:	b506      	lw	a1,bfc17c64 <check_asrc_chanel_fifo_empty+0x34>
+bfc17c50:	dee0      	sw	a3,0(a2)
+bfc17c52:	9d62      	lw	v1,8(a1)
+bfc17c54:	b407      	lw	a0,bfc17c70 <check_asrc_chanel_fifo_empty+0x40>
+bfc17c56:	dc60      	sw	v1,0(a0)
+bfc17c58:	d820      	sw	s1,0(s0)
+bfc17c5a:	6474      	restore	32,ra,s0-s1
+bfc17c5c:	e8a0      	jrc	ra
+bfc17c5e:	0000      	addiu	s0,sp,0
+bfc17c60:	0080      	addiu	s0,sp,512
+bfc17c62:	c016      	sb	s0,22(s0)
+bfc17c64:	9368      	lw	v1,416(sp)
+bfc17c66:	9fc1      	lw	a2,4(a3)
+bfc17c68:	7ae1      	sd	a3,8(v0)
+bfc17c6a:	bfc1      	lwu	a2,4(a3)
+bfc17c6c:	0064      	addiu	s0,sp,400
+bfc17c6e:	c016      	sb	s0,22(s0)
+bfc17c70:	0068      	addiu	s0,sp,416
+bfc17c72:	c016      	sb	s0,22(s0)
+
+bfc17c74 <modify_asrc_chanel_decimation_ratio>:
+bfc17c74:	64b1      	save	8,s0-s1
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *  deal modify asrc dec ratio
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_asrc_adjust.c
+ * \par
+ * \note
+ *******************************************************************************/
+void modify_asrc_chanel_decimation_ratio(void)
+{
+bfc17c76:	b550      	lw	a1,bfc17db4 <modify_asrc_chanel_decimation_ratio+0x140>
+    int32 i;
+    uint16 nTmp16Val;
+
+    //check hf to he
+    if((*((REG32)(ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_HFtoHEIP)) != 0) {
+bfc17c78:	6b02      	li	v1,2
+bfc17c7a:	9d40      	lw	v0,0(a1)
+bfc17c7c:	ea6c      	and	v0,v1
+bfc17c7e:	2271      	beqz	v0,bfc17d62 <modify_asrc_chanel_decimation_ratio+0xee>
+bfc17c80:	b04e      	lw	s0,bfc17db8 <modify_asrc_chanel_decimation_ratio+0x144>
+
+        //check if is record already
+        if(g_asrc_out1_record.nRecord != K_HF2HE) {
+bfc17c82:	67f0      	move	a3,s0
+bfc17c84:	4f10      	addiu	a3,16
+bfc17c86:	9f99      	lw	a0,100(a3)
+bfc17c88:	7401      	cmpi	a0,1
+bfc17c8a:	600d      	bteqz	bfc17ca6 <modify_asrc_chanel_decimation_ratio+0x32>
+bfc17c8c:	b34c      	lw	v1,bfc17dbc <modify_asrc_chanel_decimation_ratio+0x148>
+            //low half-word
+            nTmp16Val = (uint16)(*((REG32)(ASRC_OUT1_TIME)) >> 16);
+bfc17c8e:	9b40      	lw	v0,0(v1)
+bfc17c90:	3642      	srl	a2,v0,8
+bfc17c92:	34c2      	srl	a0,a2,8
+bfc17c94:	2408      	beqz	a0,bfc17ca6 <modify_asrc_chanel_decimation_ratio+0x32>
+
+            if(nTmp16Val != 0) {
+bfc17c96:	9f4b      	lw	v0,44(a3)
+                //save
+                g_asrc_out1_record.nHfToHeVec[g_asrc_out1_record.nGlbHfToHeCounter] = nTmp16Val;
+bfc17c98:	3644      	sll	a2,v0,1
+bfc17c9a:	e6ed      	addu	v1,a2,a3
+bfc17c9c:	cb8f      	sh	a0,30(v1)
+bfc17c9e:	42c1      	addiu	a2,v0,1
+
+                g_asrc_out1_record.nGlbHfToHeCounter++;
+bfc17ca0:	6c01      	li	a0,1
+
+                //set flag
+                g_asrc_out1_record.nRecord = K_HF2HE;
+bfc17ca2:	dfcb      	sw	a2,44(a3)
+bfc17ca4:	df99      	sw	a0,100(a3)
+bfc17ca6:	6c02      	li	a0,2
+            }
+        }
+        //libc_print("ftoe", asrc_out1_record.nGlbHfToHeCounter, 2);
+        //*((REG32) (GPIOADAT)) &= (~(1 << 23));
+        //clear pending bit
+        *((REG32)(ASRC_OUT1_IP)) = (1 << ASRC_OUT1_IP_HFtoHEIP);
+bfc17ca8:	dd80      	sw	a0,0(a1)
+bfc17caa:	9d40      	lw	v0,0(a1)
+
+    }
+    //check he to hf
+    if((*((REG32)(ASRC_OUT1_IP)) & (1 << ASRC_OUT1_IP_HEtoHFIP)) != 0) {
+bfc17cac:	6b01      	li	v1,1
+bfc17cae:	ea6c      	and	v0,v1
+bfc17cb0:	2a5f      	bnez	v0,bfc17d70 <modify_asrc_chanel_decimation_ratio+0xfc>
+bfc17cb2:	9faa      	lw	a1,40(a3)
+
+        if(g_asrc_out1_record.nRecord != K_HE2HF) {
+            //check low half-word
+            nTmp16Val = (uint16)(*((REG32)(ASRC_OUT1_TIME)));
+
+            if(nTmp16Val != 0) {
+                //save
+                g_asrc_out1_record.nHeToHfVec[g_asrc_out1_record.nGlbHeToHfCounter] = nTmp16Val;
+
+                g_asrc_out1_record.nGlbHeToHfCounter++;
+
+                //set flag
+                g_asrc_out1_record.nRecord = K_HE2HF;
+            }
+        }
+        //libc_print("etof", asrc_out1_record.nGlbHeToHfCounter, 2);
+        //*((REG32) (GPIOADAT)) |= (1 << 23);
+        //clear pending bit
+        *((REG32)(ASRC_OUT1_IP)) = (1 << ASRC_OUT1_IP_HEtoHFIP);
+
+    }
+    if((g_asrc_out1_record.nGlbHeToHfCounter == K_RECORD_LEN)
+bfc17cb4:	7503      	cmpi	a1,3
+bfc17cb6:	6153      	btnez	bfc17d5e <modify_asrc_chanel_decimation_ratio+0xea>
+bfc17cb8:	9f4b      	lw	v0,44(a3)
+bfc17cba:	5a03      	sltiu	v0,3
+bfc17cbc:	6150      	btnez	bfc17d5e <modify_asrc_chanel_decimation_ratio+0xea>
+bfc17cbe:	9f90      	lw	a0,64(a3)
+            && (g_asrc_out1_record.nGlbHfToHeCounter >= K_RECORD_LEN)) {
+        //asrc_out1_record.nValidRecordNum = asrc_out1_record.nGlbHfToHeCounter;
+        // calculate frequency difference
+        g_asrc_out1_record.nDiffFreq = (g_asrc_out1_record.nFreqHigh - g_asrc_out1_record.nFreqLow);
+bfc17cc0:	9f6f      	lw	v1,60(a3)
+bfc17cc2:	6900      	li	s1,0
+        // calculate average time
+        g_asrc_out1_record.nAverageHe2Hf = 0;
+bfc17cc4:	e47b      	subu	a2,a0,v1
+bfc17cc6:	dfd6      	sw	a2,88(a3)
+bfc17cc8:	df2c      	sw	s1,48(a3)
+bfc17cca:	df2d      	sw	s1,52(a3)
+
+        g_asrc_out1_record.nAverageHf2He = 0;
+bfc17ccc:	6c01      	li	a0,1
+
+        //libc_print("adjust", 0, 0);
+
+        for(i = 1; i < K_RECORD_LEN; i++) {
+bfc17cce:	67b1      	move	a1,s1
+bfc17cd0:	4762      	addiu	v1,a3,2
+bfc17cd2:	67d1      	move	a2,s1
+bfc17cd4:	ab2a      	lhu	s1,20(v1)
+            g_asrc_out1_record.nAverageHe2Hf += g_asrc_out1_record.nHeToHfVec[i];
+bfc17cd6:	ab4f      	lhu	v0,30(v1)
+            g_asrc_out1_record.nAverageHf2He += g_asrc_out1_record.nHfToHeVec[i];
+bfc17cd8:	448f      	addiu	a0,a0,-1
+bfc17cda:	5400      	slti	a0,0
+bfc17cdc:	e535      	addu	a1,s1
+bfc17cde:	e659      	addu	a2,v0
+bfc17ce0:	4362      	addiu	v1,v1,2
+bfc17ce2:	60f8      	bteqz	bfc17cd4 <modify_asrc_chanel_decimation_ratio+0x60>
+bfc17ce4:	35a6      	srl	a1,1
+        }
+        g_asrc_out1_record.nAverageHe2Hf /= (K_RECORD_LEN - 1);
+bfc17ce6:	34c6      	srl	a0,a2,1
+        g_asrc_out1_record.nAverageHf2He /= (K_RECORD_LEN - 1);
+bfc17ce8:	f008 5d01 	sltiu	a1,16385
+
+        if((g_asrc_out1_record.nAverageHe2Hf <= K_NO_NEED_MOD_THRESHOLD) || (g_asrc_out1_record.nAverageHf2He
+bfc17cec:	6730      	move	s1,s0
+bfc17cee:	dfac      	sw	a1,48(a3)
+bfc17cf0:	6707      	move	s0,a3
+bfc17cf2:	df8d      	sw	a0,52(a3)
+bfc17cf4:	604f      	bteqz	bfc17d94 <modify_asrc_chanel_decimation_ratio+0x120>
+bfc17cf6:	6e00      	li	a2,0
+                <= K_NO_NEED_MOD_THRESHOLD)) {
+
+            // clear counter
+            g_asrc_out1_record.nGlbHfToHeCounter = g_asrc_out1_record.nGlbHeToHfCounter = 0;
+bfc17cf8:	e591      	addu	a0,a1,a0
+
+            // calculate nFreqHigh to nCenterfrequecy
+            if((g_asrc_out1_record.nAverageHe2Hf + g_asrc_out1_record.nAverageHf2He) != 0) {
+bfc17cfa:	dfca      	sw	a2,40(a3)
+bfc17cfc:	dfcb      	sw	a2,44(a3)
+bfc17cfe:	244f      	beqz	a0,bfc17d9e <modify_asrc_chanel_decimation_ratio+0x12a>
+bfc17d00:	9f76      	lw	v1,88(a3)
+                g_asrc_out1_record.nFreqHighToCenter = g_asrc_out1_record.nDiffFreq * g_asrc_out1_record.nAverageHe2Hf
+bfc17d02:	ebb8      	mult	v1,a1
+bfc17d04:	ed12      	mflo	a1
+bfc17d06:	ed9b      	divu	zero,a1,a0
+bfc17d08:	eb12      	mflo	v1
+bfc17d0a:	df75      	sw	v1,84(a3)
+bfc17d0c:	98d0      	lw	a2,64(s0)
+                                                       / (g_asrc_out1_record.nAverageHe2Hf + g_asrc_out1_record.nAverageHf2He);
+            }
+            // calculate nCenterfrequecy to nFreqLow
+            //asrc_out1_record.nFreqCenterToLow = (asrc_out1_record.nDiffFreq - asrc_out1_record.nFreqHighToCenter);
+            // refresh center frequency
+            g_asrc_out1_record.nCenterfrequecy = (g_asrc_out1_record.nFreqHigh - g_asrc_out1_record.nFreqHighToCenter);
+bfc17d0e:	984c      	lw	v0,48(s0)
+
+            if((g_asrc_out1_record.nAverageHe2Hf < 0x100) || (g_asrc_out1_record.nAverageHf2He < 0x100)) {
+bfc17d10:	e673      	subu	a0,a2,v1
+bfc17d12:	f100 5a00 	sltiu	v0,256
+bfc17d16:	d893      	sw	a0,76(s0)
+bfc17d18:	6104      	btnez	bfc17d22 <modify_asrc_chanel_decimation_ratio+0xae>
+bfc17d1a:	98ad      	lw	a1,52(s0)
+bfc17d1c:	f100 5d00 	sltiu	a1,256
+bfc17d20:	6043      	bteqz	bfc17da8 <modify_asrc_chanel_decimation_ratio+0x134>
+bfc17d22:	b228      	lw	v0,bfc17dc0 <modify_asrc_chanel_decimation_ratio+0x14c>
+                // refresh nFreqHigh
+                g_asrc_out1_record.nFreqHigh = (g_asrc_out1_record.nCenterfrequecy + g_asrc_freq_in / 1000);
+bfc17d24:	99c0      	lw	a2,0(s1)
+bfc17d26:	ee59      	multu	a2,v0
+bfc17d28:	eb10      	mfhi	v1
+bfc17d2a:	327a      	srl	v0,v1,6
+bfc17d2c:	9f7a      	lw	v1,104(a3)
+                // refresh nFreqLow
+                g_asrc_out1_record.nFreqLow = (g_asrc_out1_record.nCenterfrequecy - g_asrc_freq_in / 1000);
+            } else {
+                // refresh nFreqHigh
+                g_asrc_out1_record.nFreqHigh = (g_asrc_out1_record.nCenterfrequecy + g_asrc_freq_in / 4000);
+                // refresh nFreqLow
+                g_asrc_out1_record.nFreqLow = (g_asrc_out1_record.nCenterfrequecy - g_asrc_freq_in / 4000);
+            }
+            if(g_asrc_out1_record.nSampleRate != 0) {
+bfc17d2e:	e455      	addu	a1,a0,v0
+bfc17d30:	e45b      	subu	a2,a0,v0
+bfc17d32:	d8b0      	sw	a1,64(s0)
+bfc17d34:	d8cf      	sw	a2,60(s0)
+bfc17d36:	67a7      	move	a1,a3
+bfc17d38:	2334      	beqz	v1,bfc17da2 <modify_asrc_chanel_decimation_ratio+0x12e>
+bfc17d3a:	9ff0      	lw	a3,64(a3)
+                // calculate decimation rate 1 accroding to nFreqHigh
+                g_asrc_out1_record.nDecimationRatio1 = ((g_asrc_out1_record.nFreqHigh << 14)
+bfc17d3c:	36e0      	sll	a2,a3,8
+bfc17d3e:	34d8      	sll	a0,a2,6
+bfc17d40:	ec7b      	divu	zero,a0,v1
+bfc17d42:	9def      	lw	a3,60(a1)
+                                                        / g_asrc_out1_record.nSampleRate) << 6;
+                // calculate decimation rate 0 accroding to nFreqLow
+                g_asrc_out1_record.nDecimationRatio0 = ((g_asrc_out1_record.nFreqLow << 14)
+bfc17d44:	36e0      	sll	a2,a3,8
+bfc17d46:	ea12      	mflo	v0
+bfc17d48:	3458      	sll	a0,v0,6
+bfc17d4a:	32d8      	sll	v0,a2,6
+bfc17d4c:	ea7b      	divu	zero,v0,v1
+bfc17d4e:	dd92      	sw	a0,72(a1)
+bfc17d50:	ef12      	mflo	a3
+bfc17d52:	33f8      	sll	v1,a3,6
+bfc17d54:	dd71      	sw	v1,68(a1)
+bfc17d56:	b51c      	lw	a1,bfc17dc4 <modify_asrc_chanel_decimation_ratio+0x150>
+                                                        / g_asrc_out1_record.nSampleRate) << 6;
+            }
+            // refresh ASRC_OUT0_DEC0
+            *((REG32)(ASRC_OUT1_DEC0)) = g_asrc_out1_record.nDecimationRatio0;
+bfc17d58:	dd60      	sw	v1,0(a1)
+bfc17d5a:	b31c      	lw	v1,bfc17dc8 <modify_asrc_chanel_decimation_ratio+0x154>
+            // refresh ASRC_OUT0_DEC1
+            *((REG32)(ASRC_OUT1_DEC1)) = g_asrc_out1_record.nDecimationRatio1;
+bfc17d5c:	db80      	sw	a0,0(v1)
+bfc17d5e:	6431      	restore	8,s0-s1
+
+        }
+    }
+}
+bfc17d60:	e8a0      	jrc	ra
+bfc17d62:	b016      	lw	s0,bfc17db8 <modify_asrc_chanel_decimation_ratio+0x144>
+bfc17d64:	9d40      	lw	v0,0(a1)
+bfc17d66:	6b01      	li	v1,1
+bfc17d68:	67f0      	move	a3,s0
+bfc17d6a:	ea6c      	and	v0,v1
+bfc17d6c:	4f10      	addiu	a3,16
+bfc17d6e:	22a1      	beqz	v0,bfc17cb2 <modify_asrc_chanel_decimation_ratio+0x3e>
+bfc17d70:	9fd9      	lw	a2,100(a3)
+bfc17d72:	260d      	beqz	a2,bfc17d8e <modify_asrc_chanel_decimation_ratio+0x11a>
+bfc17d74:	b412      	lw	a0,bfc17dbc <modify_asrc_chanel_decimation_ratio+0x148>
+bfc17d76:	9c40      	lw	v0,0(a0)
+bfc17d78:	6782      	move	a0,v0
+bfc17d7a:	ec31      	zeh	a0
+bfc17d7c:	2408      	beqz	a0,bfc17d8e <modify_asrc_chanel_decimation_ratio+0x11a>
+bfc17d7e:	9f4a      	lw	v0,40(a3)
+bfc17d80:	3644      	sll	a2,v0,1
+bfc17d82:	e6ed      	addu	v1,a2,a3
+bfc17d84:	cb8a      	sh	a0,20(v1)
+bfc17d86:	42c1      	addiu	a2,v0,1
+bfc17d88:	6b00      	li	v1,0
+bfc17d8a:	dfca      	sw	a2,40(a3)
+bfc17d8c:	df79      	sw	v1,100(a3)
+bfc17d8e:	6c01      	li	a0,1
+bfc17d90:	dd80      	sw	a0,0(a1)
+bfc17d92:	178f      	b	bfc17cb2 <modify_asrc_chanel_decimation_ratio+0x3e>
+bfc17d94:	f008 5c01 	sltiu	a0,16385
+bfc17d98:	61ae      	btnez	bfc17cf6 <modify_asrc_chanel_decimation_ratio+0x82>
+bfc17d9a:	6431      	restore	8,s0-s1
+bfc17d9c:	e8a0      	jrc	ra
+bfc17d9e:	9f75      	lw	v1,84(a3)
+bfc17da0:	17b5      	b	bfc17d0c <modify_asrc_chanel_decimation_ratio+0x98>
+bfc17da2:	9f92      	lw	a0,72(a3)
+bfc17da4:	9f71      	lw	v1,68(a3)
+bfc17da6:	17d7      	b	bfc17d56 <modify_asrc_chanel_decimation_ratio+0xe2>
+bfc17da8:	b206      	lw	v0,bfc17dc0 <modify_asrc_chanel_decimation_ratio+0x14c>
+bfc17daa:	9960      	lw	v1,0(s1)
+bfc17dac:	eb59      	multu	v1,v0
+bfc17dae:	ed10      	mfhi	a1
+bfc17db0:	32a2      	srl	v0,a1,8
+bfc17db2:	17bc      	b	bfc17d2c <modify_asrc_chanel_decimation_ratio+0xb8>
+bfc17db4:	0080      	addiu	s0,sp,512
+bfc17db6:	c016      	sb	s0,22(s0)
+bfc17db8:	9368      	lw	v1,416(sp)
+bfc17dba:	9fc1      	lw	a2,4(a3)
+bfc17dbc:	0084      	addiu	s0,sp,528
+bfc17dbe:	c016      	sb	s0,22(s0)
+bfc17dc0:	4dd3      	addiu	a1,-45
+bfc17dc2:	1062      	b	bfc17e88 <cnvrt_ascii_to_uni16+0xc>
+bfc17dc4:	0064      	addiu	s0,sp,400
+bfc17dc6:	c016      	sb	s0,22(s0)
+bfc17dc8:	0068      	addiu	s0,sp,416
+bfc17dca:	c016      	sb	s0,22(s0)
+
+bfc17dcc <deal_timer_process>:
+bfc17dcc:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *  deal timer interrupt
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_asrc_adjust.c
+ * \par
+ * \note
+ *******************************************************************************/
+void deal_timer_process(void)
+{
+bfc17dce:	1a1f 5efb 	jal	bfc17bec <check_asrc_chanel_fifo_full>
+
+    // timer0 interrupt
+    check_asrc_chanel_fifo_full();
+bfc17dd2:	6500      	nop
+bfc17dd4:	1a1f 5f0c 	jal	bfc17c30 <check_asrc_chanel_fifo_empty>
+    check_asrc_chanel_fifo_empty();
+bfc17dd8:	6500      	nop
+bfc17dda:	1a1f 5f1d 	jal	bfc17c74 <modify_asrc_chanel_decimation_ratio>
+    modify_asrc_chanel_decimation_ratio();
+bfc17dde:	6500      	nop
+bfc17de0:	6443      	restore	24,ra
+bfc17de2:	e8a0      	jrc	ra
+bfc17de4:	6500      	nop
+bfc17de6:	6500      	nop
+
+bfc17de8 <set_usb_cfg_param>:
+bfc17de8:	64c3      	save	24,ra
+ * \par
+ * \note
+ *******************************************************************************/
+int set_usb_cfg_param(uint32 index, uint32 *cfg_info, uint32 cfg_len)
+{
+bfc17dea:	5c07      	sltiu	a0,7
+    uint32 *set_p = NULL;
+    int32 ret_val = -1;
+    switch(index) {
+bfc17dec:	6a01      	li	v0,1
+bfc17dee:	ea4b      	neg	v0
+bfc17df0:	6014      	bteqz	bfc17e1a <set_usb_cfg_param+0x32>
+bfc17df2:	3384      	sll	v1,a0,1
+bfc17df4:	0f03      	la	a3,bfc17e00 <set_usb_cfg_param+0x18>
+bfc17df6:	e3e9      	addu	v0,v1,a3
+bfc17df8:	8a80      	lh	a0,0(v0)
+bfc17dfa:	e4ed      	addu	v1,a0,a3
+bfc17dfc:	eb80      	jrc	v1
+bfc17dfe:	0000      	addiu	s0,sp,0
+bfc17e00:	0023      	addiu	s0,sp,140
+bfc17e02:	0027      	addiu	s0,sp,156
+bfc17e04:	002b      	addiu	s0,sp,172
+bfc17e06:	000f      	addiu	s0,sp,60
+bfc17e08:	002f      	addiu	s0,sp,188
+bfc17e0a:	0033      	addiu	s0,sp,204
+bfc17e0c:	001f      	addiu	s0,sp,124
+bfc17e0e:	b20e      	lw	v0,bfc17e44 <set_usb_cfg_param+0x5c>
+        case 0:
+            set_p = (uint32 *) g_usb_vid;
+            break;
+        case 1:
+            set_p = (uint32 *) g_usb_pid;
+            break;
+        case 2:
+            set_p = (uint32 *) &manufacure_string.wManufacturerName;
+            break;
+        case 3:
+            set_p = (uint32 *) &device_name_string.wProductName;
+bfc17e10:	4282      	addiu	a0,v0,2
+            break;
+        case 4:
+            set_p = &g_volume_flag;
+            break;
+        case 5:
+            set_p = (uint32 *) g_usb_bcd;
+            break;
+        case 6:
+            set_p = (uint32 *) &SerialNumber.wManufacturerName;
+bfc17e12:	b211      	lw	v0,bfc17e54 <set_usb_cfg_param+0x6c>
+            break;
+        default:
+            break;
+    }
+
+    if(set_p != NULL) {
+        libc_memcpy((uint8 *) set_p, (uint8 *) cfg_info, cfg_len);
+bfc17e14:	ea40      	jalr	v0
+bfc17e16:	6f00      	li	a3,0
+bfc17e18:	6a00      	li	v0,0
+        ret_val = 0;
+bfc17e1a:	6443      	restore	24,ra
+    }
+
+    return ret_val;
+}
+bfc17e1c:	e8a0      	jrc	ra
+bfc17e1e:	b20d      	lw	v0,bfc17e50 <set_usb_cfg_param+0x68>
+bfc17e20:	17f7      	b	bfc17e10 <set_usb_cfg_param+0x28>
+bfc17e22:	b406      	lw	a0,bfc17e38 <set_usb_cfg_param+0x50>
+bfc17e24:	17f6      	b	bfc17e12 <set_usb_cfg_param+0x2a>
+bfc17e26:	b406      	lw	a0,bfc17e3c <set_usb_cfg_param+0x54>
+bfc17e28:	17f4      	b	bfc17e12 <set_usb_cfg_param+0x2a>
+bfc17e2a:	b206      	lw	v0,bfc17e40 <set_usb_cfg_param+0x58>
+bfc17e2c:	17f1      	b	bfc17e10 <set_usb_cfg_param+0x28>
+bfc17e2e:	b407      	lw	a0,bfc17e48 <set_usb_cfg_param+0x60>
+bfc17e30:	17f0      	b	bfc17e12 <set_usb_cfg_param+0x2a>
+bfc17e32:	b407      	lw	a0,bfc17e4c <set_usb_cfg_param+0x64>
+bfc17e34:	17ee      	b	bfc17e12 <set_usb_cfg_param+0x2a>
+bfc17e36:	0000      	addiu	s0,sp,0
+bfc17e38:	941c      	lw	a0,112(sp)
+bfc17e3a:	9fc1      	lw	a2,4(a3)
+bfc17e3c:	9414      	lw	a0,80(sp)
+bfc17e3e:	9fc1      	lw	a2,4(a3)
+bfc17e40:	921c      	lw	v0,112(sp)
+bfc17e42:	9fc1      	lw	a2,4(a3)
+bfc17e44:	9264      	lw	v0,400(sp)
+bfc17e46:	9fc1      	lw	a2,4(a3)
+bfc17e48:	93f8      	lw	v1,992(sp)
+bfc17e4a:	9fc1      	lw	a2,4(a3)
+bfc17e4c:	940c      	lw	a0,48(sp)
+bfc17e4e:	9fc1      	lw	a2,4(a3)
+bfc17e50:	9240      	lw	v0,256(sp)
+bfc17e52:	9fc1      	lw	a2,4(a3)
+bfc17e54:	8361      	lb	v1,1(v1)
+bfc17e56:	bfc1      	lwu	a2,4(a3)
+
+bfc17e58 <count_string_charlngth>:
+bfc17e58:	6e00      	li	a2,0
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   count string lenth.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+uint8 count_string_charlngth(uint8 *pstraddr, uint8 strlgth)
+{
+    unsigned char charcounter = 0x00;
+bfc17e5a:	ed11      	zeb	a1
+bfc17e5c:	eea3      	sltu	a2,a1
+    unsigned char i;
+    for(i = 0; i < strlgth; i++) {
+bfc17e5e:	6766      	move	v1,a2
+bfc17e60:	600b      	bteqz	bfc17e78 <count_string_charlngth+0x20>
+bfc17e62:	a440      	lbu	v0,0(a0)
+        if(*pstraddr == 0) {
+bfc17e64:	2209      	beqz	v0,bfc17e78 <count_string_charlngth+0x20>
+bfc17e66:	43e1      	addiu	a3,v1,1
+bfc17e68:	4641      	addiu	v0,a2,1
+            break;
+        }
+        charcounter++;
+bfc17e6a:	6767      	move	v1,a3
+bfc17e6c:	67c2      	move	a2,v0
+bfc17e6e:	eb11      	zeb	v1
+bfc17e70:	ee11      	zeb	a2
+bfc17e72:	4481      	addiu	a0,a0,1
+        pstraddr++;
+bfc17e74:	eba3      	sltu	v1,a1
+bfc17e76:	61f5      	btnez	bfc17e62 <count_string_charlngth+0xa>
+bfc17e78:	e820      	jr	ra
+    }
+    return charcounter;
+}
+bfc17e7a:	6746      	move	v0,a2
+
+bfc17e7c <cnvrt_ascii_to_uni16>:
+bfc17e7c:	ed11      	zeb	a1
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   ASCII code to unique code.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void cnvrt_ascii_to_uni16(uint8 *pstraddr, uint8 strlgth)
+{
+bfc17e7e:	33a4      	sll	v1,a1,1
+    uint8 *data_p1;
+    uint8 *data_p2;
+
+    //数组的下标从0开始
+    data_p1 = pstraddr + (strlgth - 1); //The last byte address
+    data_p2 = pstraddr + (strlgth - 1) * 2 + 1; //the data address to be load
+bfc17e80:	e59d      	addu	a3,a1,a0
+bfc17e82:	e389      	addu	v0,v1,a0
+bfc17e84:	47cf      	addiu	a2,a3,-1
+bfc17e86:	426f      	addiu	v1,v0,-1
+bfc17e88:	250b      	beqz	a1,bfc17ea0 <cnvrt_ascii_to_uni16+0x24>
+
+    //当ASCII码长度为0或1时作下面的转换会覆盖地址指向memory之前的数据
+    while(strlgth != 0x00) {
+        *data_p2 = 0x00;
+        data_p2--;
+        *data_p2 = *data_p1; //Original ASCII char
+
+        data_p1--;
+        data_p2--;
+        strlgth--;
+bfc17e8a:	6c00      	li	a0,0
+bfc17e8c:	c380      	sb	a0,0(v1)
+bfc17e8e:	454f      	addiu	v0,a1,-1
+bfc17e90:	a6e0      	lbu	a3,0(a2)
+bfc17e92:	67a2      	move	a1,v0
+bfc17e94:	ed11      	zeb	a1
+bfc17e96:	f7ff c3ff 	sb	a3,-1(v1)
+bfc17e9a:	46cf      	addiu	a2,a2,-1
+bfc17e9c:	436e      	addiu	v1,v1,-2
+bfc17e9e:	2df6      	bnez	a1,bfc17e8c <cnvrt_ascii_to_uni16+0x10>
+bfc17ea0:	e8a0      	jrc	ra
+	...
+
+bfc17ea4 <atoi>:
+bfc17ea4:	6e00      	li	a2,0
+    }
+}
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   string to int
+ * \param[in]
+ * \param[in]
+ * \return
+ * \retval
+ * \ingroup enumerate.c
+ * \par
+ * \note
+ *******************************************************************************/
+uint32 atoi(const char *src, int lenth)
+{
+    int total = 0;
+bfc17ea6:	250d      	beqz	a1,bfc17ec2 <atoi+0x1e>
+    int temp_value;
+
+    while(lenth != 0) {
+        if((*src >= 'a') && (*src <= 'f')) {
+            temp_value = 10 + *src - 'a';
+        } else if((*src >= 'A') && (*src <= 'F')) {
+            temp_value = 10 + *src - 'A';
+        } else {
+            temp_value = *src - '0';
+        }
+        total = total * 16 + temp_value;
+        src++;
+        lenth--;
+bfc17ea8:	a460      	lbu	v1,0(a0)
+bfc17eaa:	6743      	move	v0,v1
+bfc17eac:	4a9f      	addiu	v0,-97
+bfc17eae:	ea11      	zeb	v0
+bfc17eb0:	5a06      	sltiu	v0,6
+bfc17eb2:	6009      	bteqz	bfc17ec6 <atoi+0x22>
+bfc17eb4:	eb91      	seb	v1
+bfc17eb6:	4ba9      	addiu	v1,-87
+bfc17eb8:	32d0      	sll	v0,a2,4
+bfc17eba:	e279      	addu	a2,v0,v1
+bfc17ebc:	4481      	addiu	a0,a0,1
+bfc17ebe:	45af      	addiu	a1,a1,-1
+bfc17ec0:	2df3      	bnez	a1,bfc17ea8 <atoi+0x4>
+bfc17ec2:	e820      	jr	ra
+    }
+
+    return total;
+}
+bfc17ec4:	6746      	move	v0,a2
+bfc17ec6:	67e3      	move	a3,v1
+bfc17ec8:	4fbf      	addiu	a3,-65
+bfc17eca:	ef11      	zeb	a3
+bfc17ecc:	5f06      	sltiu	a3,6
+bfc17ece:	6003      	bteqz	bfc17ed6 <atoi+0x32>
+bfc17ed0:	eb91      	seb	v1
+bfc17ed2:	4bc9      	addiu	v1,-55
+bfc17ed4:	17f1      	b	bfc17eb8 <atoi+0x14>
+bfc17ed6:	eb91      	seb	v1
+bfc17ed8:	4bd0      	addiu	v1,-48
+bfc17eda:	17ee      	b	bfc17eb8 <atoi+0x14>
+
+bfc17edc <descriptor_init>:
+bfc17edc:	64f4      	save	32,ra,s0-s1
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   deal descriptor.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_setup.c
+ * \par
+ * \note
+ *******************************************************************************/
+void descriptor_init(void)
+{
+bfc17ede:	b439      	lw	a0,bfc17fc0 <descriptor_init+0xe4>
+    uint8 string_len;
+    uint8 ret_type;
+
+    if(0 != g_usb_vid[2]) {
+bfc17ee0:	a442      	lbu	v0,2(a0)
+bfc17ee2:	2a3f      	bnez	v0,bfc17f62 <descriptor_init+0x86>
+bfc17ee4:	b439      	lw	a0,bfc17fc8 <descriptor_init+0xec>
+        Device_Descriptor.idVendor = (unsigned short) atoi((char *) &g_usb_vid[2], 4);
+    }
+
+    if(0 != g_usb_pid[2]) {
+bfc17ee6:	a4a2      	lbu	a1,2(a0)
+bfc17ee8:	2d48      	bnez	a1,bfc17f7a <descriptor_init+0x9e>
+bfc17eea:	b439      	lw	a0,bfc17fcc <descriptor_init+0xf0>
+        Device_Descriptor.idProduct = (unsigned short) atoi((char *) &g_usb_pid[2], 4);
+    }
+
+    if(0 != g_usb_bcd[2]) {
+bfc17eec:	a4c2      	lbu	a2,2(a0)
+bfc17eee:	2e51      	bnez	a2,bfc17f92 <descriptor_init+0xb6>
+bfc17ef0:	b038      	lw	s0,bfc17fd0 <descriptor_init+0xf4>
+        Device_Descriptor.bcdDevice = (unsigned short) atoi((char *) &g_usb_bcd[2], 4);
+    }
+
+    string_len = count_string_charlngth((uint8 *) &manufacure_string.wManufacturerName, 0x08);
+bfc17ef2:	6d08      	li	a1,8
+bfc17ef4:	4022      	addiu	s1,s0,2
+bfc17ef6:	1a1f 5f96 	jal	bfc17e58 <count_string_charlngth>
+bfc17efa:	6791      	move	a0,s1
+bfc17efc:	3344      	sll	v1,v0,1
+    manufacure_string.bLength = 0x02 + string_len * 2;
+bfc17efe:	43e2      	addiu	a3,v1,2
+bfc17f00:	6e03      	li	a2,3
+    manufacure_string.bDescriptorType = 0x03;
+bfc17f02:	c0e0      	sb	a3,0(s0)
+bfc17f04:	c0c1      	sb	a2,1(s0)
+bfc17f06:	6791      	move	a0,s1
+    cnvrt_ascii_to_uni16((uint8 *) &manufacure_string.wManufacturerName, string_len);
+bfc17f08:	1a1f 5f9f 	jal	bfc17e7c <cnvrt_ascii_to_uni16>
+bfc17f0c:	67a2      	move	a1,v0
+bfc17f0e:	b032      	lw	s0,bfc17fd4 <descriptor_init+0xf8>
+
+    string_len = count_string_charlngth((uint8 *) &device_name_string.wProductName, 0x10);
+bfc17f10:	6d10      	li	a1,16
+bfc17f12:	4022      	addiu	s1,s0,2
+bfc17f14:	1a1f 5f96 	jal	bfc17e58 <count_string_charlngth>
+bfc17f18:	6791      	move	a0,s1
+bfc17f1a:	3444      	sll	a0,v0,1
+    device_name_string.bLength = 0x02 + string_len * 2;
+bfc17f1c:	44a2      	addiu	a1,a0,2
+bfc17f1e:	6b03      	li	v1,3
+    device_name_string.bDescriptorType = 0x03;
+bfc17f20:	c0a0      	sb	a1,0(s0)
+bfc17f22:	c061      	sb	v1,1(s0)
+bfc17f24:	6791      	move	a0,s1
+    cnvrt_ascii_to_uni16((uint8 *) &device_name_string.wProductName, string_len);
+bfc17f26:	1a1f 5f9f 	jal	bfc17e7c <cnvrt_ascii_to_uni16>
+bfc17f2a:	67a2      	move	a1,v0
+bfc17f2c:	b02b      	lw	s0,bfc17fd8 <descriptor_init+0xfc>
+
+    //sys_get_fw_info((uint8 *) &ret_type, FW_INFO_USB_SN_TYPE_ADDR, 1);
+    //if ((2 == ret_type) || (1 == ret_type))
+    {
+        //sys_get_fw_info((uint8 *) &SerialNumber.wManufacturerName, FW_INFO_USB_ID_ADDR, 16);
+        string_len = count_string_charlngth((uint8 *) &SerialNumber.wManufacturerName, 0x30);
+bfc17f2e:	6d30      	li	a1,48
+bfc17f30:	4022      	addiu	s1,s0,2
+bfc17f32:	1a1f 5f96 	jal	bfc17e58 <count_string_charlngth>
+bfc17f36:	6791      	move	a0,s1
+bfc17f38:	67a2      	move	a1,v0
+bfc17f3a:	2a35      	bnez	v0,bfc17fa6 <descriptor_init+0xca>
+        if(string_len != 0) {
+bfc17f3c:	b722      	lw	a3,bfc17fc4 <descriptor_init+0xe8>
+            SerialNumber.bLength = 0x02 + string_len * 2;
+            SerialNumber.bDescriptorType = 0x03;
+            cnvrt_ascii_to_uni16((uint8 *) &SerialNumber.wManufacturerName, string_len);
+        } else {
+            Device_Descriptor.iSerialNumber = 0x00;
+bfc17f3e:	c750      	sb	v0,16(a3)
+bfc17f40:	b327      	lw	v1,bfc17fdc <descriptor_init+0x100>
+        }
+    }
+    //序列号一致且同为UNICODE编码时，连两台小机到同一PC会死机，所以这里不转换成unicode编码
+    //    string_len = count_string_charlngth((uint8 *) &SerialNumber.wManufacturerName, 0x10);
+    //    SerialNumber.bLength = 0x02 + string_len * 2;
+    //    SerialNumber.bDescriptorType = 0x03;
+    //    cnvrt_ascii_to_uni16((uint8 *) &SerialNumber.wManufacturerName, string_len);
+    if((g_volume_flag & 0x02) != 0) {
+bfc17f42:	6a02      	li	v0,2
+bfc17f44:	9ba0      	lw	a1,0(v1)
+bfc17f46:	6b03      	li	v1,3
+        All_Descriptors_of_Configuration.Audio_Class_Feature1.bmaControls0 = 0x03;
+bfc17f48:	eaac      	and	v0,a1
+bfc17f4a:	2a01      	bnez	v0,bfc17f4e <descriptor_init+0x72>
+bfc17f4c:	6b01      	li	v1,1
+    } else {
+        All_Descriptors_of_Configuration.Audio_Class_Feature1.bmaControls0 = 0x01;
+bfc17f4e:	b425      	lw	a0,bfc17fe0 <descriptor_init+0x104>
+bfc17f50:	b225      	lw	v0,bfc17fe4 <descriptor_init+0x108>
+    }
+    libc_print("pcctrl", g_volume_flag, 2);
+bfc17f52:	f020 c476 	sb	v1,54(a0)
+bfc17f56:	6e02      	li	a2,2
+bfc17f58:	0c18      	la	a0,bfc17fb8 <descriptor_init+0xdc>
+bfc17f5a:	ea40      	jalr	v0
+bfc17f5c:	6f4b      	li	a3,75
+bfc17f5e:	6474      	restore	32,ra,s0-s1
+bfc17f60:	e8a0      	jrc	ra
+bfc17f62:	4482      	addiu	a0,a0,2
+bfc17f64:	b018      	lw	s0,bfc17fc4 <descriptor_init+0xe8>
+bfc17f66:	1a1f 5fa9 	jal	bfc17ea4 <atoi>
+bfc17f6a:	6d04      	li	a1,4
+bfc17f6c:	ea31      	zeh	v0
+bfc17f6e:	3342      	srl	v1,v0,8
+bfc17f70:	b416      	lw	a0,bfc17fc8 <descriptor_init+0xec>
+bfc17f72:	c048      	sb	v0,8(s0)
+bfc17f74:	c069      	sb	v1,9(s0)
+bfc17f76:	a4a2      	lbu	a1,2(a0)
+bfc17f78:	25b8      	beqz	a1,bfc17eea <descriptor_init+0xe>
+bfc17f7a:	4482      	addiu	a0,a0,2
+bfc17f7c:	b112      	lw	s1,bfc17fc4 <descriptor_init+0xe8>
+bfc17f7e:	1a1f 5fa9 	jal	bfc17ea4 <atoi>
+bfc17f82:	6d04      	li	a1,4
+bfc17f84:	ea31      	zeh	v0
+bfc17f86:	3442      	srl	a0,v0,8
+bfc17f88:	c18b      	sb	a0,11(s1)
+bfc17f8a:	b411      	lw	a0,bfc17fcc <descriptor_init+0xf0>
+bfc17f8c:	c14a      	sb	v0,10(s1)
+bfc17f8e:	a4c2      	lbu	a2,2(a0)
+bfc17f90:	26af      	beqz	a2,bfc17ef0 <descriptor_init+0x14>
+bfc17f92:	4482      	addiu	a0,a0,2
+bfc17f94:	b00c      	lw	s0,bfc17fc4 <descriptor_init+0xe8>
+bfc17f96:	1a1f 5fa9 	jal	bfc17ea4 <atoi>
+bfc17f9a:	6d04      	li	a1,4
+bfc17f9c:	ea31      	zeh	v0
+bfc17f9e:	3742      	srl	a3,v0,8
+bfc17fa0:	c04c      	sb	v0,12(s0)
+bfc17fa2:	c0ed      	sb	a3,13(s0)
+bfc17fa4:	17a5      	b	bfc17ef0 <descriptor_init+0x14>
+bfc17fa6:	3644      	sll	a2,v0,1
+bfc17fa8:	4682      	addiu	a0,a2,2
+bfc17faa:	6a03      	li	v0,3
+bfc17fac:	c080      	sb	a0,0(s0)
+bfc17fae:	c041      	sb	v0,1(s0)
+bfc17fb0:	1a1f 5f9f 	jal	bfc17e7c <cnvrt_ascii_to_uni16>
+bfc17fb4:	6791      	move	a0,s1
+bfc17fb6:	17c4      	b	bfc17f40 <descriptor_init+0x64>
+bfc17fb8:	6370      	addiu	sp,896
+bfc17fba:	7463      	cmpi	a0,99
+bfc17fbc:	6c72      	li	a0,114
+bfc17fbe:	0000      	addiu	s0,sp,0
+bfc17fc0:	941c      	lw	a0,112(sp)
+bfc17fc2:	9fc1      	lw	a2,4(a3)
+bfc17fc4:	9208      	lw	v0,32(sp)
+bfc17fc6:	9fc1      	lw	a2,4(a3)
+bfc17fc8:	9414      	lw	a0,80(sp)
+bfc17fca:	9fc1      	lw	a2,4(a3)
+bfc17fcc:	940c      	lw	a0,48(sp)
+bfc17fce:	9fc1      	lw	a2,4(a3)
+bfc17fd0:	921c      	lw	v0,112(sp)
+bfc17fd2:	9fc1      	lw	a2,4(a3)
+bfc17fd4:	9264      	lw	v0,400(sp)
+bfc17fd6:	9fc1      	lw	a2,4(a3)
+bfc17fd8:	9240      	lw	v0,256(sp)
+bfc17fda:	9fc1      	lw	a2,4(a3)
+bfc17fdc:	93f8      	lw	v1,992(sp)
+bfc17fde:	9fc1      	lw	a2,4(a3)
+bfc17fe0:	92b8      	lw	v0,736(sp)
+bfc17fe2:	9fc1      	lw	a2,4(a3)
+bfc17fe4:	8365      	lb	v1,5(v1)
+bfc17fe6:	bfc1      	lwu	a2,4(a3)
+
+bfc17fe8 <usb_phy_setting>:
+bfc17fe8:	64a1      	save	8,s0
+ * \par
+ * \note
+ *******************************************************************************/
+void usb_phy_setting(uint8 bRegAdd, uint8 bValue)
+{
+bfc17fea:	b714      	lw	a3,bfc18038 <usb_phy_setting+0x50>
+    unsigned char bAddLow, bAddHigh;
+    unsigned char bTemp;
+
+    bAddLow = bRegAdd & 0x0f;
+    bAddHigh = (bRegAdd >> 4) & 0x0f;
+
+    bTemp = act_readb(VDCTRL);
+bfc17fec:	6e80      	li	a2,128
+    bTemp &= (uint8) 0x80;
+bfc17fee:	a760      	lbu	v1,0(a3)
+bfc17ff0:	ec11      	zeb	a0
+bfc17ff2:	ee6c      	and	a2,v1
+bfc17ff4:	b312      	lw	v1,bfc1803c <usb_phy_setting+0x54>
+
+    /* write vstatus: */
+    act_writeb(bValue, VDSTAT);
+bfc17ff6:	680f      	li	s0,15
+bfc17ff8:	ed11      	zeb	a1
+bfc17ffa:	6744      	move	v0,a0
+bfc17ffc:	c3a0      	sb	a1,0(v1)
+bfc17ffe:	ea0c      	and	v0,s0
+bfc18000:	6d10      	li	a1,16
+
+    /* write vcontrol: */
+    bAddLow |= 0x10;
+bfc18002:	eaad      	or	v0,a1
+bfc18004:	6762      	move	v1,v0
+    act_writeb((bAddLow | bTemp), VDCTRL);
+bfc18006:	ebcd      	or	v1,a2
+bfc18008:	ea0c      	and	v0,s0
+
+    bAddLow &= 0x0f;
+bfc1800a:	3492      	srl	a0,4
+bfc1800c:	c760      	sb	v1,0(a3)
+bfc1800e:	ec0c      	and	a0,s0
+bfc18010:	6762      	move	v1,v0
+    act_writeb((bAddLow | bTemp), VDCTRL);
+bfc18012:	ebcd      	or	v1,a2
+bfc18014:	ecad      	or	a0,a1
+
+    bAddLow |= 0x10;
+    act_writeb((bAddLow | bTemp), VDCTRL);
+
+    bAddHigh |= 0x10;
+bfc18016:	eaad      	or	v0,a1
+bfc18018:	c760      	sb	v1,0(a3)
+bfc1801a:	eacd      	or	v0,a2
+bfc1801c:	6764      	move	v1,a0
+    act_writeb((bAddHigh | bTemp), VDCTRL);
+bfc1801e:	ec0c      	and	a0,s0
+
+    bAddHigh &= 0x0f;
+bfc18020:	c740      	sb	v0,0(a3)
+bfc18022:	ed8d      	or	a1,a0
+    act_writeb((bAddHigh | bTemp), VDCTRL);
+
+    bAddHigh |= 0x10;
+bfc18024:	6744      	move	v0,a0
+bfc18026:	ebcd      	or	v1,a2
+bfc18028:	eacd      	or	v0,a2
+bfc1802a:	edcd      	or	a1,a2
+    act_writeb((bAddHigh | bTemp), VDCTRL);
+bfc1802c:	c760      	sb	v1,0(a3)
+bfc1802e:	c740      	sb	v0,0(a3)
+bfc18030:	c7a0      	sb	a1,0(a3)
+bfc18032:	6421      	restore	8,s0
+bfc18034:	e8a0      	jrc	ra
+bfc18036:	0000      	addiu	s0,sp,0
+bfc18038:	0408      	addiu	a0,sp,32
+bfc1803a:	c008      	sb	s0,8(s0)
+bfc1803c:	0409      	addiu	a0,sp,36
+bfc1803e:	c008      	sb	s0,8(s0)
+
+bfc18040 <usb_sound_init>:
+bfc18040:	f004 64f4 	save	a0,32,ra,s0-s1
+}
+//#endif
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   init usb device ,called by ap.
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_init.c
+ * \par
+ * \note
+ *******************************************************************************/
+void usb_sound_init(isr_cbk *p_isr_cbk)
+{
+bfc18044:	b459      	lw	a0,bfc181a8 <usb_sound_init+0x168>
+    //uint32 irq_save;
+    //#ifndef FPGA_DEBUG
+
+    uint8 efuse_reg;
+
+    //sys_mdelay(3);
+    //#endif
+    act_writel((act_readl(MULTI_USED) & (~MULTI_USED_UVDD_V_MASK)) | 0x180,
+bfc18046:	6be1      	li	v1,225
+bfc18048:	9cc0      	lw	a2,0(a0)
+bfc1804a:	ed6b      	neg	a1,v1
+bfc1804c:	eeac      	and	a2,a1
+bfc1804e:	f260 4d01 	addiu	a1,609
+bfc18052:	b157      	lw	s1,bfc181ac <usb_sound_init+0x16c>
+               MULTI_USED); //vdd =1.2v vdd ldo enbale //从1.3v修改为1.2v更稳定
+
+    //enable usb module clk CMU_DEVCLKEN
+    act_writel(act_readl(CMU_DEVCLKEN) | (1 << CMU_DEVCLKEN_USBCLKEN), CMU_DEVCLKEN);
+bfc18054:	eead      	or	a2,a1
+bfc18056:	dcc0      	sw	a2,0(a0)
+bfc18058:	9940      	lw	v0,0(s1)
+bfc1805a:	f280 4d00 	addiu	a1,640
+bfc1805e:	eaad      	or	v0,a1
+bfc18060:	d940      	sw	v0,0(s1)
+bfc18062:	b154      	lw	s1,bfc181b0 <usb_sound_init+0x170>
+
+    //act_writel((act_readl(MULTI_USED) & 0xFFFFFF0F) | 0x1c0, MULTI_USED); //vdd =1.3v vdd ldo enbale
+
+    //for detect cotec
+    //irq_save = sys_local_irq_save();
+
+    //reset2 usb moudule MRCR
+    act_writel(act_readl(MRCR) | (1 << MRCR_USBReset2), MRCR);
+bfc18064:	b754      	lw	a3,bfc181b4 <usb_sound_init+0x174>
+bfc18066:	9900      	lw	s0,0(s1)
+bfc18068:	6d00      	li	a1,0
+    //system interface
+
+    sys_mdelay(1);
+bfc1806a:	e8ed      	or	s0,a3
+bfc1806c:	d900      	sw	s0,0(s1)
+bfc1806e:	b053      	lw	s0,bfc181b8 <usb_sound_init+0x178>
+bfc18070:	67c5      	move	a2,a1
+bfc18072:	6c01      	li	a0,1
+bfc18074:	e840      	jalr	s0
+bfc18076:	6f1d      	li	a3,29
+bfc18078:	b451      	lw	a0,bfc181bc <usb_sound_init+0x17c>
+    //enable usb phy pll USB_PHYCTRL
+    act_writeb(((uint8) 0xc0 | (act_readb(USB_PHYCTRL))), USB_PHYCTRL);
+bfc1807a:	6e40      	li	a2,64
+bfc1807c:	a460      	lbu	v1,0(a0)
+bfc1807e:	edcb      	neg	a1,a2
+bfc18080:	ed6d      	or	a1,v1
+bfc18082:	c4a0      	sb	a1,0(a0)
+bfc18084:	6d00      	li	a1,0
+    //system interface
+
+    sys_mdelay(1);
+bfc18086:	67c5      	move	a2,a1
+bfc18088:	6c01      	li	a0,1
+bfc1808a:	e840      	jalr	s0
+bfc1808c:	6f1d      	li	a3,29
+bfc1808e:	b44d      	lw	a0,bfc181c0 <usb_sound_init+0x180>
+    //set efuse
+    act_writeb(0x00, USB_EFUSE_REF);
+bfc18090:	6a00      	li	v0,0
+bfc18092:	c440      	sb	v0,0(a0)
+bfc18094:	6f80      	li	a3,128
+    efuse_reg = act_readb(USB_EFUSE_REF);
+    act_writeb(0x80, USB_EFUSE_REF);
+bfc18096:	efeb      	neg	a3
+bfc18098:	a4a0      	lbu	a1,0(a0)
+bfc1809a:	c4e0      	sb	a3,0(a0)
+bfc1809c:	a4c0      	lbu	a2,0(a0)
+    act_writeb((act_readb(USB_EFUSE_REF) | efuse_reg), USB_EFUSE_REF);
+bfc1809e:	ed11      	zeb	a1
+bfc180a0:	edcd      	or	a1,a2
+bfc180a2:	c4a0      	sb	a1,0(a0)
+bfc180a4:	6d00      	li	a1,0
+    sys_mdelay(1);
+bfc180a6:	67c5      	move	a2,a1
+bfc180a8:	6c01      	li	a0,1
+bfc180aa:	e840      	jalr	s0
+bfc180ac:	6f1d      	li	a3,29
+bfc180ae:	9940      	lw	v0,0(s1)
+
+    //system interface usbreset
+    act_writel(act_readl(MRCR) | (1 << MRCR_USBReset), MRCR);
+bfc180b0:	f200 6b00 	li	v1,512
+bfc180b4:	ea6d      	or	v0,v1
+bfc180b6:	6d00      	li	a1,0
+
+    sys_mdelay(1);
+bfc180b8:	d940      	sw	v0,0(s1)
+bfc180ba:	6c01      	li	a0,1
+bfc180bc:	67c5      	move	a2,a1
+bfc180be:	e840      	jalr	s0
+bfc180c0:	6f1d      	li	a3,29
+bfc180c2:	b341      	lw	v1,bfc181c4 <usb_sound_init+0x184>
+bfc180c4:	6801      	li	s0,1
+bfc180c6:	a3e0      	lbu	a3,0(v1)
+
+    //sys_local_irq_restore(irq_save);
+
+
+    //wait reset complete
+    while((act_readb(LINESTATUS) & (1 << LINESTATUS_otgreset)) != 0) {
+bfc180c8:	6730      	move	s1,s0
+bfc180ca:	e9ec      	and	s1,a3
+bfc180cc:	29fc      	bnez	s1,bfc180c6 <usb_sound_init+0x86>
+bfc180ce:	b43f      	lw	a0,bfc181c8 <usb_sound_init+0x188>
+        //clear watchdog
+        ;//act_writel(0x00000001 | (act_readl(WD_CTL)), WD_CTL);
+    }
+
+    //enable dp,dm DPDMCTRL
+    act_writeb(0x1f | (act_readb(DPDMCTRL)), DPDMCTRL);
+bfc180d0:	6a1f      	li	v0,31
+bfc180d2:	a4c0      	lbu	a2,0(a0)
+bfc180d4:	b339      	lw	v1,bfc181b8 <usb_sound_init+0x178>
+
+    sys_mdelay(10);
+bfc180d6:	eacd      	or	v0,a2
+bfc180d8:	67b1      	move	a1,s1
+bfc180da:	67d1      	move	a2,s1
+bfc180dc:	c440      	sb	v0,0(a0)
+bfc180de:	6f1d      	li	a3,29
+bfc180e0:	eb40      	jalr	v1
+bfc180e2:	6c0a      	li	a0,10
+bfc180e4:	b63a      	lw	a2,bfc181cc <usb_sound_init+0x18c>
+
+    //enbale sofeware id
+    act_writeb(0x0f | (act_readb(IDVBUSCTRL)), IDVBUSCTRL);
+bfc180e6:	6d0f      	li	a1,15
+bfc180e8:	a6e0      	lbu	a3,0(a2)
+bfc180ea:	b334      	lw	v1,bfc181b8 <usb_sound_init+0x178>
+
+    sys_mdelay(5);
+bfc180ec:	eded      	or	a1,a3
+bfc180ee:	c6a0      	sb	a1,0(a2)
+bfc180f0:	6c05      	li	a0,5
+bfc180f2:	67b1      	move	a1,s1
+bfc180f4:	67d1      	move	a2,s1
+bfc180f6:	eb40      	jalr	v1
+bfc180f8:	6f1d      	li	a3,29
+bfc180fa:	b436      	lw	a0,bfc181d0 <usb_sound_init+0x190>
+
+    //#ifndef FPGA_DEBUG
+    //#endif
+
+    //enable all memory clock
+    act_writel(act_readl(CMU_MEMCLKEN) | 0x1ff, CMU_MEMCLKEN);
+bfc180fc:	f1e0 6b1f 	li	v1,511
+bfc18100:	9c40      	lw	v0,0(a0)
+bfc18102:	b736      	lw	a3,bfc181d8 <usb_sound_init+0x198>
+
+    //uram0
+    act_writel((act_readl(CMU_MEMCLKSEL) & (~CMU_MEMCLKSEL_URAM0CLKSEL_MASK)) | (1 << CMU_MEMCLKSEL_URAM0CLKSEL_SHIFT),
+bfc18104:	ea6d      	or	v0,v1
+bfc18106:	dc40      	sw	v0,0(a0)
+bfc18108:	b433      	lw	a0,bfc181d4 <usb_sound_init+0x194>
+bfc1810a:	b535      	lw	a1,bfc181dc <usb_sound_init+0x19c>
+bfc1810c:	9cc0      	lw	a2,0(a0)
+bfc1810e:	b32b      	lw	v1,bfc181b8 <usb_sound_init+0x178>
+               CMU_MEMCLKSEL);
+
+    // pcm ram1 as buffer so it need select cpu clk
+    //act_writel((act_readl(CMU_MEMCLKSEL) & (~CMU_MEMCLKSEL_PCMRAM1CLKSEL_MASK)) | (0
+    //<< CMU_MEMCLKSEL_PCMRAM1CLKSEL_SHIFT), CMU_MEMCLKSEL);//pcmram1
+    //register irq and enable usb isr
+    sys_request_irq(IRQ_USB, usound_isr);
+bfc18110:	eeec      	and	a2,a3
+bfc18112:	eead      	or	a2,a1
+bfc18114:	b533      	lw	a1,bfc181e0 <usb_sound_init+0x1a0>
+bfc18116:	6f14      	li	a3,20
+bfc18118:	dcc0      	sw	a2,0(a0)
+bfc1811a:	67d1      	move	a2,s1
+bfc1811c:	eb40      	jalr	v1
+bfc1811e:	6c0a      	li	a0,10
+bfc18120:	6c84      	li	a0,132
+
+    //#ifndef FPGA_DEBUG
+    //usb_phy_setting(0xe0, 0xa3);
+    //usb_phy_setting(0xe7, 0x0b);
+    //usb_phy_setting(0xe7, 0x1f);
+    //#endif
+    usb_phy_setting(0x84, 0x1a);
+bfc18122:	1a1f 5ffa 	jal	bfc17fe8 <usb_phy_setting>
+bfc18126:	6d1a      	li	a1,26
+bfc18128:	6ce0      	li	a0,224
+    usb_phy_setting(0xe0, 0xa3);
+bfc1812a:	1a1f 5ffa 	jal	bfc17fe8 <usb_phy_setting>
+bfc1812e:	6da3      	li	a1,163
+bfc18130:	6ce6      	li	a0,230
+    usb_phy_setting(0xe6, 0x8d);
+bfc18132:	1a1f 5ffa 	jal	bfc17fe8 <usb_phy_setting>
+bfc18136:	6d8d      	li	a1,141
+bfc18138:	6ce7      	li	a0,231
+    usb_phy_setting(0xe7, 0x2b);
+bfc1813a:	1a1f 5ffa 	jal	bfc17fe8 <usb_phy_setting>
+bfc1813e:	6d2b      	li	a1,43
+bfc18140:	6ce7      	li	a0,231
+    usb_phy_setting(0xe7, 0x3f);
+bfc18142:	1a1f 5ffa 	jal	bfc17fe8 <usb_phy_setting>
+bfc18146:	6d3f      	li	a1,63
+bfc18148:	b327      	lw	v1,bfc181e4 <usb_sound_init+0x1a4>
+
+    act_writeb(0x01 | act_readb(Usbirq_hcusbirq), Usbirq_hcusbirq);
+bfc1814a:	b528      	lw	a1,bfc181e8 <usb_sound_init+0x1a8>
+    act_writeb(0x01 | act_readb(Usbien_hcusbien), Usbien_hcusbien);
+bfc1814c:	a340      	lbu	v0,0(v1)
+bfc1814e:	b428      	lw	a0,bfc181ec <usb_sound_init+0x1ac>
+    act_writeb(0x02 | act_readb(OUT03TOKIEN), OUT03TOKIEN);
+bfc18150:	ea0d      	or	v0,s0
+bfc18152:	c340      	sb	v0,0(v1)
+bfc18154:	a5e0      	lbu	a3,0(a1)
+bfc18156:	b327      	lw	v1,bfc181f0 <usb_sound_init+0x1b0>
+    act_writeb(0x02 | act_readb(OUT03TOKIRQ), OUT03TOKIRQ);
+bfc18158:	e8ed      	or	s0,a3
+bfc1815a:	c500      	sb	s0,0(a1)
+bfc1815c:	a4c0      	lbu	a2,0(a0)
+bfc1815e:	6d02      	li	a1,2
+bfc18160:	eead      	or	a2,a1
+bfc18162:	c4c0      	sb	a2,0(a0)
+bfc18164:	a340      	lbu	v0,0(v1)
+bfc18166:	b624      	lw	a2,bfc181f4 <usb_sound_init+0x1b4>
+    //act_writeb(0x02 | act_readb(IN03TOKIEN), IN03TOKIEN);
+    act_writeb(0x06 | act_readb(IN03TOKIRQ), IN03TOKIRQ);
+bfc18168:	eaad      	or	v0,a1
+bfc1816a:	c340      	sb	v0,0(v1)
+bfc1816c:	a600      	lbu	s0,0(a2)
+bfc1816e:	6f06      	li	a3,6
+bfc18170:	ef0d      	or	a3,s0
+bfc18172:	b022      	lw	s0,bfc181f8 <usb_sound_init+0x1b8>
+    act_writeb((uint8) 0x88 | act_readb(USBEIRQ), USBEIRQ);//enable external irq USBEIRQ
+bfc18174:	c6e0      	sb	a3,0(a2)
+bfc18176:	a060      	lbu	v1,0(s0)
+bfc18178:	6c78      	li	a0,120
+bfc1817a:	b721      	lw	a3,bfc181fc <usb_sound_init+0x1bc>
+
+    act_writeb(0x00, UsbCTRL_STUS);
+bfc1817c:	ea8b      	neg	v0,a0
+bfc1817e:	b421      	lw	a0,bfc18200 <usb_sound_init+0x1c0>
+    act_writeb(0x80, BKDOOR); //disable high speed
+bfc18180:	ea6d      	or	v0,v1
+bfc18182:	6e80      	li	a2,128
+bfc18184:	eecb      	neg	a2
+bfc18186:	c040      	sb	v0,0(s0)
+bfc18188:	c720      	sb	s1,0(a3)
+bfc1818a:	c4c0      	sb	a2,0(a0)
+bfc1818c:	9008      	lw	s0,32(sp)
+
+    //set call back
+    *p_isr_cbk = usound_isr_cbk;
+bfc1818e:	b41e      	lw	a0,bfc18204 <usb_sound_init+0x1c4>
+bfc18190:	b30a      	lw	v1,bfc181b8 <usb_sound_init+0x178>
+    //init is zero
+    g_pagemiss_cb_bak = 0;
+    g_pagemiss_cb_bak = sys_set_sys_info(usound_isr_cbk, SYS_INFO_PAGEMISS_CALLBACK);
+bfc18192:	d880      	sw	a0,0(s0)
+bfc18194:	b01d      	lw	s0,bfc18208 <usb_sound_init+0x1c8>
+bfc18196:	67d1      	move	a2,s1
+bfc18198:	6f36      	li	a3,54
+bfc1819a:	eb40      	jalr	v1
+bfc1819c:	d820      	sw	s1,0(s0)
+bfc1819e:	d840      	sw	v0,0(s0)
+bfc181a0:	b21b      	lw	v0,bfc1820c <usb_sound_init+0x1cc>
+    descriptor_init();
+bfc181a2:	eac0      	jalrc	v0
+bfc181a4:	6474      	restore	32,ra,s0-s1
+bfc181a6:	e8a0      	jrc	ra
+bfc181a8:	0004      	addiu	s0,sp,16
+bfc181aa:	c002      	sb	s0,2(s0)
+bfc181ac:	1004      	b	bfc181b6 <usb_sound_init+0x176>
+bfc181ae:	c000      	sb	s0,0(s0)
+bfc181b0:	0000      	addiu	s0,sp,0
+bfc181b2:	c000      	sb	s0,0(s0)
+bfc181b4:	0000      	addiu	s0,sp,0
+bfc181b6:	0001      	addiu	s0,sp,4
+bfc181b8:	8365      	lb	v1,5(v1)
+bfc181ba:	bfc1      	lwu	a2,4(a3)
+bfc181bc:	041b      	addiu	a0,sp,108
+bfc181be:	c008      	sb	s0,8(s0)
+bfc181c0:	0422      	addiu	a0,sp,136
+bfc181c2:	c008      	sb	s0,8(s0)
+bfc181c4:	0419      	addiu	a0,sp,100
+bfc181c6:	c008      	sb	s0,8(s0)
+bfc181c8:	041a      	addiu	a0,sp,104
+bfc181ca:	c008      	sb	s0,8(s0)
+bfc181cc:	0418      	addiu	a0,sp,96
+bfc181ce:	c008      	sb	s0,8(s0)
+bfc181d0:	1040      	b	bfc18252 <usb_device_exit+0x42>
+bfc181d2:	c000      	sb	s0,0(s0)
+bfc181d4:	1044      	b	bfc1825e <usb_device_exit+0x4e>
+bfc181d6:	c000      	sb	s0,0(s0)
+bfc181d8:	ffff      	daddiu	a3,sp,124
+bfc181da:	ffcf      	daddiu	a2,sp,60
+bfc181dc:	0000      	addiu	s0,sp,0
+bfc181de:	0010      	addiu	s0,sp,64
+bfc181e0:	75fd      	cmpi	a1,253
+bfc181e2:	bfc1      	lwu	a2,4(a3)
+bfc181e4:	018c      	addiu	s1,sp,560
+bfc181e6:	c008      	sb	s0,8(s0)
+bfc181e8:	0198      	addiu	s1,sp,608
+bfc181ea:	c008      	sb	s0,8(s0)
+bfc181ec:	019d      	addiu	s1,sp,628
+bfc181ee:	c008      	sb	s0,8(s0)
+bfc181f0:	0191      	addiu	s1,sp,580
+bfc181f2:	c008      	sb	s0,8(s0)
+bfc181f4:	0190      	addiu	s1,sp,576
+bfc181f6:	c008      	sb	s0,8(s0)
+bfc181f8:	0400      	addiu	a0,sp,0
+bfc181fa:	c008      	sb	s0,8(s0)
+bfc181fc:	01a3      	addiu	s1,sp,652
+bfc181fe:	c008      	sb	s0,8(s0)
+bfc18200:	040b      	addiu	a0,sp,44
+bfc18202:	c008      	sb	s0,8(s0)
+bfc18204:	7665      	cmpi	a2,101
+bfc18206:	bfc1      	lwu	a2,4(a3)
+bfc18208:	944c      	lw	a0,304(sp)
+bfc1820a:	9fc1      	lw	a2,4(a3)
+bfc1820c:	7edd      	sd	a2,232(a2)
+bfc1820e:	bfc1      	lwu	a2,4(a3)
+
+bfc18210 <usb_device_exit>:
+bfc18210:	64f4      	save	32,ra,s0-s1
+ * \par
+ * \note
+ *******************************************************************************/
+void usb_device_exit(void)
+{
+bfc18212:	b13b      	lw	s1,bfc182fc <usb_device_exit+0xec>
+    //close usb isr
+    //#ifndef FPGA_DEBUG
+    uint8 efuse_reg;
+    //sys_mdelay(40);
+    //#endif
+    sys_set_sys_info(g_pagemiss_cb_bak, SYS_INFO_PAGEMISS_CALLBACK);
+bfc18214:	6d02      	li	a1,2
+bfc18216:	9980      	lw	a0,0(s1)
+bfc18218:	b13a      	lw	s1,bfc18300 <usb_device_exit+0xf0>
+bfc1821a:	6e00      	li	a2,0
+bfc1821c:	e940      	jalr	s1
+bfc1821e:	6f36      	li	a3,54
+bfc18220:	6d00      	li	a1,0
+
+    sys_free_irq(IRQ_USB);
+bfc18222:	67c5      	move	a2,a1
+bfc18224:	6c0a      	li	a0,10
+bfc18226:	e940      	jalr	s1
+bfc18228:	6f15      	li	a3,21
+bfc1822a:	b037      	lw	s0,bfc18304 <usb_device_exit+0xf4>
+
+    //sound_deinit();
+
+    //reset usb moudule
+    act_writel((~(1 << MRCR_USBReset2)) & act_readl(MRCR), MRCR);
+bfc1822c:	b337      	lw	v1,bfc18308 <usb_device_exit+0xf8>
+bfc1822e:	98c0      	lw	a2,0(s0)
+bfc18230:	6d00      	li	a1,0
+    sys_mdelay(1);
+bfc18232:	ee6c      	and	a2,v1
+bfc18234:	d8c0      	sw	a2,0(s0)
+bfc18236:	6c01      	li	a0,1
+bfc18238:	67c5      	move	a2,a1
+bfc1823a:	e940      	jalr	s1
+bfc1823c:	6f1d      	li	a3,29
+bfc1823e:	9840      	lw	v0,0(s0)
+
+    act_writel((1 << MRCR_USBReset2) | act_readl(MRCR), MRCR);
+bfc18240:	b533      	lw	a1,bfc1830c <usb_device_exit+0xfc>
+bfc18242:	6c02      	li	a0,2
+
+    sys_mdelay(2);
+bfc18244:	eaad      	or	v0,a1
+bfc18246:	6d00      	li	a1,0
+bfc18248:	67c5      	move	a2,a1
+bfc1824a:	d840      	sw	v0,0(s0)
+bfc1824c:	e940      	jalr	s1
+bfc1824e:	6f1d      	li	a3,29
+bfc18250:	98c0      	lw	a2,0(s0)
+
+    act_writel((~(1 << MRCR_USBReset)) & act_readl(MRCR), MRCR);
+bfc18252:	f200 6c01 	li	a0,513
+bfc18256:	ef8b      	neg	a3,a0
+bfc18258:	eeec      	and	a2,a3
+bfc1825a:	6d00      	li	a1,0
+    //system interface
+    sys_mdelay(1);
+bfc1825c:	d8c0      	sw	a2,0(s0)
+bfc1825e:	6c01      	li	a0,1
+bfc18260:	67c5      	move	a2,a1
+bfc18262:	e940      	jalr	s1
+bfc18264:	6f1d      	li	a3,29
+bfc18266:	98a0      	lw	a1,0(s0)
+
+    //set usb moudule to normal state
+    act_writel((1 << MRCR_USBReset) | act_readl(MRCR), MRCR);
+bfc18268:	f200 6b00 	li	v1,512
+bfc1826c:	ed6d      	or	a1,v1
+bfc1826e:	b729      	lw	a3,bfc18310 <usb_device_exit+0x100>
+
+    //enable usb phy pll USB_PHYCTRL
+    act_writeb(((uint8) 0xc0 | (act_readb(USB_PHYCTRL))), USB_PHYCTRL);
+bfc18270:	d8a0      	sw	a1,0(s0)
+bfc18272:	a780      	lbu	a0,0(a3)
+bfc18274:	6a40      	li	v0,64
+bfc18276:	e84b      	neg	s0,v0
+bfc18278:	6d00      	li	a1,0
+    sys_mdelay(1);
+bfc1827a:	e88d      	or	s0,a0
+bfc1827c:	67c5      	move	a2,a1
+bfc1827e:	c700      	sb	s0,0(a3)
+bfc18280:	6c01      	li	a0,1
+bfc18282:	e940      	jalr	s1
+bfc18284:	6f1d      	li	a3,29
+bfc18286:	b424      	lw	a0,bfc18314 <usb_device_exit+0x104>
+
+    //#ifndef FPGA_DEBUG
+    //set efuse
+    act_writeb(0x00, USB_EFUSE_REF);
+bfc18288:	6e00      	li	a2,0
+bfc1828a:	c4c0      	sb	a2,0(a0)
+bfc1828c:	6d80      	li	a1,128
+    efuse_reg = act_readb(USB_EFUSE_REF);
+    act_writeb(0x80, USB_EFUSE_REF);
+bfc1828e:	edab      	neg	a1
+bfc18290:	a440      	lbu	v0,0(a0)
+bfc18292:	c4a0      	sb	a1,0(a0)
+bfc18294:	a460      	lbu	v1,0(a0)
+    act_writeb((act_readb(USB_EFUSE_REF) | efuse_reg), USB_EFUSE_REF);
+bfc18296:	ea11      	zeb	v0
+bfc18298:	ea6d      	or	v0,v1
+bfc1829a:	6d00      	li	a1,0
+    //#endif
+
+    sys_mdelay(1);
+bfc1829c:	c440      	sb	v0,0(a0)
+bfc1829e:	67c5      	move	a2,a1
+bfc182a0:	6c01      	li	a0,1
+bfc182a2:	e940      	jalr	s1
+bfc182a4:	6f1d      	li	a3,29
+bfc182a6:	b41d      	lw	a0,bfc18318 <usb_device_exit+0x108>
+bfc182a8:	6b01      	li	v1,1
+bfc182aa:	a400      	lbu	s0,0(a0)
+
+    //wait reset complete
+    while(0 != ((act_readb(LINESTATUS)) & 0x01)) {
+bfc182ac:	6723      	move	s1,v1
+bfc182ae:	e90c      	and	s1,s0
+bfc182b0:	29fc      	bnez	s1,bfc182aa <usb_device_exit+0x9a>
+bfc182b2:	b014      	lw	s0,bfc18300 <usb_device_exit+0xf0>
+        //clear watchdog
+        ;//act_writel(0x00000001 | (act_readl(WD_CTL)), WD_CTL);
+    }
+
+    //disable dp,dm DPDMCTRL
+    //act_writeb(0xe0 & (act_readb(DPDMCTRL)), DPDMCTRL);
+
+    sys_mdelay(10);
+bfc182b4:	67b1      	move	a1,s1
+bfc182b6:	67d1      	move	a2,s1
+bfc182b8:	6c0a      	li	a0,10
+bfc182ba:	e840      	jalr	s0
+bfc182bc:	6f1d      	li	a3,29
+bfc182be:	b618      	lw	a2,bfc1831c <usb_device_exit+0x10c>
+
+    //disable sofeware id
+    act_writeb((uint8) 0xfb & (act_readb(IDVBUSCTRL)), IDVBUSCTRL);
+bfc182c0:	6c05      	li	a0,5
+bfc182c2:	a660      	lbu	v1,0(a2)
+bfc182c4:	ef8b      	neg	a3,a0
+bfc182c6:	ef6c      	and	a3,v1
+bfc182c8:	c6e0      	sb	a3,0(a2)
+bfc182ca:	67b1      	move	a1,s1
+
+    sys_mdelay(5);
+bfc182cc:	67d1      	move	a2,s1
+bfc182ce:	6c05      	li	a0,5
+bfc182d0:	e840      	jalr	s0
+bfc182d2:	6f1d      	li	a3,29
+bfc182d4:	b213      	lw	v0,bfc18320 <usb_device_exit+0x110>
+
+    //usb disconnect
+    act_writeb(0x40, UsbCTRL_STUS);
+bfc182d6:	6d40      	li	a1,64
+bfc182d8:	c2a0      	sb	a1,0(v0)
+bfc182da:	b513      	lw	a1,bfc18324 <usb_device_exit+0x114>
+
+    //switch memory to MCU
+    act_writel(act_readl(CMU_MEMCLKSEL) & (~CMU_MEMCLKSEL_URAM0CLKSEL_MASK), CMU_MEMCLKSEL);
+bfc182dc:	b413      	lw	a0,bfc18328 <usb_device_exit+0x118>
+bfc182de:	9de0      	lw	a3,0(a1)
+bfc182e0:	b313      	lw	v1,bfc1832c <usb_device_exit+0x11c>
+    act_writel(act_readl(CMU_MEMCLKSEL) & (~CMU_MEMCLKSEL_URAM1CLKSEL_MASK), CMU_MEMCLKSEL);
+bfc182e2:	ef8c      	and	a3,a0
+bfc182e4:	dde0      	sw	a3,0(a1)
+bfc182e6:	9dc0      	lw	a2,0(a1)
+bfc182e8:	b70a      	lw	a3,bfc18310 <usb_device_exit+0x100>
+
+    //disable usb phy pll USB_PHYCTRL
+    act_writeb(0x3f & act_readb(USB_PHYCTRL), USB_PHYCTRL);
+bfc182ea:	ee6c      	and	a2,v1
+bfc182ec:	ddc0      	sw	a2,0(a1)
+bfc182ee:	a740      	lbu	v0,0(a3)
+bfc182f0:	6c3f      	li	a0,63
+bfc182f2:	ec4c      	and	a0,v0
+bfc182f4:	c780      	sb	a0,0(a3)
+bfc182f6:	6474      	restore	32,ra,s0-s1
+bfc182f8:	e8a0      	jrc	ra
+bfc182fa:	0000      	addiu	s0,sp,0
+bfc182fc:	944c      	lw	a0,304(sp)
+bfc182fe:	9fc1      	lw	a2,4(a3)
+bfc18300:	8365      	lb	v1,5(v1)
+bfc18302:	bfc1      	lwu	a2,4(a3)
+bfc18304:	0000      	addiu	s0,sp,0
+bfc18306:	c000      	sb	s0,0(s0)
+bfc18308:	ffff      	daddiu	a3,sp,124
+bfc1830a:	fffe      	daddiu	a3,sp,120
+bfc1830c:	0000      	addiu	s0,sp,0
+bfc1830e:	0001      	addiu	s0,sp,4
+bfc18310:	041b      	addiu	a0,sp,108
+bfc18312:	c008      	sb	s0,8(s0)
+bfc18314:	0422      	addiu	a0,sp,136
+bfc18316:	c008      	sb	s0,8(s0)
+bfc18318:	0419      	addiu	a0,sp,100
+bfc1831a:	c008      	sb	s0,8(s0)
+bfc1831c:	0418      	addiu	a0,sp,96
+bfc1831e:	c008      	sb	s0,8(s0)
+bfc18320:	01a3      	addiu	s1,sp,652
+bfc18322:	c008      	sb	s0,8(s0)
+bfc18324:	1044      	b	bfc183ae <sys_op_entry+0x4a>
+bfc18326:	c000      	sb	s0,0(s0)
+bfc18328:	ffff      	daddiu	a3,sp,124
+bfc1832a:	ffcf      	daddiu	a2,sp,60
+bfc1832c:	ffff      	daddiu	a3,sp,124
+bfc1832e:	fcff      	ld	a3,bfc18420 <sys_op_entry+0xbc>
+
+bfc18330 <init_module>:
+bfc18330:	64c3      	save	24,ra
+ * \par
+ * \note
+ *******************************************************************************/
+int usb_init(void *null1, void *null2, void *null3)
+{
+bfc18332:	b205      	lw	v0,bfc18344 <init_module+0x14>
+    sys_set_mem_use_info(MEM_USE_USOUND);
+bfc18334:	6c02      	li	a0,2
+bfc18336:	6d0c      	li	a1,12
+bfc18338:	6e00      	li	a2,0
+bfc1833a:	ea40      	jalr	v0
+bfc1833c:	6f36      	li	a3,54
+bfc1833e:	6a00      	li	v0,0
+    return 0;
+}
+bfc18340:	6443      	restore	24,ra
+bfc18342:	e8a0      	jrc	ra
+bfc18344:	8365      	lb	v1,5(v1)
+bfc18346:	bfc1      	lwu	a2,4(a3)
+
+bfc18348 <cleanup_module>:
+bfc18348:	64c3      	save	24,ra
+
+/******************************************************************************/
+/*!
+ * \par  Description:
+ *   init usb
+ * \param[in]   none
+ * \return  none
+ * \retval  none
+ * \ingroup ud_init.c
+ * \par
+ * \note
+ *******************************************************************************/
+int usb_exit(void *null1, void *null2, void *null3)
+{
+bfc1834a:	b205      	lw	v0,bfc1835c <cleanup_module+0x14>
+    sys_set_mem_use_info(MEM_USE_USOUND);
+bfc1834c:	6c02      	li	a0,2
+bfc1834e:	6d0c      	li	a1,12
+bfc18350:	6e00      	li	a2,0
+bfc18352:	ea40      	jalr	v0
+bfc18354:	6f36      	li	a3,54
+bfc18356:	6a00      	li	v0,0
+    return 0;
+}
+bfc18358:	6443      	restore	24,ra
+bfc1835a:	e8a0      	jrc	ra
+bfc1835c:	8365      	lb	v1,5(v1)
+bfc1835e:	bfc1      	lwu	a2,4(a3)
+
+bfc18360 <libc_op_entry>:
+bfc18360:	6b10      	li	v1,16
+bfc18362:	e805      	break	0
+
+bfc18364 <sys_op_entry>:
+bfc18364:	6b0f      	li	v1,15
+bfc18366:	e805      	break	0

@@ -1,0 +1,6 @@
+   text	   data	    bss	    dec	    hex	filename
+  0x3a8	    0x0	    0x0	    936	    3a8	./obj/alarm_fs_selector.o
+  0x320	  0x200	    0x0	   1312	    520	./obj/alarm_fs_selector_scan.o
+  0x160	    0xc	  0x314	   1152	    480	./obj/alarm_main.o
+  0x878	    0x0	    0x0	   2168	    878	./obj/alarm_playing.o
+  0x69c	    0x0	  0x204	   2208	    8a0	./obj/alarm_scene_playing.o

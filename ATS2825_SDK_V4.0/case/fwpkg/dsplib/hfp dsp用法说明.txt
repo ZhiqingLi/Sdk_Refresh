@@ -1,0 +1,7 @@
+注：默认不打包以下库，有需要可以修改名称替换掉原来的库
+
+1、hf481648.dsp：48k in-16k treat-48k out（用于I2S 48K IN且无空数据，MSBC，固定48K输出）
+2、hf480848.dsp：48k in-8k treat-48k out（用于I2S 48K IN且无空数据，CVSD，固定48K输出）
+
+3.HV480848.dsp:  48k in-8k treat-48k out（用于I2S 48K IN且1/3有效数据,2/3零数据，CVSD，固定48K输出）
+4.HV481648.dsp:  48k in-16k treat-48k out（用于I2S 48K IN且1/3有效数据,2/3零数据，MSBC，固定48K输出）

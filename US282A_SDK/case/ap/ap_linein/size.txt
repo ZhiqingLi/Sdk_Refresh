@@ -1,0 +1,5 @@
+   text	   data	    bss	    dec	    hex	filename
+  0x414	    0x1	    0x0	   1045	    415	./obj/linein_control.o
+  0x2cc	    0x1	  0x21c	   1257	    4e9	./obj/linein_main.o
+  0x108	    0x0	    0x0	    264	    108	./obj/linein_rcp_deal.o
+  0x3c0	    0x0	    0x0	    960	    3c0	./obj/scene_linein.o

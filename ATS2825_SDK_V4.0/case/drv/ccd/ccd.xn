@@ -1,0 +1,74 @@
+INPUT(link_base.xn)
+
+BANK_GROUP_INDEX = DRV_GROUP_CCD;
+
+SRAM_TEXT_ADDR = SRAM_RAM6_CCD_GLOBAL_DATA_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+
+SRAM_CCD_DRV_DATA_SIZE_FILL = SRAM_RAM6_CCD_GLOBAL_DATA_SIZE;
+
+ROM_TEXT_ADDR = RCODE_ADDR_BASE + SROM_TWI_ADDR_MDY;
+ROM_TEXT_SIZE = SROM_TWI_SIZE_MDY;
+
+KERNEL_BANK_A_ADDR_BASE = (KERNEL_BANK_A << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_A_ADDR;
+KERNEL_BANK_B_ADDR_BASE = (KERNEL_BANK_B << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_B_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE;
+KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+KERNEL_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+ENTRY(ccd_op_table)
+
+SECTIONS
+{
+    .text RCODE_TEXT_ADDR :
+    {
+        /*API OBJ在此链接*/
+        sys_op_entry.o(.text)
+        libc_op_entry.o(.text)
+    }
+
+    .data :
+    {
+        *.o(.data)
+    }
+    .bss :
+    {
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = SRAM_CCD_DRV_DATA_SIZE_FILL - SIZEOF(.text) - SIZEOF(.data);
+    }
+
+    .rom ROM_TEXT_ADDR :
+    {
+        rom_TWI.o(.text .rodata)
+        . = ROM_TEXT_SIZE;
+    }
+
+    . = KERNEL_BANK_A_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_A_0 :
+    {
+        
+
+    }=0x0
+
+
+    . = KERNEL_BANK_B_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_B_0 :
+    {
+        ccd_banka0_init.o(.text .rodata*)
+        ccd_bankb0_pa_deal.o(.text .rodata*)
+        STA339BWS.o(.text .rodata*)	
+    }=0x0
+
+    /*假设还有一个bank b，文件名为bank_b_card_xx.c
+    . = ((. + KERNEL_BANK_SPACE) & (~(KERNEL_BANK_SPACE - 1)))  + OFFSET;*/
+}

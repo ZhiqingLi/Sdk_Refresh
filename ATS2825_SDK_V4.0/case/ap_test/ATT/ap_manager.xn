@@ -1,0 +1,256 @@
+/**************************************************************************
+*                                                                         *
+*   PROJECT     : MIPS port for UCOS-II                                   *
+*                                                                         *
+*   MODULE      : bank a&b link.xn                                        *
+*                                                                         *
+*   AUTHOR      : wuyueqian                                               *
+*                                                                         *
+*   PROCESSOR   : MIPS 4KEc (32 bit RISC) - Actions board                 *
+*                                                                         *
+*   Tool-chain  : Cygnus                                                  *
+*                                                                         *
+*                                                                         *
+*   Linker script file                                                    *
+*                                                                         *
+**************************************************************************/
+/*-----------------------  memory map ------------------------------------*
+*   ap_code                  address                           length     *
+*-------------------------------------------------------------------------*
+*   rcode              0xbfc1ee00-0xbfc1f5ff                    0x800(2k) *
+*-------------------------------------------------------------------------*
+* front control     (0x40**0000+0x1fe00)-(0x40**0000+0x205ff)   0x800(2k) *
+*-------------------------------------------------------------------------*
+* front UI          (0x48**0000+0x1f600)-(0x48**0000+0x1fdff)   0x800(2k) *
+*-------------------------------------------------------------------------*
+* front enhance1    (0x78**0000+0x27000)-(0x78**0000+0x277ff)   0x800(2k) *
+*-------------------------------------------------------------------------*
+* front enhance2    (0x71**0000+0x27800)-(0x71**0000+0x27fff)   0x800(2k) *
+*-------------------------------------------------------------------------*
+*                                                                         *
+*------------------------------------------------------------------------ *
+*   ap_data                  address                           length     *
+*-------------------------------------------------------------------------*
+*   rdata              0x9fc1d200-0x9fc1d9ff                    0x800(2k) *
+*-------------------------------------------------------------------------*
+* applib(global data)  0x9fc19f80-0x9fc19fff                    0x80      *
+*-------------------------------------------------------------------------*/
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+INPUT(memory_map.xn)
+
+/*1.AP INDEX*/
+AP_INDEX = FRONT_AP;
+
+/*2.从地址map图中获取card模块的常驻代码段物理地址，只需写低14位，开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+SRAM_TEXT_ADDR = AP_MANAGER_TEST_RCODE_ADDR;
+
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+
+/*只是建议起始地址，也可以往后偏移，如control_2一般不是从这个地址，如果要占全部的空间，则使用control_1*/
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_AUTOTEST << 24) + AP_MANAGER_TEST_BANK0_ADDR;
+
+BANK_CONTROL_2_ADDR_BASE = (AP_BANK_AUTOTEST << 24) + AP_MANAGER_TEST_BANK1_ADDR;
+
+BANK_CONTROL_3_ADDR_BASE = (AP_BANK_AUTOTEST << 24) + 0x10000; 
+
+BANK_CONTROL_4_ADDR_BASE = (AP_BANK_AUTOTEST << 24) + 0x24800; 
+
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(__start)
+EXTERN(key_op_entry)
+EXTERN(audio_device_op_entry)
+EXTERN(sys_op_entry)
+EXTERN(vfs_op_entry)
+EXTERN(libc_op_entry)
+EXTERN(mmm_hfp_cmd)
+SECTIONS
+{
+    /* 常驻代码段: .text */
+    .text RCODE_TEXT_ADDR   :
+    {
+        /*4.填写rcode输入节*/
+        ctor.o(.text .rodata)
+        api.a(.text)
+        ap_autotest_main.o(.text .data .bss .rodata)
+        common_func_rcode.o(.text .rcode .rodata)
+        ap_autotest_btstack_test.o(.data .bss)
+        ap_autotest_mptest.o(.bss .data)
+        ap_autotest_bertest.o(.bss .data)
+    }
+
+
+    /*6.链接bank control 1代码*/
+    /*bank0 预留给运行时库ctor */
+    . = BANK_CONTROL_1_ADDR_BASE;
+    /*OFFSET为ui bank 1组的实际物理地址 0x2a000*/
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_0    :
+    {
+        ap_autotest_main.o(.text.bank_test)
+        common_func.o(.text .rodata)
+        ap_autotest_btstack_test.o(.text .rodata .data .bss)
+        ap_autotest_btstack_test_dev.o(.text .rodata .data .bss)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }=0x0/*对定位符的赋值而产生的空隙由0x0填充*/
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_1 :
+    {
+        ap_autotest_start_deal.o(.text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_2 :
+    {
+        ap_autotest_gpio.o(.xdata .text .rodata)       
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_3 :
+    {
+        ap_autotest_music_test.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_4 :
+    {
+        ap_autotest_record_file.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_5 :
+    {
+        ap_autotest_read_args.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_6 :
+    {
+        ap_autotest_modify_bt_attr.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_7 :
+    {
+        ap_autotest_mptest.o(.bss .data .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_8 :
+    {
+        ap_autotest_mptest_sub.o(.bss .data .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_9 :
+    {
+        ap_autotest_channel_test.o(.xdata .text .rodata .data)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }  
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_10 :
+    {
+        ap_autotest_read_param.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }    
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_11 :
+    {
+        ap_autotest_bertest.o(.text .rodata .xdata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }
+     
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_12 :
+    {
+        ap_autotest_lradc_test.o(.text .rodata .xdata)
+        ap_autotest_misc_test.o(.text .rodata .data .bss)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }  
+    
+     . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_13 :
+    {
+        ap_autotest_bertest_sub.o(.text .rodata .xdata)
+        . = AP_MANAGER_TEST_BANK0_SIZE;
+    }    
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_14 :
+    {       
+        ap_autotest_channel_test_SNR.o(.xdata .text .rodata)      
+    }   
+    
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_15 :
+    {       
+        ap_autotest_channel_test_log_file.o(.xdata .text .rodata)      
+    }      
+     
+    . = BANK_CONTROL_4_ADDR_BASE + AP_BANK_SPACE * 39;
+    BANK_CONTROL_1_39 :
+    {    
+        ap_autotest_channel_test_SNR_data.o(.xdata .text .rodata .data .bss) 
+    }
+             
+    . = BANK_CONTROL_3_ADDR_BASE + AP_BANK_SPACE * 40;
+    BANK_CONTROL_1_40 :
+    {
+        ABC_03.o(.text .rodata .data .bss)
+        ABC_05.o(.text .rodata .data .bss)
+        ABC_06.o(.text .rodata .data .bss)
+        ABC_08.o(.text .rodata .data .bss)
+        ABC_13.o(.text .rodata .data .bss)
+        ABC_23.o(.text .rodata .data .bss)
+        ABC_29.o(.text .rodata .data .bss)
+        ABC_33.o(.text .rodata .data .bss)
+        ABC_39.o(.text .rodata .data .bss)
+        ABC_N2.o(.text .rodata .data .bss)   
+        
+		ap_upgrade_rcode.o(.text .rodata)
+		decrypt.o(.text .rodata)
+		ap_upgrade_bank.o(.text .rodata) 
+		ap_upgrade_fw_check.o(.text .rodata)     
+    }     
+
+    . = BANK_CONTROL_2_ADDR_BASE + AP_BANK_SPACE * 50;
+    OFFSET = . & 0x3ffff;
+    BANK_CONTROL_1_50 :
+    {
+        ap_autotest_common.o(.text .rodata)
+        ap_autotest_fsm.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK1_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_51 :
+    {
+        ap_autotest_printk.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK1_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_52 :
+    {
+        ap_autotest_gpio_sub.o(.xdata .text .rodata)
+        . = AP_MANAGER_TEST_BANK1_SIZE;
+    }   
+}

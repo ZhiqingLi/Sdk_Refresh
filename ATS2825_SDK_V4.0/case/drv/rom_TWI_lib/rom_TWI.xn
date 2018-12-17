@@ -1,0 +1,17 @@
+INPUT(link_base.xn)
+
+ROM_TEXT_ADDR = RCODE_ADDR_BASE + SROM_TWI_ADDR_MDY;
+ROM_TEXT_SIZE = SROM_TWI_SIZE_MDY;
+
+OUTPUT_ARCH(mips)
+
+SECTIONS
+{
+    
+    .rom ROM_TEXT_ADDR :
+    {
+        rom_TWI.o(.text .rodata)
+        . = ROM_TEXT_SIZE;
+    }
+    
+}

@@ -1,0 +1,131 @@
+/**************************************************************************
+*                                                                         *
+*   PROJECT     : MIPS port for UCOS-II                                   *
+*                                                                         *
+*   MODULE      : bank a&b link.xn                                        *
+*                                                                         *
+*   AUTHOR      : wuyueqian                                               *
+*                                                                         *
+*   PROCESSOR   : MIPS 4KEc (32 bit RISC) - Actions board                 *
+*                                                                         *
+*   Tool-chain  : Cygnus                                                  *
+*                                                                         *
+*                                                                         *
+*   Linker script file                                                    *
+*                                                                         *
+**************************************************************************/
+/************************common memory map*********************************
+*-------------------------------code--------------------------------------*
+*---rcode   : 0xbfc20600-0xbfc20eff                     length:0x900      *
+*---bank a  :(0x19**0000+0x24c00)-(0x19**0000+0x24fff)  length:0x400      *
+*---bank b  :(0x29**0000+0x25000)-(0x29**0000+0x257ff)  length:0x800      *
+*---说明                                                                  *
+*---1 最高4bit 表示bank a/b，次高4bit 表示驱动号
+*---2 **高6bit 为bank号，比如0x19064c00中0x06高6bit为0x01，故为 bank 1    *
+*-------------------------------data--------------------------------------*
+*--rdata    : 0x9fc1ab80-0x9fc1acff                     length:0x180      *
+***************************************************************************/
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+
+/*1.获取card模块的group index，驱动开发人员需选择*/
+BANK_GROUP_INDEX = DRV_GROUP_KEY;
+
+/*2.从地址map图中获取card模块的常驻代码段物理地址，只需写低14位，驱动开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+SRAM_TEXT_ADDR = SRAM_KEY_MESSAGE_RCODE_ADDR;
+SRAM_DATA_ADDR = SRAM_KEY_MESSAGE_DATA_ADDR;
+
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+/*ROM_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR + 0x20000;*/
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+
+KERNEL_BANK_A_ADDR_BASE = (KERNEL_BANK_A << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_A_ADDR;
+KERNEL_BANK_B_ADDR_BASE = (KERNEL_BANK_B << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_B_ADDR;
+KERNEL_BANK_C_ADDR_BASE = (KERNEL_BANK_C << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_C_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE;
+KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE;
+KERNEL_BANK_C_SIZE = SRAM_BANK_C_SIZE;
+
+/*输出段开头以4字节对齐， .bss 段总大小减4，防止 .data 段大小不是4整倍时溢出几个字节的情况*/
+SRAM_KEY_MESSAGE_DATA_SIZE_FILL = SRAM_KEY_MESSAGE_DATA_SIZE - 4;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+KERNEL_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(blk_op)
+
+SECTIONS
+{
+    .text RCODE_TEXT_ADDR  : 
+    {
+        /*API OBJ在此链接*/
+        libc_op_entry.o(.text)
+        sys_op_entry.o(.text)
+        
+        key_rcode_*.o(.text .rodata)
+        . = SRAM_KEY_MESSAGE_RCODE_SIZE;      
+    }
+    
+    .data RDATA_DATA_ADDR   :  AT(ADDR(.text) + SIZEOF(.text)) 
+    {
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        *.o(.data)
+    }
+    .bss :
+    {
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+        . = SRAM_KEY_MESSAGE_DATA_SIZE_FILL - SIZEOF(.data);
+    } 
+
+    .rom RDATA_DATA_ADDR :
+    {
+        *.o(.rom*)       
+    }
+    
+
+    /*6.链接bank a代码*/
+    . = KERNEL_BANK_A_ADDR_BASE;
+    BANK_A_0    : 
+    {
+        key_banka0_rcp_queue.o(.text .rodata)       
+        . = KERNEL_BANK_A_SIZE;
+    }=0x0 
+    
+    . += (KERNEL_BANK_SPACE - KERNEL_BANK_A_SIZE);
+     BANK_A_1   : 
+    {
+        key_banka1_others.o(.text .rodata)  
+        . = KERNEL_BANK_A_SIZE;
+    }=0x0     
+    
+     /*7.链接bank b代码*/
+    . = KERNEL_BANK_B_ADDR_BASE;
+    BANK_B_0    : 
+    {
+        key_bankb0_init.o(.text .rodata)  
+        . = KERNEL_BANK_B_SIZE;
+    }=0x0 
+
+    /*假设还有一个bank b，文件名为bank_b_card_xx.c*/
+    . += (KERNEL_BANK_SPACE - KERNEL_BANK_B_SIZE);
+     BANK_B_1   : 
+    {
+        key_bankb1_exit.o(.text .rodata) 
+        . = KERNEL_BANK_B_SIZE;
+    }=0x0
+    
+    /*8.链接bank c代码, card 模块没有*/
+    . = KERNEL_BANK_C_ADDR_BASE;
+    
+ }

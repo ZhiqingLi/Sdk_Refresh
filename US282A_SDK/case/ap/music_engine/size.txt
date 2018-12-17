@@ -1,0 +1,13 @@
+   text	   data	    bss	    dec	    hex	filename
+   0xb8	    0x0	    0x0	    184	     b8	./obj/mengine_bk_info.o
+  0x2a0	    0x0	    0x0	    672	    2a0	./obj/mengine_control.o
+   0x7c	    0x0	    0x0	    124	     7c	./obj/mengine_event.o
+  0x55c	   0xe8	    0x0	   1604	    644	./obj/mengine_event_param.o
+  0x124	    0x0	    0x0	    292	    124	./obj/mengine_event_playmode.o
+  0x344	    0x0	    0x0	    836	    344	./obj/mengine_event_switch.o
+   0x54	    0x0	    0x0	     84	     54	./obj/mengine_event_volume.o
+  0x318	    0x0	    0x0	    792	    318	./obj/mengine_file_init.o
+  0x48c	    0x4	  0x1b8	   1608	    648	./obj/mengine_main.o
+  0x66c	    0x0	    0x0	   1644	    66c	./obj/mengine_message_done.o
+  0x6d0	    0x0	    0x0	   1744	    6d0	./obj/mengine_play_deal.o
+  0x1c4	    0x0	    0x0	    452	    1c4	./obj/mengine_tts_deal.o

@@ -1,0 +1,12 @@
+---- MAX_PWM_DUTY_CNT Matches (11 in 1 files) ----
+main.c line 32 : #define MAX_PWM_DUTY_CNT		100
+LightDutyContorlChange in main.c : 	static uint8_t MaxPwmDutyBuf = MAX_PWM_DUTY_CNT,PwmBeliel = 100;
+LightDutyContorlChange in main.c : 			if((gSys.Pwm0DutyVal < MAX_PWM_DUTY_CNT)
+LightDutyContorlChange in main.c : 			&& (gSys.Pwm1DutyVal < MAX_PWM_DUTY_CNT))
+LightDutyContorlChange in main.c : 			gSys.Pwm0DutyVal = MAX_PWM_DUTY_CNT/2;
+LightDutyContorlChange in main.c : 			gSys.Pwm1DutyVal = MAX_PWM_DUTY_CNT/2;
+LightDutyContorlChange in main.c : 			MaxPwmDutyBuf = MAX_PWM_DUTY_CNT;
+RGBDisplayScan in main.c : 			if(I2CRdBuffer[RED_BASE] >= MAX_PWM_DUTY_CNT)
+RGBDisplayScan in main.c : 			if(I2CRdBuffer[GREEN_BASE] >= MAX_PWM_DUTY_CNT)
+RGBDisplayScan in main.c : 			if(I2CRdBuffer[BLUE_BASE] >= MAX_PWM_DUTY_CNT)
+RGBDisplayScan in main.c : 			I2CRdBuffer[RED_BASE] = MAX_PWM_DUTY_CNT;

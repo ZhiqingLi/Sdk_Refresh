@@ -1,0 +1,162 @@
+/*用来检查用了xdata的几个.o文件的对外依赖性*/
+/*因为xdata是分配在BANK_CONTROL_1里面，
+所以，
+用了xdata的.o文件是不能调用BANK_CONTROL_1里面的其他函数的
+其他函数也不能调用这些.o文件
+*/
+INPUT(link_base.xn)
+
+AP_INDEX = FRONT_AP;
+
+SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_AP_FRONT_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_AP_FRONT_DATA_SIZE;
+
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_FRONT_CONTROL_1 << 24) + SRAM_AP_BANK_FRONT_CONTROL_ADDR;
+BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE;
+AP_BANK_SPACE = BANK_SPACE;
+
+/*music_rcp_deal_get.c中定义的BANK DATA的大小*/
+MUSIC_RCP_DEAL_GET_XDATA_LEN = 512 + 16;
+
+OUTPUT_ARCH(mips)
+/*本.o文件组对外封装出以下几个函数,这几个函数跟同bank的其他函数没有任何关联：
+这几个函数不会调用外面的同bank函数, 外面的bank函数也不会调用这几个函数*/
+ENTRY(music_get_music_info)
+ENTRY(music_get_music_lyric)
+ENTRY(music_get_music_plist)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        /*4.填写rcode输入节*/
+        /*从这里开始 .text 固定链接地址*/
+        KEEP(sys_op_entry.o(.text))
+        KEEP(libc_op_entry.o(.text))
+        KEEP(audio_device_op_entry.o(.text))
+        KEEP(key_op_entry.o(.text))
+        KEEP(lcd_op_entry.o(.text))
+        KEEP(tts_op_entry.o(.text))
+        KEEP(ccd_op_entry.o(.text))
+        KEEP(base_op_entry.o(.text))
+        KEEP(stub_mod_cmd.o(.text))
+        KEEP(app_timer_rcode.o(.text))
+        KEEP(message_rcode.o(.text))
+        KEEP(message_key_rcode.o(.text))
+        KEEP(common_view_loop.o(.text .rodata))
+        KEEP(common_view_manager.o(.rcode))
+        /*到这里结束 .text 固定链接地址*/
+        /*其他API OBJ在此链接*/
+        music_scan_cmd.o(.text)
+        vfs_op_entry.o(.text)
+
+        music_ab.o(.rodata.ke_maplist)
+        music_digit_song.o(.rodata.ke_maplist)
+        music_hint.o(.rodata.ke_maplist)
+        music_loop_mode.o(.rodata.ke_maplist)
+        music_play.o(.rodata.ke_maplist .rodata.se_maplist)
+        music_song_number.o(.rodata.ke_maplist)
+
+        music_play.o(.rcode)
+
+        music_rcp_deal_set.o(.rodata)
+
+        /*这里还有一定的空间，如果有切BANK导致杂音等问题，可以利用一下*/
+        . = RCODE_SIZE;
+    }
+    
+    /* 未初始化的全局数据段，系统会自动清零*/
+    .bss RDATA_DATA_ADDR	:
+    {
+        /*从这里开始 .bss 固定链接地址*/
+        bss_begin = ABSOLUTE(.);
+        KEEP(applib_app_data.o(.bss))
+        KEEP(common_func_data.o(.bss))
+        /*到这里结束 .bss 固定链接地址*/
+        
+        music_ab.o(.bss)
+        music_digit_song.o(.bss)
+        music_hint.o(.bss)
+        music_loop_mode.o(.bss)
+        music_play.o(.bss)
+        music_song_number.o(.bss)
+
+        music_main.o(.bss)
+        music_common_inner.o(.bss)
+        music_rcp_file_deal.o(.bss)
+        eh_id3_rdata.o(.bss)
+        music_rcp_id3_deal.o(.bss)
+        music_rcp_key_deal.o(.bss)
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+    
+    /* 初始化了的全局数据段*/
+    .data :
+    {
+        bss_end = ABSOLUTE(.);
+        /*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        music_ab.o(.data)
+        music_digit_song.o(.data)
+        music_hint.o(.data)
+        music_loop_mode.o(.data)
+        music_play.o(.data)
+        music_song_number.o(.data)
+
+        music_main.o(.data)
+        music_common_inner.o(.data)
+        music_rcp_file_deal.o(.data)
+        eh_id3_rdata.o(.data)
+        music_rcp_id3_deal.o(.data)
+        music_rcp_key_deal.o(.data)
+        *.o(.data)
+        . = DATA_BSS_SIZE - (bss_end - bss_begin);
+    }
+
+    . = BANK_CONTROL_1_ADDR_BASE + AP_BANK_SPACE * 14;
+    OFFSET = . & 0x3ffff;
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+    BANK_CONTROL_1_14 :
+    {
+        music_rcp_deal_get.o(.xdata)
+        . = MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET + MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    BANK_CONTROL_1_15 :
+    {
+        music_rcp_deal_get.o(.text .rodata)
+        . = BANK_CONTROL_SIZE - MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET + MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    BANK_CONTROL_1_16 :
+    {
+        music_rcp_id3_deal.o(.xdata .text .rodata)
+        . = BANK_CONTROL_SIZE - MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET + MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    BANK_CONTROL_1_17 :
+    {
+        music_rcp_lyric_deal.o(.xdata .text .rodata)
+        . = BANK_CONTROL_SIZE - MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET + MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    BANK_CONTROL_1_18 :
+    {
+        music_rcp_deal_get.o(.text.bank2)
+        music_rcp_id3_deal.o(.text.bank2)
+        . = BANK_CONTROL_SIZE - MUSIC_RCP_DEAL_GET_XDATA_LEN;
+    }
+}

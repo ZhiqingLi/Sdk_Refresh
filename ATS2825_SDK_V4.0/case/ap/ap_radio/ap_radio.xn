@@ -1,0 +1,176 @@
+INPUT(link_base.xn)
+
+AP_INDEX = FRONT_AP;
+
+SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR;
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RCODE_SIZE = SRAM_AP_FRONT_RCODE_SIZE;
+
+SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+DATA_BSS_SIZE = SRAM_AP_FRONT_DATA_SIZE;
+
+BANK_CONTROL_1_ADDR_BASE = (AP_BANK_FRONT_CONTROL_1 << 24) + SRAM_AP_BANK_FRONT_CONTROL_ADDR;
+BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE;
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(__start)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        /*4.填写rcode输入节*/
+        /*从这里开始 .text 固定链接地址*/
+        KEEP(sys_op_entry.o(.text))
+        KEEP(libc_op_entry.o(.text))
+        KEEP(audio_device_op_entry.o(.text))
+        KEEP(key_op_entry.o(.text))
+        KEEP(lcd_op_entry.o(.text))
+        KEEP(tts_op_entry.o(.text))
+        KEEP(ccd_op_entry.o(.text))
+        KEEP(base_op_entry.o(.text))
+        KEEP(stub_mod_cmd.o(.text))
+        KEEP(app_timer_rcode.o(.text))
+        KEEP(message_rcode.o(.text))
+        KEEP(message_key_rcode.o(.text))
+        KEEP(common_view_loop.o(.text .rodata))
+        KEEP(common_view_manager.o(.rcode))
+        /*到这里结束 .text 固定链接地址*/
+        /*其他API OBJ在此链接*/
+
+        radio_rcode.o(.text .rodata)
+        radio_global_data.o(.rodata)
+        radio_rcp_deal.o(.rodata)
+        radio_playing_keydeal.o(.rodata.ke_maplist)
+        radio_view_digit.o(.rodata.ke_maplist)
+        radio_view_hard_search.o(.rodata.ke_maplist)
+        radio_rcp_deal.o(.rcode)
+        . = RCODE_SIZE;
+    }
+    
+    /* 未初始化的全局数据段，系统会自动清零*/
+    .bss RDATA_DATA_ADDR	:
+    {
+        bss_begin = ABSOLUTE(.);
+		/*从这里开始 .bss 固定链接地址*/
+        KEEP(applib_app_data.o(.bss))
+        KEEP(common_func_data.o(.bss))
+        /*到这里结束 .bss 固定链接地址*/
+        
+        radio_main.o(.bss)
+        radio_global_data.o(.bss)
+        radio_rcp_deal.o(.bss)
+        radio_set_funcs.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+    
+    /* 初始化了的全局数据段*/
+    .data :
+    {
+        bss_end = ABSOLUTE(.);
+		/*5.填写rdata输入节，所以文件产生的.data都被链接到这里*/
+        radio_main.o(.data)
+        radio_global_data.o(.data)
+        radio_rcp_deal.o(.data)
+        radio_rcode.o(.data)
+        *.o(.data)
+		. = DATA_BSS_SIZE - (bss_end - bss_begin);
+    }
+
+    . = BANK_CONTROL_1_ADDR_BASE;
+    OFFSET = . & 0x3ffff;
+
+    BANK_CONTROL_1_0 :
+    {
+        ctor.o(.text .rodata)
+        radio_set_funcs.o(.text .rodata)
+        radio_control.o(.text .rodata)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_1 :
+    {
+        radio_main.o(.text .rodata)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_2 :
+    {
+        radio_scene_playing_deal.o(.text .rodata .xdata)
+        radio_view_play_search.o(.text)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_3 :
+    {
+        radio_view_station.o(.text .xdata) 
+        radio_view_digit.o(.text .xdata)
+        radio_view_error.o(.text .xdata)
+        radio_view_play_search.o(.bank)
+        radio_view_hard_search.o(.bank)
+        radio_view_soft_search.o(.bank)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_4 :
+    {
+        radio_playing_keydeal.o(.text .rodata .xdata)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_5 :
+    {
+        radio_playing_keydeal.o(.text.bank2)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_6 :
+    {
+        radio_soft_search_deal.o(.text .rodata .xdata)
+        radio_view_soft_search.o(.text)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_7 :
+    {
+        radio_hard_search_deal.o(.text .rodata .xdata)
+        radio_view_hard_search.o(.text)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_8 :
+    {
+        radio_hard_search_deal.o(.text.bank2)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_9 :
+    {
+    	radio_scene_playing.o(.text .rodata .xdata)
+        radio_auto_search_start.o(.text .rodata)
+        radio_manual_search.o(.text .rodata .xdata)
+        . = BANK_CONTROL_SIZE;
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1)))  + OFFSET;
+     BANK_CONTROL_1_10 :
+    {
+        radio_rcp_deal.o(.text .xdata) 
+        . = BANK_CONTROL_SIZE;
+    }
+}

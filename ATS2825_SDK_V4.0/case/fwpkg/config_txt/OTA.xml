@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+    part        : 结点名, 定义一个分区描述项
+    desc        : 分区描述
+    ID          : 分区ID
+    size        : 分区允许大小(十六进制表示，字节为单位)
+    needbackup  : 是否需要先备份再写
+    name        : 分区包含的文件集合
+    该文件描述norflash大于等于8M的OTA xml文件的配置，其中LFI允许最大大小参见sys_info.h头文件定义
+    注意哪里面大小是扇区为单位，而xml里面分区大小是字节为单位的
+-->
+
+<firmwareupdate name = "/">
+
+  <!-- 第一个分区ID -->
+  <part id = "1" desc = "brec是第一分区，允许最大大小64KB">
+    <param size = '0x10000' needbackup = "1"/>   
+  </part>  
+  
+  <!-- 第二个分区ID -->  
+  <part id = "2" desc = "lfi是第二个分区，允许最大大小0xe00">
+    <param size = '0x1c0000' needbackup = "1"/>
+  </part> 
+
+</firmwareupdate>
+
+
+
+

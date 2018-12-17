@@ -1,0 +1,2 @@
+RseFlashDriverModel=<?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?><rseFlashDriverModel><addr>0x0</addr><eraseAll>true</eraseAll><flashDriver>PAR_burn</flashDriver><imageFile>D\:\\MV\\SVN\\P2\\P2_NEW\\2017_newest_bak\\MVsP20_SDK\\Examples\\Demo_WIFI\\Debug\\output\\Demo_WIFI.bin</imageFile><lock>false</lock><unlock>false</unlock><verify>true</verify></rseFlashDriverModel>
+eclipse.preferences.version=1

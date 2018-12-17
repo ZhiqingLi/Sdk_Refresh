@@ -1,0 +1,4 @@
+在 common_front.xn 添加或修改共享数据段，必须考虑修改:
+1）common_engine.xn 可能也需要同步修改一下，以使前台和引擎共享的数据段地址一致。
+2）ap_manager 的 process_manager_linker.xn ，以便在manager中对共享数据段进行初始化。
+3）bluetooth_stack 是一个特殊的应用，需要直接将添加或修改共享数据段同步到它们的xn文件中。

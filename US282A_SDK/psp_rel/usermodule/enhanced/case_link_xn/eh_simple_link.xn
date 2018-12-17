@@ -1,0 +1,192 @@
+INPUT(link_base.xn)
+
+AP_INDEX = FRONT_AP;
+
+BANK_BACK_ENHANCED_1_ADDR_BASE = (AP_BANK_BACK_ENHANCED_1 << 24) + SRAM_AP_BANK_BACK_ENHANCED_1_ADDR;
+BANK_BACK_ENHANCED_2_ADDR_BASE = (AP_BANK_BACK_ENHANCED_2 << 24) + SRAM_AP_BANK_BACK_ENHANCED_2_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+BANK_BACK_ENHANCED1_SIZE = SRAM_AP_BANK_BACK_ENHANCED_1_SIZE;
+BANK_BACK_ENHANCED2_SIZE = SRAM_AP_BANK_BACK_ENHANCED_2_SIZE;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+AP_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+EXTERN(vfs_op_entry)
+
+SECTIONS
+{
+    /*常驻代码*/
+    .text RCODE_TEXT_ADDR :
+    {
+        _resident_text = ABSOLUTE(.); /*只是标号*/
+        /*4.无常驻代码*/
+        _resident_text_end = ABSOLUTE(.);
+    }
+
+    /* 初始化了的全局数据段*/
+    /*.data RDATA_DATA_ADDR :  AT(ADDR(.text) + SIZEOF(.text))
+    {
+        _resident_data = ABSOLUTE(.);
+        //5.填写rdata输入节，所以文件产生的.data都被链接到这里
+        eh_globle_data.o(.data)
+        _resident_data_end = ABSOLUTE(.);
+    }*/
+    /*未初始化的全局数据段，系统不会进行清零*/
+
+    /*.bss :
+    {
+        eh_globle_data.o(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    } */
+
+    . = BANK_BACK_ENHANCED_1_ADDR_BASE;
+    /*OFFSET 为BANK组的实际物理地址*/
+    OFFSET = . & 0x3ffff;
+    BANK_ENHANCED_1_0 :
+    {
+        eh_fsel_interface.o(.text .rodata)
+        eh_fsel_entry.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_1_1 :
+    {
+        eh_fsel_shuffle.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_1_2 :
+    {
+        eh_fsel_dirlist_func.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_1_3 :
+    {
+        eh_fsel_directory_func.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_1_0 :
+    {
+        eh_id3_entry.o(.text .rodata .xdata)
+        /*eh_id3_aac.o(.text .rodata .xdata)*/
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_1_1 :
+    {
+        eh_id3_function.o(.text .rodata .xdata)
+    }
+
+    . = BANK_BACK_ENHANCED_2_ADDR_BASE;
+    /*OFFSET 为BANK组的实际物理地址*/
+    OFFSET = . & 0x3ffff;
+    BANK_ENHANCED_2_0 :
+    {
+        eh_fsel_directory_next.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_1 :
+    {
+        eh_fsel_directory_prev.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_2 :
+    {
+        eh_fsel_dirlist_next.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_3 :
+    {
+        eh_fsel_dirlist_prev.o(.text .rodata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_4 :
+    {
+        eh_fsel_dirlist_vram.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_5 :
+    {
+        eh_fsel_sortlist_func.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_2_6 :
+    {
+        eh_fsel_sortlist_func.o(.text.bank2)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_0 :
+    {
+        eh_id3_mp3_v1.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_1 :
+    {
+        eh_id3_mp3_v2.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_2 :
+    {
+        eh_id3_wma.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_3 :
+    {
+        eh_id3_ape.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_4 :
+    {
+       eh_id3_flac.o(.text .rodata .xdata)
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_5 :
+    {
+        /*eh_id3_ogg.o(.text .rodata .xdata) */
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_6 :
+    {
+        /*eh_id3_aa.o(.text .rodata .xdata) */
+        /*. = BANK_BACK_ENHANCED2_SIZE;*/
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_7 :
+    {
+        /*eh_id3_aax.o(.text .rodata .xdata) */
+        /*. = BANK_BACK_ENHANCED2_SIZE;*/
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_8 :
+    {
+        /*eh_id3_function_sub.o(.text .rodata .xdata) */
+        /*. = BANK_BACK_ENHANCED2_SIZE;*/
+    }
+
+    . = ((. + AP_BANK_SPACE) & (~(AP_BANK_SPACE - 1))) + OFFSET;
+    BANK_ENHANCED_ID3_2_9 :
+    {
+        eh_id3_utf8_deal.o(.text .rodata .xdata)
+    }
+}

@@ -1,0 +1,56 @@
+//编写说明：
+//1）脚本文件 tts_flist.txt 必须是ANSI编码，每个词条包含2中语言语音文件，即[中文语音文件;英语语音文件]。
+//2）NULL表示该词条没有此种语言语音文件，[END]表示结尾，这两者不能删除。
+//3）支持英文分号;和中文分号；为语音文件分隔符。支持英文空格，制表符和中文空格为空白符号。
+NULL;	BluetoothMode.mp3
+NULL;	BluetoothHands-free.mp3
+NULL;	WaitingForAConnection.mp3
+NULL;	BluetoothConnected.mp3
+NULL;	Theseconddeviceisconnectedsuccessfully.mp3
+NULL;	BluetoothDisconnected.mp3
+NULL;	Play.mp3
+NULL;	Pause.mp3
+NULL;	Previous.mp3
+NULL;	Next.mp3
+NULL;	LineIn.mp3
+NULL;	LowPowerPleaseCharge.mp3
+NULL;	LowPower.mp3
+NULL;	Chargeisfull.mp3
+NULL;	PowerOn.mp3
+NULL;	PowerOff.mp3
+NULL;	Waitingforpairing.mp3
+NULL;	Pairingissuccessful.mp3
+NULL;	playmusic.mp3
+NULL;	UDiskPlay.mp3
+NULL;	CardPlay.mp3
+NULL;	Playrecording.mp3
+NULL;	FmRadio.mp3
+NULL;	SearchingTheRadio.mp3
+NULL;	USBSound.mp3
+NULL;	EnterUDisk.mp3
+NULL;	Recording.mp3
+NULL;	MaximumVolume.mp3
+NULL;	MinimumVolume.mp3
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	NULL
+NULL;	ConnectionToTheAppIsLost.mp3
+NULL;	PleaseLaunchTheAppOnYourPhone.mp3
+END

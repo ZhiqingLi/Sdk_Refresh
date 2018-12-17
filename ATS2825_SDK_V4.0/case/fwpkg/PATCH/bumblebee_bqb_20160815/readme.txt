@@ -1,0 +1,4 @@
+mp_patch_0x0a_1db.bin对应发射功率为1db
+mp_patch_0x0b_4db.bin对应发射功率为4db
+mp_patch_0x0c_7db.bin对应发射功率为7db
+mp_patch_0x09_-2db.bin对应发射功率为-2db

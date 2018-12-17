@@ -1,0 +1,618 @@
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD ./../../../psp_rel/include/link_base.xn
+                0x0000000000000000                DRV_GROUP_STG_BASE = 0x0
+                0x0000000000000001                DRV_GROUP_STG_CARD = 0x1
+                0x0000000000000002                DRV_GROUP_STG_UHOST = 0x2
+                0x0000000000000003                DRV_GROUP_FAT32 = 0x3
+                0x0000000000000004                DRV_GROUP_EXFAT = 0x4
+                0x0000000000000005                DRV_GROUP_UD = 0x5
+                0x0000000000000006                DRV_GROUP_LCD = 0x6
+                0x0000000000000007                DRV_GROUP_FM = 0x7
+                0x0000000000000008                DRV_GROUP_KEY = 0x8
+                0x0000000000000009                DRV_GROUP_CCD = 0x9
+                0x000000000000000a                DRV_GROUP_AUDIO_DEVICE = 0xa
+                0x000000000000000b                DRV_GROUP_TTS = 0xb
+                0x000000000000000c                DRV_GROUP_BT = 0xc
+                0x000000000000000f                DRV_GROUP_SYS = 0xf
+                0x000000000003ffff                SRAM_SIZE_MASK = 0x3ffff
+                0x000000009fc00000                RDATA_ADDR_BASE = 0x9fc00000
+                0x00000000bfc00000                RCODE_ADDR_BASE = 0xbfc00000
+                0x0000000000000001                KERNEL_BANK_A = 0x1
+                0x0000000000000002                KERNEL_BANK_B = 0x2
+                0x0000000000000003                KERNEL_BANK_C = 0x3
+                0x0000000000040000                BANK_SPACE = 0x40000
+                0x0000000000000000                FRONT_AP = 0x0
+                0x0000000000000001                BACK_AP = 0x1
+                0x0000000000000002                PROCESS_MANAGER_AP = 0x2
+                0x0000000000000000                FRONT_CODEC = 0x0
+                0x0000000000000001                BACK_CODEC = 0x1
+                0x0000000000000040                AP_BANK_FRONT_CONTROL_1 = 0x40
+                0x0000000000000048                AP_BANK_FRONT_UI_1 = 0x48
+                0x0000000000000050                AP_BANK_FRONT_BASAL = 0x50
+                0x0000000000000058                AP_BANK_FRONT_CODEC = 0x58
+                0x0000000000000060                AP_BANK_BACK_CONTROL_1 = 0x60
+                0x0000000000000068                AP_BANK_BACK_BASAL = 0x68
+                0x0000000000000070                AP_BANK_BACK_CODEC = 0x70
+                0x0000000000000078                AP_BANK_FRONT_ENHANCED_1 = 0x78
+                0x0000000000000071                AP_BANK_FRONT_ENHANCED_2 = 0x71
+                0x000000000000007a                AP_BANK_BACK_ENHANCED_1 = 0x7a
+                0x000000000000007b                AP_BANK_BACK_ENHANCED_2 = 0x7b
+                0x0000000000000072                AP_BANK_BTENGINE_CONTROL_1 = 0x72
+                0x0000000000000073                AP_BANK_BTENGINE_LIB_1 = 0x73
+                0x0000000000000074                AP_BANK_BTENGINE_LIB_2 = 0x74
+                0x0000000000000075                AP_BANK_BTENGINE_EXTEND_1 = 0x75
+                0x0000000000000076                AP_BANK_BTENGINE_EXTEND_2 = 0x76
+                0x0000000000000077                AP_BANK_BTENGINE_EXTEND_3 = 0x77
+                0x000000000000007c                AP_BANK_BTENGINE_EXTEND_4 = 0x7c
+                0x0000000000000079                AP_BANK_BTENGINE_EXTEND_5 = 0x79
+                0x000000000000007f                AP_BANK_MANAGER = 0x7f
+                0x0000000000000041                AP_BANK_AUTOTEST = 0x41
+                0x0000000000000000                SROM_BROM_ADDR = 0x0
+                0x0000000000002600                SROM_BROM_SIZE = 0x2600
+                0x0000000000002600                SROM_SPINOR_ADDR = (SROM_BROM_ADDR + SROM_BROM_SIZE)
+                0x0000000000000c00                SROM_SPINOR_SIZE = 0xc00
+                0x0000000000003200                SROM_TWI_ADDR = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE)
+                0x0000000000000700                SROM_TWI_SIZE = 0x700
+                0x0000000000003900                SROM_STUB_ADDR = (SROM_TWI_ADDR + SROM_TWI_SIZE)
+                0x0000000000000700                SROM_STUB_SIZE = 0x700
+                0x0000000000000e00                SROM_SPINOR_SIZE_MDY = 0xe00
+                0x0000000000003400                SROM_TWI_ADDR_MDY = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE_MDY)
+                0x0000000000000700                SROM_TWI_SIZE_MDY = 0x700
+                0x0000000000003b00                SROM_STUB_ADDR_MDY = (SROM_TWI_ADDR_MDY + SROM_TWI_SIZE_MDY)
+                0x0000000000000500                SROM_STUB_SIZE_MDY = 0x500
+                0x0000000000004000                SROM_KERNEL_ADDR = (SROM_STUB_ADDR + SROM_STUB_SIZE)
+                0x0000000000004000                SROM_KERNEL_SIZE = 0x4000
+                0x000000000000c000                SROM_FS_ADDR = 0xc000
+                0x0000000000001c00                SROM_FS_SIZE = 0x1c00
+                0x000000000000dc00                SROM_SPINOR1_ADDR = (SROM_FS_ADDR + SROM_FS_SIZE)
+                0x0000000000000400                SROM_SPINOR1_SIZE = 0x400
+                0x0000000000008000                SRAM_OS_RCODE_ADDR = 0x8000
+                0x0000000000000c00                SRAM_OS_RCODE_SIZE = 0xc00
+                0x0000000000008c00                SRAM_SPINOR_RCODE_ADDR = 0x8c00
+                0x0000000000000400                SRAM_SPINOR_RCODE_SIZE = 0x400
+                0x0000000000009000                SRAM_BANK_A_ADDR = 0x9000
+                0x0000000000000400                SRAM_BANK_A_SIZE = 0x400
+                0x0000000000009400                SRAM_BANK_B_ADDR = 0x9400
+                0x0000000000000800                SRAM_BANK_B_SIZE = 0x800
+                0x0000000000009c00                SRAM_UI_RCODE_ADDR = 0x9c00
+                0x0000000000000300                SRAM_UI_RCODE_SIZE = 0x300
+                0x0000000000009f00                SRAM_AUDIO_GLOBAL_DATA_ADDR = 0x9f00
+                0x0000000000000060                SRAM_AUDIO_GLOBAL_DATA_SIZE = 0x60
+                0x0000000000009f60                SRAM_UHOST_GLOBAL_DATA_ADDR = 0x9f60
+                0x0000000000000010                SRAM_UHOST_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f70                SRAM_CARD_GLOBAL_DATA_ADDR = 0x9f70
+                0x0000000000000010                SRAM_CARD_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f80                SRAM_SYS_SHARE_DATA_ADDR = 0x9f80
+                0x0000000000000040                SRAM_SYS_SHARE_DATA_SIZE = 0x40
+                0x0000000000009fc0                SRAM_RAM6_CCD_GLOBAL_DATA_ADDR = 0x9fc0
+                0x0000000000000040                SRAM_RAM6_CCD_GLOBAL_DATA_SIZE = 0x40
+                0x000000000000a000                SRAM_BT_LIB1_BANK_ADDR = 0xa000
+                0x0000000000000800                SRAM_BT_LIB1_BANK_SIZE = 0x800
+                0x000000000000a800                SRAM_BT_EXT1_BANK_ADDR = (SRAM_BT_LIB1_BANK_ADDR + SRAM_BT_LIB1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT1_BANK_SIZE = 0x800
+                0x000000000000b000                SRAM_BT_EXT2_BANK_ADDR = (SRAM_BT_EXT1_BANK_ADDR + SRAM_BT_EXT1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT2_BANK_SIZE = 0x800
+                0x000000000000f000                SRAM_BT_STACK_RCODE1_ADDR = 0xf000
+                0x0000000000000a00                SRAM_BT_STACK_RCODE1_SIZE = 0xa00
+                0x000000000000b000                SRAM_AP_BANK_MANAGER_ADDR = SRAM_BT_EXT2_BANK_ADDR
+                0x0000000000000800                SRAM_AP_BANK_MANAGER_SIZE = SRAM_BT_EXT2_BANK_SIZE
+                0x000000000000be00                SRAM_KEY_MESSAGE_DATA_ADDR = 0xbe00
+                0x0000000000000100                SRAM_KEY_MESSAGE_DATA_SIZE = 0x100
+                0x000000000000bf00                SRAM_UI_DATA_ADDR = 0xbf00
+                0x0000000000000100                SRAM_UI_DATA_SIZE = 0x100
+                0x0000000000010000                SRAM_BT_CONTROLLER_RCODE_ADDR = 0x10000
+                0x0000000000000500                SRAM_BT_CONTROLLER_RCODE_SIZE = 0x500
+                0x0000000000010500                SRAM_COMMON_BT_MANAGER_RCODE = (SRAM_BT_CONTROLLER_RCODE_ADDR + SRAM_BT_CONTROLLER_RCODE_SIZE)
+                0x0000000000000b00                SRAM_COMMON_BT_MANAGER_SIZE = 0xb00
+                0x0000000000011000                SRAM_BT_BACK_RCODE_ADDR = (SRAM_COMMON_BT_MANAGER_RCODE + SRAM_COMMON_BT_MANAGER_SIZE)
+                0x0000000000002900                SRAM_BT_BACK_RCODE_SIZE = 0x2900
+                0x00000000000140d0                SRAM_IRQ_PRINT_BUFFER_ADDR = 0x140d0
+                0x0000000000000130                SRAM_IRQ_PRINT_BUFFER_SIZE = 0x130
+                0x0000000000013900                SRAM_BT_LIB2_BANK_ADDR = 0x13900
+                0x0000000000000d00                SRAM_BT_LIB2_BANK_SIZE = 0xd00
+                0x0000000000013900                SRAM_BT_EXT3_BANK_ADDR = SRAM_BT_LIB2_BANK_ADDR
+                0x0000000000000d00                SRAM_BT_EXT3_BANK_SIZE = SRAM_BT_LIB2_BANK_SIZE
+                0x0000000000021e00                SRAM_BT_EXT4_BANK_ADDR = 0x21e00
+                0x0000000000000600                SRAM_BT_EXT4_BANK_SIZE = 0x600
+                0x0000000000014600                SRAM_BT_EXT5_BANK_ADDR = 0x14600
+                0x0000000000000600                SRAM_BT_EXT5_BANK_SIZE = 0x600
+                0x000000000000fa00                SRAM_COM_DAE_RCODE_ADDR = 0xfa00
+                0x0000000000000100                SRAM_COM_DAE_RCODE_SIZE = 0x100
+                0x000000000000fb00                SRAM_BTCALL_EXT_RCODE_ADDR = 0xfb00
+                0x0000000000000100                SRAM_BTCALL_EXT_RCODE_SIZE = 0x100
+                0x000000000001e900                SRAM_AP_FRONT_RCODE_ADDR = 0x1e900
+                0x0000000000000800                SRAM_AP_FRONT_RCODE_SIZE = 0x800
+                0x0000000000016c00                SRAM_FS_RCODE_ADDR = 0x16c00
+                0x0000000000000800                SRAM_FS_RCODE_SIZE = 0x800
+                0x0000000000017400                SRAM_CARD_UD_RCODE_ADDR = 0x17400
+                0x0000000000000c00                SRAM_CARD_UD_RCODE_SIZE = 0xc00
+                0x0000000000017400                SRAM_UHOST_UD_RCODE_ADDR = SRAM_CARD_UD_RCODE_ADDR
+                0x0000000000000c00                SRAM_UHOST_UD_RCODE_SIZE = SRAM_CARD_UD_RCODE_SIZE
+                0x0000000000016c00                SRAM_USOUND_RCODE_ADDR = 0x16c00
+                0x0000000000002800                SRAM_USOUND_RCODE_SIZE = 0x2800
+                0x0000000000016c00                SRAM_BTSTACK_AVDTP_DATA_ADDR = 0x16c00
+                0x0000000000002980                SRAM_BTSTACK_AVDTP_DATA_SIZE = 0x2980
+                0x0000000000016c00                SRAM_BTCALL_CALLRING_BUF_ADDR = 0x16c00
+                0x0000000000001000                SRAM_BTCALL_CALLRING_BUF_SIZE = 0x1000
+                0x0000000000016c00                SRAM_BTCALL_ASQT_BUF_ADDR = 0x16c00
+                0x0000000000002800                SRAM_BTCALL_ASQT_BUF_SIZE = 0x2800
+                0x0000000000018000                SRAM_FS_DATA_ADDR = 0x18000
+                0x0000000000000300                SRAM_FS_DATA_SIZE = 0x300
+                0x0000000000018300                SRAM_FS_BUF_ADDR = 0x18300
+                0x0000000000000a00                SRAM_FS_BUF_SIZE = 0xa00
+                0x0000000000018d00                SRAM_CARD_UD_CACHE_ADDR = 0x18d00
+                0x0000000000000800                SRAM_CARD_UD_CACHE_SIZE = 0x800
+                0x0000000000018d00                SRAM_UHOST_UD_CACHE_ADDR = SRAM_CARD_UD_CACHE_ADDR
+                0x0000000000000800                SRAM_UHOST_UD_CACHE_SIZE = SRAM_CARD_UD_CACHE_SIZE
+                0x0000000000019500                SRAM_CARD_DATA_ADDR = 0x19500
+                0x0000000000000080                SRAM_CARD_DATA_SIZE = 0x80
+                0x0000000000019500                SRAM_UHOST_DATA_ADDR = SRAM_CARD_DATA_ADDR
+                0x0000000000000080                SRAM_UHOST_DATA_SIZE = SRAM_CARD_DATA_SIZE
+                0x0000000000019580                SRAM_AP_BACK_DATA_ADDR = 0x19580
+                0x0000000000000400                SRAM_AP_BACK_DATA_SIZE = 0x400
+                0x0000000000019980                SRAM_AP_FRONT_DATA_ADDR = 0x19980
+                0x0000000000000700                SRAM_AP_FRONT_DATA_SIZE = 0x700
+                0x000000000001a080                SRAM_APPLIB_GLOBAL_DATA_ADDR = 0x1a080
+                0x0000000000000040                SRAM_APPLIB_GLOBAL_DATA_SIZE = 0x40
+                0x000000000001a0c0                SRAM_APPLIB_DATA_ADDR = 0x1a0c0
+                0x0000000000000200                SRAM_APPLIB_DATA_SIZE = 0x200
+                0x000000000001a2c0                SRAM_BTMANAGER_DATA_ADDR = 0x1a2c0
+                0x0000000000000140                SRAM_BTMANAGER_DATA_SIZE = 0x140
+                0x000000000001a400                SRAM_OS_DATA_ADDR = 0x1a400
+                0x0000000000000880                SRAM_OS_DATA_SIZE = 0x880
+                0x000000000001ac80                SRAM_OS_HEAP_ADDR = 0x1ac80
+                0x0000000000000680                SRAM_OS_HEAP_SIZE = 0x680
+                0x000000000001b300                SRAM_AP_MANAGER_RCODE_ADDR = 0x1b300
+                0x0000000000000100                SRAM_AP_MANAGER_RCODE_SIZE = 0x100
+                0x000000000001b400                SRAM_OS_SD_SWAP_BUF_ADDR = 0x1b400
+                0x0000000000000200                SRAM_OS_SD_SWAP_BUF_SIZE = 0x200
+                0x000000000001b600                SRAM_OS_TASK_STACK_ADDR = 0x1b600
+                0x0000000000001e00                SRAM_OS_TASK_STACK_SIZE = 0x1e00
+                0x000000000001d500                SRAM_BANK_C_ADDR = 0x1d500
+                0x0000000000000400                SRAM_BANK_C_SIZE = 0x400
+                0x000000000001d900                SRAM_BT_HCI_BUF_ADDR = 0x1d900
+                0x0000000000001000                SRAM_BT_HCI_BUF_SIZE = 0x1000
+                0x0000000000016400                SRAM_BT_UART_BUF_ADDR = 0x16400
+                0x0000000000000800                SRAM_BT_UART_BUF_SIZE = 0x800
+                0x000000000001f100                SRAM_BT_RCODE_DATA_ADDR = 0x1f100
+                0x0000000000000700                SRAM_BT_RCODE_DATA_SIZE = 0x700
+                0x000000000001f800                SRAM_KEY_MESSAGE_RCODE_ADDR = 0x1f800
+                0x0000000000000800                SRAM_KEY_MESSAGE_RCODE_SIZE = 0x800
+                0x0000000000020000                SRAM_DSP_IRQ_TABLE_ADDR = 0x20000
+                0x0000000000000120                SRAM_DSP_IRQ_TABLE_SIZE = 0x120
+                0x0000000000020120                SRAM_RAM2_RESEVER_ADDR = 0x20120
+                0x00000000000000e0                SRAM_RAM2_RESEVER_SIZE = 0xe0
+                0x0000000000020200                SRAM_AP_BANK_FRONT_CONTROL_ADDR = 0x20200
+                0x0000000000000800                SRAM_AP_BANK_FRONT_CONTROL_SIZE = 0x800
+                0x0000000000020a00                SRAM_KERNEL_XSYS_ADDR = 0x20a00
+                0x0000000000000e00                SRAM_KERNEL_XSYS_SIZE = 0xe00
+                0x0000000000021800                SRAM_AP_BACK_BASAL_RCODE_ADDR = 0x21800
+                0x0000000000000600                SRAM_AP_BACK_BASAL_RCODE_SIZE = 0x600
+                0x0000000000021e00                SRAM_AP_BANK_BACK_BASAL_ADDR = 0x21e00
+                0x0000000000000600                SRAM_AP_BANK_BACK_BASAL_SIZE = 0x600
+                0x0000000000022400                SRAM_BT_HEAD_ADDR = 0x22400
+                0x0000000000003400                SRAM_BT_HEAD_SIZE = 0x3400
+                0x0000000000025000                SRAM_UART_STUB_RCODE_ADDR = 0x25000
+                0x0000000000000800                SRAM_UART_STUB_RCODE_SIZE = 0x800
+                0x0000000000027e00                SRAM_AP_FRONT_BASAL_RCODE_ADDR = 0x27e00
+                0x0000000000000400                SRAM_AP_FRONT_BASAL_RCODE_SIZE = 0x400
+                0x000000000000b000                SRAM_AP_BANK_FRONT_BASAL_ADDR = 0xb000
+                0x0000000000000800                SRAM_AP_BANK_FRONT_BASAL_SIZE = 0x800
+                0x0000000000025800                SRAM_AP_BANK_FRONT_UI_ADDR = 0x25800
+                0x0000000000000800                SRAM_AP_BANK_FRONT_UI_SIZE = 0x800
+                0x0000000000026000                SRAM_AP_RCP_COMMAND_BUFFER_ADDR = 0x26000
+                0x0000000000000220                SRAM_AP_RCP_COMMAND_BUFFER_SIZE = 0x220
+                0x0000000000026000                SRAM_AP_BACK_RCODE_ADDR = 0x26000
+                0x0000000000000800                SRAM_AP_BACK_RCODE_SIZE = 0x800
+                0x0000000000026800                SRAM_AP_BANK_BACK_CONTROL_ADDR = 0x26800
+                0x0000000000000800                SRAM_AP_BANK_BACK_CONTROL_SIZE = 0x800
+                0x0000000000027000                SRAM_RAM2_RESEVER2_ADDR = 0x27000
+                0x0000000000000e00                SRAM_RAM2_RESEVER2_SIZE = 0xe00
+                0x0000000000027e00                SRAM_BTPLAY_MMM_RCODE2_ADDR = 0x27e00
+                0x0000000000000e00                SRAM_BTPLAY_MMM_RCODE2_SIZE = 0xe00
+                0x0000000000028c00                SRAM_BTPLAY_SWAP_BUFFER_ADDR = 0x28c00
+                0x0000000000000400                SRAM_BTPLAY_SWAP_BUFFER_SIZE = 0x400
+                0x0000000000028200                SRAM_AP_BACK_CODEC_RCODE_ADDR = 0x28200
+                0x0000000000000a00                SRAM_AP_BACK_CODEC_RCODE_SIZE = 0xa00
+                0x0000000000028c00                SRAM_AP_BANK_BACK_CODEC_ADDR = 0x28c00
+                0x0000000000000400                SRAM_AP_BANK_BACK_CODEC_SIZE = 0x400
+                0x0000000000029000                SRAM_AP_BACK_AL_RCODE_1_ADDR = 0x29000
+                0x0000000000007000                SRAM_AP_BACK_AL_RCODE_1_SIZE = 0x7000
+                0x000000000002e000                SRAM_AP_BANK_BACK_AL_4_ADDR = 0x2e000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_4_SIZE = 0x2000
+                0x0000000000030000                SRAM_AP_BANK_BACK_AL_1_ADDR = 0x30000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_1_SIZE = 0x4000
+                0x0000000000034000                SRAM_AP_BACK_AL_RCODE_2_ADDR = 0x34000
+                0x0000000000002000                SRAM_AP_BACK_AL_RCODE_2_SIZE = 0x2000
+                0x0000000000036000                SRAM_AP_BANK_BACK_AL_2_ADDR = 0x36000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_2_SIZE = 0x2000
+                0x0000000000038000                SRAM_AP_BANK_BACK_AL_3_ADDR = 0x38000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_3_SIZE = 0x4000
+                0x000000000000e000                SRAM_ASRC_BUF_0_ADDR = 0xe000
+                0x0000000000000e00                SRAM_ASRC_BUF_0_SIZE = 0xe00
+                0x000000000000f000                SRAM_ASRC_BUF_1_ADDR = 0xf000
+                0x0000000000000c00                SRAM_ASRC_BUF_1_SIZE = 0xc00
+                0x000000000000fc00                SRAM_CARD_BUF_0_ADDR = 0xfc00
+                0x0000000000000200                SRAM_CARD_BUF_0_SIZE = 0x200
+                0x000000000000fe00                SRAM_CARD_BUF_1_ADDR = 0xfe00
+                0x0000000000000200                SRAM_CARD_BUF_1_SIZE = 0x200
+                0x000000000000fc00                SRAM_CARD_FIFO_ADDR = SRAM_CARD_BUF_0_ADDR
+                0x0000000000000400                SRAM_CARD_FIFO_SIZE = (SRAM_CARD_BUF_0_SIZE + SRAM_CARD_BUF_1_SIZE)
+                0x000000000003c000                SRAM_PCMRAM_0_ADDR = 0x3c000
+                0x0000000000001000                SRAM_PCMRAM_0_SIZE = 0x1000
+                0x000000000003d000                SRAM_PCMRAM_1_ADDR = 0x3d000
+                0x0000000000001000                SRAM_PCMRAM_1_SIZE = 0x1000
+                0x000000000003e000                SRAM_PCMRAM_2_ADDR = 0x3e000
+                0x0000000000001000                SRAM_PCMRAM_2_SIZE = 0x1000
+                0x000000000003c000                SRAM_PCMRAM_H5_FIFO_ADDR = SRAM_PCMRAM_0_ADDR
+                0x0000000000001000                SRAM_PCMRAM_H5_FIFO_SIZE = SRAM_PCMRAM_0_SIZE
+                0x000000000003d000                SRAM_PCMRAM_PCMFIFO_ADDR = SRAM_PCMRAM_1_ADDR
+                0x0000000000002000                SRAM_PCMRAM_FIFO_SIZE = (SRAM_PCMRAM_1_SIZE + SRAM_PCMRAM_2_SIZE)
+                0x000000000003f000                SRAM_URAM_0_ADDR = 0x3f000
+                0x0000000000000800                SRAM_URAM_0_SIZE = 0x800
+                0x000000000003f800                SRAM_URAM_1_ADDR = 0x3f800
+                0x0000000000000800                SRAM_URAM_1_SIZE = 0x800
+                0x000000000003f000                SRAM_URAM_UDISK_FIFO_ADDR = SRAM_URAM_0_ADDR
+                0x0000000000001000                SRAM_URAM_UDISK_FIFO_SIZE = (SRAM_URAM_0_SIZE + SRAM_URAM_1_SIZE)
+                0x000000000003f800                SRAM_URAM_UHOST_FIFO_ADDR = SRAM_URAM_1_ADDR
+                0x0000000000000800                SRAM_URAM_UHOST_FIFO_SIZE = SRAM_URAM_1_SIZE
+                0x0000000000026800                SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_CONTROL_ADDR
+                0x0000000000000800                SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE = 0x800
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE = 0x0
+                0x0000000000021e00                SRAM_AP_BANK_BACK_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_BASAL_ADDR
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_1_SIZE = SRAM_AP_BANK_BACK_BASAL_SIZE
+                0x0000000000028a00                SRAM_AP_BANK_BACK_ENHANCED_2_ADDR = 0x28a00
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_2_SIZE = 0x600
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_SIZE = 0x0
+                0x000000000003b800                SRAM_TTS_DRV_RCODE_ADDR = 0x3b800
+                0x0000000000000800                SRAM_TTS_DRV_RCODE_SIZE = 0x800
+                0x0000000000019580                SRAM_FM_ENG_RDATA_ADDR = SRAM_AP_BACK_DATA_ADDR
+                0x0000000000000200                SRAM_FM_ENG_RDATA_SIZE = 0x200
+                0x0000000000016c00                SRAM_FM_DRV_RCODE_ADDR = SRAM_FS_RCODE_ADDR
+                0x0000000000000800                SRAM_FM_DRV_RCODE_SIZE = 0x800
+                0x0000000000019780                SRAM_FM_DRV_RDATA_ADDR = (SRAM_FM_ENG_RDATA_ADDR + SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000000200                SRAM_FM_DRV_RDATA_SIZE = (SRAM_AP_BACK_DATA_SIZE - SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000021800                SRAM_AP_USB_DEVICE_RCODE_ADDR = 0x21800
+                0x0000000000004000                SRAM_AP_USB_DEVICE_RCODE_SIZE = SRAM_AP_BANK_BACK_AL_1_SIZE
+                0x0000000000040000                SRAM_INVALID_RCODE_ADDR = 0x40000
+                0x0000000000000006                BANK_GROUP_INDEX = DRV_GROUP_LCD
+                0x0000000000009c00                SRAM_TEXT_ADDR = SRAM_UI_RCODE_ADDR
+                0x000000000000bf00                SRAM_DATA_ADDR = SRAM_UI_DATA_ADDR
+                0x00000000bfc09c00                RCODE_TEXT_ADDR = (RCODE_ADDR_BASE + SRAM_TEXT_ADDR)
+                0x000000009fc0bf00                RDATA_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_DATA_ADDR)
+                0x0000000016009000                KERNEL_BANK_A_ADDR_BASE = (((KERNEL_BANK_A << 0x1c) + (BANK_GROUP_INDEX << 0x18)) + SRAM_BANK_A_ADDR)
+                0x0000000026009400                KERNEL_BANK_B_ADDR_BASE = (((KERNEL_BANK_B << 0x1c) + (BANK_GROUP_INDEX << 0x18)) + SRAM_BANK_B_ADDR)
+                0x000000003601d500                KERNEL_BANK_C_ADDR_BASE = (((KERNEL_BANK_C << 0x1c) + (BANK_GROUP_INDEX << 0x18)) + SRAM_BANK_C_ADDR)
+                0x0000000000000400                KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE
+                0x0000000000000800                KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE
+                0x0000000000000400                KERNEL_BANK_C_SIZE = SRAM_BANK_C_SIZE
+                0x00000000000000fc                SRAM_LCD_DATA_SIZE_FILL = (SRAM_UI_DATA_SIZE - 0x4)
+                0x0000000000040000                KERNEL_BANK_SPACE = BANK_SPACE
+
+.text           0x00000000bfc09c00      0x300
+ rcode_led_op_entry.o(.text .rodata)
+ libc_op_entry.o(.text .rodata)
+ .text          0x00000000bfc09c00        0x4 ./../../../psp_rel/lib/libc_op_entry.o
+                0x00000000bfc09c01                libc_op_entry
+ lcd_op_entry.o(.text .rodata)
+ .text          0x00000000bfc09c04        0x4 ./../../../psp_rel/lib/lcd_op_entry.o
+                0x00000000bfc09c05                lcd_op_entry
+ sys_op_entry.o(.text .rodata)
+ .text          0x00000000bfc09c08        0x4 ./../../../psp_rel/lib/sys_op_entry.o
+                0x00000000bfc09c09                sys_op_entry
+ sdrv_clear_screen.o(.text .rodata)
+ .text          0x00000000bfc09c0c       0x28 sdrv_clear_screen.o
+                0x00000000bfc09c0d                sdrv_clear_screen
+ sdrv_led_display.o(.text .rodata)
+ .text          0x00000000bfc09c34       0xa4 sdrv_led_display.o
+                0x00000000bfc09c35                sdrv_led_display
+ .rodata        0x00000000bfc09cd8       0x84 sdrv_led_display.o
+                0x00000000bfc09cd8                num_vals
+                0x00000000bfc09d10                icon_vals
+                0x00000000bfc09d20                seg_val
+                0x00000000bfc09d48                icon_set
+ hdrv_hard_deal.o(.text .rodata)
+ .text          0x00000000bfc09d5c       0x48 hdrv_hard_deal.o
+                0x00000000bfc09d5d                wait_for_trans
+                0x00000000bfc09d7d                hdrv_data_send
+ sdrv_flash_screen.o(.text .rodata)
+ .text          0x00000000bfc09da4       0x44 sdrv_flash_screen.o
+                0x00000000bfc09da5                sdrv_flash_screen
+                0x0000000000000300                . = SRAM_UI_RCODE_SIZE
+ *fill*         0x00000000bfc09de8      0x118 00
+
+.data           0x000000009fc0bf00       0x29 load address 0x00000000bfc09f00
+ *.o(.data)
+ .data          0x000000009fc0bf00       0x28 rcode_led_op_entry.o
+                0x000000009fc0bf00                led_driver_op
+ .data          0x000000009fc0bf28        0x1 hdrv_hard_init.o
+                0x000000009fc0bf28                Led_sleep_falg
+
+.bss            0x000000009fc0bf2c       0xd3
+ *(.bss)
+ .bss           0x000000009fc0bf2c        0x8 sdrv_led_display.o
+                0x000000009fc0bf2c                cur_disval
+ .bss           0x000000009fc0bf34        0x8 sdrv_flash_screen.o
+                0x000000009fc0bf38                bak_seg_sreen_data0
+                0x000000009fc0bf34                bak_seg_sreen_data1
+ .bss           0x000000009fc0bf3c        0x8 pb_common.o
+ *(.sbss)
+ *(.common)
+ *(common)
+                0x00000000000000d3                . = (SRAM_LCD_DATA_SIZE_FILL - SIZEOF (.data))
+ *fill*         0x000000009fc0bf44       0xbb 00
+                0x0000000016009000                . = KERNEL_BANK_A_ADDR_BASE
+                0x0000000000009000                OFFSET = (. & (KERNEL_BANK_SPACE - 0x1))
+
+BANK_A_0        0x0000000016009000      0x400
+ hdrv_hard_init.o(.text .rodata)
+ .text          0x0000000016009000       0xfc hdrv_hard_init.o
+                0x0000000016009095                hdrv_hard_init
+                0x00000000160090ad                sdrv_wake_up_LED_display
+                0x0000000016009059                hdrv_set_led
+                0x00000000160090cd                sdrv_sleep_LED_display
+                0x0000000016009001                hdrv_set_mfp_to_emif
+ bank_a_led_init.o(.text .rodata)
+ .text          0x00000000160090fc       0x14 bank_a_led_init.o
+                0x000000001600910d                led_exit
+                0x000000001600910d                cleanup_module
+                0x00000000160090fd                init_module
+                0x00000000160090fd                led_init
+                0x0000000000000400                . = KERNEL_BANK_A_SIZE
+ *fill*         0x0000000016009110      0x2f0 00
+                0x0000000016049400                . = (((. + KERNEL_BANK_SPACE) & ~ ((KERNEL_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_A_1        0x0000000016049000      0x400
+ pb_common.o(.text* .rodata*)
+ .text          0x0000000016049000      0x150 pb_common.o
+                0x00000000160490a9                pb_field_iter_find
+                0x0000000016049121                pb_load
+                0x00000000160490ed                memcpy
+                0x0000000016049001                pb_field_iter_begin
+                0x0000000016049021                pb_field_iter_next
+                0x0000000016049109                memset
+                0x0000000016049145                pb_register_load_callback
+                0x00000000160490dd                strlen
+ ./obj/_ashldi3.o(.text*)
+ .text          0x0000000016049150       0x40 ./obj/_ashldi3.o
+                0x0000000016049151                __ashldi3
+ pb_decode.o(.pb_decodecomm)
+ .pb_decodecomm
+                0x0000000016049190      0x1b4 pb_decode.o
+                0x00000000160491ad                pb_read
+                0x000000001604926d                pb_istream_from_buffer
+                0x0000000016049335                pb_decode_varint32
+                0x0000000000000400                . = KERNEL_BANK_A_SIZE
+ *fill*         0x0000000016049344       0xbc 00
+                0x0000000026009400                . = KERNEL_BANK_B_ADDR_BASE
+                0x0000000000009400                OFFSET = (. & 0x3ffff)
+
+BANK_B_0        0x0000000026009400      0x564
+ pb_encode.o(.text* .rodata*)
+ .text          0x0000000026009400      0x53c pb_encode.o
+                0x000000002600972d                pb_encode_delimited
+                0x0000000026009619                pb_encode_nullterminated
+                0x000000002600967d                pb_encode_svarint
+                0x0000000026009485                pb_encode_varint
+                0x00000000260096ad                pb_encode_fixed32
+                0x000000002600942d                pb_write
+                0x00000000260096d5                pb_encode_fixed64
+                0x00000000260095a1                pb_encode
+                0x0000000026009419                pb_ostream_from_buffer
+                0x0000000026009645                pb_get_encoded_size
+ .rodata        0x000000002600993c       0x28 pb_encode.o
+                0x0000000026049400                . = (((. + KERNEL_BANK_SPACE) & ~ ((KERNEL_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_B_1        0x0000000026049400      0x78c
+ pb_decode.o(.text* .rodata*)
+ .text          0x0000000026049400      0x764 pb_decode.o
+                0x0000000026049675                pb_decode_fixed64
+                0x0000000026049401                pb_decode_varint
+                0x0000000026049471                pb_close_string_substream
+                0x0000000026049639                pb_decode_fixed32
+                0x00000000260495f5                pb_decode_svarint
+ .rodata        0x0000000026049b64       0x28 pb_decode.o
+                0x0000000026089400                . = (((. + KERNEL_BANK_SPACE) & ~ ((KERNEL_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_B_2        0x0000000026089400      0x6fc
+ pb_decode.o(.pb_decode)
+ .pb_decode     0x0000000026089400      0x6fc pb_decode.o
+                0x00000000260897e1                pb_decode_noinit
+                0x0000000026089441                pb_skip_field
+                0x00000000260894c9                pb_make_string_substream
+                0x0000000026089401                pb_decode_tag
+                0x0000000026089a6d                pb_decode_delimited_noinit
+                0x0000000026089a45                pb_decode
+                0x0000000026089aad                pb_decode_delimited
+                0x0000000026089aed                pb_decode_nullterminated
+                0x00000000260c9400                . = (((. + KERNEL_BANK_SPACE) & ~ ((KERNEL_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_B_3        0x00000000260c9400      0x468
+ pb_encode.o(.pb_encode)
+ .pb_encode     0x00000000260c9400      0x468 pb_encode.o
+                0x00000000260c9735                pb_encode_string
+                0x00000000260c9401                pb_encode_tag
+                0x00000000260c9761                pb_encode_submessage
+                0x00000000260c9429                pb_encode_tag_for_field
+
+.rel.dyn
+LOAD bank_a_led_init.o
+LOAD hdrv_hard_deal.o
+LOAD hdrv_hard_init.o
+LOAD pb_common.o
+LOAD pb_decode.o
+LOAD pb_encode.o
+LOAD rcode_led_op_entry.o
+LOAD sdrv_clear_screen.o
+LOAD sdrv_flash_screen.o
+LOAD sdrv_led_display.o
+LOAD ./obj/_ashldi3.o
+OUTPUT(drv_led.exe elf32-tradlittlemips)
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 rcode_led_op_entry.o
+
+.pdr            0x0000000000000000      0xa40
+ .pdr           0x0000000000000000       0x20 ./../../../psp_rel/lib/libc_op_entry.o
+ .pdr           0x0000000000000020       0x20 ./../../../psp_rel/lib/lcd_op_entry.o
+ .pdr           0x0000000000000040       0x20 ./../../../psp_rel/lib/sys_op_entry.o
+ .pdr           0x0000000000000060       0x20 sdrv_clear_screen.o
+ .pdr           0x0000000000000080       0x20 sdrv_led_display.o
+ .pdr           0x00000000000000a0       0x40 hdrv_hard_deal.o
+ .pdr           0x00000000000000e0       0x20 sdrv_flash_screen.o
+ .pdr           0x0000000000000100       0xa0 hdrv_hard_init.o
+ .pdr           0x00000000000001a0       0x40 bank_a_led_init.o
+ .pdr           0x00000000000001e0      0x100 pb_common.o
+ .pdr           0x00000000000002e0       0x20 ./obj/_ashldi3.o
+ .pdr           0x0000000000000300      0x400 pb_decode.o
+ .pdr           0x0000000000000700      0x340 pb_encode.o
+
+.mdebug.abi32   0x0000000000000000        0x0
+
+.debug_abbrev   0x0000000000000000      0xb9a
+ .debug_abbrev  0x0000000000000000       0x86 rcode_led_op_entry.o
+ .debug_abbrev  0x0000000000000086       0x96 sdrv_clear_screen.o
+ .debug_abbrev  0x000000000000011c       0xa5 sdrv_led_display.o
+ .debug_abbrev  0x00000000000001c1       0xa8 hdrv_hard_deal.o
+ .debug_abbrev  0x0000000000000269       0x75 sdrv_flash_screen.o
+ .debug_abbrev  0x00000000000002de       0x9c hdrv_hard_init.o
+ .debug_abbrev  0x000000000000037a       0x70 bank_a_led_init.o
+ .debug_abbrev  0x00000000000003ea      0x105 pb_common.o
+ .debug_abbrev  0x00000000000004ef       0xfd ./obj/_ashldi3.o
+ .debug_abbrev  0x00000000000005ec      0x2eb pb_decode.o
+ .debug_abbrev  0x00000000000008d7      0x2c3 pb_encode.o
+
+.debug_info     0x0000000000000000     0x365c
+ .debug_info    0x0000000000000000      0x167 rcode_led_op_entry.o
+ .debug_info    0x0000000000000167       0xfc sdrv_clear_screen.o
+ .debug_info    0x0000000000000263      0x1d9 sdrv_led_display.o
+ .debug_info    0x000000000000043c      0x101 hdrv_hard_deal.o
+ .debug_info    0x000000000000053d      0x103 sdrv_flash_screen.o
+ .debug_info    0x0000000000000640      0x15f hdrv_hard_init.o
+ .debug_info    0x000000000000079f      0x10c bank_a_led_init.o
+ .debug_info    0x00000000000008ab      0x3f6 pb_common.o
+ .debug_info    0x0000000000000ca1      0x19e ./obj/_ashldi3.o
+ .debug_info    0x0000000000000e3f     0x16ff pb_decode.o
+ .debug_info    0x000000000000253e     0x111e pb_encode.o
+
+.debug_line     0x0000000000000000      0xb39
+ .debug_line    0x0000000000000000       0x32 rcode_led_op_entry.o
+ .debug_line    0x0000000000000032       0x7d sdrv_clear_screen.o
+ .debug_line    0x00000000000000af       0x88 sdrv_led_display.o
+ .debug_line    0x0000000000000137       0xb4 hdrv_hard_deal.o
+ .debug_line    0x00000000000001eb       0x71 sdrv_flash_screen.o
+ .debug_line    0x000000000000025c       0xcd hdrv_hard_init.o
+ .debug_line    0x0000000000000329       0x43 bank_a_led_init.o
+ .debug_line    0x000000000000036c       0xad pb_common.o
+ .debug_line    0x0000000000000419      0x10b ./obj/_ashldi3.o
+ .debug_line    0x0000000000000524      0x37f pb_decode.o
+ .debug_line    0x00000000000008a3      0x296 pb_encode.o
+
+.debug_pubnames
+                0x0000000000000000      0x594
+ .debug_pubnames
+                0x0000000000000000       0x24 rcode_led_op_entry.o
+ .debug_pubnames
+                0x0000000000000024       0x28 sdrv_clear_screen.o
+ .debug_pubnames
+                0x000000000000004c       0x6a sdrv_led_display.o
+ .debug_pubnames
+                0x00000000000000b6       0x38 hdrv_hard_deal.o
+ .debug_pubnames
+                0x00000000000000ee       0x58 sdrv_flash_screen.o
+ .debug_pubnames
+                0x0000000000000146       0x9a hdrv_hard_init.o
+ .debug_pubnames
+                0x00000000000001e0       0x2c bank_a_led_init.o
+ .debug_pubnames
+                0x000000000000020c       0xa3 pb_common.o
+ .debug_pubnames
+                0x00000000000002af       0x20 ./obj/_ashldi3.o
+ .debug_pubnames
+                0x00000000000002cf      0x17d pb_decode.o
+ .debug_pubnames
+                0x000000000000044c      0x148 pb_encode.o
+
+.debug_str      0x0000000000000000      0xd4e
+ .debug_str     0x0000000000000000      0x1d4 rcode_led_op_entry.o
+                                        0x20d (size before relaxing)
+ .debug_str     0x00000000000001d4       0x37 sdrv_clear_screen.o
+                                        0x13c (size before relaxing)
+ .debug_str     0x000000000000020b       0x5b sdrv_led_display.o
+                                        0x17a (size before relaxing)
+ .debug_str     0x0000000000000266       0x60 hdrv_hard_deal.o
+                                        0x15b (size before relaxing)
+ .debug_str     0x00000000000002c6       0x42 sdrv_flash_screen.o
+                                        0x160 (size before relaxing)
+ .debug_str     0x0000000000000308       0x42 hdrv_hard_init.o
+                                        0x180 (size before relaxing)
+ .debug_str     0x000000000000034a       0x2a bank_a_led_init.o
+                                        0x129 (size before relaxing)
+ .debug_str     0x0000000000000374      0x175 pb_common.o
+                                        0x285 (size before relaxing)
+ .debug_str     0x00000000000004e9       0xa2 ./obj/_ashldi3.o
+                                        0x164 (size before relaxing)
+ .debug_str     0x000000000000058b      0x53e pb_decode.o
+                                        0x7bb (size before relaxing)
+ .debug_str     0x0000000000000ac9      0x285 pb_encode.o
+                                        0x62c (size before relaxing)
+
+.comment        0x0000000000000000      0x1d9
+ .comment       0x0000000000000000       0x2b rcode_led_op_entry.o
+ .comment       0x000000000000002b       0x2b sdrv_clear_screen.o
+ .comment       0x0000000000000056       0x2b sdrv_led_display.o
+ .comment       0x0000000000000081       0x2b hdrv_hard_deal.o
+ .comment       0x00000000000000ac       0x2b sdrv_flash_screen.o
+ .comment       0x00000000000000d7       0x2b hdrv_hard_init.o
+ .comment       0x0000000000000102       0x2b bank_a_led_init.o
+ .comment       0x000000000000012d       0x2b pb_common.o
+ .comment       0x0000000000000158       0x2b ./obj/_ashldi3.o
+ .comment       0x0000000000000183       0x2b pb_decode.o
+ .comment       0x00000000000001ae       0x2b pb_encode.o
+
+.debug_frame    0x0000000000000000      0x944
+ .debug_frame   0x0000000000000000       0x28 sdrv_clear_screen.o
+ .debug_frame   0x0000000000000028       0x34 sdrv_led_display.o
+ .debug_frame   0x000000000000005c       0x38 hdrv_hard_deal.o
+ .debug_frame   0x0000000000000094       0x28 sdrv_flash_screen.o
+ .debug_frame   0x00000000000000bc       0x70 hdrv_hard_init.o
+ .debug_frame   0x000000000000012c       0x38 bank_a_led_init.o
+ .debug_frame   0x0000000000000164       0xbc pb_common.o
+ .debug_frame   0x0000000000000220       0x2c ./obj/_ashldi3.o
+ .debug_frame   0x000000000000024c      0x414 pb_decode.o
+ .debug_frame   0x0000000000000660      0x2e4 pb_encode.o
+
+.debug_aranges  0x0000000000000000      0x1e0
+ .debug_aranges
+                0x0000000000000000       0x20 sdrv_clear_screen.o
+ .debug_aranges
+                0x0000000000000020       0x20 sdrv_led_display.o
+ .debug_aranges
+                0x0000000000000040       0x20 hdrv_hard_deal.o
+ .debug_aranges
+                0x0000000000000060       0x20 sdrv_flash_screen.o
+ .debug_aranges
+                0x0000000000000080       0x20 hdrv_hard_init.o
+ .debug_aranges
+                0x00000000000000a0       0x20 bank_a_led_init.o
+ .debug_aranges
+                0x00000000000000c0       0x20 pb_common.o
+ .debug_aranges
+                0x00000000000000e0       0x20 ./obj/_ashldi3.o
+ .debug_aranges
+                0x0000000000000100       0x98 pb_decode.o
+ .debug_aranges
+                0x0000000000000198       0x48 pb_encode.o
+
+.debug_ranges   0x0000000000000000       0x80
+ .debug_ranges  0x0000000000000000       0x68 pb_decode.o
+ .debug_ranges  0x0000000000000068       0x18 pb_encode.o

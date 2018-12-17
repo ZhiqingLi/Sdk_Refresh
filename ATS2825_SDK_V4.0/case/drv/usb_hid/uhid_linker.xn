@@ -1,0 +1,141 @@
+/**************************************************************************
+*                                                                         *
+*   PROJECT     : MIPS port for UCOS-II                                   *
+*                                                                         *
+*   MODULE      : rcode link.xn                                        *
+*                                                                         *
+*   AUTHOR      : wuyueqian                                               *
+*                                                                         *
+*   PROCESSOR   : MIPS 4KEc (32 bit RISC) - Actions board                 *
+*                                                                         *
+*   Tool-chain  : Cygnus                                                  *
+*                                                                         *
+*   Note        : 
+*   关于代码段：
+*    1) 目标文件中'a0'表示"Bank_A_0", 'a1'、'b0'之类的依此类推,
+*       空间都是分配在bank中，但b0_uhost_ctrl_trans.o里的".rw_rode"较特殊,
+*       它放在rcode段
+*    2) 目标文件中没有以'a0'、'b0'之类的都分配在rcode段   
+*    3) 初始化主要分成“枚举”、“get_max_lun”和“set_lun”3个阶段；
+*       1. 枚举阶段主代码使用a0、b0、b2、a3的bank空间,a0和b0是主要的,b2较
+*       独立,不会调用其他bank函数,a3主要做出错处理,主要是被b2和rcode的函数
+*       在出错时调用。
+*       2. get_max_lun阶段在“枚举”之后、“set_lun”之前，会调用b0的函数，
+*       出错处理时也会调用a3的函数。现特殊一点，放在a4的bank空间；
+*       3. set_lun阶段主要使用a1、b1的bank空间和rcode的hal_bulk函数；
+*    4) exit阶段单独分配一个bank_A
+*    5) uhost_operations.o放着驱动的入口函数，因rcode空间不够放bank空间里，
+*       为避免反复切bank,打算放在读写时也会用到的bank空间,因而放在a3里
+*    6) 其他说明：
+*         出错处理的代码放在bank_A的原因是：初始化阶段和读写阶段都会调用到
+*       这部分代码,而这部分代码又会调用b0的代码,b0空间不够大同时放这么多，
+*       放在bank_B会导致反复切bank，所以只能放到bank_A
+*
+*   关于数据段：
+*    1) 以下数据以分配到rdata段：host_global_variable_gather结构体、
+*       uhost_operations结构体、g_uhost_state、g_uhost_multiple_delay、
+*       g_uhost_errno、cpu_reg和cbw_read10_write10
+*    2) 其他数据就是cbw的命令，由于只在set_lun()时用，所以放在bank_B_1了
+*                                                                         *
+*                                                                         *
+*   Linker script file                                                    *
+*                                                                         *
+**************************************************************************/
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+
+/*1.usound模块的group index，驱动开发人员需选择*/
+BANK_GROUP_INDEX = DRV_GROUP_UD;
+
+/*2.从地址map图中获取uhost模块的常驻代码段物理地址，只需写低14位，驱动开发人员需填写，集成开始后只由集成人员修改，驱动人员不允许修改*/
+/* 2012-12-13: UHost的RCODE空间使用0xBFC38000——0xBFC3bFFF，共16K空间 */
+SRAM_TEXT_ADDR = SRAM_AP_USB_DEVICE_RCODE_ADDR; /* 用RAM5的地址*/
+SRAM_TEXT_SIZE = SRAM_AP_USB_DEVICE_RCODE_SIZE - 0x400; /* RCODE大小最大为15KB */
+
+SRAM_DATA_ADDR = SRAM_AP_USB_DEVICE_RCODE_ADDR + 0x3C00;  /* 占用常驻代码空间的后1k*/
+
+/*3.转换为链接地址,不能修改*/
+RCODE_TEXT_ADDR = RCODE_ADDR_BASE + SRAM_TEXT_ADDR;
+RDATA_DATA_ADDR = RDATA_ADDR_BASE + SRAM_DATA_ADDR;
+
+
+KERNEL_BANK_A_ADDR_BASE = (KERNEL_BANK_A << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_A_ADDR;
+KERNEL_BANK_B_ADDR_BASE = (KERNEL_BANK_B << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_B_ADDR;
+KERNEL_BANK_C_ADDR_BASE = (KERNEL_BANK_C << 28) + (BANK_GROUP_INDEX << 24) + SRAM_BANK_C_ADDR;
+
+/*bank的实际空间大小,不能修改*/
+KERNEL_BANK_A_SIZE = SRAM_BANK_A_SIZE;
+KERNEL_BANK_B_SIZE = SRAM_BANK_B_SIZE;
+
+/*系统允许的bank的最大空间大小，不能修改*/
+KERNEL_BANK_SPACE = BANK_SPACE;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(uhid_ops)
+
+SECTIONS
+{
+
+    .DATA_BUFFER 0x9fc27000:
+    {
+   		  ud_data.o(.data.buf_ram);
+    }
+    
+    
+    .text RCODE_TEXT_ADDR  :
+    {
+        _resident_text = ABSOLUTE(.); /*只是标号*/
+
+        ud_setup.o(.text .rodata)
+        ud_irq.o(.text .rodata)       
+        uhid_op_entry.o(.text .rodata)
+        ud_trans.o(.text .rodata)              
+        ud_string_deal.o(.text .rodata)
+        ud_init.o(.text .rodata)
+        ud_deinit.o(.text .rodata)
+        ud_module_entry.o(.text .rodata) 
+        api.a(.text)
+
+        _resident_text_end = ABSOLUTE(.);
+    }
+          
+
+    .data RDATA_DATA_ADDR  :  AT(ADDR(.text) + SIZEOF(.text))
+    {
+        _resident_data = ABSOLUTE(.);
+        *.o(.data)
+        _resident_data_end = ABSOLUTE(.);
+    }
+
+    .bss    : 
+    {
+        _resident_data = ABSOLUTE(.);
+        *.o(.bss)
+        _resident_data_end = ABSOLUTE(.);
+    }
+
+
+    /* BANK_A_0 主要放 枚举阶段 代码, BANK_A_0和BANK_B_0、BANK_B_2配合 */
+    . = KERNEL_BANK_A_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_A_0    : 
+    {
+        
+        . = KERNEL_BANK_A_SIZE;/*识别驱动类型*/
+    }=0x0 
+
+        
+    /* BANK_B_0和BANK_A_0配合 */
+    . = KERNEL_BANK_B_ADDR_BASE;
+    OFFSET = . & (KERNEL_BANK_SPACE - 1);
+    BANK_B_0    : 
+    {
+
+
+    }=0x0 
+
+
+ }

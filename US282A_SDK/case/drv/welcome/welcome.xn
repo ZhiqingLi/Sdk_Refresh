@@ -1,0 +1,36 @@
+
+/*定义GROUP BANK INDEX 和其他地址变量*/
+INPUT(link_base.xn)
+
+
+WELCOME_START_ADDR = 0xbfc14200;
+
+ROM_TEXT_ADDR = RCODE_ADDR_BASE + SROM_TWI_ADDR_MDY;    /*2k rom*/
+ROM_TEXT_SIZE = SROM_TWI_SIZE_MDY;
+
+OUTPUT_ARCH(mips)
+
+ENTRY(disp_starting)
+
+SECTIONS
+{    
+    .rom ROM_TEXT_ADDR :
+    {
+        rom_TWI.o(.text .rodata)
+        . = ROM_TEXT_SIZE; 
+    }
+
+    .text WELCOME_START_ADDR  : 
+    {
+    	welcome.o(.FIRST)
+        welcome.o(.text)/*不能改变*/
+        welcome_ejtag.o(.text)
+        welcome_i2c_tk.o(.text .rodata)
+        *.o(.text .rodata)
+        *.o(.data)
+        *(.bss)
+        *(.sbss)
+        *(.common)
+        *(common)
+    }
+}
