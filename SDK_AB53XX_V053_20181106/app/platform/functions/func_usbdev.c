@@ -73,6 +73,7 @@ static void func_usbdev_enter(void)
         fs_mount();
     }
 #endif // UDE_STORAGE_EN
+
     usb_device_enter(UDE_ENUM_TYPE);
 }
 
@@ -95,6 +96,7 @@ static void func_usbdev_exit(void)
     #endif
     }
 #endif // UDE_STORAGE_EN
+
     func_cb.last = FUNC_USBDEV;
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <configuration>
     <appSettings>
-        <add key="buck_mode_en" value="False" />
+        <add key="buck_mode_en" value="True" />
         <add key="lowpower_warning_en" value="True" />
         <add key="dac_sel" value="0" />
         <add key="bt_name" value="Karaok" />
@@ -122,8 +122,8 @@
         <add key="sys_sleep_time" value="0" />
         <add key="sys_off_time" value="0" />
         <add key="bt_txpwr" value="+2DBM" />
-        <add key="func_music_en" value="True" />
-        <add key="func_aux_en" value="True" />
+        <add key="func_music_en" value="False" />
+        <add key="func_aux_en" value="False" />
         <add key="bt_call_max_gain" value="-1DB" />
         <add key="led_disp_en" value="False" />
         <add key="led_pwr_en" value="False" />
@@ -182,13 +182,13 @@
         <add key="eq_uart_sel" value="PA7" />
         <add key="fmrx_rfcap_val" value="0" />
         <add key="fmrx_threshold_val" value="128" />
-        <add key="func_fmrx_en" value="True" />
+        <add key="func_fmrx_en" value="False" />
         <add key="bt_hfp_ring_number_en" value="False" />
         <add key="music_sdcard_en" value="True" />
         <add key="music_udisk_en" value="True" />
         <add key="pwron_press_time" value="1.5秒" />
         <add key="pwroff_press_time" value="1.5秒" />
-        <add key="spk_mute_en" value="True" />
+        <add key="spk_mute_en" value="False" />
         <add key="spk_mute_io_sel" value="PE0" />
         <add key="high_mute" value="False" />
         <add key="loudspeaker_unmute_delay" value="6" />

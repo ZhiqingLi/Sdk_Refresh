@@ -5,7 +5,7 @@
         <add key="lowpower_warning_en" value="True" />
         <add key="dac_sel" value="1" />
         <add key="bt_name" value="Bluetooth Speaker" />
-        <add key="bt_addr" value="41:42:98:68:20:26" />
+        <add key="bt_addr" value="41:42:98:68:20:2D" />
         <add key="bt_addr_mode" value="单次递增" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -180,7 +180,7 @@
         <add key="eq_uart_sel" value="PA7" />
         <add key="fmrx_rfcap_val" value="0" />
         <add key="fmrx_threshold_val" value="128" />
-        <add key="func_fmrx_en" value="True" />
+        <add key="func_fmrx_en" value="False" />
         <add key="bt_hfp_ring_number_en" value="True" />
         <add key="music_sdcard_en" value="True" />
         <add key="music_udisk_en" value="True" />
