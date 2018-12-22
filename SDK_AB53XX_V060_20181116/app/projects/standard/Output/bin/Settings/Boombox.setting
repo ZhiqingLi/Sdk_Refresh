@@ -244,7 +244,7 @@
         <add key="aux_dig_gain" value="0" />
         <add key="auxl_sel" value="4" />
         <add key="auxr_sel" value="4" />
-        <add key="sddet_iosel" value="27" />
+        <add key="sddet_iosel" value="31" />
         <add key="earphone_det_iosel" value="0" />
         <add key="bt_tws_en" value="True" />
         <add key="bt_tws_pair_mode" value="0" />

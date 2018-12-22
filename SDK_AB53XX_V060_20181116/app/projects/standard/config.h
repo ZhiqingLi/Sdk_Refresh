@@ -60,7 +60,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
  *****************************************************************************/
 #define MUSIC_UDISK_EN                  1   //是否支持播放UDISK
 #define MUSIC_SDCARD_EN                 1   //是否支持播放SDCARD
-#define MUSIC_SDCARD1_EN                1   //是否支持播放双卡
+#define MUSIC_SDCARD1_EN                0   //是否支持播放双卡
 
 #define MUSIC_WAV_SUPPORT               1   //是否支持WAV格式解码
 #define MUSIC_WMA_SUPPORT               0   //是否支持WMA格式解码
@@ -78,9 +78,9 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define MUSIC_ID3_TAG_EN                0   //是否获取MP3 ID3信息
 #define MUSIC_REC_FILE_FILTER           0   //是否区分录音文件与非录音文件分别播放
 #define MUSIC_LRC_EN                    0   //是否支持歌词显示
-#define MUSIC_ENCRYPT_EN                0   //是否支持加密MP3文件播放(使用MusicEncrypt.exe工具进行MP3加密)
+#define MUSIC_ENCRYPT_EN                1   //是否支持加密MP3文件播放(使用MusicEncrypt.exe工具进行MP3加密)
 
-#define MUSIC_ENCRYPT_KEY               12345   //MusicEncrypt.exe工具上填的加密KEY
+#define MUSIC_ENCRYPT_KEY               5555   //MusicEncrypt.exe工具上填的加密KEY
 
 #define IPHONE_POWER_VAL                50  //苹果充电电流设置
 #define IPHONE_POWER_INDEX              190 //苹果充电电流设置

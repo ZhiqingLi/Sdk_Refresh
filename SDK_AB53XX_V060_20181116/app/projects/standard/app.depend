@@ -35,7 +35,7 @@
 
 1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\sfr.h
 
-1545404795 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\config.h
+1545467028 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -390,7 +390,7 @@
 1541388662 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_sys.c
+1545466298 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_sys.c
 	"include.h"
 	"bsp_spiflash1.h"
 
