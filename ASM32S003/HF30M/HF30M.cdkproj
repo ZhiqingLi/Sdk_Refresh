@@ -68,7 +68,6 @@
     <Description/>
     <algorithmPath>$(CDKPath)/CSKY/SDK/Templates/NR#ASM32S003_Patch_V01/v1.0.0</algorithmPath>
   </SDKTemplate>
-  <Dependencies Name="BuildSet"/>
   <BuildConfigs>
     <BuildConfig Name="BuildSet">
       <Target>
@@ -239,4 +238,5 @@
     <memoryExpressions>;;;</memoryExpressions>
     <statistics>E0011100;10;MHZ</statistics>
   </DebugSessions>
+  <Dependencies Name="BuildSet"/>
 </Project>

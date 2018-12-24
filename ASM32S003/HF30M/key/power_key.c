@@ -322,8 +322,10 @@ void SysPowerOnControl(B_T Flag)
 void SystemPowerOnDetect(void)
 {
     TIMER PowerOnWiatTime;
+    TIMER UpgradeWiatTime;
 
     TimeOutSet(&PowerOnWiatTime, GPIO_POWER_DETECT_TIME);
+    TimeOutSet(&UpgradeWiatTime, 50);
 
     while(!IsTimeOut(&PowerOnWiatTime))
     {
@@ -332,6 +334,19 @@ void SystemPowerOnDetect(void)
         {
             SystemGotoDeepSleepPowerDown();
         }
+#endif
+#ifdef FUNC_POWERON_DETECT_UPGRADE_EN
+		if((!GPIO_Read_Status(GPIO_UPGRADE_DETECT_PORT_OUT,GPIO_UPGRADE_DETECT_PORT_BIT))
+		&& IsTimeOut(&UpgradeWiatTime))
+		{
+			APP_DBG("Enter Upgrade Mode!!!");
+			GPIO_Debug_IO_12_13();
+#ifdef EXTE_UPGRADE_PORT_OUT_EN
+			GPIO_PullHigh_Init(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT);
+			GPIO_Init(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT,Output); 
+			GPIO_Write_High(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT);
+#endif
+		}
 #endif
     }
     

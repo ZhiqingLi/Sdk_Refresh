@@ -381,6 +381,13 @@ void ASM32S003_init(void)
     CK_CPU_EnAllNormalIrq();                                         //enable all IRQ
     SYSCON_CONFIG();
 	//syscon  initial
+
+//------------------------------------------------------------/
+//Uart debug config
+//------------------------------------------------------------/
+#ifdef FUNC_APP_DEBUG_EN
+	UartAppDebugConfig();
+#endif
 //------------------------------------------------------------/
 //系统滴答定时器初始化，所有软定时器均基于此实现，所以时钟配
 //置完成后必须立即启动，不要修改这个部分
@@ -393,12 +400,6 @@ void ASM32S003_init(void)
 #ifdef FUNC_GPIO_POWER_CONTROL_EN
     SystemPowerControlInit();
     SystemPowerOnDetect();
-#endif
-//------------------------------------------------------------/
-//Uart debug config
-//------------------------------------------------------------/
-#ifdef FUNC_APP_DEBUG_EN
-	UartAppDebugConfig();
 #endif
 //------------------------------------------------------------/
 //Other IP config
