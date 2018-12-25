@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ HF30M - BuildSet ]----------"
-	@cd "HF30M" && make -f  "HF30M.mk"
+	@echo "----------Building project:[ MXQ - BuildSet ]----------"
+	@cd "MXQ" && make -f  "MXQ.mk"
 clean:
-	@echo "----------Cleaning project:[ HF30M - BuildSet ]----------"
-	@cd "HF30M" && make -f  "HF30M.mk" clean
+	@echo "----------Cleaning project:[ MXQ - BuildSet ]----------"
+	@cd "MXQ" && make -f  "MXQ.mk" clean

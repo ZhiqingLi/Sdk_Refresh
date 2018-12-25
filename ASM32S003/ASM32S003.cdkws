@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CDK_Workspace Name="ASM32S003" Database="">
-  <Project Name="HF30M" Path="HF30M/HF30M.cdkproj" Active="Yes"/>
+  <Project Name="MXQ" Path="MXQ/MXQ.cdkproj" Active="Yes"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
-      <Project Name="HF30M" ConfigName="BuildSet"/>
+      <Project Name="MXQ" ConfigName="BuildSet"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CDK_Workspace>
