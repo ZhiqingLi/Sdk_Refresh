@@ -1,0 +1,2792 @@
+Archive member included because of file (symbol)
+
+./../../../psp_rel/lib/asr.a(LpMain.o)
+                              ./../../lib/common_view_manager.o (lp_init)
+./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                              ./../../../psp_rel/lib/asr.a(LpMain.o) (lp_send_trigger_cmd)
+./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+                              ./../../../psp_rel/lib/asr.a(LpMain.o) (lp_smart_command_parser_init)
+./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+                              ./../../../psp_rel/lib/asr.a(LpMain.o) (lp_record_notify_start)
+./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+                              ./../../../psp_rel/lib/asr.a(LpMain.o) (check_chipid)
+./../../../psp_rel/lib/asr.a(sa2Controller.o)
+                              ./../../../psp_rel/lib/asr.a(lp_command_deal.o) (sa2_get_version)
+./../../../psp_rel/lib/asr.a(c02Controller.o)
+                              ./../../../psp_rel/lib/asr.a(lp_command_deal.o) (DSPGetVersion)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+*default*        0x0000000000000000 0xffffffffffffffff
+
+Linker script and memory map
+
+LOAD ./../../../psp_rel/lib/asr.a
+LOAD ./../../../psp_rel/include/link_base.xn
+                0x0000000000000000                DRV_GROUP_STG_BASE = 0x0
+                0x0000000000000001                DRV_GROUP_STG_CARD = 0x1
+                0x0000000000000002                DRV_GROUP_STG_UHOST = 0x2
+                0x0000000000000003                DRV_GROUP_FAT32 = 0x3
+                0x0000000000000004                DRV_GROUP_EXFAT = 0x4
+                0x0000000000000005                DRV_GROUP_UD = 0x5
+                0x0000000000000006                DRV_GROUP_LCD = 0x6
+                0x0000000000000007                DRV_GROUP_FM = 0x7
+                0x0000000000000008                DRV_GROUP_KEY = 0x8
+                0x0000000000000009                DRV_GROUP_CCD = 0x9
+                0x000000000000000a                DRV_GROUP_AUDIO_DEVICE = 0xa
+                0x000000000000000b                DRV_GROUP_TTS = 0xb
+                0x000000000000000c                DRV_GROUP_BT = 0xc
+                0x000000000000000f                DRV_GROUP_SYS = 0xf
+                0x000000000003ffff                SRAM_SIZE_MASK = 0x3ffff
+                0x000000009fc00000                RDATA_ADDR_BASE = 0x9fc00000
+                0x00000000bfc00000                RCODE_ADDR_BASE = 0xbfc00000
+                0x0000000000000001                KERNEL_BANK_A = 0x1
+                0x0000000000000002                KERNEL_BANK_B = 0x2
+                0x0000000000000003                KERNEL_BANK_C = 0x3
+                0x0000000000040000                BANK_SPACE = 0x40000
+                0x0000000000000000                FRONT_AP = 0x0
+                0x0000000000000001                BACK_AP = 0x1
+                0x0000000000000002                PROCESS_MANAGER_AP = 0x2
+                0x0000000000000000                FRONT_CODEC = 0x0
+                0x0000000000000001                BACK_CODEC = 0x1
+                0x0000000000000040                AP_BANK_FRONT_CONTROL_1 = 0x40
+                0x0000000000000048                AP_BANK_FRONT_UI_1 = 0x48
+                0x0000000000000050                AP_BANK_FRONT_BASAL = 0x50
+                0x0000000000000058                AP_BANK_FRONT_CODEC = 0x58
+                0x0000000000000060                AP_BANK_BACK_CONTROL_1 = 0x60
+                0x0000000000000068                AP_BANK_BACK_BASAL = 0x68
+                0x0000000000000070                AP_BANK_BACK_CODEC = 0x70
+                0x0000000000000078                AP_BANK_FRONT_ENHANCED_1 = 0x78
+                0x0000000000000071                AP_BANK_FRONT_ENHANCED_2 = 0x71
+                0x000000000000007a                AP_BANK_BACK_ENHANCED_1 = 0x7a
+                0x000000000000007b                AP_BANK_BACK_ENHANCED_2 = 0x7b
+                0x0000000000000072                AP_BANK_BTENGINE_CONTROL_1 = 0x72
+                0x0000000000000073                AP_BANK_BTENGINE_LIB_1 = 0x73
+                0x0000000000000074                AP_BANK_BTENGINE_LIB_2 = 0x74
+                0x0000000000000075                AP_BANK_BTENGINE_EXTEND_1 = 0x75
+                0x0000000000000076                AP_BANK_BTENGINE_EXTEND_2 = 0x76
+                0x0000000000000077                AP_BANK_BTENGINE_EXTEND_3 = 0x77
+                0x000000000000007c                AP_BANK_BTENGINE_EXTEND_4 = 0x7c
+                0x0000000000000079                AP_BANK_BTENGINE_EXTEND_5 = 0x79
+                0x000000000000007f                AP_BANK_MANAGER = 0x7f
+                0x0000000000000041                AP_BANK_AUTOTEST = 0x41
+                0x0000000000000000                SROM_BROM_ADDR = 0x0
+                0x0000000000002600                SROM_BROM_SIZE = 0x2600
+                0x0000000000002600                SROM_SPINOR_ADDR = (SROM_BROM_ADDR + SROM_BROM_SIZE)
+                0x0000000000000c00                SROM_SPINOR_SIZE = 0xc00
+                0x0000000000003200                SROM_TWI_ADDR = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE)
+                0x0000000000000700                SROM_TWI_SIZE = 0x700
+                0x0000000000003900                SROM_STUB_ADDR = (SROM_TWI_ADDR + SROM_TWI_SIZE)
+                0x0000000000000700                SROM_STUB_SIZE = 0x700
+                0x0000000000000e00                SROM_SPINOR_SIZE_MDY = 0xe00
+                0x0000000000003400                SROM_TWI_ADDR_MDY = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE_MDY)
+                0x0000000000000700                SROM_TWI_SIZE_MDY = 0x700
+                0x0000000000003b00                SROM_STUB_ADDR_MDY = (SROM_TWI_ADDR_MDY + SROM_TWI_SIZE_MDY)
+                0x0000000000000500                SROM_STUB_SIZE_MDY = 0x500
+                0x0000000000004000                SROM_KERNEL_ADDR = (SROM_STUB_ADDR + SROM_STUB_SIZE)
+                0x0000000000004000                SROM_KERNEL_SIZE = 0x4000
+                0x000000000000c000                SROM_FS_ADDR = 0xc000
+                0x0000000000001c00                SROM_FS_SIZE = 0x1c00
+                0x000000000000dc00                SROM_SPINOR1_ADDR = (SROM_FS_ADDR + SROM_FS_SIZE)
+                0x0000000000000400                SROM_SPINOR1_SIZE = 0x400
+                0x0000000000008000                SRAM_OS_RCODE_ADDR = 0x8000
+                0x0000000000000c00                SRAM_OS_RCODE_SIZE = 0xc00
+                0x0000000000008c00                SRAM_SPINOR_RCODE_ADDR = 0x8c00
+                0x0000000000000400                SRAM_SPINOR_RCODE_SIZE = 0x400
+                0x0000000000009000                SRAM_BANK_A_ADDR = 0x9000
+                0x0000000000000400                SRAM_BANK_A_SIZE = 0x400
+                0x0000000000009400                SRAM_BANK_B_ADDR = 0x9400
+                0x0000000000000800                SRAM_BANK_B_SIZE = 0x800
+                0x0000000000009c00                SRAM_UI_RCODE_ADDR = 0x9c00
+                0x0000000000000300                SRAM_UI_RCODE_SIZE = 0x300
+                0x0000000000009f00                SRAM_AUDIO_GLOBAL_DATA_ADDR = 0x9f00
+                0x0000000000000060                SRAM_AUDIO_GLOBAL_DATA_SIZE = 0x60
+                0x0000000000009f60                SRAM_UHOST_GLOBAL_DATA_ADDR = 0x9f60
+                0x0000000000000010                SRAM_UHOST_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f70                SRAM_CARD_GLOBAL_DATA_ADDR = 0x9f70
+                0x0000000000000010                SRAM_CARD_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f80                SRAM_SYS_SHARE_DATA_ADDR = 0x9f80
+                0x0000000000000040                SRAM_SYS_SHARE_DATA_SIZE = 0x40
+                0x0000000000009fc0                SRAM_RAM6_CCD_GLOBAL_DATA_ADDR = 0x9fc0
+                0x0000000000000040                SRAM_RAM6_CCD_GLOBAL_DATA_SIZE = 0x40
+                0x000000000000a000                SRAM_BT_LIB1_BANK_ADDR = 0xa000
+                0x0000000000000800                SRAM_BT_LIB1_BANK_SIZE = 0x800
+                0x000000000000a800                SRAM_BT_EXT1_BANK_ADDR = (SRAM_BT_LIB1_BANK_ADDR + SRAM_BT_LIB1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT1_BANK_SIZE = 0x800
+                0x000000000000b000                SRAM_BT_EXT2_BANK_ADDR = (SRAM_BT_EXT1_BANK_ADDR + SRAM_BT_EXT1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT2_BANK_SIZE = 0x800
+                0x000000000000f000                SRAM_BT_STACK_RCODE1_ADDR = 0xf000
+                0x0000000000000a00                SRAM_BT_STACK_RCODE1_SIZE = 0xa00
+                0x000000000000b000                SRAM_AP_BANK_MANAGER_ADDR = SRAM_BT_EXT2_BANK_ADDR
+                0x0000000000000800                SRAM_AP_BANK_MANAGER_SIZE = SRAM_BT_EXT2_BANK_SIZE
+                0x000000000000be00                SRAM_KEY_MESSAGE_DATA_ADDR = 0xbe00
+                0x0000000000000100                SRAM_KEY_MESSAGE_DATA_SIZE = 0x100
+                0x000000000000bf00                SRAM_UI_DATA_ADDR = 0xbf00
+                0x0000000000000100                SRAM_UI_DATA_SIZE = 0x100
+                0x0000000000010000                SRAM_BT_CONTROLLER_RCODE_ADDR = 0x10000
+                0x0000000000000500                SRAM_BT_CONTROLLER_RCODE_SIZE = 0x500
+                0x0000000000010500                SRAM_COMMON_BT_MANAGER_RCODE = (SRAM_BT_CONTROLLER_RCODE_ADDR + SRAM_BT_CONTROLLER_RCODE_SIZE)
+                0x0000000000000b00                SRAM_COMMON_BT_MANAGER_SIZE = 0xb00
+                0x0000000000011000                SRAM_BT_BACK_RCODE_ADDR = (SRAM_COMMON_BT_MANAGER_RCODE + SRAM_COMMON_BT_MANAGER_SIZE)
+                0x0000000000002900                SRAM_BT_BACK_RCODE_SIZE = 0x2900
+                0x00000000000140d0                SRAM_IRQ_PRINT_BUFFER_ADDR = 0x140d0
+                0x0000000000000130                SRAM_IRQ_PRINT_BUFFER_SIZE = 0x130
+                0x0000000000013900                SRAM_BT_LIB2_BANK_ADDR = 0x13900
+                0x0000000000000d00                SRAM_BT_LIB2_BANK_SIZE = 0xd00
+                0x0000000000013900                SRAM_BT_EXT3_BANK_ADDR = SRAM_BT_LIB2_BANK_ADDR
+                0x0000000000000d00                SRAM_BT_EXT3_BANK_SIZE = SRAM_BT_LIB2_BANK_SIZE
+                0x0000000000021e00                SRAM_BT_EXT4_BANK_ADDR = 0x21e00
+                0x0000000000000600                SRAM_BT_EXT4_BANK_SIZE = 0x600
+                0x0000000000014600                SRAM_BT_EXT5_BANK_ADDR = 0x14600
+                0x0000000000000600                SRAM_BT_EXT5_BANK_SIZE = 0x600
+                0x000000000000fa00                SRAM_COM_DAE_RCODE_ADDR = 0xfa00
+                0x0000000000000100                SRAM_COM_DAE_RCODE_SIZE = 0x100
+                0x000000000000fb00                SRAM_BTCALL_EXT_RCODE_ADDR = 0xfb00
+                0x0000000000000100                SRAM_BTCALL_EXT_RCODE_SIZE = 0x100
+                0x000000000001e900                SRAM_AP_FRONT_RCODE_ADDR = 0x1e900
+                0x0000000000000800                SRAM_AP_FRONT_RCODE_SIZE = 0x800
+                0x0000000000016c00                SRAM_FS_RCODE_ADDR = 0x16c00
+                0x0000000000000800                SRAM_FS_RCODE_SIZE = 0x800
+                0x0000000000017400                SRAM_CARD_UD_RCODE_ADDR = 0x17400
+                0x0000000000000c00                SRAM_CARD_UD_RCODE_SIZE = 0xc00
+                0x0000000000017400                SRAM_UHOST_UD_RCODE_ADDR = SRAM_CARD_UD_RCODE_ADDR
+                0x0000000000000c00                SRAM_UHOST_UD_RCODE_SIZE = SRAM_CARD_UD_RCODE_SIZE
+                0x0000000000016c00                SRAM_USOUND_RCODE_ADDR = 0x16c00
+                0x0000000000002800                SRAM_USOUND_RCODE_SIZE = 0x2800
+                0x0000000000016c00                SRAM_BTSTACK_AVDTP_DATA_ADDR = 0x16c00
+                0x0000000000002980                SRAM_BTSTACK_AVDTP_DATA_SIZE = 0x2980
+                0x0000000000016c00                SRAM_BTCALL_CALLRING_BUF_ADDR = 0x16c00
+                0x0000000000001000                SRAM_BTCALL_CALLRING_BUF_SIZE = 0x1000
+                0x0000000000016c00                SRAM_BTCALL_ASQT_BUF_ADDR = 0x16c00
+                0x0000000000002800                SRAM_BTCALL_ASQT_BUF_SIZE = 0x2800
+                0x0000000000018000                SRAM_FS_DATA_ADDR = 0x18000
+                0x0000000000000300                SRAM_FS_DATA_SIZE = 0x300
+                0x0000000000018300                SRAM_FS_BUF_ADDR = 0x18300
+                0x0000000000000a00                SRAM_FS_BUF_SIZE = 0xa00
+                0x0000000000018d00                SRAM_CARD_UD_CACHE_ADDR = 0x18d00
+                0x0000000000000800                SRAM_CARD_UD_CACHE_SIZE = 0x800
+                0x0000000000018d00                SRAM_UHOST_UD_CACHE_ADDR = SRAM_CARD_UD_CACHE_ADDR
+                0x0000000000000800                SRAM_UHOST_UD_CACHE_SIZE = SRAM_CARD_UD_CACHE_SIZE
+                0x0000000000019500                SRAM_CARD_DATA_ADDR = 0x19500
+                0x0000000000000080                SRAM_CARD_DATA_SIZE = 0x80
+                0x0000000000019500                SRAM_UHOST_DATA_ADDR = SRAM_CARD_DATA_ADDR
+                0x0000000000000080                SRAM_UHOST_DATA_SIZE = SRAM_CARD_DATA_SIZE
+                0x0000000000019580                SRAM_AP_BACK_DATA_ADDR = 0x19580
+                0x0000000000000400                SRAM_AP_BACK_DATA_SIZE = 0x400
+                0x0000000000019980                SRAM_AP_FRONT_DATA_ADDR = 0x19980
+                0x0000000000000700                SRAM_AP_FRONT_DATA_SIZE = 0x700
+                0x000000000001a080                SRAM_APPLIB_GLOBAL_DATA_ADDR = 0x1a080
+                0x0000000000000040                SRAM_APPLIB_GLOBAL_DATA_SIZE = 0x40
+                0x000000000001a0c0                SRAM_APPLIB_DATA_ADDR = 0x1a0c0
+                0x0000000000000200                SRAM_APPLIB_DATA_SIZE = 0x200
+                0x000000000001a2c0                SRAM_BTMANAGER_DATA_ADDR = 0x1a2c0
+                0x0000000000000140                SRAM_BTMANAGER_DATA_SIZE = 0x140
+                0x000000000001a400                SRAM_OS_DATA_ADDR = 0x1a400
+                0x0000000000000880                SRAM_OS_DATA_SIZE = 0x880
+                0x000000000001ac80                SRAM_OS_HEAP_ADDR = 0x1ac80
+                0x0000000000000680                SRAM_OS_HEAP_SIZE = 0x680
+                0x000000000001b300                SRAM_AP_MANAGER_RCODE_ADDR = 0x1b300
+                0x0000000000000100                SRAM_AP_MANAGER_RCODE_SIZE = 0x100
+                0x000000000001b400                SRAM_OS_SD_SWAP_BUF_ADDR = 0x1b400
+                0x0000000000000200                SRAM_OS_SD_SWAP_BUF_SIZE = 0x200
+                0x000000000001b600                SRAM_OS_TASK_STACK_ADDR = 0x1b600
+                0x0000000000001e00                SRAM_OS_TASK_STACK_SIZE = 0x1e00
+                0x000000000001d500                SRAM_BANK_C_ADDR = 0x1d500
+                0x0000000000000400                SRAM_BANK_C_SIZE = 0x400
+                0x000000000001d900                SRAM_BT_HCI_BUF_ADDR = 0x1d900
+                0x0000000000001000                SRAM_BT_HCI_BUF_SIZE = 0x1000
+                0x0000000000016400                SRAM_BT_UART_BUF_ADDR = 0x16400
+                0x0000000000000800                SRAM_BT_UART_BUF_SIZE = 0x800
+                0x000000000001f100                SRAM_BT_RCODE_DATA_ADDR = 0x1f100
+                0x0000000000000700                SRAM_BT_RCODE_DATA_SIZE = 0x700
+                0x000000000001f800                SRAM_KEY_MESSAGE_RCODE_ADDR = 0x1f800
+                0x0000000000000800                SRAM_KEY_MESSAGE_RCODE_SIZE = 0x800
+                0x0000000000020000                SRAM_DSP_IRQ_TABLE_ADDR = 0x20000
+                0x0000000000000120                SRAM_DSP_IRQ_TABLE_SIZE = 0x120
+                0x0000000000020120                SRAM_RAM2_RESEVER_ADDR = 0x20120
+                0x00000000000000e0                SRAM_RAM2_RESEVER_SIZE = 0xe0
+                0x0000000000020200                SRAM_AP_BANK_FRONT_CONTROL_ADDR = 0x20200
+                0x0000000000000800                SRAM_AP_BANK_FRONT_CONTROL_SIZE = 0x800
+                0x0000000000020a00                SRAM_KERNEL_XSYS_ADDR = 0x20a00
+                0x0000000000000e00                SRAM_KERNEL_XSYS_SIZE = 0xe00
+                0x0000000000021800                SRAM_AP_BACK_BASAL_RCODE_ADDR = 0x21800
+                0x0000000000000600                SRAM_AP_BACK_BASAL_RCODE_SIZE = 0x600
+                0x0000000000021e00                SRAM_AP_BANK_BACK_BASAL_ADDR = 0x21e00
+                0x0000000000000600                SRAM_AP_BANK_BACK_BASAL_SIZE = 0x600
+                0x0000000000022400                SRAM_BT_HEAD_ADDR = 0x22400
+                0x0000000000003400                SRAM_BT_HEAD_SIZE = 0x3400
+                0x0000000000025000                SRAM_UART_STUB_RCODE_ADDR = 0x25000
+                0x0000000000000800                SRAM_UART_STUB_RCODE_SIZE = 0x800
+                0x0000000000027e00                SRAM_AP_FRONT_BASAL_RCODE_ADDR = 0x27e00
+                0x0000000000000400                SRAM_AP_FRONT_BASAL_RCODE_SIZE = 0x400
+                0x000000000000b000                SRAM_AP_BANK_FRONT_BASAL_ADDR = 0xb000
+                0x0000000000000800                SRAM_AP_BANK_FRONT_BASAL_SIZE = 0x800
+                0x0000000000025800                SRAM_AP_BANK_FRONT_UI_ADDR = 0x25800
+                0x0000000000000800                SRAM_AP_BANK_FRONT_UI_SIZE = 0x800
+                0x0000000000026000                SRAM_AP_RCP_COMMAND_BUFFER_ADDR = 0x26000
+                0x0000000000000220                SRAM_AP_RCP_COMMAND_BUFFER_SIZE = 0x220
+                0x0000000000026000                SRAM_AP_BACK_RCODE_ADDR = 0x26000
+                0x0000000000000800                SRAM_AP_BACK_RCODE_SIZE = 0x800
+                0x0000000000026800                SRAM_AP_BANK_BACK_CONTROL_ADDR = 0x26800
+                0x0000000000000800                SRAM_AP_BANK_BACK_CONTROL_SIZE = 0x800
+                0x0000000000027000                SRAM_RAM2_RESEVER2_ADDR = 0x27000
+                0x0000000000000e00                SRAM_RAM2_RESEVER2_SIZE = 0xe00
+                0x0000000000027e00                SRAM_BTPLAY_MMM_RCODE2_ADDR = 0x27e00
+                0x0000000000000e00                SRAM_BTPLAY_MMM_RCODE2_SIZE = 0xe00
+                0x0000000000028c00                SRAM_BTPLAY_SWAP_BUFFER_ADDR = 0x28c00
+                0x0000000000000400                SRAM_BTPLAY_SWAP_BUFFER_SIZE = 0x400
+                0x0000000000028200                SRAM_AP_BACK_CODEC_RCODE_ADDR = 0x28200
+                0x0000000000000a00                SRAM_AP_BACK_CODEC_RCODE_SIZE = 0xa00
+                0x0000000000028c00                SRAM_AP_BANK_BACK_CODEC_ADDR = 0x28c00
+                0x0000000000000400                SRAM_AP_BANK_BACK_CODEC_SIZE = 0x400
+                0x0000000000029000                SRAM_AP_BACK_AL_RCODE_1_ADDR = 0x29000
+                0x0000000000007000                SRAM_AP_BACK_AL_RCODE_1_SIZE = 0x7000
+                0x000000000002e000                SRAM_AP_BANK_BACK_AL_4_ADDR = 0x2e000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_4_SIZE = 0x2000
+                0x0000000000030000                SRAM_AP_BANK_BACK_AL_1_ADDR = 0x30000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_1_SIZE = 0x4000
+                0x0000000000034000                SRAM_AP_BACK_AL_RCODE_2_ADDR = 0x34000
+                0x0000000000002000                SRAM_AP_BACK_AL_RCODE_2_SIZE = 0x2000
+                0x0000000000036000                SRAM_AP_BANK_BACK_AL_2_ADDR = 0x36000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_2_SIZE = 0x2000
+                0x0000000000038000                SRAM_AP_BANK_BACK_AL_3_ADDR = 0x38000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_3_SIZE = 0x4000
+                0x000000000000e000                SRAM_ASRC_BUF_0_ADDR = 0xe000
+                0x0000000000000e00                SRAM_ASRC_BUF_0_SIZE = 0xe00
+                0x000000000000f000                SRAM_ASRC_BUF_1_ADDR = 0xf000
+                0x0000000000000c00                SRAM_ASRC_BUF_1_SIZE = 0xc00
+                0x000000000000fc00                SRAM_CARD_BUF_0_ADDR = 0xfc00
+                0x0000000000000200                SRAM_CARD_BUF_0_SIZE = 0x200
+                0x000000000000fe00                SRAM_CARD_BUF_1_ADDR = 0xfe00
+                0x0000000000000200                SRAM_CARD_BUF_1_SIZE = 0x200
+                0x000000000000fc00                SRAM_CARD_FIFO_ADDR = SRAM_CARD_BUF_0_ADDR
+                0x0000000000000400                SRAM_CARD_FIFO_SIZE = (SRAM_CARD_BUF_0_SIZE + SRAM_CARD_BUF_1_SIZE)
+                0x000000000003c000                SRAM_PCMRAM_0_ADDR = 0x3c000
+                0x0000000000001000                SRAM_PCMRAM_0_SIZE = 0x1000
+                0x000000000003d000                SRAM_PCMRAM_1_ADDR = 0x3d000
+                0x0000000000001000                SRAM_PCMRAM_1_SIZE = 0x1000
+                0x000000000003e000                SRAM_PCMRAM_2_ADDR = 0x3e000
+                0x0000000000001000                SRAM_PCMRAM_2_SIZE = 0x1000
+                0x000000000003c000                SRAM_PCMRAM_H5_FIFO_ADDR = SRAM_PCMRAM_0_ADDR
+                0x0000000000001000                SRAM_PCMRAM_H5_FIFO_SIZE = SRAM_PCMRAM_0_SIZE
+                0x000000000003d000                SRAM_PCMRAM_PCMFIFO_ADDR = SRAM_PCMRAM_1_ADDR
+                0x0000000000002000                SRAM_PCMRAM_FIFO_SIZE = (SRAM_PCMRAM_1_SIZE + SRAM_PCMRAM_2_SIZE)
+                0x000000000003f000                SRAM_URAM_0_ADDR = 0x3f000
+                0x0000000000000800                SRAM_URAM_0_SIZE = 0x800
+                0x000000000003f800                SRAM_URAM_1_ADDR = 0x3f800
+                0x0000000000000800                SRAM_URAM_1_SIZE = 0x800
+                0x000000000003f000                SRAM_URAM_UDISK_FIFO_ADDR = SRAM_URAM_0_ADDR
+                0x0000000000001000                SRAM_URAM_UDISK_FIFO_SIZE = (SRAM_URAM_0_SIZE + SRAM_URAM_1_SIZE)
+                0x000000000003f800                SRAM_URAM_UHOST_FIFO_ADDR = SRAM_URAM_1_ADDR
+                0x0000000000000800                SRAM_URAM_UHOST_FIFO_SIZE = SRAM_URAM_1_SIZE
+                0x0000000000026800                SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_CONTROL_ADDR
+                0x0000000000000800                SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE = 0x800
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE = 0x0
+                0x0000000000021e00                SRAM_AP_BANK_BACK_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_BASAL_ADDR
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_1_SIZE = SRAM_AP_BANK_BACK_BASAL_SIZE
+                0x0000000000028a00                SRAM_AP_BANK_BACK_ENHANCED_2_ADDR = 0x28a00
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_2_SIZE = 0x600
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_SIZE = 0x0
+                0x000000000003b800                SRAM_TTS_DRV_RCODE_ADDR = 0x3b800
+                0x0000000000000800                SRAM_TTS_DRV_RCODE_SIZE = 0x800
+                0x0000000000019580                SRAM_FM_ENG_RDATA_ADDR = SRAM_AP_BACK_DATA_ADDR
+                0x0000000000000200                SRAM_FM_ENG_RDATA_SIZE = 0x200
+                0x0000000000016c00                SRAM_FM_DRV_RCODE_ADDR = SRAM_FS_RCODE_ADDR
+                0x0000000000000800                SRAM_FM_DRV_RCODE_SIZE = 0x800
+                0x0000000000019780                SRAM_FM_DRV_RDATA_ADDR = (SRAM_FM_ENG_RDATA_ADDR + SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000000200                SRAM_FM_DRV_RDATA_SIZE = (SRAM_AP_BACK_DATA_SIZE - SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000021800                SRAM_AP_USB_DEVICE_RCODE_ADDR = 0x21800
+                0x0000000000004000                SRAM_AP_USB_DEVICE_RCODE_SIZE = SRAM_AP_BANK_BACK_AL_1_SIZE
+                0x0000000000040000                SRAM_INVALID_RCODE_ADDR = 0x40000
+                0x0000000000000000                AP_INDEX = FRONT_AP
+                0x000000000001e900                SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR
+                0x00000000bfc1e900                RCODE_TEXT_ADDR = (RCODE_ADDR_BASE + SRAM_TEXT_ADDR)
+                0x0000000000000800                RCODE_SIZE = SRAM_AP_FRONT_RCODE_SIZE
+                0x0000000000019980                SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR
+                0x000000009fc19980                RDATA_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_DATA_ADDR)
+                0x0000000000000700                DATA_BSS_SIZE = SRAM_AP_FRONT_DATA_SIZE
+                0x0000000040020200                BANK_CONTROL_1_ADDR_BASE = ((AP_BANK_FRONT_CONTROL_1 << 0x18) + SRAM_AP_BANK_FRONT_CONTROL_ADDR)
+                0x0000000000000800                BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE
+                0x0000000000040000                AP_BANK_SPACE = BANK_SPACE
+
+.text           0x00000000bfc1e900      0x800
+ sys_op_entry.o(.text)
+ .text          0x00000000bfc1e900        0x4 ./../../../psp_rel/lib/sys_op_entry.o
+                0x00000000bfc1e901                sys_op_entry
+ libc_op_entry.o(.text)
+ .text          0x00000000bfc1e904        0x4 ./../../../psp_rel/lib/libc_op_entry.o
+                0x00000000bfc1e905                libc_op_entry
+ audio_device_op_entry.o(.text)
+ .text          0x00000000bfc1e908        0x4 ./../../../psp_rel/lib/audio_device_op_entry.o
+                0x00000000bfc1e909                audio_device_op_entry
+ key_op_entry.o(.text)
+ .text          0x00000000bfc1e90c        0x4 ./../../../psp_rel/lib/key_op_entry.o
+                0x00000000bfc1e90d                key_op_entry
+ lcd_op_entry.o(.text)
+ .text          0x00000000bfc1e910        0x4 ./../../../psp_rel/lib/lcd_op_entry.o
+                0x00000000bfc1e911                lcd_op_entry
+ tts_op_entry.o(.text)
+ .text          0x00000000bfc1e914        0x4 ./../../../psp_rel/lib/tts_op_entry.o
+                0x00000000bfc1e915                tts_op_entry
+ ccd_op_entry.o(.text)
+ .text          0x00000000bfc1e918        0x4 ./../../../psp_rel/lib/ccd_op_entry.o
+                0x00000000bfc1e919                ccd_op_entry
+ base_op_entry.o(.text)
+ .text          0x00000000bfc1e91c        0x4 ./../../../psp_rel/lib/base_op_entry.o
+                0x00000000bfc1e91d                base_op_entry
+ stub_mod_cmd.o(.text)
+ .text          0x00000000bfc1e920        0x4 ./../../../psp_rel/lib/stub_mod_cmd.o
+                0x00000000bfc1e921                stub_mod_cmd
+ app_timer_rcode.o(.text)
+ .text          0x00000000bfc1e924      0x11c ./../../lib/app_timer_rcode.o
+                0x00000000bfc1e925                handle_timers
+ message_rcode.o(.text)
+ .text          0x00000000bfc1ea40       0x98 ./../../lib/message_rcode.o
+                0x00000000bfc1ea75                get_app_msg
+                0x00000000bfc1ea41                get_sys_msg
+ message_key_rcode.o(.text)
+ .text          0x00000000bfc1ead8       0xa4 ./../../lib/message_key_rcode.o
+                0x00000000bfc1ead9                get_gui_msg
+ common_view_loop.o(.text .rodata)
+ .text          0x00000000bfc1eb7c       0xdc ./../../lib/common_view_loop.o
+                0x00000000bfc1eb7d                com_view_loop
+ common_view_manager.o(.rcode)
+ .rcode         0x00000000bfc1ec58       0x3c ./../../lib/common_view_manager.o
+                0x00000000bfc1ec59                com_view_update
+ radio_rcode.o(.text .rodata)
+ .text          0x00000000bfc1ec94      0x170 ./obj/radio_rcode.o
+                0x00000000bfc1edcd                radio_get_freq
+                0x00000000bfc1ecdd                radio_send_sync_msg
+                0x00000000bfc1ede9                release_mute_timer
+                0x00000000bfc1eda1                radio_send_msg
+                0x00000000bfc1ecb9                whether_in_list
+                0x00000000bfc1ec95                should_be_passed
+ .rodata        0x00000000bfc1ee04       0x18 ./obj/radio_rcode.o
+                0x00000000bfc1ee04                freq_passed
+ radio_global_data.o(.rodata)
+ .rodata        0x00000000bfc1ee1c       0x18 ./obj/radio_global_data.o
+                0x00000000bfc1ee1c                min_freq
+                0x00000000bfc1ee28                max_freq
+ radio_rcp_deal.o(.rodata)
+ .rodata        0x00000000bfc1ee34       0x58 ./obj/radio_rcp_deal.o
+                0x00000000bfc1ee34                radio_rcp_cmd_cb_tbl
+ radio_playing_keydeal.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x00000000bfc1ee8c       0x60 ./obj/radio_playing_keydeal.o
+                0x00000000bfc1ee8c                radio_play_ke_maplist
+ radio_view_digit.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x00000000bfc1eeec       0x18 ./obj/radio_view_digit.o
+                0x00000000bfc1eeec                radio_digit_ke_maplist
+ radio_view_hard_search.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x00000000bfc1ef04       0x48 ./obj/radio_view_hard_search.o
+                0x00000000bfc1ef04                radio_search_ke_maplist
+ radio_rcp_deal.o(.rcode)
+ .rcode         0x00000000bfc1ef4c       0x8c ./obj/radio_rcp_deal.o
+                0x00000000bfc1ef4d                radio_get_global_rcp_info
+                0x0000000000000800                . = RCODE_SIZE
+ *fill*         0x00000000bfc1efd8      0x128 00
+ *fill*         0x00000000bfc1f100        0x0 00
+
+.bss            0x000000009fc19980      0x5c8
+                0x000000009fc19980                bss_begin = <code 340> (.)
+ applib_app_data.o(.bss)
+ .bss           0x000000009fc19980       0x1c ./../../lib/applib_app_data.o
+                0x000000009fc1998c                g_app_timer_id
+                0x000000009fc19988                g_app_timer_vector
+                0x000000009fc19998                g_app_timer_count
+                0x000000009fc19990                g_this_app_info
+                0x000000009fc19994                thread_mutex
+                0x000000009fc19980                g_this_gui_msg_hook
+                0x000000009fc19984                g_this_app_msg_hook
+                0x000000009fc1998d                g_this_app_timer_tag
+ common_func_data.o(.bss)
+ .bss           0x000000009fc1999c       0x98 ./../../lib/common_func_data.o
+                0x000000009fc19a24                g_standby_exit_flag
+                0x000000009fc199a4                g_p_set_calendar
+                0x000000009fc19a27                g_need_reset_controller_timeout
+                0x000000009fc19a1c                g_standby_enter_cb
+                0x000000009fc19a20                g_standby_exit_cb
+                0x000000009fc199dc                g_view_manager_infor
+                0x000000009fc19a30                prev_next_ch_timer_id
+                0x000000009fc19a25                g_esd_restart_flag
+                0x000000009fc1999c                sys_comval
+                0x000000009fc19a31                g_prev_next_ch_start
+                0x000000009fc19a04                g_low_power_var
+                0x000000009fc199a8                g_p_set_alarm
+                0x000000009fc199fd                sys_counter_timer_id
+                0x000000009fc19a28                g_neednot_tts_play_timeout
+                0x000000009fc19a26                g_need_auto_connect_timeout
+                0x000000009fc19a29                g_neednot_tts_play_reset
+                0x000000009fc199fc                this_filter_key_value
+                0x000000009fc199e8                g_ota_restore_data
+                0x000000009fc199fe                peripheral_detect_timer_id
+                0x000000009fc199ac                g_view_infor
+                0x000000009fc19a00                g_detect_card_force_flag
+                0x000000009fc199e4                g_p_view_ke
+                0x000000009fc199ff                g_ignore_switch_mute
+                0x000000009fc19a2c                g_APKsend_pakg_num
+                0x000000009fc199a0                g_p_clock_show
+ radio_main.o(.bss)
+ radio_global_data.o(.bss)
+ .bss           0x000000009fc19a34      0x50c ./obj/radio_global_data.o
+                0x000000009fc19d5c                g_engine_status
+                0x000000009fc19a34                radio_app_timer_vector
+                0x000000009fc19f25                g_search_throd
+                0x000000009fc19f26                g_enter_param
+                0x000000009fc19cb8                pfreq
+                0x000000009fc19d68                g_comval
+                0x000000009fc19f34                g_search_current_freq
+                0x000000009fc19f3a                g_neednot_freq_tts_play
+                0x000000009fc19f1c                startfreq
+                0x000000009fc19f3d                g_searching_flag
+                0x000000009fc19aa8                g_radio_scene
+                0x000000009fc19f28                g_freq_tts_sec_ids
+                0x000000009fc19f39                g_first_enter_play
+                0x000000009fc19f3c                g_playing_flag
+                0x000000009fc19f3b                g_radio_init_flag
+                0x000000009fc19f20                g_digital_buf
+                0x000000009fc19f3f                g_radio_from_alarm
+                0x000000009fc19aa4                alarmfm_end_time
+                0x000000009fc19aac                g_radio_config
+                0x000000009fc19f38                g_digit_input_flag
+                0x000000009fc19cbc                Auto_tab
+                0x000000009fc19f3e                g_next_prev_flag
+                0x000000009fc19f24                g_digital_count
+                0x000000009fc19aa7                alarmfm_volume
+ radio_rcp_deal.o(.bss)
+ radio_set_funcs.o(.bss)
+ .bss           0x000000009fc19f40        0x1 ./obj/radio_set_funcs.o
+                0x000000009fc19f40                s_mute_count
+ *(.sbss)
+ *(.common)
+ *(common)
+ *fill*         0x000000009fc19f41        0x3 00
+ .bss           0x000000009fc19f44        0x4 ./../../lib/common_rcp_func.o
+
+.data           0x000000009fc19f48      0x138
+                0x000000009fc19f48                bss_end = <code 340> (.)
+ radio_main.o(.data)
+ radio_global_data.o(.data)
+ .data          0x000000009fc19f48        0x1 ./obj/radio_global_data.o
+                0x000000009fc19f48                g_mute_set_timer
+ radio_rcp_deal.o(.data)
+ radio_rcode.o(.data)
+ *.o(.data)
+ .data          0x000000009fc19f49        0x1 ./obj/radio_scene_playing.o
+                0x000000009fc19f49                fm_eg_channel_sel
+ *fill*         0x000000009fc19f4a        0x2 00
+ .data          0x000000009fc19f4c        0xc ./../../lib/common_rcp_func.o
+                0x000000009fc19f50                bat_val_tap
+                0x0000000000000138                . = (DATA_BSS_SIZE - (bss_end - bss_begin))
+ *fill*         0x000000009fc19f58      0x128 00
+ *fill*         0x000000009fc1a080        0x0 00
+                0x0000000040020200                . = BANK_CONTROL_1_ADDR_BASE
+                0x0000000000020200                OFFSET = (. & 0x3ffff)
+
+BANK_CONTROL_1_0
+                0x0000000040020200      0x800
+ ctor.o(.text .rodata)
+ .text          0x0000000040020200       0xcc ./../../../psp_rel/lib/ctor.o
+                0x0000000040020201                process_start
+                0x0000000040020231                __start
+ radio_set_funcs.o(.text .rodata)
+ .text          0x00000000400202cc      0x1a0 ./obj/radio_set_funcs.o
+                0x0000000040020435                radio_set_band
+                0x0000000040020359                radio_set_freq
+                0x0000000040020301                radio_set_mute
+                0x00000000400202e9                radio_connect_ain
+                0x0000000040020451                radio_set_throd
+                0x00000000400202cd                radio_modul_open
+ radio_control.o(.text .rodata)
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x000000004002046c      0x594 00
+ *fill*         0x0000000040020a00        0x0 00
+                0x0000000040065800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_1
+                0x0000000040060200      0x800
+ radio_main.o(.text .rodata)
+ .text          0x0000000040060200      0x560 ./obj/radio_main.o
+                0x0000000040060241                init_point_freq
+                0x0000000040060701                radio_freq_tts_play
+                0x000000004006036d                radio_app_init
+                0x0000000040060339                radio_save_cfg
+                0x0000000040060435                radio_scene_dispatch
+                0x0000000040060221                get_end_freq
+                0x0000000040060511                main
+                0x00000000400603e9                radio_app_exit
+                0x00000000400605ed                radio_tts_fm_freq
+                0x0000000040060201                get_start_freq
+                0x0000000040060275                radio_load_cfg
+ .rodata        0x0000000040060760       0x40 ./obj/radio_main.o
+                0x0000000040060780                end_border_freq
+                0x0000000040060760                start_border_freq
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000400607a0      0x260 00
+ *fill*         0x0000000040060a00        0x0 00
+                0x00000000400a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_2
+                0x00000000400a0200      0x800
+ radio_scene_playing_deal.o(.text .rodata .xdata)
+ .text          0x00000000400a0200       0x48 ./obj/radio_scene_playing_deal.o
+                0x00000000400a0201                playing_loop_deal
+ radio_view_play_search.o(.text)
+ .text          0x00000000400a0248        0x8 ./obj/radio_view_play_search.o
+                0x00000000400a024d                radio_play_main_view
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000400a0250      0x7b0 00
+ *fill*         0x00000000400a0a00        0x0 00
+                0x00000000400e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_3
+                0x00000000400e0200      0x800
+ radio_view_station.o(.text .xdata)
+ .text          0x00000000400e0200       0x68 ./obj/radio_view_station.o
+                0x00000000400e0201                show_station_num
+                0x00000000400e0205                __radio_station_view_redraw
+                0x00000000400e021d                radio_station_msg_view
+                0x00000000400e023d                radio_station_create_msg_view
+ radio_view_digit.o(.text .xdata)
+ .text          0x00000000400e0268       0x94 ./obj/radio_view_digit.o
+                0x00000000400e0285                radio_digit_key_deal_number_play
+                0x00000000400e0269                radio_digit_key_deal_number_input
+                0x00000000400e02a5                radio_digit_sub_view
+                0x00000000400e029d                show_digital_set
+                0x00000000400e02c9                radio_digit_create_sub_view
+                0x00000000400e02a1                __radio_digit_view_redraw
+ radio_view_error.o(.text .xdata)
+ radio_view_play_search.o(.bank)
+ .bank          0x00000000400e02fc       0x30 ./obj/radio_view_play_search.o
+                0x00000000400e02fd                radio_play_create_main_view
+ radio_view_hard_search.o(.bank)
+ .bank          0x00000000400e032c       0x3c ./obj/radio_view_hard_search.o
+                0x00000000400e032d                search_key_deal_cancel_search
+                0x00000000400e0335                radio_hard_search_create_main_view
+ radio_view_soft_search.o(.bank)
+ .bank          0x00000000400e0368       0x34 ./obj/radio_view_soft_search.o
+                0x00000000400e0369                radio_soft_search_create_main_view
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000400e039c      0x664 00
+ *fill*         0x00000000400e0a00        0x0 00
+                0x0000000040125800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_4
+                0x0000000040120200      0x800
+ radio_playing_keydeal.o(.text .rodata .xdata)
+ .text          0x0000000040120200      0x508 ./obj/radio_playing_keydeal.o
+                0x0000000040120401                radio_play_key_deal_next_freq
+                0x000000004012059d                radio_digital_to_chanel
+                0x0000000040120229                radio_play_key_deal_auto_search
+                0x0000000040120215                radio_play_key_deal_seek_prev
+                0x00000000401203dd                radio_play_key_deal_prev_freq
+                0x000000004012024d                radio_play_key_deal_play_pause
+                0x0000000040120315                change_freq
+                0x0000000040120579                radio_play_key_deal_switch_next_preset
+                0x0000000040120201                radio_play_key_deal_seek_next
+                0x0000000040120425                select_station
+                0x0000000040120555                radio_play_key_deal_switch_prev_preset
+                0x0000000040120691                radio_play_key_digital_sure
+                0x00000000401202bd                radio_play_key_deal_play_mute
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x0000000040120708      0x2f8 00
+ *fill*         0x0000000040120a00        0x0 00
+                0x0000000040165800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_5
+                0x0000000040160200      0x800
+ radio_playing_keydeal.o(.text.bank2)
+ .text.bank2    0x0000000040160200      0x1c0 ./obj/radio_playing_keydeal.o
+                0x0000000040160391                radio_play_key_deal_number_input
+                0x0000000040160335                radio_play_key_digital_store
+                0x0000000040160201                radio_do_switch_band
+                0x00000000401602f9                radio_play_key_deal_switch_band
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000401603c0      0x640 00
+ *fill*         0x0000000040160a00        0x0 00
+                0x00000000401a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_6
+                0x00000000401a0200      0x800
+ radio_soft_search_deal.o(.text .rodata .xdata)
+ .text          0x00000000401a0200      0x458 ./obj/radio_soft_search_deal.o
+                0x00000000401a0285                deal_soft_manual_search
+                0x00000000401a025d                radio_set_softseek
+                0x00000000401a0201                Dec2Hex
+                0x00000000401a0415                deal_soft_auto_seek
+ radio_view_soft_search.o(.text)
+ .text          0x00000000401a0658        0x8 ./obj/radio_view_soft_search.o
+                0x00000000401a065d                radio_soft_search_main_view
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000401a0660      0x3a0 00
+ *fill*         0x00000000401a0a00        0x0 00
+                0x00000000401e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_7
+                0x00000000401e0200      0x800
+ radio_hard_search_deal.o(.text .rodata .xdata)
+ .text          0x00000000401e0200      0x4b8 ./obj/radio_hard_search_deal.o
+                0x00000000401e025d                radio_set_hardseek
+                0x00000000401e0231                radio_get_seekflag
+                0x00000000401e0279                deal_hard_manual_search
+                0x00000000401e0219                radio_break_hardseek
+                0x00000000401e0439                deal_hard_auto_seek
+ radio_view_hard_search.o(.text)
+ .text          0x00000000401e06b8        0x8 ./obj/radio_view_hard_search.o
+                0x00000000401e06bd                radio_hard_search_main_view
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000401e06c0      0x340 00
+ *fill*         0x00000000401e0a00        0x0 00
+                0x0000000040225800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_8
+                0x0000000040220200      0x800
+ radio_hard_search_deal.o(.text.bank2)
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x0000000040220200      0x800 00
+ *fill*         0x0000000040220a00        0x0 00
+                0x0000000040265800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_9
+                0x0000000040260200      0x800
+ radio_scene_playing.o(.text .rodata .xdata)
+ .text          0x0000000040260200      0x2a8 ./obj/radio_scene_playing.o
+                0x00000000402602dd                radio_scene_playing
+                0x00000000402602ad                scene_play_init
+                0x0000000040260221                radio_engine_create
+                0x0000000040260201                radio_engine_kill
+                0x0000000040260245                radio_engine_init
+ radio_auto_search_start.o(.text .rodata)
+ .text          0x00000000402604a8      0x208 ./obj/radio_auto_search_start.o
+                0x00000000402605a1                radio_scene_auto_search
+                0x0000000040260505                radio_auto_search_exit
+                0x00000000402604a9                radio_auto_search_init
+ radio_manual_search.o(.text .rodata .xdata)
+ .text          0x00000000402606b0      0x190 ./obj/radio_manual_search.o
+                0x000000004026079d                radio_scene_manual_search
+                0x00000000402606b1                scene_manual_search_init
+                0x00000000402606e9                scene_manual_search_exit
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x0000000040260840      0x1c0 00
+ *fill*         0x0000000040260a00        0x0 00
+                0x00000000402a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_CONTROL_1_10
+                0x00000000402a0200      0x800
+ radio_rcp_deal.o(.text .xdata)
+ .text          0x00000000402a0200      0x2b4 ./obj/radio_rcp_deal.o
+                0x00000000402a042d                radio_apk_key_mute
+                0x00000000402a02b1                radio_get_station_name
+                0x00000000402a021d                radio_rcp_var_exit
+                0x00000000402a03a9                radio_apk_key_stop_search
+                0x00000000402a02b5                radio_set_station_band
+                0x00000000402a0385                radio_apk_key_search
+                0x00000000402a03fd                radio_apk_key_chsub
+                0x00000000402a0231                radio_get_station_list
+                0x00000000402a02f9                radio_set_station_freq
+                0x00000000402a03cd                radio_apk_key_chadd
+                0x00000000402a0201                radio_rcp_var_init
+ .xdata         0x00000000402a04b4      0x210 ./obj/radio_rcp_deal.o
+                0x00000000402a04b4                radio_rcp_buffer
+                0x0000000000000800                . = BANK_CONTROL_SIZE
+ *fill*         0x00000000402a06c4      0x33c 00
+ *fill*         0x00000000402a0a00        0x0 00
+LOAD ./../common/common_front.xn
+LOAD ./../../../psp_rel/include/link_base.xn
+                0x0000000000000000                DRV_GROUP_STG_BASE = 0x0
+                0x0000000000000001                DRV_GROUP_STG_CARD = 0x1
+                0x0000000000000002                DRV_GROUP_STG_UHOST = 0x2
+                0x0000000000000003                DRV_GROUP_FAT32 = 0x3
+                0x0000000000000004                DRV_GROUP_EXFAT = 0x4
+                0x0000000000000005                DRV_GROUP_UD = 0x5
+                0x0000000000000006                DRV_GROUP_LCD = 0x6
+                0x0000000000000007                DRV_GROUP_FM = 0x7
+                0x0000000000000008                DRV_GROUP_KEY = 0x8
+                0x0000000000000009                DRV_GROUP_CCD = 0x9
+                0x000000000000000a                DRV_GROUP_AUDIO_DEVICE = 0xa
+                0x000000000000000b                DRV_GROUP_TTS = 0xb
+                0x000000000000000c                DRV_GROUP_BT = 0xc
+                0x000000000000000f                DRV_GROUP_SYS = 0xf
+                0x000000000003ffff                SRAM_SIZE_MASK = 0x3ffff
+                0x000000009fc00000                RDATA_ADDR_BASE = 0x9fc00000
+                0x00000000bfc00000                RCODE_ADDR_BASE = 0xbfc00000
+                0x0000000000000001                KERNEL_BANK_A = 0x1
+                0x0000000000000002                KERNEL_BANK_B = 0x2
+                0x0000000000000003                KERNEL_BANK_C = 0x3
+                0x0000000000040000                BANK_SPACE = 0x40000
+                0x0000000000000000                FRONT_AP = 0x0
+                0x0000000000000001                BACK_AP = 0x1
+                0x0000000000000002                PROCESS_MANAGER_AP = 0x2
+                0x0000000000000000                FRONT_CODEC = 0x0
+                0x0000000000000001                BACK_CODEC = 0x1
+                0x0000000000000040                AP_BANK_FRONT_CONTROL_1 = 0x40
+                0x0000000000000048                AP_BANK_FRONT_UI_1 = 0x48
+                0x0000000000000050                AP_BANK_FRONT_BASAL = 0x50
+                0x0000000000000058                AP_BANK_FRONT_CODEC = 0x58
+                0x0000000000000060                AP_BANK_BACK_CONTROL_1 = 0x60
+                0x0000000000000068                AP_BANK_BACK_BASAL = 0x68
+                0x0000000000000070                AP_BANK_BACK_CODEC = 0x70
+                0x0000000000000078                AP_BANK_FRONT_ENHANCED_1 = 0x78
+                0x0000000000000071                AP_BANK_FRONT_ENHANCED_2 = 0x71
+                0x000000000000007a                AP_BANK_BACK_ENHANCED_1 = 0x7a
+                0x000000000000007b                AP_BANK_BACK_ENHANCED_2 = 0x7b
+                0x0000000000000072                AP_BANK_BTENGINE_CONTROL_1 = 0x72
+                0x0000000000000073                AP_BANK_BTENGINE_LIB_1 = 0x73
+                0x0000000000000074                AP_BANK_BTENGINE_LIB_2 = 0x74
+                0x0000000000000075                AP_BANK_BTENGINE_EXTEND_1 = 0x75
+                0x0000000000000076                AP_BANK_BTENGINE_EXTEND_2 = 0x76
+                0x0000000000000077                AP_BANK_BTENGINE_EXTEND_3 = 0x77
+                0x000000000000007c                AP_BANK_BTENGINE_EXTEND_4 = 0x7c
+                0x0000000000000079                AP_BANK_BTENGINE_EXTEND_5 = 0x79
+                0x000000000000007f                AP_BANK_MANAGER = 0x7f
+                0x0000000000000041                AP_BANK_AUTOTEST = 0x41
+                0x0000000000000000                SROM_BROM_ADDR = 0x0
+                0x0000000000002600                SROM_BROM_SIZE = 0x2600
+                0x0000000000002600                SROM_SPINOR_ADDR = (SROM_BROM_ADDR + SROM_BROM_SIZE)
+                0x0000000000000c00                SROM_SPINOR_SIZE = 0xc00
+                0x0000000000003200                SROM_TWI_ADDR = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE)
+                0x0000000000000700                SROM_TWI_SIZE = 0x700
+                0x0000000000003900                SROM_STUB_ADDR = (SROM_TWI_ADDR + SROM_TWI_SIZE)
+                0x0000000000000700                SROM_STUB_SIZE = 0x700
+                0x0000000000000e00                SROM_SPINOR_SIZE_MDY = 0xe00
+                0x0000000000003400                SROM_TWI_ADDR_MDY = (SROM_SPINOR_ADDR + SROM_SPINOR_SIZE_MDY)
+                0x0000000000000700                SROM_TWI_SIZE_MDY = 0x700
+                0x0000000000003b00                SROM_STUB_ADDR_MDY = (SROM_TWI_ADDR_MDY + SROM_TWI_SIZE_MDY)
+                0x0000000000000500                SROM_STUB_SIZE_MDY = 0x500
+                0x0000000000004000                SROM_KERNEL_ADDR = (SROM_STUB_ADDR + SROM_STUB_SIZE)
+                0x0000000000004000                SROM_KERNEL_SIZE = 0x4000
+                0x000000000000c000                SROM_FS_ADDR = 0xc000
+                0x0000000000001c00                SROM_FS_SIZE = 0x1c00
+                0x000000000000dc00                SROM_SPINOR1_ADDR = (SROM_FS_ADDR + SROM_FS_SIZE)
+                0x0000000000000400                SROM_SPINOR1_SIZE = 0x400
+                0x0000000000008000                SRAM_OS_RCODE_ADDR = 0x8000
+                0x0000000000000c00                SRAM_OS_RCODE_SIZE = 0xc00
+                0x0000000000008c00                SRAM_SPINOR_RCODE_ADDR = 0x8c00
+                0x0000000000000400                SRAM_SPINOR_RCODE_SIZE = 0x400
+                0x0000000000009000                SRAM_BANK_A_ADDR = 0x9000
+                0x0000000000000400                SRAM_BANK_A_SIZE = 0x400
+                0x0000000000009400                SRAM_BANK_B_ADDR = 0x9400
+                0x0000000000000800                SRAM_BANK_B_SIZE = 0x800
+                0x0000000000009c00                SRAM_UI_RCODE_ADDR = 0x9c00
+                0x0000000000000300                SRAM_UI_RCODE_SIZE = 0x300
+                0x0000000000009f00                SRAM_AUDIO_GLOBAL_DATA_ADDR = 0x9f00
+                0x0000000000000060                SRAM_AUDIO_GLOBAL_DATA_SIZE = 0x60
+                0x0000000000009f60                SRAM_UHOST_GLOBAL_DATA_ADDR = 0x9f60
+                0x0000000000000010                SRAM_UHOST_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f70                SRAM_CARD_GLOBAL_DATA_ADDR = 0x9f70
+                0x0000000000000010                SRAM_CARD_GLOBAL_DATA_SIZE = 0x10
+                0x0000000000009f80                SRAM_SYS_SHARE_DATA_ADDR = 0x9f80
+                0x0000000000000040                SRAM_SYS_SHARE_DATA_SIZE = 0x40
+                0x0000000000009fc0                SRAM_RAM6_CCD_GLOBAL_DATA_ADDR = 0x9fc0
+                0x0000000000000040                SRAM_RAM6_CCD_GLOBAL_DATA_SIZE = 0x40
+                0x000000000000a000                SRAM_BT_LIB1_BANK_ADDR = 0xa000
+                0x0000000000000800                SRAM_BT_LIB1_BANK_SIZE = 0x800
+                0x000000000000a800                SRAM_BT_EXT1_BANK_ADDR = (SRAM_BT_LIB1_BANK_ADDR + SRAM_BT_LIB1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT1_BANK_SIZE = 0x800
+                0x000000000000b000                SRAM_BT_EXT2_BANK_ADDR = (SRAM_BT_EXT1_BANK_ADDR + SRAM_BT_EXT1_BANK_SIZE)
+                0x0000000000000800                SRAM_BT_EXT2_BANK_SIZE = 0x800
+                0x000000000000f000                SRAM_BT_STACK_RCODE1_ADDR = 0xf000
+                0x0000000000000a00                SRAM_BT_STACK_RCODE1_SIZE = 0xa00
+                0x000000000000b000                SRAM_AP_BANK_MANAGER_ADDR = SRAM_BT_EXT2_BANK_ADDR
+                0x0000000000000800                SRAM_AP_BANK_MANAGER_SIZE = SRAM_BT_EXT2_BANK_SIZE
+                0x000000000000be00                SRAM_KEY_MESSAGE_DATA_ADDR = 0xbe00
+                0x0000000000000100                SRAM_KEY_MESSAGE_DATA_SIZE = 0x100
+                0x000000000000bf00                SRAM_UI_DATA_ADDR = 0xbf00
+                0x0000000000000100                SRAM_UI_DATA_SIZE = 0x100
+                0x0000000000010000                SRAM_BT_CONTROLLER_RCODE_ADDR = 0x10000
+                0x0000000000000500                SRAM_BT_CONTROLLER_RCODE_SIZE = 0x500
+                0x0000000000010500                SRAM_COMMON_BT_MANAGER_RCODE = (SRAM_BT_CONTROLLER_RCODE_ADDR + SRAM_BT_CONTROLLER_RCODE_SIZE)
+                0x0000000000000b00                SRAM_COMMON_BT_MANAGER_SIZE = 0xb00
+                0x0000000000011000                SRAM_BT_BACK_RCODE_ADDR = (SRAM_COMMON_BT_MANAGER_RCODE + SRAM_COMMON_BT_MANAGER_SIZE)
+                0x0000000000002900                SRAM_BT_BACK_RCODE_SIZE = 0x2900
+                0x00000000000140d0                SRAM_IRQ_PRINT_BUFFER_ADDR = 0x140d0
+                0x0000000000000130                SRAM_IRQ_PRINT_BUFFER_SIZE = 0x130
+                0x0000000000013900                SRAM_BT_LIB2_BANK_ADDR = 0x13900
+                0x0000000000000d00                SRAM_BT_LIB2_BANK_SIZE = 0xd00
+                0x0000000000013900                SRAM_BT_EXT3_BANK_ADDR = SRAM_BT_LIB2_BANK_ADDR
+                0x0000000000000d00                SRAM_BT_EXT3_BANK_SIZE = SRAM_BT_LIB2_BANK_SIZE
+                0x0000000000021e00                SRAM_BT_EXT4_BANK_ADDR = 0x21e00
+                0x0000000000000600                SRAM_BT_EXT4_BANK_SIZE = 0x600
+                0x0000000000014600                SRAM_BT_EXT5_BANK_ADDR = 0x14600
+                0x0000000000000600                SRAM_BT_EXT5_BANK_SIZE = 0x600
+                0x000000000000fa00                SRAM_COM_DAE_RCODE_ADDR = 0xfa00
+                0x0000000000000100                SRAM_COM_DAE_RCODE_SIZE = 0x100
+                0x000000000000fb00                SRAM_BTCALL_EXT_RCODE_ADDR = 0xfb00
+                0x0000000000000100                SRAM_BTCALL_EXT_RCODE_SIZE = 0x100
+                0x000000000001e900                SRAM_AP_FRONT_RCODE_ADDR = 0x1e900
+                0x0000000000000800                SRAM_AP_FRONT_RCODE_SIZE = 0x800
+                0x0000000000016c00                SRAM_FS_RCODE_ADDR = 0x16c00
+                0x0000000000000800                SRAM_FS_RCODE_SIZE = 0x800
+                0x0000000000017400                SRAM_CARD_UD_RCODE_ADDR = 0x17400
+                0x0000000000000c00                SRAM_CARD_UD_RCODE_SIZE = 0xc00
+                0x0000000000017400                SRAM_UHOST_UD_RCODE_ADDR = SRAM_CARD_UD_RCODE_ADDR
+                0x0000000000000c00                SRAM_UHOST_UD_RCODE_SIZE = SRAM_CARD_UD_RCODE_SIZE
+                0x0000000000016c00                SRAM_USOUND_RCODE_ADDR = 0x16c00
+                0x0000000000002800                SRAM_USOUND_RCODE_SIZE = 0x2800
+                0x0000000000016c00                SRAM_BTSTACK_AVDTP_DATA_ADDR = 0x16c00
+                0x0000000000002980                SRAM_BTSTACK_AVDTP_DATA_SIZE = 0x2980
+                0x0000000000016c00                SRAM_BTCALL_CALLRING_BUF_ADDR = 0x16c00
+                0x0000000000001000                SRAM_BTCALL_CALLRING_BUF_SIZE = 0x1000
+                0x0000000000016c00                SRAM_BTCALL_ASQT_BUF_ADDR = 0x16c00
+                0x0000000000002800                SRAM_BTCALL_ASQT_BUF_SIZE = 0x2800
+                0x0000000000018000                SRAM_FS_DATA_ADDR = 0x18000
+                0x0000000000000300                SRAM_FS_DATA_SIZE = 0x300
+                0x0000000000018300                SRAM_FS_BUF_ADDR = 0x18300
+                0x0000000000000a00                SRAM_FS_BUF_SIZE = 0xa00
+                0x0000000000018d00                SRAM_CARD_UD_CACHE_ADDR = 0x18d00
+                0x0000000000000800                SRAM_CARD_UD_CACHE_SIZE = 0x800
+                0x0000000000018d00                SRAM_UHOST_UD_CACHE_ADDR = SRAM_CARD_UD_CACHE_ADDR
+                0x0000000000000800                SRAM_UHOST_UD_CACHE_SIZE = SRAM_CARD_UD_CACHE_SIZE
+                0x0000000000019500                SRAM_CARD_DATA_ADDR = 0x19500
+                0x0000000000000080                SRAM_CARD_DATA_SIZE = 0x80
+                0x0000000000019500                SRAM_UHOST_DATA_ADDR = SRAM_CARD_DATA_ADDR
+                0x0000000000000080                SRAM_UHOST_DATA_SIZE = SRAM_CARD_DATA_SIZE
+                0x0000000000019580                SRAM_AP_BACK_DATA_ADDR = 0x19580
+                0x0000000000000400                SRAM_AP_BACK_DATA_SIZE = 0x400
+                0x0000000000019980                SRAM_AP_FRONT_DATA_ADDR = 0x19980
+                0x0000000000000700                SRAM_AP_FRONT_DATA_SIZE = 0x700
+                0x000000000001a080                SRAM_APPLIB_GLOBAL_DATA_ADDR = 0x1a080
+                0x0000000000000040                SRAM_APPLIB_GLOBAL_DATA_SIZE = 0x40
+                0x000000000001a0c0                SRAM_APPLIB_DATA_ADDR = 0x1a0c0
+                0x0000000000000200                SRAM_APPLIB_DATA_SIZE = 0x200
+                0x000000000001a2c0                SRAM_BTMANAGER_DATA_ADDR = 0x1a2c0
+                0x0000000000000140                SRAM_BTMANAGER_DATA_SIZE = 0x140
+                0x000000000001a400                SRAM_OS_DATA_ADDR = 0x1a400
+                0x0000000000000880                SRAM_OS_DATA_SIZE = 0x880
+                0x000000000001ac80                SRAM_OS_HEAP_ADDR = 0x1ac80
+                0x0000000000000680                SRAM_OS_HEAP_SIZE = 0x680
+                0x000000000001b300                SRAM_AP_MANAGER_RCODE_ADDR = 0x1b300
+                0x0000000000000100                SRAM_AP_MANAGER_RCODE_SIZE = 0x100
+                0x000000000001b400                SRAM_OS_SD_SWAP_BUF_ADDR = 0x1b400
+                0x0000000000000200                SRAM_OS_SD_SWAP_BUF_SIZE = 0x200
+                0x000000000001b600                SRAM_OS_TASK_STACK_ADDR = 0x1b600
+                0x0000000000001e00                SRAM_OS_TASK_STACK_SIZE = 0x1e00
+                0x000000000001d500                SRAM_BANK_C_ADDR = 0x1d500
+                0x0000000000000400                SRAM_BANK_C_SIZE = 0x400
+                0x000000000001d900                SRAM_BT_HCI_BUF_ADDR = 0x1d900
+                0x0000000000001000                SRAM_BT_HCI_BUF_SIZE = 0x1000
+                0x0000000000016400                SRAM_BT_UART_BUF_ADDR = 0x16400
+                0x0000000000000800                SRAM_BT_UART_BUF_SIZE = 0x800
+                0x000000000001f100                SRAM_BT_RCODE_DATA_ADDR = 0x1f100
+                0x0000000000000700                SRAM_BT_RCODE_DATA_SIZE = 0x700
+                0x000000000001f800                SRAM_KEY_MESSAGE_RCODE_ADDR = 0x1f800
+                0x0000000000000800                SRAM_KEY_MESSAGE_RCODE_SIZE = 0x800
+                0x0000000000020000                SRAM_DSP_IRQ_TABLE_ADDR = 0x20000
+                0x0000000000000120                SRAM_DSP_IRQ_TABLE_SIZE = 0x120
+                0x0000000000020120                SRAM_RAM2_RESEVER_ADDR = 0x20120
+                0x00000000000000e0                SRAM_RAM2_RESEVER_SIZE = 0xe0
+                0x0000000000020200                SRAM_AP_BANK_FRONT_CONTROL_ADDR = 0x20200
+                0x0000000000000800                SRAM_AP_BANK_FRONT_CONTROL_SIZE = 0x800
+                0x0000000000020a00                SRAM_KERNEL_XSYS_ADDR = 0x20a00
+                0x0000000000000e00                SRAM_KERNEL_XSYS_SIZE = 0xe00
+                0x0000000000021800                SRAM_AP_BACK_BASAL_RCODE_ADDR = 0x21800
+                0x0000000000000600                SRAM_AP_BACK_BASAL_RCODE_SIZE = 0x600
+                0x0000000000021e00                SRAM_AP_BANK_BACK_BASAL_ADDR = 0x21e00
+                0x0000000000000600                SRAM_AP_BANK_BACK_BASAL_SIZE = 0x600
+                0x0000000000022400                SRAM_BT_HEAD_ADDR = 0x22400
+                0x0000000000003400                SRAM_BT_HEAD_SIZE = 0x3400
+                0x0000000000025000                SRAM_UART_STUB_RCODE_ADDR = 0x25000
+                0x0000000000000800                SRAM_UART_STUB_RCODE_SIZE = 0x800
+                0x0000000000027e00                SRAM_AP_FRONT_BASAL_RCODE_ADDR = 0x27e00
+                0x0000000000000400                SRAM_AP_FRONT_BASAL_RCODE_SIZE = 0x400
+                0x000000000000b000                SRAM_AP_BANK_FRONT_BASAL_ADDR = 0xb000
+                0x0000000000000800                SRAM_AP_BANK_FRONT_BASAL_SIZE = 0x800
+                0x0000000000025800                SRAM_AP_BANK_FRONT_UI_ADDR = 0x25800
+                0x0000000000000800                SRAM_AP_BANK_FRONT_UI_SIZE = 0x800
+                0x0000000000026000                SRAM_AP_RCP_COMMAND_BUFFER_ADDR = 0x26000
+                0x0000000000000220                SRAM_AP_RCP_COMMAND_BUFFER_SIZE = 0x220
+                0x0000000000026000                SRAM_AP_BACK_RCODE_ADDR = 0x26000
+                0x0000000000000800                SRAM_AP_BACK_RCODE_SIZE = 0x800
+                0x0000000000026800                SRAM_AP_BANK_BACK_CONTROL_ADDR = 0x26800
+                0x0000000000000800                SRAM_AP_BANK_BACK_CONTROL_SIZE = 0x800
+                0x0000000000027000                SRAM_RAM2_RESEVER2_ADDR = 0x27000
+                0x0000000000000e00                SRAM_RAM2_RESEVER2_SIZE = 0xe00
+                0x0000000000027e00                SRAM_BTPLAY_MMM_RCODE2_ADDR = 0x27e00
+                0x0000000000000e00                SRAM_BTPLAY_MMM_RCODE2_SIZE = 0xe00
+                0x0000000000028c00                SRAM_BTPLAY_SWAP_BUFFER_ADDR = 0x28c00
+                0x0000000000000400                SRAM_BTPLAY_SWAP_BUFFER_SIZE = 0x400
+                0x0000000000028200                SRAM_AP_BACK_CODEC_RCODE_ADDR = 0x28200
+                0x0000000000000a00                SRAM_AP_BACK_CODEC_RCODE_SIZE = 0xa00
+                0x0000000000028c00                SRAM_AP_BANK_BACK_CODEC_ADDR = 0x28c00
+                0x0000000000000400                SRAM_AP_BANK_BACK_CODEC_SIZE = 0x400
+                0x0000000000029000                SRAM_AP_BACK_AL_RCODE_1_ADDR = 0x29000
+                0x0000000000007000                SRAM_AP_BACK_AL_RCODE_1_SIZE = 0x7000
+                0x000000000002e000                SRAM_AP_BANK_BACK_AL_4_ADDR = 0x2e000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_4_SIZE = 0x2000
+                0x0000000000030000                SRAM_AP_BANK_BACK_AL_1_ADDR = 0x30000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_1_SIZE = 0x4000
+                0x0000000000034000                SRAM_AP_BACK_AL_RCODE_2_ADDR = 0x34000
+                0x0000000000002000                SRAM_AP_BACK_AL_RCODE_2_SIZE = 0x2000
+                0x0000000000036000                SRAM_AP_BANK_BACK_AL_2_ADDR = 0x36000
+                0x0000000000002000                SRAM_AP_BANK_BACK_AL_2_SIZE = 0x2000
+                0x0000000000038000                SRAM_AP_BANK_BACK_AL_3_ADDR = 0x38000
+                0x0000000000004000                SRAM_AP_BANK_BACK_AL_3_SIZE = 0x4000
+                0x000000000000e000                SRAM_ASRC_BUF_0_ADDR = 0xe000
+                0x0000000000000e00                SRAM_ASRC_BUF_0_SIZE = 0xe00
+                0x000000000000f000                SRAM_ASRC_BUF_1_ADDR = 0xf000
+                0x0000000000000c00                SRAM_ASRC_BUF_1_SIZE = 0xc00
+                0x000000000000fc00                SRAM_CARD_BUF_0_ADDR = 0xfc00
+                0x0000000000000200                SRAM_CARD_BUF_0_SIZE = 0x200
+                0x000000000000fe00                SRAM_CARD_BUF_1_ADDR = 0xfe00
+                0x0000000000000200                SRAM_CARD_BUF_1_SIZE = 0x200
+                0x000000000000fc00                SRAM_CARD_FIFO_ADDR = SRAM_CARD_BUF_0_ADDR
+                0x0000000000000400                SRAM_CARD_FIFO_SIZE = (SRAM_CARD_BUF_0_SIZE + SRAM_CARD_BUF_1_SIZE)
+                0x000000000003c000                SRAM_PCMRAM_0_ADDR = 0x3c000
+                0x0000000000001000                SRAM_PCMRAM_0_SIZE = 0x1000
+                0x000000000003d000                SRAM_PCMRAM_1_ADDR = 0x3d000
+                0x0000000000001000                SRAM_PCMRAM_1_SIZE = 0x1000
+                0x000000000003e000                SRAM_PCMRAM_2_ADDR = 0x3e000
+                0x0000000000001000                SRAM_PCMRAM_2_SIZE = 0x1000
+                0x000000000003c000                SRAM_PCMRAM_H5_FIFO_ADDR = SRAM_PCMRAM_0_ADDR
+                0x0000000000001000                SRAM_PCMRAM_H5_FIFO_SIZE = SRAM_PCMRAM_0_SIZE
+                0x000000000003d000                SRAM_PCMRAM_PCMFIFO_ADDR = SRAM_PCMRAM_1_ADDR
+                0x0000000000002000                SRAM_PCMRAM_FIFO_SIZE = (SRAM_PCMRAM_1_SIZE + SRAM_PCMRAM_2_SIZE)
+                0x000000000003f000                SRAM_URAM_0_ADDR = 0x3f000
+                0x0000000000000800                SRAM_URAM_0_SIZE = 0x800
+                0x000000000003f800                SRAM_URAM_1_ADDR = 0x3f800
+                0x0000000000000800                SRAM_URAM_1_SIZE = 0x800
+                0x000000000003f000                SRAM_URAM_UDISK_FIFO_ADDR = SRAM_URAM_0_ADDR
+                0x0000000000001000                SRAM_URAM_UDISK_FIFO_SIZE = (SRAM_URAM_0_SIZE + SRAM_URAM_1_SIZE)
+                0x000000000003f800                SRAM_URAM_UHOST_FIFO_ADDR = SRAM_URAM_1_ADDR
+                0x0000000000000800                SRAM_URAM_UHOST_FIFO_SIZE = SRAM_URAM_1_SIZE
+                0x0000000000026800                SRAM_AP_BANK_FRONT_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_CONTROL_ADDR
+                0x0000000000000800                SRAM_AP_BANK_FRONT_ENHANCED_1_SIZE = 0x800
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_ENHANCED_2_SIZE = 0x0
+                0x0000000000021e00                SRAM_AP_BANK_BACK_ENHANCED_1_ADDR = SRAM_AP_BANK_BACK_BASAL_ADDR
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_1_SIZE = SRAM_AP_BANK_BACK_BASAL_SIZE
+                0x0000000000028a00                SRAM_AP_BANK_BACK_ENHANCED_2_ADDR = 0x28a00
+                0x0000000000000600                SRAM_AP_BANK_BACK_ENHANCED_2_SIZE = 0x600
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_ADDR = 0x0
+                0x0000000000000000                SRAM_AP_BANK_FRONT_CODEC_SIZE = 0x0
+                0x000000000003b800                SRAM_TTS_DRV_RCODE_ADDR = 0x3b800
+                0x0000000000000800                SRAM_TTS_DRV_RCODE_SIZE = 0x800
+                0x0000000000019580                SRAM_FM_ENG_RDATA_ADDR = SRAM_AP_BACK_DATA_ADDR
+                0x0000000000000200                SRAM_FM_ENG_RDATA_SIZE = 0x200
+                0x0000000000016c00                SRAM_FM_DRV_RCODE_ADDR = SRAM_FS_RCODE_ADDR
+                0x0000000000000800                SRAM_FM_DRV_RCODE_SIZE = 0x800
+                0x0000000000019780                SRAM_FM_DRV_RDATA_ADDR = (SRAM_FM_ENG_RDATA_ADDR + SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000000200                SRAM_FM_DRV_RDATA_SIZE = (SRAM_AP_BACK_DATA_SIZE - SRAM_FM_ENG_RDATA_SIZE)
+                0x0000000000021800                SRAM_AP_USB_DEVICE_RCODE_ADDR = 0x21800
+                0x0000000000004000                SRAM_AP_USB_DEVICE_RCODE_SIZE = SRAM_AP_BANK_BACK_AL_1_SIZE
+                0x0000000000040000                SRAM_INVALID_RCODE_ADDR = 0x40000
+                0x000000000001e900                SRAM_TEXT_ADDR = SRAM_AP_FRONT_RCODE_ADDR
+                0x0000000000019980                SRAM_DATA_ADDR = SRAM_AP_FRONT_DATA_ADDR
+                0x00000000bfc1e900                RCODE_TEXT_ADDR = (RCODE_ADDR_BASE + SRAM_TEXT_ADDR)
+                0x00000000bfc10500                RCODE_TEXT1_ADDR = (RCODE_ADDR_BASE + SRAM_COMMON_BT_MANAGER_RCODE)
+                0x000000009fc19980                RDATA_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_DATA_ADDR)
+                0x00000000bfc16400                RCODE_TEXT2_ADDR = (RCODE_ADDR_BASE + SRAM_BT_UART_BUF_ADDR)
+                0x0000000000000800                RCODE_TEXT2_SIZE = SRAM_BT_UART_BUF_SIZE
+                0x000000009fc1a080                APPLIB_GLOBAL_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_APPLIB_GLOBAL_DATA_ADDR)
+                0x000000009fc1a0c0                APPLIB_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_APPLIB_DATA_ADDR)
+                0x000000009fc26000                RCP_COMMAND_BUFFER_ADDR = (RDATA_ADDR_BASE + SRAM_AP_RCP_COMMAND_BUFFER_ADDR)
+                0x000000009fc1a2c0                BSMANAGER_DATA_ADDR = (RDATA_ADDR_BASE + SRAM_BTMANAGER_DATA_ADDR)
+                0x0000000000000040                APPLIB_GLOBAL_DATA_SIZE = SRAM_APPLIB_GLOBAL_DATA_SIZE
+                0x0000000000000200                APPLIB_DATA_SIZE = SRAM_APPLIB_DATA_SIZE
+                0x0000000000000140                BTMANAGER_DATA_SIZE = SRAM_BTMANAGER_DATA_SIZE
+                0x0000000040020200                BANK_CONTROL_1_ADDR_BASE = ((AP_BANK_FRONT_CONTROL_1 << 0x18) + SRAM_AP_BANK_FRONT_CONTROL_ADDR)
+                0x0000000048025800                BANK_UI_1_ADDR_BASE = ((AP_BANK_FRONT_UI_1 << 0x18) + SRAM_AP_BANK_FRONT_UI_ADDR)
+                0x0000000000000800                BANK_CONTROL_SIZE = SRAM_AP_BANK_FRONT_CONTROL_SIZE
+                0x0000000000000800                BANK_UI_SIZE = SRAM_AP_BANK_FRONT_UI_SIZE
+                0x0000000000040000                AP_BANK_SPACE = BANK_SPACE
+
+.text1          0x00000000bfc10500      0xa68
+ bt_common_manager_deal.o(.rcode)
+ .rcode         0x00000000bfc10500      0x530 ./../../lib/bt_common_manager_deal.o
+                0x00000000bfc10911                com_btmanager_loop
+                0x00000000bfc108bd                com_btmanager_sniff_handle
+                0x00000000bfc1053d                check_a2dp_status
+                0x00000000bfc1074d                com_btmanager_hfp_handle
+                0x00000000bfc107d1                com_btmanager_battery_handle
+                0x00000000bfc10885                check_sniff_status
+                0x00000000bfc105b1                com_btmanager_discoverable_handle
+                0x00000000bfc1063d                com_btmanager_mod_change
+                0x00000000bfc10675                com_btmanager_a2dp_handle
+                0x00000000bfc10501                get_bt_stack_info
+ common_rcp_dispatch.o(.rcode)
+ .rcode         0x00000000bfc10a30      0x100 ./../../lib/common_rcp_dispatch.o
+                0x00000000bfc10a31                com_rcp_dispatch
+ common_rcp_dispatch_block.o(.rcode)
+ .rcode         0x00000000bfc10b30       0xb8 ./../../lib/common_rcp_dispatch_block.o
+                0x00000000bfc10b31                com_check_valid_rcp
+                0x00000000bfc10b6d                com_rcp_cmd_dispatch
+ common_rcp_dispatch_misc.o(.rcode)
+ .rcode         0x00000000bfc10be8       0x18 ./../../lib/common_rcp_dispatch_misc.o
+                0x00000000bfc10be9                com_rcp_cmd_dispatch_before_hook
+ common_rcp_func.o(.rcode)
+ .rcode         0x00000000bfc10c00      0x188 ./../../lib/common_rcp_func.o
+                0x00000000bfc10c01                com_get_com_info
+                0x00000000bfc10d65                com_get_global_rcp_info
+ bt_common_sppble.o(.rcode)
+ .rcode         0x00000000bfc10d88      0x114 ./../../lib/bt_common_sppble.o
+                0x00000000bfc10df1                com_btmanager_sppble_read
+                0x00000000bfc10d89                com_btmanager_sppble_copy_rcp
+ message_bank_send_btmanager.o(.text .rodata .xdata)
+ .text          0x00000000bfc10e9c       0xb4 ./../../lib/message_bank_send_btmanager.o
+                0x00000000bfc10e9d                send_sync_msg_btmanager
+ common_alexa.o(.linkplay.const)
+ .linkplay.const
+                0x00000000bfc10f50       0x18 ./../../lib/common_alexa.o
+                0x00000000bfc10f50                g_lp_func_cb
+OUTPUT(radio.exe elf32-tradlittlemips)
+                0x000000009fc1a080                . = APPLIB_GLOBAL_DATA_ADDR
+
+APPLIB_GLOBAL_DATA
+                0x000000009fc1a080       0x40
+ applib_globe_data.o(.applib_globe_data.g_app_info_vector)
+ .applib_globe_data.g_app_info_vector
+                0x000000009fc1a080       0x10 ./../../lib/applib_globe_data.o
+                0x000000009fc1a080                g_app_info_vector
+                0x000000009fc1a090                . = 0x10
+ applib_globe_data.o(.applib_globe_data.config_fp)
+ .applib_globe_data.config_fp
+                0x000000009fc1a090        0x4 ./../../lib/applib_globe_data.o
+                0x000000009fc1a090                config_fp
+                0x000000009fc1a094                . = 0x14
+ applib_globe_data.o(.applib_globe_data.g_app_info_state_all)
+ .applib_globe_data.g_app_info_state_all
+                0x000000009fc1a094       0x24 ./../../lib/applib_globe_data.o
+                0x000000009fc1a0b4                g_neednot_tts_play_timeout1
+                0x000000009fc1a094                g_app_info_state_all
+                0x000000009fc1a0b0                g_customer_state
+                0x0000000000000040                . = APPLIB_GLOBAL_DATA_SIZE
+ *fill*         0x000000009fc1a0b8        0x8 00
+ *fill*         0x000000009fc1a0c0        0x0 00
+                0x000000009fc1a0c0                . = APPLIB_DATA_ADDR
+
+APPLIB_DATA     0x000000009fc1a0c0      0x200
+ applib_globe_data_com.o(.g_app_info_state)
+ .g_app_info_state
+                0x000000009fc1a0c0       0x18 ./../../lib/applib_globe_data_com.o
+                0x000000009fc1a0c0                g_app_info_state
+ applib_globe_data_com.o(.gl_rcp_buffer)
+ .gl_rcp_buffer
+                0x000000009fc1a0d8        0x4 ./../../lib/applib_globe_data_com.o
+                0x000000009fc1a0d8                g_rcp_default_long_buffer
+ applib_globe_data_com.o(.gl_com_data)
+ .gl_com_data   0x000000009fc1a0dc       0xe0 ./../../lib/applib_globe_data_com.o
+                0x000000009fc1a188                g_OTA_var
+                0x000000009fc1a0dc                g_sys_counter
+                0x000000009fc1a0e8                g_buffer_gui_msg
+                0x000000009fc1a0f0                g_buffer_app_msg
+                0x000000009fc1a100                g_com_app_timer_vct
+                0x000000009fc1a18c                g_ap_switch_var
+                0x000000009fc1a185                g_discrete_led_a23_available
+                0x000000009fc1a1b0                g_config_var
+                0x000000009fc1a184                g_rcp_ctrl_quit_flag
+                0x000000009fc1a1b8                g_esd_cardreader_flag
+                0x000000009fc1a180                g_app_last_state
+ message_key_deal.o(.gl_key_data)
+ .gl_key_data   0x000000009fc1a1bc       0x28 ./../../lib/message_key_deal.o
+                0x000000009fc1a1bc                g_key_infor
+                0x000000009fc1a1e0                g_key_hold
+ common_tts.o(.gl_tts_data)
+ .gl_tts_data   0x000000009fc1a1e4       0x40 ./../../lib/common_tts.o
+                0x000000009fc1a1e4                g_tts_play_info
+ common_keytone_play.o(.gl_kt_data)
+ .gl_kt_data    0x000000009fc1a224        0xc ./../../lib/common_keytone_play.o
+                0x000000009fc1a224                g_keytone_infor
+ common_rcp_dispatch.o(.gl_rcp_data)
+ .gl_rcp_data   0x000000009fc1a230       0x68 ./../../lib/common_rcp_dispatch.o
+                0x000000009fc1a231                g_dialog_overtime_flag
+                0x000000009fc1a294                g_rcp_long_buffer_flag
+                0x000000009fc1a233                g_dialog_choosed
+                0x000000009fc1a296                g_rcp_pkg_max_len
+                0x000000009fc1a240                g_app_get_global_info
+                0x000000009fc1a238                g_rcp_service_type
+                0x000000009fc1a236                g_dialog_desc_id
+                0x000000009fc1a239                g_rcp_remote_number
+                0x000000009fc1a290                g_rcp_long_length
+                0x000000009fc1a286                g_rcp_cmd_id
+                0x000000009fc1a234                g_dialog_type
+                0x000000009fc1a244                g_app_ext_serv_cb
+                0x000000009fc1a230                g_dialog_state
+                0x000000009fc1a232                g_dialog_overtime
+                0x000000009fc1a28c                g_rcp_long_buffer
+                0x000000009fc1a292                g_rcp_long_index
+                0x000000009fc1a287                g_rcp_next_seq
+                0x000000009fc1a288                g_rcp_seg_flag
+                0x000000009fc1a284                g_rcp_cmd_flags
+                0x000000009fc1a235                g_dialog_button_type
+                0x000000009fc1a237                g_dialog_active_default
+                0x000000009fc1a23c                g_app_rcp_cmd_cb_tbl
+ common_aset_main_deal.o(.gl_stub_data)
+ .gl_stub_data  0x000000009fc1a298       0x18 ./../../lib/common_aset_main_deal.o
+                0x000000009fc1a299                g_aset_sync_volume
+                0x000000009fc1a298                g_aset_run_state
+                0x000000009fc1a2a8                g_p_dae_cfg
+                0x000000009fc1a29e                g_aset_equivalent_gain
+                0x000000009fc1a2ac                g_aset_base_timer
+                0x000000009fc1a29a                g_aset_neednot_take_effect
+                0x000000009fc1a2a4                g_aset_rw_buffer
+                0x000000009fc1a2a0                g_aset_main_switch_flag
+                0x000000009fc1a29c                g_aset_main_gain_value
+                0x0000000000000200                . = APPLIB_DATA_SIZE
+ *fill*         0x000000009fc1a2b0       0x10 00
+ *fill*         0x000000009fc1a2c0        0x0 00
+                0x000000009fc26000                . = RCP_COMMAND_BUFFER_ADDR
+
+RCP_COMMAND_BUFFER
+ common_rcp_dispatch.o(.bss.rcp_default_buffer)
+                0x000000009fc1a2c0                . = BSMANAGER_DATA_ADDR
+
+BSMANAGER_DATA  0x000000009fc1a2c0      0x140
+ bt_common_manager.o(.bt_auto_connect)
+ .bt_auto_connect
+                0x000000009fc1a2c0       0x3c ./../../lib/bt_common_manager.o
+                0x000000009fc1a2c8                g_bt_auto_connect_ctrl
+                0x000000009fc1a2c0                g_bt_auto_connect_addr
+ bt_common_manager.o(.bt_globe_data)
+ .bt_globe_data
+                0x000000009fc1a2fc       0x78 ./../../lib/bt_common_manager.o
+                0x000000009fc1a36d                g_tws_m_switchap_flag
+                0x000000009fc1a370                check_id2
+                0x000000009fc1a348                g_p_rcp_in_data_ctl
+                0x000000009fc1a36f                check_id1
+                0x000000009fc1a36e                send_once_flag
+                0x000000009fc1a371                once_auto_flag
+                0x000000009fc1a368                g_fast_discoverable_timer
+                0x000000009fc1a34c                g_btmanager_gl_var
+                0x000000009fc1a36a                g_fast_discoverable_cnt
+                0x000000009fc1a2fc                g_bt_stack_cur_info
+                0x000000009fc1a36c                g_tws_m_linein_flag
+ common_rcp_servs.o(.gl_rcp_data)
+ .gl_rcp_data   0x000000009fc1a374       0x10 ./../../lib/common_rcp_servs.o
+                0x000000009fc1a374                g_ancs_data_buf
+ asr.a(.g_smart_data)
+ .g_smart_data  0x000000009fc1a384        0xc ./../../../psp_rel/lib/asr.a(LpMain.o)
+                0x000000009fc1a38c                g_lp_sdk_running_status
+                0x000000009fc1a384                g_plpCbFunc
+                0x000000009fc1a389                g_resume_play_timer
+ .g_smart_data  0x000000009fc1a390       0x10 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ common_alexa.o(.data .bss)
+ .bss           0x000000009fc1a3a0        0x4 ./../../lib/common_alexa.o
+ applib_globe_data_com.o(.gl_com_led_data)
+ .gl_com_led_data
+                0x000000009fc1a3a4        0x8 ./../../lib/applib_globe_data_com.o
+                0x000000009fc1a3a4                g_discrete_led_info
+                0x0000000000000140                . = BTMANAGER_DATA_SIZE
+ *fill*         0x000000009fc1a3ac       0x54 00
+ *fill*         0x000000009fc1a400        0x0 00
+                0x00000000482a5800                . = (BANK_UI_1_ADDR_BASE + (AP_BANK_SPACE * 0xa))
+                0x0000000000025800                OFFSET = (. & 0x3ffff)
+
+BANK_UI_1_10    0x00000000482a5800      0x800
+ common_charge.o(.text .rodata .xdata)
+ .text          0x00000000482a5800       0xf4 ./../../lib/common_charge.o
+                0x00000000482a5801                com_battery_charge_deal
+ sys_counter.o(.text .rodata .xdata)
+ .text          0x00000000482a58f4      0x21c ./../../lib/sys_counter.o
+                0x00000000482a5ac1                peripheral_detect_handle
+                0x00000000482a58f5                sys_counter_handle
+ bt_common_sppble.o(.text .rodata .xdata)
+ .text          0x00000000482a5b10       0x9c ./../../lib/bt_common_sppble.o
+                0x00000000482a5b59                com_btmanager_apk_app_verification_handle
+                0x00000000482a5b11                com_btmanager_sppble_send
+ bt_common_event_dispatch.o(.rcode)
+ .rcode         0x00000000482a5bac       0x50 ./../../lib/bt_common_event_dispatch.o
+                0x00000000482a5bad                com_btmanager_event_dispatch
+ common_rcp_send.o(.rcode)
+ .rcode         0x00000000482a5bfc       0x58 ./../../lib/common_rcp_send.o
+                0x00000000482a5bfd                com_rcp_send_pkg
+ common_alexa.o(.linkplay.playtone)
+ .linkplay.playtone
+                0x00000000482a5c54       0x44 ./../../lib/common_alexa.o
+                0x00000000482a5c55                lp_play_keytone
+ common_alexa.o(.linkplay.alexastate)
+ .linkplay.alexastate
+                0x00000000482a5c98      0x254 ./../../lib/common_alexa.o
+                0x00000000482a5c99                lp_sdk_alexa_led_init
+                0x00000000482a5cf5                lp_update_alexa_state
+                0x00000000482a5ed5                lp_alexa_led_timer_deal
+                0x00000000482a5cd9                lp_alexa_start_led_timer
+                0x00000000482a5cb5                lp_alexa_led_init
+ common_alexa.o(.linkplay.dsp)
+ .linkplay.dsp  0x00000000482a5eec       0x50 ./../../lib/common_alexa.o
+                0x00000000482a5eed                lp_asr_dsp_reset
+ common_alexa.o(.linkplay.ble)
+ .linkplay.ble  0x00000000482a5f3c       0x24 ./../../lib/common_alexa.o
+                0x00000000482a5f3d                lp_receive_ble_data
+ common_keytone_play.o(.keytone.bank)
+ .keytone.bank  0x00000000482a5f60       0x24 ./../../lib/common_keytone_play.o
+                0x00000000482a5f61                com_start_key_tone
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000482a5f84       0x7c 00
+ *fill*         0x00000000482a6000        0x0 00
+                0x00000000482e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_11    0x00000000482e5800      0x800
+ app_engine_config.o(.text .rodata .xdata)
+ .text          0x00000000482e5800       0x54 ./../../lib/app_engine_config.o
+                0x00000000482e5829                get_engine_appid_by_type
+                0x00000000482e5801                get_engine_type_by_appid
+ .rodata        0x00000000482e5854        0xc ./../../lib/app_engine_config.o
+                0x00000000482e5854                applib_app2eg_type
+ app_manager_bank.o(.text .rodata .xdata)
+ .text          0x00000000482e5860      0x1c8 ./../../lib/app_manager_bank.o
+                0x00000000482e5861                applib_init
+                0x00000000482e5951                applib_quit
+ message_bank_init.o(.text .rodata .xdata)
+ .text          0x00000000482e5a28       0x3c ./../../lib/message_bank_init.o
+                0x00000000482e5a29                applib_message_init
+ message_bank_send.o(.text .rodata .xdata)
+ .text          0x00000000482e5a64      0x1c0 ./../../lib/message_bank_send.o
+                0x00000000482e5a65                send_sync_msg
+ message_bank_send_async.o(.text .rodata .xdata)
+ .text          0x00000000482e5c24       0xfc ./../../lib/message_bank_send_async.o
+                0x00000000482e5c25                send_async_msg
+ message_bank_broadcast.o(.text .rodata .xdata)
+ .text          0x00000000482e5d20       0x40 ./../../lib/message_bank_broadcast.o
+                0x00000000482e5d21                broadcast_msg
+ app_sleep.o(.text .rodata .xdata)
+ .text          0x00000000482e5d60       0x4c ./../../lib/app_sleep.o
+                0x00000000482e5d61                com_app_sleep
+ message_bank_send_btmanager.o(.bank)
+ .bank          0x00000000482e5dac       0x94 ./../../lib/message_bank_send_btmanager.o
+                0x00000000482e5dad                send_async_msg_btmanager
+ common_alexa.o(.linkplay.alexaprofile)
+ .linkplay.alexaprofile
+                0x00000000482e5e40      0x15c ./../../lib/common_alexa.o
+                0x00000000482e5e41                lp_get_alexa_profile
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000482e5f9c       0x64 00
+ *fill*         0x00000000482e6000        0x0 00
+                0x0000000048325800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_12    0x0000000048325800      0x600
+ common_setvolume.o(.text .rodata .xdata)
+ .text          0x0000000048325800       0x90 ./../../lib/common_setvolume.o
+                0x000000004832583d                com_volume_sub
+                0x0000000048325801                com_create_volume_view
+                0x000000004832586d                com_volume_set
+                0x0000000048325809                com_set_volume_view
+                0x000000004832580d                com_volume_add
+ common_sys_hook.o(.text .rodata .xdata)
+ .text          0x0000000048325890      0x244 ./../../lib/common_sys_hook.o
+                0x0000000048325891                com_app_msg_hook
+ sys_counter.o(.bank)
+ .bank          0x0000000048325ad4       0x64 ./../../lib/sys_counter.o
+                0x0000000048325ad5                enter_lower_mode
+                0x0000000048325b25                com_set_display_onoff
+ common_speaker_out_switch.o(.text .rodata .xdata)
+ .text          0x0000000048325b38      0x190 ./../../lib/common_speaker_out_switch.o
+                0x0000000048325b6d                SPEAKER_OUT_SWITCH
+                0x0000000048325e00                . = 0x600
+ *fill*         0x0000000048325cc8      0x138 00
+ *fill*         0x0000000048325e00        0x0 00
+                0x0000000048365800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_13    0x0000000048365800      0x800
+ common_sound.o(.text .rodata .xdata)
+ .text          0x0000000048365800        0xc ./../../lib/common_sound.o
+                0x0000000048365801                com_set_sound_out
+ common_phy_volume_deal.o(.text .rodata .xdata)
+ .text          0x000000004836580c      0x594 ./../../lib/common_phy_volume_deal.o
+                0x0000000048365d55                com_update_volume_limit
+                0x0000000048365855                com_set_phy_volume
+ common_phy_volume_table.o(.text .rodata .xdata)
+ .rodata        0x0000000048365da0       0xc0 ./../../lib/common_phy_volume_table.o
+                0x0000000048365da0                g_hard_volume_table_i2s_pa
+                0x0000000048365e20                g_hard_volume_table
+                0x0000000048365de0                g_hard_volume_table_sm
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048365e60      0x1a0 00
+ *fill*         0x0000000048366000        0x0 00
+                0x00000000483a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_14    0x00000000483a5800      0x800
+ common_tts.o(.text .rodata .xdata)
+ .text          0x00000000483a5800      0x530 ./../../lib/common_tts.o
+                0x00000000483a596d                com_tts_state_play_exit
+                0x00000000483a5ce9                com_tts_state_play_control
+                0x00000000483a58a9                com_tts_state_play_init
+                0x00000000483a5b75                com_tts_state_play_deal
+                0x00000000483a5a01                com_tts_state_play_loop
+                0x00000000483a5999                tts_fifo_out
+                0x00000000483a5bdd                tts_fifo_in
+                0x00000000483a5c15                com_tts_state_play
+                0x00000000483a5801                need_tts_state_play
+                0x00000000483a5b51                com_tts_state_play_wait
+ common_tts_thread.o(.text .rodata .xdata)
+ .text          0x00000000483a5d30      0x278 ./../../lib/common_tts_thread.o
+                0x00000000483a5d89                tts_play_init
+                0x00000000483a5d31                com_tts_state_sync
+                0x00000000483a5e91                tts_play_exit
+                0x00000000483a5f11                tts_play_loop
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000483a5fa8       0x58 00
+ *fill*         0x00000000483a6000        0x0 00
+                0x00000000483e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_15    0x00000000483e5800      0x800
+ common_ap_switch.o(.text .rodata .xdata)
+ .text          0x00000000483e5800      0x554 ./../../lib/common_ap_switch.o
+                0x00000000483e5afd                com_ap_switch_deal
+                0x00000000483e5a9d                com_ap_switch_ask_next_func
+                0x00000000483e5ced                com_check_ap_func_index_valid
+ .rodata        0x00000000483e5d54       0xc8 ./../../lib/common_ap_switch.o
+                0x00000000483e5d54                ap_switch_info
+ common_charge.o(.bank)
+ .bank          0x00000000483e5e1c       0x98 ./../../lib/common_charge.o
+                0x00000000483e5e1d                com_battery_charge_change_deal
+                0x00000000483e5e61                com_battery_charge_full_check
+ bt_common_manager.o(.call_auto_conn)
+ .call_auto_conn
+                0x00000000483e5eb4       0x24 ./../../lib/bt_common_manager.o
+                0x00000000483e5eb5                com_btmanager_call_back_auto_connect
+                0x00000000483e5eb9                send_cmd_to_other
+ bt_common_manager_deal.o(.call_auto_conn)
+ .call_auto_conn
+                0x00000000483e5ed8       0x34 ./../../lib/bt_common_manager_deal.o
+                0x00000000483e5ed9                send_mod_flag_to_other
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000483e5f0c       0xf4 00
+ *fill*         0x00000000483e6000        0x0 00
+                0x0000000048425800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_16    0x0000000048425800      0x800
+ common_rcp_dispatch.o(.text .rodata .xdata)
+ .text          0x0000000048425800      0x3d8 ./../../lib/common_rcp_dispatch.o
+                0x0000000048425801                com_rcp_dispatch_invalid
+                0x0000000048425b95                com_rcp_ble_serv_send
+                0x0000000048425821                com_rcp_dispatch_bank
+ common_rcp_dispatch_block.o(.text .rodata .xdata)
+ .text          0x0000000048425bd8      0x134 ./../../lib/common_rcp_dispatch_block.o
+                0x0000000048425c09                com_rcp_cmd_dispatch_bank
+                0x0000000048425bd9                com_rcp_cmd_dispatch_ap_switch
+ common_rcp_dispatch_misc.o(.text .rodata .xdata)
+ .text          0x0000000048425d0c       0x70 ./../../lib/common_rcp_dispatch_misc.o
+                0x0000000048425d0d                com_rcp_cmd_find_cb
+                0x0000000048425d51                com_apswitch_hook
+ .rodata        0x0000000048425d7c      0x104 ./../../lib/common_rcp_dispatch_misc.o
+                0x0000000048425e54                rcp_cmd_apswitch_event
+                0x0000000048425d7c                com_rcp_cmd_cb_tbl
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048425e80      0x180 00
+ *fill*         0x0000000048426000        0x0 00
+                0x0000000048465800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_17    0x0000000048465800      0x800
+ setting_comval.o(.text .rodata .xdata)
+ .text          0x0000000048465800      0x208 ./../../lib/setting_comval.o
+                0x0000000048465801                com_setting_comval_init
+                0x00000000484659b9                com_enable_jtag_function
+ common_config.o(.text .rodata .xdata)
+ .text          0x0000000048465a08      0x11c ./../../lib/common_config.o
+                0x0000000048465ac5                com_get_config_default
+                0x0000000048465a09                com_open_config_file
+                0x0000000048465a55                com_get_config_struct
+ common_rcp_dialog.o(.text .rodata .xdata)
+ .text          0x0000000048465b24      0x180 ./../../lib/common_rcp_dialog.o
+                0x0000000048465b25                dialog_overtime
+                0x0000000048465b31                com_rcp_dialog
+                0x0000000048465c91                com_dialog_check_usbdialog
+ .rodata        0x0000000048465ca4       0x2c ./../../lib/common_rcp_dialog.o
+                0x0000000048465ca4                button_result
+ common_share_data.o(.text .rodata .xdata)
+ .text          0x0000000048465cd0       0xbc ./../../lib/common_share_data.o
+                0x0000000048465cd1                com_load_share_data
+ .rodata        0x0000000048465d8c       0x9c ./../../lib/common_share_data.o
+                0x0000000048465da8                g_sd_ring_file
+                0x0000000048465e18                g_ring_folder_root_long
+                0x0000000048465d98                g_rec_folder_long
+                0x0000000048465e20                g_ring_folder_root_short
+                0x0000000048465db8                g_ring_folder_short
+                0x0000000048465db4                g_ring_floder_type
+                0x0000000048465de8                g_ring_folder_long
+                0x0000000048465d8c                g_rec_folder_short
+ common_setdae.o(.bank)
+ .bank          0x0000000048465e28      0x114 ./../../lib/common_setdae.o
+                0x0000000048465e4d                com_set_dae_enable
+                0x0000000048465e99                com_set_dae_config
+                0x0000000048465e29                com_set_dae_chan
+                0x0000000048465e69                com_set_dae_onoff
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048465f3c       0xc4 00
+ *fill*         0x0000000048466000        0x0 00
+                0x00000000484a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_18    0x00000000484a5800      0x800
+ common_setdae.o(.text .rodata .xdata)
+ .text          0x00000000484a5800      0x5c0 ./../../lib/common_setdae.o
+                0x00000000484a58f9                get_dae_bypass_status
+                0x00000000484a5909                com_update_dae_config
+                0x00000000484a5ca1                __set_dae_config
+                0x00000000484a5801                com_load_mdrc_config
+                0x00000000484a5da9                com_set_dae_config_dynamic
+ common_math_exp_fixed.o(.text .rodata .xdata)
+ .text          0x00000000484a5dc0      0x120 ./../../lib/common_math_exp_fixed.o
+                0x00000000484a5dc1                com_math_exp_fixed
+ .rodata        0x00000000484a5ee0       0x18 ./../../lib/common_math_exp_fixed.o
+                0x00000000484a5ee0                exp_taylor_coeff
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000484a5ef8      0x108 00
+ *fill*         0x00000000484a6000        0x0 00
+                0x00000000484e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_19    0x00000000484e5800      0x800
+ message_key_deal.o(.text .rodata .xdata)
+ .text          0x00000000484e5800      0x42c ./../../lib/message_key_deal.o
+                0x00000000484e5801                com_phy_key_phy2log
+                0x00000000484e5b29                com_filter_keymsg_in_queue
+                0x00000000484e58d1                com_phy_key_fsm
+                0x00000000484e5879                com_need_cont_dck_deal
+ .rodata        0x00000000484e5c2c       0xa8 ./../../lib/message_key_deal.o
+                0x00000000484e5c80                IrcKeyValueTab
+                0x00000000484e5c2c                IrcKeyMsgTab
+ common_key_hook.o(.text .rodata .xdata)
+ .text          0x00000000484e5cd4      0x168 ./../../lib/common_key_hook.o
+                0x00000000484e5e29                com_filter_key_itself
+                0x00000000484e5cd5                com_gui_msg_hook
+                0x00000000484e5e15                com_filter_key_up
+                0x00000000484e5e01                com_filter_key_hold
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000484e5e3c      0x1c4 00
+ *fill*         0x00000000484e6000        0x0 00
+                0x0000000048525800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_20    0x0000000048525800      0x800
+ common_aset_new_func.o(.text .rodata .xdata)
+ .text          0x0000000048525800      0x6e4 ./../../lib/common_aset_new_func.o
+                0x0000000048525a59                aset_read_surr_data
+                0x0000000048525915                enable_aset_sound_effect
+                0x0000000048525af5                aset_read_multibank_drc_data
+                0x0000000048525801                aset_read_data
+                0x00000000485258b5                aset_read_volume
+                0x0000000048525b79                aset_cmd_deal
+                0x0000000048525e2d                aset_set_dae_init
+                0x0000000048525ac1                aset_read_mdrc2_data
+                0x0000000048525a25                aset_read_te_data
+                0x00000000485259a5                aset_read_eq_data
+                0x0000000048525a8d                aset_read_limiter_data
+                0x0000000048525b39                aset_read_frcurve_data
+                0x00000000485258f1                aset_read_main_switch
+                0x00000000485259f1                aset_read_vbass_data
+ common_mic_mute.o(.text .rodata .xdata)
+ .text          0x0000000048525ee4       0x5c ./../../lib/common_mic_mute.o
+                0x0000000048525ee5                com_smart_mic_mute
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048525f40       0xc0 00
+ *fill*         0x0000000048526000        0x0 00
+                0x0000000048565800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_21    0x0000000048565800      0x800
+ common_aset_main_deal.o(.text .rodata)
+ .text          0x0000000048565800      0x448 ./../../lib/common_aset_main_deal.o
+                0x0000000048565b71                aset_loop_deal
+                0x0000000048565801                get_audiopp_type
+                0x0000000048565a69                aset_global_para_init
+                0x0000000048565ad5                aset_test_exit
+                0x0000000048565a75                aset_test_init
+                0x0000000048565b19                reinstall_stub
+                0x0000000048565b09                aset_test_set_dae_init
+                0x0000000048565945                aset_reconnect_deal
+ common_aset_sub_code.o(.text .rodata .xdata)
+ .text          0x0000000048565c48      0x2b0 ./../../lib/common_aset_sub_code.o
+                0x0000000048565de1                aset_write_vbass_data
+                0x0000000048565ea5                aset_write_volume_data
+                0x0000000048565e71                aset_write_limiter_data
+                0x0000000048565d8d                aset_write_peq_data
+                0x0000000048565c49                aset_write_data
+                0x0000000048565e41                aset_write_surr_data
+                0x0000000048565ce5                config_pc_view
+                0x0000000048565ec5                aset_upload_sound_param
+                0x0000000048565d51                aset_write_case_info
+                0x0000000048565e11                aset_write_te_data
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048565ef8      0x108 00
+ *fill*         0x0000000048566000        0x0 00
+                0x00000000485a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_22    0x00000000485a5800      0x800
+ common_keytone_play.o(.text .rodata .xdata)
+ .text          0x00000000485a5800      0x588 ./../../lib/common_keytone_play.o
+                0x00000000485a5bb5                keytone_set_dac_chan
+                0x00000000485a5b11                keytone_play_thread
+                0x00000000485a5801                keytone_init_set
+                0x00000000485a59d5                keytone_play_loop
+                0x00000000485a587d                keytone_send_to_asrc
+                0x00000000485a5b5d                keytone_thread_task_stack_free
+                0x00000000485a5c81                keytone_fifo_in
+                0x00000000485a583d                keytone_asrc_fill
+                0x00000000485a5bd5                keytone_set_dac_sample
+                0x00000000485a5be1                keytone_set_on_off
+                0x00000000485a5949                keytone_play_frame
+                0x00000000485a5c4d                keytone_play_deal
+                0x00000000485a5b89                keytone_play_deal_wait
+                0x00000000485a5c15                keytone_fifo_out
+                0x00000000485a5cc9                keytone_play
+ .xdata         0x00000000485a5d88      0x200 ./../../lib/common_keytone_play.o
+                0x00000000485a5d88                g_bitstream_buffer
+ common_keytone_file.o(.rodata)
+ .rodata        0x00000000485a5f88       0x64 ./../../lib/common_keytone_file.o
+                0x00000000485a5f88                g_keytone_filelist
+ common_key_deal.o(.text.BANK_UI)
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000485a5fec       0x14 00
+ *fill*         0x00000000485a6000        0x0 00
+                0x00000000485e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_23    0x00000000485e5800      0x800
+ common_discrete_led.o(.text .rodata .xdata)
+ .text          0x00000000485e5800      0x234 ./../../lib/common_discrete_led.o
+                0x00000000485e5989                discrete_led_low_power
+                0x00000000485e589d                discrete_led_set
+                0x00000000485e5801                discrete_led_init
+                0x00000000485e59e1                discrete_led_restore
+ .rodata        0x00000000485e5a34        0x4 ./../../lib/common_discrete_led.o
+                0x00000000485e5a34                discrete_led_cfg
+ common_speaker_control.o(.text .rodata .xdata)
+ .text          0x00000000485e5a38      0x160 ./../../lib/common_speaker_control.o
+                0x00000000485e5b95                SPEAKER_D_AB_SWITCH
+                0x00000000485e5a89                SPEAKER_CONTROL_DISABLE
+                0x00000000485e5a39                SPEAKER_CONTROL_ENABLE
+                0x00000000485e5ae1                SPEAKER_ON
+                0x00000000485e5b89                IS_SPEAKER_ON
+                0x00000000485e5b39                SPEAKER_OFF
+ common_view_manager.o(.text .rodata .xdata)
+ .text          0x00000000485e5b98      0x2fc ./../../lib/common_view_manager.o
+                0x00000000485e5e6d                com_view_remove_top_view
+                0x00000000485e5e45                com_view_manager_exit
+                0x00000000485e5d91                com_view_add
+                0x00000000485e5bf1                com_view_update_key_view
+                0x00000000485e5c29                com_view_remove
+                0x00000000485e5b99                com_view_manager_init
+                0x00000000485e5d59                com_view_remove_type_view
+ common_key_deal.o(.text.BANK2)
+ .text.BANK2    0x00000000485e5e94       0x58 ./../../lib/common_key_deal.o
+                0x00000000485e5e95                com_app_deal_play_prev_next
+                0x00000000485e5ec1                com_creat_play_prev_next_timer
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000485e5eec      0x114 00
+ *fill*         0x00000000485e6000        0x0 00
+                0x0000000048625800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_24    0x0000000048625800      0x800
+ common_standby.o(.text .rodata)
+ .text          0x0000000048625800      0x3cc ./../../lib/common_standby.o
+                0x0000000048625801                com_standby_register
+                0x0000000048625885                com_standby
+ common_discrete_led.o(.text.bank24)
+ .text.bank24   0x0000000048625bcc       0x94 ./../../lib/common_discrete_led.o
+                0x0000000048625c25                discrete_led_enable
+                0x0000000048625bcd                discrete_led_disable
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048625c60      0x3a0 00
+ *fill*         0x0000000048626000        0x0 00
+                0x0000000048665800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_25    0x0000000048665800      0x800
+ time_alarm_clock.o(.text .rodata .xdata)
+ .text          0x0000000048665800      0x17c ./../../lib/time_alarm_clock.o
+                0x0000000048665971                clock_handle
+                0x0000000048665859                clock_key_deal_switch_set_alarm
+                0x0000000048665801                tm_alarm_create_clock_view
+                0x0000000048665839                clock_key_deal_exit
+                0x0000000048665849                clock_key_deal_switch_set_calendar
+                0x0000000048665895                tm_alarm_clock_view
+ time_alarm_rcp_deal.o(.text .rodata .xdata)
+ .text          0x000000004866597c      0x1f8 ./../../lib/time_alarm_rcp_deal.o
+                0x0000000048665b01                time_alarm_get_alarm_param
+                0x000000004866597d                time_alarm_get_alarm_list
+                0x0000000048665b3d                time_alarm_set_alarm_param
+                0x0000000048665ac9                time_alarm_set_alarm_delete
+                0x0000000048665a59                time_alarm_set_alarm_add
+ time_alarm_rcp_deal_ring.o(.text .rodata .xdata)
+ .text          0x0000000048665b74      0x270 ./../../lib/time_alarm_rcp_deal_ring.o
+                0x0000000048665d4d                time_alarm_get_ring_list
+                0x0000000048665c85                time_alarm_folder_ring_list
+                0x0000000048665c09                time_alarm_builtin_ring_list
+                0x0000000048665dc5                alarm_alarm_snooze
+                0x0000000048665ba9                time_alarm_get_ring_folder
+                0x0000000048665dd5                alarm_alarm_close
+                0x0000000048665b75                ring_filename_type
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048665de4      0x21c 00
+ *fill*         0x0000000048666000        0x0 00
+                0x00000000486a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_26    0x00000000486a5800      0x800
+ time_alarm_set_calendar.o(.text .rodata .xdata)
+ .text          0x00000000486a5800      0x2e8 ./../../lib/time_alarm_set_calendar.o
+                0x00000000486a5a5d                calendar_key_deal_add
+                0x00000000486a5971                calendar_key_deal_number_input
+                0x00000000486a5861                tm_alarm_set_calendar_view
+                0x00000000486a5a25                calendar_key_deal_sub
+                0x00000000486a5a95                calendar_key_deal_switch_menu
+                0x00000000486a5839                calendar_key_deal_switch_clock
+                0x00000000486a5801                tm_alarm_create_set_calendar_view
+                0x00000000486a5add                calendar_handle
+ time_alarm_set_calendar_sub.o(.text .rodata .xdata)
+ .text          0x00000000486a5ae8      0x224 ./../../lib/time_alarm_set_calendar_sub.o
+                0x00000000486a5c89                set_calendar_add_deal
+                0x00000000486a5b75                set_calendar_switch_deal
+                0x00000000486a5b41                sys_write_rtc
+                0x00000000486a5c0d                set_calendar_sub_deal
+ .rodata        0x00000000486a5d0c        0xc ./../../lib/time_alarm_set_calendar_sub.o
+                0x00000000486a5d0c                day_table
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000486a5d18      0x2e8 00
+ *fill*         0x00000000486a6000        0x0 00
+                0x00000000486e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_27    0x00000000486e5800      0x800
+ time_alarm_set_alarm.o(.text .rodata .xdata)
+ .text          0x00000000486e5800      0x3a8 ./../../lib/time_alarm_set_alarm.o
+                0x00000000486e5839                alarm_key_deal_switch_clock
+                0x00000000486e5ad5                alarm_key_deal_sub
+                0x00000000486e5b11                alarm_key_deal_add
+                0x00000000486e5b9d                alarm_handle
+                0x00000000486e5801                tm_alarm_create_set_alarm_view
+                0x00000000486e5861                tm_alarm_set_alarm_view
+                0x00000000486e5b4d                alarm_key_deal_switch_menu
+                0x00000000486e5a1d                alarm_key_deal_number_input
+ .rodata        0x00000000486e5ba8        0x8 ./../../lib/time_alarm_set_alarm.o
+ time_alarm_set_alarm_sub.o(.text .rodata .xdata)
+ .text          0x00000000486e5bb0       0xf4 ./../../lib/time_alarm_set_alarm_sub.o
+                0x00000000486e5c05                set_alarm_sub_deal
+                0x00000000486e5c51                set_alarm_add_deal
+                0x00000000486e5bb1                set_alarm_switch_deal
+ time_alarm_alarm_ring.o(.text .rodata .xdata)
+ .text          0x00000000486e5ca4      0x1c0 ./../../lib/time_alarm_alarm_ring.o
+                0x00000000486e5ca5                tm_alarm_alarm_ring_deal
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000486e5e64      0x19c 00
+ *fill*         0x00000000486e6000        0x0 00
+                0x0000000048725800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_28    0x0000000048725800      0x800
+ time_alarm_alarm_record.o(.text .rodata .xdata)
+ .text          0x0000000048725800      0x470 ./../../lib/time_alarm_alarm_record.o
+                0x000000004872582d                time_alarm_update_alarm
+                0x0000000048725a11                time_alarm_record_list_operate
+ .xdata         0x0000000048725c70       0xc8 ./../../lib/time_alarm_alarm_record.o
+                0x0000000048725c70                g_time_alarm_var
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048725d38      0x2c8 00
+ *fill*         0x0000000048726000        0x0 00
+                0x0000000048765800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_29    0x0000000048765800      0x800
+ time_alarm_clock.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x0000000048765800       0x10 ./../../lib/time_alarm_clock.o
+                0x0000000048765800                clock_ke_maplist
+ time_alarm_set_calendar.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x0000000048765810       0x48 ./../../lib/time_alarm_set_calendar.o
+                0x0000000048765810                calendar_ke_maplist
+ time_alarm_set_alarm.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x0000000048765858       0x48 ./../../lib/time_alarm_set_alarm.o
+                0x0000000048765858                alarm_ke_maplist
+ common_key_deal.o(.rodata.ke_maplist)
+ .rodata.ke_maplist
+                0x00000000487658a0       0x88 ./../../lib/common_key_deal.o
+                0x00000000487658a0                com_ke_maplist
+ common_key_deal.o(.text .rodata .xdata)
+ .text          0x0000000048765928      0x398 ./../../lib/common_key_deal.o
+                0x0000000048765ad9                com_key_deal_enter_crecord
+                0x0000000048765c39                com_key_deal_FT_test
+                0x0000000048765bbd                com_key_deal_force_unlink_10s
+                0x0000000048765a65                com_key_deal_switch_dae
+                0x0000000048765b69                com_key_deal_enter_record_cplay
+                0x0000000048765c9d                com_hid_send_key
+                0x0000000048765a19                com_key_deal_volume_add
+                0x00000000487659f9                com_key_deal_switch_mute
+                0x0000000048765c75                com_key_deal_siri
+                0x0000000048765929                com_key_dal_mic_mute
+                0x0000000048765a61                com_key_deal_enter_clock
+                0x0000000048765b21                com_key_deal_enter_urecord
+                0x0000000048765991                com_key_deal_switch_app
+                0x0000000048765ca1                com_hid_disconnect
+                0x0000000048765c01                com_key_deal_BQB_test
+                0x0000000048765a3d                com_key_deal_volume_sub
+                0x0000000048765ca5                com_key_deal_force_ble_unlink
+                0x0000000048765bd9                com_key_deal_call_last
+                0x0000000048765b79                com_key_deal_force_unlink
+                0x0000000048765a85                com_key_deal_shutoff
+                0x0000000048765b71                com_key_deal_enter_record_uplay
+ common_view_key_event.o(.text .rodata .xdata)
+ .text          0x0000000048765cc0      0x120 ./../../lib/common_view_key_event.o
+                0x0000000048765d99                com_view_key_check_dck
+                0x0000000048765cd9                com_view_key_event
+ common_view_loop.o(.text.com_view_loop_key)
+ .text.com_view_loop_key
+                0x0000000048765de0       0x74 ./../../lib/common_view_loop.o
+                0x0000000048765de1                com_view_loop_key
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048765e54      0x1ac 00
+ *fill*         0x0000000048766000        0x0 00
+                0x00000000487a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_30    0x00000000487a5800      0x800
+ common_sys_deal.o(.rodata.se_maplist)
+ .rodata.se_maplist
+                0x00000000487a5800      0x128 ./../../lib/common_sys_deal.o
+                0x00000000487a5800                com_se_maplist
+ common_sys_deal.o(.text .rodata .xdata)
+ .text          0x00000000487a5928      0x4e8 ./../../lib/common_sys_deal.o
+                0x00000000487a5999                com_sys_deal_linein_in
+                0x00000000487a5d15                com_sys_deal_enter_usound
+                0x00000000487a5949                com_sys_deal_uhost_out
+                0x00000000487a5b91                com_sys_deal_enter_music
+                0x00000000487a5c0d                com_sys_deal_enter_uhost_music
+                0x00000000487a59d1                com_sys_deal_rtc_alarm
+                0x00000000487a5d85                com_tws_switch_app
+                0x00000000487a5995                com_sys_deal_sdcard_out
+                0x00000000487a5b7d                com_sys_deal_enter_btplay
+                0x00000000487a5b35                com_sys_deal_hfp_call
+                0x00000000487a5afd                com_sys_deal_system_enter_s2
+                0x00000000487a5b4d                com_sys_deal_app_quit
+                0x00000000487a5bdd                com_sys_deal_enter_card_music
+                0x00000000487a5ce5                com_sys_deal_enter_crecord
+                0x00000000487a5c55                com_sys_deal_enter_radio
+                0x00000000487a5b69                com_sys_deal_headphone_out
+                0x00000000487a5d2d                com_sys_deal_btstack_hd_err
+                0x00000000487a5ded                com_mpu_error_deal
+                0x00000000487a5aed                com_sys_deal_power_off
+                0x00000000487a5a35                com_sys_deal_lowpower
+                0x00000000487a5b09                com_sys_deal_system_enter_s3
+                0x00000000487a5c75                com_sys_deal_enter_alarm
+                0x00000000487a5cb5                com_sys_deal_enter_record_cplay
+                0x00000000487a59cd                com_sys_deal_linein_out
+                0x00000000487a5cfd                com_sys_deal_enter_urecord
+                0x00000000487a5d61                com_att_switch_app
+                0x00000000487a5929                com_sys_deal_uhost_in
+                0x00000000487a5ccd                com_sys_deal_enter_record_uplay
+                0x00000000487a594d                com_sys_deal_sdcard_in
+                0x00000000487a59e1                com_sys_deal_usb_in
+                0x00000000487a5b55                com_sys_deal_headphone_in
+                0x00000000487a5af5                com_sys_deal_idle_mode
+                0x00000000487a5c3d                com_sys_deal_enter_linein
+                0x00000000487a5aa1                com_sys_deal_full_charge
+ common_view_sys_event.o(.text .rodata .xdata)
+ .text          0x00000000487a5e10       0x3c ./../../lib/common_view_sys_event.o
+                0x00000000487a5e11                com_view_sys_event
+ common_view_loop.o(.text.com_view_loop_sys)
+ .text.com_view_loop_sys
+                0x00000000487a5e4c       0x70 ./../../lib/common_view_loop.o
+                0x00000000487a5e4d                com_view_loop_sys
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000487a5ebc      0x144 00
+ *fill*         0x00000000487a6000        0x0 00
+                0x00000000487e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_31    0x00000000487e5800      0x800
+ bt_common_manager.o(.text .rodata)
+ bt_common_manager.o(.bank_3)
+ .bank_3        0x00000000487e5800      0x268 ./../../lib/bt_common_manager.o
+                0x00000000487e59d5                print_btstack_ver
+                0x00000000487e5801                com_btmanager_exit
+                0x00000000487e5a51                com_set_discover_ctl
+ bt_common_autoconnect.o(.text.auto_connect_bank)
+ .text.auto_connect_bank
+                0x00000000487e5a68      0x2d4 ./../../lib/bt_common_autoconnect.o
+                0x00000000487e5a69                com_get_dev_conn_init
+                0x00000000487e5a95                auto_connect_deal
+                0x00000000487e5c71                connect_remain_profile_bank
+                0x00000000487e5cdd                auto_connect_profile
+ bt_common_manager_misc.o(.text .rodata)
+ .text          0x00000000487e5d3c       0xf8 ./../../lib/bt_common_manager_misc.o
+                0x00000000487e5e31                com_btmanager_rmt_dev_set
+                0x00000000487e5d3d                com_btmanager_power_off
+                0x00000000487e5df5                com_btmanager_BQB_test
+                0x00000000487e5d65                com_btmanager_force_unlink
+                0x00000000487e5db9                com_btmanager_clearpairlist
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000487e5e34      0x1cc 00
+ *fill*         0x00000000487e6000        0x0 00
+                0x0000000048825800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_32    0x0000000048825800      0x800
+ bt_common_manager.o(.bank_2)
+ .bank_2        0x0000000048825800      0x364 ./../../lib/bt_common_manager.o
+                0x0000000048825ab9                auto_connect_sync_rmt_device_list
+                0x0000000048825801                auto_connect_get_tws_dev_list
+                0x0000000048825b45                com_restart_auto_connect_set
+                0x0000000048825901                auto_connect_get_phone_dev_list
+ bt_common_manager_deal.o(.text .rodata)
+ .text          0x0000000048825b64      0x3d0 ./../../lib/bt_common_manager_deal.o
+                0x0000000048825de1                com_btmanager_set_scan_mode
+                0x0000000048825bf1                com_bt_sniff_control
+                0x0000000048825e01                com_btstack_error_deal
+                0x0000000048825e41                com_btmanager_conn_status_change_handle
+                0x0000000048825ba5                com_set_discoverable
+                0x0000000048825b65                com_set_active_dev
+                0x0000000048825bd1                com_set_ble_discoverable
+                0x0000000048825c75                com_btmanager_a2dp_handle_kill_a2dp_timer
+                0x0000000048825ced                change_btmanager_status
+                0x0000000048825b8d                check_a2dp_status_ok
+                0x0000000048825c99                com_btmanager_a2dp_handle_kill_avrcp_timer
+                0x0000000048825cb5                start_battery_report_update_timer
+                0x0000000048825c11                com_call_handle
+                0x0000000048825c49                start_avrcp_volume_update_timer
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048825f34       0xcc 00
+ *fill*         0x0000000048826000        0x0 00
+                0x0000000048865800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_33    0x0000000048865800      0x800
+ bt_common_avrcp.o(.text .rodata)
+ .text          0x0000000048865800      0x240 ./../../lib/bt_common_avrcp.o
+                0x0000000048865939                com_btmanager_avrcp_volume2avrcp_volume
+                0x00000000488658a5                com_btmanager_avrcp_ind
+                0x0000000048865801                com_btmanager_avrcp_op
+                0x0000000048865975                com_btmanager_tws_send
+                0x00000000488658d1                com_btmanager_avrcp_set_volume_to_soundbox
+                0x00000000488659d1                com_btmanager_avrcp_update_volume_to_phone
+                0x0000000048865855                com_btmanager_avrcp_op_async
+ .rodata        0x0000000048865a40       0x10 ./../../lib/bt_common_avrcp.o
+ bt_common_hfp.o(.text .rodata)
+ .text          0x0000000048865a50      0x28c ./../../lib/bt_common_hfp.o
+                0x0000000048865bf1                com_btmanager_hfp_update_volume_to_phone
+                0x0000000048865a99                com_btmanager_hfp_call_last
+                0x0000000048865b25                com_btmanager_hfp_siri_handle
+                0x0000000048865a51                com_btmanager_hfp_call_req
+                0x0000000048865c95                com_btmanager_hfp_battery_report_update_handle
+                0x0000000048865c39                com_btmanager_hfp_battery_report_update
+                0x0000000048865cb9                com_btmanager_hfp_battery_report_enable
+                0x0000000048865b8d                com_btmanager_hfp_set_volume_to_soundbox
+ .rodata        0x0000000048865cdc        0x4 ./../../lib/bt_common_hfp.o
+ bt_common_sppble.o(.text .rodata)
+ bt_common_manager_deal.o(.call_auto_conn1)
+ .call_auto_conn1
+                0x0000000048865ce0       0x2c ./../../lib/bt_common_manager_deal.o
+                0x0000000048865ce1                com_hfp_old_sco_change
+ bt_common_manager_deal.o(.bank)
+ .bank          0x0000000048865d0c       0xd4 ./../../lib/bt_common_manager_deal.o
+                0x0000000048865d0d                com_btmanager_ble_deal
+                0x0000000048865d59                com_btmanager_fast_discover_timer_proc
+                0x0000000048865d8d                com_btmanager_fast_discover_deal
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048865de0      0x220 00
+ *fill*         0x0000000048866000        0x0 00
+                0x00000000488a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_34    0x00000000488a5800      0x800
+ bt_common_gen_addr.o(.text .rodata .xdata)
+ .text          0x00000000488a5800      0x290 ./../../lib/bt_common_gen_addr.o
+                0x00000000488a582d                sample_sound_exit
+                0x00000000488a5949                tick_ISR_uninstall
+                0x00000000488a58ed                tick_ISR
+                0x00000000488a5801                sample_sound_init
+                0x00000000488a5965                gen_random_lap
+                0x00000000488a584d                sample_sound_data
+                0x00000000488a59f9                com_btmanager_gen_random_lap
+                0x00000000488a5919                tick_ISR_install
+ .xdata         0x00000000488a5a90      0x46c ./../../lib/bt_common_gen_addr.o
+                0x00000000488a5ef4                g_sound_index
+                0x00000000488a5a90                g_adc_buffer
+                0x00000000488a5e90                g_sound_data
+                0x00000000488a5ef8                timer_id
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000488a5efc      0x104 00
+ *fill*         0x00000000488a6000        0x0 00
+                0x00000000488e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_35    0x00000000488e5800      0x600
+ app_timer_bank.o(.text .rodata .xdata)
+ .text          0x00000000488e5800      0x470 ./../../lib/app_timer_bank.o
+                0x00000000488e5931                set_single_shot_app_timer
+                0x00000000488e5a81                restart_app_timer
+                0x00000000488e5915                set_app_timer
+                0x00000000488e59cd                modify_app_timer
+                0x00000000488e594d                set_twinkle_app_timer
+                0x00000000488e5b01                kill_app_timer
+                0x00000000488e5a31                stop_app_timer
+                0x00000000488e5bd9                init_app_timers
+                0x00000000488e5c19                standby_restart_all_app_timer
+                0x00000000488e5b4d                kill_app_timer_safe
+ sys_timer.o(.text .rodata .xdata)
+ .text          0x00000000488e5c70       0x74 ./../../lib/sys_timer.o
+                0x00000000488e5cb9                sys_timer_exit
+                0x00000000488e5c71                sys_timer_init
+ app_timer_bank_single.o(.text .rodata)
+ .text          0x00000000488e5ce4       0xb4 ./../../lib/app_timer_bank_single.o
+                0x00000000488e5ce5                set_single_shot_app_timer_btmamager
+                0x00000000488e5e00                . = 0x600
+ *fill*         0x00000000488e5d98       0x68 00
+ *fill*         0x00000000488e5e00        0x0 00
+                0x0000000048925800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_36    0x0000000048925800      0x600
+ common_aset_new_func.o(.bank_2)
+ .bank_2        0x0000000048925800      0x564 ./../../lib/common_aset_new_func.o
+                0x0000000048925801                update_peq_point
+                0x0000000048925855                update_peq_value
+                0x0000000048925d01                aset_read_SignalD_data
+                0x0000000048925c99                aset_read_see_data
+                0x0000000048925d35                aset_update_audiopp
+                0x0000000048925ccd                aset_read_sew_data
+                0x0000000048925e00                . = 0x600
+ *fill*         0x0000000048925d64       0x9c 00
+ *fill*         0x0000000048925e00        0x0 00
+                0x0000000048965800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_37    0x0000000048965800      0x600
+ common_stub_switch.o(.text .rodata .xdata)
+ .text          0x0000000048965800      0x30c ./../../lib/common_stub_switch.o
+                0x00000000489658d1                common_load_att_code
+                0x0000000048965a81                com_sys_install_stub
+                0x0000000048965801                att_test_fread
+ .xdata         0x0000000048965b0c      0x200 ./../../lib/common_stub_switch.o
+                0x0000000048965e00                . = 0x600
+ *fill*         0x0000000048965d0c       0xf4 00
+ *fill*         0x0000000048965e00        0x0 00
+                0x00000000489a5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_38    0x00000000489a5800      0x800
+ common_seteq.o(.text .rodata .xdata)
+ .text          0x00000000489a5800       0xf0 ./../../lib/common_seteq.o
+                0x00000000489a58dd                com_eq_set
+                0x00000000489a5801                com_create_eq_view
+                0x00000000489a5809                com_set_eq_view
+                0x00000000489a58b5                com_eq_next
+                0x00000000489a58c9                com_eq_prev
+                0x00000000489a580d                com_set_sound_eq
+ common_setdae_init.o(.text .rodata .xdata)
+ .text          0x00000000489a58f0      0x630 ./../../lib/common_setdae_init.o
+                0x00000000489a58f1                com_load_dae_config
+                0x00000000489a5e09                com_inner_load_mdrc_param
+                0x00000000489a5c01                com_reset_dae_config
+                0x00000000489a5d69                com_init_dae_config
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000489a5f20       0xe0 00
+ *fill*         0x00000000489a6000        0x0 00
+                0x00000000489e5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_39    0x00000000489e5800      0x800
+ bt_common_autoconnect.o(.text.auto_connect_profile_bank)
+ .text.auto_connect_profile_bank
+                0x00000000489e5800       0x84 ./../../lib/bt_common_autoconnect.o
+                0x00000000489e5801                stop_auto_con
+ common_rcp_servs.o(.text .rodata .xdata)
+ .text          0x00000000489e5884      0x150 ./../../lib/common_rcp_servs.o
+                0x00000000489e58cd                ancs_notification_cb
+                0x00000000489e5975                com_ancs_init
+                0x00000000489e5945                ancs_data_cb
+                0x00000000489e59bd                com_tip_init
+                0x00000000489e5885                com_ancs_GetNotificationAttributes
+                0x00000000489e5995                tip_recv_cb
+ bt_common_sppble.o(.bank)
+ .bank          0x00000000489e59d4      0x104 ./../../lib/bt_common_sppble.o
+                0x00000000489e59d5                com_btmanater_start_apk_app_verification
+                0x00000000489e5a59                com_btmanager_unlink_spp_ble_profile
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x00000000489e5ad8      0x528 00
+ *fill*         0x00000000489e6000        0x0 00
+                0x0000000048a25800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_40    0x0000000048a25800      0x800
+ Ota_rcp_s_cmd_deal.o(.text .rodata .xdata)
+ .text          0x0000000048a25800      0x5dc ./../../lib/Ota_rcp_s_cmd_deal.o
+                0x0000000048a25dc5                ota_receive_vram_data
+                0x0000000048a25801                CheckSum16
+                0x0000000048a25c89                fw_download_new
+                0x0000000048a25d2d                ota_receive_data
+                0x0000000048a25dc9                CheckSum32
+                0x0000000048a25819                ota_receive_connect_data
+ Ota_rcp_q_cmd_deal.o(.text .rodata .xdata)
+ .text          0x0000000048a25ddc      0x1d0 ./../../lib/Ota_rcp_q_cmd_deal.o
+                0x0000000048a25f1d                get_ver_message
+                0x0000000048a25f95                reboot_system
+                0x0000000048a25f59                ota_get_ver_num
+                0x0000000048a25ddd                message_copy
+                0x0000000048a25e91                ota_enquiry_connect
+                0x0000000048a25e29                ota_enquiry_message
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048a25fac       0x54 00
+ *fill*         0x0000000048a26000        0x0 00
+                0x0000000048a65800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_41    0x0000000048a65800      0x800
+ Ota_rcp_s_cmd_deal.o(.bank)
+ Ota_rcp_reboot_cmd.o(.text .rodata .xdata)
+ .text          0x0000000048a65800      0x124 ./../../lib/Ota_rcp_reboot_cmd.o
+                0x0000000048a65801                ota_restart_to_upgrade
+                0x0000000048a65839                ota_restart_to_clean_data
+                0x0000000048a658cd                ota_send_complete
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048a65924      0x6dc 00
+ *fill*         0x0000000048a66000        0x0 00
+                0x0000000048aa5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_42    0x0000000048aa5800      0x800
+ common_rcp_send.o(.text .rodata .xdata)
+ .text          0x0000000048aa5800       0x78 ./../../lib/common_rcp_send.o
+                0x0000000048aa5801                com_rcp_send_pkg_cont
+                0x0000000048aa5855                com_rcp_send_cmd_pkg
+                0x0000000048aa5811                com_rcp_send_ack_pkg
+ common_rcp_func.o(.text .rodata .xdata)
+ .text          0x0000000048aa5878      0x144 ./../../lib/common_rcp_func.o
+                0x0000000048aa5879                com_set_system_setting
+                0x0000000048aa5961                com_set_system_dialog
+                0x0000000048aa599d                com_ctrl_switch_mute
+                0x0000000048aa5955                com_set_system_status
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048aa59bc      0x644 00
+ *fill*         0x0000000048aa6000        0x0 00
+                0x0000000048ae5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_43    0x0000000048ae5800      0x800
+ bt_common_event_dispatch.o(.text .rodata)
+ .text          0x0000000048ae5800      0x384 ./../../lib/bt_common_event_dispatch.o
+                0x0000000048ae5865                com_btmanager_event_dispatch_bank
+                0x0000000048ae5801                com_btmanager_event_check_for_tts
+ common_rcp_dispatch.o(.bank.check_for_tts)
+ .bank.check_for_tts
+                0x0000000048ae5b84      0x110 ./../../lib/common_rcp_dispatch.o
+                0x0000000048ae5b85                com_rcp_check_for_tts
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048ae5c94      0x36c 00
+ *fill*         0x0000000048ae6000        0x0 00
+                0x0000000048b25800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_44    0x0000000048b25800      0x800
+ common_rcp_func.o(.bank_2)
+ .bank_2        0x0000000048b25800      0x198 ./../../lib/common_rcp_func.o
+                0x0000000048b258bd                com_rcp_set_ext_cb
+                0x0000000048b25801                com_rcp_state_init
+                0x0000000048b258e1                com_get_support_feature
+                0x0000000048b25945                com_get_bt_device_info
+                0x0000000048b258a9                com_rcp_set_callback
+                0x0000000048b258d1                com_rcp_clr_ext_cb
+                0x0000000048b25979                com_set_device_name
+                0x0000000048b25835                com_rcp_init
+ asr.a(.text.bank8 .rodata.bank8)
+ .rodata.bank8  0x0000000048b25998       0x9c ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                0x0000000048b25a1c                lp_alexa_product_id
+                0x0000000048b25998                lp_alexa_clientsecret
+                0x0000000048b259dc                lp_alexa_client_id
+ .text.bank8    0x0000000048b25a34      0x39c ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                0x0000000048b25a35                lp_send_device_info
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048b25dd0      0x230 00
+ *fill*         0x0000000048b26000        0x0 00
+                0x0000000048b65800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_45    0x0000000048b65800      0x800
+ common_setdae_init.o(.text.bank)
+ .text.bank     0x0000000048b65800      0x164 ./../../lib/common_setdae_init.o
+                0x0000000048b65801                load_standard_mode_mdrc_param
+                0x0000000048b658e1                update_peq_para
+ bt_common_manager.o(.bank_3)
+ asr.a(.text.bank3 .text.rodata3)
+ .text.bank3    0x0000000048b65964      0x218 ./../../../psp_rel/lib/asr.a(LpMain.o)
+                0x0000000048b65a1d                lp_key_record_start
+                0x0000000048b65b59                lp_start_resume_play_timer
+                0x0000000048b65965                lp_key_record_stop
+                0x0000000048b659f1                lp_kill_resume_play_timer
+ .text.bank3    0x0000000048b65b7c      0x1c4 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+                0x0000000048b65cb1                lp_record_set_param
+                0x0000000048b65c2d                lp_record_voice_pause_music
+                0x0000000048b65cd5                lp_record_control_start
+                0x0000000048b65c5d                lp_record_voice_resume_music
+                0x0000000048b65ba1                lp_record_notify_stop
+                0x0000000048b65b7d                lp_record_notify_start
+                0x0000000048b65c7d                lp_record_voice_stop
+                0x0000000048b65c09                lp_record_voice_start
+                0x0000000048b65cfd                lp_record_control_stop
+                0x0000000048b65d1d                lp_smart_filter_judge
+ .text.bank3    0x0000000048b65d40       0x58 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+                0x0000000048b65d41                check_chipid
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048b65d98      0x268 00
+ *fill*         0x0000000048b66000        0x0 00
+                0x0000000048ba5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_46    0x0000000048ba5800      0x800
+ common_phy_volume_deal.o(.BANK46)
+ .BANK46        0x0000000048ba5800       0x50 ./../../lib/common_phy_volume_deal.o
+                0x0000000048ba5801                mdrc_comp_handle
+ bt_common_manager.o(.bank_2)
+ asr.a(.text.bank6 .text.rodata6)
+ .text.bank6    0x0000000048ba5850      0x3bc ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+                0x0000000048ba5b3d                sa2_stop_dsp
+                0x0000000048ba59c9                sa2_write_reg_16bit
+                0x0000000048ba5b7d                sa2_upgrade_frame
+                0x0000000048ba5a71                sa2_write_register
+                0x0000000048ba5b55                sa2_enter_upgrade_mode
+                0x0000000048ba5851                sa2_read_reg
+                0x0000000048ba591d                sa2_write_reg_32bit
+                0x0000000048ba5ab5                sa2_get_version
+                0x0000000048ba5a91                sa2_switch_mode
+                0x0000000048ba5be9                sa2_recevie_upgrade_frame
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048ba5c0c      0x3f4 00
+ *fill*         0x0000000048ba6000        0x0 00
+                0x0000000048be5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_47    0x0000000048be5800      0x800
+ common_setdae.o(.BANK47)
+ .BANK47        0x0000000048be5800      0x1f4 ./../../lib/common_setdae.o
+                0x0000000048be592d                update_dae_vol_table
+                0x0000000048be5801                __calc_dae_freq
+ common_volume.o(.text .rodata .xdata)
+ .text          0x0000000048be59f4      0x258 ./../../lib/common_volume.o
+                0x0000000048be5b55                com_set_volume_gain
+                0x0000000048be5bed                com_switch_mute
+                0x0000000048be5a01                com_set_sound_volume
+                0x0000000048be59f5                com_get_sound_volume
+                0x0000000048be5add                com_reset_sound_volume
+                0x0000000048be5b01                com_switch_volume_mode
+                0x0000000048be5b9d                com_set_mute
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048be5c4c      0x3b4 00
+ *fill*         0x0000000048be6000        0x0 00
+                0x0000000048c25800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_48    0x0000000048c25800      0x800
+ bt_common_manager_deal.o(.bank)
+ bt_common_autoconnect.o(.auto_connect_bank1)
+ .auto_connect_bank1
+                0x0000000048c25800      0x134 ./../../lib/bt_common_autoconnect.o
+                0x0000000048c258a1                com_exchange_vale
+                0x0000000048c25801                check_auto_con_flag
+ common_charge.o(.bank)
+ sys_counter.o(.bank)
+ asr.a(.text.bank7 .rodata.bank7)
+ .text.bank7    0x0000000048c25934      0x1c4 ./../../../psp_rel/lib/asr.a(LpMain.o)
+                0x0000000048c25a11                lp_deal_ble_disconnect
+                0x0000000048c25aa1                lp_deal_app_exit
+                0x0000000048c25991                lp_deal_spp_disconnect
+                0x0000000048c2598d                lp_btstack_notify_cbk
+                0x0000000048c25935                lp_resume_play_deal
+ .text.bank7    0x0000000048c25af8      0x414 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                0x0000000048c25c2d                lp_set_alexa_alarm_state
+                0x0000000048c25c15                lp_send_device_volume
+                0x0000000048c25ec9                lp_set_alexa_player_status
+                0x0000000048c25bfd                lp_send_trigger_cmd
+                0x0000000048c25ee1                lp_send_ble_data
+                0x0000000048c25b7d                lp_send_response_cmd
+                0x0000000048c25c9d                lp_get_alexa_spech_state
+                0x0000000048c25cb1                lp_record_stop_force
+                0x0000000048c25af9                lp_send_cmd
+                0x0000000048c25c75                lp_get_alexa_alarm_state
+                0x0000000048c25ce9                lp_i2c_debug
+                0x0000000048c25c85                lp_stop_alexa_alarm
+ .text.bank7    0x0000000048c25f0c       0x44 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+                0x0000000048c25f0d                get_secret_id
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048c25f50       0xb0 00
+ *fill*         0x0000000048c26000        0x0 00
+                0x0000000048c65800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_49    0x0000000048c65800      0x800
+ bt_common_manager.o(.bank_4)
+ .bank_4        0x0000000048c65800      0x730 ./../../lib/bt_common_manager.o
+                0x0000000048c65801                com_btmanager_init
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048c65f30       0xd0 00
+ *fill*         0x0000000048c66000        0x0 00
+                0x0000000048ca5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_50    0x0000000048ca5800      0x800
+ common_waves_dae.o(.text)
+ .text          0x0000000048ca5800       0x5c ./../../lib/common_waves_dae.o
+                0x0000000048ca5801                dynamic_switch_waves_bin_para
+ common_setdae.o(.rcode)
+ .rcode         0x0000000048ca585c       0x94 ./../../lib/common_setdae.o
+                0x0000000048ca585d                com_detect_energy_realtime
+ common_aset_main_deal.o(.rcode)
+ .rcode         0x0000000048ca58f0       0x30 ./../../lib/common_aset_main_deal.o
+                0x0000000048ca58f1                aset_test_loop_deal
+ common_discrete_led.o(.text.led_twinkle)
+ .text.led_twinkle
+                0x0000000048ca5920       0x74 ./../../lib/common_discrete_led.o
+                0x0000000048ca5921                discrete_led_twinkle
+ asr.a(.text.bank4 .rodata.bank4)
+ .text.bank4    0x0000000048ca5994      0x4a8 ./../../../psp_rel/lib/asr.a(LpMain.o)
+                0x0000000048ca5a85                lp_smart_timeout_deal
+                0x0000000048ca5ded                lp_set_vol_dev_to_phone
+                0x0000000048ca5af5                lp_speed_test_start
+                0x0000000048ca5995                lp_sdk_init
+                0x0000000048ca5ba9                lp_send_trigger_command
+                0x0000000048ca59d1                lp_init
+                0x0000000048ca5d9d                lp_alexa_key_prev_deal
+                0x0000000048ca5c8d                lp_alexa_voice_trigger
+                0x0000000048ca5c5d                lp_key_record_triger
+                0x0000000048ca5b79                lp_speed_test_stop
+                0x0000000048ca5a69                lp_switch_btplay_app
+                0x0000000048ca5d41                lp_alexa_key_next_deal
+                0x0000000048ca5ce1                lp_alexa_key_play_deal
+                0x0000000048ca5aad                lp_speed_test_timeout_deal
+                0x0000000048ca5cbd                lp_set_data_encrypt_callback
+ .text.bank4    0x0000000048ca5e3c       0x58 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                0x0000000048ca5e3d                lp_set_vol_phone_to_dev
+ .text.bank4    0x0000000048ca5e94       0x50 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+                0x0000000048ca5eb9                lp_smart_commad_parser_clean
+                0x0000000048ca5e95                lp_smart_command_parser_init
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048ca5ee4      0x11c 00
+ *fill*         0x0000000048ca6000        0x0 00
+                0x0000000048ce5800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_51    0x0000000048ce5800      0x800
+ bt_common_autoconnect.o(.text .rodata .xdata)
+ .text          0x0000000048ce5800      0x458 ./../../lib/bt_common_autoconnect.o
+                0x0000000048ce59d1                check_connect_status
+                0x0000000048ce5bb1                com_btmanager_autoconnect
+                0x0000000048ce5801                connect_remain_profile
+ asr.a(.text.parserSerialCmd)
+ .text.parserSerialCmd
+                0x0000000048ce5c58       0xe8 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+                0x0000000048ce5c59                lp_parser_serial_cmd
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048ce5d40      0x2c0 00
+ *fill*         0x0000000048ce6000        0x0 00
+                0x0000000048d25800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_52    0x0000000048d25800      0x800
+ asr.a(.text .rodata)
+ .text          0x0000000048d25800      0x5d4 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                0x0000000048d25db9                lp_excute_response_cmd
+                0x0000000048d25801                lp_excute_cmd
+ .text          0x0000000048d25dd4      0x208 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+                0x0000000048d25dd5                lp_smart_triger_cb
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048d25fdc       0x24 00
+ *fill*         0x0000000048d26000        0x0 00
+                0x0000000048d65800                . = (((. + AP_BANK_SPACE) & ~ ((AP_BANK_SPACE - 0x1))) + OFFSET)
+
+BANK_UI_1_53    0x0000000048d65800      0x800
+ asr.a(.text.bank5)
+ .text.bank5    0x0000000048d65800      0x6e4 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+                0x0000000048d65d41                DSPGetDigitalGain
+                0x0000000048d65c69                DSPUpdate
+                0x0000000048d65bfd                DSPEnterUpdate
+                0x0000000048d65c91                DSPReadRegister
+                0x0000000048d65a41                DSPSwitchSource
+                0x0000000048d65871                _i2c_burst_read
+                0x0000000048d65cad                DSPEnableDRC
+                0x0000000048d65d85                DSPSetWorkMode
+                0x0000000048d65ca1                DSPReadBytes
+                0x0000000048d65801                _i2c_burst_write
+                0x0000000048d65979                DSPGetVersion
+                0x0000000048d65ea1                DSPGetDistance
+                0x0000000048d65b51                DSPGetMICBoost
+                0x0000000048d65ab1                DSPSetMICBoost
+                0x0000000048d65e59                DSPSetDistance
+                0x0000000048d65cf1                DSPSetDigitalGain
+                0x0000000000000800                . = BANK_UI_SIZE
+ *fill*         0x0000000048d65ee4      0x11c 00
+ *fill*         0x0000000048d66000        0x0 00
+
+.rel.dyn
+
+.reginfo        0x0000000000000000       0x18
+ .reginfo       0x0000000000000000       0x18 ./../../../psp_rel/lib/sys_op_entry.o
+
+.pdr            0x0000000000000000     0x5220
+ .pdr           0x0000000000000000       0x20 ./../../../psp_rel/lib/sys_op_entry.o
+ .pdr           0x0000000000000020       0x20 ./../../../psp_rel/lib/libc_op_entry.o
+ .pdr           0x0000000000000040       0x20 ./../../../psp_rel/lib/audio_device_op_entry.o
+ .pdr           0x0000000000000060       0x20 ./../../../psp_rel/lib/key_op_entry.o
+ .pdr           0x0000000000000080       0x20 ./../../../psp_rel/lib/lcd_op_entry.o
+ .pdr           0x00000000000000a0       0x20 ./../../../psp_rel/lib/tts_op_entry.o
+ .pdr           0x00000000000000c0       0x20 ./../../../psp_rel/lib/ccd_op_entry.o
+ .pdr           0x00000000000000e0       0x20 ./../../../psp_rel/lib/base_op_entry.o
+ .pdr           0x0000000000000100       0x20 ./../../../psp_rel/lib/stub_mod_cmd.o
+ .pdr           0x0000000000000120       0x20 ./../../lib/app_timer_rcode.o
+ .pdr           0x0000000000000140       0x40 ./../../lib/message_rcode.o
+ .pdr           0x0000000000000180       0x20 ./../../lib/message_key_rcode.o
+ .pdr           0x00000000000001a0       0x60 ./../../lib/common_view_loop.o
+ .pdr           0x0000000000000200      0x100 ./../../lib/common_view_manager.o
+ .pdr           0x0000000000000300       0xc0 ./obj/radio_rcode.o
+ .pdr           0x00000000000003c0      0x180 ./obj/radio_rcp_deal.o
+ .pdr           0x0000000000000540      0x220 ./obj/radio_playing_keydeal.o
+ .pdr           0x0000000000000760       0xc0 ./obj/radio_view_digit.o
+ .pdr           0x0000000000000820       0x80 ./obj/radio_view_hard_search.o
+ .pdr           0x00000000000008a0      0x160 ./obj/radio_main.o
+ .pdr           0x0000000000000a00       0xc0 ./obj/radio_set_funcs.o
+ .pdr           0x0000000000000ac0       0x40 ./../../../psp_rel/lib/ctor.o
+ .pdr           0x0000000000000b00       0x20 ./obj/radio_scene_playing_deal.o
+ .pdr           0x0000000000000b20       0x60 ./obj/radio_view_play_search.o
+ .pdr           0x0000000000000b80       0x80 ./obj/radio_view_station.o
+ .pdr           0x0000000000000c00       0x60 ./obj/radio_view_soft_search.o
+ .pdr           0x0000000000000c60       0x80 ./obj/radio_soft_search_deal.o
+ .pdr           0x0000000000000ce0       0xc0 ./obj/radio_hard_search_deal.o
+ .pdr           0x0000000000000da0       0xa0 ./obj/radio_scene_playing.o
+ .pdr           0x0000000000000e40       0x60 ./obj/radio_auto_search_start.o
+ .pdr           0x0000000000000ea0       0x60 ./obj/radio_manual_search.o
+ .pdr           0x0000000000000f00      0x3a0 ./../../lib/bt_common_manager_deal.o
+ .pdr           0x00000000000012a0       0xa0 ./../../lib/common_rcp_dispatch.o
+ .pdr           0x0000000000001340       0x80 ./../../lib/common_rcp_dispatch_block.o
+ .pdr           0x00000000000013c0       0x60 ./../../lib/common_rcp_dispatch_misc.o
+ .pdr           0x0000000000001420      0x1c0 ./../../lib/common_rcp_func.o
+ .pdr           0x00000000000015e0       0xc0 ./../../lib/bt_common_sppble.o
+ .pdr           0x00000000000016a0       0x40 ./../../lib/message_bank_send_btmanager.o
+ .pdr           0x00000000000016e0      0x120 ./../../lib/common_alexa.o
+ .pdr           0x0000000000001800       0x80 ./../../lib/message_key_deal.o
+ .pdr           0x0000000000001880      0x140 ./../../lib/common_tts.o
+ .pdr           0x00000000000019c0      0x200 ./../../lib/common_keytone_play.o
+ .pdr           0x0000000000001bc0      0x140 ./../../lib/common_aset_main_deal.o
+ .pdr           0x0000000000001d00      0x140 ./../../lib/bt_common_manager.o
+ .pdr           0x0000000000001e40       0xc0 ./../../lib/common_rcp_servs.o
+ .pdr           0x0000000000001f00      0x300 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .pdr           0x0000000000002200      0x200 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .pdr           0x0000000000002400       0x80 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .pdr           0x0000000000002480      0x140 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .pdr           0x00000000000025c0       0x40 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .pdr           0x0000000000002600      0x140 ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .pdr           0x0000000000002740      0x220 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+ .pdr           0x0000000000002960       0x60 ./../../lib/common_charge.o
+ .pdr           0x00000000000029c0       0x80 ./../../lib/sys_counter.o
+ .pdr           0x0000000000002a40       0x60 ./../../lib/bt_common_event_dispatch.o
+ .pdr           0x0000000000002aa0       0x80 ./../../lib/common_rcp_send.o
+ .pdr           0x0000000000002b20       0x40 ./../../lib/app_engine_config.o
+ .pdr           0x0000000000002b60       0x40 ./../../lib/app_manager_bank.o
+ .pdr           0x0000000000002ba0       0x20 ./../../lib/message_bank_init.o
+ .pdr           0x0000000000002bc0       0x20 ./../../lib/message_bank_send.o
+ .pdr           0x0000000000002be0       0x20 ./../../lib/message_bank_send_async.o
+ .pdr           0x0000000000002c00       0x20 ./../../lib/message_bank_broadcast.o
+ .pdr           0x0000000000002c20       0x20 ./../../lib/app_sleep.o
+ .pdr           0x0000000000002c40       0xa0 ./../../lib/common_setvolume.o
+ .pdr           0x0000000000002ce0       0x20 ./../../lib/common_sys_hook.o
+ .pdr           0x0000000000002d00       0x40 ./../../lib/common_speaker_out_switch.o
+ .pdr           0x0000000000002d40       0x20 ./../../lib/common_sound.o
+ .pdr           0x0000000000002d60       0x80 ./../../lib/common_phy_volume_deal.o
+ .pdr           0x0000000000002de0       0x80 ./../../lib/common_tts_thread.o
+ .pdr           0x0000000000002e60      0x120 ./../../lib/common_ap_switch.o
+ .pdr           0x0000000000002f80       0x40 ./../../lib/setting_comval.o
+ .pdr           0x0000000000002fc0       0x60 ./../../lib/common_config.o
+ .pdr           0x0000000000003020       0x60 ./../../lib/common_rcp_dialog.o
+ .pdr           0x0000000000003080       0x20 ./../../lib/common_share_data.o
+ .pdr           0x00000000000030a0      0x1a0 ./../../lib/common_setdae.o
+ .pdr           0x0000000000003240       0x20 ./../../lib/common_math_exp_fixed.o
+ .pdr           0x0000000000003260       0x80 ./../../lib/common_key_hook.o
+ .pdr           0x00000000000032e0      0x280 ./../../lib/common_aset_new_func.o
+ .pdr           0x0000000000003560       0x20 ./../../lib/common_mic_mute.o
+ .pdr           0x0000000000003580      0x140 ./../../lib/common_aset_sub_code.o
+ .pdr           0x00000000000036c0      0x2e0 ./../../lib/common_key_deal.o
+ .pdr           0x00000000000039a0       0xe0 ./../../lib/common_discrete_led.o
+ .pdr           0x0000000000003a80       0xc0 ./../../lib/common_speaker_control.o
+ .pdr           0x0000000000003b40       0x80 ./../../lib/common_standby.o
+ .pdr           0x0000000000003bc0       0xe0 ./../../lib/time_alarm_clock.o
+ .pdr           0x0000000000003ca0       0xa0 ./../../lib/time_alarm_rcp_deal.o
+ .pdr           0x0000000000003d40       0xe0 ./../../lib/time_alarm_rcp_deal_ring.o
+ .pdr           0x0000000000003e20      0x120 ./../../lib/time_alarm_set_calendar.o
+ .pdr           0x0000000000003f40       0xc0 ./../../lib/time_alarm_set_calendar_sub.o
+ .pdr           0x0000000000004000      0x120 ./../../lib/time_alarm_set_alarm.o
+ .pdr           0x0000000000004120       0x60 ./../../lib/time_alarm_set_alarm_sub.o
+ .pdr           0x0000000000004180       0x20 ./../../lib/time_alarm_alarm_ring.o
+ .pdr           0x00000000000041a0       0x60 ./../../lib/time_alarm_alarm_record.o
+ .pdr           0x0000000000004200       0x60 ./../../lib/common_view_key_event.o
+ .pdr           0x0000000000004260      0x440 ./../../lib/common_sys_deal.o
+ .pdr           0x00000000000046a0       0x20 ./../../lib/common_view_sys_event.o
+ .pdr           0x00000000000046c0      0x140 ./../../lib/bt_common_autoconnect.o
+ .pdr           0x0000000000004800       0xa0 ./../../lib/bt_common_manager_misc.o
+ .pdr           0x00000000000048a0      0x100 ./../../lib/bt_common_avrcp.o
+ .pdr           0x00000000000049a0      0x100 ./../../lib/bt_common_hfp.o
+ .pdr           0x0000000000004aa0      0x100 ./../../lib/bt_common_gen_addr.o
+ .pdr           0x0000000000004ba0      0x160 ./../../lib/app_timer_bank.o
+ .pdr           0x0000000000004d00       0x40 ./../../lib/sys_timer.o
+ .pdr           0x0000000000004d40       0x20 ./../../lib/app_timer_bank_single.o
+ .pdr           0x0000000000004d60       0x60 ./../../lib/common_stub_switch.o
+ .pdr           0x0000000000004dc0       0xc0 ./../../lib/common_seteq.o
+ .pdr           0x0000000000004e80       0xc0 ./../../lib/common_setdae_init.o
+ .pdr           0x0000000000004f40       0xc0 ./../../lib/Ota_rcp_s_cmd_deal.o
+ .pdr           0x0000000000005000       0xc0 ./../../lib/Ota_rcp_q_cmd_deal.o
+ .pdr           0x00000000000050c0       0x60 ./../../lib/Ota_rcp_reboot_cmd.o
+ .pdr           0x0000000000005120       0xe0 ./../../lib/common_volume.o
+ .pdr           0x0000000000005200       0x20 ./../../lib/common_waves_dae.o
+
+.mdebug.abi32   0x0000000000000000        0x0
+
+.comment        0x0000000000000000     0x12d0
+ .comment       0x0000000000000000       0x2b ./../../lib/app_timer_rcode.o
+ .comment       0x000000000000002b       0x2b ./../../lib/message_rcode.o
+ .comment       0x0000000000000056       0x2b ./../../lib/message_key_rcode.o
+ .comment       0x0000000000000081       0x2b ./../../lib/common_view_loop.o
+ .comment       0x00000000000000ac       0x2b ./../../lib/common_view_manager.o
+ .comment       0x00000000000000d7       0x2b ./obj/radio_rcode.o
+ .comment       0x0000000000000102       0x2b ./obj/radio_global_data.o
+ .comment       0x000000000000012d       0x2b ./obj/radio_rcp_deal.o
+ .comment       0x0000000000000158       0x2b ./obj/radio_playing_keydeal.o
+ .comment       0x0000000000000183       0x2b ./obj/radio_view_digit.o
+ .comment       0x00000000000001ae       0x2b ./obj/radio_view_hard_search.o
+ .comment       0x00000000000001d9       0x2b ./../../lib/applib_app_data.o
+ .comment       0x0000000000000204       0x2b ./../../lib/common_func_data.o
+ .comment       0x000000000000022f       0x2b ./obj/radio_main.o
+ .comment       0x000000000000025a       0x2b ./obj/radio_set_funcs.o
+ .comment       0x0000000000000285       0x2b ./../../../psp_rel/lib/ctor.o
+ .comment       0x00000000000002b0       0x2b ./obj/radio_control.o
+ .comment       0x00000000000002db       0x2b ./obj/radio_scene_playing_deal.o
+ .comment       0x0000000000000306       0x2b ./obj/radio_view_play_search.o
+ .comment       0x0000000000000331       0x2b ./obj/radio_view_station.o
+ .comment       0x000000000000035c       0x2b ./obj/radio_view_error.o
+ .comment       0x0000000000000387       0x2b ./obj/radio_view_soft_search.o
+ .comment       0x00000000000003b2       0x2b ./obj/radio_soft_search_deal.o
+ .comment       0x00000000000003dd       0x2b ./obj/radio_hard_search_deal.o
+ .comment       0x0000000000000408       0x2b ./obj/radio_scene_playing.o
+ .comment       0x0000000000000433       0x2b ./obj/radio_auto_search_start.o
+ .comment       0x000000000000045e       0x2b ./obj/radio_manual_search.o
+ .comment       0x0000000000000489       0x2b ./../../lib/bt_common_manager_deal.o
+ .comment       0x00000000000004b4       0x2b ./../../lib/common_rcp_dispatch.o
+ .comment       0x00000000000004df       0x2b ./../../lib/common_rcp_dispatch_block.o
+ .comment       0x000000000000050a       0x2b ./../../lib/common_rcp_dispatch_misc.o
+ .comment       0x0000000000000535       0x2b ./../../lib/common_rcp_func.o
+ .comment       0x0000000000000560       0x2b ./../../lib/bt_common_sppble.o
+ .comment       0x000000000000058b       0x2b ./../../lib/message_bank_send_btmanager.o
+ .comment       0x00000000000005b6       0x2b ./../../lib/common_alexa.o
+ .comment       0x00000000000005e1       0x2b ./../../lib/applib_globe_data.o
+ .comment       0x000000000000060c       0x2b ./../../lib/applib_globe_data_com.o
+ .comment       0x0000000000000637       0x2b ./../../lib/message_key_deal.o
+ .comment       0x0000000000000662       0x2b ./../../lib/common_tts.o
+ .comment       0x000000000000068d       0x2b ./../../lib/common_keytone_play.o
+ .comment       0x00000000000006b8       0x2b ./../../lib/common_aset_main_deal.o
+ .comment       0x00000000000006e3       0x2b ./../../lib/bt_common_manager.o
+ .comment       0x000000000000070e       0x2b ./../../lib/common_rcp_servs.o
+ .comment       0x0000000000000739       0x2b ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .comment       0x0000000000000764       0x2b ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .comment       0x000000000000078f       0x2b ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .comment       0x00000000000007ba       0x2b ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .comment       0x00000000000007e5       0x2b ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .comment       0x0000000000000810       0x2b ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .comment       0x000000000000083b       0x2b ./../../../psp_rel/lib/asr.a(c02Controller.o)
+ .comment       0x0000000000000866       0x2b ./../../lib/common_charge.o
+ .comment       0x0000000000000891       0x2b ./../../lib/sys_counter.o
+ .comment       0x00000000000008bc       0x2b ./../../lib/bt_common_event_dispatch.o
+ .comment       0x00000000000008e7       0x2b ./../../lib/common_rcp_send.o
+ .comment       0x0000000000000912       0x2b ./../../lib/app_engine_config.o
+ .comment       0x000000000000093d       0x2b ./../../lib/app_manager_bank.o
+ .comment       0x0000000000000968       0x2b ./../../lib/message_bank_init.o
+ .comment       0x0000000000000993       0x2b ./../../lib/message_bank_send.o
+ .comment       0x00000000000009be       0x2b ./../../lib/message_bank_send_async.o
+ .comment       0x00000000000009e9       0x2b ./../../lib/message_bank_broadcast.o
+ .comment       0x0000000000000a14       0x2b ./../../lib/app_sleep.o
+ .comment       0x0000000000000a3f       0x2b ./../../lib/common_setvolume.o
+ .comment       0x0000000000000a6a       0x2b ./../../lib/common_sys_hook.o
+ .comment       0x0000000000000a95       0x2b ./../../lib/common_speaker_out_switch.o
+ .comment       0x0000000000000ac0       0x2b ./../../lib/common_sound.o
+ .comment       0x0000000000000aeb       0x2b ./../../lib/common_phy_volume_deal.o
+ .comment       0x0000000000000b16       0x2b ./../../lib/common_phy_volume_table.o
+ .comment       0x0000000000000b41       0x2b ./../../lib/common_tts_thread.o
+ .comment       0x0000000000000b6c       0x2b ./../../lib/common_ap_switch.o
+ .comment       0x0000000000000b97       0x2b ./../../lib/setting_comval.o
+ .comment       0x0000000000000bc2       0x2b ./../../lib/common_config.o
+ .comment       0x0000000000000bed       0x2b ./../../lib/common_rcp_dialog.o
+ .comment       0x0000000000000c18       0x2b ./../../lib/common_share_data.o
+ .comment       0x0000000000000c43       0x2b ./../../lib/common_setdae.o
+ .comment       0x0000000000000c6e       0x2b ./../../lib/common_math_exp_fixed.o
+ .comment       0x0000000000000c99       0x2b ./../../lib/common_key_hook.o
+ .comment       0x0000000000000cc4       0x2b ./../../lib/common_aset_new_func.o
+ .comment       0x0000000000000cef       0x2b ./../../lib/common_mic_mute.o
+ .comment       0x0000000000000d1a       0x2b ./../../lib/common_aset_sub_code.o
+ .comment       0x0000000000000d45       0x2b ./../../lib/common_keytone_file.o
+ .comment       0x0000000000000d70       0x2b ./../../lib/common_key_deal.o
+ .comment       0x0000000000000d9b       0x2b ./../../lib/common_discrete_led.o
+ .comment       0x0000000000000dc6       0x2b ./../../lib/common_speaker_control.o
+ .comment       0x0000000000000df1       0x2b ./../../lib/common_standby.o
+ .comment       0x0000000000000e1c       0x2b ./../../lib/time_alarm_clock.o
+ .comment       0x0000000000000e47       0x2b ./../../lib/time_alarm_rcp_deal.o
+ .comment       0x0000000000000e72       0x2b ./../../lib/time_alarm_rcp_deal_ring.o
+ .comment       0x0000000000000e9d       0x2b ./../../lib/time_alarm_set_calendar.o
+ .comment       0x0000000000000ec8       0x2b ./../../lib/time_alarm_set_calendar_sub.o
+ .comment       0x0000000000000ef3       0x2b ./../../lib/time_alarm_set_alarm.o
+ .comment       0x0000000000000f1e       0x2b ./../../lib/time_alarm_set_alarm_sub.o
+ .comment       0x0000000000000f49       0x2b ./../../lib/time_alarm_alarm_ring.o
+ .comment       0x0000000000000f74       0x2b ./../../lib/time_alarm_alarm_record.o
+ .comment       0x0000000000000f9f       0x2b ./../../lib/common_view_key_event.o
+ .comment       0x0000000000000fca       0x2b ./../../lib/common_sys_deal.o
+ .comment       0x0000000000000ff5       0x2b ./../../lib/common_view_sys_event.o
+ .comment       0x0000000000001020       0x2b ./../../lib/bt_common_autoconnect.o
+ .comment       0x000000000000104b       0x2b ./../../lib/bt_common_manager_misc.o
+ .comment       0x0000000000001076       0x2b ./../../lib/bt_common_avrcp.o
+ .comment       0x00000000000010a1       0x2b ./../../lib/bt_common_hfp.o
+ .comment       0x00000000000010cc       0x2b ./../../lib/bt_common_gen_addr.o
+ .comment       0x00000000000010f7       0x2b ./../../lib/app_timer_bank.o
+ .comment       0x0000000000001122       0x2b ./../../lib/sys_timer.o
+ .comment       0x000000000000114d       0x2b ./../../lib/app_timer_bank_single.o
+ .comment       0x0000000000001178       0x2b ./../../lib/common_stub_switch.o
+ .comment       0x00000000000011a3       0x2b ./../../lib/common_seteq.o
+ .comment       0x00000000000011ce       0x2b ./../../lib/common_setdae_init.o
+ .comment       0x00000000000011f9       0x2b ./../../lib/Ota_rcp_s_cmd_deal.o
+ .comment       0x0000000000001224       0x2b ./../../lib/Ota_rcp_q_cmd_deal.o
+ .comment       0x000000000000124f       0x2b ./../../lib/Ota_rcp_reboot_cmd.o
+ .comment       0x000000000000127a       0x2b ./../../lib/common_volume.o
+ .comment       0x00000000000012a5       0x2b ./../../lib/common_waves_dae.o
+
+.debug_abbrev   0x0000000000000000     0x2b0c
+ .debug_abbrev  0x0000000000000000      0x1c7 ./obj/radio_rcode.o
+ .debug_abbrev  0x00000000000001c7      0x141 ./obj/radio_global_data.o
+ .debug_abbrev  0x0000000000000308      0x182 ./obj/radio_rcp_deal.o
+ .debug_abbrev  0x000000000000048a      0x22e ./obj/radio_playing_keydeal.o
+ .debug_abbrev  0x00000000000006b8      0x1a6 ./obj/radio_view_digit.o
+ .debug_abbrev  0x000000000000085e      0x191 ./obj/radio_view_hard_search.o
+ .debug_abbrev  0x00000000000009ef      0x24d ./obj/radio_main.o
+ .debug_abbrev  0x0000000000000c3c      0x124 ./obj/radio_set_funcs.o
+ .debug_abbrev  0x0000000000000d60      0x108 ./obj/radio_control.o
+ .debug_abbrev  0x0000000000000e68       0xde ./obj/radio_scene_playing_deal.o
+ .debug_abbrev  0x0000000000000f46      0x17b ./obj/radio_view_play_search.o
+ .debug_abbrev  0x00000000000010c1      0x17c ./obj/radio_view_station.o
+ .debug_abbrev  0x000000000000123d      0x15d ./obj/radio_view_error.o
+ .debug_abbrev  0x000000000000139a      0x165 ./obj/radio_view_soft_search.o
+ .debug_abbrev  0x00000000000014ff      0x240 ./obj/radio_soft_search_deal.o
+ .debug_abbrev  0x000000000000173f      0x286 ./obj/radio_hard_search_deal.o
+ .debug_abbrev  0x00000000000019c5      0x1d2 ./obj/radio_scene_playing.o
+ .debug_abbrev  0x0000000000001b97      0x135 ./obj/radio_auto_search_start.o
+ .debug_abbrev  0x0000000000001ccc      0x14e ./obj/radio_manual_search.o
+ .debug_abbrev  0x0000000000001e1a      0x287 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_abbrev  0x00000000000020a1      0x2b7 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_abbrev  0x0000000000002358      0x196 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_abbrev  0x00000000000024ee      0x196 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_abbrev  0x0000000000002684       0xfc ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_abbrev  0x0000000000002780      0x179 ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_abbrev  0x00000000000028f9      0x213 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_info     0x0000000000000000    0x1842a
+ .debug_info    0x0000000000000000      0x90d ./obj/radio_rcode.o
+ .debug_info    0x000000000000090d     0x160d ./obj/radio_global_data.o
+ .debug_info    0x0000000000001f1a      0xfa8 ./obj/radio_rcp_deal.o
+ .debug_info    0x0000000000002ec2      0xea2 ./obj/radio_playing_keydeal.o
+ .debug_info    0x0000000000003d64     0x131f ./obj/radio_view_digit.o
+ .debug_info    0x0000000000005083     0x12ac ./obj/radio_view_hard_search.o
+ .debug_info    0x000000000000632f     0x19b4 ./obj/radio_main.o
+ .debug_info    0x0000000000007ce3      0x5cc ./obj/radio_set_funcs.o
+ .debug_info    0x00000000000082af      0x4ef ./obj/radio_control.o
+ .debug_info    0x000000000000879e      0x6a2 ./obj/radio_scene_playing_deal.o
+ .debug_info    0x0000000000008e40     0x1421 ./obj/radio_view_play_search.o
+ .debug_info    0x000000000000a261     0x142c ./obj/radio_view_station.o
+ .debug_info    0x000000000000b68d     0x127e ./obj/radio_view_error.o
+ .debug_info    0x000000000000c90b     0x128c ./obj/radio_view_soft_search.o
+ .debug_info    0x000000000000db97      0xcf6 ./obj/radio_soft_search_deal.o
+ .debug_info    0x000000000000e88d      0xd57 ./obj/radio_hard_search_deal.o
+ .debug_info    0x000000000000f5e4     0x1859 ./obj/radio_scene_playing.o
+ .debug_info    0x0000000000010e3d      0x956 ./obj/radio_auto_search_start.o
+ .debug_info    0x0000000000011793      0xa78 ./obj/radio_manual_search.o
+ .debug_info    0x000000000001220b     0x1b61 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_info    0x0000000000013d6c     0x1962 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_info    0x00000000000156ce      0xa40 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_info    0x000000000001610e      0xa31 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_info    0x0000000000016b3f      0x556 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_info    0x0000000000017095      0x74f ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_info    0x00000000000177e4      0xc46 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_line     0x0000000000000000     0x2c19
+ .debug_line    0x0000000000000000      0x149 ./obj/radio_rcode.o
+ .debug_line    0x0000000000000149      0x11d ./obj/radio_global_data.o
+ .debug_line    0x0000000000000266      0x1d6 ./obj/radio_rcp_deal.o
+ .debug_line    0x000000000000043c      0x2d4 ./obj/radio_playing_keydeal.o
+ .debug_line    0x0000000000000710      0x12c ./obj/radio_view_digit.o
+ .debug_line    0x000000000000083c      0x12c ./obj/radio_view_hard_search.o
+ .debug_line    0x0000000000000968      0x24e ./obj/radio_main.o
+ .debug_line    0x0000000000000bb6      0x138 ./obj/radio_set_funcs.o
+ .debug_line    0x0000000000000cee       0xcb ./obj/radio_control.o
+ .debug_line    0x0000000000000db9       0xdf ./obj/radio_scene_playing_deal.o
+ .debug_line    0x0000000000000e98      0x13b ./obj/radio_view_play_search.o
+ .debug_line    0x0000000000000fd3      0x135 ./obj/radio_view_station.o
+ .debug_line    0x0000000000001108      0x106 ./obj/radio_view_error.o
+ .debug_line    0x000000000000120e      0x129 ./obj/radio_view_soft_search.o
+ .debug_line    0x0000000000001337      0x222 ./obj/radio_soft_search_deal.o
+ .debug_line    0x0000000000001559      0x265 ./obj/radio_hard_search_deal.o
+ .debug_line    0x00000000000017be      0x1f1 ./obj/radio_scene_playing.o
+ .debug_line    0x00000000000019af      0x15c ./obj/radio_auto_search_start.o
+ .debug_line    0x0000000000001b0b      0x152 ./obj/radio_manual_search.o
+ .debug_line    0x0000000000001c5d      0x2f0 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_line    0x0000000000001f4d      0x3e4 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_line    0x0000000000002331      0x1ce ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_line    0x00000000000024ff      0x187 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_line    0x0000000000002686      0x108 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_line    0x000000000000278e      0x1cf ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_line    0x000000000000295d      0x2bc ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_frame    0x0000000000000000     0x14fc
+ .debug_frame   0x0000000000000000       0x9c ./obj/radio_rcode.o
+ .debug_frame   0x000000000000009c      0x14c ./obj/radio_rcp_deal.o
+ .debug_frame   0x00000000000001e8      0x1e8 ./obj/radio_playing_keydeal.o
+ .debug_frame   0x00000000000003d0       0x90 ./obj/radio_view_digit.o
+ .debug_frame   0x0000000000000460       0x58 ./obj/radio_view_hard_search.o
+ .debug_frame   0x00000000000004b8      0x140 ./obj/radio_main.o
+ .debug_frame   0x00000000000005f8       0xac ./obj/radio_set_funcs.o
+ .debug_frame   0x00000000000006a4       0x28 ./obj/radio_control.o
+ .debug_frame   0x00000000000006cc       0x28 ./obj/radio_scene_playing_deal.o
+ .debug_frame   0x00000000000006f4       0x48 ./obj/radio_view_play_search.o
+ .debug_frame   0x000000000000073c       0x68 ./obj/radio_view_station.o
+ .debug_frame   0x00000000000007a4       0x58 ./obj/radio_view_error.o
+ .debug_frame   0x00000000000007fc       0x48 ./obj/radio_view_soft_search.o
+ .debug_frame   0x0000000000000844       0x90 ./obj/radio_soft_search_deal.o
+ .debug_frame   0x00000000000008d4       0xb8 ./obj/radio_hard_search_deal.o
+ .debug_frame   0x000000000000098c       0xa0 ./obj/radio_scene_playing.o
+ .debug_frame   0x0000000000000a2c       0x78 ./obj/radio_auto_search_start.o
+ .debug_frame   0x0000000000000aa4       0x78 ./obj/radio_manual_search.o
+ .debug_frame   0x0000000000000b1c      0x2c0 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_frame   0x0000000000000ddc      0x1c4 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_frame   0x0000000000000fa0       0x88 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_frame   0x0000000000001028      0x10c ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_frame   0x0000000000001134       0x48 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_frame   0x000000000000117c      0x13c ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_frame   0x00000000000012b8      0x244 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_pubnames
+                0x0000000000000000     0x16af
+ .debug_pubnames
+                0x0000000000000000       0xa0 ./obj/radio_rcode.o
+ .debug_pubnames
+                0x00000000000000a0      0x21f ./obj/radio_global_data.o
+ .debug_pubnames
+                0x00000000000002bf      0x176 ./obj/radio_rcp_deal.o
+ .debug_pubnames
+                0x0000000000000435      0x255 ./obj/radio_playing_keydeal.o
+ .debug_pubnames
+                0x000000000000068a       0xe4 ./obj/radio_view_digit.o
+ .debug_pubnames
+                0x000000000000076e       0x97 ./obj/radio_view_hard_search.o
+ .debug_pubnames
+                0x0000000000000805      0x110 ./obj/radio_main.o
+ .debug_pubnames
+                0x0000000000000915       0x9b ./obj/radio_set_funcs.o
+ .debug_pubnames
+                0x00000000000009b0       0x2b ./obj/radio_control.o
+ .debug_pubnames
+                0x00000000000009db       0x28 ./obj/radio_scene_playing_deal.o
+ .debug_pubnames
+                0x0000000000000a03       0x4b ./obj/radio_view_play_search.o
+ .debug_pubnames
+                0x0000000000000a4e       0x84 ./obj/radio_view_station.o
+ .debug_pubnames
+                0x0000000000000ad2       0x78 ./obj/radio_view_error.o
+ .debug_pubnames
+                0x0000000000000b4a       0x59 ./obj/radio_view_soft_search.o
+ .debug_pubnames
+                0x0000000000000ba3       0x69 ./obj/radio_soft_search_deal.o
+ .debug_pubnames
+                0x0000000000000c0c       0x8d ./obj/radio_hard_search_deal.o
+ .debug_pubnames
+                0x0000000000000c99       0x98 ./obj/radio_scene_playing.o
+ .debug_pubnames
+                0x0000000000000d31       0x64 ./obj/radio_auto_search_start.o
+ .debug_pubnames
+                0x0000000000000d95       0x6a ./obj/radio_manual_search.o
+ .debug_pubnames
+                0x0000000000000dff      0x2ba ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_pubnames
+                0x00000000000010b9      0x1e4 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_pubnames
+                0x000000000000129d       0x84 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_pubnames
+                0x0000000000001321      0x124 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_pubnames
+                0x0000000000001445       0x35 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_pubnames
+                0x000000000000147a       0xf2 ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_pubnames
+                0x000000000000156c      0x143 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_aranges  0x0000000000000000      0x5e8
+ .debug_aranges
+                0x0000000000000000       0x20 ./obj/radio_rcode.o
+ .debug_aranges
+                0x0000000000000020       0x28 ./obj/radio_rcp_deal.o
+ .debug_aranges
+                0x0000000000000048       0x40 ./obj/radio_playing_keydeal.o
+ .debug_aranges
+                0x0000000000000088       0x20 ./obj/radio_view_digit.o
+ .debug_aranges
+                0x00000000000000a8       0x30 ./obj/radio_view_hard_search.o
+ .debug_aranges
+                0x00000000000000d8       0x20 ./obj/radio_main.o
+ .debug_aranges
+                0x00000000000000f8       0x20 ./obj/radio_set_funcs.o
+ .debug_aranges
+                0x0000000000000118       0x20 ./obj/radio_control.o
+ .debug_aranges
+                0x0000000000000138       0x20 ./obj/radio_scene_playing_deal.o
+ .debug_aranges
+                0x0000000000000158       0x28 ./obj/radio_view_play_search.o
+ .debug_aranges
+                0x0000000000000180       0x20 ./obj/radio_view_station.o
+ .debug_aranges
+                0x00000000000001a0       0x20 ./obj/radio_view_error.o
+ .debug_aranges
+                0x00000000000001c0       0x28 ./obj/radio_view_soft_search.o
+ .debug_aranges
+                0x00000000000001e8       0x20 ./obj/radio_soft_search_deal.o
+ .debug_aranges
+                0x0000000000000208       0x20 ./obj/radio_hard_search_deal.o
+ .debug_aranges
+                0x0000000000000228       0x20 ./obj/radio_scene_playing.o
+ .debug_aranges
+                0x0000000000000248       0x20 ./obj/radio_auto_search_start.o
+ .debug_aranges
+                0x0000000000000268       0x20 ./obj/radio_manual_search.o
+ .debug_aranges
+                0x0000000000000288       0xe0 ./../../../psp_rel/lib/asr.a(LpMain.o)
+ .debug_aranges
+                0x0000000000000368       0x90 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_aranges
+                0x00000000000003f8       0x38 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+ .debug_aranges
+                0x0000000000000430       0x70 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+ .debug_aranges
+                0x00000000000004a0       0x30 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+ .debug_aranges
+                0x00000000000004d0       0x70 ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+ .debug_aranges
+                0x0000000000000540       0xa8 ./../../../psp_rel/lib/asr.a(c02Controller.o)
+
+.debug_str      0x0000000000000000     0x652b
+ .debug_str     0x0000000000000000      0x71f ./obj/radio_rcode.o
+                                        0x7ad (size before relaxing)
+ .debug_str     0x000000000000071f      0xf1f ./obj/radio_global_data.o
+                                       0x1630 (size before relaxing)
+ .debug_str     0x000000000000163e      0xa0f ./obj/radio_rcp_deal.o
+                                       0x1244 (size before relaxing)
+ .debug_str     0x000000000000204d      0x502 ./obj/radio_playing_keydeal.o
+                                       0x126b (size before relaxing)
+ .debug_str     0x000000000000254f     0x208c ./obj/radio_view_digit.o
+                                       0x2e69 (size before relaxing)
+ .debug_str     0x00000000000045db       0xa9 ./obj/radio_view_hard_search.o
+                                       0x2e39 (size before relaxing)
+ .debug_str     0x0000000000004684      0x2e6 ./obj/radio_main.o
+                                       0x1d8d (size before relaxing)
+ .debug_str     0x000000000000496a       0x9d ./obj/radio_set_funcs.o
+                                        0x5aa (size before relaxing)
+ .debug_str     0x0000000000004a07       0x25 ./obj/radio_control.o
+                                        0x4e0 (size before relaxing)
+ .debug_str     0x0000000000004a2c       0x2d ./obj/radio_scene_playing_deal.o
+                                        0xb3b (size before relaxing)
+ .debug_str     0x0000000000004a59       0x63 ./obj/radio_view_play_search.o
+                                       0x2f72 (size before relaxing)
+ .debug_str     0x0000000000004abc       0x77 ./obj/radio_view_station.o
+                                       0x2f70 (size before relaxing)
+ .debug_str     0x0000000000004b33       0x69 ./obj/radio_view_error.o
+                                       0x2ddc (size before relaxing)
+ .debug_str     0x0000000000004b9c       0x58 ./obj/radio_view_soft_search.o
+                                       0x2e1b (size before relaxing)
+ .debug_str     0x0000000000004bf4       0xff ./obj/radio_soft_search_deal.o
+                                        0xf72 (size before relaxing)
+ .debug_str     0x0000000000004cf3       0xae ./obj/radio_hard_search_deal.o
+                                        0xf9c (size before relaxing)
+ .debug_str     0x0000000000004da1      0x158 ./obj/radio_scene_playing.o
+                                       0x1ce5 (size before relaxing)
+ .debug_str     0x0000000000004ef9       0x87 ./obj/radio_auto_search_start.o
+                                        0xd8f (size before relaxing)
+ .debug_str     0x0000000000004f80       0x62 ./obj/radio_manual_search.o
+                                        0xebe (size before relaxing)
+ .debug_str     0x0000000000004fe2      0x87b ./../../../psp_rel/lib/asr.a(LpMain.o)
+                                       0x1a19 (size before relaxing)
+ .debug_str     0x000000000000585d      0x262 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+                                       0x15b1 (size before relaxing)
+ .debug_str     0x0000000000005abf      0x127 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)
+                                        0x995 (size before relaxing)
+ .debug_str     0x0000000000005be6      0x4e0 ./../../../psp_rel/lib/asr.a(lp_smart_common.o)
+                                        0xa3b (size before relaxing)
+ .debug_str     0x00000000000060c6       0xc1 ./../../../psp_rel/lib/asr.a(lp_smart_secret.o)
+                                        0x547 (size before relaxing)
+ .debug_str     0x0000000000006187      0x11a ./../../../psp_rel/lib/asr.a(sa2Controller.o)
+                                        0x5c0 (size before relaxing)
+ .debug_str     0x00000000000062a1      0x28a ./../../../psp_rel/lib/asr.a(c02Controller.o)
+                                        0x8e3 (size before relaxing)
+
+.debug_ranges   0x0000000000000000      0x1f0
+ .debug_ranges  0x0000000000000000       0x48 ./obj/radio_soft_search_deal.o
+ .debug_ranges  0x0000000000000048       0x58 ./obj/radio_hard_search_deal.o
+ .debug_ranges  0x00000000000000a0      0x120 ./../../../psp_rel/lib/asr.a(lp_command_deal.o)
+ .debug_ranges  0x00000000000001c0       0x30 ./../../../psp_rel/lib/asr.a(lp_command_parser.o)

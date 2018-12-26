@@ -1,0 +1,39 @@
+修改说明(相对SDK4.0)：
+1、添加SPP协议,IOS走BLE,安卓走SPP（连接性和速度比BLE要好很多）
+2、解决某些情况下按键失效，如：
+		a、直接上电开机（一些状态未被初始化）
+		b、IOS APP连上，手机触发Siri以后
+		c、IOS APP连上，手机打电话结束以后
+3、C02支持设置麦克风距离
+4、支持获取ID3信息：艺术家和标题
+5、解决BLE断开时将录音通道修改为右声道的问题
+6、近场OTA升级后，不清除蓝牙配对信息（近场OTA升级后蓝牙可以回连上），远场待CBV功能做好后也会包含此功能
+7、未连上APP提示语音两条合成一条播放（分开播放两条之间可能会出现蓝牙声音）
+
+配套通用APP:
+iOS ble: https://dln.bz/i/btsmart/1.0.6425.1 
+Android spp: https://dln.bz/a/btsmartspp/1.0.6425.1
+Android ble: https://dln.bz/a/btsmart/1.0.6425.1
+
+备注：1、通用APP所有类型的产品都可以连上，不受Project字段和CUSTOMER ID限制，可做开发调试使用
+	  2、4.2版SDK是在矩力3.70版SDK上开发的
+
+近场编译说明：
+	编译命令：
+	make linkplay_demo
+	打包命令：
+	make build_linkplay_demo	
+	配置文件：
+	linkplay_demo.ini
+	linkplay_demo.txt
+	linkplay_demo.cfg
+	
+C02远场编译说明：
+	编译命令：
+	make linkplay_far
+	打包命令：
+	make build_linkplay_far	
+	配置文件：
+	jl_36410_far.ini
+	jl_36410_far.txt
+	jl_36410_far.cfg
