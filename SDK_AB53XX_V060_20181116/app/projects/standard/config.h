@@ -494,7 +494,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
  * Module    : 提示音 功能选择
  *****************************************************************************/
 #define WARNING_TONE_EN                 1               //是否打开提示音功能, 总开关
-#define WARING_MAXVOL_MP3               0               //最大音量提示音WAV或MP3选择， 播放WAV可以与MUSIC叠加播放。
+#define WARING_MAXVOL_MP3               1               //最大音量提示音WAV或MP3选择， 播放WAV可以与MUSIC叠加播放。
 #define WARNING_VOLUME                  xcfg_cb.warning_volume   //播放提示音的音量级数
 #define LANG_SELECT                     LANG_EN      //提示音语言选择
 

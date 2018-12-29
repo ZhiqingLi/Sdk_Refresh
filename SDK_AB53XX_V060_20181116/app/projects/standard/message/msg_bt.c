@@ -29,7 +29,7 @@ void func_bt_message(u16 msg)
     case KU_PLAY:
     case KU_PLAY_POWER:
     case KU_PLAY_MODE:
-        bt_music_play_pause();
+        bt_music_play_pause();    
         f_bt.pp_2_unmute = sys_cb.mute;
         break;
 

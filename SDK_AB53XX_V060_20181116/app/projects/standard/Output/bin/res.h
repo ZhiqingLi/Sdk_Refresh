@@ -110,28 +110,31 @@
 #define RES_BUF_EN_SPK_MODE_MP3                     (*(u32 *)0x11000498)
 #define RES_LEN_EN_SPK_MODE_MP3                     (*(u32 *)0x1100049c)
 
-#define RES_BUF_EN_USB_MODE_MP3                     (*(u32 *)0x110004b8)
-#define RES_LEN_EN_USB_MODE_MP3                     (*(u32 *)0x110004bc)
+#define RES_BUF_EN_TFCARD_MODE_MP3                  (*(u32 *)0x110004b8)
+#define RES_LEN_EN_TFCARD_MODE_MP3                  (*(u32 *)0x110004bc)
 
-#define RES_BUF_EN_WAIT4CONN_MP3                    (*(u32 *)0x110004d8)
-#define RES_LEN_EN_WAIT4CONN_MP3                    (*(u32 *)0x110004dc)
+#define RES_BUF_EN_USB_MODE_MP3                     (*(u32 *)0x110004d8)
+#define RES_LEN_EN_USB_MODE_MP3                     (*(u32 *)0x110004dc)
 
-#define RES_BUF_EQ_CLASSIC_EQ                       (*(u32 *)0x110004f8)
-#define RES_LEN_EQ_CLASSIC_EQ                       (*(u32 *)0x110004fc)
+#define RES_BUF_EN_WAIT4CONN_MP3                    (*(u32 *)0x110004f8)
+#define RES_LEN_EN_WAIT4CONN_MP3                    (*(u32 *)0x110004fc)
 
-#define RES_BUF_EQ_COUNTRY_EQ                       (*(u32 *)0x11000518)
-#define RES_LEN_EQ_COUNTRY_EQ                       (*(u32 *)0x1100051c)
+#define RES_BUF_EQ_CLASSIC_EQ                       (*(u32 *)0x11000518)
+#define RES_LEN_EQ_CLASSIC_EQ                       (*(u32 *)0x1100051c)
 
-#define RES_BUF_EQ_JAZZ_EQ                          (*(u32 *)0x11000538)
-#define RES_LEN_EQ_JAZZ_EQ                          (*(u32 *)0x1100053c)
+#define RES_BUF_EQ_COUNTRY_EQ                       (*(u32 *)0x11000538)
+#define RES_LEN_EQ_COUNTRY_EQ                       (*(u32 *)0x1100053c)
 
-#define RES_BUF_EQ_NORMAL_EQ                        (*(u32 *)0x11000558)
-#define RES_LEN_EQ_NORMAL_EQ                        (*(u32 *)0x1100055c)
+#define RES_BUF_EQ_JAZZ_EQ                          (*(u32 *)0x11000558)
+#define RES_LEN_EQ_JAZZ_EQ                          (*(u32 *)0x1100055c)
 
-#define RES_BUF_EQ_POP_EQ                           (*(u32 *)0x11000578)
-#define RES_LEN_EQ_POP_EQ                           (*(u32 *)0x1100057c)
+#define RES_BUF_EQ_NORMAL_EQ                        (*(u32 *)0x11000578)
+#define RES_LEN_EQ_NORMAL_EQ                        (*(u32 *)0x1100057c)
 
-#define RES_BUF_EQ_ROCK_EQ                          (*(u32 *)0x11000598)
-#define RES_LEN_EQ_ROCK_EQ                          (*(u32 *)0x1100059c)
+#define RES_BUF_EQ_POP_EQ                           (*(u32 *)0x11000598)
+#define RES_LEN_EQ_POP_EQ                           (*(u32 *)0x1100059c)
+
+#define RES_BUF_EQ_ROCK_EQ                          (*(u32 *)0x110005b8)
+#define RES_LEN_EQ_ROCK_EQ                          (*(u32 *)0x110005bc)
 
 #endif

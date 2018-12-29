@@ -1688,6 +1688,12 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			WiFiWorkStateSet(WIFI_STATUS_INIT_END);
 			//通知凯叔app，小夜灯在开启状态
 			Mcu_SendCmdToWiFi(MCU_LGT__ON, NULL);
+			//凯叔故事机开机默认播放本地TF卡;
+			if(MODULE_ID_PLAYER_WIFI_SD != gSys.CurModuleID)
+			{
+				gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
+				MsgSend(MSG_COMMON_CLOSE);
+			}
 			//Mcu_SendCmdToWiFi(MCU_MMC_GET, NULL);
 			break;
 

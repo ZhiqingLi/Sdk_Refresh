@@ -563,6 +563,7 @@ void PwmDisplayLightOnOff(void)
 {
 	if(PWM_LED_COLOUR_IDLE != PwmLightDisplayMode)
 	{
+		LightBrightness = MIN_BRIGHTNESS;
 		PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
 		Mcu_SendCmdToWiFi(MCU_IOTN_OFF, NULL);
 		PwmLedDisplayControlChange(PwmLightDisplayMode);
@@ -789,8 +790,12 @@ void LightLedDisplayAutoControl(void)
 		if((FALSE == PwmLightState[3].PwmSetDuty) 
         && IsLightAdcDetect() && (FALSE == SetPwmLightFlag))
 		{
-			PwmLightState[3].PwmSetDuty = MAX_BRIGHTNESS;
+			LightBrightness = MAX_BRIGHTNESS;
 			PwmLightDisplayMode = PWM_LED_COLOUR_WHITE;
+			Mcu_SendCmdToWiFi(MCU_IOTN__ON, NULL);
+			WaitMs(10);
+			Mcu_SendCmdToWiFi(MCU_IOTN_LIGHT, &LightBrightness);
+			PwmLedDisplayControlChange(PwmLightDisplayMode);
 			SetPwmLightFlag = TRUE;
 		}
 	}
@@ -798,8 +803,10 @@ void LightLedDisplayAutoControl(void)
 	{
 		if(SetPwmLightFlag == TRUE)
 		{
-			PwmLightState[3].PwmSetDuty = FALSE;
+			LightBrightness = MIN_BRIGHTNESS;
 			PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
+			Mcu_SendCmdToWiFi(MCU_IOTN_OFF, NULL);
+			PwmLedDisplayControlChange(PwmLightDisplayMode);
 			SetPwmLightFlag = FALSE;
 		}	
 	}
@@ -1473,7 +1480,7 @@ void PwmLedDisplayScanSet(bool State)
 	IsPwmLedDisplayFlag = State;
 	if(State)
 	{
-		TimeOutSet(&LightAutoControlTimer, 45000);
+		TimeOutSet(&LightAutoControlTimer, 40000);
 	}
 }
 

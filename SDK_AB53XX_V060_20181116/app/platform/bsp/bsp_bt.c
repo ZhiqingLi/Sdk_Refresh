@@ -329,6 +329,7 @@ bool bt_get_tws_info(uint8_t *param)
     param[0] |= (u8)sys_cb.eq_mode<<4;
 #endif
     param[1] = sys_cb.hfp_vol;      //同步初始通话音量
+    printf("bt_get_tws_info!!!\n");
     return true;
 }
 
@@ -349,6 +350,7 @@ void bt_set_tws_info(uint8_t *param)
         msg_enqueue(EVT_BT_SET_EQ);
     }
 #endif
+	printf("bt_set_tws_info!!!\n");
     sys_cb.hfp_vol = param[1];      //同步初始通话音量
 
     tmp = tmp;      //避免编译警告
@@ -452,6 +454,10 @@ void bt_emit_notice(uint evt, u32 param)
         }
         msg_enqueue(EVT_TWS_SET_VOL);
         break;
+
+    case BT_NOTICE_TWS_USER_KEY:
+    	//printf("bt_tws_user_key = %x!!!", param);
+    	break;
 
     case BT_NOTICE_MUSIC_SET_VOL:
         param = (param+1) * VOL_MAX / 128;

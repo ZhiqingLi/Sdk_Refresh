@@ -107,6 +107,7 @@ typedef enum _WIFI_AVS_STATUS_
 //凯叔智能故事机电台模式
 enum 
 {
+	WIFI_PLAY_KAISHU_SDCARD = 0,    	//凯叔本地TF卡
 	WIFI_PLAY_KAISHU_RADIO_DEFAULT = 1,    	//凯叔电台
 	WIFI_PLAY_KAISHU_RADIO_SLEEP,			//哄睡模式
 	WIFI_PLAY_KAISHU_RADIO_TIPS,			//小知识

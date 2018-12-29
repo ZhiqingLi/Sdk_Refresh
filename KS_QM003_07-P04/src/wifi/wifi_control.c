@@ -2523,22 +2523,37 @@ uint32_t WiFiControl(void)
 
 			case MSG_WIFI_NEXT_CH:	//播放下一个按键预置歌单						
 				gWiFi.KaiShuRadio++;
-				if(gWiFi.KaiShuRadio >= WIFI_PLAY_KAISHU_RADIO_MAX)
+				if((gWiFi.KaiShuRadio > WIFI_PLAY_KAISHU_SDCARD)
+				&& (gWiFi.KaiShuRadio < WIFI_PLAY_KAISHU_RADIO_MAX))
 				{
-					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_RADIO_DEFAULT;
+					Mcu_SendCmdToWiFi(MCU_RAD_XXX, &gWiFi.KaiShuRadio);
 				}
-				
-				Mcu_SendCmdToWiFi(MCU_RAD_XXX, &gWiFi.KaiShuRadio);
+				else
+				{
+					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_SDCARD;
+					gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
+					MsgSend(MSG_COMMON_CLOSE);
+				}
 				break;
 
 			case MSG_WIFI_PREV_CH:	
-				gWiFi.KaiShuRadio--;
-				if(gWiFi.KaiShuRadio < WIFI_PLAY_KAISHU_RADIO_DEFAULT)
+				if(WIFI_PLAY_KAISHU_SDCARD == gWiFi.KaiShuRadio)
 				{
 					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_RADIO_MAX;
 				}
-
-				Mcu_SendCmdToWiFi(MCU_RAD_XXX, &gWiFi.KaiShuRadio);
+				
+				gWiFi.KaiShuRadio--;
+				if((gWiFi.KaiShuRadio > WIFI_PLAY_KAISHU_SDCARD)
+				&& (gWiFi.KaiShuRadio < WIFI_PLAY_KAISHU_RADIO_MAX))
+				{
+					Mcu_SendCmdToWiFi(MCU_RAD_XXX, &gWiFi.KaiShuRadio);
+				}
+				else
+				{
+					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_SDCARD;
+					gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
+					MsgSend(MSG_COMMON_CLOSE);
+				}
 				break;
 
 			case MSG_WIFI_GROUP:
