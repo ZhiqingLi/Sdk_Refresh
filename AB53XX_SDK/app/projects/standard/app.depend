@@ -1,0 +1,1257 @@
+# depslib dependency file v1.0
+1540206213 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_app.c
+	"include.h"
+	"bsp_app.h"
+	"bsp_ble.h"
+	"func_fmrx.h"
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\typedef.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\macro.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\clib.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\sfr.h
+
+1546003823 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\config_define.h
+
+1542155433 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\xcfg.h
+
+1542363744 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\config_extra.h
+
+1542155436 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_fs.h"
+	"api_device.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1542028637 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_btstack.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_cm.h
+
+1542162711 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_music.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_sd.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_rtc.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_usb.h
+
+1541675867 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_fs.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_device.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_sdadc.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_update.h
+
+1541643386 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_dac.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_sysclk.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_msg.h
+
+1540463252 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_saradc.h
+
+1540206213 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_fmrx.h
+
+1541812481 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_sys.h
+
+1541220615 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_pwr.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_key.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_gpio.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_uart.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\api_karaok.h
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"func_spdif.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+
+1541220615 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_bt.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_bt_hid.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_clock.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_idle.h
+
+1542156715 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_music.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_usbdev.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_aux.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_speaker.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_spdif.h
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_record.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_record_play.h
+
+1541220615 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_lowpwr.h
+
+1541036261 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_fmrx.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_fmam_freq.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_update.h
+
+1541638573 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_fmtx.h"
+	"bsp_karaok.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_car_audio.h"
+	"bsp_i2c.h"
+	"bsp_aux.h"
+	"bsp_app.h"
+	"bsp_lrc.h"
+
+1542155436 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_sys.h
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_key.h
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_dac.h
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_param.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_ir.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_audio.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_music.h
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_led.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fs.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_bt.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_eq.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_charge.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fmtx.h
+
+1540463253 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_karaok.h
+
+1541810322 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_id3_tag.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_record.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_car_audio.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_i2c.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_aux.h
+
+1540206213 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_app.h
+
+1541660147 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_lrc.h
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+	"lcd/lcd.h"
+	"lcd/display_lcd.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\ledseg\ledseg_common.h
+
+1541838978 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+
+1538020972 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\ledseg\ledseg_7p7s.h
+
+1542283682 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\lcd\lcd.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\plugin\multi_lang.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_pwm.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_linein.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_led.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_sd.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_earphone.h
+
+1538020980 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_mic.h
+
+1546003927 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\res.h
+
+1540206213 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_ble.h
+
+1541220615 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_audio.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_aux.c
+	"include.h"
+
+1540206213 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_ble.c
+	"include.h"
+	"bsp_ble.h"
+	"bsp_app.h"
+
+1545984715 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_car_audio.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540463253 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_cm.c
+	"include.h"
+
+1540206213 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206213 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fmtx.c
+	"include.h"
+	"bsp_fmtx.h"
+
+1542158820 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_fs.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_iap.c
+	"include.h"
+
+1541816546 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1542156143 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_ir.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1545374628 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_key.c
+	"include.h"
+
+1540463253 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1541837230 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_lrc.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_music.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_param.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_record.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spiflash1.c
+	"include.h"
+	"bsp_spiflash1.h"
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spiflash1.h
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spiflash1_music_bin.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spiflash_rec_play.c
+	"include.h"
+	"bsp_spiflash1.h"
+	"spiflash_cyc_fs.h"
+	"bsp_spiflash_rec_play.h"
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\spiflash_cyc_fs.h
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spiflash_rec_play.h
+	"spiflash_cyc_fs.h"
+
+1541388662 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_spp.c
+	"include.h"
+
+1545466298 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\bsp_sys.c
+	"include.h"
+	"bsp_spiflash1.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540463253 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func.c
+	"include.h"
+
+1540206214 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1541503180 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1540206214 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_exspifalsh_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspifalsh_music.h"
+
+1542353256 f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_exspifalsh_music.h
+	"bsp_spiflash1.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542166957 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1542163088 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1541723814 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_bt_ota.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1542353256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+	"spiflash_cyc_fs.h"
+	"bsp_spiflash1.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1541036261 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1542352530 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\lcd\lcd.c
+	"include.h"
+	"lcd.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1538020972 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1542155436 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\platform\libs\strong_symbol.c
+	"include.h"
+
+1545392643 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\config.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1541749574 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1541036264 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1541220614 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\main.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1545984686 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1542353255 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_exspiflash_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspifalsh_music.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542020092 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1541503420 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1542353255 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1540463256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\plugin\plugin.c
+	"include.h"
+
+1542155433 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_earphone.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_ir.c
+	"include.h"
+
+1540463256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_key.c
+	"include.h"
+
+1540463256 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_led.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1542155433 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_linein.c
+	"include.h"
+
+1542155433 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_mic.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_mute.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_pwm.c
+	"include.h"
+
+1542155433 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_sd.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_sd1.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\port\port_update.c
+	"include.h"
+
+1542353255 source:f:\soft_sdk\sdk_ab53xx_v060_20181116\app\projects\standard\ram.ld
+
+1540206213 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_app.c
+	"include.h"
+	"bsp_app.h"
+	"bsp_ble.h"
+	"func_fmrx.h"
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\typedef.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\macro.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\clib.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
+
+1547004862 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1547006322 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_define.h
+
+1547004968 f:\soft_sdk\ab53xx_sdk\app\projects\standard\xcfg.h
+
+1547006352 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_extra.h
+
+1542155436 f:\soft_sdk\ab53xx_sdk\app\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_fs.h"
+	"api_device.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1547006192 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_btstack.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_cm.h
+
+1547006249 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_music.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_sd.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_rtc.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_usb.h
+
+1541675867 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_fs.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_device.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_sdadc.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_update.h
+
+1547006208 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_dac.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_sysclk.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_msg.h
+
+1540463252 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_saradc.h
+
+1547006222 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_fmrx.h
+
+1541812481 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_sys.h
+
+1541220615 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_pwr.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_key.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_gpio.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_uart.h
+
+1547006239 f:\soft_sdk\ab53xx_sdk\app\platform\libs\api_karaok.h
+
+1542353256 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"func_spdif.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+
+1547006607 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt_hid.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_clock.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_idle.h
+
+1542156715 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_music.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_usbdev.h
+
+1547006676 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_speaker.h
+
+1547006815 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_spdif.h
+
+1542353256 f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_record.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_record_play.h
+
+1547006496 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.h
+
+1541036261 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmrx.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmam_freq.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_update.h
+
+1541638573 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_fmtx.h"
+	"bsp_karaok.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_car_audio.h"
+	"bsp_i2c.h"
+	"bsp_aux.h"
+	"bsp_app.h"
+	"bsp_lrc.h"
+
+1547006114 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_sys.h
+
+1542353256 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_key.h
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_dac.h
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_param.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_ir.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_audio.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_music.h
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fs.h
+
+1547005774 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_bt.h
+
+1547005917 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_eq.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_charge.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fmtx.h
+
+1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_karaok.h
+
+1541810322 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_id3_tag.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_record.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_car_audio.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_i2c.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_aux.h
+
+1540206213 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_app.h
+
+1541660147 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_lrc.h
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+	"lcd/lcd.h"
+	"lcd/display_lcd.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.h
+
+1541838978 f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+
+1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_7p7s.h
+
+1542283682 f:\soft_sdk\ab53xx_sdk\app\platform\gui\lcd\lcd.h
+
+1547004353 f:\soft_sdk\ab53xx_sdk\app\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\plugin\multi_lang.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_pwm.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_linein.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_led.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_sd.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_earphone.h
+
+1538020980 f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_mic.h
+
+1546003927 f:\soft_sdk\ab53xx_sdk\app\projects\standard\res.h
+
+1540206213 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_ble.h
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_aux.c
+	"include.h"
+
+1540206213 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_ble.c
+	"include.h"
+	"bsp_ble.h"
+	"bsp_app.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_car_audio.c
+	"include.h"
+
+1540463253 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_cm.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fmtx.c
+	"include.h"
+	"bsp_fmtx.h"
+
+1542158820 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fs.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_iap.c
+	"include.h"
+
+1541816546 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1542156143 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_ir.c
+	"include.h"
+
+1541837230 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_lrc.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_music.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_param.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_record.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spiflash1.c
+	"include.h"
+	"bsp_spiflash1.h"
+
+1542353256 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spiflash1.h
+
+1542353256 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spiflash1_music_bin.c
+	"include.h"
+
+1542353256 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spiflash_rec_play.c
+	"include.h"
+	"bsp_spiflash1.h"
+	"spiflash_cyc_fs.h"
+	"bsp_spiflash_rec_play.h"
+
+1545826225 f:\soft_sdk\ab53xx_sdk\app\platform\libs\spiflash_cyc_fs.h
+
+1542353256 f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spiflash_rec_play.h
+	"spiflash_cyc_fs.h"
+
+1541388662 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_spp.c
+	"include.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540463253 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1540206214 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542163088 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1542352530 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\lcd\lcd.c
+	"include.h"
+	"lcd.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1545392643 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1541749574 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1541036264 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542020092 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1541503420 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1542353255 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_ir.c
+	"include.h"
+
+1540463256 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_key.c
+	"include.h"
+
+1540463256 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_led.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_mute.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_pwm.c
+	"include.h"
+
+1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_update.c
+	"include.h"
+
+1542353255 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\ram.ld
+

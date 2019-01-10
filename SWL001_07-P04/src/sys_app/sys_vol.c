@@ -1025,8 +1025,9 @@ void CommonMsgProccess(uint16_t Msg)
 				}
 #endif
 			}
+			
 #ifdef FUNC_SOUND_REMIND
-			else if(!IsSoundRemindPlaying())
+			if((MAX_VOLUME <= gSys.Volume) && !IsSoundRemindPlaying())
 			{
 				//提示最大音量
 				SoundRemind(SOUND_MAX_VOL);
@@ -1069,8 +1070,9 @@ void CommonMsgProccess(uint16_t Msg)
 				}
 #endif
 			}
+			
 #ifdef FUNC_SOUND_REMIND
-			else if(!IsSoundRemindPlaying())
+			if((0 >= gSys.Volume) && !IsSoundRemindPlaying())
 			{
 				//提示最小音量
 				SoundRemind(SOUND_MAX_VOL);

@@ -84,7 +84,7 @@ typedef struct _PWM_LED_STATE_
 #define  UXLED_ORANGE_MODE_ON(Duty)		do{\
 										PwmConfig(UXLED_RED_PWM_PORT_MASK, 1200, 1200*Duty/100);\
 										PwmEnableChannel(UXLED_RED_PWM_PORT_MASK, PWM_IO_SEL1, PWM_MODE_OUT);\
-										PwmConfig(UXLED_GREEN_PWM_PORT_MASK, 1200, 180*Duty/100);\
+										PwmConfig(UXLED_GREEN_PWM_PORT_MASK, 1200, (uint8_t)(180*Duty/100));\
 										PwmEnableChannel(UXLED_GREEN_PWM_PORT_MASK, PWM_IO_SEL1, PWM_MODE_OUT);\
 										PwmConfig(UXLED_BLUE_PWM_PORT_MASK, 1200, 0);\
 										PwmEnableChannel(UXLED_BLUE_PWM_PORT_MASK, PWM_IO_SEL1, PWM_MODE_OUT);\
@@ -301,7 +301,7 @@ extern void PwmLedDisplayControlSetting(void);
 
 
  #define  LED_LIGHT_MODE_ON(Duty)		do{\
-										PwmConfig(LED_LIGHT_PWM_PORT_MASK, 1200, 1200*Duty/100);\
+										PwmConfig(LED_LIGHT_PWM_PORT_MASK, 1200, (1200*Duty)/100);\
 										PwmEnableChannel(LED_LIGHT_PWM_PORT_MASK, PWM_IO_SEL0, PWM_MODE_OUT);\
 										}while(0)
  

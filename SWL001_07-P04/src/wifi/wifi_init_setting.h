@@ -13,13 +13,8 @@ extern "C" {
 //**MCU+CAP+PRJproject_name&:项目名称定义
 #define MCU_CAP_PRJ_PROJECT_NAME	"SWL001"
 
-#if defined(FUNC_WIFI_ALEXA_PROJECT_EN)
-//**MCU+SID+name&:设置设备默认SSID名称
-#define MCU_SSID_NAME	"MUZO Cobblestone"
-#elif defined(FUNC_WIFI_DUMI_PROJECT_EN)
 //**MCU+SID+name&:设置设备默认SSID名称
 #define MCU_SSID_NAME	"SWL001"
-#endif
 
 //**MCU+PTV+nnn:使用的MCU 协议的版本号设置
 #define MCU_PTV_NUM		002		//nnn为0~999的数字，表示使用的MCU 协议的版本号，默认000；此项设定和capacity 的位定义有依赖关系?

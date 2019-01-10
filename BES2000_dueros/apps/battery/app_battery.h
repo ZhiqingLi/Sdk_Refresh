@@ -1,0 +1,120 @@
+#ifndef __APP_BATTERY_H__
+#define __APP_BATTERY_H__
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define APP_BATTERY_SET_MESSAGE(appevt, status, volt) (appevt = (((uint32_t)status&0xffff)<<16)|(volt&0xffff))
+#define APP_BATTERY_GET_STATUS(appevt, status) (status = (appevt>>16)&0xffff)
+#define APP_BATTERY_GET_VOLT(appevt, volt) (volt = appevt&0xffff)
+
+#ifdef __ANKER_UI__
+
+
+#define APP_NTC_ADC_CHANNEL             HAL_GPADC_CHAN_3
+
+#define APP_BATTERY_SERIES_CON_MUTL     (2)
+
+#undef  APP_BATTERY_MIN_MV
+#undef  APP_BATTERY_MAX_MV
+#undef  APP_BATTERY_PD_MV
+
+
+/* no charging */
+#define APP_BATTERY_MAX_MV    (8284)
+#define APP_BATTERY_MIN_MV    (5604)
+#define APP_BATTERY_LOW_MV    (6500)
+
+/*  charging  */
+#define APP_BATTERY_CHARGING_MAX_MV    (8400)
+#define APP_BATTERY_CHARGING_MIN_MV    (6200)
+#define APP_BATTERY_CHARGING_LOW_MV    (7057)
+
+
+
+/*
+#ifndef APP_BATTERY_MIN_MV
+#define APP_BATTERY_MIN_MV (3200*APP_BATTERY_SERIES_CON_MUTL)
+#endif
+
+#ifndef APP_BATTERY_MAX_MV
+#define APP_BATTERY_MAX_MV (4250*APP_BATTERY_SERIES_CON_MUTL)
+#endif
+
+#ifndef APP_BATTERY_PD_MV
+#define APP_BATTERY_PD_MV   (3100*APP_BATTERY_SERIES_CON_MUTL)
+#endif
+*/
+
+#ifndef APP_BATTERY_CHARGE_TIMEOUT_MIN
+#define APP_BATTERY_CHARGE_TIMEOUT_MIN (90)
+#endif
+
+#define APP_BATTERY_CHARGING_PLUGOUT_DEDOUNCE_CNT (APP_BATTERY_CHARGING_PERIODIC_MS<500?3:1)
+
+#define APP_BATTERY_CHARGING_EXTPIN_MEASURE_CNT (APP_BATTERY_CHARGING_PERIODIC_MS<2*1000?2*1000/APP_BATTERY_CHARGING_PERIODIC_MS:1)
+#define APP_BATTERY_CHARGING_EXTPIN_DEDOUNCE_CNT (6)
+
+#define APP_BATTERY_CHARGING_OVERVOLT_MEASURE_CNT (APP_BATTERY_CHARGING_PERIODIC_MS<2*1000?2*1000/APP_BATTERY_CHARGING_PERIODIC_MS:1)
+#define APP_BATTERY_CHARGING_OVERVOLT_DEDOUNCE_CNT (3)
+
+#define APP_BATTERY_CHARGING_SLOPE_MEASURE_CNT (APP_BATTERY_CHARGING_PERIODIC_MS<20*1000?20*1000/APP_BATTERY_CHARGING_PERIODIC_MS:1)
+#define APP_BATTERY_CHARGING_SLOPE_TABLE_COUNT (6)
+
+
+#define APP_BATTERY_REPORT_INTERVAL (5)
+
+#define APP_BATTERY_LEVEL_MIN (0)
+#define APP_BATTERY_LEVEL_MAX (9)
+#define APP_BATTERY_LEVEL_NUM (APP_BATTERY_LEVEL_MAX-APP_BATTERY_LEVEL_MIN+1)
+
+#define APP_BATTERY_MV_BASE ((APP_BATTERY_MAX_MV-APP_BATTERY_PD_MV)/(APP_BATTERY_LEVEL_NUM))
+
+#define APP_BATTERY_STABLE_COUNT (5)
+#define APP_BATTERY_MEASURE_PERIODIC_FAST_MS (1000)
+#define APP_BATTERY_MEASURE_PERIODIC_NORMAL_MS (10000)
+#define APP_BATTERY_CHARGING_PERIODIC_MS (1000)
+
+#define APP_BATTERY_CHARING_FULL_DELAY      (60)
+
+#endif
+
+enum APP_BATTERY_STATUS_T {
+    APP_BATTERY_STATUS_NORMAL,
+    APP_BATTERY_STATUS_CHARGING,
+    APP_BATTERY_STATUS_OVERVOLT,
+    APP_BATTERY_STATUS_UNDERVOLT,
+    APP_BATTERY_STATUS_PDVOLT,
+    APP_BATTERY_STATUS_INVALID,
+
+    APP_BATTERY_STATUS_QTY
+};
+
+typedef uint16_t APP_BATTERY_MV_T;
+typedef void (*APP_BATTERY_EVENT_CB_T)(enum APP_BATTERY_STATUS_T, APP_BATTERY_MV_T volt);
+
+int8_t app_battery_volt_to_percent(APP_BATTERY_MV_T volt, enum APP_BATTERY_STATUS_T status);
+
+int app_battery_get_info(APP_BATTERY_MV_T *currvolt, uint8_t *currlevel, enum APP_BATTERY_STATUS_T *status);
+
+int app_battery_open(void);
+
+int app_battery_start(void);
+
+int app_battery_stop(void);
+
+int app_battery_close(void);
+
+int app_battery_charger_indication_open(void);
+
+int ntc_capture_open(void);
+
+int ntc_capture_start(void);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+

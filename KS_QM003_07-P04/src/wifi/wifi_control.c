@@ -2383,12 +2383,12 @@ uint32_t WiFiControl(void)
 	{
 		if(gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_USB)
 	    {
-		   SoundRemind(SOUND_UDISC_PLAYBACK); 
+		   //SoundRemind(SOUND_UDISC_PLAYBACK); 
 		   APP_DBG("enter MODULE_ID_PLAYER_WIFI_USB player\n");		
 	    }
 		else if(gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_SD)
 		{
-		   SoundRemind(SOUND_CARD_PLAYBACK); 
+		   //SoundRemind(SOUND_CARD_PLAYBACK); 
 		   APP_DBG("enter MODULE_ID_PLAYER_WIFI_SD player\n");
 		}	
 		else

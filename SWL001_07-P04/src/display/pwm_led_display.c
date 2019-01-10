@@ -520,8 +520,11 @@ TIMER LightAutoControlTimer;
 PWM_LED_COLOUR	PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
 PWM_LED_DUTY 	PwmLightState[MAX_LIGHT_NUM];
 uint8_t DutyBuf[3];
-static uint8_t PwmSetDutyTemp[MAX_LIGHT_NUM];
 static uint8_t LightBrightness = MIN_BRIGHTNESS;
+
+#ifdef FUNC_WIFI_ALEXA_PROJECT_EN
+static uint8_t PwmSetDutyTemp[MAX_LIGHT_NUM];
+#endif
 
 static const uint8_t PwmColorTable[PWM_LED_COLOUR_COLORFUL][4] =
 {
@@ -622,7 +625,9 @@ void PwmLedDisplayControlChange(PWM_LED_COLOUR Colour)
 		for (Temp = 0; Temp < MAX_LIGHT_NUM; ++Temp)
 		{
 			PwmLightState[Temp].PwmSetDuty = PwmColorTable[Colour][Temp]*LightBrightness/100;
+#ifdef FUNC_WIFI_ALEXA_PROJECT_EN
 			PwmSetDutyTemp[Temp] = PwmColorTable[Colour][Temp];
+#endif
 		}
 	}
 	else
@@ -630,7 +635,9 @@ void PwmLedDisplayControlChange(PWM_LED_COLOUR Colour)
 		for (Temp = 0; Temp < MAX_LIGHT_NUM; ++Temp)
 		{
 			PwmLightState[Temp].PwmSetDuty = 0;
+#ifdef FUNC_WIFI_ALEXA_PROJECT_EN
 			PwmSetDutyTemp[Temp] = 0;
+#endif
 		}
 	}
 
@@ -1243,7 +1250,10 @@ void PwmRandomColourTimerBlink(void)
 	
 	if(FALSE == IsPwmLedDisplayFlag)
 	{
-		memset(&PwmLightState, 0, sizeof(PwmLightState));
+		for (Temp = 0; Temp < MAX_LIGHT_NUM; ++Temp)
+		{
+			PwmLightState[Temp].PwmSetDuty = 0;
+		}
 		return;
 	}
 
@@ -1352,92 +1362,6 @@ void PwmLedDisplayInit(void)
 // Call by display refresh ISR.
 void PwmLedFlushDisp(void)
 {
-#ifdef PWM_LED_SCAN_DISP_EN
-	static uint8_t ScanPinNum = 0;
-	
-    //关闭所有输出
-	LedAllPinGpioOutoff();
-	PwmDisableChannel(UXLED_RED_PWM_PORT_MASK);
-	PwmDisableChannel(UXLED_GREEN_PWM_PORT_MASK);
-	PwmDisableChannel(UXLED_BLUE_PWM_PORT_MASK);
-	
-	ScanPinNum++;
-	if(ScanPinNum >= PWM_LED_SCAN_MAX_NUM)
-	{
-		ScanPinNum = 0;
-	}
-	
-	switch(PwmLedState[ScanPinNum].PwmLedColor)
-	{
-		case PWM_LED_COLOUR_RED:
-			UXLED_RED_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_ORANGE:
-			UXLED_ORANGE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_YELLOW:
-			UXLED_YELLOW_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_GREEN:
-			UXLED_GREEN_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_CYAN:
-			UXLED_CYAN_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_BLUE:
-			UXLED_BLUE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_PURPLE:
-			UXLED_PURPLE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-
-		case PWM_LED_COLOUR_WHITE:
-			UXLED_WHITE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
-			break;
-				
-		default:
-			UXLED_ALL_MODE_OFF();
-			break;
-	}
-
-	switch(ScanPinNum)
-	{
-		case 0:
-			LED_PIN1_OUT_ON;
-			break;
-
-		case 1:
-			LED_PIN2_OUT_ON;
-			break;
-
-		case 2:
-			LED_PIN3_OUT_ON;
-			break;
-
-		case 3:
-			LED_PIN4_OUT_ON;
-			break;
-
-		case 4:
-			LED_PIN5_OUT_ON;
-			break;
-
-		case 5:
-			LED_PIN6_OUT_ON;
-			break;
-
-		default:
-			LED_ALL_POWER_OFF();
-			break;
-	}
-#endif
-
 #ifdef FUNC_LIGHT_PWM_LED_EN
 	{
 		uint8_t LightScanNum = 0;
@@ -1452,6 +1376,10 @@ void PwmLedFlushDisp(void)
 			{
 				PwmLightState[LightScanNum].PwmScanDuty--;
 			}
+			else if(PwmLightState[LightScanNum].PwmScanDuty == PwmLightState[LightScanNum].PwmSetDuty)
+			{
+				continue;
+			}
 
 			if(0 == LightScanNum)
 			{
@@ -1465,10 +1393,98 @@ void PwmLedFlushDisp(void)
 			{
 				LED_BLUE_MODE_ON(PwmLightState[LightScanNum].PwmScanDuty);
 			}
-			else
+			else if(3 == LightScanNum)
 			{
 				LED_LIGHT_MODE_ON(PwmLightState[LightScanNum].PwmScanDuty);
 			}
+		}
+	}
+#endif
+
+#ifdef PWM_LED_SCAN_DISP_EN
+	{
+		static uint8_t ScanPinNum = 0;
+		
+	    //关闭所有输出
+		LedAllPinGpioOutoff();
+		PwmDisableChannel(UXLED_GREEN_PWM_PORT_MASK);
+		PwmDisableChannel(UXLED_BLUE_PWM_PORT_MASK);
+		PwmDisableChannel(UXLED_RED_PWM_PORT_MASK);
+		
+		ScanPinNum++;
+		if(ScanPinNum >= PWM_LED_SCAN_MAX_NUM)
+		{
+			ScanPinNum = 0;
+		}
+		
+		switch(PwmLedState[ScanPinNum].PwmLedColor)
+		{
+			case PWM_LED_COLOUR_RED:
+				UXLED_RED_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_ORANGE:
+				UXLED_ORANGE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_YELLOW:
+				UXLED_YELLOW_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_GREEN:
+				UXLED_GREEN_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_CYAN:
+				UXLED_CYAN_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_BLUE:
+				UXLED_BLUE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_PURPLE:
+				UXLED_PURPLE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+
+			case PWM_LED_COLOUR_WHITE:
+				UXLED_WHITE_MODE_ON(PwmLedState[ScanPinNum].PwmLedDuty);
+				break;
+					
+			default:
+				UXLED_ALL_MODE_OFF();
+				break;
+		}
+
+		switch(ScanPinNum)
+		{
+			case 0:
+				LED_PIN1_OUT_ON;
+				break;
+
+			case 1:
+				LED_PIN2_OUT_ON;
+				break;
+
+			case 2:
+				LED_PIN3_OUT_ON;
+				break;
+
+			case 3:
+				LED_PIN4_OUT_ON;
+				break;
+
+			case 4:
+				LED_PIN5_OUT_ON;
+				break;
+
+			case 5:
+				LED_PIN6_OUT_ON;
+				break;
+
+			default:
+				LED_ALL_POWER_OFF();
+				break;
 		}
 	}
 #endif
