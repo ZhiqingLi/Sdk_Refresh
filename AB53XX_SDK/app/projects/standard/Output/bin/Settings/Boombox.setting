@@ -266,5 +266,6 @@
         <add key="led_btinit_cycle" value="0" />
         <add key="user_adkey_mux_sdclk_en" value="False" />
         <add key="sd1det_iosel" value="24" />
+        <add key="mic_post_gain" value="0" />
     </appSettings>
 </configuration>

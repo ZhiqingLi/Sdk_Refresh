@@ -246,7 +246,7 @@
         <add key="auxl_sel" value="4" />
         <add key="auxr_sel" value="4" />
         <add key="earphone_det_iosel" value="0" />
-        <add key="sddet_iosel" value="19" />
+        <add key="sddet_iosel" value="31" />
         <add key="bt_tws_en" value="True" />
         <add key="bt_tws_pair_mode" value="2" />
         <add key="bt_tws_lr_mode" value="4" />
@@ -266,5 +266,6 @@
         <add key="led_btinit_cycle" value="0" />
         <add key="sd1det_iosel" value="28" />
         <add key="user_adkey_mux_sdclk_en" value="False" />
+        <add key="mic_post_gain" value="0" />
     </appSettings>
 </configuration>

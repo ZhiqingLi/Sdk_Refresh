@@ -21,6 +21,7 @@
 #define GUI_LEDSEG_5C7S                 (DISPLAY_LEDSEG | 0x00)                 //5C7S 数码管
 #define GUI_LEDSEG_7P7S                 (DISPLAY_LEDSEG | 0x01)                 //7PIN 数码管 按COM方式扫描
 #define GUI_LEDSEG_3P7S                 (DISPLAY_LEDSEG | 0x02)                 //3PIN 7段数码管
+#define GUI_SPISEG_16XX                 (DISPLAY_LEDSEG | 0x03)                 //spi断码驱动IC类
 
 /*****************************************************************************
  * Module    : FLASH大小定义

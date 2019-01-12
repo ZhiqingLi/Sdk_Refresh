@@ -694,7 +694,7 @@
 	"bsp_ble.h"
 	"func_fmrx.h"
 
-1540463253 f:\soft_sdk\ab53xx_sdk\app\platform\header\include.h
+1547127562 f:\soft_sdk\ab53xx_sdk\app\platform\header\include.h
 	"global.h"
 	"config.h"
 	"io_def.h"
@@ -724,12 +724,12 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1547004862 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1547174741 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
 
-1547006322 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_define.h
+1547111482 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_define.h
 
 1547004968 f:\soft_sdk\ab53xx_sdk\app\projects\standard\xcfg.h
 
@@ -933,10 +933,11 @@
 	"lcd/lcd.h"
 	"lcd/display_lcd.h"
 
-1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.h
+1547123378 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.h
 
-1541838978 f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.h
+1547207599 f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.h
 	"ledseg/ledseg_7p7s.h"
+	"ledseg/spidisplay.h"
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_7p7s.h
 
@@ -1104,7 +1105,7 @@
 1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_record_play.c
 	"include.h"
 
-1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\gui.c
+1547124249 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\gui.c
 	"include.h"
 	"gui.h"
 
@@ -1117,7 +1118,7 @@
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
 
-1538020972 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.c
+1547127634 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.c
 	"include.h"
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
@@ -1254,4 +1255,135 @@
 	"include.h"
 
 1542353255 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\ram.ld
+
+1547005603 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_audio.c
+	"include.h"
+
+1547005756 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1547005784 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_charge.c
+	"include.h"
+
+1547005799 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1547005903 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1547005927 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1547005959 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1547006057 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_key.c
+	"include.h"
+
+1547006008 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1547006717 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
+	"include.h"
+
+1547006689 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1547006668 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1547006588 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_exspifalsh_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspifalsh_music.h"
+
+1547006552 f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_exspifalsh_music.h
+	"bsp_spiflash1.h"
+	"spiflash_cyc_fs.h"
+
+1547006537 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1547006487 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1547006466 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1547006440 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_bt_ota.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1547006431 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1547006397 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+	"spiflash_cyc_fs.h"
+	"bsp_spiflash1.h"
+
+1546498957 source:f:\soft_sdk\ab53xx_sdk\app\platform\libs\strong_symbol.c
+	"include.h"
+
+1547007287 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\main.c
+	"include.h"
+
+1547004252 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1547004288 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_exspiflash_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspifalsh_music.h"
+
+1547004338 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\plugin\plugin.c
+	"include.h"
+
+1547004374 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_earphone.c
+	"include.h"
+
+1547004387 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_linein.c
+	"include.h"
+
+1547004396 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_mic.c
+	"include.h"
+
+1547004407 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_sd.c
+	"include.h"
+
+1547004417 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_sd1.c
+	"include.h"
+
+1547174513 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_sys.c
+	"include.h"
+	"bsp_spiflash1.h"
+
+1547126244 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\bsp_spidisplay.h
+
+1547126244 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.h
+
+1547206732 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.c
+	"include.h"
+	"spidisplay.h"
 

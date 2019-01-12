@@ -1,12 +1,12 @@
 #ifndef _DISPLAY_LEDSEG_H
 #define _DISPLAY_LEDSEG_H
 
-#define SEG_A           BIT(0)
-#define SEG_B           BIT(1)
-#define SEG_C           BIT(2)
-#define SEG_D           BIT(3)
-#define SEG_E           BIT(4)
-#define SEG_F           BIT(5)
+#define SEG_A           BIT(5)
+#define SEG_B           BIT(4)
+#define SEG_C           BIT(3)
+#define SEG_D           BIT(2)
+#define SEG_E           BIT(1)
+#define SEG_F           BIT(0)
 #define SEG_G           BIT(6)
 #define SEG_H           BIT(7)
 
@@ -19,6 +19,9 @@
 #define ICON_MP3        SEG_F
 #define ICON_FM         SEG_G
 #define ICON_AUX        0x00
+#define ICON_BT         0x00
+#define ICON_24H        0x00
+#define ICON_ARM1       0x00
 
 enum {
     DISP_POWERON = 0,
@@ -52,6 +55,12 @@ enum {
 #define ledseg_off()                ledseg_7p7s_off()
 #define ledseg_scan()               ledseg_7p7s_scan()
 #define ledseg_update_dispbuf()     ledseg_7p7s_update_dispbuf()
+#elif (GUI_SELECT == GUI_SPISEG_16XX)
+#include "ledseg/spidisplay.h"
+#define ledseg_init()               SpiDisplayInit()
+#define ledseg_off()                SpiDisplayClr()
+#define ledseg_scan()               
+#define ledseg_update_dispbuf()     RefreshSpiDisplayData()
 #else
 #define ledseg_init()
 #define ledseg_off()

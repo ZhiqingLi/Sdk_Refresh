@@ -51,7 +51,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define USB_SD_UPDATE_EN                1                       //是否支持UDISK/SD的离线升级
 #define EXT_32K_EN                      0                       //是否使用外部32K晶振,否则内部32K OSC。软关机需要闹钟唤醒时必须使用外部32K晶振
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量, 四声道车机的系统总音量调数字音量
-#define GUI_SELECT                      GUI_NO         //GUI Display Select
+#define GUI_SELECT                      GUI_SPISEG_16XX         //GUI Display Select
 #define FLASH_SIZE                      FSIZE_1M              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
 #define UART0_PRINTF_SEL                PRINTF_PE7             //选择UART打印信息输出IO，或关闭打印信息输出
 
@@ -88,8 +88,8 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 /*****************************************************************************
  * Module    : 蓝牙功能配置
  *****************************************************************************/
-#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙）
-#define BT_BACKSTAGE_PLAY_DETECT_EN     0   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
+#define BT_BACKSTAGE_EN                 1   //蓝牙后台管理（全模式使用蓝牙）
+#define BT_BACKSTAGE_PLAY_DETECT_EN     1   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
 #define BT_NAME_DEFAULT                 "BT-BOX"     //默认蓝牙名称（不超过31个字符）
 #define BT_NAME_WITH_ADDR_EN            0   //蓝牙名称是否附加地址信息（调试用，例如：btbox-***）
 #define BT_POWER_UP_RECONNECT_TIMES     xcfg_cb.bt_power_up_reconnect_times   //上电回连次数
