@@ -28,7 +28,7 @@
         <add key="eq_dgb_spp_en" value="False" />
         <add key="eq_dgb_uart_en" value="False" />
         <add key="eq_uart_sel" value="0" />
-        <add key="dac_sel" value="1" />
+        <add key="dac_sel" value="0" />
         <add key="dac_ldoh_sel" value="3" />
         <add key="dac_vcm_less_en" value="True" />
         <add key="dacvdd_bypass_en" value="False" />
@@ -153,10 +153,10 @@
         <add key="iokey_num3" value="MODE" />
         <add key="iokey_num4" value="HSF" />
         <add key="iokey_midkey_num" value="REPEAT" />
-        <add key="led_disp_en" value="True" />
-        <add key="led_pwr_en" value="True" />
+        <add key="led_disp_en" value="False" />
+        <add key="led_pwr_en" value="False" />
         <add key="led_btpair_5s_en" value="False" />
-        <add key="charge_full_bled" value="True" />
+        <add key="charge_full_bled" value="False" />
         <add key="rled_lowbat_en" value="False" />
         <add key="bled_io_sel" value="PF4" />
         <add key="rled_io_sel" value="PF3" />

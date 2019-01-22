@@ -33,4 +33,9 @@ void sys_set_eq(void);
 void eq_parse_cmd(void);
 void eq_dbg_init(void);
 void bsp_eq_init(void);
+
+void mic_bass_treble_set(int mode, int gain);   //mode: 0(bass), 1(treble)
+void music_bass_treble_set(int mode, int gain);
+void music_set_eq_for_index(u8 index, int gain);
+void music_set_eq_for_gains(s8 gain[8]);
 #endif

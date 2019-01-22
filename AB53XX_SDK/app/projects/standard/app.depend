@@ -724,7 +724,7 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1547174741 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1547881129 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -733,7 +733,7 @@
 
 1547004968 f:\soft_sdk\ab53xx_sdk\app\projects\standard\xcfg.h
 
-1547006352 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_extra.h
+1547779619 f:\soft_sdk\ab53xx_sdk\app\platform\header\config_extra.h
 
 1542155436 f:\soft_sdk\ab53xx_sdk\app\platform\header\io_def.h
 	"global.h"
@@ -935,7 +935,7 @@
 
 1547123378 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.h
 
-1547207599 f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.h
+1547214075 f:\soft_sdk\ab53xx_sdk\app\projects\standard\display\ledseg\display_ledseg.h
 	"ledseg/ledseg_7p7s.h"
 	"ledseg/spidisplay.h"
 
@@ -1118,7 +1118,7 @@
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
 
-1547127634 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.c
+1547214241 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\ledseg_common.c
 	"include.h"
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
@@ -1239,7 +1239,7 @@
 1540463256 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_key.c
 	"include.h"
 
-1540463256 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_led.c
+1547783818 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_led.c
 	"include.h"
 
 1538020980 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_ledseg.c
@@ -1280,10 +1280,10 @@
 1547005959 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_karaok.c
 	"include.h"
 
-1547006057 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_key.c
+1547729559 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_key.c
 	"include.h"
 
-1547006008 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.c
+1547721448 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.c
 	"include.h"
 	"bsp_led.h"
 
@@ -1310,7 +1310,7 @@
 	"bsp_spiflash1.h"
 	"spiflash_cyc_fs.h"
 
-1547006537 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.c
+1547781425 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.c
 	"include.h"
 	"func.h"
 
@@ -1375,15 +1375,15 @@
 1547004417 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\port\port_sd1.c
 	"include.h"
 
-1547174513 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_sys.c
+1547790834 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 	"bsp_spiflash1.h"
 
 1547126244 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\bsp_spidisplay.h
 
-1547126244 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.h
+1547213918 f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.h
 
-1547206732 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.c
+1547213987 source:f:\soft_sdk\ab53xx_sdk\app\platform\gui\ledseg\spidisplay.c
 	"include.h"
 	"spidisplay.h"
 

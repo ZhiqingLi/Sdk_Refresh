@@ -20,6 +20,7 @@ typedef struct{
     u8 pp_2_unmute  : 1;
     u8 need_pairing : 1;
     u8 tws_had_pair : 1;
+    u8 dac_sta      : 1;
 } func_bt_t;
 
 extern func_bt_t f_bt;

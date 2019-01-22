@@ -64,7 +64,7 @@
 /*****************************************************************************
  * Module    : 蓝牙功能配置
  *****************************************************************************/
-#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙）
+#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙，暂不支持BLE后台）
 #define BT_BACKSTAGE_PLAY_DETECT_EN     0   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
 #define BT_NAME_DEFAULT                 "BT-BOX"     //默认蓝牙名称（不超过31个字符）
 #define BT_NAME_WITH_ADDR_EN            0   //蓝牙名称是否附加地址信息（调试用，例如：btbox-***）
@@ -114,7 +114,7 @@
 #define BT_ALC_FADE_OUT_STEP            xcfg_cb.bt_alc_out_step     //远端淡入速度
 #define BT_ALC_VOICE_THR                0x50000
 
-#define LE_EN                           0   //是否打开BLE功能
+#define LE_EN                           0   //是否打开BLE功能（暂不支持蓝牙后台）
 #define LE_LIGHTING_EN                  0   //是否打开BLE灯光控制服务
 #define LE_MUSIC_CTRL_EN                0   //是否打开BLE音乐控制服务
 

@@ -45,7 +45,7 @@ void fmrx_threshold_init(void)
 AT(.text.bsp.fmrx)
 void fmrx_inside_init(void)
 {
-    fmrx_power_on(FMRX_THRESHOLD_VAL);
+    fmrx_power_on(BT_BACKSTAGE_EN << 31);
     fmrx_set_rf_cap(FMRX_RFCAP_VAL);         //FMFE input capacitor
 #if FMRX_REC_EN
     rec_src.spr = SPR_44100;

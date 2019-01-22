@@ -54,7 +54,7 @@ void func_bt_message(u16 msg)
     case KD_PLAY_POWER:
     case KD_PLAY_MODE:
         bsp_clr_mute_sta();
-        if (bt_get_status() >= BT_STA_CONNECTED) {
+        if (bt_nor_is_connected()) {
             bt_call_redial_last_number();           //回拨电话
             func_bt_mp3_res_play(RES_BUF_CALLOUT_MP3, RES_LEN_CALLOUT_MP3);
 #if BT_TWS_EN
@@ -68,6 +68,9 @@ void func_bt_message(u16 msg)
         } else {
             printf("switch voice\n");
             func_bt_switch_voice_lang();            //切换提示音语言
+#if (LANG_SELECT == LANG_EN_ZH)
+            bt_send_msg(BT_MSG_TWS_SYNC_INFO);      //同步提示音语言
+#endif
         }
         break;
 
@@ -204,6 +207,11 @@ void sfunc_bt_call_message(u16 msg)
 #endif // BT_HFP_CALL_PRIVATE_EN
         break;
 
+    case KL_PLAY_POWER:
+        //长按挂断电话，无论长按多久不响应关机功能。
+        if (msg == KL_PLAY_POWER) {
+            sys_cb.poweron_flag = 1;    //PWRKEY松开前不产生KHL_PLAY_POWER消息。按键松开自动清此标志。
+        }
     case KL_HSF:
         bsp_clr_mute_sta();
         call_status = bt_get_call_indicate();

@@ -122,10 +122,12 @@ static void sfunc_sleep(void)
     USBCON0 = BIT(5);
     USBCON1 = 0;
 
-    //close pll0
-    PLL0CON &= ~BIT(18);                //pll10 sdm enable disable
-    PLL0CON &= ~BIT(6);                 //pll0 analog diable
-    PLL0CON &= ~BIT(12);                //pll0 ldo disable
+    if ((CLKCON0 & 0x70) != 0) {
+        //close pll0
+        PLL0CON &= ~BIT(18);                //pll10 sdm enable disable
+        PLL0CON &= ~BIT(6);                 //pll0 analog diable
+        PLL0CON &= ~BIT(12);                //pll0 ldo disable
+    }
 
     //close pll1
     p111_en = pll1_disable();
@@ -187,11 +189,13 @@ static void sfunc_sleep(void)
     USBCON0 = usbcon0;
     USBCON1 = usbcon1;
 
-    //enable adpll
-    PLL0CON |= BIT(12);                //PLL1 LDO enable
-    delay_us(100);
-    PLL0CON |= BIT(18);                //PLL1 SDM enable
-    PLL0CON |= BIT(6);                 //PLL1 Analog enable
+    if ((CLKCON0 & 0x70) != 0) {
+        //enable adpll
+        PLL0CON |= BIT(12);                //PLL1 LDO enable
+        delay_us(100);
+        PLL0CON |= BIT(18);                //PLL1 SDM enable
+        PLL0CON |= BIT(6);                 //PLL1 Analog enable
+    }
 
     adc_cb.channel = adc_ch;
     bsp_saradc_init(adc_cb.channel);

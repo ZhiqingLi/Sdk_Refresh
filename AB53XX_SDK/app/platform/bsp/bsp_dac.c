@@ -172,6 +172,7 @@ void dac_set_mute_callback(u8 mute_flag)
             {
                 //DAC延时淡入，防止UNMUTE时间太短导致喇叭声音不全的问题
                 dac_unmute_set_delay(LOUDSPEAKER_UNMUTE_DELAY);
+                printf("dac_unmute_set_delay = %d;\n", LOUDSPEAKER_UNMUTE_DELAY);
             }
         }
     }

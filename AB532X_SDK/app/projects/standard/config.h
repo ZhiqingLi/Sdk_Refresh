@@ -13,13 +13,13 @@
  * Module    : Function选择相关配置
  *****************************************************************************/
 #define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
-#define FUNC_CLOCK_EN                   1   //是否打开时钟功能
+#define FUNC_CLOCK_EN                   0   //是否打开时钟功能
 #define FUNC_FMRX_EN                    1   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
 #define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
 #define FUNC_AUX_EN                     1   //是否打开AUX功能
 #define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
-#define FUNC_SPEAKER_EN                 1   //是否打开Speaker模式
+#define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能(未开发)
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
 #define FUNC_IDLE_EN                    0   //是否打开IDLE功能
@@ -32,9 +32,9 @@
 #define SOFT_POWER_ON_OFF               1                       //是否使用软开关机功能
 #define USB_SD_UPDATE_EN                1                       //是否支持UDISK/SD的离线升级
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量
-#define GUI_SELECT                      GUI_LEDSEG_7P7S  //GUI Display Select
+#define GUI_SELECT                      GUI_NO					//GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_PA7              //选择UART打印信息输出IO，或关闭打印信息输出
+#define UART0_PRINTF_SEL                PRINTF_PB3              //选择UART打印信息输出IO，或关闭打印信息输出
 
 /*****************************************************************************
  * Module    : 音乐功能配置
@@ -68,11 +68,11 @@
 /*****************************************************************************
  * Module    : 蓝牙功能配置
  *****************************************************************************/
-#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙）
-#define BT_BACKSTAGE_PLAY_DETECT_EN     0   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
+#define BT_BACKSTAGE_EN                 1   //蓝牙后台管理（全模式使用蓝牙，暂不支持BLE后台）
+#define BT_BACKSTAGE_PLAY_DETECT_EN     1   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
 #define BT_NAME_DEFAULT                 "BT-BOX"     //默认蓝牙名称（不超过31个字符）
 #define BT_NAME_WITH_ADDR_EN            0   //蓝牙名称是否附加地址信息（调试用，例如：btbox-***）
-#define BT_POWER_UP_RECONNECT_TIMES     3   //上电回连次数
+#define BT_POWER_UP_RECONNECT_TIMES     5   //上电回连次数
 #define BT_TIME_OUT_RECONNECT_TIMES     20  //掉线回连次数
 #define BT_SIMPLE_PAIR_EN               1   //是否打开蓝牙简易配对功能（关闭时需要手机端输入PIN码）
 #define BT_DISCOVER_CTRL_EN             0   //是否使用按键打开可被发现（按一下按键才能被连接配对）
@@ -95,11 +95,12 @@
 #define BT_HFP_CALL_PRIVATE_EN          1   //是否使能私密接听与蓝牙接听切换功能
 #define BT_HFP_CALL_PRIVATE_FORCE_EN    0   //是否强制使用私密接听（手机端接听）
 #define BT_HFP_RING_NUMBER_EN           1   //是否支持来电报号
-#define BT_HFP_PLAY_IOS_RING_EN         0   //是否支持ios来电铃声（android默认用RING提示音）
+#define BT_HFP_PLAY_IOS_RING_EN         1   //是否支持ios来电铃声（android默认用RING提示音）
 #define BT_HFP_BAT_REPORT_EN            1   //是否支持电量显示
 #define BT_HFP_MSBC_EN                  0   //是否打开宽带语音功能
 #define BT_A2DP_VOL_CTRL_EN             1   //是否支持A2DP音量与手机同步
 #define BT_A2DP_RECON_EN                0   //是否支持A2DP控制键（播放/暂停、上下曲键）回连
+#define DAC_OFF_FOR_BT_CONN_EN          xcfg_cb.dac_off_for_conn
 
 //通话参数
 #define BT_PLC_EN                       1
@@ -119,7 +120,7 @@
 #define BT_ALC_FADE_OUT_STEP            xcfg_cb.bt_alc_out_step     //远端淡入速度
 #define BT_ALC_VOICE_THR                0x50000
 
-#define LE_EN                           0   //是否打开BLE功能
+#define LE_EN                           0   //是否打开BLE功能（暂不支持蓝牙后台）
 #define LE_LIGHTING_EN                  0   //是否打开BLE灯光控制服务
 #define LE_MUSIC_CTRL_EN                0   //是否打开BLE音乐控制服务
 
@@ -281,11 +282,11 @@
 #define I2S_EN                          0           //是否使能I2S功能
 #define I2S_DEVICE                      I2S_DEV_NO //I2S设备选择
 #define I2S_MAPPING_SEL                 I2S_GPIOA   //I2S IO口选择
-#define I2S_MODE_SEL                    1           //I2S主从模式选择 0: master; 1:slave
+#define I2S_MODE_SEL                    0           //I2S主从模式选择 0: master; 1:slave
 #define I2S_BIT_MODE                    0           //I2S数据位宽选择 0:16bit; 1:32bit
 #define I2S_DATA_MODE                   1           //I2S数据格式选择 0:left-justified mode; 1:normal mode
-#define I2S_DMA_EN                      1           //I2S数据源选择 0:src; 1:dma
-#define I2S_MCLK_EN                     0           //I2S是否打开MCLK
+#define I2S_DMA_EN                      0           //I2S数据源选择 0:src; 1:dma
+#define I2S_MCLK_EN                     1           //I2S是否打开MCLK
 #define I2S_MCLK_SEL                    2           //I2S MCLK选择 0:64fs 1:128fs 2:256fs
 #define I2S_PCM_MODE                    0           //I2S是否打开PCM mode
 
@@ -336,6 +337,7 @@
 #define EQ_MODE_EN                      1           //是否调节EQ MODE (POP, Rock, Jazz, Classic, Country)
 #define EQ_DBG_IN_UART                  1           //是否使能UART在线调节EQ
 #define EQ_DBG_IN_SPP                   1           //是否使能SPP在线调节EQ
+#define SYS_EQ_FOR_IDX_EN               0           //是否使能10条EQ独立调节(包括高低音)
 #define SLEEP_DAC_OFF_EN                (is_sleep_dac_off_enable()) //sfunc_sleep是否关闭DAC， 复用MICL检测方案不能关DAC。
 #define SYS_INIT_VOLUME                 xcfg_cb.sys_init_vol        //系统默认音量
 #define LPWR_WARNING_VBAT               xcfg_cb.lpwr_warning_vbat   //低电提醒电压
@@ -375,7 +377,7 @@
 #define LOUDSPEAKER_MUTE_DIS()          loudspeaker_disable()
 #define LOUDSPEAKER_MUTE()              loudspeaker_mute()
 #define LOUDSPEAKER_UNMUTE()            loudspeaker_unmute()
-#define LOUDSPEAKER_UNMUTE_DELAY        6           //UNMUTE延时配置，单位为5ms
+#define LOUDSPEAKER_UNMUTE_DELAY        xcfg_cb.loudspeaker_unmute_delay//UNMUTE延时配置，单位为5ms
 
 #define AMPLIFIER_SEL_INIT()            amp_sel_cfg_init(xcfg_cb.ampabd_io_sel)
 #define AMPLIFIER_SEL_D()               amp_sel_cfg_d()

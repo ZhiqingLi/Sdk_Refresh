@@ -40,6 +40,12 @@
 #define CHARGE_FINISH_INTO_LOWPOWER   0
 #define CHARGE_OUT_POWER_ON    0
 #endif
+
+#if SYS_EQ_FOR_IDX_EN
+#undef SYS_BASS_TREBLE_EN
+#define SYS_BASS_TREBLE_EN          0
+#endif
+
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/
@@ -331,7 +337,7 @@
 #define LE_MUSIC_CTRL_EN            0
 #endif
 
-#if LE_LIGHTING_EN || LE_MUSIC_CTRL_EN
+#if LE_EN
     #define BT_DUAL_MODE_EN         1
 #else
     #define BT_DUAL_MODE_EN         0
@@ -341,6 +347,19 @@
 #define BT_PAIR_SLEEP_EN            0
 #endif // BT_PAIR_SLEEP_EN
 
+#if BT_BACKSTAGE_EN
+#undef MUSIC_WMA_SUPPORT
+#undef MUSIC_FLAC_SUPPORT
+#undef FMRX_THRESHOLD_FZ
+
+#define MUSIC_WMA_SUPPORT           0
+#define MUSIC_FLAC_SUPPORT          0
+#define FMRX_THRESHOLD_FZ           0
+#endif
+
+#ifndef DAC_OFF_FOR_BT_CONN_EN
+#define DAC_OFF_FOR_BT_CONN_EN      0
+#endif
 /*****************************************************************************
  * Module    : uart0 printf 功能自动配置(自动关闭SD卡，USB)
  *****************************************************************************/

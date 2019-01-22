@@ -2,6 +2,18 @@
 #include "func.h"
 #include "func_bt.h"
 
+#define MAX_DIG_VAL             32767
+#define AEC_DIG_P0DB            (MAX_DIG_VAL * 1.000000)
+#define AEC_DIG_P1DB            (MAX_DIG_VAL * 1.122018)
+#define AEC_DIG_P2DB            (MAX_DIG_VAL * 1.258925)
+#define AEC_DIG_P3DB            (MAX_DIG_VAL * 1.412538)
+#define AEC_DIG_P4DB            (MAX_DIG_VAL * 1.584893)
+#define AEC_DIG_P5DB            (MAX_DIG_VAL * 1.778279)
+#define AEC_DIG_P6DB            (MAX_DIG_VAL * 1.995262)
+#define AEC_DIG_P7DB            (MAX_DIG_VAL * 2.238721)
+#define AEC_DIG_P8DB            (MAX_DIG_VAL * 2.511886)
+#define AEC_DIG_P9DB            (MAX_DIG_VAL * 2.818383)
+
 typedef struct {
     //AEC
     u8 aec_en       :   1;
@@ -23,6 +35,13 @@ typedef struct {
 static bt_voice_cfg_t bt_voice_cfg AT(.sco_data);
 void bt_voice_init(bt_voice_cfg_t *p);
 void bt_voice_exit(void);
+void bt_sco_rec_exit(void);
+////库调用，设置MIC的增益（算法之后）
+//AT(.com_text.aec)
+//int sco_set_mic_gain_after_aec(void)
+//{
+//    return AEC_DIG_P9DB;
+//}
 
 #if FUNC_BT_EN
 void sco_audio_init(void)
@@ -75,6 +94,7 @@ void sco_audio_exit(void)
 {
 #if BT_HFP_REC_EN
     sfunc_record_stop();
+    bt_sco_rec_exit();
 #endif
 #if SYS_KARAOK_EN
     if (sys_cb.hfp_karaok_en) {

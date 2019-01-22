@@ -6,9 +6,29 @@ void plugin_init(void)
 #if (LANG_SELECT == LANG_EN_ZH)
     multi_lang_init(sys_cb.lang_id);
 #endif
+
+#if ((UART0_PRINTF_SEL == PRINTF_NONE)  || (!EQ_DBG_IN_UART))
+    if (!xcfg_cb.eq_dgb_uart_en) {
+        CLKGAT0 &= ~BIT(10);    //UART0CLK
+    }
+#endif
+    CLKGAT0 &= ~BIT(9);       //SDCLK
+    CLKGAT0 &= ~BIT(11);      //HUART
+    CLKGAT0 &= ~BIT(14);      //USBCLK
+    CLKGAT0 &= ~BIT(15);      //FMRXCLK
+    CLKGAT0 &= ~BIT(21);      //UART1CLK
+    CLKGAT0 &= ~BIT(24);      //TIME1
+    CLKGAT0 &= ~BIT(25);      //TIME2
+    CLKGAT0 &= ~BIT(29);      //SPFCLK
+    CLKGAT1 &= ~(BIT(0)|BIT(1)|BIT(3)|BIT(4) |BIT(8)  |BIT(11)  |BIT(12)); //FMAMFDT,FMTX,IRRX,IIS,TIME3,UART2,SPI1
+    CLKGAT1 &= ~BIT(13);      //FMLODIV
+    CLKGAT1 &= ~BIT(14);      //FMLO_AFCCLK
 }
 
+void lopll_2_pll1out_init(void)   //耳机省功耗
+{
 
+}
 
 void plugin_var_init(void)
 {

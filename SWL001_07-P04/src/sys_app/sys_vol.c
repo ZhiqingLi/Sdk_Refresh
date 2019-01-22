@@ -1404,8 +1404,9 @@ void CommonMsgProccess(uint16_t Msg)
 		}
 		else if(Msg == MSG_WIFI_TALK)
 		{
-			if((gWiFi.MicState != WIFI_AVS_STATUS_LSN)
+			if(((gWiFi.MicState != WIFI_AVS_STATUS_LSN)
 			&& (gWiFi.MicState != WIFI_AVS_STATUS_DIS))
+			|| gWiFi.TestModeState)
 			{
 			    Mcu_SendCmdToWiFi(MCU_TALK_ON, NULL);
 			}

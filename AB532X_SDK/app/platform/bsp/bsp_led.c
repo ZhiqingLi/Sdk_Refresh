@@ -28,7 +28,7 @@ void tmr5ms_set_sync(void)
 }
 
 AT(.com_text.led)
-static void led_sync(void)
+static bool led_sync(void)
 {
 #if BT_TWS_EN
     if((led_cb.flag & LED_SYNC)) {
@@ -50,12 +50,13 @@ static void led_sync(void)
             } else if(led_period < 400) {   //2s
                 bled_set_off();
                 rled_set_off();
-                return;
+                return false;
             }
         }
 
     }
 #endif
+    return true;
 }
 
 //50ms调用周期
@@ -66,7 +67,9 @@ void led_scan(void)
         return;
     }
 
-    led_sync();
+    if(!led_sync()) {
+        return;
+    }
 
     //等待间隔时间
     if (led_cb.space_cnt) {
@@ -150,6 +153,8 @@ void led_cfg_set_on(gpio_t *g)
     } else {
         g->sfr[GPIOxDE] |= BIT(g->num);
         g->sfr[GPIOxPU300] |= BIT(g->num);
+        g->sfr[GPIOxDIR] &= ~BIT(g->num);
+        g->sfr[GPIOxSET] = BIT(g->num);
     }
 }
 
@@ -165,8 +170,10 @@ void led_cfg_set_off(gpio_t *g)
         g->sfr[GPIOxDIR] &= ~BIT(g->num);
         g->sfr[GPIOxCLR] = BIT(g->num);
     } else {
-        g->sfr[GPIOxDE] &= ~BIT(g->num);
+        g->sfr[GPIOxDE] |= BIT(g->num);
         g->sfr[GPIOxPU300] &= ~BIT(g->num);
+        g->sfr[GPIOxDIR] &= ~BIT(g->num);
+        g->sfr[GPIOxCLR] = BIT(g->num);
     }
 }
 
@@ -447,6 +454,9 @@ void led_set_sta(u8 rled_sta, u8 bled_sta, u8 uint, u8 period)
         s = &led_bak;
     }
 
+    s->flag &= ~LED_SYNC;
+    s->space_cnt = 0xff;        //避免中断同时操作led_cb
+
     rled_set_off();
     bled_set_off();
 
@@ -458,30 +468,20 @@ void led_set_sta(u8 rled_sta, u8 bled_sta, u8 uint, u8 period)
     s->cnt = 0;
     s->bcnt = 0;
     s->space_cnt = 0;
-    s->flag |= LED_SYNC;
+    if(bt_tws_is_connected()) {
+        s->flag |= LED_SYNC;
+    }
 }
 
 AT(.com_text.led_disp)
 void led_cfg_set_sta(led_cfg_t *cfg_cb)
 {
-    led_cb_t *s = &led_cb;
+    led_set_sta(cfg_cb->redpat, cfg_cb->bluepat, cfg_cb->unit, cfg_cb->cycle);
 
-    if (s->flag & LED_TOG_LBAT) {                   //低电优先闪灯
-        s = &led_bak;
-    }
-
-    rled_set_off();
-    bled_set_off();
-
-    memcpy(s, cfg_cb, 4);
-    s->cnt = 0;
-    s->bcnt = 0;
-    s->space_cnt = 0;
-    s->flag |= LED_SYNC;
 }
 
 #if LED_LOWBAT_EN
-AT(.com_text.led_disp)
+AT(.text.led_disp)
 void led_lowbat(void)
 {
     if (!(led_cb.flag & LED_TOG_LBAT)) {
@@ -495,7 +495,7 @@ void led_lowbat(void)
     }
 }
 
-AT(.com_text.led_disp)
+AT(.text.led_disp)
 void led_lowbat_recover(void)
 {
     if (led_cb.flag & LED_TOG_LBAT) {

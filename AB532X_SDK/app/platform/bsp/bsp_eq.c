@@ -281,7 +281,7 @@ void mic_bass_treble_set(int mode, int gain)
     mic_set_eq(2, (u32 *)mic_coef);
 }
 
-//设置MUSIC高低音（会影响其他段EQ，不能边调EQ边调高低音）
+//设置MUSIC高低音（第9、10段EQ用来设置高低音，不会影响其他段EQ，可以边调EQ边调高低音）
 void music_bass_treble_set(int mode, int gain)
 {
     if (mode == 0) {    //bass

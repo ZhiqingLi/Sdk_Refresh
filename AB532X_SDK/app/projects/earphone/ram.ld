@@ -243,6 +243,9 @@ SECTIONS
         . = 0x1000;
         *(.sbc_cache_buf)
         . = 0x3800;
+        . = 0x3a2c;
+        *(.ble_buf*)
+        . = 0x4000;
     } > aram
 
     .aram_music __aram_vma (NOLOAD) : {
@@ -313,6 +316,7 @@ SECTIONS
         . = 0xD38;
         *(.a2dp_play)
         *(.mav_cache)
+        *(.ble_cache*)
         . = 0x3000;
     }  > dram
 

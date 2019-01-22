@@ -33,8 +33,8 @@ rf_cfg_t rf_cfg;
 
 const char bt_local_name[] = BT_NAME_DEFAULT;
 const char bt_local_addr[6] = {0xaa, 0xaa, 0xaa, 0xaa, 0xaa, 0xaa};
-const uint8_t bt_local_guid[16] = { 0x3C, 0x46, 0x71, 0x9D, 0xEF, 0xEC, 0x44, 0x03,
-                                    0xA8, 0xAF, 0x88, 0x4E, 0x56, 0x89, 0x34, 0xFF };
+const uint8_t bt_local_guid[16] = { 0x1f, 0xa5, 0xc8, 0xf8, 0x12, 0xef, 0x47, 0xb9,
+                                    0x94, 0xfc, 0xbb, 0xd5, 0xc7, 0x19, 0xce, 0xfe };
 
 #if 0
 //是否支持android & ios播放暂停快速切换，需要时定义该函数
@@ -266,6 +266,22 @@ void bsp_bt_hid_photo(void)
     delay_5ms(10);
     bt_hid_consumer(HID_KEY_VOL_UP);        //consumer key vol_up, ios
 }
+
+////点击左边屏幕中心位置
+//void bsp_bt_hid_screen_left(void)
+//{
+//    bt_hid_touch_screen(0);
+//    delay_5ms(10);
+//    bt_hid_touch_screen(1);
+//}
+//
+////点击右边屏幕中心位置
+//void bsp_bt_hid_screen_right(void)
+//{
+//    bt_hid_touch_screen(0x11);
+//    delay_5ms(10);
+//    bt_hid_touch_screen(0x10);
+//}
 
 /*****************************************************************************
  * 回调函数

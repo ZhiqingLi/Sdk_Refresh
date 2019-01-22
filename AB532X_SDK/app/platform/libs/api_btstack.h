@@ -36,7 +36,7 @@
 #define BT_FLAG0_CLK_ADVANCE        0x02
 #define BT_FLAG0_TWS_M_RECON        0x04
 #define BT_FLAG0_TWS_FAST_RECON     0x08
-#define BT_FLAG0_TWS_MENU_PAIR      0x10
+#define BT_FLAG0_TWS_MENU_PAIR      0x10    //手动控制TWS连接, 调用tws api
 
 #define BT_FLAG1_LTX_RECON          0x01
 
@@ -148,17 +148,29 @@ enum bt_msg_t {
     BT_MSG_TWS_DISCONNECT,                      //断开TWS连接
     BT_MSG_TWS_CONNECT,                         //建立TWS连接
     BT_MSG_TWS_SEARCH_SLAVE,                    //搜索并建立TWS连接
-    BT_MSG_RES2,
+    BT_MSG_TWS_NOTICE_RING,
     BT_MSG_SWITCH_SIRI,
     BT_MSG_OTA_READ,
     BT_MSG_OTA_STATUS,
     BT_MSG_CALL_REDIAL_NUMBER,                  //回拨电话（从hfp_get_outgoing_number获取号码）
     BT_MSG_HFP_AT_CMD,
+    BT_MSG_HID_SEND,
+    BT_MSG_CALL_ANSWER_INCOM_REJ_OTHER,         //接听来电，三通时挂断当前通话
+    BT_MSG_RES7,
+    BT_MSG_RES8,
+    BT_MSG_RES9,
+    BT_MSG_TWS_SYNC_INFO,
+    BT_MSG_NOR_CONNECT,
+    BT_MSG_NOR_DISCONNECT,
+    BT_MSG_BLE_SEND,
+    BT_MSG_BLE_UPDATE_CONN_PARAM,
+    BT_MSG_RES14,
     BT_MSG_MAX,
 
     BT_MSG_HID_KEY      = 0x30,                 //HID按键
     BT_MSG_HID_CONSUMER,                        //CONSUMER按键
     BT_MSG_TWS_USER_KEY,                        //TWS用户自定义消息
+    BT_MSG_HID_TOUCH_SCREEN,                    //触摸屏
     BT_MSG_PARAM_MAX,
 
     BT_MSG_PLAY         = AVC_PLAY,             //播放
@@ -193,12 +205,12 @@ void bt_hid_connect(void);                      //蓝牙HID服务回连
 void bt_hid_disconnect(void);                   //蓝牙HID服务断开
 int bt_hid_is_connected(void);
 bool bt_hid_is_ready_to_discon(void);
-bool sco_is_bypass(void);
 
 //status
 uint bt_get_disp_status(void);                  //获取蓝牙的当前显示状态, V060
 uint bt_get_status(void);                       //获取蓝牙的当前状态
 uint bt_get_call_indicate(void);                //获取通话的当前状态
+uint bt_get_siri_status(void);                  //获取SIRI当前状态, 0=SIRI已退出, 1=SIRI已唤出
 bool bt_is_calling(void);                       //判断是否正在通话
 bool bt_is_playing(void);                       //判断是否正在播放
 bool bt_is_ring(void);                          //判断是否正在响铃
@@ -226,6 +238,8 @@ bool bt_tws_ring_number_sync(u32 ticks);        //查询tws报号是否已同步
 bool bt_nor_is_connected(void);                 //是否已连接手机
 void bt_nor_connect(void);                      //断开手机
 void bt_nor_disconnect(void);                   //回连手机
+bool bt_nor_get_link_info(uint8_t *bd_addr);    //获取手机配对信息，bd_addr=NULL时仅查询是否存在回连信息
+void bt_nor_delete_link_info(void);             //删除手机配对信息
 
 //蓝牙连接
 #define bt_scan_enable()                        bt_send_msg(BT_MSG_SCAN_ENABLE)     //打开扫描
@@ -245,11 +259,12 @@ void bt_nor_disconnect(void);                   //回连手机
 
 //蓝牙通话
 #define bt_call_redial_last_number()            bt_send_msg(BT_MSG_CALL_REDIAL)     //电话回拨（最后一次通话）
-#define bt_call_answer_incoming()               bt_send_msg(BT_MSG_CALL_ANSWER_INCOM) //接听电话
+#define bt_call_answer_incoming()               bt_send_msg(BT_MSG_CALL_ANSWER_INCOM) //接听电话，三通时挂起当前通话
+#define bt_call_answer_incom_rej_other()        bt_send_msg(BT_MSG_CALL_ANSWER_INCOM_REJ_OTHER)	//接听电话，三通时挂断当前通话
 #define bt_call_terminate()                     bt_send_msg(BT_MSG_CALL_TERMINATE)  //挂断电话
 #define bt_call_swap()                          bt_send_msg(BT_MSG_CALL_SWAP)       //切换三通电话
 #define bt_call_private_switch()                bt_send_msg(BT_MSG_HFP_PRIVATE_SWITCH)       //切换三通电话
-#define bt_siri_switch()                        bt_send_msg(BT_MSG_SWITCH_SIRI)     //调用SIRI, android需要在语音助手中打开“蓝牙耳机按键启动”, ios需要打开siri功能
+#define bt_siri_switch()                        bt_send_msg(BT_MSG_SWITCH_SIRI)     //开关SIRI, android需要在语音助手中打开“蓝牙耳机按键启动”, ios需要打开siri功能
 
 uint bt_get_hfp_feature(void);
 int bt_spp_tx(uint8_t *packet, uint16_t len);
@@ -257,6 +272,7 @@ int bt_spp_tx(uint8_t *packet, uint16_t len);
 //hid
 bool bt_hid_key(int keycode);                 //标准HID键, 如Enter
 bool bt_hid_consumer(int keycode);            //自定义HID键, 如VOL+ VOL-
+bool bt_hid_touch_screen(int keycode);
 
 /*****************************************************************************
  * BLE API函数接口

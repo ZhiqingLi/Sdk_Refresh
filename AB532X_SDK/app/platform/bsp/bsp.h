@@ -20,5 +20,6 @@
 #include "bsp_aux.h"
 #include "bsp_i2c.h"
 #include "bsp_karaok.h"
+#include "bsp_ble.h"
 
 #endif

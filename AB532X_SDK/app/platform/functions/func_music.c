@@ -462,7 +462,11 @@ static void func_music_enter(void)
         func_cb.sta = FUNC_NULL;
         return;
     }
-
+#if BT_BACKSTAGE_EN
+    if (dev_is_online(DEV_UDISK)) {
+        udisk_resume();
+    }
+#endif
     func_music_filter_set();
     fsdisk_callback_init(sys_cb.cur_dev);
     memset(&f_msc, 0, sizeof(f_msc));
@@ -508,6 +512,12 @@ static void func_music_exit(void)
         sd0_go_idle_state();
 #endif
     }
+
+#if BT_BACKSTAGE_EN
+    if (dev_is_online(DEV_UDISK)) {
+        udisk_suspend();
+    }
+#endif
     func_cb.last = FUNC_MUSIC;
 }
 

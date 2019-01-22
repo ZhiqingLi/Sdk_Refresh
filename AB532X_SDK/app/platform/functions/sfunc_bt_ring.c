@@ -37,7 +37,8 @@ struct {
     u32 ring_tick;
     u8  sysclk;
     u8  ring_cnt;
-    bool begin;
+    u8  num_rdy         : 1;
+    u8  begin           : 1;
     bool entry;
 } f_bt_ring;
 
@@ -61,7 +62,7 @@ void hfp_get_bnip_number(char *buf, u32 len)
 
 u8 hfp_notice_ring_number(char *buf, u32 len)
 {
-    if(f_bt_ring.entry) {
+    if(f_bt_ring.entry && f_bt_ring.len == 0) {
         hfp_get_bnip_number(buf, len);
         return 1;
     }
@@ -116,9 +117,13 @@ static void sfunc_bt_ring_process(void)
 #endif
 
 #if BT_TWS_EN
-    if (f_bt_ring.cur < f_bt_ring.len && bt_tws_ring_number_sync(ticks_50ms)) {
+    if (f_bt_ring.cur < f_bt_ring.len && bt_tws_ring_number_sync(ticks_50ms) && f_bt_ring.begin == 0) {
 #if BT_TSCO_EN
-        if(f_bt_ring.ring_cnt >= 2)
+        u32 delta = tick_get() - f_bt_ring.ring_tick;
+        if(delta < 2450) {
+            f_bt_ring.num_rdy = 1;
+        }
+        if(f_bt_ring.ring_cnt >= 2 && f_bt_ring.num_rdy)
 #endif
         {
             f_bt_ring.begin = 1;
@@ -133,7 +138,6 @@ static void sfunc_bt_ring_enter(void)
     memset(&f_bt_ring, 0, sizeof(f_bt_ring));
     f_bt_ring.gain_offset = sys_cb.anl_gain_offset;
     f_bt_ring.ring_tick = tick_get() - 5000;
-    f_bt_ring.entry = true;
     dac_set_anl_offset(0);
     bt_audio_bypass();
     bsp_change_volume(WARNING_VOLUME);
@@ -146,6 +150,9 @@ static void sfunc_bt_ring_enter(void)
 
 static void sfunc_bt_ring_exit(void)
 {
+#if BT_TWS_EN
+    bt_tws_status_sync(0xff, NULL);
+#endif
 #if WARNING_BT_INCALL
     music_control(MUSIC_MSG_STOP);
     sys_cb.anl_gain_offset = f_bt_ring.gain_offset;
@@ -164,8 +171,10 @@ void sfunc_bt_ring(void)
     sfunc_bt_ring_enter();
 #if BT_TWS_EN
     bt_tws_status_sync(BT_STA_INCOMING, (u32 *)&ticks_50ms);
+    f_bt_ring.entry = true;
 #else
     f_bt_ring.begin = 1;
+    f_bt_ring.entry = true;
 #endif
     while ((f_bt.disp_status == BT_STA_INCOMING) && (func_cb.sta == FUNC_BT)) {
         sfunc_bt_ring_process();

@@ -118,13 +118,13 @@ void led_music_busy(void)
 AT(.text.led_disp)
 void led_music_play(void)
 {
-    led_set_sta(0x00, 0xaa, 20, 0);           //蓝灯1s周期闪烁
+    led_set_sta(0x00, 0xaa, 10, 0);           //蓝灯500ms周期闪烁
 }
 
 AT(.text.led_disp)
 void led_aux_play(void)
 {
-     led_set_sta(0x00, 0xaa, 20, 0);           //蓝灯1s周期闪烁
+     led_set_sta(0x00, 0xff, 20, 0);           //蓝灯长亮
 }
 
 AT(.text.led_disp)

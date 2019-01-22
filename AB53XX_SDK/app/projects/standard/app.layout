@@ -7,14 +7,9 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="display\ledseg\display_ledseg.h" open="1" top="1" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="display\ledseg\display_ledseg.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="plugin\multi_lang.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="7951" topLine="166" />
+			<Cursor1 position="676" topLine="12" />
 		</Cursor>
 	</File>
 	<File name="..\..\platform\gui\gui.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -22,9 +17,9 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="config.h" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\..\platform\header\config_extra.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5974" topLine="75" />
+			<Cursor1 position="4566" topLine="162" />
 		</Cursor>
 	</File>
 	<File name="display\display_aux.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,9 +27,19 @@
 			<Cursor1 position="301" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="plugin\multi_lang.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7951" topLine="166" />
+		</Cursor>
+	</File>
 	<File name="..\..\platform\gui\ledseg\spidisplay.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="3120" topLine="119" />
+		</Cursor>
+	</File>
+	<File name="config.h" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="22752" topLine="312" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

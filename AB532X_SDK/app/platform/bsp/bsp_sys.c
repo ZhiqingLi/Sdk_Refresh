@@ -838,7 +838,7 @@ void bsp_sys_init(void)
 
     // clock init
     if (SYS_CLK_SEL < SYS_48M && xcfg_cb.bt_tws_en && BT_TWS_EN) {   //TWS 系统时钟至少48M
-        set_sys_clk(SYS_52M);
+        set_sys_clk(SYS_48M);
     } else {
         set_sys_clk(SYS_CLK_SEL);
     }
@@ -946,9 +946,9 @@ void bsp_sys_init(void)
     }
 #endif // LINEIN_2_PWRDOWN_EN
 
-//#if BT_BACKSTAGE_EN
-//    bsp_bt_init();
-//#endif
+#if BT_BACKSTAGE_EN
+    bsp_bt_init();
+#endif
 
 #if EQ_DBG_IN_UART || EQ_DBG_IN_SPP
     eq_dbg_init();

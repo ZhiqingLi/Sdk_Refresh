@@ -24,4 +24,6 @@ void dev_clr_sta(u8 dev_num);
 bool dev_udisk_activation_try(u8 mode);
 bool dev_is_invalid(u8 dev_num);
 void sd_disk_switch(u8 index);                       //双SD卡底层切换
+void udisk_resume(void);
+void udisk_suspend(void);
 #endif // _API_DEVICE_H

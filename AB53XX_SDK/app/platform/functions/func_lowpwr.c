@@ -468,8 +468,8 @@ void sfunc_pwrdown(void)
 
     LOUDSPEAKER_MUTE_DIS();
     WDT_DIS();
-#if USER_PWRKEY_EXT
-    PWRKEY_EXT_POWEROFF();
+#if USER_EXT_POWERON_EN
+    EXT_GPIO_POWEROFF();
 #endif
 #if CHARGE_EN
     if (xcfg_cb.charge_en) {

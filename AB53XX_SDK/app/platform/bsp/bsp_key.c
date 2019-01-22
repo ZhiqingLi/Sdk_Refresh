@@ -521,6 +521,7 @@ void power_on_check(void)
     }
     //第一次上电是否直接开机
     if (is_powron_frist_enable()) {
+    	printf("is_powron_frist_enable()!\n");
         return;
     }
     #endif
@@ -530,6 +531,7 @@ void power_on_check(void)
     }
 #endif // USER_PWRKEY
     if (rtccon8 & BIT(0)) {
+    	printf("Powerkey 10S rest!\n");
         return;                                                     //长按PWRKEY 10S复位后直接开机。
     }
 #if CHARGE_FINISH_INTO_LOWPOWER
@@ -541,6 +543,7 @@ void power_on_check(void)
         }
     }
 #endif // CHARGE_FINISH_INTO_LOWPOWER
+
     while (1) {
         WDT_CLR();
 #if CHARGE_FINISH_INTO_LOWPOWER

@@ -11,6 +11,28 @@ bool wav_res_stop(void);
 void mp3_res_play_exit(void);
 
 #if FUNC_MUSIC_EN
+
+#if BT_BACKSTAGE_EN
+const u32 *res_addr[] = {
+#if WARNING_FUNC_MUSIC
+    &RES_BUF_MUSIC_MODE_MP3,
+#endif
+#if WARNING_USB_SD
+    &RES_BUF_SDCARD_MODE_MP3,
+    &RES_BUF_USB_MODE_MP3,
+#endif
+#if WARNING_FUNC_BT
+    &RES_BUF_BT_MODE_MP3,
+#endif
+#if WARNING_FUNC_FMRX
+    &RES_BUF_FM_MODE_MP3,
+#endif
+#if WARNING_FUNC_AUX
+    &RES_BUF_AUX_MODE_MP3,
+#endif
+};
+#endif
+
 //扫描全盘文件
 bool pf_scan_music(u8 new_dev)
 {
@@ -116,12 +138,27 @@ void mp3_res_play(u32 addr, u32 len)
     if (len == 0) {
         return;
     }
+#if BT_BACKSTAGE_EN
+    if (func_cb.sta_break != FUNC_NULL) {
+        for (u32 i = 0; i < sizeof(res_addr) / sizeof(u32); i++) {
+            if (*res_addr[i] == addr) {
+                printf("addr equal, sta = %d_%d\n",func_cb.sta,func_cb.sta_break);
+
+                if (func_cb.sta != FUNC_BT) {
+                    func_cb.sta_break = FUNC_NULL;
+                }
+                return;
+            }
+        }
+    }
+#endif
+
 #if DAC_DNR_EN
     u8 sta = dac_dnr_get_sta();
     dac_dnr_set_sta(0);
 #endif
 #if SYS_KARAOK_EN
-    u8 voice_bak = 0;
+    u8 voice_bak = 0, func_sta = func_cb.sta;
     if (karaok_get_voice_rm_sta()) {
         voice_bak = 1;
         karaok_voice_rm_disable();
@@ -170,7 +207,7 @@ void mp3_res_play(u32 addr, u32 len)
     if (voice_bak) {
         karaok_voice_rm_enable();
     }
-    bsp_karaok_init(AUDIO_PATH_KARAOK, func_cb.sta);
+    bsp_karaok_init(AUDIO_PATH_KARAOK, func_sta);
 #endif
 }
 

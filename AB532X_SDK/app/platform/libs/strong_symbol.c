@@ -183,6 +183,10 @@ bool ext_lc_tsco_tx_ack(void *conn, uint8_t tx_type) {
 AT(.bcom_text.bb.tws.sco)
 void ext_lc_tsco_put_txpkt(uint8_t *rx_buf, uint8_t pkt_len, bool pkt_stat) {
 }
+AT(.bt_voice.bb.tws.sco)
+uint8_t ext_lc_tsco_get_status(void) {
+    return 0;
+}
 void lc_tsco_send_setup(uint8_t sco_lid, uint8_t flags, uint8_t dsco, uint8_t tsco, uint8_t pkt_len, uint8_t air_mode) {
 }
 void lc_tsco_send_kill(uint8_t sco_lid) {
@@ -214,4 +218,40 @@ void mav_kick_start(void) {}
 void spdif_process(void){}
 bool spdif_smprate_detect(void) {    return false;}
 void spdif_isr(void){}
+#endif
+
+#if !I2S_DMA_EN
+void i2s_isr(void) {}
+void i2s_process(void) {}
+#endif
+
+#if !LE_EN
+AT(.bcom_text.bb.leisr)
+void ble_isr(void) {}
+AT(.bcom_text.bb.leisr)
+void ble_evt_instant(void *evt, uint32_t *next_basetimecnt, bool role) {}
+AT(.bcom_text.bb.leisr)
+void ble_evt_schedule(void) {}
+AT(.bcom_text.bb.leisr)
+uint32_t ble_evt_time_get(void) { return 0; }
+AT(.bcom_text.bb.leisr)
+uint8_t llm_set_adv_data(void const *param) { return 0; }
+AT(.bcom_text.bb.leisr)
+void ble_lm_adv_data_update(void) {}
+AT(.bcom_text.bb.leisr)
+void ble_lc_check_update_evt_sent(uint16_t conhdl, void *evt_new) {}
+void llc_con_update_ind(uint16_t conhdl, void *evt_new) {}
+void llc_con_update_cmd_complete_send(uint8_t status, uint16_t conhdl, void *evt) {}
+void llc_map_update_ind(uint16_t conhdl) {}
+void llc_common_nb_of_pkt_comp_evt_send(uint16_t conhdl, uint8_t nb_of_pkt) {}
+
+void ble_ll_init(void) {}
+void ble_ll_reset(void) {}
+bool ble_event_cmd_complete(uint8_t *packet, int size) { return false; }
+void ble_event_meta(uint8_t *packet, int size) {}
+int att_server_notify_do(void) { return 1;}
+void hci_run_le_connection(void) {}
+void btstack_ble_init(void) {}
+void btstack_ble_send(void) {}
+void btstack_ble_update_conn_param(void) {}
 #endif

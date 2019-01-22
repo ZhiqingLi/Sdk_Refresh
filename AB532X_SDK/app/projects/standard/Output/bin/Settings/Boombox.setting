@@ -43,7 +43,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="BT-BOX" />
         <add key="bt_addr_mode" value="随机地址" />
-        <add key="bt_addr" value="41:42:00:00:00:00" />
+        <add key="bt_addr" value="41:42:00:00:00:dd" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -221,5 +221,7 @@
         <add key="mic_det_iosel" value="0" />
         <add key="charge_warehouse_set" value="0" />
         <add key="charge_full_bled_on_time" value="32767" />
+        <add key="dac_off_for_bt_conn_en" value="False" />
+        <add key="dac_off_for_conn" value="False" />
     </appSettings>
 </configuration>

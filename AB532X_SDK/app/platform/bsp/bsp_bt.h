@@ -15,5 +15,7 @@ void bsp_bt_hid_photo(void);
 bool bsp_bt_pwrkey5s_check(void);
 void bsp_bt_pwrkey5s_clr(void);
 void bsp_bt_hid_tog_conn(void);
+void bsp_bt_hid_screen_left(void);
+void bsp_bt_hid_screen_right(void);
 
 #endif //_BSP_BT_H

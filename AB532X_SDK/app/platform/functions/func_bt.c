@@ -3,7 +3,6 @@
 #include "func_bt.h"
 
 void sbc_decode_exit(void);
-void bt_cvsd_irq_init(void);
 
 func_bt_t f_bt;
 
@@ -93,6 +92,25 @@ void bt_music_rec_continue(void)
 
 #endif // BT_REC_EN
 
+
+void func_bt_set_dac(u8 enable)
+{
+    if (DAC_OFF_FOR_BT_CONN_EN) {
+        if (enable) {
+            if (f_bt.dac_sta == 0) {
+                f_bt.dac_sta = 1;
+                dac_switch_for_bt(f_bt.dac_sta);
+            }
+        } else {
+            if (f_bt.dac_sta == 1) {
+                f_bt.dac_sta = 0;
+                dac_switch_for_bt(f_bt.dac_sta);
+            }
+        }
+    }
+}
+
+
 void func_bt_mp3_res_play(u32 addr, u32 len)
 {
     if (len == 0) {
@@ -102,10 +120,12 @@ void func_bt_mp3_res_play(u32 addr, u32 len)
 #if BT_REC_EN
     sfunc_record_pause();
 #endif
-
+    u8 dac_sta = f_bt.dac_sta;
+    func_bt_set_dac(1);
     bt_audio_bypass();
     mp3_res_play(addr, len);
     bt_audio_enable();
+    func_bt_set_dac(dac_sta);
 #if BT_REC_EN
     sfunc_record_continue();
 #endif
@@ -310,7 +330,16 @@ void func_bt_disp_status(void)
 
         if(f_bt.disp_status >= BT_STA_CONNECTED) {
             f_bt.need_pairing = 1;
+            func_bt_set_dac(1);
+        } else {
+            func_bt_set_dac(0);
         }
+
+#if BT_BACKSTAGE_EN
+        if (f_bt.disp_status < BT_STA_PLAYING && func_cb.sta_break != FUNC_NULL) {
+            func_cb.sta = func_cb.sta_break;
+        }
+#endif
     }
 }
 
@@ -378,7 +407,6 @@ static void func_bt_enter(void)
     bt_init();
 #endif
 
-    bt_cvsd_irq_init();
     func_cb.mp3_res_play = func_bt_mp3_res_play;
     msg_queue_clear();
     func_bt_enter_display();
@@ -431,6 +459,8 @@ static void func_bt_enter(void)
         bt_set_tws_scan(1);
     }
 #endif
+    f_bt.dac_sta = 1;
+    func_bt_set_dac(0);
 }
 
 AT(.text.func.bt)
@@ -450,12 +480,30 @@ static void func_bt_exit(void)
 #endif
     func_bt_exit_display();
     bt_audio_bypass();
+#if BT_TWS_EN
+    dac_mono_init(1, 0);
+#endif
+#if !BT_BACKSTAGE_EN
     bt_disconnect();
     bt_off();
+#else
+    if (bt_get_status() == BT_STA_PLAYING) {        //蓝牙退出停掉音乐
+        delay_5ms(10);
+        if(bt_get_status() == BT_STA_PLAYING) {     //再次确认play状态
+            u32 timeout = 850; //8.5s
+            bt_music_pause();
+            while (bt_get_status() == BT_STA_PLAYING && timeout > 0) {
+                timeout--;
+                delay_5ms(2);
+            }
+        }
+    }
+#endif
     f_bt.rec_pause = 0;
     f_bt.pp_2_unmute = 0;
     sys_cb.key2unmute_cnt = 0;
     func_cb.last = FUNC_BT;
+    func_bt_set_dac(1);
 }
 
 AT(.text.func.bt)

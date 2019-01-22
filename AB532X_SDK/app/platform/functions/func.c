@@ -64,6 +64,21 @@ void func_process(void)
     lowpower_vbat_process();
 #endif // VBAT_DETECT_EN
 
+#if BT_BACKSTAGE_EN
+    if (func_cb.sta != FUNC_BT) {
+        func_bt_warning();
+        uint status = bt_get_status();
+#if BT_BACKSTAGE_PLAY_DETECT_EN
+        if (status >= BT_STA_PLAYING) {
+#else
+        if (status > BT_STA_PLAYING) {
+#endif
+            func_cb.sta_break = func_cb.sta;
+            func_cb.sta = FUNC_BT;
+        }
+    }
+#endif
+
 #if CHARGE_EN
     if (xcfg_cb.charge_en) {
         charge_detect(1);
@@ -72,6 +87,10 @@ void func_process(void)
 
 #if SYS_KARAOK_EN
     karaok_process();
+#endif
+
+#if LE_EN
+    bsp_ble_process();
 #endif
 }
 

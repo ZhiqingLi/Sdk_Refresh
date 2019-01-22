@@ -174,10 +174,23 @@
 #define LINEIN_2_PWRDOWN_TONE_EN    0   //插入Linein直接关机，是否播放关机提示音。
 #endif // LINEIN_2_PWRDOWN_TONE_EN
 
-#ifndef USER_PWRKEY_EXT
-#define USER_PWRKEY_EXT             0
+#if !USER_PWRKEY_EXT					//20190117;解决没有使用外部软关机时按键定义错误
+#undef IS_PWRKEY_PRESS
+#undef PWRKEY_EXT_INIT
+
 #define IS_PWRKEY_PRESS()			(0 == (RTCCON & BIT(19)))
-#endif // USER_PWRKEY_EXT
+#define PWRKEY_EXT_INIT()			0
+#endif
+
+#if !USER_EXT_POWERON_EN				//20190118:增加外部电源控制
+#undef EXT_GPIO_POWERON
+#undef EXT_GPIO_POWEROFF
+#undef EXT_POWER_SLEEP_HOLD
+
+#define EXT_GPIO_POWERON()			0
+#define EXT_GPIO_POWEROFF()			0
+#define EXT_POWER_SLEEP_HOLD()		0
+#endif
 
 #ifndef PWRKEY_2_HW_PWRON
 #define PWRKEY_2_HW_PWRON           0

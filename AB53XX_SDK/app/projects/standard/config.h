@@ -30,13 +30,13 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
  * Module    : Function选择相关配置
  *****************************************************************************/
 #define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
-#define FUNC_CLOCK_EN                   1   //是否打开时钟功能
+#define FUNC_CLOCK_EN                   0   //是否打开时钟功能
 #define FUNC_FMRX_EN                    1   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
 #define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
 #define FUNC_AUX_EN                     1   //是否打开AUX功能
 #define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
-#define FUNC_SPEAKER_EN                 1   //是否打开Speaker模式
+#define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
 #define FUNC_IDLE_EN                    0   //是否打开IDLE功能
@@ -51,9 +51,9 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define USB_SD_UPDATE_EN                1                       //是否支持UDISK/SD的离线升级
 #define EXT_32K_EN                      0                       //是否使用外部32K晶振,否则内部32K OSC。软关机需要闹钟唤醒时必须使用外部32K晶振
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量, 四声道车机的系统总音量调数字音量
-#define GUI_SELECT                      GUI_SPISEG_16XX         //GUI Display Select
+#define GUI_SELECT                      GUI_NO         //GUI Display Select
 #define FLASH_SIZE                      FSIZE_1M              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_PE7             //选择UART打印信息输出IO，或关闭打印信息输出
+#define UART0_PRINTF_SEL                PRINTF_PB3             //选择UART打印信息输出IO，或关闭打印信息输出
 
 /*****************************************************************************
  * Module    : 音乐功能配置
@@ -328,10 +328,13 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define DOUBLE_KEY_TIME                 (xcfg_cb.double_key_time)
 
 #define USER_PWRKEY_EXT                 0           //是否使用外部软开关机功能, 需要定义控制MOS管的IO口.
-#define IS_PWRKEY_PRESS()               0 //(0 == (GPIOA & BIT(3)))
+#define IS_PWRKEY_PRESS()               0//(0 == (GPIOA & BIT(3)))
 #define PWRKEY_EXT_INIT()               //{GPIOADE |= BIT(3); GPIOASET = BIT(3); GPIOADIR &= ~BIT(3);}
-#define PWRKEY_EXT_POWEROFF()           //{GPIOACLR = BIT(3); while(1) { WDT_CLR();}}
-#define PWRKEY_EXT_SLEEP_HOLD()         //GPIOADE = BIT(3);   //进入遥控休眠需要保持有电
+
+#define USER_EXT_POWERON_EN				1			//20190118:是否需要GPIO控制外部电源上电
+#define EXT_GPIO_POWERON()				{GPIOADE |= BIT(2); GPIOASET = BIT(2); GPIOADIR &= ~BIT(2);}
+#define EXT_GPIO_POWEROFF()				{GPIOADE |= BIT(2); GPIOACLR = BIT(2); GPIOADIR &= ~BIT(2);}
+#define EXT_POWER_SLEEP_HOLD()			EXT_GPIO_POWERON()   //进入遥控休眠需要保持有电
 
 /*****************************************************************************
  * Module    : SD0配置
@@ -476,7 +479,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define LOUDSPEAKER_MUTE_DIS()          loudspeaker_disable()
 #define LOUDSPEAKER_MUTE()              loudspeaker_mute()
 #define LOUDSPEAKER_UNMUTE()            loudspeaker_unmute()
-#define LOUDSPEAKER_UNMUTE_DELAY        6           //UNMUTE延时配置，单位为5ms
+#define LOUDSPEAKER_UNMUTE_DELAY        xcfg_cb.loudspeaker_unmute_delay//UNMUTE延时配置，单位为5ms
 
 #define AMPLIFIER_SEL_INIT()            amp_sel_cfg_init(xcfg_cb.ampabd_io_sel)
 #define AMPLIFIER_SEL_D()               amp_sel_cfg_d()

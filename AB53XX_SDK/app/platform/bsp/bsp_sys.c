@@ -874,6 +874,10 @@ void bsp_sys_init(void)
     led_init();
     key_init();
 
+#if USER_EXT_POWERON_EN
+	EXT_GPIO_POWERON();				//20190118：进入开机前，打开外部电源
+#endif
+
     gui_init();
 #if PWM_RGB_EN
     pwm_init();

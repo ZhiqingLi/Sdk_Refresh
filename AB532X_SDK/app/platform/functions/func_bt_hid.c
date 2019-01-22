@@ -62,6 +62,13 @@ static void func_bthid_enter(void)
     led_bt_init();
     func_bt_enter_display();
 
+#if BT_BACKSTAGE_EN
+    if (f_bt.disp_status >= BT_STA_CONNECTED) {
+        bt_disconnect();
+        bt_off();
+    }
+#endif
+
 #if WARNING_FUNC_BT
     mp3_res_play(RES_BUF_CAMERA_MODE_MP3, RES_LEN_CAMERA_MODE_MP3);
 #endif // WARNING_FUNC_BT
@@ -95,6 +102,9 @@ static void func_bthid_exit(void)
     bt_off();
     func_cb.last = FUNC_BTHID;
     sys_cb.bthid_mode = 0;
+#if BT_BACKSTAGE_EN
+    bsp_bt_init();
+#endif
 }
 
 AT(.text.func.bt)

@@ -39,6 +39,9 @@ enum {
 typedef struct {
     u8 sta;                                         //cur working task number
     u8 last;                                        //lask task number
+#if BT_BACKSTAGE_EN
+    u8 sta_break;                                   //被中断的任务
+#endif
     void (*mp3_res_play)(u32 addr, u32 len);        //各任务的语音播报函数接口
     void (*set_vol_callback)(u8 dir);               //设置音量的回调函数，用于各任务的音量事件处理。
 } func_cb_t;
@@ -71,4 +74,5 @@ void func_fmam_freq(void);
 void func_speaker(void);
 #endif // FUNC_SPEAKER_EN
 
+void func_bt_warning(void);
 #endif // _FUNC_H
