@@ -45,6 +45,9 @@ const static BP_SYS_INFO sInitSysInfo =
 #ifdef FUNC_BT_HF_EN
 	15,								//bt hf volume
 #endif
+#ifdef FUNC_SPI_UPDATE_EN
+    UPGRADE_SOURCE_IDLE,
+#endif
 };
 
 #if (defined(FUNC_USB_EN) || defined(FUNC_CARD_EN)) // player module default init nvm value

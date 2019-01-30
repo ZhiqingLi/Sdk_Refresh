@@ -49,6 +49,7 @@
 #include "led_display.h"
 #include "seg_panel.h"
 #include "seg_led_disp.h"
+#include "singled_display.h"
 #endif
 
 #ifdef	OPTION_CHARGER_DETECT
@@ -726,6 +727,7 @@ void WiFiKaiShuVolumeMaxSet(  uint8_t       Vol)
 	{
 		gSys.Volume = (MAX_VOLUME * gWiFi.KaiShuVolumeMax) / 100;
 		SetSysVol();
+		Mcu_SendCmdToWiFi(MCU_CUR_VOL, &gWiFi.KaiShuVolumeMax);
 	}
 }
 
@@ -1219,6 +1221,17 @@ void WiFiSoundRemindStateSet(uint16_t State)
 	{
 		TimeOutSet(&WiFiSoundRemindTimer, 1000);
 	}
+
+#ifdef FUNC_SINGLE_LED_EN
+	if(State && (WIFI_AVS_STATUS_IDLE == gWiFi.MicState))
+	{
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, FALSE, LED_DISPLAY_KEEP);
+	}
+	else
+	{
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, TRUE, LED_DISPLAY_KEEP);
+	}
+#endif
 }
 
 //WiFi端语音播报状态
@@ -1485,6 +1498,9 @@ void WiFiTalkStateSet(bool State)
 		gSys.MicEnable = TRUE;
 		MixerUnmute(MIXER_SOURCE_MIC);
 #endif
+#ifdef FUNC_SINGLE_LED_EN
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_TLAK_ON, TRUE, LED_DISPLAY_KEEP);
+#endif
 	}
 	else
 	{		
@@ -1499,7 +1515,11 @@ void WiFiTalkStateSet(bool State)
 #ifdef FUNC_WIFI_TALK_QUICK_OPEN_MIC_EN	
 		DacVolumeSet(DAC_DIGITAL_VOL, DAC_DIGITAL_VOL);
 #endif
-		DacSoftMuteSet(FALSE, FALSE);	
+		DacSoftMuteSet(FALSE, FALSE);
+
+#ifdef FUNC_SINGLE_LED_EN
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_TLAK_ON, FALSE, LED_DISPLAY_KEEP);
+#endif
 	}
 #endif
 }
@@ -1726,6 +1746,46 @@ void McuGetWiFiNextAlarmTime(void)
 {
 	Mcu_SendCmdToWiFi(MCU_ALM_NXT, NULL);
 }
+/*****************************************************************************
+ 函 数 名  : WiFiSetAlarmRemindState
+ 功能描述  : 设置WiFi提示音状态
+ 输入参数  : bool State  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年1月28日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void WiFiSetAlarmRemindState(bool State)
+{
+	gWiFi.AlarmRemindState = State;
+}
+
+/*****************************************************************************
+ 函 数 名  : GetWiFiAlarmRemindState
+ 功能描述  : 获取WiFi提示音状态
+ 输入参数  : void  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年1月28日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+bool GetWiFiAlarmRemindState(void)
+{
+	return gWiFi.AlarmRemindState;
+}
+
 
 //Master设备通过透传方式向处于同一个多房间的MCU传递指令
 //参数:Cmd值范围000 ~ 999
@@ -2030,6 +2090,16 @@ void WiFiSetMcuLedState(uint16_t State)
 void WiFiSetMicState(WIFI_AVS_STATUS State)
 {
 	gWiFi.MicState = State;
+#ifdef FUNC_SINGLE_LED_EN
+	if((WIFI_AVS_STATUS_IDLE == State) && gWiFi.WiFiSoundRemindState)
+	{
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, FALSE, LED_DISPLAY_KEEP);
+	}
+	else
+	{		
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, TRUE, LED_DISPLAY_KEEP);
+	}
+#endif
 }
 
 //MCU获取WiFi当前播放状态相关参数(注:由于在断电记忆中会关闭串口中断,

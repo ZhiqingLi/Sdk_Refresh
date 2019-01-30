@@ -131,10 +131,10 @@ const uint16_t gHfVolArr[MAX_BTHF_VOLUME + 1] =
 const uint16_t gDecVolArr[MAX_VOLUME + 1] =
 {
 	0,
-	26,		31,		36,		42,		49,		58,		67,		78,
-	91,		107,	125,	147,	173,	204,	240,	282,
-	332,	391,	460,	541,	636,	748,	880,	1035,
-	1218,	1433,	1686,	1984,	2434,	2946,	3500,	4096
+	46,		81,		116,	162,	209,	258,	307,	368,
+	521,	607,	685,	747,	803,	884,	940,	1035,
+	1132,	1281,	1460,	1581,	1736,	1948,	2180,	2435,
+	2618,	2833,	3086,	3204,	3434,	3606,	3800,	4096
 };
 
 #ifdef FUNC_REC_PLAYBACK_EN
@@ -153,10 +153,10 @@ const uint16_t gRecPlayVolArr[MAX_VOLUME + 1] =
 const uint16_t gAnaVolArr[MAX_VOLUME + 1] =
 {
 	0,
-	26,		31,		36,		42,		49,		58,		67,		78,
-	91,		107,	125,	147,	173,	204,	240,	282,
-	332,	391,	460,	541,	636,	748,	880,	1035,
-	1218,	1433,	1686,	1984,	2434,	2946,	3500,	4096
+	46,		81,		116,	162,	209,	258,	307,	368,
+	521,	607,	685,	747,	803,	884,	940,	1035,
+	1132,	1281,	1460,	1581,	1736,	1948,	2180,	2435,
+	2618,	2833,	3086,	3204,	3434,	3606,	3800,	4096
 };
 
 #ifdef FUNC_MIC_EN
@@ -222,24 +222,8 @@ void SetSysVol(void)
 		MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[TempVol], gDecVolArr[TempVol]);
 	}
 	
-#ifdef FUNC_WIFI_EN
-	if((gSys.CurModuleID == MODULE_ID_I2SIN) || (gSys.CurModuleID == MODULE_ID_WIFI)
-	|| (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_SD) || (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_USB)
-#ifdef FUNC_WIFI_POWER_KEEP_ON
-		|| gWiFi.OtherModuleWiFiAudioEn
-#endif
-	)
-	//这里因为IISIN信号幅值较大，所以IISIN使用单独的音量表
-	{
-		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gDecVolArr[TempVol], gDecVolArr[TempVol]);
-		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gDecVolArr[TempVol], gDecVolArr[TempVol]); 
-	}
-	else
-#endif
-	{
-		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
-		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
-	}
+	MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
+	MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
 
 #ifdef FUNC_MIC_EN	
 	if(gSys.MicVolume > MAX_MICIN_VOLUME)

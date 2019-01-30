@@ -14,7 +14,7 @@
         <add key="ampabd_io_sel" value="PE7" />
         <add key="earphone_det_iosel" value="0" />
         <add key="sys_sleep_time" value="30" />
-        <add key="sys_off_time" value="900" />
+        <add key="sys_off_time" value="0" />
         <add key="lowpower_warning_en" value="True" />
         <add key="lpwr_warning_vbat" value="3.4V" />
         <add key="lpwr_off_vbat" value="3.2V" />
@@ -27,8 +27,8 @@
         <add key="osco_cap" value="23" />
         <add key="vddio_sel" value="0" />
         <add key="eq_dgb_spp_en" value="False" />
-        <add key="eq_dgb_uart_en" value="False" />
-        <add key="eq_uart_sel" value="0" />
+        <add key="eq_dgb_uart_en" value="True" />
+        <add key="eq_uart_sel" value="2" />
         <add key="dac_sel" value="1" />
         <add key="dac_ldoh_sel" value="5" />
         <add key="dac_vcm_less_en" value="True" />
@@ -45,7 +45,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D19" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:00:E7" />
+        <add key="bt_addr" value="41:42:00:00:00:EA" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -215,6 +215,6 @@
         <add key="led_lowbat_bluepat" value="0" />
         <add key="led_lowbat_unit" value="6" />
         <add key="led_lowbat_cycle" value="0" />
-        <add key="RESOURCE_DIR_SEL" value="默认" />
+        <add key="RESOURCE_DIR_SEL" value="D19" />
     </appSettings>
 </configuration>

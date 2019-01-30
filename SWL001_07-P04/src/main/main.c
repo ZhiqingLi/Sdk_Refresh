@@ -204,17 +204,9 @@ int32_t main(void)
 	 */
 
 #if defined(FUNC_SWUART_DBG_EN)
-#ifdef FUNC_POWERON_USB_UPDATA_EN
-#if (defined(FUNC_ADC_KEY_EN) || defined(FUNC_IR_KEY_EN) || defined(FUNC_CODING_KEY_EN) || defined(FUNC_IIC_KEY_EN))
-	KeyInit();
-#endif
-	if(!IsHardwareUpdataLink())
-#endif
-	{
-		OsSetDebugFlag(1);
-		SwUartTxInit(SWUART_GPIO_PORT, SWUART_GPIO_INDX, SWUART_BAUD_RATE);
-		EnableSwUartAsFuart(TRUE);
-	}
+	OsSetDebugFlag(1);
+	SwUartTxInit(SWUART_GPIO_PORT, SWUART_GPIO_INDX, SWUART_BAUD_RATE);
+	EnableSwUartAsFuart(TRUE);
 #elif defined(FUNC_FUART_DBG_EN) 
 	OsSetDebugFlag(1);
 	GpioFuartRxIoConfig(DEBUG_RX_PORT);
@@ -266,17 +258,18 @@ int32_t main(void)
 #ifdef FUNC_POWERON_USB_UPDATA_EN 
 	if(IsHardwareUpdataLink())
 	{
+	    APP_DBG("Enter USB upgrade mode!!!!\n");	    
 		gSys.CurModuleID = MODULE_ID_PLAYER_USB;
-		Usb1SetDetectMode((UDISK_PORT_NUM == 1), (PC_PORT_NUM == 1)); // usb1 port host/device mode set
-		Usb2SetDetectMode((UDISK_PORT_NUM == 2), (PC_PORT_NUM == 2)); // usb2 port host/device mode set
-		UsbSetCurrentPort(UDISK_PORT_NUM); // set usb host port
-		APP_DBG("USB updata init ok!!!!\n");
+#ifdef FUNC_SWUART_DBG_EN
+	    OsSetDebugFlag(0);
+	    EnableSwUartAsFuart(FALSE);
+	    SwUartTxDeinit(SWUART_GPIO_PORT, SWUART_GPIO_INDX);
+#endif	    
 	}
-#else
+#endif
 	Usb1SetDetectMode((UDISK_PORT_NUM == 1), (PC_PORT_NUM == 1)); // usb1 port host/device mode set
 	Usb2SetDetectMode((UDISK_PORT_NUM == 2), (PC_PORT_NUM == 2)); // usb2 port host/device mode set
 	UsbSetCurrentPort(UDISK_PORT_NUM); // set usb host port
-#endif
 #endif
 	InitDeviceDetect();                 // 上电时，设备状态扫描消抖
 
@@ -380,14 +373,14 @@ int32_t main(void)
 	Timer1Set(1000);
 	
 #ifdef FUNC_DISP_EN
-#if defined(FUNC_SINGLE_LED_EN)
-	gDisplayMode = DISP_DEV_SLED;
-#elif defined(FUNC_SEG_LCD_EN)
+#if defined(FUNC_SEG_LCD_EN)
 	gDisplayMode = DISP_DEV_LCD58;
 #elif defined(FUNC_AIP1629A_LED_EN)
-	gDisplayMode = DISP_DEV_LED8888;
+	gDisplayMode = DISP_DEV_CUSTOM;
+#elif defined(FUNC_SINGLE_LED_EN)
+	gDisplayMode = DISP_DEV_SLED;
 #else
-	gDisplayMode = DISP_DEV_LED1888;
+	gDisplayMode = DISP_DEV_NONE;
 #endif
 	DispInit(FALSE);
 #endif
@@ -416,7 +409,7 @@ int32_t main(void)
 		Display();
 #endif
 #ifdef FUNC_SPI_UPDATE_EN
-		if(UpgradeFileFound)
+		if(UpgradeFileFound && !IsSoundRemindPlaying())
 		{
 			//upgrade file found,try to upgrade it
 			BootUpgradeChk();

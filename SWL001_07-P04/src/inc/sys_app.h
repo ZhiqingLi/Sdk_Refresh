@@ -27,6 +27,7 @@ extern "C" {
 #endif//__cplusplus
 
 #include "spi_flash.h"
+#include "breakpoint.h"
 
 //”Ô—‘¿‡–Õ
 typedef enum _LANG
@@ -126,7 +127,10 @@ typedef struct _SYS_INFO_
 #endif
 
 #ifdef FUNC_WIFI_POWER_KEEP_ON
-  bool  OtherModuleTalkOn;
+    bool  OtherModuleTalkOn;
+#endif
+#ifdef FUNC_SPI_UPDATE_EN
+    UPGRADE_SOURCE UpgradeFileSource;
 #endif
 } SYS_INFO;
 

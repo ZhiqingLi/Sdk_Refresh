@@ -146,6 +146,7 @@ typedef struct _WIFI_WORK_STATE_
 	WIFI_AVS_STATUS MicState; 		//MIC状态（000 空闲 001 录音中  002 语义识别中  003 语音回复中 004 MIC错误 ）
 	bool     VisInfState; 			//WiFi消息通知状态
 	bool	 WiFiNotifyChangeModeFlag;
+	bool	 AlarmRemindState;		//WiFi闹钟播放状态
 #ifdef FUNC_POWER_MONITOR_EN
 #ifdef FUNC_WIFI_BATTERY_POWER_CHECK_EN	
 	uint8_t BatPowerPercentBak;
@@ -189,6 +190,7 @@ const static WIFI_WORK_STATE InitgWiFi =
 	WIFI_AVS_STATUS_IDLE,             //MIC状态（000 空闲 001 录音中  002 语义识别中  003 语音回复中 004 MIC错误 ）
 	0,                                //WiFi消息通知状态
 	0,
+	FALSE,							  //WiFi闹钟播放状态
 #ifdef FUNC_POWER_MONITOR_EN
 #ifdef FUNC_WIFI_BATTERY_POWER_CHECK_EN	
 	0,
@@ -252,6 +254,8 @@ extern void WiFiTalkStateSet(bool State);
 extern void WiFiSetMcuSystemTime(uint8_t* DateData);
 extern void WiFiSetMcuWeekDay(uint8_t* DayData);
 extern void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData);
+extern void WiFiSetAlarmRemindState(bool State);
+extern bool GetWiFiAlarmRemindState(void);
 extern void MasterMcuRevPassThroughCmd(uint16_t Cmd);
 extern void SlaveMcuRevPassThroughCmd(uint16_t Cmd);
 extern void McuRevPassThroughData(uint8_t* RevData);

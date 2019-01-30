@@ -6,6 +6,7 @@ typedef enum _DISP_DEV
 {
     DISP_DEV_NONE = 0,
     DISP_DEV_SLED,
+    DISP_DEV_CUSTOM,
     DISP_DEV_LED1888,
     DISP_DEV_LED8888,
     DISP_DEV_LED57,

@@ -46,7 +46,7 @@ uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 // return: 0---no key, else---key msg
 void AdcAdjustVolScan(void)
 {
-	uint8_t	CurVolumeIndex = 0;
+	static uint8_t	CurVolumeIndex = 0;
 
 	if(AdcAdjustSampleCnt > 0)
 	{
@@ -60,10 +60,9 @@ void AdcAdjustVolScan(void)
 		AdcAdjustSampleCnt = ADC_ADJUST_VOL_SCAN_COUNT;
 		AdcAdjustSampleSum = 0;
 
-		CurVolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
-
-		if(CurVolumeIndex != gSys.Volume)
+		if(CurVolumeIndex != GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage))
 		{
+			CurVolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
 			gSys.Volume = CurVolumeIndex;
 			//APP_DBG("AdcAdjustvolume = %d;\n", gSys.Volume);
 			SetSysVol();

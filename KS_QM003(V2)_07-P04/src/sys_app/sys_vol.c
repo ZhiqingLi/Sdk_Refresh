@@ -1420,7 +1420,7 @@ bool GetSilenceMuteFlag(void)
 	}
 	else
 	{
-		return SysMuteFlag;
+		return FALSE;//SysMuteFlag;
 	}
 }
 //初始化检测条件

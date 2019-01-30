@@ -1110,6 +1110,11 @@
               <FileType>1</FileType>
               <FilePath>..\src\display\aip1629a.c</FilePath>
             </File>
+            <File>
+              <FileName>singled_display.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\display\singled_display.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

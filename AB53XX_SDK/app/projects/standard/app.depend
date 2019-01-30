@@ -724,7 +724,7 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1547881129 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1548744372 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -1072,7 +1072,7 @@
 	"func.h"
 	"func_fmam_freq.h"
 
-1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmrx.c
+1547883481 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_fmrx.c
 	"include.h"
 	"func.h"
 	"func_fmrx.h"
@@ -1266,7 +1266,7 @@
 1547005784 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_charge.c
 	"include.h"
 
-1547005799 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_dac.c
+1547881270 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_dac.c
 	"include.h"
 	"bsp_dac.h"
 
@@ -1287,7 +1287,7 @@
 	"include.h"
 	"bsp_led.h"
 
-1547006717 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
+1548741468 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
 	"include.h"
 
 1547006689 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.c
@@ -1295,7 +1295,7 @@
 	"func.h"
 	"func_aux.h"
 
-1547006668 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt.c
+1548742615 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"
@@ -1346,7 +1346,7 @@
 1547007287 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\main.c
 	"include.h"
 
-1547004252 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_bt.c
+1548743620 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"

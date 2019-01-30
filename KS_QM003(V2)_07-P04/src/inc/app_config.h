@@ -1196,11 +1196,11 @@ extern "C" {
 
 #define FUNC_DISP_EN					//显示功能
 
-#ifdef FUNC_DISP_EN						              
+#ifdef FUNC_DISP_EN	
+	#define FUNC_SINGLE_LED_EN				//单颗LED
 //	#define FUNC_SEG_LED_EN				    //段码LED屏
 //	#define FUNC_SEG_LCD_EN				    //段码LCD屏
 //  #define FUNC_ALEXA_PWM_LED_EN			//PWM LED灯
-    #define FUNC_BACKLIGHT_LED_EN           //背光LED控制
 #endif
 
 //特殊段码LED 屏选择
@@ -1209,15 +1209,6 @@ extern "C" {
 //	#define FUNC_7PIN_SEG_LED_EN			//7只脚的段码LED 屏
 //	#define FUNC_6PIN_SEG_LED_EN		 	//6只脚的段码LED 屏
 //	#define FUNC_AIP1629A_LED_EN            //AIP1629LED段码驱动IC
-#endif
-
-#ifdef FUNC_BACKLIGHT_LED_EN		  //GPIO控制背光
-	#define BACKLIGHT_GPIO_PORT_PU			GPIO_A_PU
-	#define BACKLIGHT_GPIO_PORT_PD			GPIO_A_PD
-	#define BACKLIGHT_GPIO_PORT_OUT			GPIO_A_OUT
-	#define BACKLIGHT_GPIO_PORT_IE			GPIO_A_IE
-	#define BACKLIGHT_GPIO_PORT_OE			GPIO_A_OE
-	#define BACKLIGHT_GPIO_PORT_BIT			GPIOA10
 #endif
 
 #ifdef FUNC_ALEXA_PWM_LED_EN

@@ -29,7 +29,6 @@
 #include "presearch.h"
 #include "gpio.h"
 
-
 //keep consist with miscfg.h definition
 #define UPGRADE_NVM_ADDR        (176)//boot upgrade information at NVRAM address
 #define UPGRADE_ERRNO_NOERR		(-1) //just initialization after boot up
@@ -54,6 +53,7 @@
 #define UPGRADE_SUCC_MAGIC		(0x57F9B3C8) //just a successful magic
 #define UPGRADE_REQT_MAGIC		(0x9ab4d18e) //just a request magic
 #define UPGRADE_ERRNO_LASTCLR	(0x581f9831) //just a clear magic
+#define UPGARDE_REQT_SPEC_DEV_TAG  (0x9ab4d1c0) //just for specific device upgarde request 
 
 
 #ifdef FUNC_SPI_UPDATE_EN
@@ -92,7 +92,18 @@ void BootUpgradeChk(void)
 			FS_CONTEXT* CurFsContext = FsGetCurContext();
 			FsLock(CurFsContext);
 			APP_DBG("[UPGRADE]:found upgrade ball(*.MVA), prepare to boot upgrade\n");
+#if defined(FUNC_USB_EN)
+			//指定USB升级设备端口(bit[5:4])：01_PHY2()；10_PHY1()
+			DBG("CFG_OTG_USB_PORT_NUM == 1\n");
+			BootNvmInfo = UPGARDE_REQT_SPEC_DEV_TAG | 0x10; 
+#elif defined(FUNC_CARD_EN)
+			//指定SD升级设备端口(bit[3:0])：0001_SD0()；0010_SD1()；0100_SD2()；1000_SD3()；
+			DBG("CFG_OTG_SD_PORT_NUM == 1\n");
+			BootNvmInfo = UPGARDE_REQT_SPEC_DEV_TAG | 0x01; 
+#else
+
 			BootNvmInfo = UPGRADE_REQT_MAGIC;
+#endif
 			NvmWrite(UPGRADE_NVM_ADDR, (uint8_t*)&BootNvmInfo, 4);
 			//if you want PORRESET to reset GPIO only,uncomment it
 			GpioPorSysReset(GPIO_RSTSRC_PORREST);
@@ -114,9 +125,14 @@ void BootUpgradeChk(void)
 		}
 	}
 	
-	if((0xFF == UpgradeFileFound) && (BootNvmInfo != (uint32_t)UPGRADE_ERRNO_NOERR))
+	if((0xFF == UpgradeFileFound) && ((uint32_t)UPGRADE_ERRNO_NOERR != BootNvmInfo))
 	{
-		UpgradeFileFound = 2;
+		if(((uint32_t)UPGRADE_SUCC_MAGIC == BootNvmInfo) || ((uint32_t)UPGRADE_ERRNO_EBADF == BootNvmInfo)) {
+			UpgradeFileFound = 2;
+		}
+		else {
+			UpgradeFileFound = 0x0F;
+		}
 	}
 	else
 	{

@@ -215,5 +215,4 @@ void LCD_Drv_Init(void);
 void DispSleepRemainTime(void);
 void DispSleepTime(void);
 #endif
-void SysBackLightBrightOnControl(bool IsLightOn);
 #endif

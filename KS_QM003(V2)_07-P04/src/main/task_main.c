@@ -42,6 +42,7 @@
 #include "led_display.h"
 #include "seg_panel.h"
 #include "seg_led_disp.h"
+#include "singled_display.h"
 #endif
 
 void EnterIntoNextMode(void);
@@ -70,9 +71,11 @@ void GuiTaskEntrance(void)
 	uint16_t i;
 	#endif
 	
-#ifdef FUNC_BACKLIGHT_LED_EN
-	SysBackLightBrightOnControl(TRUE);
+
+#ifdef FUNC_SINGLE_LED_EN
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE, LED_DISPLAY_KEEP);
 #endif
+
 	APP_DBG("main task Init...\n");
 	SetSysVol();
 #ifdef FUNC_SPI_UPDATE_EN
@@ -94,10 +97,11 @@ void GuiTaskEntrance(void)
         }
 #endif
     }
-    else
+    else\
 #endif
-    {
-	    SoundRemind(SOUND_PWR_ON);
+	if(MODULE_ID_END >= gSys.CurModuleID)
+	{
+		SoundRemind(SOUND_PWR_ON);
 	}
 
 	OSRescheduleTimeout(500);

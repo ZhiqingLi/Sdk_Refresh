@@ -75,9 +75,36 @@ void GuiTaskEntrance(void)
 	SysPowerOnControl(TRUE);
 #endif
 #endif
+
 	APP_DBG("main task Init...\n");
 	SetSysVol();
 	
+#ifdef FUNC_SPI_UPDATE_EN
+#ifdef FUNC_BREAKPOINT_EN	
+{
+	BP_SYS_INFO *pSysInfo;
+
+	pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+	
+    if(UPGRADE_SOURCE_USBSD == BP_GET_ELEMENT(pSysInfo->UpgradeFileSource)) {
+    	if(UPGRADE_SOURCE_FAIL == gSys.UpgradeFileSource) {
+			SoundRemind(SOUND_UPDATE_FAIL);
+		}
+		else {
+			SoundRemind(SOUND_UPDATE_SUCC);
+		}
+	}
+
+	gSys.UpgradeFileSource = UPGRADE_SOURCE_IDLE;
+	BP_SET_ELEMENT(pSysInfo->UpgradeFileSource, gSys.UpgradeFileSource);
+	BP_SaveInfo(BP_SAVE2NVM);
+#ifdef BP_SAVE_TO_FLASH // µôµç¼ÇÒä
+	BP_SaveInfo(BP_SAVE2FLASH);
+#endif
+}
+#endif
+#endif
+
 	if(MODULE_ID_END >= gSys.CurModuleID)
 	{
 		SoundRemind(SOUND_PWR_ON);
@@ -351,10 +378,8 @@ void GuiTaskEntrance(void)
 		// quick response
 		SetQuickResponseFlag(FALSE);
 #ifdef FUNC_BREAKPOINT_EN		
-		if((gSys.CurModuleID != MODULE_ID_POWEROFF) 
-			&& (gSys.CurModuleID != MODULE_ID_STANDBY) 
-			&& (gSys.CurModuleID != MODULE_ID_BT_HF)
-		  && (gSys.CurModuleID != MODULE_ID_IDLE)) 
+		if((gSys.CurModuleID < MODULE_ID_END) 
+		&& (gSys.CurModuleID != MODULE_ID_BT_HF)) 
 		{
 			BP_SYS_INFO *pSysInfo;
 			pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);

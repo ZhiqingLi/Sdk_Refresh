@@ -34,6 +34,7 @@
 #include "led_display.h"
 #include "seg_panel.h"
 #include "seg_led_disp.h"
+#include "singled_display.h"
 #endif
 
 #ifdef FUNC_WIFI_EN
@@ -772,7 +773,13 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 		case MCU_ALM_NXT:
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+ALM+NXT", 11);
 			Len = 11;
-			break;		
+			break;
+
+		case MCU_ALM_STP:
+			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+ALM+STP", 11);
+			CmdBuf[11] = '&';
+			Len = 12;
+			break;
 			
 		case MCU_FACTORY:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+FACTORY", 11);
@@ -1688,12 +1695,6 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			WiFiWorkStateSet(WIFI_STATUS_INIT_END);
 			//通知凯叔app，小夜灯在开启状态
 			Mcu_SendCmdToWiFi(MCU_LGT__ON, NULL);
-			//凯叔故事机开机默认播放本地TF卡;
-			if(MODULE_ID_PLAYER_WIFI_SD != gSys.CurModuleID)
-			{
-				gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
-				MsgSend(MSG_COMMON_CLOSE);
-			}
 			//Mcu_SendCmdToWiFi(MCU_MMC_GET, NULL);
 			break;
 
@@ -1781,6 +1782,9 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 				{
 					WiFiStationStateSet(WIFI_STATUS_STATION_CONNECTING);
 				}
+#ifdef FUNC_SINGLE_LED_EN
+				SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE, LED_DISPLAY_KEEP);
+#endif
 			}	
 			else
 			{
@@ -1823,6 +1827,9 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			{
 				WiFiWwwStateSet(WIFI_STATUS_WWW_DISABLE);
 			}
+#ifdef FUNC_SINGLE_LED_EN
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, FALSE, LED_DISPLAY_KEEP);
+#endif
 			break;
 
 		case AXX_RA0_XXX:
@@ -2032,14 +2039,35 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			WiFiKaiShuRadioSet(Temp);
 			break;
 
+		case AXX_ALM_STT:
+			WiFiSetAlarmRemindState(TRUE);
+#ifdef FUNC_SINGLE_LED_EN
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_ALARM_CLOCK, TRUE, LED_DISPLAY_KEEP);
+#endif
+			break;
+
+		case AXX_ALM_STP:
+			WiFiSetAlarmRemindState(FALSE);
+#ifdef FUNC_SINGLE_LED_EN
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_ALARM_CLOCK, FALSE, LED_DISPLAY_KEEP);
+#endif
+			break;
+
 		case AXX_LGT__ON:
 		    gWiFi.KaiShuLightState = TRUE;
-			SysBackLightBrightOnControl(TRUE);
+#ifdef FUNC_SINGLE_LED_EN
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE, LED_DISPLAY_LOOP);
+#endif
 			break;
 			
 		case AXX_LGT_OFF:
 		    gWiFi.KaiShuLightState = FALSE;
-			SysBackLightBrightOnControl(FALSE);
+#ifdef FUNC_SINGLE_LED_EN
+			if(GetSingleLedDispMode(LED_DISPLAY_MODE_NIGHTLAMP))
+			{
+				SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, FALSE, LED_DISPLAY_LOOP);
+			}
+#endif
 			break;
 
 		case AXX_LCK__ON:
@@ -2388,6 +2416,14 @@ void WiFi_CmdProcess(void)
 	else if(memcmp(gWiFiCmd, "+VIS+CAN", 8) == 0)
 	{
 		WiFiSetMicState(WIFI_AVS_STATUS_CAN);
+	}
+	else if(memcmp(gWiFiCmd, "+ALM+STT", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_ALM_STT, NULL);
+	}
+	else if(memcmp(gWiFiCmd, "+ALM+STP", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_ALM_STP, NULL);
 	}
 	//KAISHU 故事机命令
 	else if(memcmp(gWiFiCmd, "+LGT++ON", 8) == 0)

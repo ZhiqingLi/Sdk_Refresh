@@ -27,6 +27,7 @@
 #include "led_display.h"
 #include "seg_panel.h"
 #include "seg_led_disp.h"
+#include "singled_display.h"
 #endif
 
 
@@ -44,24 +45,12 @@ extern void SysPowerOnControl(bool Flag);
 
 #ifdef FUNC_POWER_MONITOR_EN
 
-#define POWER_MONITOR_DISP_EN
-
-#ifdef POWER_MONITOR_DISP_EN
-    #define LOW_BAT_DISP_EN
-    #ifdef LOW_BAT_DISP_EN
-        #define LOW_BAT_DISP_PORT_PU			GPIO_B_PU
-    	#define LOW_BAT_DISP_PORT_PD			GPIO_B_PD
-    	#define LOW_BAT_DISP_PORT_OUT			GPIO_B_OUT
-    	#define LOW_BAT_DISP_PORT_IE			GPIO_B_IE
-    	#define LOW_BAT_DISP_PORT_OE			GPIO_B_OE
-    	#define LOW_BAT_DISP_PORT_BIT			GPIOB27
-    #endif
-#endif
+//#define POWER_MONITOR_DISP_EN
 
 #define LDOIN_SAMPLE_COUNT			20		//获取LDOIN幅度时用来平均的采样次数
 #define LDOIN_SAMPLE_PERIOD			50		//获取LDOIN幅度时获取采样值的间隔(ms)
 #define LOW_POWER_DET_COUNT 		3		//低电检测报警次数
-#define LOW_POWER_SOUND_CNT 		180		//低电报警提示音间隔时间(单位s)
+#define LOW_POWER_SOUND_CNT 		20		//低电报警提示音间隔时间(单位s)
 
 //获取LDOIN幅度时获取采样值的总时间间隔(ms)
 #define LDOIN_SAMPLE_TIMER			(LDOIN_SAMPLE_COUNT*LDOIN_SAMPLE_PERIOD)
@@ -169,42 +158,6 @@ bool IsChargeFul(void)
 	return FALSE;
 }
 #endif
-#ifdef LOW_BAT_DISP_EN
-/*****************************************************************************
- 函 数 名  : LowBatterDispControl
- 功能描述  : 低电LED显示控制
- 输入参数  : bool IsLightOn  
- 输出参数  : 无
- 返 回 值  : 
- 调用函数  : 
- 被调函数  : 
- 
- 修改历史      :
-  1.日    期   : 2018年9月29日
-    作    者   : 李治清
-    修改内容   : 新生成函数
-
-*****************************************************************************/
-void LowBatterDispControl(bool IsLightOn)
-{
-	if(IsLightOn)
-	{
-		GpioClrRegOneBit(LOW_BAT_DISP_PORT_PU, LOW_BAT_DISP_PORT_BIT);
-		GpioClrRegOneBit(LOW_BAT_DISP_PORT_PD, LOW_BAT_DISP_PORT_BIT);
-		GpioClrRegOneBit(LOW_BAT_DISP_PORT_IE, LOW_BAT_DISP_PORT_BIT);
-		GpioSetRegOneBit(LOW_BAT_DISP_PORT_OE, LOW_BAT_DISP_PORT_BIT);
-		GpioSetRegOneBit(LOW_BAT_DISP_PORT_OUT, LOW_BAT_DISP_PORT_BIT);
-	}
-	else
-	{
-		GpioSetRegOneBit(LOW_BAT_DISP_PORT_PU, LOW_BAT_DISP_PORT_BIT);
-		GpioSetRegOneBit(LOW_BAT_DISP_PORT_PD, LOW_BAT_DISP_PORT_BIT);
-		GpioClrRegOneBit(LOW_BAT_DISP_PORT_IE, LOW_BAT_DISP_PORT_BIT);
-		GpioSetRegOneBit(LOW_BAT_DISP_PORT_OE, LOW_BAT_DISP_PORT_BIT);
-		GpioClrRegOneBit(LOW_BAT_DISP_PORT_OUT, LOW_BAT_DISP_PORT_BIT);
-	}
-}
-#endif /* LOW_BAT_DISP_EN */
 
 void PowerMonitorDisp(void)
 {
@@ -304,39 +257,6 @@ void PowerMonitorDisp(void)
 		default:
 			break;
 	}
-#else
-    if(PwrMntDisp == PWR_MNT_DISP_SYS_OFF)
-    {
-        //APP_DBG("BAT OFF\n");
-    }
-
-#if defined(OPTION_CHAR_FUL_DETECT) || defined(LOW_BAT_DISP_EN)
-{
-    static bool IsLowBlink = FALSE,IsSetFlag = FALSE;
-    
-    if(IsInCharge() && !IsChargeFul())
-    {
-        IsSetFlag = TRUE;
-        SysBackLightBrightOnControl(FALSE);
-    }
-    else if(LowPowerDetCnt <= ((LOW_POWEROFF_DET_TMR*1000)/LDOIN_SAMPLE_TIMER+LOW_POWEROFF_COUNT))
-    {
-        IsSetFlag = TRUE;
-        SysBackLightBrightOnControl(FALSE);
-        if(IsTimeOut(&BlinkTimer)){
-            TimeOutSet(&BlinkTimer, 100);
-            IsLowBlink = !IsLowBlink;
-            LowBatterDispControl(IsLowBlink);
-        }
-    }
-    else if(IsSetFlag)
-    {
-        IsSetFlag = FALSE;
-        SysBackLightBrightOnControl(gWiFi.KaiShuLightState);
-        LowBatterDispControl(FALSE);
-    }
-}
-#endif
 #endif
 }
 //监测LDOIN的电压值，执行对应检测点的处理
@@ -385,14 +305,20 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 #endif	
 
 #ifdef	OPTION_CHARGER_DETECT
-		if(IsInCharge())		//充电器已经接入的处理
+		if(IsInCharge() && !IsChargeFul())		//充电器已经接入的处理
 		{	
-#ifdef POWER_MONITOR_DISP_EN
-            PwrMntDisp = PWR_MNT_DISP_CHARGE;
-			PowerMonitorDisp();
+#ifdef FUNC_SINGLE_LED_EN
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_CHARGING, TRUE, LED_DISPLAY_LOOP);
 #endif
 			//DBG("IsInCharge\n");
 			return;
+		}
+#endif
+
+#ifdef FUNC_SINGLE_LED_EN
+		if(TRUE == GetSingleLedDispMode(LED_DISPLAY_MODE_CHARGING))
+		{
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_CHARGING, FALSE, LED_DISPLAY_LOOP);
 		}
 #endif
 
@@ -458,6 +384,9 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			{
 				APP_DBG("PowerMonitor, Low Voltage sound remind!!!!");
 				MsgSend(MSG_BAT_LOW_PWR);
+			#ifdef FUNC_SINGLE_LED_EN
+				SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, TRUE, LED_DISPLAY_ONCE);
+			#endif
 			}
 			else if(LowPowerDetCnt == FALSE)	// PowerOnInitFlag == FALSE
 			{

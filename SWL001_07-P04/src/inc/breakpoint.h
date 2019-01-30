@@ -21,6 +21,18 @@ extern "C" {
 #define USB_TYPE  1 // U盘为播放盘
 #define SD_TYPE   2 // SD卡为播放盘
 
+#ifdef FUNC_SPI_UPDATE_EN
+typedef enum _UPGRADE_SOURCE_INDEX
+{
+	UPGRADE_SOURCE_IDLE = 0,
+	UPGRADE_SOURCE_USBSD,
+	UPGRADE_SOURCE_WIFI,
+	UPGRADE_SOURCE_SUCC,
+	UPGRADE_SOURCE_FAIL,
+} UPGRADE_SOURCE;
+#endif
+
+
 #ifdef FUNC_BREAKPOINT_EN
 
 #define BP_MAX_SIZE		115		//BP 信息最大字节数(考虑到NVM空间有限)
@@ -114,6 +126,9 @@ typedef struct _BP_SYS_INFO_
 #endif
 #ifdef FUNC_BT_HF_EN
 	uint8_t 	HfVolume;
+#endif
+#ifdef FUNC_SPI_UPDATE_EN
+    UPGRADE_SOURCE UpgradeFileSource;
 #endif
 } BP_SYS_INFO;
 

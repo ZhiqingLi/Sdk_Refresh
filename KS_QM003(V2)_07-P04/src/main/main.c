@@ -47,6 +47,7 @@
 #include "led_display.h"
 #include "seg_panel.h"
 #include "seg_led_disp.h"
+#include "singled_display.h"
 #endif
 #ifdef FUNC_SLAVE_UART_EN
 #include "slave_uart_com.h"
@@ -100,8 +101,8 @@ __attribute__((section(".driver.isr"))) void Timer1Interrupt(void)
 #ifdef FUNC_WIFI_EN
 	Mcu_TimerPollingRcvUartData();	
 #endif
-#if (defined(FUNC_9PIN_SEG_LED_EN) || defined(FUNC_7PIN_SEG_LED_EN) || defined(FUNC_6PIN_SEG_LED_EN))
-	LedFlushDisp();
+#if (defined(FUNC_SINGLE_LED_EN) || defined(FUNC_7PIN_SEG_LED_EN) || defined(FUNC_6PIN_SEG_LED_EN))
+	//LedFlushDisp();
 #endif
 #ifdef FUNC_SLEEP_EN
 	if(GetSilenceMuteFlag()
@@ -166,18 +167,13 @@ int32_t main(void)
 	LED_ALL_MODE_OFF();
 	LED_ALL_POWER_OFF();
 #endif
-#ifdef FUNC_BACKLIGHT_LED_EN
-	SysBackLightBrightOnControl(TRUE);
+
+#ifdef FUNC_SINGLE_LED_EN
+	SingleLedFlushDispInit();
 #endif
-#ifdef LOW_BAT_DISP_EN
-	LowBatterDispControl(FALSE);
-#endif
+
 #ifdef FUNC_WIFI_POWER_KEEP_ON
 	WiFiControlGpioInit();
-#endif
-	
-#ifdef FUNC_GPIO_POWER_ON_EN
-	SysPowerOnControl(TRUE);
 #endif
 	
 #ifdef FUNC_AMP_MUTE_EN
@@ -286,7 +282,6 @@ int32_t main(void)
 	{
 	    APP_DBG("Enter USB upgrade mode!!!!\n");	    
 		gSys.CurModuleID = MODULE_ID_PLAYER_USB;
-	    SysBackLightBrightOnControl(TRUE);
 #ifdef FUNC_SWUART_DBG_EN
 	    OsSetDebugFlag(0);
 	    EnableSwUartAsFuart(FALSE);
@@ -332,7 +327,17 @@ int32_t main(void)
 #endif
 	EqStyleInit(p_gSwEq);
 	EqStyleSelect(p_gSwEq, 44100, gSys.Eq);
-	APP_DBG("System EqStyleSelect Eq: %d\n", gSys.Eq);
+	APP_DBG("Init gSys.Eq = %d!", gSys.Eq);
+#ifdef FUNC_AUDIO_VB_EFFECT_EN
+	APP_DBG("audio VB enable!");
+#endif
+#ifdef FUNC_AUDIO_3D_EFFECT_EN
+	APP_DBG("audio 3D enable!");
+#endif
+#ifdef FUNC_AUDIO_DRC_EFFECT_EN
+	APP_DBG("audio DRC enable!");
+#endif
+	APP_DBG("\n");
 //#ifdef FUNC_TREB_BASS_EN
 //	TrebBassSet(gSys.TrebVal, gSys.BassVal);
 //#endif
@@ -385,10 +390,16 @@ int32_t main(void)
 	gDisplayMode = DISP_DEV_LCD58;
 #elif defined(FUNC_AIP1629A_LED_EN)
 	gDisplayMode = DISP_DEV_CUSTOM;
+#elif defined(FUNC_SINGLE_LED_EN)
+	gDisplayMode = DISP_DEV_SLED;
 #else
 	gDisplayMode = DISP_DEV_NONE;
 #endif
 	DispInit(FALSE);
+#endif
+#ifdef FUNC_SINGLE_LED_EN
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_POWER_ON, TRUE, LED_DISPLAY_ONCE);
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE, LED_DISPLAY_LOOP);
 #endif
 
 	DBG("Start Detect External Device(Keypad, U disk, SD card, FM,...)\n");

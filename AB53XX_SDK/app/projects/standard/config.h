@@ -88,7 +88,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 /*****************************************************************************
  * Module    : 蓝牙功能配置
  *****************************************************************************/
-#define BT_BACKSTAGE_EN                 1   //蓝牙后台管理（全模式使用蓝牙）
+#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙）
 #define BT_BACKSTAGE_PLAY_DETECT_EN     1   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
 #define BT_NAME_DEFAULT                 "BT-BOX"     //默认蓝牙名称（不超过31个字符）
 #define BT_NAME_WITH_ADDR_EN            0   //蓝牙名称是否附加地址信息（调试用，例如：btbox-***）

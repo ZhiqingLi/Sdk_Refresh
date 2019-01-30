@@ -95,10 +95,10 @@ AT(.text.func.aux)
 void func_aux_pause_play(void)
 {
     if (f_aux.pause) {
-        led_aux_play();
+        //led_aux_play();
         func_aux_start();
     } else {
-        led_idle();
+        //led_idle();
         func_aux_stop();
     }
     f_aux.pause ^= 1;

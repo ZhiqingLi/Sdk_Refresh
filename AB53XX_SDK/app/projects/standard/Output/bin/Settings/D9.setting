@@ -4,7 +4,7 @@
         <add key="lang_id" value="英文" />
         <add key="func_music_en" value="True" />
         <add key="func_aux_en" value="True" />
-        <add key="func_fmrx_en" value="True" />
+        <add key="func_fmrx_en" value="False" />
         <add key="buck_mode_en" value="False" />
         <add key="powkey_10s_reset" value="False" />
         <add key="spk_mute_en" value="True" />
@@ -44,7 +44,7 @@
         <add key="charge_trickle_curr" value="40mA" />
         <add key="bt_name" value="Bluetooth Speaker" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:88:68:20:20" />
+        <add key="bt_addr" value="41:42:88:68:20:27" />
         <add key="bt_addr_start" value="41:42:88:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -66,7 +66,7 @@
         <add key="func_bthid_en" value="False" />
         <add key="bthid_name" value="BT-Photo" />
         <add key="bt_tws_en" value="True" />
-        <add key="bt_tws_pair_mode" value="0" />
+        <add key="bt_tws_pair_mode" value="1" />
         <add key="bt_tws_recon_mode" value="1" />
         <add key="bt_tws_lr_mode" value="1" />
         <add key="tws_sel_left_gpio_sel" value="0" />

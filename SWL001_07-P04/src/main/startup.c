@@ -115,18 +115,18 @@ PIDCHKSUM	FILL 8, 0xFF
 
 	//constant data offset
 	AREA    |.ARM.__at_0x0000008C|, CODE, READONLY
-CONSTDATA	DCD	0xB4000
+CONSTDATA	DCD	0xC0000
 
 	//user data offset
 	AREA    |.ARM.__at_0x00000090|, CODE, READONLY
-USERDATA	DCD	0xE8000
+USERDATA	DCD	0xD8000
 
 	//sdk version
 	AREA    |.ARM.__at_0x00000094|, CODE, READONLY
 SDK_VER_CHIPID	DCB		0x12	//MV chip ID
 SDK_VER_MAJOR	DCB		1		//MV SDK major version
 SDK_VER_MINOR	DCB		7		//MV SDK minor version
-SDK_VER_USER	DCB		29		//version
+SDK_VER_USER	DCB		32		//version
 
 	//code memory(exclude of this 4 bytes) crc
 	AREA    |.ARM.__at_0x00000098|, CODE, READONLY

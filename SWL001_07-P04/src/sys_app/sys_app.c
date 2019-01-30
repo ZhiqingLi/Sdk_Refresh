@@ -91,36 +91,34 @@ void SysVarInit(void)
 	gSys.LanguageMode = LANG_ZH;
 #endif
 
+#ifdef FUNC_SPI_UPDATE_EN
+    gSys.UpgradeFileSource = UPGRADE_SOURCE_IDLE;
+#endif
+
 	// 装载断点信息，设置信息
 #ifdef FUNC_BREAKPOINT_EN
 {
 	BP_SYS_INFO *pBpSysInfo;
 	pBpSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
-#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
-	if(UpgradeFileFound == 2)
-	{
+
+#ifdef FUNC_SPI_UPDATE_EN
+	if(UpgradeFileFound >= 2) {
+		
+		if(UpgradeFileFound > 2) {
+			gSys.UpgradeFileSource = UPGRADE_SOURCE_FAIL;
+		}
 		gSys.CurModuleID = MODULE_ID_WIFI;
 		UpgradeFileFound = 0;
 	}
-	else
-	{
-	  gSys.CurModuleID = MODULE_ID_IDLE;
-	}
-#else
-	if(UpgradeFileFound == 2)
-	{
-		gSys.CurModuleID = MODULE_ID_WIFI;
-		UpgradeFileFound = 0;
-	}
-	else
+	else 
+#endif
 	{
 		gSys.CurModuleID = MODULE_ID_IDLE;
 	}
 
-#endif
 	gSys.DiskType = BP_GET_ELEMENT(pBpSysInfo->DiskType);
 	gSys.Volume = BP_GET_ELEMENT(pBpSysInfo->Volume);
-  gSys.Eq = BP_GET_ELEMENT(pBpSysInfo->Eq);
+	gSys.Eq = BP_GET_ELEMENT(pBpSysInfo->Eq);
 #ifndef POWERON_DEFAULT_VOLUME_EN
 	if(gSys.Volume > MAX_VOLUME || gSys.Volume < 7)
 #endif

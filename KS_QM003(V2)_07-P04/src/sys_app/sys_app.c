@@ -110,9 +110,7 @@ void SysVarInit(void)
 #ifdef FUNC_SPI_UPDATE_EN
     gSys.UpgradeFileSource = BP_GET_ELEMENT(pBpSysInfo->UpgradeFileSource);
     APP_DBG("SysVarInit gSys.UpgradeFileSource = %d\n", gSys.UpgradeFileSource);
-#endif
-
-#ifdef FUNC_SPI_UPDATE_EN
+	
 	if(gSys.UpgradeFileSource == UPGRADE_SOURCE_WIFI)
 	{
 		gSys.CurModuleID = MODULE_ID_WIFI;

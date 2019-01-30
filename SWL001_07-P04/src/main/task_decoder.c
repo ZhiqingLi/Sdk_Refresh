@@ -303,18 +303,19 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
 #endif
 #endif
 
-	//提示音使用固定音量
-#ifdef SOUND_REMIND_VOL
-	APP_DBG("DecoderTaskSyncPla gSys.Volume = %d\n", SOUND_REMIND_VOL);
-	MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[SOUND_REMIND_VOL], gDecVolArr[SOUND_REMIND_VOL]);
-#else
 	TempVol = gSys.Volume;
-	if (TempVol < 7)
+	if(TempVol < 7)
 	{
-	    TempVol = 7;
+		TempVol = 10;
 	}
-	APP_DBG("DecoderTaskSyncPla gSys.Volume = %d\n", TempVol);
+
+#ifdef SOUND_REMIND_VOL
+	//提示音使用固定音量
+	MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[SOUND_REMIND_VOL], gDecVolArr[SOUND_REMIND_VOL]);
+	APP_DBG("Fixed volume playback = %d\n", SOUND_REMIND_VOL);
+#else
 	MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[TempVol], gDecVolArr[TempVol]);
+	APP_DBG("DecoderTaskSyncPlayVolume = %d\n", TempVol);
 #endif
 	MixerSetFadeSpeed(MIXER_SOURCE_DEC, 10, 10);
 #ifdef FUNC_WIFI_EN

@@ -81,6 +81,7 @@
 ".\output\seg_led_disp.o"
 ".\output\seg_panel.o"
 ".\output\aip1629a.o"
+".\output\singled_display.o"
 ".\output\wifi_control.o"
 ".\output\wifi_uart_com.o"
 ".\output\wifi_bt_control.o"

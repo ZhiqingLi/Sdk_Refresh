@@ -18,6 +18,8 @@
 #include "fs_filesort.h"
 #include "partition.h"
 #include "breakpoint.h"
+#include "sys_app.h"
+#include "sound_remind.h"
 #ifndef INDEPEND_FREERTOS
 #include "os.h"
 #endif
@@ -25,7 +27,7 @@
 #ifdef FUNC_SPI_UPDATE_EN
 uint8_t UpgradeFileFound = 0xFF;
 #endif// FUNC_SPI_UPDATE_EN
-#ifdef  FUNC_UPDATE_CONTROL	
+#ifdef FUNC_UPDATE_CONTROL
 uint8_t ConfirmUpgradeFlag = 0;
 #endif
 
@@ -118,10 +120,23 @@ void FindSpecialFileCallBack(FS_CONTEXT* FsContext)
 				while(!IsTimeOut(&MVAtime))
 				{
 					if(ConfirmUpgradeFlag == 2)
-#endif		
-						
-							UpgradeFileFound = 1;
-						
+#endif	
+                    {
+                    #ifdef FUNC_BREAKPOINT_EN	
+                        BP_SYS_INFO *pSysInfo;
+
+                        pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+                        gSys.UpgradeFileSource = UPGRADE_SOURCE_USBSD;
+                        BP_SET_ELEMENT(pSysInfo->UpgradeFileSource, gSys.UpgradeFileSource);
+                        BP_SaveInfo(BP_SAVE2NVM);
+                    #ifdef BP_SAVE_TO_FLASH // 掉电记忆
+                        BP_SaveInfo(BP_SAVE2FLASH);
+                    #endif
+                    #endif
+                        //找到升级文件
+                        SoundRemind(SOUND_UPDATING);
+                        UpgradeFileFound = 1;
+					}	
 #ifdef FUNC_UPDATE_CONTROL						
 				}
 

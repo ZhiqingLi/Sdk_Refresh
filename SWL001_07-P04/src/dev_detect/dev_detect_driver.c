@@ -35,7 +35,9 @@
 static bool IsCardLinkFlag = TRUE;
 static bool IsUDiskLinkFlag = TRUE;
 static bool IsLineInLinkFlag = TRUE;
+#if (PC_PORT_NUM != 0)
 static bool IsPcLinkFlag = TRUE;
+#endif
 #ifdef FUNC_MIC_EN
 static bool IsMicLinkFlag = FALSE;
 #endif
@@ -136,6 +138,9 @@ bool IsPcLink(void)
 
 #if (PC_PORT_NUM == 2)
 	return UsbDevice2IsLink();
+#endif
+#if (PC_PORT_NUM == 0)
+    return FALSE;
 #endif
 
 }
@@ -299,7 +304,8 @@ void DeviceDetect(void)
 		return;
 	}
 #endif
-	
+
+#if (PC_PORT_NUM != 0)	
 	//PC²å°Î¼ì²â
 	if((!IsPcLinkFlag) && IsPcLink())
 	{
@@ -323,6 +329,7 @@ void DeviceDetect(void)
 		MsgSend(Msg);
 		return;
 	}
+#endif
 
 #ifdef FUNC_CARD_EN
 	//CARD²å°Î¼ì²â

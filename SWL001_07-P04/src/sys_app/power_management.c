@@ -50,7 +50,7 @@ extern void SysPowerOnControl(bool Flag);
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置
 #ifdef ADC_POWER_MONITOR_EN 
    #define LDOIN_VOLTAGE_FULL			3100
-   #define LDOIN_VOLTAGE_HIGHT    3000
+   #define LDOIN_VOLTAGE_HIGHT          3000
    #define LDOIN_VOLTAGE_HIGH			2800
    #define LDOIN_VOLTAGE_MID			2600
    #define LDOIN_VOLTAGE_LOW			2500

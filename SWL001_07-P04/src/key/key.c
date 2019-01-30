@@ -325,7 +325,12 @@ void KeyScan(void)
 		}
 #endif
 #endif
-	
+		//任意键打断WiFi闹钟提示音。
+		if(TRUE == GetWiFiAlarmRemindState())
+		{
+			Mcu_SendCmdToWiFi(MCU_ALM_STP, NULL);
+		}
+		
 		// quick response
 		if(Msg == MSG_MODE)
 		{

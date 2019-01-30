@@ -214,7 +214,7 @@ bool DualBankFlashErase(void)
 		DBG("Dual Bank Update: Flash erase FAILED!\r\n");
 		return FALSE;
 	}
-  DBG("DualBankFlashErase OK.........!\r\n");
+    DBG("DualBankFlashErase OK.........!\r\n");
 #ifdef FUNC_AMP_MUTE_EN
 	gSys.MuteFlag = FALSE;
 #endif
@@ -232,12 +232,25 @@ void DualBankDataUpgrade(uint32_t DataLen)
 		gSys.MuteFlag = TRUE;
 		AmpMuteControl(TRUE);
 #endif
+#ifdef FUNC_BREAKPOINT_EN	
+        {
+            BP_SYS_INFO *pSysInfo;
+
+            pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+            gSys.UpgradeFileSource = UPGRADE_SOURCE_WIFI;
+            BP_SET_ELEMENT(pSysInfo->UpgradeFileSource, gSys.UpgradeFileSource);
+            BP_SaveInfo(BP_SAVE2NVM);
+#ifdef BP_SAVE_TO_FLASH // 掉电记忆
+            BP_SaveInfo(BP_SAVE2FLASH);
+#endif
+        }
+#endif
 		APP_DBG("[UPGRADE]: dual bank flash prepare to boot upgrade\n");
 		//write upgrade ball offset address to NVM(176), and then reset system
 		BootNvmInfo = UPGRADE_CODE_BANK_ADDR;
 		NvmWrite(UPGRADE_NVM_ADDR, (uint8_t*)&BootNvmInfo, 4);
 	    //if you want PORRESET to reset GPIO only,uncomment it
-	    GpioPorSysReset(GPIO_RSTSRC_PORREST);
+        GpioPorSysReset(GPIO_RSTSRC_PORREST);
 		NVIC_SystemReset();
 		while(1);		
 	}
@@ -711,6 +724,7 @@ void WiFiKaiShuVolumeMaxSet(  uint8_t       Vol)
 	{
 		gSys.Volume = (MAX_VOLUME * gWiFi.KaiShuVolumeMax) / 100;
 		SetSysVol();
+		Mcu_SendCmdToWiFi(MCU_CUR_VOL, &gWiFi.KaiShuVolumeMax);
 	}
 }
 
@@ -1064,15 +1078,32 @@ void McuGetWiFiSoundRemindLanguage(void)
 //WiFi 端语音提示音量设置[TRUE：固定音量播放提示音；FALSE：返回当前系统音量]
 void WiFiSoundRemindVolSet(bool WorkFlag)
 {	
-#ifdef 	WIFI_SOUND_REMIND_VOL	
-	uint8_t TempVol = gSys.Volume;
+	extern const uint16_t gAnaVolArr[MAX_VOLUME + 1];
 	
-	if(WorkFlag && (TempVol < 7))
+#ifdef 	WIFI_SOUND_REMIND_VOL	
+	if(WorkFlag)
 	{
-		TempVol = 10;
-		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gDecVolArr[TempVol], gDecVolArr[TempVol]);
-		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gDecVolArr[TempVol], gDecVolArr[TempVol]);		
-		APP_DBG(" WiFiSoundRemindVolSet = %d\n", TempVol);
+		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[WIFI_SOUND_REMIND_VOL], gAnaVolArr[WIFI_SOUND_REMIND_VOL]);
+		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[WIFI_SOUND_REMIND_VOL], gAnaVolArr[WIFI_SOUND_REMIND_VOL]);		
+		APP_DBG("WiFiSoundRemindVolFixed = %d\n", WIFI_SOUND_REMIND_VOL);
+	}
+	else
+	{		
+		SetSysVol();
+	}
+#else
+	if(gSys.Volume >= 7)
+		return;
+	
+	if(WorkFlag)
+	{
+		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[7], gAnaVolArr[7]);
+		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[7], gAnaVolArr[7]);
+		APP_DBG(" WiFiSoundRemindVolSet = 7!\n");
+	}
+	else
+	{
+		SetSysVol();
 	}
 #endif
 }
@@ -1924,6 +1955,46 @@ void McuGetWiFiNextAlarmTime(void)
 {
 	Mcu_SendCmdToWiFi(MCU_ALM_NXT, NULL);
 }
+/*****************************************************************************
+ 函 数 名  : WiFiSetAlarmRemindState
+ 功能描述  : 设置WiFi提示音状态
+ 输入参数  : bool State  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年1月28日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void WiFiSetAlarmRemindState(bool State)
+{
+	gWiFi.AlarmRemindState = State;
+}
+
+/*****************************************************************************
+ 函 数 名  : GetWiFiAlarmRemindState
+ 功能描述  : 获取WiFi提示音状态
+ 输入参数  : void  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年1月28日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+bool GetWiFiAlarmRemindState(void)
+{
+	return gWiFi.AlarmRemindState;
+}
+
 
 //Master设备通过透传方式向处于同一个多房间的MCU传递指令
 //参数:Cmd值范围000 ~ 999
