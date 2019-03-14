@@ -54,7 +54,7 @@ void func_bt_message(u16 msg)
     case KD_PLAY_POWER:
     case KD_PLAY_MODE:
         bsp_clr_mute_sta();
-        if (bt_get_status() >= BT_STA_CONNECTED) {
+        if (bt_nor_is_connected()) {//(bt_get_status() >= BT_STA_CONNECTED) {
             bt_call_redial_last_number();           //回拨电话
             func_bt_mp3_res_play(RES_BUF_CALLOUT_MP3, RES_LEN_CALLOUT_MP3);
 #if BT_TWS_EN
@@ -69,6 +69,13 @@ void func_bt_message(u16 msg)
             func_bt_switch_voice_lang();            //切换提示音语言
         }
         break;
+
+	case KL_PLAY_HSF:
+		if(bt_nor_is_connected()) {
+			bt_nor_disconnect();
+		} else {
+			bt_nor_connect();
+		}
 
 #if BT_TWS_EN
     case KL_MODE:
@@ -193,6 +200,12 @@ void sfunc_bt_call_message(u16 msg)
         }
         break;
 
+	case KU_PREV_VOL_DOWN:
+	case KL_VOL_DOWN_PREV:
+	case KU_PREV:
+	case KU_NEXT_VOL_UP:
+	case KL_VOL_UP_NEXT:
+	case KU_NEXT:
     case KL_PLAY:
         bsp_clr_mute_sta();
 #if BT_HFP_CALL_PRIVATE_EN

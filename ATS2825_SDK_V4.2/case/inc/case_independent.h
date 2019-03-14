@@ -76,7 +76,7 @@
 
 //是否支持linein tws，在config.sh中配置
 //case/cfg根据这个宏决定编译linein的目录
-//#define __SUPPORT_LINEIN_TWS
+#define __SUPPORT_LINEIN_TWS
 
 #endif
 
@@ -196,9 +196,6 @@
 #define EXTERN_CHARGE_DETECT_GPIODAT   GPIOADAT
 #define EXTERN_CHARGE_DETECT_PIN       (1 << 16)
 
-//#define EXTERN_BATTERY_DETECT_GPIOIN   GPIOAINEN
-//#define EXTERN_BATTERY_DETECT_GPIODAT  GPIOADAT
-//#define EXTERN_BATTER_DETECT_PIN       (1 << 21)
 #define IS_EXTERN_CAHREGE_IN()         ((act_readl(EXTERN_CHARGE_DETECT_GPIODAT) & EXTERN_CHARGE_DETECT_PIN) == 0)
 #define IS_EXTERN_BATTERY_IN()         (1)
 #elif defined(BOARD_JL_36410_FAR)
@@ -207,9 +204,6 @@
 #define EXTERN_CHARGE_DETECT_GPIODAT   GPIOADAT
 #define EXTERN_CHARGE_DETECT_PIN       (1 << 5)
 
-//#define EXTERN_BATTERY_DETECT_GPIOIN   GPIOAINEN
-//#define EXTERN_BATTERY_DETECT_GPIODAT  GPIOADAT
-//#define EXTERN_BATTER_DETECT_PIN       (1 << 21)
 #define IS_EXTERN_CAHREGE_IN()         ((act_readl(EXTERN_CHARGE_DETECT_GPIODAT) & EXTERN_CHARGE_DETECT_PIN) == 0)
 #define IS_EXTERN_BATTERY_IN()         (1)
 #else
@@ -356,6 +350,11 @@ typedef void (*scan_isr_cbk)(void);
 #ifdef BOARD_LINKPLAY_DEMO
 #define KEYTONE_VOLUME_SAME_AS_SYSTEM_VOLUME
 #define SUPPORT_SPI_FUNCTION
+
+#define SYS_POWER_CTRL_UPEN     GPIOAPUEN
+#define SYS_POWER_CTRL_OUTPUT   GPIOAOUTEN
+#define SYS_POWER_CTRL_DATA     GPIOADAT
+#define SYS_POWER_PIN           (1 << 21)
 #endif
 
 #if defined(BOARD_LINKPLAY_FAR_DEMO)

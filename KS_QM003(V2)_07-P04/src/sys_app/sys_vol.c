@@ -45,6 +45,7 @@
 #include "string.h"
 #include "fat_file.h"
 #include "player_control.h"
+#include "breakpoint.h"
 #include "rtc_control.h"
 #ifdef FUNC_WIFI_EN
 #include "wifi_mcu_command.h"

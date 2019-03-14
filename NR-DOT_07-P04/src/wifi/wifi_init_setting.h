@@ -29,7 +29,7 @@ extern "C" {
 	#define MCU_SSID_NAME	"KnowBest_D1"
 #else
 	//**MCU+CAP+PRJproject_name&:项目名称定义
-	#define MCU_CAP_PRJ_PROJECT_NAME	"NR_DOT"
+	#define MCU_CAP_PRJ_PROJECT_NAME	"linkplaydemo"//"NR_DOT"
 	#define MCU_SSID_NAME	"DOT"
 #endif
 

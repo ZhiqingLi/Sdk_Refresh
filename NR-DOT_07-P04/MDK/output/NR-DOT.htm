@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\NR-DOT.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\NR-DOT.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Mon Sep 03 08:44:30 2018
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Feb 20 16:13:18 2019
 <BR><P>
 <H3>Maximum Stack Usage =       2384 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -6033,8 +6033,8 @@ Global Symbols
 <LI><a href="#[1b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HidSendKeyWithData_
 <LI><a href="#[1b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidSendRawData_
 <LI><a href="#[1b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySendDownUp_
-<LI><a href="#[370]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidIsReadyUserMode
 <LI><a href="#[36f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidSendRawData
+<LI><a href="#[370]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidIsReadyUserMode
 </UL>
 
 <P><STRONG><a name="[173]"></a>EVM_Init</STRONG> (Thumb, 124 bytes, Stack size 8 bytes, eventmgr.o(.text), UNUSED)
@@ -7245,6 +7245,7 @@ Global Symbols
 <LI><a href="#[4a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;get_utf8
 <LI><a href="#[493]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_frame_header
 <LI><a href="#[495]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_decode_frame
+<LI><a href="#[656]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_audio_samples_and_reconstruction
 <LI><a href="#[655]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3_huffman_decode
 <LI><a href="#[652]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3_scale_factors_parse
 <LI><a href="#[651]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3_side_info_parse
@@ -7261,7 +7262,6 @@ Global Symbols
 <LI><a href="#[65e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DecodeICSInfo
 <LI><a href="#[65d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DecodeProgramConfigElement
 <LI><a href="#[657]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_scale_factor
-<LI><a href="#[656]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_audio_samples_and_reconstruction
 </UL>
 
 <P><STRONG><a name="[4b4]"></a>show_bits25</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, bit.o(.text))
@@ -11892,8 +11892,8 @@ Global Symbols
 <LI><a href="#[4b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;align_byte
 <LI><a href="#[4ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_overflow
 <LI><a href="#[493]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_frame_header
-<LI><a href="#[658]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_bit_allocation
 <LI><a href="#[656]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_audio_samples_and_reconstruction
+<LI><a href="#[658]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_bit_allocation
 </UL>
 <BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sbc_decoder_decode
 </UL>
@@ -13597,6 +13597,8 @@ Global Symbols
 <LI><a href="#[7c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLongName
 <LI><a href="#[81d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SampleRateConvert
 <LI><a href="#[904]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;setup_init_task
+<LI><a href="#[36d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySendDown
+<LI><a href="#[36c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidDataSend
 <LI><a href="#[36a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySend
 <LI><a href="#[33e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HfRegisterSdpServices
 <LI><a href="#[309]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AvrcpQueueRxCmd
@@ -13623,8 +13625,6 @@ Global Symbols
 <LI><a href="#[3fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ME_GetExtInqData
 <LI><a href="#[3f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ME_AutoCreateExtInquiryRsp
 <LI><a href="#[409]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SecSetUserIo
-<LI><a href="#[36d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySendDown
-<LI><a href="#[36c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidDataSend
 <LI><a href="#[484]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3_id3_v2_parse
 <LI><a href="#[485]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mp3_id3_v1_parse
 <LI><a href="#[474]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParseWmaHeaderObject
@@ -13806,6 +13806,7 @@ Global Symbols
 <LI><a href="#[114]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__down
 <LI><a href="#[8f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;msgq_task_register
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;msgq_init
+<LI><a href="#[36d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySendDown
 <LI><a href="#[2dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMGR_RegisterHandler
 <LI><a href="#[2de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CMGR_CreateDataLink
 <LI><a href="#[2cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AvrcpAlloc
@@ -13827,7 +13828,6 @@ Global Symbols
 <LI><a href="#[3ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeDevEventHandler
 <LI><a href="#[3cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MeGetFreeRemoteDevice
 <LI><a href="#[39f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AllocChannel
-<LI><a href="#[36d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BTHidMultiKeySendDown
 <LI><a href="#[58b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HfAlloc
 <LI><a href="#[55f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AvdevAllocListeningDevice
 <LI><a href="#[55c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AvdevAlloc
@@ -14783,14 +14783,14 @@ Global Symbols
 <P><STRONG><a name="[6e6]"></a>CodecDacChannelSel</STRONG> (Thumb, 124 bytes, Stack size 16 bytes, dac.o(i.CodecDacChannelSel))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216<LI>Call Chain = CodecDacChannelSel &rArr; CodecDacChannelDisconnect &rArr; CodecMixPgaDisconnect &rArr; DelayMs &rArr; vTaskSleep &rArr; xTaskResumeAll &rArr; msgq_msg_ioctl &rArr;  xTaskResumeAll (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[758]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecPgainIsConnect
+<BR>[Calls]<UL><LI><a href="#[74e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacChannelDisconnect
+<LI><a href="#[758]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecPgainIsConnect
 <LI><a href="#[759]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixPgaConnect
 <LI><a href="#[755]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixLineinConnect
 <LI><a href="#[757]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixFmConnect
 <LI><a href="#[753]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixDacConnect
 <LI><a href="#[754]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecLineinIsConnect
 <LI><a href="#[756]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecFminIsConnect
-<LI><a href="#[74e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacChannelDisconnect
 </UL>
 <BR>[Called By]<UL><LI><a href="#[826]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MixerInit
 <LI><a href="#[702]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioDacOutSetChannel
@@ -15174,6 +15174,7 @@ Global Symbols
 <LI><a href="#[6e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacMuteSet
 <LI><a href="#[8a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiUpgradeMcuSoftMsg
 <LI><a href="#[897]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiGetProjectParams
+<LI><a href="#[6ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
 <LI><a href="#[752]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixPgaDisconnect
 <LI><a href="#[759]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixPgaConnect
 <LI><a href="#[750]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixLineinDisconnect
@@ -15183,7 +15184,6 @@ Global Symbols
 <LI><a href="#[74f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixDacDisconnect
 <LI><a href="#[753]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixDacConnect
 <LI><a href="#[75a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacVmidChargeOp
-<LI><a href="#[6ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
 <LI><a href="#[222]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartWaitMs
 </UL>
 
@@ -16294,8 +16294,8 @@ Global Symbols
 <LI><a href="#[11d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BuartRecv
 <LI><a href="#[815]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLedCb
-<LI><a href="#[743]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
 <LI><a href="#[6ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
+<LI><a href="#[743]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
 </UL>
 
 <P><STRONG><a name="[870]"></a>IsUDiskLink</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, dev_detect_driver.o(i.IsUDiskLink))
@@ -16512,7 +16512,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[815]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 </UL>
 
-<P><STRONG><a name="[764]"></a>Mcu_SendCmdToWiFi</STRONG> (Thumb, 7386 bytes, Stack size 88 bytes, wifi_uart_com.o(i.Mcu_SendCmdToWiFi))
+<P><STRONG><a name="[764]"></a>Mcu_SendCmdToWiFi</STRONG> (Thumb, 7366 bytes, Stack size 88 bytes, wifi_uart_com.o(i.Mcu_SendCmdToWiFi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
 <LI>Call Chain = Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -17842,8 +17842,8 @@ Global Symbols
 <LI><a href="#[815]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 <LI><a href="#[8a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiRequestMcuPowerOff
 <LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiLedCb
-<LI><a href="#[743]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
 <LI><a href="#[6ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
+<LI><a href="#[743]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
 </UL>
 
 <P><STRONG><a name="[884]"></a>Timer0GetTime</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, timer.o(i.Timer0GetTime))
@@ -20113,8 +20113,8 @@ Local Symbols
 <LI><a href="#[6e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecAdcAnaDeInit
 <LI><a href="#[6e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecAdcChannelSel
 <LI><a href="#[6e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacMuteSet
-<LI><a href="#[6eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SarAdcPowerDown
 <LI><a href="#[6ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
+<LI><a href="#[6eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SarAdcPowerDown
 <LI><a href="#[6ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysPowerDownOtp
 <LI><a href="#[6e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__asm___8_wakeup_c_93fc64cc____DISABLE_FAULT_IRQ
 </UL>

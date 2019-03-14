@@ -8,6 +8,7 @@ volatile u32 ticks_50ms;
 void sd_detect(void);
 void tbox_uart_isr(void);
 void testbox_init(void);
+bool exspiflash_init(void);
 
 #if MUSIC_SDCARD_EN
 AT(.com_text.detect)
@@ -92,14 +93,15 @@ void usb_detect(void)
     }
 
 #if SD_USB_MUX_IO_EN
-	if(SD_MUX_IS_BUSY()){
+	if(is_det_sdcard_busy()){
         return;
 	}
-#if SD0_MAPPING == SD0MAP_G5
+#if (SD0_MAPPING == SD0MAP_G5 || SD0_MAPPING == SD0MAP_G4)
 	usb_chk_sta = 1;
     FUNCMCON0 = 0x0f;                       //关SD0 Mapping
     USBCON1 = BIT(19) | BIT(17);            //DM,DP pull down 15k enable
 	SD_DAT_DIS_UP();
+	delay_us(1);
 #endif
 #endif
 
@@ -109,12 +111,17 @@ void usb_detect(void)
     u8 usb_sta = usbchk_connect(USBCHK_ONLY_HOST);
 #endif
 
-#if SD_USB_MUX_IO_EN  && (SD0_MAPPING == SD0MAP_G5)
-	SD_DAT_RES_UP();
+#if SD_USB_MUX_IO_EN  && (SD0_MAPPING == SD0MAP_G5 || SD0_MAPPING == SD0MAP_G4)
 
-	USBCON1 &=~ (BIT(17) | BIT(18) | BIT(19));
-	FUNCMCON0 = SD0_MAPPING;
-	usb_chk_sta = 0;
+    if(sys_cb.cur_dev != DEV_UDISK)
+    {
+        SD_DAT_RES_UP();
+        USBCON1 &=~ (BIT(17) | BIT(18) | BIT(19));
+        FUNCMCON0 = SD0_MAPPING;
+        delay_us(1);
+    }
+     usb_chk_sta = 0;
+
 #endif
 //	printf(usb_detect_str, usb_sta);
 
@@ -570,7 +577,7 @@ static void bsp_var_init(void)
     }
 #endif
 
-#if SD_USB_MUX_IO_EN && (SD0_MAPPING == SD0MAP_G5)
+#if SD_USB_MUX_IO_EN && (SD0_MAPPING == SD0MAP_G5||SD0_MAPPING == SD0MAP_G4)
 	sd_other_param_set(0x0F);
 #endif
 
@@ -773,6 +780,16 @@ void bsp_update_init(void)
 }
 
 
+bool spiflash_speed_up_en(void)
+{
+#if SPIFLASH_SPEED_UP_EN
+    return true;
+#else
+    return false;
+#endif
+}
+
+
 #if  0 //port_int_example
 AT(.com_text)
 const char strisr0[] = ">>[0x%X]_[0x%X]\n";
@@ -809,6 +826,15 @@ void port_int_example(void)     //sys_set_tmr_enable(1, 1); 前调用 测试OK
 #endif
 
 /*
+void timer3_init(void)
+{
+	TMR3CON =  BIT(7);                  //Timer overflow interrupt enable
+	TMR3CNT = 0;
+	TMR3PR  = 1000000 / 2 - 1;          //500ms, select xosc26_div 1M clk
+	TMR3CON |= BIT(2) | BIT(0);         //Timer works in Counter Mode
+    sys_irq_init(IRQ_TMR3_IRRX_VECTOR, 1, timer3_isr);
+}
+
 AT(.com_rodata.isr)
 const char str_t3[] = "T3 ";
 
@@ -829,6 +855,7 @@ void bsp_sys_init(void)
     if (!xcfg_init(&xcfg_cb, sizeof(xcfg_cb))) {           //获取配置参数
         printf("xcfg init error\n");
     }
+    printf("xcfg size is %d!\n", sizeof(xcfg_cb));
 
     // io init
     bsp_io_init();
@@ -867,14 +894,12 @@ void bsp_sys_init(void)
         irtc_sfr_write(RTCCON9_CMD, 0);     //10S Reset
     }
 
-#if CHARGE_EN
-    if (xcfg_cb.charge_en) {
-        charge_init();
-    }
-#endif // CHARGE_EN
-
     led_init();
     key_init();
+
+#if USER_EXT_POWERON_EN
+	EXT_GPIO_POWERON();						//20190224，进入开机时打开外部电源。
+#endif //USER_EXT_POWERON_EN
 
     gui_init();
 #if PWM_RGB_EN
@@ -895,6 +920,10 @@ void bsp_sys_init(void)
     bt_init();
 
     bsp_change_volume(sys_cb.vol);
+
+#if EX_SPIFLASH_SUPPORT
+    exspiflash_init();
+#endif
 
 #if WARNING_POWER_ON
     mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);
@@ -958,10 +987,6 @@ void bsp_sys_init(void)
     plugin_sys_init_finish_callback(); //初始化完成, 各方案可能还有些不同参数需要初始化,预留接口到各方案
 #endif
 
-//	TMR3CON =  BIT(7);                  //Timer overflow interrupt enable
-//	TMR3CNT = 0;
-//	TMR3PR  = 1000000 / 2 - 1;          //500ms, select xosc26_div 1M clk
-//	TMR3CON |= BIT(2) | BIT(0);         //Timer works in Counter Mode
-//    sys_irq_init(IRQ_TMR3_IRRX_VECTOR, 1, timer3_isr);
+
 }
 

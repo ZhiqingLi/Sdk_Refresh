@@ -66,6 +66,36 @@ void led_bt_reconnect(void)
 }
 
 AT(.text.led_disp)
+void led_tws_main_connected(void)
+{
+    //是否配置TWS主机连接状态LED?
+    if (xcfg_cb.led_tws_main_config_en) {
+        led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_tws_main_conn);
+    } 
+    else if (xcfg_cb.led_tws_slave_config_en){ //否则，使用副机配置
+    	led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_tws_slave_conn);
+    }
+    else {
+        led_set_sta(0x00, 0x02, 2, 86);         //亮100ms, 灭5S
+    }
+}
+
+AT(.text.led_disp)
+void led_tws_slave_connected(void)
+{
+    //是否配置TWS副机已连接状态LED?
+    if (xcfg_cb.led_tws_slave_config_en) {
+        led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_tws_slave_conn);
+    } 
+    else if (xcfg_cb.led_tws_main_config_en) {	//否则，使用主机配置
+    	led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_tws_main_conn);
+    }
+    else {
+        led_set_sta(0x00, 0x02, 2, 86);         //亮100ms, 灭5S
+    }
+}
+
+AT(.text.led_disp)
 void led_bt_connected(void)
 {
     //是否配置蓝牙已连接状态LED?

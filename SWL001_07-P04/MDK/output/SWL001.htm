@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\SWL001.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\SWL001.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Tue Jan 29 20:49:18 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060422: Last Updated: Wed Mar 13 13:43:37 2019
 <BR><P>
 <H3>Maximum Stack Usage =       2384 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -526,7 +526,7 @@ Global Symbols
 <LI><a href="#[a69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FlshGetAliveAddr
 <LI><a href="#[c3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveBakBPInfo
 <LI><a href="#[a0b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveBPInfoToFlash
-<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
+<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
 <LI><a href="#[a0a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBPInfoFromFlash
 <LI><a href="#[b47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FindLatestBPBak
 <LI><a href="#[c9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiUpgradeMcuSoftRunning
@@ -566,7 +566,7 @@ Global Symbols
 <LI><a href="#[bab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsInCharge
 <LI><a href="#[c21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerkeySetOnkeyCnt
 <LI><a href="#[c1c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerkeyClrRst8s
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerkeyClrWakeCore
 <LI><a href="#[c32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RstUsbModule
 <LI><a href="#[bf3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OTGLinkCheck_USB2
@@ -17925,8 +17925,8 @@ Global Symbols
 <LI><a href="#[aa5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiStateCheck
 <LI><a href="#[aa3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OtherModulePlayWiFiSoundRemind
 <LI><a href="#[9f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioPlayerSwitchEQ
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
 <LI><a href="#[bbc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLedDisplayControlChange
+<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAvsCmdProcess
 <LI><a href="#[bbb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAutoControl
 <LI><a href="#[bba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LedGpioDetectScan
 <LI><a href="#[bac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsLightAdcDetect
@@ -17945,7 +17945,7 @@ Global Symbols
 <LI><a href="#[bff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiSoundRemindVolSet
 <LI><a href="#[b02]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiSoundRemindStateSet
 <LI><a href="#[c96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiPowerOnInitProcess
-<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
+<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
 <LI><a href="#[b03]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DualBankFlashErase
 <LI><a href="#[b01]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DualBankDataUpgrade
 <LI><a href="#[329]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;att_server_init
@@ -18272,10 +18272,10 @@ Global Symbols
 <LI><a href="#[b4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FindSpecialFileCallBack
 <LI><a href="#[b34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PartitionLoad
 <LI><a href="#[aa4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CmdProcess
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
+<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAvsCmdProcess
 <LI><a href="#[bcb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiDataProcess
 <LI><a href="#[bc9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
-<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
+<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
 <LI><a href="#[ae6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FolderOpenByLfName
 <LI><a href="#[b21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ExFatFileOpenByLfName
 <LI><a href="#[ae7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileOpenByName
@@ -18731,11 +18731,12 @@ Global Symbols
 <LI><a href="#[b2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSINFO_Init
 <LI><a href="#[b29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsSyncInit
 <LI><a href="#[aa4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CmdProcess
+<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAvsCmdProcess
 <LI><a href="#[1a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MT6622_DownloadPatch
 <LI><a href="#[c97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_UartInit
 <LI><a href="#[a77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClearRxQueue
 <LI><a href="#[c9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiUpgradeMcuSoftRunning
-<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
+<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
 <LI><a href="#[6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSContextBufferFree
 <LI><a href="#[5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSContextBufferAlloc
 <LI><a href="#[ae6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FolderOpenByLfName
@@ -21081,7 +21082,6 @@ Global Symbols
 <LI><a href="#[9a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioStaOutSetChannel
 <LI><a href="#[99d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioI2sOutSetChannel
 <LI><a href="#[993]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioDacOutSetChannel
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
 <LI><a href="#[bbb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAutoControl
 <LI><a href="#[17e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UartWaitMs
 <LI><a href="#[c9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiUpgradeMcuSoftMsg
@@ -21096,7 +21096,7 @@ Global Symbols
 <LI><a href="#[a8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecMixDacConnect
 <LI><a href="#[a92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacVmidChargeOp
 <LI><a href="#[97d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 <LI><a href="#[b8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UsbHostPortReset
 <LI><a href="#[b8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;UsbHostOpen
 <LI><a href="#[b91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StorStartDevice
@@ -22666,7 +22666,7 @@ Global Symbols
 <LI><a href="#[a09]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BP_LoadInfo
 <LI><a href="#[9b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioPlayerSetBreakPoint
 <LI><a href="#[c3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveBakBPInfo
-<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
+<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
 <LI><a href="#[b35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PreSearch
 </UL>
 
@@ -23612,9 +23612,9 @@ Global Symbols
 <LI><a href="#[bc9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 <LI><a href="#[97d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
 <LI><a href="#[a7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 <LI><a href="#[b91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StorStartDevice
 <LI><a href="#[b97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HostUsbWaitEnd
 </UL>
@@ -23708,7 +23708,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bbb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAutoControl
 </UL>
 
-<P><STRONG><a name="[bbb]"></a>LightLedDisplayAutoControl</STRONG> (Thumb, 150 bytes, Stack size 8 bytes, pwm_led_display.o(i.LightLedDisplayAutoControl))
+<P><STRONG><a name="[bbb]"></a>LightLedDisplayAutoControl</STRONG> (Thumb, 148 bytes, Stack size 8 bytes, pwm_led_display.o(i.LightLedDisplayAutoControl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
 <LI>Call Chain = LightLedDisplayAutoControl &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -23720,6 +23720,18 @@ Global Symbols
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[afa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmRandomColourTimerBlink
+</UL>
+
+<P><STRONG><a name="[bbd]"></a>LightLedDisplayAvsCmdProcess</STRONG> (Thumb, 1268 bytes, Stack size 88 bytes, pwm_led_display.o(i.LightLedDisplayAvsCmdProcess))
+<BR><BR>[Stack]<UL><LI>Max Depth = 248 + Unknown Stack Size
+<LI>Call Chain = LightLedDisplayAvsCmdProcess &rArr; PwmLedDisplayControlChange &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[bbc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLedDisplayControlChange
+<LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<LI><a href="#[27a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
+<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
 </UL>
 
 <P><STRONG><a name="[b96]"></a>LoadFIFOData</STRONG> (Thumb, 94 bytes, Stack size 20 bytes, otg_hal.o(i.LoadFIFOData))
@@ -23786,17 +23798,17 @@ Global Symbols
 <LI><a href="#[c1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerkeyClrWakeCore
 </UL>
 
-<P><STRONG><a name="[bbe]"></a>MMCReadExtCSD</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, sd_card.o(i.MMCReadExtCSD))
+<P><STRONG><a name="[bbf]"></a>MMCReadExtCSD</STRONG> (Thumb, 144 bytes, Stack size 24 bytes, sd_card.o(i.MMCReadExtCSD))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184<LI>Call Chain = MMCReadExtCSD &rArr; DelayMs &rArr; vTaskSleep &rArr; xTaskResumeAll &rArr; msgq_msg_ioctl &rArr;  xTaskResumeAll (Cycle)
 </UL>
 <BR>[Calls]<UL><LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsTimeOut
-<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioStartReciveData
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
-<LI><a href="#[bc3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioIsDatTransDone
-<LI><a href="#[bc2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioGetResponseStatus
-<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEndDatTrans
-<LI><a href="#[bc4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
+<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioStartReciveData
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioIsDatTransDone
+<LI><a href="#[bc3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioGetResponseStatus
+<LI><a href="#[bc2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEndDatTrans
+<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
 <LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayMs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
@@ -23816,11 +23828,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GuiTaskEntrance
 </UL>
 
-<P><STRONG><a name="[bc5]"></a>McuRevPassThroughData</STRONG> (Thumb, 380 bytes, Stack size 16 bytes, wifi_control.o(i.McuRevPassThroughData))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
-<LI>Call Chain = McuRevPassThroughData &rArr; WiFi_CtrlPwmLight &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
+<P><STRONG><a name="[bc6]"></a>McuRevPassThroughData</STRONG> (Thumb, 380 bytes, Stack size 16 bytes, wifi_control.o(i.McuRevPassThroughData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 264 + Unknown Stack Size
+<LI>Call Chain = McuRevPassThroughData &rArr; LightLedDisplayAvsCmdProcess &rArr; PwmLedDisplayControlChange &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
+<BR>[Calls]<UL><LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAvsCmdProcess
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 <LI><a href="#[27a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -23892,7 +23904,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bc9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 </UL>
 
-<P><STRONG><a name="[aa0]"></a>Mcu_SendCmdToWiFi</STRONG> (Thumb, 9808 bytes, Stack size 88 bytes, wifi_uart_com.o(i.Mcu_SendCmdToWiFi))
+<P><STRONG><a name="[aa0]"></a>Mcu_SendCmdToWiFi</STRONG> (Thumb, 8208 bytes, Stack size 88 bytes, wifi_uart_com.o(i.Mcu_SendCmdToWiFi))
 <BR><BR>[Stack]<UL><LI>Max Depth = 232 + Unknown Stack Size
 <LI>Call Chain = Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -23914,7 +23926,6 @@ Global Symbols
 <LI><a href="#[a9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLightDisplayControlSetting
 <LI><a href="#[a9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLightBrightnessSetting
 <LI><a href="#[a9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuSyncWiFiVolume
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
 <LI><a href="#[bbb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAutoControl
 <LI><a href="#[bcd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_SendCmdToMcu
 <LI><a href="#[c9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiUpgradeMcuSoftRunning
@@ -24227,7 +24238,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BP_SaveInfo
 <LI><a href="#[a62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BootUpgradeChk
 <LI><a href="#[b05]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DualBankUpdateReboot
-<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
+<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
 <LI><a href="#[b01]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DualBankDataUpgrade
 <LI><a href="#[272]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveNvRamInfo
 <LI><a href="#[26e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveNvRamRecNum
@@ -24783,7 +24794,7 @@ Global Symbols
 <LI><a href="#[c25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmAlexaLedDisplayInit
 </UL>
 
-<P><STRONG><a name="[a9c]"></a>PwmDisplayLightOnOff</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, pwm_led_display.o(i.PwmDisplayLightOnOff))
+<P><STRONG><a name="[a9c]"></a>PwmDisplayLightOnOff</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, pwm_led_display.o(i.PwmDisplayLightOnOff))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
 <LI>Call Chain = PwmDisplayLightOnOff &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -24810,7 +24821,7 @@ Global Symbols
 <LI><a href="#[c25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmAlexaLedDisplayInit
 </UL>
 
-<P><STRONG><a name="[bbc]"></a>PwmLedDisplayControlChange</STRONG> (Thumb, 98 bytes, Stack size 16 bytes, pwm_led_display.o(i.PwmLedDisplayControlChange))
+<P><STRONG><a name="[bbc]"></a>PwmLedDisplayControlChange</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, pwm_led_display.o(i.PwmLedDisplayControlChange))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = PwmLedDisplayControlChange &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -24818,8 +24829,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmDisplayLightOnOff
 <LI><a href="#[a9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLightDisplayControlSetting
-<LI><a href="#[a9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLightBrightnessSetting
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
+<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAvsCmdProcess
 <LI><a href="#[bbb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LightLedDisplayAutoControl
 <LI><a href="#[afa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmRandomColourTimerBlink
 </UL>
@@ -24871,12 +24881,11 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[17]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Timer1Interrupt
 </UL>
 
-<P><STRONG><a name="[a9e]"></a>PwmLightBrightnessSetting</STRONG> (Thumb, 96 bytes, Stack size 8 bytes, pwm_led_display.o(i.PwmLightBrightnessSetting))
-<BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
+<P><STRONG><a name="[a9e]"></a>PwmLightBrightnessSetting</STRONG> (Thumb, 132 bytes, Stack size 16 bytes, pwm_led_display.o(i.PwmLightBrightnessSetting))
+<BR><BR>[Stack]<UL><LI>Max Depth = 248 + Unknown Stack Size
 <LI>Call Chain = PwmLightBrightnessSetting &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[aa0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_SendCmdToWiFi
-<LI><a href="#[bbc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLedDisplayControlChange
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CommonMsgProccess
 </UL>
@@ -25257,7 +25266,7 @@ Global Symbols
 <P><STRONG><a name="[c41]"></a>SdAppSendCommand</STRONG> (Thumb, 48 bytes, Stack size 16 bytes, sd_card.o(i.SdAppSendCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = SdAppSendCommand &rArr; SdioSendCommand &rArr; TimeOutSet
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<BR>[Calls]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
 <LI><a href="#[c42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardDetect
@@ -25267,7 +25276,7 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = SdCardDetect &rArr; SdAppSendCommand &rArr; SdioSendCommand &rArr; TimeOutSet
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdControllerInit
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdAppSendCommand
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardInit
@@ -25279,10 +25288,10 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[c44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WdgFeed
 <LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsTimeOut
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
-<LI><a href="#[bc2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioGetResponseStatus
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioGetResponseStatus
 <LI><a href="#[c41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdAppSendCommand
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 <LI><a href="#[188]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[9d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardInit
@@ -25324,51 +25333,51 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c49]"></a>SdioDisableClk</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, sdio.o(i.SdioDisableClk))
-<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<BR><BR>[Called By]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioControllerInit
 </UL>
 
-<P><STRONG><a name="[bc4]"></a>SdioEnableClk</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, sdio.o(i.SdioEnableClk))
-<BR><BR>[Called By]<UL><LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioStartReciveData
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<P><STRONG><a name="[bc5]"></a>SdioEnableClk</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, sdio.o(i.SdioEnableClk))
+<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioStartReciveData
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
 <P><STRONG><a name="[c48]"></a>SdioEndCmd</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sdio.o(i.SdioEndCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<BR><BR>[Called By]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioControllerInit
 </UL>
 
-<P><STRONG><a name="[bc1]"></a>SdioEndDatTrans</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sdio.o(i.SdioEndDatTrans))
-<BR><BR>[Called By]<UL><LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<P><STRONG><a name="[bc2]"></a>SdioEndDatTrans</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sdio.o(i.SdioEndDatTrans))
+<BR><BR>[Called By]<UL><LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
-<P><STRONG><a name="[bc2]"></a>SdioGetResponseStatus</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, sdio.o(i.SdioGetResponseStatus))
+<P><STRONG><a name="[bc3]"></a>SdioGetResponseStatus</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, sdio.o(i.SdioGetResponseStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
 <P><STRONG><a name="[c4b]"></a>SdioIsCmdDone</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sdio.o(i.SdioIsCmdDone))
-<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<BR><BR>[Called By]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 </UL>
 
-<P><STRONG><a name="[bc3]"></a>SdioIsDatTransDone</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sdio.o(i.SdioIsDatTransDone))
-<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<P><STRONG><a name="[bc4]"></a>SdioIsDatTransDone</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, sdio.o(i.SdioIsDatTransDone))
+<BR><BR>[Called By]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
 <P><STRONG><a name="[c47]"></a>SdioModeEn</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sdio.o(i.SdioModeEn))
 <BR><BR>[Called By]<UL><LI><a href="#[c46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioControllerInit
 </UL>
 
-<P><STRONG><a name="[bc0]"></a>SdioSendCommand</STRONG> (Thumb, 200 bytes, Stack size 32 bytes, sdio.o(i.SdioSendCommand))
+<P><STRONG><a name="[bc1]"></a>SdioSendCommand</STRONG> (Thumb, 200 bytes, Stack size 32 bytes, sdio.o(i.SdioSendCommand))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = SdioSendCommand &rArr; TimeOutSet
 </UL>
 <BR>[Calls]<UL><LI><a href="#[183]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
 <LI><a href="#[184]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsTimeOut
 <LI><a href="#[118]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__udelay
-<LI><a href="#[bc3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioIsDatTransDone
-<LI><a href="#[bc4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
+<LI><a href="#[bc4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioIsDatTransDone
+<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
 <LI><a href="#[c49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioDisableClk
 <LI><a href="#[c4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioStartCmd
 <LI><a href="#[c4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioIsCmdDone
@@ -25377,7 +25386,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
 <LI><a href="#[c42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardDetect
 <LI><a href="#[c41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdAppSendCommand
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
 <P><STRONG><a name="[c45]"></a>SdioSetClk</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, sdio.o(i.SdioSetClk))
@@ -25386,15 +25395,15 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[c4a]"></a>SdioStartCmd</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, sdio.o(i.SdioStartCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<BR><BR>[Called By]<UL><LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 </UL>
 
-<P><STRONG><a name="[bbf]"></a>SdioStartReciveData</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, sdio.o(i.SdioStartReciveData))
+<P><STRONG><a name="[bc0]"></a>SdioStartReciveData</STRONG> (Thumb, 60 bytes, Stack size 8 bytes, sdio.o(i.SdioStartReciveData))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = SdioStartReciveData
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
+<BR>[Calls]<UL><LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioEnableClk
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<BR>[Called By]<UL><LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 </UL>
 
 <P><STRONG><a name="[9e6]"></a>SearchAndOpenLrcFile</STRONG> (Thumb, 224 bytes, Stack size 72 bytes, player_control.o(i.SearchAndOpenLrcFile))
@@ -26400,9 +26409,9 @@ Global Symbols
 <LI><a href="#[b02]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiSoundRemindStateSet
 <LI><a href="#[97d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodecDacDeinit
 <LI><a href="#[a7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ClkUseOsc32kCheckRc48m
-<LI><a href="#[bc0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
+<LI><a href="#[bc1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdioSendCommand
 <LI><a href="#[c43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SdCardGetInfo
-<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
+<LI><a href="#[bbf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MMCReadExtCSD
 <LI><a href="#[b91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;StorStartDevice
 <LI><a href="#[b97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;HostUsbWaitEnd
 </UL>
@@ -26833,7 +26842,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bcd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_SendCmdToMcu
 </UL>
 
-<P><STRONG><a name="[c90]"></a>WiFiGetProjectParams</STRONG> (Thumb, 352 bytes, Stack size 8 bytes, wifi_control.o(i.WiFiGetProjectParams))
+<P><STRONG><a name="[c90]"></a>WiFiGetProjectParams</STRONG> (Thumb, 336 bytes, Stack size 8 bytes, wifi_control.o(i.WiFiGetProjectParams))
 <BR><BR>[Stack]<UL><LI>Max Depth = 240 + Unknown Stack Size
 <LI>Call Chain = WiFiGetProjectParams &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -27107,14 +27116,13 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[bcd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_SendCmdToMcu
 </UL>
 
-<P><STRONG><a name="[aa4]"></a>WiFi_CmdProcess</STRONG> (Thumb, 2406 bytes, Stack size 8 bytes, wifi_uart_com.o(i.WiFi_CmdProcess))
+<P><STRONG><a name="[aa4]"></a>WiFi_CmdProcess</STRONG> (Thumb, 2398 bytes, Stack size 8 bytes, wifi_uart_com.o(i.WiFi_CmdProcess))
 <BR><BR>[Stack]<UL><LI>Max Depth = 432 + Unknown Stack Size
 <LI>Call Chain = WiFi_CmdProcess &rArr; Mcu_RcvWiFiCmd &rArr; Mcu_RcvWiFiDataProcess &rArr; WiFi_SendCmdToMcu &rArr; WiFiAppSetPlayMode &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MsgSend
 <LI><a href="#[a9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiPowerOnInitStateGet
 <LI><a href="#[c2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiSetMicState
-<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CtrlPwmLight
 <LI><a href="#[bcd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_SendCmdToMcu
 <LI><a href="#[bc9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_RcvWiFiCmd
 <LI><a href="#[122]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
@@ -27124,21 +27132,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[9c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CommonMsgProccess
 </UL>
 
-<P><STRONG><a name="[bc6]"></a>WiFi_CtrlPwmLight</STRONG> (Thumb, 900 bytes, Stack size 24 bytes, pwm_led_display.o(i.WiFi_CtrlPwmLight))
-<BR><BR>[Stack]<UL><LI>Max Depth = 256 + Unknown Stack Size
-<LI>Call Chain = WiFi_CtrlPwmLight &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
-</UL>
-<BR>[Calls]<UL><LI><a href="#[aa0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Mcu_SendCmdToWiFi
-<LI><a href="#[bbc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmLedDisplayControlChange
-<LI><a href="#[17f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DelayMs
-<LI><a href="#[27a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;memcmp
-<LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[aa4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_CmdProcess
-<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
-</UL>
-
-<P><STRONG><a name="[bcd]"></a>WiFi_SendCmdToMcu</STRONG> (Thumb, 2028 bytes, Stack size 16 bytes, wifi_uart_com.o(i.WiFi_SendCmdToMcu))
+<P><STRONG><a name="[bcd]"></a>WiFi_SendCmdToMcu</STRONG> (Thumb, 2034 bytes, Stack size 16 bytes, wifi_uart_com.o(i.WiFi_SendCmdToMcu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 400 + Unknown Stack Size
 <LI>Call Chain = WiFi_SendCmdToMcu &rArr; WiFiAppSetPlayMode &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -27186,7 +27180,7 @@ Global Symbols
 <LI><a href="#[c8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiCardStateSet
 <LI><a href="#[c8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFiAppSetPlayMode
 <LI><a href="#[cab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SlaveMcuRevPassThroughCmd
-<LI><a href="#[bc5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
+<LI><a href="#[bc6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;McuRevPassThroughData
 <LI><a href="#[cac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;MasterMcuRevPassThroughCmd
 <LI><a href="#[276]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy4
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
@@ -29124,14 +29118,14 @@ Local Symbols
 </UL>
 <BR>[Calls]<UL><LI><a href="#[115]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpiFlashRead
 <LI><a href="#[113]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SpiFlashEraseInTcm
-<LI><a href="#[bbd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
+<LI><a href="#[bbe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LoadBakBPInfo
 <LI><a href="#[b47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FindLatestBPBak
 <LI><a href="#[120]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a09]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BP_LoadInfo
 </UL>
 
-<P><STRONG><a name="[bbd]"></a>LoadBakBPInfo</STRONG> (Thumb, 100 bytes, Stack size 32 bytes, breakpoint.o(i.LoadBakBPInfo))
+<P><STRONG><a name="[bbe]"></a>LoadBakBPInfo</STRONG> (Thumb, 100 bytes, Stack size 32 bytes, breakpoint.o(i.LoadBakBPInfo))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = LoadBakBPInfo &rArr; SpiFlashRead
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetCrc8CheckSum

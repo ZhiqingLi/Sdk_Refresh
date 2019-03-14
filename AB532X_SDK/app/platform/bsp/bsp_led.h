@@ -65,6 +65,8 @@ enum
     void led_bt_connected(void);
     void led_bt_connectting(void);
     void led_bt_reconnect(void);
+    void led_tws_main_connected(void);
+    void led_tws_slave_connected(void);
     void led_bt_play(void);
     bool led_bt_sleep(void);
     void led_bt_ring(void);
@@ -111,6 +113,8 @@ enum
     #define led_bt_idle()
     #define led_bt_connected()
     #define led_bt_reconnect()
+    #define led_tws_main_connected()
+    #define led_tws_slave_connected()
     #define led_bt_connectting()
     #define led_bt_play()
     #define led_bt_sleep()                  0

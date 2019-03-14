@@ -35,6 +35,8 @@ enum
     WIFI_STATUS_WPS_SCANNING,  //正在搜索
     WIFI_STATUS_PLAY_PAUSE,	//暂停播放
     WIFI_STATUS_PLAY_PLAYING, //正在播放
+    WIFI_STATUS_LOGIN_SUCCESSFUL, //登录服务商服务器成功
+    WIFI_STATUS_LOGIN_FAILED, //登录服务商服务器失败
 };
 
 //MCU端播放模式定义
@@ -138,6 +140,7 @@ typedef struct _WIFI_WORK_STATE_
 	uint16_t WiFiAppPlayMode;		//WiFi通知MCU播放模式
 	uint16_t SlaveSoundBoxCnt;		//WiFi子音箱个数	
 	uint16_t WiFiSoundRemindState;	//WiFi语音提示状态
+	uint8_t  LoginState;			//服务器登录状态
 	uint16_t LedState; 				//LED状态(000 表示关闭001 表示常亮002 表示快闪003 表示慢闪)
 	uint8_t  KaiShuRadio;			//凯叔故事机当前电台
 	uint8_t  KaiShuVolumeMax;		//凯叔音量限制;
@@ -182,6 +185,7 @@ const static WIFI_WORK_STATE InitgWiFi =
 	MCU_PLAY_MODE_WIFI,         	  //WiFi播放模式
 	0,                            	  //WiFi子音箱个数	
 	2,                                //WiFi语音提示状态
+	WIFI_STATUS_LOGIN_FAILED,
 	0,                                //LED状态(000 表示关闭001 表示常亮002 表示快闪003 表示慢闪)
 	WIFI_PLAY_KAISHU_RADIO_DEFAULT,   //默认凯叔电台
 	100,							  //凯叔默认限制音量。
@@ -217,11 +221,15 @@ extern void WiFiWpsStateSet(uint8_t State);
 extern void WiFiStationStateSet(uint8_t State);
 extern void WiFiEthStateSet(uint8_t State);
 extern void WiFiWwwStateSet(uint8_t State);
+extern uint8_t WiFiWwwStateGet(void);
 extern void WiFiRa0StateSet(uint8_t State);
+extern uint8_t WiFiRa0StateGet(void);
 extern void WiFiFactoryStateSet(bool State);
 extern bool WiFiFactoryStateGet(void);
 extern void WiFiFirmwareUpgradeStateSet(uint8_t State);
 extern uint8_t WiFiFirmwareUpgradeStateGet(void);
+extern void WiFiLoginStateSet(uint8_t State);
+extern uint8_t WiFiLoginStateGet(void);
 extern void WiFiRequestMcuPowerOff(void);
 extern void WiFiPowerStateSet(uint8_t* State);
 extern void WiFiTestModeStateSet(void);
@@ -254,6 +262,7 @@ extern void WiFiTalkStateSet(bool State);
 extern void WiFiSetMcuSystemTime(uint8_t* DateData);
 extern void WiFiSetMcuWeekDay(uint8_t* DayData);
 extern void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData);
+extern void WiFiSetMcuAlarmTime(uint8_t* AlarmTimeData);
 extern void WiFiSetAlarmRemindState(bool State);
 extern bool GetWiFiAlarmRemindState(void);
 extern void MasterMcuRevPassThroughCmd(uint16_t Cmd);

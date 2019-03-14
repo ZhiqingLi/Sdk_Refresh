@@ -190,7 +190,7 @@ void bsp_bt_init(void)
 
     memset(&f_bt, 0, sizeof(func_bt_t));
     f_bt.disp_status = 0xfe;
-    f_bt.need_pairing = 1;  //开机若回连不成功，需要播报pairing
+    f_bt.need_pairing = 1;  //开机若回连不成功，需要播报pairing。
     if (!is_bthid_mode()) {
         f_bt.hid_menu_flag = 1;
     }
@@ -380,9 +380,11 @@ void bt_emit_notice(uint evt, u32 param)
         if(bt_cfg.tws_mode) {
             if(param & 0xc0) {
                 f_bt.tws_status &= ~0xc0;
+                bt_tws_disconnect();
                 break;                      //tws断线不播报提示音
             } else {
                 f_bt.tws_status &= ~0x01;
+                bt_tws_user_key(BT_STA_TWS_DISCONN);
             }
         }
 #endif
@@ -395,12 +397,15 @@ void bt_emit_notice(uint evt, u32 param)
             if(param & 0x80) {
                 f_bt.tws_status |= 0x80;
                 f_bt.warning_status |= BT_WARN_TWS_SCON;
+                led_tws_slave_connected();
             } else if(param & 0x40) {
                 f_bt.tws_status |= 0x40;
                 f_bt.warning_status |= BT_WARN_TWS_MCON;
+                led_tws_main_connected();
             } else {
                 f_bt.tws_status |= 0x01;
                 f_bt.warning_status |= BT_WARN_CON;
+                bt_tws_user_key(BT_STA_TWS_CONN);
             }
         } else
 #endif
@@ -451,6 +456,17 @@ void bt_emit_notice(uint evt, u32 param)
     case BT_NOTICE_TWS_INFO:
         bt_set_tws_info((u8 *)param);
         break;
+
+    case BT_NOTICE_TWS_USER_KEY:
+    	if(BT_STA_TWS_CONN == param) {
+    		led_bt_connected();
+    	}
+    	else if(BT_STA_TWS_DISCONN == param) {
+    		if(bt_tws_is_connected() && bt_tws_is_slave()) {
+    			led_tws_slave_connected();
+    		}
+    	}
+    	break;
 
     case BT_NOTICE_TWS_SET_VOL:
         param = (param+1) * VOL_MAX / 128;

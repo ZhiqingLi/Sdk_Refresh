@@ -71,7 +71,7 @@ typedef enum _RTC_RING_TYPE_
 	RTC_RING_SOUND5_TYPE,		// 内置铃声5
 	RTC_RING_SDCARD_TYPE,       // SD卡当前歌曲为铃声
 	RTC_RING_TYPE_MAX, 		  //
-	
+	RTC_RING_WIFISD_TYPE,       // WiFi网络端闹钟，本地设置闹钟铃声不能进入
 } RTC_RING_TYPE;
 
 typedef enum _RTC_WEEK_
@@ -109,7 +109,7 @@ typedef struct _RTC_CONTROL_
 
 typedef struct _NVM_RTC_INFO_
 {
-	uint8_t 		AlarmVolume;        			// 闹钟铃声音量
+	uint8_t 		AlarmVolume[MAX_ALARM_NUM+1];   // 闹钟铃声音量
 	uint8_t			RingType[MAX_ALARM_NUM+1]; 		// 铃声类型 INTER_RING_TYPE - 内置铃声、USB_RING_TYPE - U盘铃声、SD_RING_TYPE - SD卡铃声
 	ALARM_TIME_INFO AlarmTimeList[MAX_ALARM_NUM];	// 闹钟时间信息
 	
@@ -134,7 +134,11 @@ bool RtcInitialize(void);
 bool IsRtcAlarmRingPlaying(uint16_t CheckMsg);
 void SoundRemindAlarmRing(uint8_t RingId);
 bool RtcCurAlarmSleepAndStop(RTC_ALARM_STATE state);
-
+#if (defined(FUNC_RTC_EN) && defined(FUNC_RTC_ALARM_SAVE2FLASH))
+extern bool GetNearAlarmTimeFromBpInfo(ALARM_BP_INFO *AlarmInfo, uint8_t AlarmNum);
+extern void SetWiFiAlarmTimeToBpInfo(ALARM_BP_INFO *AlarmInfo);
+extern void SyncMcuAlarmTimeToBpInfo(ALARM_BP_INFO *AlarmInfo,uint8_t AlarmNum);
+#endif
 #ifdef __cplusplus
 }
 #endif//__cplusplus

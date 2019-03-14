@@ -462,21 +462,21 @@ __section__(".FIRST") void disp_starting(void (*adfu_launch)(void), void (*read_
 #endif
 #endif
 
-               //ejtag 口配置
-               welcome_ejtag();
+	//ejtag 口配置
+	welcome_ejtag();
 
-               //获取充电模式配置项默认值
-               charge_mode = (uint8) cfg_value[CONFIG_ID_80_CHARGE_MODE]; //index 0 -> 充电模式
-               capacitor_mode = (uint8) cfg_value[CONFIG_ID_110_CYRSTAL_CAP];
-               debug_mode = (uint8)cfg_value[CONFIG_ID_121_DEBUG_MODE];
+	//获取充电模式配置项默认值
+	charge_mode = (uint8) cfg_value[CONFIG_ID_80_CHARGE_MODE]; //index 0 -> 充电模式
+	capacitor_mode = (uint8) cfg_value[CONFIG_ID_110_CYRSTAL_CAP];
+	debug_mode = (uint8)cfg_value[CONFIG_ID_121_DEBUG_MODE];
 
     if(capacitor_mode == 1) { //使用外部电容，将内部电容设置为1.6pf
-    act_writel(((act_readl(HOSC_CTL) & (~0xffff)) | 0x1010), HOSC_CTL);
+		act_writel(((act_readl(HOSC_CTL) & (~0xffff)) | 0x1010), HOSC_CTL);
         welcome_flush_rtc();
     }
 
     if(debug_mode == 0) {
-    ENABLE_WATCH_DOG(6);
+    	ENABLE_WATCH_DOG(6);
     }
 
 
@@ -490,7 +490,7 @@ __section__(".FIRST") void disp_starting(void (*adfu_launch)(void), void (*read_
 #if (CASE_BOARD_TYPE == CASE_BOARD_DEMO)
 #if (SUPPORT_OUTER_CHARGE == 1)
     if(charge_mode == BAT_CHARGE_MODE_OUTER) {
-    if(IS_EXTERN_BATTERY_IN() == 0) {
+		if(IS_EXTERN_BATTERY_IN() == 0) {
             goto do_nothing;
         }
     }
@@ -516,18 +516,18 @@ __section__(".FIRST") void disp_starting(void (*adfu_launch)(void), void (*read_
     act_writel((act_readl(HOSC_CTL) & 0xffff0000), HOSC_CTL);
     act_writel(0xA596, RTC_REGUPDATA);
     while(act_readl(RTC_REGUPDATA) != 0x5A69) {
-    ;//qac
-}
-welcome_delay_ms(20);
-//act_writel((act_readl(HOSC_CTL) | 0x4646), HOSC_CTL);
-welcome_delay_ms(10);
-act_writel(act_readl(0xc01b0000) | 0x00000014, 0xc01b0000); //ft test mode
-welcome_delay_ms(20);
+		;//qac
+	}
+	welcome_delay_ms(20);
+	//act_writel((act_readl(HOSC_CTL) | 0x4646), HOSC_CTL);
+	welcome_delay_ms(10);
+	act_writel(act_readl(0xc01b0000) | 0x00000014, 0xc01b0000); //ft test mode
+	welcome_delay_ms(20);
 #endif
 
-//step 5: BT Controller 上电
-if((act_readl(POWER_CTL) & (1 << 1)) == 0) { //check is s3bt POWER ON
-    welcome_RTL_poweron();
+	//step 5: BT Controller 上电
+	if((act_readl(POWER_CTL) & (1 << 1)) == 0) { //check is s3bt POWER ON
+    	welcome_RTL_poweron();
     }
 
 //#if defined(BOARD_LINKPLAY_FAR_DEMO)
@@ -541,8 +541,8 @@ if((act_readl(POWER_CTL) & (1 << 1)) == 0) { //check is s3bt POWER ON
 #ifdef FT_MODE
     act_writel((act_readl(WD_CTL) & (~0x10)), WD_CTL);
     while(1) {
-    ;
-}
+	    ;
+	}
 #endif
 }
 

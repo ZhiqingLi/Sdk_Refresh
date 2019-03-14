@@ -347,10 +347,21 @@ void func_music_device_new(void)
     u8 dev_change = f_msc.dev_change;
     if (f_msc.dev_change) {
         f_msc.dev_change = 0;
+        music_control(MUSIC_MSG_STOP);
         if ((dev_change == 1) && (!func_music_switch_device())) {
             return;
         }
-        music_control(MUSIC_MSG_STOP);
+        #if SD_USB_MUX_IO_EN
+        printf("sys_cb.cur_dev:%d\n",sys_cb.cur_dev);
+        if(f_msc.cur_dev == DEV_UDISK){
+            printf("SDmode\n");
+            udisk_suspend();
+        }if(sys_cb.cur_dev == DEV_UDISK){
+            printf("USB mode\n");
+            udisk_resume();
+        }
+        #endif
+        //music_control(MUSIC_MSG_STOP);
 
         led_music_busy();
         fsdisk_callback_init(sys_cb.cur_dev);

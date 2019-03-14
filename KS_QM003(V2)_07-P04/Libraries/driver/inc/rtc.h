@@ -31,6 +31,10 @@ extern "C" {
  * 定义闹钟最大数量，最多同时支持8个闹钟
  */	
 #define   MAX_ALARM_NUM			2
+/**
+ * 定义断点记忆的闹钟最大数量，最多记忆8个闹钟
+ */	
+#define   MAX_BP_INFO_ALARM_NUM	 6
 
 /**
  * 闹钟状态定义
@@ -77,7 +81,19 @@ typedef struct _RTC_DATE_TIME
 	uint8_t	Sec;   /**< 秒数 */
 } RTC_DATE_TIME;
 
-
+/**
+ * 闹钟断点记忆结构体
+ */
+#pragma pack(1)	/*Ensure this structure is byte aligned, and not use padding bytes */
+typedef struct _ALARM_BP_INFO
+{
+    uint8_t 		AlarmVolume;    // 闹钟铃声音量
+	uint8_t			RingType; 		// 铃声类型 INTER_RING_TYPE - 内置铃声、USB_RING_TYPE - U盘铃声、SD_RING_TYPE - SD卡铃声
+	uint8_t			AlarmMode; 		// 闹钟模式
+	uint8_t			AlarmState; 	// 闹钟状态
+	RTC_DATE_TIME	AlarmTime;		// 闹钟时间信息
+} ALARM_BP_INFO;
+#pragma pack()
 
 /**
  * 农历时间结构体定义

@@ -183,6 +183,12 @@ void mp3_res_play(u32 addr, u32 len)
                 break;
             }
         }
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+        if ((msg == KU_REC) || (msg == KL_REC)) {
+            break;
+        }
+#endif
+
 #if LINEIN_DETECT_EN
         if ((msg == EVT_LINEIN_INSERT) && ((sys_cb.voice_evt_brk_en) || (LINEIN_2_PWRDOWN_EN))) {
             func_message(msg);

@@ -34,7 +34,7 @@
 #define GUI_SELECT                      GUI_NO                  //GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K                //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
 #define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
-
+#define SPIFLASH_SPEED_UP_EN            1                       //SPI FLASH提速。注意5327A,5327C,5325F不支持提速，这三颗芯请配置成0
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/

@@ -520,7 +520,7 @@ TIMER LightAutoControlTimer;
 PWM_LED_COLOUR	PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
 PWM_LED_DUTY 	PwmLightState[MAX_LIGHT_NUM];
 uint8_t DutyBuf[3];
-static uint8_t LightBrightness = MIN_BRIGHTNESS;
+static uint8_t LightBrightness = MAX_BRIGHTNESS;
 
 #ifdef FUNC_WIFI_ALEXA_PROJECT_EN
 static uint8_t PwmSetDutyTemp[MAX_LIGHT_NUM];
@@ -564,16 +564,10 @@ static const uint8_t SetSwitchCmdTable[14][12] =
 /******************************************************************************/
 void PwmDisplayLightOnOff(void)
 {
-	if(PWM_LED_COLOUR_IDLE != PwmLightDisplayMode)
-	{
-		LightBrightness = MIN_BRIGHTNESS;
-		PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
-		Mcu_SendCmdToWiFi(MCU_IOTN_OFF, NULL);
-		PwmLedDisplayControlChange(PwmLightDisplayMode);
-	}
-	else
-	{
-	}
+	LightBrightness = 0;//MIN_BRIGHTNESS;
+	PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
+	Mcu_SendCmdToWiFi(MCU_IOTN_OFF, NULL);
+	PwmLedDisplayControlChange(PwmLightDisplayMode);
 }
 
 /*****************************************************************************
@@ -593,6 +587,7 @@ void PwmDisplayLightOnOff(void)
 *****************************************************************************/
 void PwmLightBrightnessSetting(uint16_t Msg)
 {
+	uint8_t Count;
 	if (MSG_LIGHT_SET_UP == Msg)
 	{
 	    LightBrightness += 10;
@@ -609,8 +604,16 @@ void PwmLightBrightnessSetting(uint16_t Msg)
 	    	LightBrightness = MIN_BRIGHTNESS;
 	    }
 	}
-	
-	PwmLedDisplayControlChange(PwmLightDisplayMode);
+
+	for (Count = 0; Count < MAX_LIGHT_NUM; ++Count)
+	{
+#ifdef FUNC_WIFI_ALEXA_PROJECT_EN
+		PwmLightState[Count].PwmSetDuty = PwmSetDutyTemp[Count]*LightBrightness/100;
+#else
+		PwmLightState[Count].PwmSetDuty = PwmColorTable[PwmLightDisplayMode][Count]*LightBrightness/100;
+#endif
+	}
+
 	Mcu_SendCmdToWiFi(MCU_IOTN_LIGHT, &LightBrightness);
 }
 /******************************************************************************/
@@ -810,7 +813,7 @@ void LightLedDisplayAutoControl(void)
 	{
 		if(SetPwmLightFlag == TRUE)
 		{
-			LightBrightness = MIN_BRIGHTNESS;
+			LightBrightness = 0;//MIN_BRIGHTNESS;
 			PwmLightDisplayMode = PWM_LED_COLOUR_IDLE;
 			Mcu_SendCmdToWiFi(MCU_IOTN_OFF, NULL);
 			PwmLedDisplayControlChange(PwmLightDisplayMode);
@@ -843,6 +846,7 @@ void WiFi_CtrlPwmLight(uint8_t* Cmdbuf, bool IsPasCmd)
 	{
 		PwmLightDisplayMode = PWM_LED_COLOUR_WHITE;
 		LightBrightness = MAX_BRIGHTNESS;
+		
 		PwmLedDisplayControlChange(PwmLightDisplayMode);
 		if(TRUE == IsPasCmd)
 		{
@@ -917,6 +921,9 @@ void WiFi_CtrlPwmLight(uint8_t* Cmdbuf, bool IsPasCmd)
 			Mcu_SendCmdToWiFi(MCU_IOTN_COLOR, &DutyBuf[0]);
 		}
 		WaitMs(10);
+
+		LightBrightness = MAX_BRIGHTNESS;
+		
 		Mcu_SendCmdToWiFi(MCU_IOTN_LIGHT, &LightBrightness);
 	}
     else if(memcmp(Cmdbuf, "Percentage++", 12) == 0)
@@ -1197,7 +1204,7 @@ void LightLedDisplayAvsCmdProcess(uint8_t* AvsCmdBuf,uint16_t Len)
 			PwmLightDisplayMode = PWM_LED_COLOUR_COLORFUL;
 		}
 
-        LightBrightness = MAX_BRIGHTNESS;
+		LightBrightness = MAX_BRIGHTNESS;
 	}
 	else if(memcmp(&AvsCmdProcessBuf[1], "SetMode", 7) == 0)
 	{

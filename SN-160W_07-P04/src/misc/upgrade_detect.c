@@ -94,8 +94,8 @@ void BootUpgradeChk(void)
 			APP_DBG("[UPGRADE]:found upgrade ball(*.MVA), prepare to boot upgrade\n");
 			BootNvmInfo = UPGRADE_REQT_MAGIC;
 			NvmWrite(UPGRADE_NVM_ADDR, (uint8_t*)&BootNvmInfo, 4);
-      //if you want PORRESET to reset GPIO only,uncomment it
-      GpioPorSysReset(GPIO_RSTSRC_PORREST);
+            //if you want PORRESET to reset GPIO only,uncomment it
+            GpioPorSysReset(GPIO_RSTSRC_PORREST);
 			NVIC_SystemReset();
 			FsUnLock(CurFsContext);
 			while(1);;;

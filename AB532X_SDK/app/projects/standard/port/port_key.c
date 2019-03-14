@@ -317,3 +317,31 @@ u8 get_iokey(void)
 }
 #endif // USER_IOKEY
 
+#if USER_EXT_POWERON_EN
+static gpio_t pwr_gpio;
+
+void external_power_gpio_poweron(u8 io_num)
+{
+	gpio_t *p = &pwr_gpio;
+    bsp_gpio_cfg_init(p, io_num);
+    if (p->sfr == NULL) {
+    	return;
+    }
+    p->sfr[GPIOxDE] |= BIT(p->num);
+    p->sfr[GPIOxDIR] &= ~BIT(p->num);
+	p->sfr[GPIOxSET] = BIT(p->num);
+}
+
+void external_power_gpio_powerdown(u8 io_num)
+{
+	gpio_t *p = &pwr_gpio;
+    bsp_gpio_cfg_init(p, io_num);
+    if (p->sfr == NULL) {
+    	return;
+    }
+    p->sfr[GPIOxDE] |= BIT(p->num);
+    p->sfr[GPIOxDIR] &= ~BIT(p->num);
+    p->sfr[GPIOxCLR] = BIT(p->num);
+}
+#endif //USER_EXT_POWERON_EN
+

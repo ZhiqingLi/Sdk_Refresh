@@ -1,6 +1,7 @@
 #include "include.h"
 #include "func.h"
 #include "func_bt_hid.h"
+extern void func_bt_disp_status(void);
 
 AT(.text.bthid)
 bool is_bthid_mode(void)

@@ -38,7 +38,7 @@ CC_OPTS_BASE = -g -c -G0 -Wall -Wundef -Wno-unknown-pragmas $(INCLUDE)  -msoft-f
 
 #-fpack-struct -fshort-enums -Wno-bad-function-cast 
  
-CC_LINKPLAY_OPTS = -DBOARD_JL_36410_FAR
+CC_LINKPLAY_OPTS = -DBOARD_LINKPLAY_DEMO
 CC_OPTS_BASE += $(CC_LINKPLAY_OPTS)
 CC_OPTS_BASE_16 += $(CC_LINKPLAY_OPTS)
 

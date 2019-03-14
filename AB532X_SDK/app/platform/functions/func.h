@@ -32,6 +32,7 @@ enum {
     FUNC_SPEAKER,
     FUNC_PWROFF,
     FUNC_SLEEPMODE,
+    FUNC_EXSPIFLASH_MUSIC,
     FUNC_IDLE,
 };
 
@@ -50,6 +51,8 @@ extern func_cb_t func_cb;
 extern const u8 func_sort_table[];     //任务切换排序table
 
 u8 get_funcs_total(void);
+bool is_next_func_switch(void);
+
 void func_process(void);
 void func_message(u16 msg);
 
@@ -74,5 +77,6 @@ void func_fmam_freq(void);
 void func_speaker(void);
 #endif // FUNC_SPEAKER_EN
 
+void func_exspifalsh_music(void);
 void func_bt_warning(void);
 #endif // _FUNC_H

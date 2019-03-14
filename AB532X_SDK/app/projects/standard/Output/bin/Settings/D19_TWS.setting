@@ -4,7 +4,7 @@
         <add key="lang_id" value="英文" />
         <add key="func_music_en" value="False" />
         <add key="func_aux_en" value="True" />
-        <add key="func_fmrx_en" value="True" />
+        <add key="func_fmrx_en" value="False" />
         <add key="powkey_10s_reset" value="False" />
         <add key="spk_mute_en" value="True" />
         <add key="spk_mute_io_sel" value="PE0" />
@@ -13,11 +13,11 @@
         <add key="ampabd_type" value="独立IO电平控制" />
         <add key="ampabd_io_sel" value="PE7" />
         <add key="earphone_det_iosel" value="0" />
-        <add key="sys_sleep_time" value="30" />
+        <add key="sys_sleep_time" value="0" />
         <add key="sys_off_time" value="0" />
         <add key="lowpower_warning_en" value="True" />
-        <add key="lpwr_warning_vbat" value="3.4V" />
-        <add key="lpwr_off_vbat" value="3.2V" />
+        <add key="lpwr_warning_vbat" value="3.3V" />
+        <add key="lpwr_off_vbat" value="不关机" />
         <add key="lpwr_warning_period" value="60" />
         <add key="vol_max" value="16级音量" />
         <add key="sys_init_vol" value="5" />
@@ -25,16 +25,16 @@
         <add key="osc_both_cap" value="0PF" />
         <add key="osci_cap" value="23" />
         <add key="osco_cap" value="23" />
-        <add key="vddio_sel" value="0" />
+        <add key="vddio_sel" value="10" />
         <add key="eq_dgb_spp_en" value="False" />
-        <add key="eq_dgb_uart_en" value="True" />
+        <add key="eq_dgb_uart_en" value="False" />
         <add key="eq_uart_sel" value="2" />
         <add key="dac_sel" value="1" />
         <add key="dac_ldoh_sel" value="5" />
         <add key="dac_vcm_less_en" value="True" />
         <add key="dacvdd_bypass_en" value="False" />
         <add key="dac_max_gain" value="-3DB" />
-        <add key="bt_call_max_gain" value="-1DB" />
+        <add key="bt_call_max_gain" value="-9DB" />
         <add key="charge_en" value="False" />
         <add key="charge_trick_en" value="True" />
         <add key="charge_dc_reset" value="True" />
@@ -45,7 +45,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D19" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:00:EA" />
+        <add key="bt_addr" value="41:42:00:00:01:4F" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -55,29 +55,29 @@
         <add key="bt_a2dp_en" value="True" />
         <add key="bt_a2dp_vol_ctrl_en" value="True" />
         <add key="bt_sco_en" value="True" />
-        <add key="bt_hfp_private_en" value="False" />
+        <add key="bt_hfp_private_en" value="True" />
         <add key="bt_hfp_ring_number_en" value="True" />
-        <add key="bt_spp_en" value="False" />
+        <add key="bt_spp_en" value="True" />
         <add key="bt_hid_en" value="False" />
         <add key="bt_hid_menu_en" value="False" />
         <add key="bt_hid_discon_default_en" value="False" />
         <add key="func_bthid_en" value="False" />
         <add key="bthid_name" value="BT-Photo" />
-        <add key="bt_tws_en" value="True" />
-        <add key="bt_tws_pair_mode" value="0" />
+        <add key="bt_tws_en" value="False" />
+        <add key="bt_tws_pair_mode" value="1" />
         <add key="bt_tws_lr_mode" value="4" />
         <add key="tws_sel_left_gpio_sel" value="0" />
         <add key="ble_en" value="False" />
         <add key="le_name" value="LE-Remoter" />
         <add key="dac_off_for_conn" value="False" />
         <add key="bt_ch_mic" value="MIC_PF2" />
-        <add key="bt_anl_gain" value="15" />
-        <add key="bt_dig_gain" value="3" />
+        <add key="bt_anl_gain" value="13" />
+        <add key="bt_dig_gain" value="18" />
         <add key="mic_det_iosel" value="0" />
-        <add key="bt_noise_threshoid" value="100" />
+        <add key="bt_noise_threshoid" value="60" />
         <add key="bt_aec_en" value="True" />
-        <add key="bt_echo_level" value="1" />
-        <add key="bt_far_offset" value="36" />
+        <add key="bt_echo_level" value="8" />
+        <add key="bt_far_offset" value="120" />
         <add key="bt_alc_en" value="False" />
         <add key="music_wav_support" value="True" />
         <add key="music_wma_support" value="False" />
@@ -103,17 +103,17 @@
         <add key="user_iokey_en" value="False" />
         <add key="user_adkey_mux_sdclk_en" value="False" />
         <add key="user_key_double_en" value="True" />
-        <add key="double_key_time" value="1" />
+        <add key="double_key_time" value="2" />
         <add key="adkey_ch" value="ADCCH_PE7" />
         <add key="adkey2_ch" value="ADCCH_PE6" />
         <add key="pwron_press_time" value="2.5秒" />
         <add key="pwroff_press_time" value="2.5秒" />
-        <add key="key_double_config_en" value="False" />
+        <add key="key_double_config_en" value="True" />
         <add key="dblkey_num0" value="PP/POWER" />
         <add key="dblkey_num1" value="P/P" />
         <add key="dblkey_num2" value="VOL+/NEXT" />
         <add key="dblkey_num3" value="VOL-/PREV" />
-        <add key="dblkey_num4" value="HSF" />
+        <add key="dblkey_num4" value="PP/MODE" />
         <add key="pwrkey_config_en" value="True" />
         <add key="pwrkey_num0" value="None" />
         <add key="pwrkey_num1" value="NEXT/VOL+" />
@@ -216,5 +216,9 @@
         <add key="led_lowbat_unit" value="6" />
         <add key="led_lowbat_cycle" value="0" />
         <add key="RESOURCE_DIR_SEL" value="D19" />
+        <add key="ext_power_io_sel" value="None" />
+        <add key="ampabd_level" value="True" />
+        <add key="lpwr_warning_count" value="255" />
+        <add key="bt_pwrkey_nsec_discover" value="不支持" />
     </appSettings>
 </configuration>

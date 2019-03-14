@@ -34,8 +34,8 @@
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量
 #define GUI_SELECT                      GUI_NO					//GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_PB3              //选择UART打印信息输出IO，或关闭打印信息输出
-
+#define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
+#define SPIFLASH_SPEED_UP_EN            1                       //SPI FLASH提速。注意5327A,5327C,5325F不支持提速，这三颗芯请配置成0
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/
@@ -50,7 +50,7 @@
 #define MUSIC_SBC_SUPPORT               0   //是否支持SBC格式解码(SD/UDISK的SBC歌曲, 此宏不影响蓝牙音乐)
 
 #define MUSIC_FOLDER_SELECT_EN          1   //文件夹选择功能
-#define MUSIC_AUTO_SWITCH_DEVICE        1   //双设备循环播放
+#define MUSIC_AUTO_SWITCH_DEVICE        0   //双设备循环播放
 #define MUSIC_BREAKPOINT_EN             1   //音乐断点记忆播放
 #define MUSIC_QSKIP_EN                  1   //快进快退功能
 #define MUSIC_PLAYMODE_NUM              4   //音乐播放模式总数
@@ -68,11 +68,11 @@
 /*****************************************************************************
  * Module    : 蓝牙功能配置
  *****************************************************************************/
-#define BT_BACKSTAGE_EN                 1   //蓝牙后台管理（全模式使用蓝牙，暂不支持BLE后台）
+#define BT_BACKSTAGE_EN                 0   //蓝牙后台管理（全模式使用蓝牙，暂不支持BLE后台）
 #define BT_BACKSTAGE_PLAY_DETECT_EN     1   //非蓝牙模式下检测到手机蓝牙播放音乐，则切换到蓝牙模式
 #define BT_NAME_DEFAULT                 "BT-BOX"     //默认蓝牙名称（不超过31个字符）
 #define BT_NAME_WITH_ADDR_EN            0   //蓝牙名称是否附加地址信息（调试用，例如：btbox-***）
-#define BT_POWER_UP_RECONNECT_TIMES     5   //上电回连次数
+#define BT_POWER_UP_RECONNECT_TIMES     10  //上电回连次数
 #define BT_TIME_OUT_RECONNECT_TIMES     20  //掉线回连次数
 #define BT_SIMPLE_PAIR_EN               1   //是否打开蓝牙简易配对功能（关闭时需要手机端输入PIN码）
 #define BT_DISCOVER_CTRL_EN             0   //是否使用按键打开可被发现（按一下按键才能被连接配对）
@@ -178,6 +178,7 @@
 #define DAC_PULL_DOWN_DELAY             80                          //控制DAC隔直电容的放电时间, 无电容时可设为0，减少开机时间。
 #define DAC_LOWPWR_EN                   0
 #define DAC_DNR_EN                      1                           //是否使能动态降噪
+#define DAC_DRC_EN                      0                           //是否使能DRC功能（暂不支持录音、Karaok）
 
 
 /*****************************************************************************
@@ -195,6 +196,46 @@
 #define REC_FAST_PLAY                   1   //播卡播U下快速播放最新的录音文件(双击REC)
 #define REC_STOP_MUTE_1S                0   //录音停止时, MUTE 1S功放. //提醒客户录音结束.
 #define REC_TYPE_SEL                    REC_MP3     //注意REC_ADPCM格式只支持通话录音
+#define REC_DIG_GAIN_EN                 0    //录音是否需要加大数字增益
+
+
+/*****************************************************************************
+ * Module    :外接SPIFLASH配置, 外接SPIFLASH可以播放MP3音乐文件, 及录音
+ *****************************************************************************/
+#define EX_SPIFLASH_SUPPORT              EXSPI_NOT_SUPPORT //可以配置为 EXSPI_NOT_SUPPORT(0) 或 EXSPI_MUSIC 或 EXSPI_REC 或 (EXSPI_MUSIC | EXSPI_REC)
+
+#define SPIFLASH_ID                      0x40170000  //通过读ID判断FLASH是否在线, 需要改成SPIFLASH对应的ID
+#define SPIFALSH_BAUD                    (500000)    //SPI波特率500K
+
+#if (EX_SPIFLASH_SUPPORT & EXSPI_MUSIC)
+//FLASH_MUSIC.BIN 镜像文件占用区域(BYTE)
+#define SPIFLASH_MUSIC_BEGIN_ADDR        0           //FLASH_MUSIC.BIN镜像文件默认从0地址开始存放,此宏暂不支持修改.
+#define SPIFLASH_MUSIC_END_ADDR         (1024*36)    //FLASH_MUSIC.BIN镜像文件结束地址. 测试DEMO的镜像文件是36K大小.
+#define SPIFALSH_MUSIC_BIN_WRITE_TEST    0           //默认的FLASH_MUSIC.BIN写入SPIFLASH, 可以在func_exspifalsh_music中测试外接SPIFALSH播放MP3.
+#endif
+
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+//录音占用区域(BYTE)  //注意SPIFALSH的录音区域不要覆盖 FLASH_MUSIC.BIN区域
+#define SPIFLASH_REC_BEGIN_ADDR        (1024*37)    //录音起始地址
+#define SPIFLASH_REC_END_ADDR          (1024*1024)  //录音结束地址
+#endif
+
+#define SPIFALSH_MUSIC_PLAY_REC        0           // 1 FUNC_EXSPIFLASH_MUSIC 模式下播放录音示例： 支持录音上下曲，及删除当前播放的录音  //0 播放镜像音乐示例
+
+#if EX_SPIFLASH_SUPPORT                 //TEST CONFIG
+#undef GUI_SELECT
+#undef FLASH_SIZE
+#undef FUNC_REC_EN
+#undef MIC_REC_EN
+#undef REC_AUTO_PLAY
+
+#define GUI_SELECT                      GUI_NO
+#define FLASH_SIZE                      FSIZE_1M
+#define FUNC_REC_EN                     1
+#define MIC_REC_EN                      1
+#define REC_AUTO_PLAY                   1
+#endif
+
 
 /*****************************************************************************
  * Module    : K歌功能配置
@@ -240,11 +281,16 @@
 #define PWRON_PRESS_TIME                (1500+500*xcfg_cb.pwron_press_time)             //长按PWRKEY多长时间开机？
 #define PWROFF_PRESS_TIME               (3+3*xcfg_cb.pwroff_press_time)                 //长按PWRKEY多长时间关机？
 
+#define USER_EXT_POWERON_EN				1			//20190118:是否需要GPIO控制外部电源上电
+#define EXT_GPIO_POWERON()				external_power_gpio_poweron(xcfg_cb.ext_power_io_sel)
+#define EXT_GPIO_POWEROFF()				external_power_gpio_powerdown(xcfg_cb.ext_power_io_sel)
+#define EXT_POWER_SLEEP_HOLD()			EXT_GPIO_POWERON()   //进入遥控休眠需要保持有电
+
 /*****************************************************************************
  * Module    : SD0配置
  *****************************************************************************/
 #define SDCLK_MUX_DETECT_SD             1           //是否复用SDCLK检测SD卡
-#define SD0_MAPPING                     SD0MAP_G2   //选择SD0 mapping
+#define SD0_MAPPING                     SD0MAP_G1   //选择SD0 mapping
 #define SD1_MAPPING                     SD0MAP_G3   //选择SD1 mapping
 
 ///通过配置工具选择检测GPIO
@@ -321,12 +367,13 @@
 #define UDE_STORAGE_EN                 1
 #define UDE_SPEAKER_EN                 1
 #define UDE_HID_EN                     1
-#define UDE_MIC_EN                     1
+#define UDE_MIC_EN                     0
 
 
 /*****************************************************************************
  * Module    : 系统细节配置
  *****************************************************************************/
+#define RGB_SERIAL_EN                   0           //RGB串行推灯功能
 #define PWM_RGB_EN                      0           //PWM RGB三色灯功能
 #define ENERGY_LED_EN                   0           //能量灯软件PWM显示,声音越大,点亮的灯越多.
 #define SYS_PARAM_RTCRAM                0           //是否系统参数保存到RTCRAM
@@ -343,7 +390,7 @@
 #define LPWR_WARNING_VBAT               xcfg_cb.lpwr_warning_vbat   //低电提醒电压
 #define LPWR_OFF_VBAT                   xcfg_cb.lpwr_off_vbat       //低电关机电压
 #define LOWPWR_REDUCE_VOL_EN            1                           //低电是否降低音量
-#define LPWR_WARING_TIMES               0xff                        //报低电次数
+#define LPWR_WARING_TIMES               xcfg_cb.lpwr_warning_count  //报低电次数
 /*****************************************************************************
  * Module    : LED指示灯配置
  *****************************************************************************/
@@ -412,7 +459,7 @@
  * Module    : 提示音 功能选择
  *****************************************************************************/
 #define WARNING_TONE_EN                 1            //是否打开提示音功能, 总开关
-#define WARING_MAXVOL_MP3               0            //最大音量提示音WAV或MP3选择， 播放WAV可以与MUSIC叠加播放。
+#define WARING_MAXVOL_MP3               1            //最大音量提示音WAV或MP3选择， 播放WAV可以与MUSIC叠加播放。
 #define WARNING_VOLUME                  xcfg_cb.warning_volume   //播放提示音的音量级数
 #define LANG_SELECT                     LANG_EN      //提示音语言选择
 
@@ -436,6 +483,7 @@
 #define WARNING_BT_HID_MENU             1            //BT HID MENU手动连接/断开HID Profile提示音
 #define WARNING_BTHID_CONN              0            //BTHID模式是否有独立的连接/断开提示音
 #define WARNING_BT_PAIR                 0            //BT PAIRING提示音
+#define WARNING_BT_TWS_PAIR				1            //BT TWS PAIRING提示音
 
 
 #include "config_extra.h"

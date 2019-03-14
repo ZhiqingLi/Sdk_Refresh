@@ -1,6 +1,12 @@
 #include "include.h"
 #include "bsp_dac.h"
 
+typedef struct {
+    u8 type;
+    u8 res[3];
+    const int (*coef)[10];
+}drc_cfg_t;
+
 const u8  *dac_avol_table;
 const u16 *dac_dvol_table;
 
@@ -35,6 +41,33 @@ const u8 dac_vol_tbl_50[50 + 1] = {
     54-4,  54-3,  54-3,  54-2,  54-2,  54-1,  54-1,  54,
     54,    54+1,  54+1,
 };
+
+#if DAC_DRC_EN
+//限幅最大幅度:-4dB，压缩最小幅度:-34dB
+//压缩起控时间:0.17ms，压缩释放时间:100ms
+//限幅起控时间:0.17ms，限幅释放时间:25ms
+//通过修改表来修改以上参数，后续开放工具修改
+const int drc_coef_tbl[10] = {
+    0x0411ab96,
+    0x00020af8,
+    0x0411ab96,
+    0x00082a4f,
+    0x01e04499,
+    0xf55ead01,
+    0xa5a4be81,
+    0x05a0b378,
+    0x10000000,
+    0x01e1e1e2,
+};
+
+drc_cfg_t drc_cfg = {
+    .type = 0,
+    .res[0] = 0,
+    .res[1] = 0,
+    .res[2] = 0,
+    .coef = &drc_coef_tbl,
+};
+#endif
 
 #if SYS_ADJ_DIGVOL_EN
 AT(.text.bsp.dac.table)
@@ -203,6 +236,10 @@ void dac_init(void)
 
 #if DAC_DNR_EN
     dac_dnr_init(2, 0x10, 80, 0x10);
+#endif
+
+#if DAC_DRC_EN
+    dac_drc_init(&drc_cfg);
 #endif
 }
 

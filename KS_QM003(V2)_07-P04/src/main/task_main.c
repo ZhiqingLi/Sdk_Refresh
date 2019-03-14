@@ -97,7 +97,7 @@ void GuiTaskEntrance(void)
         }
 #endif
     }
-    else\
+    else
 #endif
 	if(MODULE_ID_END >= gSys.CurModuleID)
 	{

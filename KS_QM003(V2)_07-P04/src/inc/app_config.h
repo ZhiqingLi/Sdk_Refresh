@@ -895,6 +895,7 @@ extern "C" {
 	#ifdef FUNC_RTC_EN
 		#define FUNC_RTC_ALARM 				//alarm功能
 		#define FUNC_RTC_LUNAR
+		#define FUNC_RTC_ALARM_SAVE2FLASH 	//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
 	#endif
 
 

@@ -109,11 +109,12 @@ typedef enum _WIFI_AVS_STATUS_
 //凯叔智能故事机电台模式
 enum 
 {
+	WIFI_PLAY_KAISHU_SDCARD = 0,    	//凯叔本地TF卡
 	WIFI_PLAY_KAISHU_RADIO_DEFAULT = 1,    	//凯叔电台
 	WIFI_PLAY_KAISHU_RADIO_SLEEP,			//哄睡模式
 	WIFI_PLAY_KAISHU_RADIO_TIPS,			//小知识
-	WIFI_PLAY_KAISHU_RADIO_CUSTOM,			//自定义
 	WIFI_PLAY_KAISHU_RADIO_FAVORITE,		//收藏夹
+	WIFI_PLAY_KAISHU_RADIO_CUSTOM,			//自定义
 	WIFI_PLAY_KAISHU_RADIO_MAX
 };
 
@@ -163,8 +164,8 @@ typedef struct _WIFI_WORK_STATE_
 // WiFi启动后WiFi相关参数初始化赋值，可根据需要修改
 const static WIFI_WORK_STATE InitgWiFi =
 {
-	WIFI_STATUS_IDLE,            	    //模块初始化状态	
-	FALSE,  	                        //播放状态
+	WIFI_STATUS_IDLE,            	  //模块初始化状态	
+	FALSE,  	                      //播放状态
 	0,                                //组网状态	
 	0,                                //出厂恢复状态	
 	0,                                //WiFi模组固件升级状态	
@@ -173,15 +174,15 @@ const static WIFI_WORK_STATE InitgWiFi =
 	0,                                //卡插入状态
 	0,                                //USB插入状态
 	0,                                //WiFi上电状态(000 loop all 001 single loop 002 shuffle loop 003 shuffle once Others: no loop)
-	WIFI_PLAY_MODE_REPEAT_ALL,  	    //WiFi播放重复模式
+	WIFI_PLAY_MODE_REPEAT_ALL,  	  //WiFi播放重复模式
 	WIFI_STATUS_WPS_SCAN_STOP,        //WPS搜索状态
-	WIFI_STATUS_STATION_DISCONNECTED,	//路由器连接状态(0-没有连接 1-已经连接   2-正在连接 )
-	WIFI_STATUS_AP_NO_CONNECTED,    	//AP模式热点被连接状态
+	WIFI_STATUS_STATION_DISCONNECTED, //路由器连接状态(0-没有连接 1-已经连接   2-正在连接 )
+	WIFI_STATUS_AP_NO_CONNECTED,      //AP模式热点被连接状态
 	WIFI_STATUS_ETH_PLUGOUT,          //以太网状态
 	WIFI_STATUS_WWW_DISABLE,          //互联网络状态
-	MCU_PLAY_MODE_WIFI,         			//WiFi播放模式
-	0,                            		//WiFi子音箱个数	
-	2,                              	//WiFi语音提示状态
+	MCU_PLAY_MODE_WIFI,         	  //WiFi播放模式
+	0,                            	  //WiFi子音箱个数	
+	2,                                //WiFi语音提示状态
 	WIFI_STATUS_LOGIN_FAILED,
 	0,                                //LED状态(000 表示关闭001 表示常亮002 表示快闪003 表示慢闪)
 	WIFI_PLAY_KAISHU_RADIO_DEFAULT,   //默认凯叔电台

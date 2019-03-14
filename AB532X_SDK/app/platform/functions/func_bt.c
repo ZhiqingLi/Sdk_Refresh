@@ -231,6 +231,12 @@ void func_bt_warning(void)
             right_warning = func_bt_chkclr_warning(BT_WARN_TWS_MCON);   //master
         }
 
+#if WARNING_BT_TWS_PAIR
+		if(left_warning || right_warning){
+			func_cb.mp3_res_play(RES_BUF_TWS_PAIR_MP3, RES_LEN_TWS_PAIR_MP3);
+		}
+#endif
+
         if(left_warning) { //left channel       //slave
             func_cb.mp3_res_play(RES_BUF_LEFT_CH_MP3, RES_LEN_LEFT_CH_MP3);
         }
@@ -282,6 +288,7 @@ void func_bt_disp_status(void)
             dis_auto_pwroff();
             sys_cb.sleep_en = 1;
         }
+        //printf ("cur f_bt.disp_status = %d!\n", f_bt.disp_status);
 
         switch (f_bt.disp_status) {
         case BT_STA_CONNECTING:
@@ -298,6 +305,13 @@ void func_bt_disp_status(void)
                 }
             }
 #endif
+#if BT_TWS_EN
+			if (bt_tws_is_connected()) {
+				if (!bt_nor_is_connected()) {
+					led_tws_main_connected();
+				}
+			}
+#endif
             break;
         case BT_STA_SCANNING:
             led_bt_scan();
@@ -309,9 +323,11 @@ void func_bt_disp_status(void)
 
         case BT_STA_CONNECTED:
 #if BT_TWS_EN
-            if(!bt_is_connected()) {
-                led_bt_idle();
-                break;
+            if(bt_tws_is_connected()) {
+                if (!bt_nor_is_connected()) {
+                	led_tws_slave_connected();
+                	break;
+                }
             }
 #endif
             led_bt_connected();

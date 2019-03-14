@@ -466,7 +466,7 @@ void BTStackStatusCallBackFunc(uint8_t CBParameter)
 #else
 				if((GetHfpState() == BT_HFP_STATE_INCOMING_CALL) && !IsScoConneted())
 				{
-				  BtSoundTip(BT_SOUND_TIP_PHONE_CALL_INCOMING);
+					BtSoundTip(BT_SOUND_TIP_PHONE_CALL_INCOMING);
 				}
 #endif
 			}

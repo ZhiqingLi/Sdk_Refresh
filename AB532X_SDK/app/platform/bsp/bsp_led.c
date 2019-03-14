@@ -133,9 +133,10 @@ void led_cfg_port_init(gpio_t *g)
         g->sfr[GPIOxDIR] &= ~BIT(g->num);
         g->sfr[GPIOxCLR] = BIT(g->num);
     } else {
-        g->sfr[GPIOxDIR] |= BIT(g->num);
+    	g->sfr[GPIOxDE] |= BIT(g->num);
         g->sfr[GPIOxPU300] &= ~BIT(g->num);
-        g->sfr[GPIOxDE] &= ~BIT(g->num);
+        g->sfr[GPIOxDIR] &= ~BIT(g->num);
+        g->sfr[GPIOxCLR] = BIT(g->num);
     }
 }
 

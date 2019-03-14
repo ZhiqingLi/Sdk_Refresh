@@ -450,9 +450,11 @@ void sfunc_pwrdown(void)
 {
     LOUDSPEAKER_MUTE_DIS();
     WDT_DIS();
-#if USER_PWRKEY_EXT
-    PWRKEY_EXT_POWEROFF();
-#endif
+
+#if USER_EXT_POWERON_EN
+	EXT_GPIO_POWERON();					//20190224,关机前关闭外部电源。
+#endif //USER_EXT_POWERON_EN
+
 #if CHARGE_EN
     if (xcfg_cb.charge_en) {
         charge_off();

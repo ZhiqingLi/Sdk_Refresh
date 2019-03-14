@@ -166,6 +166,12 @@ void tws_send_pkt(void)
 void lc_tsco_init(void) {
 }
 AT(.bcom_text.bb.tws.sco)
+void ext_lc_fill_tsco_dat(void) {
+}
+AT(.bcom_text.bb.tws.sco)
+void ext_lc_tsco_set_ticks(int32_t offset) {
+}
+AT(.bcom_text.bb.tws.sco)
 void ext_lc_tsco_slot_check(uint32_t clock) {
 }
 AT(.bcom_text.bb.tws.sco)
@@ -240,6 +246,9 @@ AT(.bcom_text.bb.leisr)
 void ble_lm_adv_data_update(void) {}
 AT(.bcom_text.bb.leisr)
 void ble_lc_check_update_evt_sent(uint16_t conhdl, void *evt_new) {}
+AT(.bcom_text.bb.leisr)
+void ble_evt_free_do(void *evt) {}
+
 void llc_con_update_ind(uint16_t conhdl, void *evt_new) {}
 void llc_con_update_cmd_complete_send(uint8_t status, uint16_t conhdl, void *evt) {}
 void llc_map_update_ind(uint16_t conhdl) {}
@@ -254,4 +263,18 @@ void hci_run_le_connection(void) {}
 void btstack_ble_init(void) {}
 void btstack_ble_send(void) {}
 void btstack_ble_update_conn_param(void) {}
+#endif
+
+#if !BT_PBAP_EN
+void pbap_client_init(void) {}
+void goep_client_init(uint8_t rfcomm_channel_nr) {}
+void btstack_pbap(u8 param) {}
+#endif
+
+#if !DAC_DRC_EN
+void drc_process(s16 *ldata, s16 *rdata) {}
+AT(.sbcdec.code)
+void bt_sbc_pcm_output(void) {}
+AT(.mp3dec.dac)
+void mpeg_pcm_output(void) {}
 #endif

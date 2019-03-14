@@ -235,7 +235,12 @@ SECTIONS
         *(.echo_cache)
         . = 0x4000;
     } > aram
-
+	
+    .fcc_buf __aram_vma (NOLOAD) : {
+        . = 0x1000;
+        *(.fcc_buf.huart)
+    } > aram
+	
     .sbc_cache __aram_vma (NOLOAD) : {
         . = 0x670;
         *(.a2dp_buf*)

@@ -47,9 +47,12 @@ typedef enum _POWER_KEY_STATE
 bool PowerKeyInitFlag = TRUE;
 TIMER			PowerKeyWaitTimer;
 POWER_KEY_STATE	PowerKeyState;
-										
-static const uint16_t PowerKeyEvent[2] = {MSG_NONE/*按键开始*/, MSG_MODE/*短按松开*/};	
 
+#ifdef FUNC_MXQ_MXQ_HF30_EN				//HF30项目取消模式按键。							
+static const uint16_t PowerKeyEvent[2] = {MSG_NONE/*按键开始*/, MSG_NONE/*短按松开*/};	
+#else
+static const uint16_t PowerKeyEvent[2] = {MSG_NONE/*按键开始*/, MSG_MODE/*短按松开*/};	
+#endif
 
 #if (defined(FUNC_POWER_KEY_EN) && defined(USE_POWERKEY_SOFT_PUSH_BUTTON))
 

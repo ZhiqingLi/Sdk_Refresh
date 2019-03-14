@@ -264,6 +264,7 @@ bool BtHfControl(void)
 				break;
 
 			default:
+				CommonMsgProccess(Msg);
 				break;
 		}
 	}

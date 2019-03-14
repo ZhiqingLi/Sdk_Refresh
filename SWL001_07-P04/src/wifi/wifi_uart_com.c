@@ -2210,6 +2210,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_LED_TES:
+		case AXX_TST__ON:
 			WiFiTestModeStateSet();
 			break;
 
@@ -2481,7 +2482,11 @@ void WiFi_CmdProcess(void)
 	}		
 	else if(memcmp(gWiFiCmd, "+LED+TES", 8) == 0)
 	{
-		WiFi_SendCmdToMcu(AXX_LED_TES, NULL);		
+		WiFi_SendCmdToMcu(AXX_LED_TES, NULL);
+	}
+	else if(memcmp(gWiFiCmd, "+TST++ON", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_TST__ON, NULL);		
 	}	
 	else if(memcmp(gWiFiCmd, "+LED+", 5) == 0)
 	{			

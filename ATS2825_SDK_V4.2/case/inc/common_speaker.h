@@ -64,6 +64,10 @@
 #define SPEAKER_A_PA_CTRL_PIN        (1 << 7)
 #define SPEAKER_A_PA_CTRL_LEVEL      ENABLE_LEVEL_LOW
 #elif defined(BOARD_LINKPLAY_DEMO) || defined(BOARD_LINKPLAY_FAR_DEMO)
+#define SPEAKER_A_PA_EN_GPIOOUT      GPIOAOUTEN
+#define SPEAKER_A_PA_EN_GPIODATA     GPIOADAT
+#define SPEAKER_A_PA_EN_PIN          (1 << 5)
+#define SPEAKER_A_PA_EN_LEVEL        ENABLE_LEVEL_HIGH
 //no speak, so no need control
 #elif defined(BOARD_DPI_7C370_FAR) || defined(BOARD_JL_36410_FAR)
 #define SPEAKER_A_PA_EN_GPIOOUT      GPIOAOUTEN

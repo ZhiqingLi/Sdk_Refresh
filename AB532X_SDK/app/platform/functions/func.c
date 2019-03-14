@@ -37,8 +37,10 @@ void lowpower_vbat_process(void)
                 led_lowbat_follow_warning();
             }
 
-            sys_cb.lowbat_flag = 1;
-            func_cb.mp3_res_play(RES_BUF_LOW_BATTERY_MP3, RES_LEN_LOW_BATTERY_MP3);
+            if (sys_cb.lowbat_flag) {			//忽略第一次低电，作为消抖
+            	func_cb.mp3_res_play(RES_BUF_LOW_BATTERY_MP3, RES_LEN_LOW_BATTERY_MP3);
+            }
+            
             plugin_lowbat_vol_reduce();         //低电降低音乐音量
 
             if (RLED_LOWBAT_FOLLOW_EN) {
@@ -47,9 +49,16 @@ void lowpower_vbat_process(void)
                 }
                 led_lowbat_recover();
             }
-
-            if (sys_cb.lpwr_warning_times != 0xff) {
+			//忽略第一次低电报警，作为低电消抖
+            if ((sys_cb.lpwr_warning_times != 0xff) && sys_cb.lowbat_flag) {
                 sys_cb.lpwr_warning_times--;
+            }
+
+            sys_cb.lowbat_flag = 1;
+            if (!sys_cb.lpwr_warning_times) {
+            	sys_cb.pwrdwn_tone_en = 1;
+				func_cb.sta = FUNC_PWROFF;     //低电提示音播放完，进入关机或省电模式
+				//printf("low power warning time out power off;\n");
             }
         }
     }
@@ -178,7 +187,12 @@ void func_message(u16 msg)
         case KU_MODE:
         case KU_MODE_POWER:
         case KL_PLAY_MODE:
-            func_cb.sta = FUNC_NULL;
+        	if (is_next_func_switch()) {
+            	func_cb.sta = FUNC_NULL;
+            }
+            else if (bt_nor_is_connected()) {
+            	bt_nor_disconnect();
+            }
             break;
 
 #if EQ_MODE_EN
@@ -223,6 +237,9 @@ void func_message(u16 msg)
 #if MUSIC_UDISK_EN
         case EVT_UDISK_INSERT:
             if (dev_is_online(DEV_UDISK)) {
+            #if SD_USB_MUX_IO_EN
+                sys_cb.cur_dev = DEV_UDISK;
+            #endif // SD_USB_MUX_IO_EN
                 if (dev_udisk_activation_try(0)) {
                     sys_cb.cur_dev = DEV_UDISK;
                     func_cb.sta = FUNC_MUSIC;
@@ -386,6 +403,12 @@ void func_run(void)
             func_music();
             break;
 #endif // FUNC_MUSIC_EN
+
+#if EX_SPIFLASH_SUPPORT
+        case FUNC_EXSPIFLASH_MUSIC:
+            func_exspifalsh_music();
+            break;
+#endif
 
 #if FUNC_FMRX_EN
         case FUNC_FMRX:

@@ -405,7 +405,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				}
 			}
 		}	
-		else if(LdoinLevelAverage >= LDOIN_VOLTAGE_MID)
+		else //if(LdoinLevelAverage >= LDOIN_VOLTAGE_MID)
 		{
 			LowPowerDetCnt = ((LOW_POWEROFF_DET_TMR*1000)/LDOIN_SAMPLE_TIMER)+(LOW_POWEROFF_COUNT*2);
 		}

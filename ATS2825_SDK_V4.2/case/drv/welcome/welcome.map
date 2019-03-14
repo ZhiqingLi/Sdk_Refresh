@@ -294,28 +294,27 @@ LOAD ./../../../psp_rel/include/link_base.xn
  *fill*         0x00000000bfc03400      0x700 00
  *fill*         0x00000000bfc03b00        0x0 00
 
-.text           0x00000000bfc14200      0x49c
+.text           0x00000000bfc14200      0x478
  welcome.o(.FIRST)
- .FIRST         0x00000000bfc14200      0x1f4 welcome.o
+ .FIRST         0x00000000bfc14200      0x1f8 welcome.o
                 0x00000000bfc14201                disp_starting
  welcome.o(.text)
- .text          0x00000000bfc143f4      0x294 welcome.o
-                0x00000000bfc144d5                mcu_enter_sleep_S4
-                0x00000000bfc145d5                disp_starting_adfu_check
-                0x00000000bfc1462d                disp_starting_low_power
-                0x00000000bfc14585                check_ftc334_key
-                0x00000000bfc14671                welcome_flush_rtc
-                0x00000000bfc14521                disp_starting_board_config
-                0x00000000bfc1466d                led_on_spio
-                0x00000000bfc1464d                led_init_spio
-                0x00000000bfc14649                disp_starting_show_welcome
-                0x00000000bfc14431                welcome_RTL_poweron
-                0x00000000bfc143f5                welcome_delay_ms
-                0x00000000bfc144fd                is_usb_cable_in
-                0x00000000bfc14419                flush_rtc
+ .text          0x00000000bfc143f8      0x26c welcome.o
+                0x00000000bfc144d9                mcu_enter_sleep_S4
+                0x00000000bfc14569                disp_starting_adfu_check
+                0x00000000bfc145d1                disp_starting_low_power
+                0x00000000bfc1464d                welcome_flush_rtc
+                0x00000000bfc14525                disp_starting_board_config
+                0x00000000bfc14649                led_on_spio
+                0x00000000bfc14629                led_init_spio
+                0x00000000bfc145fd                disp_starting_show_welcome
+                0x00000000bfc14435                welcome_RTL_poweron
+                0x00000000bfc143f9                welcome_delay_ms
+                0x00000000bfc14501                is_usb_cable_in
+                0x00000000bfc1441d                flush_rtc
  welcome_ejtag.o(.text)
- .text          0x00000000bfc14688       0x14 welcome_ejtag.o
-                0x00000000bfc14689                welcome_ejtag
+ .text          0x00000000bfc14664       0x14 welcome_ejtag.o
+                0x00000000bfc14665                welcome_ejtag
  welcome_i2c_tk.o(.text .rodata)
  *.o(.text .rodata)
  *.o(.data)
@@ -333,9 +332,9 @@ OUTPUT(welcome.exe elf32-tradlittlemips)
 .reginfo        0x0000000000000000       0x18
  .reginfo       0x0000000000000000       0x18 ./../../drv/rom_TWI_lib/rom_TWI.o
 
-.pdr            0x0000000000000000      0x1e0
- .pdr           0x0000000000000000      0x1c0 welcome.o
- .pdr           0x00000000000001c0       0x20 welcome_ejtag.o
+.pdr            0x0000000000000000      0x1c0
+ .pdr           0x0000000000000000      0x1a0 welcome.o
+ .pdr           0x00000000000001a0       0x20 welcome_ejtag.o
 
 .mdebug.abi32   0x0000000000000000        0x0
 
@@ -345,30 +344,30 @@ OUTPUT(welcome.exe elf32-tradlittlemips)
  .debug_abbrev  0x00000000000002c4       0x3f welcome_ejtag.o
  .debug_abbrev  0x0000000000000303       0x2a welcome_i2c_tk.o
 
-.debug_info     0x0000000000000000      0xddf
+.debug_info     0x0000000000000000      0xdab
  .debug_info    0x0000000000000000      0x8ce ./../../drv/rom_TWI_lib/rom_TWI.o
- .debug_info    0x00000000000008ce      0x3ee welcome.o
- .debug_info    0x0000000000000cbc       0x9b welcome_ejtag.o
- .debug_info    0x0000000000000d57       0x88 welcome_i2c_tk.o
+ .debug_info    0x00000000000008ce      0x3ba welcome.o
+ .debug_info    0x0000000000000c88       0x9b welcome_ejtag.o
+ .debug_info    0x0000000000000d23       0x88 welcome_i2c_tk.o
 
-.debug_line     0x0000000000000000      0x312
+.debug_line     0x0000000000000000      0x300
  .debug_line    0x0000000000000000      0x138 ./../../drv/rom_TWI_lib/rom_TWI.o
- .debug_line    0x0000000000000138      0x19e welcome.o
- .debug_line    0x00000000000002d6       0x3c welcome_ejtag.o
+ .debug_line    0x0000000000000138      0x18c welcome.o
+ .debug_line    0x00000000000002c4       0x3c welcome_ejtag.o
 
-.debug_frame    0x0000000000000000      0x4cc
+.debug_frame    0x0000000000000000      0x4a4
  .debug_frame   0x0000000000000000      0x344 ./../../drv/rom_TWI_lib/rom_TWI.o
- .debug_frame   0x0000000000000344      0x168 welcome.o
- .debug_frame   0x00000000000004ac       0x20 welcome_ejtag.o
+ .debug_frame   0x0000000000000344      0x140 welcome.o
+ .debug_frame   0x0000000000000484       0x20 welcome_ejtag.o
 
 .debug_pubnames
-                0x0000000000000000      0x35b
+                0x0000000000000000      0x346
  .debug_pubnames
                 0x0000000000000000      0x1e9 ./../../drv/rom_TWI_lib/rom_TWI.o
  .debug_pubnames
-                0x00000000000001e9      0x14e welcome.o
+                0x00000000000001e9      0x139 welcome.o
  .debug_pubnames
-                0x0000000000000337       0x24 welcome_ejtag.o
+                0x0000000000000322       0x24 welcome_ejtag.o
 
 .debug_aranges  0x0000000000000000       0x68
  .debug_aranges
@@ -378,13 +377,13 @@ OUTPUT(welcome.exe elf32-tradlittlemips)
  .debug_aranges
                 0x0000000000000048       0x20 welcome_ejtag.o
 
-.debug_str      0x0000000000000000      0x31d
+.debug_str      0x0000000000000000      0x30c
  .debug_str     0x0000000000000000       0x26 ./../../drv/rom_TWI_lib/rom_TWI.o
- .debug_str     0x0000000000000026      0x2c8 welcome.o
-                                        0x30b (size before relaxing)
- .debug_str     0x00000000000002ee       0x1e welcome_ejtag.o
+ .debug_str     0x0000000000000026      0x2b7 welcome.o
+                                        0x2fa (size before relaxing)
+ .debug_str     0x00000000000002dd       0x1e welcome_ejtag.o
                                         0x110 (size before relaxing)
- .debug_str     0x000000000000030c       0x11 welcome_i2c_tk.o
+ .debug_str     0x00000000000002fb       0x11 welcome_i2c_tk.o
                                         0x103 (size before relaxing)
 
 .comment        0x0000000000000000       0xac

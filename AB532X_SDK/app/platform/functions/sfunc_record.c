@@ -1,7 +1,8 @@
 #include "include.h"
 #include "func.h"
 #include "sfunc_record.h"
-
+#include "bsp_spiflash1.h"
+#include "api_spiflash_ex.h"
 
 #if FUNC_REC_EN
 rec_src_t rec_src AT(.buf.record);
@@ -325,12 +326,20 @@ bool sfunc_rec_create_file(void)
     printf("%s: %s\n", __func__, fname_buf);
     return true;
 }
+#if REC_DIG_GAIN_EN
+u16 rec_gain = 0;
+void rec_dig_gain_init(u16 gain)
+{
+    rec_gain = gain;
+}
+#endif // REC_DIG_GAIN_EN
 
 //可能在DMA中断调用，必须放公共区。缓存ADC数据
 AT(.com_rec.func)
 void puts_rec_obuf(u8 *inbuf, u16 len)
 {
     u16 clen, clen2, rest;
+    s32 temp = 0;
     rec_cb_t *rec = &rec_cb;
     if ((!rec->src) || (rec->len + len) > REC_OBUF_SIZE) {
         //uart_putchar('+');
@@ -339,10 +348,39 @@ void puts_rec_obuf(u8 *inbuf, u16 len)
         clen = (rest < len) ? rest : len;
         clen2 = len - clen;
         if (clen) {
+#if !REC_DIG_GAIN_EN
             memcpy(rec->wptr, inbuf, clen);
+            temp = temp;   //去除编译警告
+#else
+            s16 *in_buf = (s16*)inbuf;
+            s16 *out_buf = (s16*)rec->wptr;
+            for(u32 i = 0;i < clen/2;i++){
+                temp = (in_buf[i]* rec_gain)>>13;
+                if(temp < -32768){
+                    temp = -32768;
+                }else if(temp > 32767){
+                    temp = 32767;
+                }
+                out_buf[i] = temp;
+            }
+#endif
         }
         if (clen2) {
+#if !REC_DIG_GAIN_EN
             memcpy(rec->obuf, inbuf + clen, clen2);
+#else
+            s16 *in_buf1 = (s16*)(inbuf + clen);
+            s16 *out_buf1 = (s16*)rec->obuf;
+            for(u32 i = 0;i < clen2/2;i++){
+                temp = (in_buf1[i]* rec_gain)>>13;
+                if(temp < -32768){
+                    temp = -32768;
+                }else if(temp > 32767){
+                    temp = 32767;
+                }
+                out_buf1[i] = temp;
+            }
+#endif
             rec->wptr = rec->obuf + clen2;
         } else {
             rec->wptr += clen;
@@ -484,7 +522,11 @@ bool sfunc_rec_write_file(u8 *buf)
 {
     FRESULT res;
 
+    #if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+    res = spiflash_rec_write_file(buf, 512);
+    #else
     res = fs_write(buf, 512);
+    #endif
     if (res != FR_OK) {
         if (res == FR_NOT_ENOUGH_CORE) {
             printf("record disk full\n");
@@ -570,6 +612,10 @@ void sfunc_rec_proc(void)
 AT(.text.func.record)
 static bool rec_file_close(rec_cb_t *rec)
 {
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+    spiflash_rec_close_file();
+    return true;
+#endif
 #if ((REC_TYPE_SEL == REC_WAV) || (REC_TYPE_SEL == REC_ADPCM) || BT_HFP_REC_EN)
      if (rec->sco_flag || (REC_TYPE_SEL == REC_WAV) || (REC_TYPE_SEL == REC_ADPCM)) {
         if (!rec_wav_header_sync(rec)) {
@@ -676,6 +722,9 @@ void sfunc_record_continue(void)
 AT(.text.func.record)
 bool sfunc_fwrite_sync(void)
 {
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+    return true;
+#endif
     rec_cb_t *rec = &rec_cb;
 
     rec->tm_sec++;
@@ -746,7 +795,19 @@ bool sfunc_record_start(void)
 
     printf("record start\n");
     rec->sta = REC_STARTING;
+#if REC_DIG_GAIN_EN
+    rec_dig_gain_init(GAIN_DIG_N0DB);
+#endif // REC_DIG_GAIN_EN
 
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+    if (!is_exspiflash_online()) {
+        return false;
+    }
+    if (!spiflash_rec_creat_file()) {
+       return false;
+    }
+    rec->flag_file = 1;
+#else //REC TO SD or UDISK
     fsdisk_callback_init(sys_cb.cur_dev);
     if (!rec->flag_file) {
         if (!fs_mount()) {
@@ -777,6 +838,8 @@ bool sfunc_record_start(void)
         }
         rec->flag_file = 1;
     }
+#endif   //REC TO SD or UDISK
+
     rec->src = &rec_src;
     do {
 #if (REC_TYPE_SEL == REC_WAV)
@@ -846,7 +909,13 @@ static void sfunc_record_enter(void)
     } else if (dev_is_online(DEV_SDCARD)) {
         sys_cb.cur_dev = DEV_SDCARD;
     } else {
+#if (EX_SPIFLASH_SUPPORT & EXSPI_REC)
+        if (!is_exspiflash_online()) {
+            return;
+        }
+#else
         return;
+#endif
     }
     if (!sfunc_record_start()) {
         if (sfunc_record_switch_device()) {

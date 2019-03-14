@@ -1,0 +1,302 @@
+--------------------------------------------------------------------------------------
+                                RELEASE NOTES
+
+Shanghai Mountain View Silicon Co. Ltd. Copyright 2014, All rights reserved.
+
+免责声明
+
+上海山景集成电路股份有限公司(简称"山景")保留更改本软件开发包（简称SDK）的
+权利并且不保证本SDK的完全正确性，相关内容以最新版本为准。用户使用本SDK引
+起的任何损失或法律诉讼与山景无关。
+
+山景保留对系统软件产品在可靠性、功能和设计方面的改进以及进一步说明的权利。
+山景不承担由本SDK系统软件产品或其芯片的运用和使用所引起的任何责任。山景的
+产品不是专门设计应用于外科植入、生命维持和任何山景产品的故障会对个体造成伤
+害甚至死亡的领域。如果将山景的产品应用于上述领域，即使这些是由山景在产品设
+计和制造上的疏忽引起的，用户也应赔偿所有费用、损失、合理的人身伤害或死亡所
+直接或间接产生的律师费用，并且用户保证山景及其雇员、子公司、分支机构和销售
+商与上述事宜无关。
+
+任何人不得以任何形式 (如：电子的、机械的、手书的、光学存储的或以其它语言表
+述的形式，等等) 复制、复印或存储本文件的全部或一部分内容，除非得到山景的书
+面同意。
+
+注意：在工程文件中，所有源文件的位置、文件名请不要轻易改动，任何疑问请及时
+联系山景的技术工程人员，谢谢！
+
+--------------------------------------------------------------------------------------
+MVs18_01_07+P03+P04_WiFi_Demo_20170214_Ver17
+日期：2017.02.14
+更新内容：
+	1）调整语音搜索通路配置选择；
+	2）调整语音搜索功能，改善语音搜索过程中音量突变问题；
+	3）语音搜索功能配置默认打开有效。
+
+文件更新列表：
+1、MVs18_01_07\src\sys_app\sys_vol.c
+2、MVs18_01_07\src\wifi\wifi_control.c
+3、MVs18_01_07\src\wifi\wifi_function_config.h
+4、MVs18_01_07\src\wifi\wifi_init_setting.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_07+P03+P04_WiFi_Demo_20161230_Ver16
+日期：2016.12.30
+更新内容：
+	1）升级更新音效相关代码；【注：调音工具ACPWorkbench对应固件版本: CODEC 8.2.0】
+	2）增加GPIOA0默认设置为普通GPIO功能；
+	3）解决RTL8761蓝牙串口通话无声问题；
+	4）默认打开蓝牙串口升级功能；
+	5）解决断电记忆可能导致USB或卡播放不能换曲问题；
+	6）完善升级更新声卡功能，解决声卡模式无音效问题；
+	7）完善WiFi同步录放功能；
+	8）完善WiFi串口升级功能。
+
+文件更新列表：
+1、MVs18_01_07\Libraries\audio\inc\audio_decoder.h
+2、MVs18_01_06\Libraries\audio\inc\drc.h
+3、MVs18_01_07\Libraries\audio\inc\noise_gate.h
+4、MVs18_01_07\Libraries\audio\inc\virtual_bass.h
+5、MVs18_01_06\Libraries\audio\audio_decoder.lib
+6、MVs18_01_06\Libraries\audio\drc.lib
+7、MVs18_01_07\Libraries\audio\inc\noise_gate.lib
+8、MVs18_01_06\Libraries\audio\virtual_bass.lib
+9、MVs18_01_07\src\bluetooth\bt_device_cfg.c
+10、MVs18_01_07\src\bluetooth\obex_spp_proc.c
+11、MVs18_01_07\src\bluetooth\pcm_sync.c
+12、MVs18_01_07\src\control\player_control.c
+13、MVs18_01_07\src\control\usb_audio_control.c
+14、MVs18_01_06\src\du_params\audio_effect_codec.h
+15、MVs18_01_06\src\du_params\eq_params.c
+16、MVs18_01_07\src\du_params\eq_params.h
+17、MVs18_01_06\src\inc\app_config.h
+18、MVs18_01_07\src\inc\mcu_circular_buf.h
+19、MVs18_01_07\src\main\main.c
+20、MVs18_01_07\src\main\task_audio_process.c
+21、MVs18_01_07\src\main\task_decoder.c
+22、MVs18_01_07\src\main\task_main.c
+23、MVs18_01_07\src\sys_app\breakpoint.c
+24、MVs18_01_07\src\sys_app\mcu_circular_buf.c
+25、MVs18_01_07\src\sys_app\micro_adjust.c
+26、MVs18_01_07\src\sys_app\sys_vol.c
+27、MVs18_01_07\src\wifi\wifi_control.c
+28、MVs18_01_07\src\wifi\wifi_uart_com.c
+29、MVs18_01_07\src\wifi\wifi_uart_com.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20161012_Ver15
+日期：2016.10.12
+更新内容：
+	1）升级更新音效相关代码；【注：调音工具ACPWorkbench对应固件版本: CODEC 7.5.2】
+        2）升级更新蓝牙串口升级功能；
+	3）增加单独调节音量功能选择；
+	4）增加音效功能切换时淡入淡出操作功能选择；
+	5）增加WiFi Talk状态下同时录放功能选择；
+	6）完善WiFi Talk状态下MIC IN常通功能；
+	7）完善WiFi RTC闹钟设置功能；
+	8）完善WiFi串口升级功能；
+	9）解决RTL8761蓝牙串口通话无声问题；
+	9）改善完善蓝牙播放导致Buart buffer full问题。
+
+文件更新列表：
+1、MVs18_01_06\Libraries\audio\inc\audio_utility.h
+2、MVs18_01_06\Libraries\audio\inc\drc.h
+3、MVs18_01_06\Libraries\audio\inc\virtual_bass.h
+4、MVs18_01_06\Libraries\audio\audio_utility.lib
+5、MVs18_01_06\Libraries\audio\drc.lib
+6、MVs18_01_06\Libraries\audio\virtual_bass.lib
+7、MVs18_01_06\Libraries\driver\inc\eq.h
+8、MVs18_01_06\src\bluetooth\obex_spp_proc.c
+9、MVs18_01_06\src\du_params\audio_effect.h
+10、MVs18_01_06\src\du_params\eq_params.c
+11、MVs18_01_06\src\inc\app_config.h
+12、MVs18_01_06\src\inc\sys_app.h
+13、MVs18_01_06\src\inc\sys_vol.h
+14、MVs18_01_06\src\main\task_audio_process.c
+15、MVs18_01_06\src\main\task_decoder.c
+16、MVs18_01_06\src\main\task_main.c
+17、MVs18_01_06\src\sys_app\sound_remind.c
+18、MVs18_01_06\src\sys_app\micro_adjust.c
+19、MVs18_01_06\src\sys_app\sys_app.c
+20、MVs18_01_06\src\sys_app\sys_vol.c
+21、MVs18_01_06\src\wifi\wifi_control.c
+22、MVs18_01_06\src\wifi\wifi_function_config.h
+23、MVs18_01_06\src\wifi\wifi_uart_com.c
+24、MVs18_01_06\src\wifi\wifi_wifi_command.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160718_Ver14
+日期：2016.07.18
+更新内容：
+	1）解决少数手机蓝牙播放音乐有杂音问题；
+        2）解决少数手机蓝牙通话结束后蓝牙播放声调有微变化问题。
+
+文件更新列表：
+1、MVs18_01_06\src\control\rtc_control.c
+2、MVs18_01_06\src\inc\app_config.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160707_Ver13
+日期：2016.07.13
+更新内容：
+	1）解决断电记忆可能导致串口通讯错误问题；
+	2）调整各个模式输出平衡（改为输入800mV输出约740mV左右）；
+	3）AP8064端和WiFi端语音播报音量大小分开设置；
+	4）解决WiFi多房间播放状态下调节主机音量会影响子机音量问题；
+	5）WiFi多房间播放状态下子机音效（软EQ、VB、3D、DRC）自动关闭；
+	6）关闭一线通功能和浏览功能节省RAM空间；
+	7）解决开机RTC时钟有时无法更新问题；
+	8）解决MTK蓝牙打电话有回声的问题；	
+	9）增加通过调整DRC 预增益调节系统音量示例；
+	10）增加ADC检测电池电量示例；
+	11）增加充电状态下禁止关机示例;
+	12) 增加MIC按键长按WiFi出厂恢复按键功能。	
+	
+文件更新列表：
+1、MVs18_01_06\src\bluetooth\bte2prom.c
+2、MVs18_01_06\src\bluetooth\pcm_sync.c
+3、MVs18_01_06\src\control\line_in_control.c
+4、MVs18_01_06\src\control\player_control.c
+5、MVs18_01_06\src\du_params\audio_effect.h
+6、MVs18_01_06\src\inc\app_config.h
+7、MVs18_01_06\src\key\adc_key.c
+8、MVs18_01_06\src\main\task_audio_process.c
+9、MVs18_01_06\src\main\task_decoder.c
+10、MVs18_01_06\src\misc\gd_flash_drv.c
+11、MVs18_01_06\src\sys_app\breakpoint.c
+12、MVs18_01_06\src\sys_app\power_management.c
+13、MVs18_01_06\src\sys_app\sys_vol.c
+14、MVs18_01_06\src\wifi\wifi_control.c
+15、MVs18_01_06\src\wifi\wifi_control.h
+16、MVs18_01_06\src\wifi\wifi_uart_com.c
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160523_Ver12
+日期：2016.05.23
+更新内容：
+	1）根据测试需求，对WiFi命令“AXX+PLM+XXX”做修改，改为WiFi端实现的模式之间
+           切换时MCU只修改当前ID不做模式切换操作，同时切换到非WiFi端模式才发送播放
+           停止命令“AXX+PLY+STP”；
+	2）解决在关闭串口打印宏“FUNC_DEBUG_EN”情况下，蓝牙播放状态下如有语音播报
+           可能导致蓝牙工作异常问题；
+	3）解决在打开串口打印宏“FUNC_DEBUG_EN”情况下，蓝牙播放状态下切换到MP3播放
+           断断续续问题。
+	
+文件更新列表：
+1、MVs18_01_06\src\inc\app_config.h
+2、MVs18_01_06\src\main\task_decoder.c
+3、MVs18_01_06\src\sys_app\sound_remind.c
+4、MVs18_01_06\src\wifi\wifi_control.c
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160516_Ver11
+日期：2016.05.16
+更新内容：
+	1）解决4M Bytes的SPI Flash串口不能升级问题(加大软件代码索引号范围)；
+	2）修改WiFi出厂恢复设置参数配置；
+	3）增加长按WiFi WPS按键功能(长按WiFi SAVE按键)。
+	
+文件更新列表：
+1、MVs18_01_06\src\inc\app_config.h
+2、MVs18_01_06\src\key\adc_key.c
+3、MVs18_01_06\src\wifi\wifi_control.c
+4、MVs18_01_06\src\wifi\wifi_init_setting.h
+5、MVs18_01_06\src\wifi\wifi_uart_com.c
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160510_Ver10
+日期：2016.05.10
+更新内容：
+	1）解决TALK功能重复操作多次后无声问题；
+	2）完善串口数据的接收处理，解决WiFi命令丢失后可能不能恢复问题；
+	3）增加切换模式断电记忆后获取播放状态接口；
+	4）调整电池电量返回条件。
+
+文件更新列表：
+1、MVs18_01_06\src\main\main.c
+2、MVs18_01_06\src\main\task_main.c
+3、MVs18_01_06\src\wifi\wifi_control.c
+4、MVs18_01_06\src\wifi\wifi_control.h
+5、MVs18_01_06\src\wifi\wifi_uart_com.c
+6、MVs18_01_06\src\wifi\wifi_uart_com.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160504_Ver09
+日期：2016.05.04
+更新内容：
+	1）调整WiFi串口处理，解决WiFi命令可能不响应问题。
+
+文件更新列表：
+1、MVs18_01_06\src\wifi\wifi_uart_com.c
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P25_WiFi_Demo_20160429_Ver08
+日期：2016.04.29
+更新内容：
+        1）增加WiFi Demo SDK使用简要说明文档；
+	2）升级MVs18_01_06_P25补丁；
+        3）调整WiFi模组的上电时序；
+        4）增加部分语音播报功能；
+        5）增加语音播报音量可设置功能；
+	6）增加AP8064无信号检测定时关机功能；
+        7）增加AP8064端插入USB或卡升级功能；
+        8）取消WiFi串口升级的CRC校验功能；
+        9）解决WiFi启动MIC前可能会有短暂从DAC输出问题；
+        10）取消部分查询WiFi状态功能；
+        11）增加退出WiFi模式或语音播报前发送“MCU_PLY_STP”命令；
+        12）修改部分WiFi出厂设置初始化值；
+        13）解决“AXX+LED+TES”命令功能无效问题。        
+
+文件更新列表：
+1、MVs18_01_06\WiFi Demo SDK使用简要说明.txt
+2、MVs18_01_06\Libraries\audio\inc\drc.h
+3、MVs18_01_06\Libraries\audio\drc.lib
+4、MVs18_01_06\src\control\line_in_control.c
+5、MVs18_01_06\src\control\player_control.c
+6、MVs18_01_06\src\dev_detect\dev_state_machine.c
+7、MVs18_01_06\src\inc\app_config.h
+8、MVs18_01_06\src\inc\sound_remind.h
+9、MVs18_01_06\src\inc\sys_app.h
+10、MVs18_01_06\src\inc\sys_vol.h
+11、MVs18_01_06\src\main\main.c
+12、MVs18_01_06\src\main\task_audio_process.c
+13、MVs18_01_06\src\main\task_decoder.c
+14、MVs18_01_06\src\main\task_main.c
+15、MVs18_01_06\src\sys_app\sound_remind.c
+16、MVs18_01_06\src\sys_app\sys_app.c
+17、MVs18_01_06\src\sys_app\sys_vol.c
+18、MVs18_01_06\src\wifi\wifi_control.c
+19、MVs18_01_06\src\wifi\wifi_control.h
+20、MVs18_01_06\src\wifi\wifi_init_setting.h
+21、MVs18_01_06\src\wifi\wifi_uart_com.c
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P22_WiFi_Demo_20160422_Ver07
+日期：2016.04.22
+
+更新内容：
+	1）增加RTC功能；
+	2）增加ALARM功能；
+	3）增加开机是否记忆音量选择功能；
+	4）增加WiFi控制LED快速慢速显示示例；
+	5）修复WiFi升级MCU软件数据解析可能错误问题；
+	6）增加数据透传功能；
+	7）增加WiFi Spotify功能；
+	8）增加阿里部分功能；
+	9）增加WiFi文件夹下文件功能说明文件。
+
+文件更新列表：
+1、MVs18_01_06\src\inc\app_config.h
+2、MVs18_01_06\src\control\rtc_control.c
+3、MVs18_01_06\src\sys_app\sys_app.c
+4、MVs18_01_06\src\wifi\wifi_control.c
+5、MVs18_01_06\src\wifi\wifi_control.h
+6、MVs18_01_06\src\wifi\wifi_function_config.h
+7、MVs18_01_06\src\wifi\wifi_init_setting.h
+8、MVs18_01_06\src\wifi\wifi_mcu_command.h
+9、MVs18_01_06\src\wifi\wifi_readme.txt
+10、MVs18_01_06\src\wifi\wifi_uart_com.c
+11、MVs18_01_06\src\wifi\wifi_wifi_command.h
+
+--------------------------------------------------------------------------------------
+MVs18_01_06+P22_WiFi_Demo_20160414_Ver06
+发布初始版本

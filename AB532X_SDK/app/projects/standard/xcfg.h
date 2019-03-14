@@ -10,12 +10,14 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 func_aux_en                      : 1;   //AUX输入功能
     u32 func_fmrx_en                     : 1;   //FM收音功能
     u32 powkey_10s_reset                 : 1;   //POWKEY 10s复位系统
+    u8 ext_power_io_sel;                        //外部POWER控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
     u32 spk_mute_en                      : 1;   //功放MUTE功能
     u8 spk_mute_io_sel;                         //功放MUTE控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
     u32 high_mute                        : 1;   //高MUTE
     u8 loudspeaker_unmute_delay;                //功放MUTE延时(单位5ms)
     u8 ampabd_type;                             //功放AB/D控制模式: 0:独立IO电平控制, 1:mute脉冲控制
     u8 ampabd_io_sel;                           //功放AB/D控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
+    u32 ampabd_level                     : 1;   //D类高电平
     u32 earphone_det_iosel               : 6;   //耳机检测IO选择: None: 0, PA0: 1, PA1: 2, PA2: 3, PA3: 4, PA4: 5, PA5: 6, PA6: 7, PA7: 8, PB0: 9, PB1: 10, PB2: 11, PB3: 12, PB4: 13, PE0: 14, PE1: 15, PE2: 16, PE3: 17, PE4: 18, PE5: 19, PE6: 20, PE7: 21, PF0: 22, PF1: 23, PF2: 24, PF3: 25, PF4: 26, PF5: 27, 复用SDCLK检测: 28, 复用SDCMD检测: 29, 复用PWRKEY检测: 30
     u16 sys_sleep_time;                         //自动休眠时间: 不休眠: 0, 10秒钟后: 10, 20秒钟后: 20, 30秒钟后: 30, 45秒钟后: 45, 1分钟后: 60, 2分钟后: 120, 3分钟后: 180, 4分钟后: 240, 5分钟后: 300, 6分钟后: 360, 7分钟后: 420, 8分钟后: 480, 9分钟后: 540, 10分钟后: 600, 15分钟后: 900, 20分钟后: 1200, 25分钟后: 1500, 30分钟后: 1800, 45分钟后: 2700, 1小时后: 3600
     u16 sys_off_time;                           //自动关机时间: 不关机: 0, 30秒钟后: 30, 1分钟后: 60, 2分钟后: 120, 3分钟后: 180, 4分钟后: 240, 5分钟后: 300, 6分钟后: 360, 7分钟后: 420, 8分钟后: 480, 9分钟后: 540, 10分钟后: 600, 15分钟后: 900, 20分钟后: 1200, 25分钟后: 1500, 30分钟后: 1800, 45分钟后: 2700, 1小时后: 3600
@@ -23,6 +25,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u8 lpwr_warning_vbat;                       //低电语音提示电压: 0:2.8V, 1:2.9V, 2:3.0V, 3:3.1V, 4:3.2V, 5:3.3V, 6:3.4V, 7:3.5V, 8:3.6V, 9:3.7V
     u8 lpwr_off_vbat;                           //低电关机电压: 0:不关机, 1:2.8V, 2:2.9V, 3:3.0V, 4:3.1V, 5:3.2V, 6:3.3V, 7:3.4V, 8:3.5V, 9:3.6V, 10:3.7V
     u8 lpwr_warning_period;                     //低电语音播报周期(秒)
+    u8 lpwr_warning_count;                      //低电语音播报次数
     u8 vol_max;                                 //音量级数: 0:16级音量, 1:30级音量, 2:32级音量, 3:50级音量
     u8 sys_init_vol;                            //开机默认音量
     u8 warning_volume;                          //提示音播放音量
@@ -51,6 +54,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u8 bt_addr[6];                              //蓝牙地址
     u8 bt_txpwr;                                //发射功率: 0:+4DBM, 1:+3DBM, 2:+2DBM, 3:+1DBM, 4:0DBM, 5:-1DBM, 6:-2DBM, 7:-3DBM, 8:-4DBM
     u32 bt_rf_param                      : 8;   //RF参数选择: LQFP48: 0, QFN32: 1, SOP28: 2, TSSOP24: 3, TSSOP20: 4, SOP16: 5, QFN32小耳机板: 129, SOP16小耳机板: 133, AUTO: 255
+    u8 bt_pwrkey_nsec_discover;                 //PWRKEY开机长按进入配对: 0:不支持, 1:1秒, 2:2秒, 3:3秒, 4:4秒, 5:5秒, 6:6秒, 7:7秒, 8:8秒
     u32 bt_2acl_en                       : 1;   //连接两部手机功能
     u32 bt_a2dp_en                       : 1;   //音乐播放功能
     u32 bt_a2dp_vol_ctrl_en              : 1;   //音乐音量同步
@@ -204,6 +208,20 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
         u8 unit;
         u8 cycle;
     } led_pairing;                              //配对闪灯控制
+    u32 led_tws_main_config_en           : 1;   //TWS主机连接状态配置LED
+    struct __attribute__((packed)) {
+        u8 redpat;
+        u8 bluepat;
+        u8 unit;
+        u8 cycle;
+    } led_tws_main_conn;                        //TWS主机连接闪灯控制
+    u32 led_tws_slave_config_en          : 1;   //TWS副机连接状态配置LED
+    struct __attribute__((packed)) {
+        u8 redpat;
+        u8 bluepat;
+        u8 unit;
+        u8 cycle;
+    } led_tws_slave_conn;                       //TWS副机连接闪灯控制
     u32 led_btconn_config_en             : 1;   //蓝牙已连接状态配置LED
     struct __attribute__((packed)) {
         u8 redpat;

@@ -113,6 +113,7 @@ void sfunc_record_pause(void);
 void sfunc_record_continue(void);
 bool sfunc_is_recording(void);
 void record_var_init(void);
+void rec_dig_gain_init(u16 gain);
 
 #if (GUI_SELECT != GUI_NO)
 void sfunc_record_display(void);

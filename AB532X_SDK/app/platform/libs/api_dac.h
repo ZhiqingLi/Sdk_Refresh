@@ -31,6 +31,8 @@ void dac_channel_disable(void);
 void dac_dnr_detect(void);
 void music_src_set_volume(u16 vol);
 void dac_switch_for_bt(u8 enable);
+void dac_drc_init(void *cfg);
+
 //EQ
 struct eq_coef_tbl_t {
     const int * coef_0;            //tbl_alpha

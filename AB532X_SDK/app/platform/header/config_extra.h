@@ -46,6 +46,10 @@
 #define SYS_BASS_TREBLE_EN          0
 #endif
 
+
+#ifndef SPIFLASH_SPEED_UP_EN
+#define SPIFLASH_SPEED_UP_EN         1
+#endif
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/
@@ -134,6 +138,16 @@
 #define USER_PWRKEY_EXT             0
 #define IS_PWRKEY_PRESS()			(0 == (RTCCON & BIT(19)))
 #endif // USER_PWRKEY_EXT
+
+#if !USER_EXT_POWERON_EN				//20190118:是否需要GPIO控制外部电源上电
+#undef EXT_GPIO_POWERON			
+#undef EXT_GPIO_POWEROFF				
+#undef EXT_POWER_SLEEP_HOLD			
+
+#define EXT_GPIO_POWERON()				0
+#define EXT_GPIO_POWEROFF()				0
+#define EXT_POWER_SLEEP_HOLD()			0
+#endif									//USER_EXT_POWERON_EN
 
 #ifndef LPWR_WARING_TIMES
 #define LPWR_WARING_TIMES           0xff
@@ -246,6 +260,10 @@
 #define SD_USB_MUX_IO_EN				0
 #endif
 
+#ifndef DAC_DRC_EN
+#define DAC_DRC_EN                      0
+#endif
+
 /*****************************************************************************
  * Module    : 录音功能配置
  *****************************************************************************/
@@ -291,6 +309,10 @@
 #define GUI_LCD_EN                      0
 #endif
 
+
+#ifndef EX_SPIFLASH_SUPPORT
+#define EX_SPIFLASH_SUPPORT             0
+#endif
 /*****************************************************************************
  * Module    : karaok相关配置
  *****************************************************************************/
@@ -359,6 +381,17 @@
 
 #ifndef DAC_OFF_FOR_BT_CONN_EN
 #define DAC_OFF_FOR_BT_CONN_EN      0
+#endif
+
+#if BT_FCC_TEST_EN    //FCC 默认PB3 (USB_DP) 波特率1500000通信, 关闭用到PB3的程序
+#undef FUNC_USBDEV_EN
+#undef MUSIC_UDISK_EN
+#define FUNC_USBDEV_EN             0
+#define MUSIC_UDISK_EN             0
+#if (UART0_PRINTF_SEL == PRINTF_PB3)
+#undef UART0_PRINTF_SEL
+#define UART0_PRINTF_SEL  PRINTF_NONE
+#endif
 #endif
 /*****************************************************************************
  * Module    : uart0 printf 功能自动配置(自动关闭SD卡，USB)

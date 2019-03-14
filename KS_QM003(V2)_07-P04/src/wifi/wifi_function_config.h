@@ -32,8 +32,8 @@ extern "C" {
 	#define FUNC_WIFI_TALK_QUICK_OPEN_MIC_EN 			//打开此宏定义，可以实现WiFi talk快速打开关闭MIC通道,从而实现同时录放功能
 #endif
 //#define FUNC_WIFI_MULTIROOM_PLAY_EN					//打开此宏定义，支持多房间播放功能，所有音源通过通过I2S 输出到WiFi
-//#define FUNC_WIFI_SUPPORT_RTC_EN					//打开此宏定义，支持RTC功能
-//#define FUNC_WIFI_SUPPORT_ALARM_EN				//打开此宏定义，支持闹钟功能
+#define FUNC_WIFI_SUPPORT_RTC_EN					//打开此宏定义，支持RTC功能
+#define FUNC_WIFI_SUPPORT_ALARM_EN				//打开此宏定义，支持闹钟功能
 //#define FUNC_WIFI_ALI_PROJECT_EN	 				//打开此宏定义，支持阿里项目特殊功能
 //#define FUNC_WIFI_ALEXA_PROJECT_EN	 			//打开此宏定义，支持亚马逊项目
 #define FUNC_WIFI_DUMI_PROJECT_EN	 				//打开此宏定义，支持百度度秘项目

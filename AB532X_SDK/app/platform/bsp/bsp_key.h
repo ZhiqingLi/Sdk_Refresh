@@ -388,4 +388,9 @@ bool pwrkey_get_status(void);
 u8 get_double_key_time(void);
 void adc_mux_sdclk_w4_convert(void);
 
+#if USER_EXT_POWERON_EN
+void external_power_gpio_poweron(u8 io_num);
+void external_power_gpio_powerdown(u8 io_num);
+#endif //USER_EXT_POWERON_EN
+
 #endif // _BSP_KEY_H

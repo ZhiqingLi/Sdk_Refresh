@@ -167,7 +167,7 @@ void sfunc_bt_ring_message(u16 msg)
         bt_call_answer_incoming();
         break;
 
-    case KD_PLAY:
+    case KL_PLAY:				//KD_PLAY:
     case KL_HSF:
     case KD_HSF:
         bsp_clr_mute_sta();

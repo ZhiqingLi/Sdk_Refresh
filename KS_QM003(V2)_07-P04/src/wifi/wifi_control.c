@@ -45,6 +45,7 @@
 #include "wifi_init_setting.h"
 #include "wifi_mcu_command.h"
 #include "wifi_wifi_command.h"
+
 #ifdef FUNC_DISP_EN
 #include "led_display.h"
 #include "seg_panel.h"
@@ -79,10 +80,11 @@ static bool WiFiPowerOnInitEndFlag;
 static uint16_t WiFiPowerOnInitTimeCnt;
 uint8_t gCurNumberKeyNum = 0;
 bool WiFiTalkOnFlag;
-uint8_t McuCurPlayMode = 0;	//Mcu当前播放模式
-uint8_t WiFiLedFlashCnt; //WiFi LED指示灯闪烁计数
-uint16_t PassThroughDataLen = 0;  //透传数据长度,此数值不为0表示有透传数据接收
-uint8_t PassThroughDataState = 0; //透传数据状态
+uint8_t McuCurPlayMode = 0;				//Mcu当前播放模式
+uint8_t WiFiLedFlashCnt; 				//WiFi LED指示灯闪烁计数
+uint16_t PassThroughDataLen = 0;  		//透传数据长度,此数值不为0表示有透传数据接收
+uint8_t PassThroughDataState = 0; 		//透传数据状态
+int8_t  ChangeSystemTimeZoneFlag = 0;	//MCU修改时区时是否有日期变更，用于修改周设置
 
 #ifdef FUNC_POWER_MONITOR_EN
 #ifdef FUNC_WIFI_BATTERY_POWER_CHECK_EN	
@@ -838,6 +840,17 @@ uint8_t WiFiFirmwareUpgradeStateGet(void)
 	return gWiFi.FirmwareState;
 }
 
+//WiFi模组服务器连接状态设置
+void WiFiLoginStateSet(uint8_t State)
+{
+	gWiFi.LoginState = State;
+}
+
+uint8_t WiFiLoginStateGet(void)
+{
+	return gWiFi.LoginState;
+}
+
 //WiFi请求MCU 关机
 void WiFiRequestMcuPowerOff(void)
 {
@@ -1524,6 +1537,63 @@ void WiFiTalkStateSet(bool State)
 #endif
 }
 
+//MCU 校准时区，模组下发的时间是UTC时间，需要根据时区校准。
+void McuChangeSystemTimeZone(RTC_DATE_TIME *SystemTime)
+{
+#ifdef FUNC_RTC_EN		
+#if (defined(FUNC_WIFI_ALI_PROJECT_EN) || defined(FUNC_WIFI_DUMI_PROJECT_EN))
+    #define TIMEZONE			(8)
+#else
+	#define TIMEZONE			(-7)
+#endif
+
+	int8_t TimeHour;
+	uint8_t MonDate;
+	
+	TimeHour = (int8_t)SystemTime->Hour;
+	TimeHour += (int8_t)TIMEZONE;
+
+	if(TimeHour >= 24)
+	{	
+		SystemTime->Hour = (TimeHour%24);
+		SystemTime->Date++;
+		MonDate = RtcGetMonthDays(SystemTime->Year, SystemTime->Mon);
+		if(SystemTime->Date > MonDate)
+		{
+			SystemTime->Date = (SystemTime->Date - MonDate);
+			SystemTime->Mon++;
+			if(SystemTime->Mon > 12)
+			{
+				SystemTime->Mon -= 12;
+				SystemTime->Year++;
+			}
+		}
+		ChangeSystemTimeZoneFlag = 1;
+	}
+	else if(TimeHour < 0)
+	{
+		SystemTime->Hour = (uint8_t)(24+TimeHour);
+		SystemTime->Date--;
+		if(SystemTime->Date == 0)
+		{
+			SystemTime->Mon--;
+			if(SystemTime->Mon == 0)
+			{
+				SystemTime->Mon = 12;
+				SystemTime->Year--;
+			}
+			SystemTime->Date = RtcGetMonthDays(SystemTime->Year, SystemTime->Mon);
+		}
+		ChangeSystemTimeZoneFlag = -1;
+	}
+	else
+	{
+		SystemTime->Hour = (TimeHour%24);
+		ChangeSystemTimeZoneFlag = 0;
+	}
+#endif
+}
+
 //WiFi端设置MCU当前系统时间
 void WiFiSetMcuSystemTime(uint8_t* DateData)
 {
@@ -1540,7 +1610,8 @@ void WiFiSetMcuSystemTime(uint8_t* DateData)
 	}
 
 	if(DateData[RcvCnt++] == '&')
-	{		
+	{
+		APP_DBG("WiFiNoticeMcuSystemTime:%s\n", &DateData[0]);
 		SystemTime.Year = (DateData[0] - 0x30) * 1000 + (DateData[1] - 0x30) * 100 + (DateData[2] - 0x30) * 10 + (DateData[3] - 0x30);
 		SystemTime.Mon = (DateData[4] - 0x30) * 10 + (DateData[5] - 0x30);
 		SystemTime.Date = (DateData[6] - 0x30) * 10 + (DateData[7] - 0x30);
@@ -1548,10 +1619,12 @@ void WiFiSetMcuSystemTime(uint8_t* DateData)
 		SystemTime.Min = (DateData[10] - 0x30) * 10 + (DateData[11] - 0x30);
 		SystemTime.Sec = (DateData[12] - 0x30) * 10 + (DateData[13] - 0x30);
 		SystemTime.WDay = sRtcControl->DataTime.WDay;
+		McuChangeSystemTimeZone(&SystemTime);
 		RtcSetCurrTime(&SystemTime);
 		WiFiDataRcvStartFlag = FALSE;
 		DateData[RcvCnt] = '\0';
-		APP_DBG("WiFiSetMcuSystemTime:%s\n", &DateData[0]);
+		APP_DBG("WiFiSetMcuSystemTime:(%04d-%02d-%02d %02d:%02d:%02d)\n",
+		SystemTime.Year, SystemTime.Mon, SystemTime.Date, SystemTime.Hour, SystemTime.Min, SystemTime.Sec);
 	}	
 #endif
 #endif
@@ -1575,7 +1648,31 @@ void WiFiSetMcuWeekDay(uint8_t* DayData)
 	if(DayData[RcvCnt++] == '&')
 	{		
 		RtcGetCurrTime(&sRtcControl->DataTime);
-		SystemTime.WDay = DayData[0] - 0x30;
+		if(ChangeSystemTimeZoneFlag > 0)
+		{
+			SystemTime.WDay = ((DayData[0] - 0x30)+1);
+			if(SystemTime.WDay > 6)
+			{
+				SystemTime.WDay = 0;	
+			}
+		}
+		else if(ChangeSystemTimeZoneFlag < 0)
+		{
+			if((DayData[0] - 0x30) == 0)
+			{
+				SystemTime.WDay = 6;	
+			}
+			else
+			{
+				SystemTime.WDay = ((DayData[0] - 0x30)-1);
+			}
+		}
+		else
+		{
+			SystemTime.WDay = DayData[0] - 0x30;
+		}
+		
+		ChangeSystemTimeZoneFlag = 0;
 		SystemTime.Year = sRtcControl->DataTime.Year;
 		SystemTime.Mon = sRtcControl->DataTime.Mon;
 		SystemTime.Date = sRtcControl->DataTime.Date;
@@ -1638,22 +1735,25 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 		sRtcControl->AlarmNum = 1;
 		sRtcControl->AlarmMode = ALARM_MODE_PER_DAY;
 
+		SecondData[RcvCnt] = '\0';
+		APP_DBG("WiFiNoticeMcuNextAlarmTime:%s\n", &SecondData[0]);
+		
 		//闹钟开关状态设置
 		if((SecondData[0] == '-') && (SecondData[1] == '1'))	
 		{
 			if(RtcGetAlarmStatus(1) != ALARM_STATUS_CLOSED)
 			{
-				RtcAlarmSetStatus(1, ALARM_STATUS_CLOSED);	//关闭闹钟
+				//RtcAlarmSetStatus(1, ALARM_STATUS_CLOSED);	//关闭闹钟
 			}
 			return;
 		}
-//		else
-//		{
-//			if(RtcGetAlarmStatus(1) != ALARM_STATUS_OPENED)
-//			{
-//				RtcAlarmSetStatus(1, ALARM_STATUS_OPENED); //打开闹钟
-//			}
-//		}
+		else
+		{
+			if(RtcGetAlarmStatus(1) != ALARM_STATUS_OPENED)
+			{
+				RtcAlarmSetStatus(1, ALARM_STATUS_OPENED); //打开闹钟
+			}
+		}
 #if 0		
 		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
 
@@ -1700,15 +1800,28 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 #endif
 }
 
-//WiFi模块设置MCU闹钟的时间
-//参数: AlarmTimeData 表示闹钟时间
+/*****************************************************************************
+ 函 数 名  : WiFiSetMcuAlarmTime
+ 功能描述  : WiFi通知mcu下一个闹钟时间
+ 输入参数  : uint8_t* AlarmTimeData  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2018年8月31日
+    作    者   : 李治清
+    修改内容   : 新生成函数
+
+*****************************************************************************/
 void WiFiSetMcuAlarmTime(uint8_t* AlarmTimeData)
-		{
+{
 #ifdef FUNC_WIFI_SUPPORT_RTC_EN
 #ifdef FUNC_RTC_EN
 #ifdef FUNC_WIFI_SUPPORT_ALARM_EN
 	static uint8_t RcvCnt;
-	RTC_DATE_TIME AlarmTime;
+	ALARM_BP_INFO  AlarmInfo;
 	
 	if(WiFiDataRcvStartFlag == FALSE)
 	{
@@ -1718,23 +1831,85 @@ void WiFiSetMcuAlarmTime(uint8_t* AlarmTimeData)
 	}
 	
 	if(AlarmTimeData[RcvCnt++] == '&')
-	{	
+	{
+		APP_DBG("WiFiNoticeMcuNextAlarmTime:%s\n", &AlarmTimeData[0]);
 		RcvCnt -= 1;		
-		AlarmTime.Year = (AlarmTimeData[0] - 0x30) * 1000 + (AlarmTimeData[1] - 0x30) * 100 + (AlarmTimeData[2] - 0x30) * 10 + (AlarmTimeData[3] - 0x30);
-		AlarmTime.Mon = (AlarmTimeData[4] - 0x30) * 10 + (AlarmTimeData[5] - 0x30);
-		AlarmTime.Date= (AlarmTimeData[6] - 0x30) * 10 + (AlarmTimeData[7] - 0x30);
-		AlarmTime.Hour= (AlarmTimeData[8] - 0x30) * 10 + (AlarmTimeData[9] - 0x30);
-		AlarmTime.Min= (AlarmTimeData[10] - 0x30) * 10 + (AlarmTimeData[11] - 0x30);
-		AlarmTime.Sec= (AlarmTimeData[12] - 0x30) * 10 + (AlarmTimeData[13] - 0x30);
+		AlarmInfo.AlarmTime.Year = (AlarmTimeData[0] - 0x30) * 1000 + (AlarmTimeData[1] - 0x30) * 100 + (AlarmTimeData[2] - 0x30) * 10 + (AlarmTimeData[3] - 0x30);
+		AlarmInfo.AlarmTime.Mon = (AlarmTimeData[4] - 0x30) * 10 + (AlarmTimeData[5] - 0x30);
+		AlarmInfo.AlarmTime.Date= (AlarmTimeData[6] - 0x30) * 10 + (AlarmTimeData[7] - 0x30);
+		AlarmInfo.AlarmTime.Hour= (AlarmTimeData[8] - 0x30) * 10 + (AlarmTimeData[9] - 0x30);
+		AlarmInfo.AlarmTime.Min= (AlarmTimeData[10] - 0x30) * 10 + (AlarmTimeData[11] - 0x30);
+		AlarmInfo.AlarmTime.Sec= (AlarmTimeData[12] - 0x30) * 10 + (AlarmTimeData[13] - 0x30);
+		//为了方便比较，无实际意义
+		AlarmInfo.AlarmTime.WDay = sRtcControl->DataTime.WDay;
 		WiFiDataRcvStartFlag = FALSE;
-		sRtcControl->AlarmNum = 1;
-		sRtcControl->AlarmMode = ALARM_MODE_PER_DAY;
-		RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &AlarmTime);
-		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
-		if(RtcGetAlarmStatus(1) != ALARM_STATUS_OPENED)
+        /* 判断闹钟时间是否合法，小于当前系统时间则丢弃*/
+        if(memcmp((void *)&AlarmInfo.AlarmTime, (void *)&sRtcControl->DataTime, sizeof(RTC_DATE_TIME)) <= 0)
+        {
+            APP_DBG("Alarm time is nullity!!!\n");
+            return;
+        }
+		McuChangeSystemTimeZone((RTC_DATE_TIME *)&AlarmInfo.AlarmTime);
+		//停止本地正在闹响的闹钟
+		if(sRtcControl->CurAlarmRun)
 		{
-			RtcAlarmSetStatus(1, ALARM_STATUS_OPENED); //打开闹钟
-		}		
+			RtcCurAlarmSleepAndStop(RTC_ALARM_STATE_STOP);
+		}
+
+		APP_DBG("WiFiSetMcuNextAlarmTime:(%04d-%02d-%02d %02d:%02d:%02d)\n",
+		AlarmInfo.AlarmTime.Year, AlarmInfo.AlarmTime.Mon, AlarmInfo.AlarmTime.Date,
+		AlarmInfo.AlarmTime.Hour, AlarmInfo.AlarmTime.Min, AlarmInfo.AlarmTime.Sec);
+
+#if (defined(FUNC_RTC_EN) && defined(FUNC_RTC_ALARM_SAVE2FLASH))
+        /* 设置闹钟常量 */
+		AlarmInfo.AlarmMode = ALARM_MODE_ONCE_ONLY;
+		AlarmInfo.AlarmState = ALARM_STATUS_OPENED;
+		AlarmInfo.AlarmVolume = DEFAULT_VOLUME;
+		AlarmInfo.RingType = RTC_RING_WIFISD_TYPE;
+
+		/* 闹钟数据存放到记忆区 */
+		SetWiFiAlarmTimeToBpInfo(&AlarmInfo);
+
+		/* 更新到本地闹钟 */
+		for(sRtcControl->AlarmNum = 1; sRtcControl->AlarmNum <= MAX_ALARM_NUM; sRtcControl->AlarmNum++)
+		{
+            if(GetNearAlarmTimeFromBpInfo(&AlarmInfo, sRtcControl->AlarmNum-1))      
+            {
+			    sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = AlarmInfo.RingType;
+    			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = AlarmInfo.AlarmVolume;
+    			sRtcControl->AlarmMode = AlarmInfo.AlarmMode; 
+    			sRtcControl->AlarmTime = AlarmInfo.AlarmTime;
+    			sRtcControl->AlarmState = AlarmInfo.AlarmState;
+                RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &sRtcControl->AlarmTime);
+                RtcAlarmSetStatus(sRtcControl->AlarmNum, sRtcControl->AlarmState);
+			}
+            else
+            {
+                RtcAlarmSetStatus(sRtcControl->AlarmNum, ALARM_STATUS_CLOSED);
+            }
+		}
+        
+	    sRtcControl->AlarmNum = 0;
+        //保存到记忆区
+        AudioSysInfoSetBreakPoint();
+#endif		
+
+#ifdef FUNC_RTC_ALARM		
+		NvmWrite(RTC_NVM_START_ADDR, (uint8_t *)&sNvmRtcInfo, sizeof(NVM_RTC_INFO));
+#endif
+
+#ifdef FUNC_DISP_EN
+        /* 显示WiFi下发的闹钟时间 */
+        sRtcControl->AlarmTime.Year = (AlarmTimeData[0] - 0x30) * 1000 + (AlarmTimeData[1] - 0x30) * 100 + (AlarmTimeData[2] - 0x30) * 10 + (AlarmTimeData[3] - 0x30);
+		sRtcControl->AlarmTime.Mon = (AlarmTimeData[4] - 0x30) * 10 + (AlarmTimeData[5] - 0x30);
+		sRtcControl->AlarmTime.Date= (AlarmTimeData[6] - 0x30) * 10 + (AlarmTimeData[7] - 0x30);
+		sRtcControl->AlarmTime.Hour= (AlarmTimeData[8] - 0x30) * 10 + (AlarmTimeData[9] - 0x30);
+		sRtcControl->AlarmTime.Min= (AlarmTimeData[10] - 0x30) * 10 + (AlarmTimeData[11] - 0x30);
+		sRtcControl->AlarmTime.Sec= (AlarmTimeData[12] - 0x30) * 10 + (AlarmTimeData[13] - 0x30);
+        McuChangeSystemTimeZone(&sRtcControl->AlarmTime);
+		sRtcControl->AlarmNum = 0;
+		DispSendMessage(SET_INTERVL, DISP_MSG_WIFI_SET_ALARM);
+#endif
 	}
 #endif
 #endif
@@ -2199,9 +2374,6 @@ void WiFiControlGpioInit(void)
 	TimeOutSet(&WiFiLedBlinkTimer, 0);
 	TimeOutSet(&WiFiSoundRemindTimer, 0);
 	
-//注意：以下为上电后WiFi状态的初始状态设置，可根据需要添加代码
-  gWiFi.WiFiSoundRemindState = 2;
-	
 #ifdef FUNC_WIFI_POWER_KEEP_ON
 	WiFiPowerOnInitTimeCnt = WIFI_POWER_ON_INIT_TIME;
 	WiFiPowerOnInitEndFlag = FALSE;
@@ -2400,6 +2572,12 @@ void WiFiPowerOnInitProcess(void)
 			WiFiPowerOnInitEndFlag = TRUE;
 			APP_DBG("wifi uart init.............\n");
 		}
+	}
+#else
+
+	if(WiFiPowerOnInitTimeCnt)
+	{
+		WiFiPowerOnInitTimeCnt--;
 	}
 #endif
 }

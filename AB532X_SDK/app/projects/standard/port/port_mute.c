@@ -1,6 +1,6 @@
 #include "include.h"
 
-///é…ç½®å·¥å…·é€‰æ‹©MUTEåŠAB/Dæ§åˆ¶çš„GPIO
+///ÅäÖÃ¹¤¾ßÑ¡ÔñMUTE¼°AB/D¿ØÖÆµÄGPIO
 static gpio_t mute_gpio;
 static gpio_t amp_gpio;
 static u8 amp_conf_type = 0;
@@ -59,15 +59,15 @@ void loudspeaker_unmute(void)
         p->sfr[GPIOxSET] = BIT(p->num);
     }
     if (xcfg_cb.ampabd_type && !xcfg_cb.high_mute) {
-        delay_5ms(4);           //å…ˆæ‹‰é«˜20ms
-        if (amp_conf_type) {    //ABç±»è„‰å†²æ§åˆ¶
+        delay_5ms(4);           //ÏÈÀ­¸ß20ms
+        if (amp_conf_type) {    //ABÀàÂö³å¿ØÖÆ
             for (u32 i = 0; i < 4; i++) {
                 p->sfr[GPIOxCLR] = BIT(p->num);
                 delay_us(75);
                 p->sfr[GPIOxSET] = BIT(p->num);
                 delay_us(75);
             }
-        } else {                //æš‚æ—¶åªæ”¯æŒDç±»é˜²ç ´éŸ³å…³é—­
+        } else {                //ÔİÊ±Ö»Ö§³ÖDÀà·ÀÆÆÒô¹Ø±Õ
             for (u32 i = 0; i < 3; i++) {
                 p->sfr[GPIOxCLR] = BIT(p->num);
                 delay_us(75);
@@ -101,7 +101,11 @@ void amp_sel_cfg_d(void)
     }
     p->sfr[GPIOxDE] |= BIT(p->num);
     p->sfr[GPIOxDIR] &= ~BIT(p->num);
-    p->sfr[GPIOxSET] = BIT(p->num);
+	if (xcfg_cb.ampabd_level){				//20190224
+    	p->sfr[GPIOxSET] = BIT(p->num);
+    }else {
+		p->sfr[GPIOxCLR] = BIT(p->num);
+	}
 }
 
 AT(.text.amplifier)
@@ -122,7 +126,11 @@ void amp_sel_cfg_ab(void)
     }
     p->sfr[GPIOxDE] |= BIT(p->num);
     p->sfr[GPIOxDIR] &= ~BIT(p->num);
-    p->sfr[GPIOxCLR] = BIT(p->num);
+	if (xcfg_cb.ampabd_level){				//20190224
+    	p->sfr[GPIOxCLR] = BIT(p->num);
+    }else {
+		p->sfr[GPIOxSET] = BIT(p->num);
+	}
 }
 
 AT(.text.amplifier)

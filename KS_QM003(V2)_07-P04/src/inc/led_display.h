@@ -61,6 +61,7 @@ typedef enum _DISP_MSG_ID
 #endif
 #ifdef FUNC_RTC_EN
 	DISP_MSG_RTC_SET,
+	DISP_MSG_WIFI_SET_ALARM,
 #endif
 #ifdef FUNC_BT_HF_EN
 	DISP_MSG_BTHF_VOL,

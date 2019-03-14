@@ -724,7 +724,7 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1548744372 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1550970476 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -1287,10 +1287,10 @@
 	"include.h"
 	"bsp_led.h"
 
-1548741468 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
+1550999927 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
 	"include.h"
 
-1547006689 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.c
+1548745364 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.c
 	"include.h"
 	"func.h"
 	"func_aux.h"

@@ -76,53 +76,40 @@ void delay_ms(uint8 dly_ms)
 }
 #endif
 
-#if defined(BOARD_DPI_7C370_FAR)
 bool check_power_key_pressed(void)
 {
     uint32 i = 0;
 
+#if defined(POWER_GPIO_PIN)
     act_writel((act_readl(POWER_GPIO_UPEN) | POWER_GPIO_PIN), POWER_GPIO_UPEN);
     act_writel((act_readl(POWER_GPIO_IN) | POWER_GPIO_PIN), POWER_GPIO_IN);
+#endif
     while(1) {
+    #if defined(POWER_GPIO_PIN)
         if(!(act_readl(POWER_GPIO_DATA) & POWER_GPIO_PIN)) {
+    #else
+    	if((act_readl(ONOFF_KEY)&(1<<ONOFF_KEY_ONOFF_PRESS_0)) != 0) {
+    #endif
             //wait 2 seconds
-            if(i++ > 10) {
+            if(i++ > 20) {
                 return TRUE;
             }
         } else {
-            i = 0;
+            break;
         }
         sys_os_time_dly(10);
     }
+
+    return FALSE;
 }
 
 void hold_system_power(void)
 {
+#if defined(SYS_POWER_PIN)
     act_writel(act_readl(SYS_POWER_CTRL_OUTPUT) | SYS_POWER_PIN, SYS_POWER_CTRL_OUTPUT);
     act_writel(act_readl(SYS_POWER_CTRL_UPEN) | SYS_POWER_PIN, SYS_POWER_CTRL_UPEN);
     act_writel(act_readl(SYS_POWER_CTRL_DATA) | SYS_POWER_PIN, SYS_POWER_CTRL_DATA);
-}
 #endif
-
-#if defined(BOARD_JL_36410_FAR)
-int system_check_low_power(void)
-{
-    int i = 0;
-    int count = 0;
-    do {
-        //3.5V
-        if((act_readb(LRADC1_DATA) & 0x7f) > TEMP_ADC_1_52_V) {
-            break;
-        }
-
-        count++;
-        sys_usleep(30000);
-    } while((++i) < 10);
-
-    if(count >= 10)
-        return 1;
-
-    return 0;
 }
 
 void system_power_off(void)
@@ -134,7 +121,6 @@ void system_power_off(void)
 
     while(1);
 }
-#endif
 
 void hardware_init(void)
 {
@@ -177,6 +163,7 @@ void hardware_init(void)
 int main(int argc, const char *argv[])
 {
     uint8 dc5v_flag = 0;
+    uint8 onoff_mode = 0;
 
     hardware_init();
     system_config();
@@ -210,16 +197,13 @@ int main(int argc, const char *argv[])
     if((act_readl(CHG_DET) & (1 << CHG_DET_UVLO)) != 0) {
         dc5v_flag = 1;
     }
-
-#if defined(BOARD_DPI_7C370_FAR)
-    check_power_key_pressed();
+	//加载开关机配置项
+	onoff_mode = (uint8) com_get_config_default(SETTING_ONOFF_POWEROFF_SWITCH_MODE);
+	if (onoff_mode && !check_power_key_pressed()) {
+    	system_power_off();
+    }
+    
     hold_system_power();
-#endif
-
-#if defined(BOARD_JL_36410_FAR)
-    if(((act_readl(ONOFF_KEY) & (1 << ONOFF_KEY_ONOFF_PRESS_0)) != 0) || system_check_low_power())
-        system_power_off();
-#endif
 
     //config_hosc_freq();
     //config pcmram1 to cpu

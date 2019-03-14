@@ -9,6 +9,8 @@
 #ifndef __BREAKPOINT_H__
 #define __BREAKPOINT_H__
 
+#include "rtc_control.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif//__cplusplus
@@ -85,6 +87,18 @@ typedef struct _BP_RADIO_INFO_
 } BP_RADIO_INFO;
 #endif
 
+//**************************************************************************************************************
+//	RTC 相关断点记忆数据结构
+//	注意:: 
+//**************************************************************************************************************
+#if (defined(FUNC_RTC_EN) && defined(FUNC_RTC_ALARM_SAVE2FLASH))
+typedef struct _BP_RTC_INFO_
+{
+	uint8_t 		ValidAlarmNum;        					            // 断点中有效的闹钟数量
+    uint8_t         AlarmIndex[MAX_BP_INFO_ALARM_NUM+MAX_ALARM_NUM];    // 闹钟的先后顺序
+    ALARM_BP_INFO	AlarmBpInfo[MAX_BP_INFO_ALARM_NUM+MAX_ALARM_NUM]; 	// WiFi闹钟数据，参见相关结构体定义
+} BP_RTC_INFO;
+#endif
 
 
 
@@ -134,6 +148,10 @@ typedef struct	_BP_INFO_
 	BP_RADIO_INFO 	RadioInfo;
 #endif
 
+#if (defined(FUNC_RTC_EN) && defined(FUNC_RTC_ALARM_SAVE2FLASH))
+	BP_RTC_INFO		RtcInfo;
+#endif
+
 	uint8_t 			Crc;
 	
 } BP_INFO;
@@ -154,6 +172,7 @@ typedef enum _BP_INFO_TYPE_
 	BP_SYS_INFO_TYPE,
 	BP_PLAYER_INFO_TYPE,
 	BP_RADIO_INFO_TYPE,
+	BP_RTC_INFO_TYPE,
 }BP_INFO_TYPE;
 
 #pragma pack()

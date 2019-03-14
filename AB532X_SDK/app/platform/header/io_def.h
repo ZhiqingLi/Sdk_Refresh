@@ -29,6 +29,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOADE |= BIT(6); GPIOAPU  |= BIT(6); GPIOADIR |= BIT(6);}
     #define SD_MUX_IS_ONLINE()      ((GPIOA & BIT(6)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOADIR & BIT(6)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOAPU300 & BIT(5))
     #define SD_CMD_MUX_PU300R()     {GPIOAPU300 |= BIT(5); GPIOAPU &= ~BIT(5);}
     #define SD_CMD_MUX_PU10K()      {GPIOAPU |= BIT(5); GPIOAPU300 &= ~BIT(5);}
     #define SD_DAT_MUX_PU300R()     {GPIOAPU300 |= BIT(7); GPIOAPU &= ~BIT(7);}
@@ -82,6 +83,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOBDE |= BIT(1); GPIOBPU  |= BIT(1); GPIOBDIR |= BIT(1);}
     #define SD_MUX_IS_ONLINE()      ((GPIOB & BIT(1)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOBDIR & BIT(1)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOBPU300 & BIT(0))
     #define SD_CMD_MUX_PU300R()     {GPIOBPU300 |= BIT(0); GPIOBPU &= ~BIT(0);}
     #define SD_CMD_MUX_PU10K()      {GPIOBPU |= BIT(0); GPIOBPU300 &= ~BIT(0);}
     #define SD_DAT_MUX_PU300R()     {GPIOBPU300 |= BIT(2); GPIOBPU &= ~BIT(2);}
@@ -133,6 +135,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOEDE |= BIT(6); GPIOEPU  |= BIT(6); GPIOEDIR |= BIT(6);}
     #define SD_MUX_IS_ONLINE()      ((GPIOE & BIT(6)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOEDIR & BIT(6)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOEPU300 & BIT(5))
     #define SD_CMD_MUX_PU300R()     {GPIOEPU300 |= BIT(5); GPIOEPU &= ~BIT(5);}
     #define SD_CMD_MUX_PU10K()      {GPIOEPU |= BIT(5); GPIOEPU300 &= ~BIT(5);}
     #define SD_DAT_MUX_PU300R()     {GPIOEPU300 |= BIT(7); GPIOEPU &= ~BIT(7);}
@@ -192,6 +195,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOADE |= BIT(6); GPIOAPU  |= BIT(6); GPIOADIR |= BIT(6);}
     #define SD_MUX_IS_ONLINE()      ((GPIOA & BIT(6)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOADIR & BIT(6)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOAPU300 & BIT(5))
     #define SD_CMD_MUX_PU300R()     {GPIOAPU300 |= BIT(5); GPIOAPU &= ~BIT(5);}
     #define SD_CMD_MUX_PU10K()      {GPIOAPU |= BIT(5); GPIOAPU300 &= ~BIT(5);}
     #define SD_DAT_MUX_PU300R()     {GPIOBPU300 |= BIT(4); GPIOBPU &= ~BIT(4);}
@@ -214,8 +218,8 @@
     #define SD_CMD_OUT_L()          {GPIOACLR = BIT(5);}
     #define SD_CMD_STA()            (GPIOA & BIT(5))
 
-	#define SD_DAT_DIS_UP()			static unsigned long pu300, pu; pu300 = GPIOBPU300; pu = GPIOBPU; GPIOBPU300 &= ~BIT(4); GPIOBPU &= ~BIT(4);
-	#define SD_DAT_RES_UP()			GPIOBPU300 = pu300; GPIOBPU = pu;
+	#define SD_DAT_DIS_UP()			static unsigned long pu300, pu,dir; pu300 = GPIOBPU300; pu = GPIOBPU; dir = GPIOBDIR; GPIOBDIR |= BIT(4); GPIOBPU300 &= ~BIT(4); GPIOBPU &= ~BIT(4);
+	#define SD_DAT_RES_UP()			GPIOBPU300 = pu300; GPIOBPU = pu; GPIOBDIR = dir;
 
     #define SDCLK_IO                IO_PA6
     #define SDCMD_IO                IO_PA5
@@ -250,6 +254,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOADE |= BIT(6); GPIOAPU  |= BIT(6); GPIOADIR |= BIT(6);}
     #define SD_MUX_IS_ONLINE()      ((GPIOA & BIT(6)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOADIR & BIT(6)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOAPU300 & BIT(5))
     #define SD_CMD_MUX_PU300R()     {GPIOAPU300 |= BIT(5); GPIOAPU &= ~BIT(5);}
     #define SD_CMD_MUX_PU10K()      {GPIOAPU |= BIT(5); GPIOAPU300 &= ~BIT(5);}
     #define SD_DAT_MUX_PU300R()     {GPIOBPU300 |= BIT(3); GPIOBPU &= ~BIT(3);}
@@ -272,8 +277,8 @@
     #define SD_CMD_OUT_L()          {GPIOACLR = BIT(5);}
     #define SD_CMD_STA()            (GPIOA & BIT(5))
 
-	#define SD_DAT_DIS_UP() 		static unsigned long pu300, pu; pu300 = GPIOBPU300; pu = GPIOBPU; GPIOBPU300 &= ~BIT(3); GPIOBPU &= ~BIT(3);
-	#define SD_DAT_RES_UP() 		GPIOBPU300 = pu300; GPIOBPU = pu;
+	#define SD_DAT_DIS_UP() 		static unsigned long pu300, pu,dir; pu300 = GPIOBPU300; pu = GPIOBPU; dir = GPIOBDIR; GPIOBDIR |= BIT(3); GPIOBPU300 &= ~BIT(3); GPIOBPU &= ~BIT(3);
+	#define SD_DAT_RES_UP() 		GPIOBPU300 = pu300; GPIOBPU = pu; GPIOBDIR = dir;
 
 
     #define SDCLK_IO                IO_PA6
@@ -304,6 +309,7 @@
     #define SD_MUX_DETECT_INIT()    {GPIOADE |= BIT(6); GPIOAPU  |= BIT(6); GPIOADIR |= BIT(6);}
     #define SD_MUX_IS_ONLINE()      ((GPIOA & BIT(6)) == 0)
     #define SD_MUX_IS_BUSY()        ((GPIOADIR & BIT(6)) == 0)
+    #define SD_MUX_CMD_IS_BUSY()    (GPIOBPU300 & BIT(3))
     #define SD_CMD_MUX_PU300R()     {GPIOBPU300 |= BIT(3); GPIOBPU &= ~BIT(3);}
     #define SD_CMD_MUX_PU10K()      {GPIOBPU |= BIT(3); GPIOBPU300 &= ~BIT(3);}
     #define SD_DAT_MUX_PU300R()     {GPIOBPU300 |= BIT(4); GPIOBPU &= ~BIT(4);}
@@ -341,6 +347,7 @@
     #define SD_MUX_DETECT_INIT()
     #define SD_MUX_IS_ONLINE()      0
     #define SD_MUX_IS_BUSY()        0
+    #define SD_MUX_CMD_IS_BUSY()    0
     #define SD_CMD_MUX_PU300R()
     #define SD_CMD_MUX_PU10K()
     #define SD_CMD_MUX_IS_ONLINE()  0

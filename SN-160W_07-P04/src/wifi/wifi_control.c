@@ -1064,31 +1064,33 @@ void McuGetWiFiSoundRemindLanguage(void)
 //WiFi 端语音提示音量设置[TRUE：固定音量播放提示音；FALSE：返回当前系统音量]
 void WiFiSoundRemindVolSet(bool WorkFlag)
 {	
-#ifdef 	WIFI_SOUND_REMIND_VOL	
-	uint8_t TempVol = gSys.Volume;
+	extern const uint16_t gAnaVolArr[MAX_VOLUME + 1];
 	
+#ifdef 	WIFI_SOUND_REMIND_VOL	
 	if(WorkFlag)
 	{
-		if(TempVol < 7)
-		{
-			TempVol = 7;
-		}
-	#ifdef FUNC_DIGITAL_VOLUME_ADJ_EN
-		CS3110SpiWriteOneChar(TempVol);
-  #else
-		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gDecVolArr[TempVol], gDecVolArr[TempVol]);
-		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gDecVolArr[TempVol], gDecVolArr[TempVol]);
-  #endif		
+		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[WIFI_SOUND_REMIND_VOL], gAnaVolArr[WIFI_SOUND_REMIND_VOL]);
+		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[WIFI_SOUND_REMIND_VOL], gAnaVolArr[WIFI_SOUND_REMIND_VOL]);		
+		APP_DBG("WiFiSoundRemindVolFixed = %d\n", WIFI_SOUND_REMIND_VOL);
 	}
 	else
 	{		
-#ifdef FUNC_DIGITAL_VOLUME_ADJ_EN
-		CS3110SpiWriteOneChar(TempVol);
-#else
 		SetSysVol();
-#endif
 	}
-	APP_DBG(" WiFiSoundRemindVolSet = %d\n", TempVol);
+#else
+	if(gSys.Volume >= 7)
+		return;
+	
+	if(WorkFlag)
+	{
+		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[7], gAnaVolArr[7]);
+		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[7], gAnaVolArr[7]);
+		APP_DBG(" WiFiSoundRemindVolSet = 7!\n");
+	}
+	else
+	{
+		SetSysVol();
+	}
 #endif
 }
 

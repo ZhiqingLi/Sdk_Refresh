@@ -5,7 +5,7 @@
  *****************************************************************************/
 #ifndef CONFIG_DEFINE_H
 #define CONFIG_DEFINE_H
-//SDK_AB532X_V033_20190107
+
 /*****************************************************************************
  * Module    : 显示相关配置选择列表
  *****************************************************************************/
@@ -308,10 +308,81 @@
 #define IO_MUX_PWRKEY       30
 #define IO_MUX_MICL         31
 
+/*****************************************************************************
+* Module    : EX_SPIFLASH_SUPPORT
+*****************************************************************************/
+#define EXSPI_NOT_SUPPORT   0
+#define EXSPI_REC           (1<<0)    //外接SPIFLASH支持录音
+#define EXSPI_MUSIC         (1<<1)    //外接SPIFLASH支持MP3音乐镜像文件播放
 
 /*****************************************************************************
 * Module    : 充电仓充电操作
 *****************************************************************************/
 #define CHARGE_FINISH_2_LOWPOWER    1
 #define CHARGE_OUT_2_POWERON        2
+
+/*****************************************************************************
+* Module    : 数字增益调节表
+*****************************************************************************/
+#define GAIN_0DB_VAL          8192
+#define GAIN_DIG_P18DB       (GAIN_0DB_VAL / 0.125893)      //65071    //7.943282
+#define GAIN_DIG_P17DB       (GAIN_0DB_VAL / 0.141254)      //57994    //7.079458
+#define GAIN_DIG_P16DB       (GAIN_0DB_VAL / 0.158489)      //51688    //6.309574
+#define GAIN_DIG_P15DB       (GAIN_0DB_VAL / 0.177828)      //46067    //5.623413
+#define GAIN_DIG_P14DB       (GAIN_0DB_VAL / 0.199526)      //41057    //5.011872
+#define GAIN_DIG_P13DB       (GAIN_0DB_VAL / 0.223872)      //36592    //4.466835
+#define GAIN_DIG_P12DB       (GAIN_0DB_VAL / 0.251189)      //32612    //3.981072
+#define GAIN_DIG_P11DB       (GAIN_0DB_VAL / 0.281838)      //29066    //3.548134
+#define GAIN_DIG_P10DB       (GAIN_0DB_VAL / 0.316228)      //25905    //3.162278
+#define GAIN_DIG_P9DB       (GAIN_0DB_VAL / 0.354813)      //23088    //2.818383
+#define GAIN_DIG_P8DB       (GAIN_0DB_VAL / 0.398107)      //20577    //2.511886
+#define GAIN_DIG_P7DB       (GAIN_0DB_VAL / 0.446684)      //18339    //2.238721
+#define GAIN_DIG_P6DB       (GAIN_0DB_VAL / 0.501187)      //16345    //1.995262
+#define GAIN_DIG_P5DB       (GAIN_0DB_VAL / 0.562341)      //14567    //1.778279
+#define GAIN_DIG_P4DB       (GAIN_0DB_VAL / 0.630957)      //12983    //1.584893
+#define GAIN_DIG_P3DB       (GAIN_0DB_VAL / 0.707946)      //11571    //1.412538
+#define GAIN_DIG_P2DB       (GAIN_0DB_VAL / 0.794328)      //10313    //1.258925
+#define GAIN_DIG_P1DB       (GAIN_0DB_VAL / 0.891251)      //9191    //1.122018
+#define GAIN_DIG_N0DB       (GAIN_0DB_VAL / 1.000000)      //8192    //1.000000
+#define GAIN_DIG_N1DB       (GAIN_0DB_VAL / 1.122018)      //7301    //0.891251
+#define GAIN_DIG_N2DB       (GAIN_0DB_VAL / 1.258925)      //6507    //0.794328
+#define GAIN_DIG_N3DB       (GAIN_0DB_VAL / 1.412538)      //5799    //0.707946
+#define GAIN_DIG_N4DB       (GAIN_0DB_VAL / 1.584893)      //5168    //0.630957
+#define GAIN_DIG_N5DB       (GAIN_0DB_VAL / 1.778279)      //4606    //0.562341
+#define GAIN_DIG_N6DB       (GAIN_0DB_VAL / 1.995262)      //4105    //0.501187
+#define GAIN_DIG_N7DB       (GAIN_0DB_VAL / 2.238721)      //3659    //0.446684
+#define GAIN_DIG_N8DB       (GAIN_0DB_VAL / 2.511886)      //3261    //0.398107
+#define GAIN_DIG_N9DB       (GAIN_0DB_VAL / 2.818383)      //2906    //0.354813
+#define GAIN_DIG_N10DB       (GAIN_0DB_VAL / 3.162278)      //2590    //0.316228
+#define GAIN_DIG_N11DB       (GAIN_0DB_VAL / 3.548134)      //2308    //0.281838
+#define GAIN_DIG_N12DB       (GAIN_0DB_VAL / 3.981072)      //2057    //0.251189
+#define GAIN_DIG_N13DB       (GAIN_0DB_VAL / 4.466836)      //1833    //0.223872
+#define GAIN_DIG_N14DB       (GAIN_0DB_VAL / 5.011872)      //1634    //0.199526
+#define GAIN_DIG_N15DB       (GAIN_0DB_VAL / 5.623413)      //1456    //0.177828
+#define GAIN_DIG_N16DB       (GAIN_0DB_VAL / 6.309574)      //1298    //0.158489
+#define GAIN_DIG_N17DB       (GAIN_0DB_VAL / 7.079459)      //1157    //0.141254
+#define GAIN_DIG_N18DB       (GAIN_0DB_VAL / 7.943282)      //1031    //0.125893
+#define GAIN_DIG_N19DB       (GAIN_0DB_VAL / 8.912509)      //919    //0.112202
+#define GAIN_DIG_N20DB       (GAIN_0DB_VAL / 10.000000)      //819    //0.100000
+#define GAIN_DIG_N21DB       (GAIN_0DB_VAL / 11.220183)      //730    //0.089125
+#define GAIN_DIG_N22DB       (GAIN_0DB_VAL / 12.589254)      //650    //0.079433
+#define GAIN_DIG_N23DB       (GAIN_0DB_VAL / 14.125375)      //579    //0.070795
+#define GAIN_DIG_N24DB       (GAIN_0DB_VAL / 15.848934)      //516    //0.063096
+#define GAIN_DIG_N25DB       (GAIN_0DB_VAL / 17.782794)      //460    //0.056234
+#define GAIN_DIG_N26DB       (GAIN_0DB_VAL / 19.952621)      //410    //0.050119
+#define GAIN_DIG_N27DB       (GAIN_0DB_VAL / 22.387212)      //365    //0.044668
+#define GAIN_DIG_N28DB       (GAIN_0DB_VAL / 25.118862)      //326    //0.039811
+#define GAIN_DIG_N29DB       (GAIN_0DB_VAL / 28.183833)      //290    //0.035481
+#define GAIN_DIG_N30DB       (GAIN_0DB_VAL / 31.622778)      //259    //0.031623
+#define GAIN_DIG_N31DB       (GAIN_0DB_VAL / 35.481335)      //230    //0.028184
+#define GAIN_DIG_N32DB       (GAIN_0DB_VAL / 39.810719)      //205    //0.025119
+#define GAIN_DIG_N33DB       (GAIN_0DB_VAL / 44.668358)      //183    //0.022387
+#define GAIN_DIG_N34DB       (GAIN_0DB_VAL / 50.118728)      //163    //0.019953
+#define GAIN_DIG_N35DB       (GAIN_0DB_VAL / 56.234132)      //145    //0.017783
+#define GAIN_DIG_N36DB       (GAIN_0DB_VAL / 63.095731)      //129    //0.015849
+#define GAIN_DIG_N37DB       (GAIN_0DB_VAL / 70.794580)      //115    //0.014125
+#define GAIN_DIG_N38DB       (GAIN_0DB_VAL / 79.432822)      //103    //0.012589
+#define GAIN_DIG_N39DB       (GAIN_0DB_VAL / 89.125104)      //91     //0.011220
+
+
 #endif //CONFIG_DEFINE_H

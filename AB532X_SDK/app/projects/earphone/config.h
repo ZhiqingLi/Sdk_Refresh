@@ -34,7 +34,7 @@
 #define GUI_SELECT                      GUI_NO                  //GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
 #define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
-
+#define SPIFLASH_SPEED_UP_EN            1                       //SPI FLASH提速。注意5327A,5327C,5325F不支持提速，这三颗芯请配置成0
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/
@@ -75,7 +75,7 @@
 #define BT_TIME_OUT_RECONNECT_TIMES     20  //掉线回连次数
 #define BT_SIMPLE_PAIR_EN               1   //是否打开蓝牙简易配对功能（关闭时需要手机端输入PIN码）
 #define BT_DISCOVER_CTRL_EN             0   //是否使用按键打开可被发现（按一下按键才能被连接配对）
-#define BT_PWRKEY_5S_DISCOVER_EN        0   //是否使用长按5S开机进入可被发现(耳机长按开机功能)
+#define BT_PWRKEY_5S_DISCOVER_EN        1   //是否使用长按5S开机进入可被发现(耳机长按开机功能)
 #define BT_DISCOVER_TIMEOUT             100 //按键打开可被发现后，多久后仍无连接自动关闭，0不自动关闭，单位100ms
 #define BT_ANTI_LOST_EN                 0   //是否打开蓝牙防丢报警
 #define BT_CBT_TEST_EN                  0   //蓝牙CBT测试使能

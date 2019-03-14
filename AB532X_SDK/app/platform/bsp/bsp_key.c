@@ -120,7 +120,7 @@ bool get_adc_val(void)
 #if USER_ADKEY_MUX_SDCLK
     if (xcfg_cb.user_adkey_mux_sdclk_en) {
         adc_cb.sdclk_convert = 1;
-        if (SD_MUX_IS_BUSY()) {
+        if (is_det_sdcard_busy()) {
             channel &= ~BIT(SDCLK_AD_CH);
             adc_cb.sdclk_convert = 0;
         }
@@ -693,7 +693,11 @@ void key_init(void)
 
     plugin_saradc_init(&adc_ch);   //其他的ADC通道
     bsp_saradc_init(adc_ch);
-
+#if CHARGE_EN
+    if (xcfg_cb.charge_en) {
+        charge_init();
+    }
+#endif
     power_on_check();
 }
 

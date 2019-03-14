@@ -1384,14 +1384,14 @@ static uint8 detect_usb_line_status(void)
 
 400204c0 <get_usb_port_state>:
 400204c0:	6492      	save	16,s1
-} usb_port_state_e;
-
-//获取当前usb端口设备状态
-static inline uint8 get_usb_port_state(void)
-{
+        return USB_PORT_DEVICE;
+    } else {
+        return USB_PORT_HOST;
+    }
+}
 400204c2:	673d      	move	s1,sp
 400204c4:	b208      	lw	v0,400204e4 <get_usb_port_state+0x24>
-    if((act_readb(DPDMCTRL) & 0x0f) != 0) {
+
 400204c6:	a240      	lbu	v0,0(v0)
 400204c8:	6762      	move	v1,v0
 400204ca:	eb11      	zeb	v1
@@ -1399,16 +1399,16 @@ static inline uint8 get_usb_port_state(void)
 400204ce:	ea6c      	and	v0,v1
 400204d0:	2203      	beqz	v0,400204d8 <get_usb_port_state+0x18>
 400204d2:	6a00      	li	v0,0
-        return USB_PORT_DEVICE;
+//pc工具的类型
 400204d4:	d940      	sw	v0,0(s1)
 400204d6:	1002      	b	400204dc <get_usb_port_state+0x1c>
 400204d8:	6a01      	li	v0,1
-    } else {
-        return USB_PORT_HOST;
+typedef enum {
+    STUB_PC_TOOL_ASQT_MODE = 1,
 400204da:	d940      	sw	v0,0(s1)
 400204dc:	9940      	lw	v0,0(s1)
-    }
-}
+    STUB_PC_TOOL_ASET_MODE = 2,
+    STUB_PC_TOOL_ASET_EQ_MODE = 3,
 400204de:	65b9      	move	sp,s1
 400204e0:	6412      	restore	16,s1
 400204e2:	e8a0      	jrc	ra

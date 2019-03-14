@@ -197,7 +197,7 @@ void KeyScan(void)
                 SampleRateTmp = 44100;
             }
             APP_DBG("Key  BeepStart>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-            BeepStart(2800, 90, SampleRateTmp, 75, 15);
+            BeepStart(2800, 135, SampleRateTmp, 75, 15);
         }
 	}	
 #endif	

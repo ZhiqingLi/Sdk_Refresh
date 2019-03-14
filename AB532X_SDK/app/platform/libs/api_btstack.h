@@ -86,6 +86,9 @@ enum {
     BT_STA_OUTGOING,                            //正在呼出
     BT_STA_INCALL,                              //通话中
     BT_STA_OTA,                                 //OTA升级中
+    BT_STA_TWS_DISCONN,                         //TWS对箱断开手机连接
+    BT_STA_TWS_CONN,                            //TWS对箱连接手机成功
+    BT_STA_TWS_PAIR,                            //TWS对箱组队成功
 };
 
 //通话状态
@@ -285,5 +288,6 @@ void le_enable_adv(u8 allow);
 void le_disable_adv(void);
 void le_disconnect(void);
 bool le_tx_notify(u8 index, u8* buf, u8 len);
+bool le_set_adv_data(const u8 *adv_buf, u32 size);
 
 #endif //_API_BTSTACK_H

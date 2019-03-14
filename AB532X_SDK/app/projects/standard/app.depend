@@ -32,18 +32,18 @@
 
 1543484477 f:\soft_sdk\ab532x_sdk\app\platform\header\sfr.h
 
-1548202448 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
+1552523121 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
 
-1547622830 f:\soft_sdk\ab532x_sdk\app\platform\header\config_define.h
+1552306720 f:\soft_sdk\ab532x_sdk\app\platform\header\config_define.h
 
-1547623314 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
+1552398409 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
 
-1547622879 f:\soft_sdk\ab532x_sdk\app\platform\header\config_extra.h
+1552310812 f:\soft_sdk\ab532x_sdk\app\platform\header\config_extra.h
 
-1543477102 f:\soft_sdk\ab532x_sdk\app\platform\header\io_def.h
+1552306987 f:\soft_sdk\ab532x_sdk\app\platform\header\io_def.h
 	"global.h"
 	"config.h"
 	"sfr.h"
@@ -71,7 +71,7 @@
 	"api_uart.h"
 	"api_karaok.h"
 
-1547622963 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_btstack.h
+1552483279 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_btstack.h
 
 1543476618 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_cm.h
 
@@ -91,7 +91,7 @@
 
 1543476618 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_update.h
 
-1547622976 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_dac.h
+1551963656 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_dac.h
 
 1543476618 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_sysclk.h
 
@@ -113,7 +113,7 @@
 
 1543476618 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_karaok.h
 
-1547622576 f:\soft_sdk\ab532x_sdk\app\platform\functions\func.h
+1552306444 f:\soft_sdk\ab532x_sdk\app\platform\functions\func.h
 	"func_bt.h"
 	"func_bt_hid.h"
 	"func_clock.h"
@@ -130,7 +130,7 @@
 	"func_update.h"
 	"func_spdif.h"
 
-1547622668 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.h
+1552486234 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.h
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt_hid.h
 
@@ -146,7 +146,7 @@
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_speaker.h
 
-1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record.h
+1552306637 f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record.h
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record_play.h
 
@@ -184,7 +184,7 @@
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.h
 
-1543477102 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.h
+1551233810 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.h
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_dac.h
 
@@ -205,7 +205,7 @@
 
 1543477103 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_music.h
 
-1543477103 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_led.h
+1552437496 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_led.h
 
 1543477103 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_fs.h
 
@@ -249,7 +249,7 @@
 	"port_earphone.h"
 	"port_mic.h"
 
-1543477104 f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\multi_lang.h
+1551065989 f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\multi_lang.h
 
 1543477104 f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_pwm.h
 
@@ -263,7 +263,7 @@
 
 1543477104 f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_mic.h
 
-1543477104 f:\soft_sdk\ab532x_sdk\app\projects\standard\res.h
+1551065997 f:\soft_sdk\ab532x_sdk\app\projects\standard\res.h
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_aux.c
 	"include.h"
@@ -272,7 +272,7 @@
 	"include.h"
 	"bsp_ble.h"
 
-1547622310 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
+1552523216 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
 	"include.h"
 	"api.h"
 
@@ -282,7 +282,7 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_cm.c
 	"include.h"
 
-1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_dac.c
+1552305996 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_dac.c
 	"include.h"
 	"bsp_dac.h"
 
@@ -296,7 +296,7 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_fs.c
 	"include.h"
 
-1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_i2c.c
+1552306020 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_i2c.c
 	"include.h"
 
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_i2s.c
@@ -322,7 +322,7 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_karaok.c
 	"include.h"
 
-1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.c
+1552306083 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_lcd.c
@@ -331,11 +331,11 @@
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_lcd.h
 
-1548117525 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_led.c
+1552487783 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_led.c
 	"include.h"
 	"bsp_led.h"
 
-1547622464 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_music.c
+1552306158 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_music.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_param.c
@@ -350,7 +350,7 @@
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1547622516 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
+1552306305 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\fmrx\fmrx_external.c
@@ -361,7 +361,7 @@
 	"include.h"
 	"qn8035.h"
 
-1547622558 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
+1552393516 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_aux.c
@@ -369,12 +369,12 @@
 	"func.h"
 	"func_aux.h"
 
-1547622655 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.c
+1552486258 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"
 
-1547622686 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt_hid.c
+1552306474 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt_hid.c
 	"include.h"
 	"func.h"
 	"func_bt_hid.h"
@@ -399,11 +399,11 @@
 	"func.h"
 	"func_idle.h"
 
-1547622705 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
+1551429725 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
 	"include.h"
 	"func.h"
 
-1547622726 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_music.c
+1552306531 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_music.c
 	"include.h"
 	"func.h"
 	"func_music.h"
@@ -442,10 +442,12 @@
 	"func.h"
 	"func_bt.h"
 
-1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record.c
+1552306625 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record.c
 	"include.h"
 	"func.h"
 	"sfunc_record.h"
+	"bsp_spiflash1.h"
+	"api_spiflash_ex.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\sfunc_record_play.c
 	"include.h"
@@ -464,10 +466,10 @@
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
 
-1546518833 source:f:\soft_sdk\ab532x_sdk\app\platform\libs\strong_symbol.c
+1549971441 source:f:\soft_sdk\ab532x_sdk\app\platform\libs\strong_symbol.c
 	"include.h"
 
-1548118139 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\config.c
+1551320000 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\config.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\display\display_aux.c
@@ -532,7 +534,7 @@
 	"include.h"
 	"func.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
+1552483975 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"
@@ -556,7 +558,7 @@
 	"func.h"
 	"func_idle.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_music.c
+1552307295 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_music.c
 	"include.h"
 	"func.h"
 	"func_music.h"
@@ -571,9 +573,10 @@
 	"func.h"
 	"func_spdif.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_speaker.c
+1552307333 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_speaker.c
 	"include.h"
 	"func.h"
+	"bsp_spiflash1.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_usbdev.c
 	"include.h"
@@ -589,34 +592,34 @@
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\plugin.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_earphone.c
+1552307509 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_earphone.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_ir.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_key.c
+1551234639 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_key.c
 	"include.h"
 
-1543484478 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_led.c
+1552438331 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_led.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_ledseg.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_linein.c
+1552307537 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_linein.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_mic.c
+1552307548 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_mic.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_mute.c
+1552307574 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_mute.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_pwm.c
+1552307645 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_pwm.c
 	"include.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_sd.c
+1552307680 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_sd.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_sd1.c
@@ -625,5 +628,33 @@
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_update.c
 	"include.h"
 
-1547623292 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\ram.ld
+1552307950 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\ram.ld
+
+1549971188 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spiflash1.c
+	"include.h"
+	"bsp_spiflash1.h"
+
+1549971188 f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spiflash1.h
+
+1549971188 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spiflash1_music_bin.c
+	"include.h"
+
+1550038767 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_exspiflash_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspiflash_music.h"
+	"api_spiflash_ex.h"
+
+1549971189 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_exspiflash_music.h
+	"bsp_spiflash1.h"
+	"api_spiflash_ex.h"
+
+1550803108 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_spiflash_ex.h
+
+1550038776 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_exspiflash_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+	"func_exspiflash_music.h"
 

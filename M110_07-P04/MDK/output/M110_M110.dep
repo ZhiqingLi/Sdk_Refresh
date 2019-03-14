@@ -320,7 +320,7 @@ I (..\Libraries\audio\inc\silence_detector.h)(0x5C173928)
 I (..\Libraries\driver\inc\device_audio.h)(0x5C173928)
 I (..\Libraries\audio\inc\noise_gate.h)(0x5C173928)
 I (..\src\wifi\wifi_control.h)(0x5C173928)
-F (..\src\main\startup.c)(0x5C173928)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi --diag_suppress=A1488W-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\startup.o --omf_browse .\output\startup.crf --depend .\output\startup.d)
+F (..\src\main\startup.c)(0x5C5146F9)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi --diag_suppress=A1488W-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\startup.o --omf_browse .\output\startup.crf --depend .\output\startup.d)
 I (..\Libraries\os\inc\os.h)(0x5C173928)
 I (C:\Keil_ARM\ARM\ARMCC\include\stdlib.h)(0x57F606B8)
 I (C:\Keil_ARM\ARM\ARMCC\include\stdio.h)(0x57F606B8)
@@ -1598,7 +1598,7 @@ I (..\src\inc\task_decoder.h)(0x5C173928)
 I (..\src\inc\sys_vol.h)(0x5C173928)
 I (..\Libraries\driver\inc\dac.h)(0x5C173928)
 F (..\src\bluetooth\ble_app_pseudocode.c)(0x5C173928)()
-F (..\src\key\key.c)(0x5C173928)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\key.o --omf_browse .\output\key.crf --depend .\output\key.d)
+F (..\src\key\key.c)(0x5C51463D)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\key.o --omf_browse .\output\key.crf --depend .\output\key.d)
 I (..\src\inc\app_config.h)(0x5C173928)
 I (..\Libraries\driver\inc\type.h)(0x5C173928)
 I (..\Libraries\driver\inc\irqs.h)(0x5C173928)
@@ -1723,7 +1723,7 @@ I (..\src\wifi\wifi_function_config.h)(0x5C173928)
 I (..\src\wifi\wifi_init_setting.h)(0x5C173928)
 I (..\Libraries\driver\inc\pwm.h)(0x5C173928)
 I (..\src\inc\debug.h)(0x5C173928)
-F (..\src\key\power_key.c)(0x5C173928)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\power_key.o --omf_browse .\output\power_key.crf --depend .\output\power_key.d)
+F (..\src\key\power_key.c)(0x5C5146D9)(-c --cpu Cortex-M3 --li -g -O0 --apcs=interwork --split_sections -I ..\Libraries\audio\inc -I ..\src\inc -I ..\Libraries\bluetooth\inc -I ..\Libraries\driver\inc -I ..\Libraries\fs\inc -I ..\Libraries\os\inc -I ..\Libraries\character_encoding\inc -I ..\src\du_params -I ..\src\slave_uart -I ..\src\wifi-I.\RTE\_M110-IC:\Keil_ARM\ARM\PACK\ARM\CMSIS\5.0.1\Device\ARM\ARMCM3\Include-IC:\Keil_ARM\ARM\CMSIS\Include-D__UVISION_VERSION="523" -DARMCM3-o .\output\power_key.o --omf_browse .\output\power_key.crf --depend .\output\power_key.d)
 I (..\Libraries\driver\inc\type.h)(0x5C173928)
 I (..\Libraries\driver\inc\irqs.h)(0x5C173928)
 I (C:\Keil_ARM\ARM\CMSIS\Include\core_cm3.h)(0x5898498A)

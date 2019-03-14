@@ -55,7 +55,7 @@ AT(.text.bsp.i2c)
 void bsp_i2c_start(void)
 {
 #if I2C_MUX_SD_EN
-    if (SD_MUX_IS_BUSY()) {
+    if (is_det_sdcard_busy()) {
         return;
     }
     if (FUNCMCON0 & 0x0f) {

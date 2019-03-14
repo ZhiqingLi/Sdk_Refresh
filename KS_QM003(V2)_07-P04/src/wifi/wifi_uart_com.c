@@ -285,6 +285,10 @@ void Mcu_RcvWiFiDataProcess(void)
 	else if(memcmp(gWiFiCmd, "+NXT+ALM", 8) == 0)
 	{
 		WiFi_SendCmdToMcu(AXX_NXT_ALM, NULL);		
+	}
+	else if(memcmp(gWiFiCmd, "+ALM+VAL", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_ALM_VAL, NULL);		
 	}	
 	else if(memcmp(gWiFiCmd, "+PAS+", 5) == 0)
 	{
@@ -1992,6 +1996,10 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			//WiFiSetMcuAlarmTime(&gWiFiData[0]);
 			break;
 
+		case AXX_ALM_VAL:
+			WiFiSetMcuAlarmTime(&gWiFiData[0]);
+			break;
+
 		case AXX_LED_TES:
 			WiFiTestModeStateSet();
 			break;
@@ -2334,6 +2342,10 @@ void WiFi_CmdProcess(void)
 	{
 		WiFi_SendCmdToMcu(AXX_NXT_ALM, NULL);		
 	}	
+	else if(memcmp(gWiFiCmd, "+ALM+VAL", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_ALM_VAL, NULL);		
+	}	
 	else if(memcmp(gWiFiCmd, "+M2S+", 5) == 0)
 	{
 		WiFi_SendCmdToMcu(AXX_M2S_NNN, &gWiFiCmd[5]);		
@@ -2346,7 +2358,8 @@ void WiFi_CmdProcess(void)
 	{
 		WiFi_SendCmdToMcu(AXX_PAS_DATA, NULL);		
 	}
-	else if(memcmp(gWiFiCmd, "+TLK++ON", 8) == 0)
+	else if((memcmp(gWiFiCmd, "+TLK++ON", 8) == 0)
+		|| (memcmp(gWiFiCmd, "+WAK++UP", 8) == 0))
 	{	
 		WiFi_SendCmdToMcu(AXX_TLK_ON, NULL);
 		if(gSys.CurModuleID == MODULE_ID_RTC)
@@ -2371,8 +2384,7 @@ void WiFi_CmdProcess(void)
 	{
 		WiFiSetMicState(WIFI_AVS_STATUS_IDLE);
 	}	
-	else if((memcmp(gWiFiCmd, "+VIS+LSN", 8) == 0)
-	     || (memcmp(gWiFiCmd, "+WAK++UP", 8) == 0))
+	else if(memcmp(gWiFiCmd, "+VIS+LSN", 8) == 0)
 	{
 		TimeOutSet(&WiFiLedBlinkTimer, 0);
 		WiFiSetMicState(WIFI_AVS_STATUS_LSN);
