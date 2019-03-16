@@ -279,19 +279,19 @@ int32_t main(void)
 #ifdef FUNC_USB_EN
 #ifdef FUNC_POWERON_USB_UPDATA_EN 
 	if(IsHardwareUpdataLink())
+#endif
 	{
-	    APP_DBG("Enter USB upgrade mode!!!!\n");	    
+	    APP_DBG("Init USB port detect!!!!\n");	    
 		gSys.CurModuleID = MODULE_ID_PLAYER_USB;
 #ifdef FUNC_SWUART_DBG_EN
 	    OsSetDebugFlag(0);
 	    EnableSwUartAsFuart(FALSE);
 	    SwUartTxDeinit(SWUART_GPIO_PORT, SWUART_GPIO_INDX);
-#endif	    
-	}
 #endif
-	Usb1SetDetectMode((UDISK_PORT_NUM == 1), (PC_PORT_NUM == 1)); // usb1 port host/device mode set
-	Usb2SetDetectMode((UDISK_PORT_NUM == 2), (PC_PORT_NUM == 2)); // usb2 port host/device mode set
-	UsbSetCurrentPort(UDISK_PORT_NUM); // set usb host port
+		Usb1SetDetectMode((UDISK_PORT_NUM == 1), (PC_PORT_NUM == 1)); // usb1 port host/device mode set
+		Usb2SetDetectMode((UDISK_PORT_NUM == 2), (PC_PORT_NUM == 2)); // usb2 port host/device mode set
+		UsbSetCurrentPort(UDISK_PORT_NUM); // set usb host port
+	}
 #endif
 	InitDeviceDetect();                 // 上电时，设备状态扫描消抖
 
@@ -445,7 +445,7 @@ int32_t main(void)
 		DeviceDetect(); // 设备检测接口
 		
 #if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
-		if((!GetSilenceMuteFlag() && gSys.CurModuleID != MODULE_ID_IDLE)
+		if(((!GetSilenceMuteFlag() && gSys.CurModuleID != MODULE_ID_IDLE)
 #ifdef FUNC_SOUND_REMIND
 		|| IsSoundRemindPlaying()
 #endif
@@ -458,7 +458,10 @@ int32_t main(void)
 #ifdef FUNC_KEY_BEEP_SOUND_EN
 		|| !IsBeepSoundEnd()
 #endif
+			)
+		&& !IsEarphoneLink()
 		)
+		
 		{
 			AmpMuteControl(0);
 		}

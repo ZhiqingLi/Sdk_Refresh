@@ -754,6 +754,20 @@ extern "C" {
 	#endif
 
 //****************************************************************************************
+//                 earphone模式配置 
+//****************************************************************************************
+	#define FUNC_EARPHONE_EN   					// Linein
+	#ifdef FUNC_EARPHONE_EN
+		#define EARPHONE_DETECT_PORT_IN		GPIO_A_IN
+		#define EARPHONE_DETECT_PORT_OE		GPIO_A_OE
+		#define EARPHONE_DETECT_PORT_IE		GPIO_A_IE
+		#define EARPHONE_DETECT_PORT_PU		GPIO_A_PU
+		#define EARPHONE_DETECT_PORT_PD		GPIO_A_PD
+		#define EARPHONE_DETECT_PORT_DS		GPIO_A_DS
+		#define EARPHONE_DETECT_BIT_MASK	GPIOA24
+	#endif
+
+//****************************************************************************************
 //                 功放配置        
 //****************************************************************************************
 #define FUNC_AMP_MUTE_EN         //功放Mute功能配置										

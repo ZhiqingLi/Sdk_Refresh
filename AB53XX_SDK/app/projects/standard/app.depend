@@ -724,7 +724,7 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1550970476 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1552726887 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -1346,7 +1346,7 @@
 1547007287 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\main.c
 	"include.h"
 
-1548743620 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_bt.c
+1551000007 source:f:\soft_sdk\ab53xx_sdk\app\projects\standard\message\msg_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"

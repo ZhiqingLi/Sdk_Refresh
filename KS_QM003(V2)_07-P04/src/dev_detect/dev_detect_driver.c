@@ -104,6 +104,9 @@ bool IsCardLink(void)
 bool IsUDiskLink(void)
 {
 #ifdef FUNC_USB_EN
+	if (gSys.CurModuleID != MODULE_ID_PLAYER_USB) {
+		return FALSE;
+	}
 #if (UDISK_PORT_NUM == 1)
 	return UsbHost1IsLink();
 #endif
@@ -160,6 +163,42 @@ bool IsI2sInLink(void)
     GpioMclkIoConfig(I2SIN_MCLK_IO_PORT+2);   //mclk port sel:input
 #endif
     return TRUE;
+#else
+    return FALSE;
+#endif
+}
+
+bool IsEarphoneLink(void)
+{
+#ifdef FUNC_EARPHONE_EN
+#define EARPHONE_JETTER_TIMES		10	//连接检测消抖时间：10次，100ms
+
+	static uint8_t LinkState = 0;
+
+	if (gSys.CurModuleID == MODULE_ID_PLAYER_USB) {
+		return FALSE;
+	}
+
+	//设为输入，带上拉
+	GpioClrRegBits(EARPHONE_DETECT_PORT_OE, EARPHONE_DETECT_BIT_MASK);
+	GpioSetRegBits(EARPHONE_DETECT_PORT_IE, EARPHONE_DETECT_BIT_MASK);
+	
+	GpioClrRegBits(EARPHONE_DETECT_PORT_PU, EARPHONE_DETECT_BIT_MASK);
+	GpioClrRegBits(EARPHONE_DETECT_PORT_PD, EARPHONE_DETECT_BIT_MASK);
+	GpioSetRegBits(EARPHONE_DETECT_PORT_DS, EARPHONE_DETECT_BIT_MASK);
+
+	if(GpioGetReg(EARPHONE_DETECT_PORT_IN) & EARPHONE_DETECT_BIT_MASK)
+	{
+		LinkState = 0;						//断开状态不做消抖处理
+	}
+	else
+	{
+		if(LinkState < EARPHONE_JETTER_TIMES)	//连接状态做消抖处理
+		{
+			LinkState++;
+		}
+	}
+	return (LinkState >= EARPHONE_JETTER_TIMES);
 #else
     return FALSE;
 #endif

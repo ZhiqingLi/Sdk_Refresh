@@ -42,6 +42,7 @@ bool IsPcLink(void);
 //bool IsUsbAudioLink(void);
 bool IsI2sInLink(void);
 bool IsLineInLink(void);
+bool IsEarphoneLink(void);
 bool IsRadioLink(void);
 bool IsMicInLink(void);
 

@@ -2,7 +2,7 @@
 <configuration>
     <appSettings>
         <add key="lang_id" value="英文" />
-        <add key="func_music_en" value="False" />
+        <add key="func_music_en" value="True" />
         <add key="func_aux_en" value="True" />
         <add key="func_fmrx_en" value="False" />
         <add key="buck_mode_en" value="False" />
@@ -44,7 +44,7 @@
         <add key="charge_trickle_curr" value="40mA" />
         <add key="bt_name" value="D9" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:88:68:20:2D" />
+        <add key="bt_addr" value="41:42:88:68:20:30" />
         <add key="bt_addr_start" value="41:42:88:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -92,7 +92,7 @@
         <add key="music_flac_support" value="False" />
         <add key="music_sbc_support" value="False" />
         <add key="music_sdcard_en" value="True" />
-        <add key="music_udisk_en" value="False" />
+        <add key="music_udisk_en" value="True" />
         <add key="sddet_iosel" value="31" />
         <add key="sd1det_iosel" value="0" />
         <add key="fmrx_rfcap_val" value="0" />

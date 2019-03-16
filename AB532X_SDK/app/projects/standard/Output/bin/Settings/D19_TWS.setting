@@ -45,7 +45,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D19" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:01:4F" />
+        <add key="bt_addr" value="41:42:00:00:01:53" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -220,5 +220,15 @@
         <add key="ampabd_level" value="True" />
         <add key="lpwr_warning_count" value="255" />
         <add key="bt_pwrkey_nsec_discover" value="不支持" />
+        <add key="led_tws_main_config_en" value="False" />
+        <add key="led_tws_main_conn_redpat" value="0" />
+        <add key="led_tws_main_conn_bluepat" value="2" />
+        <add key="led_tws_main_conn_unit" value="2" />
+        <add key="led_tws_main_conn_cycle" value="86" />
+        <add key="led_tws_slave_config_en" value="False" />
+        <add key="led_tws_slave_conn_redpat" value="0" />
+        <add key="led_tws_slave_conn_bluepat" value="2" />
+        <add key="led_tws_slave_conn_unit" value="2" />
+        <add key="led_tws_slave_conn_cycle" value="86" />
     </appSettings>
 </configuration>

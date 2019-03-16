@@ -18,6 +18,7 @@
 #include "bt_control_api.h"
 #include "breakpoint.h"
 #include "dev_detect_driver.h" 
+#include "sys_vol.h"
 #ifdef FUNC_WIFI_EN
 #include "wifi_control.h"
 #include "wifi_uart_com.h"
@@ -542,12 +543,15 @@ void SystemPowerOffDetect(void)
 #endif
 			)
 		{
+		#if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
+			AmpMuteControl(1);
+		#endif
 			/*if slide switch, power down system directly*/
-		#ifdef FUNC_WIFI_POWER_KEEP_ON
+		#if 0//def FUNC_WIFI_POWER_KEEP_ON
 			WiFiRequestMcuPowerOff();
 		#else
 			APP_DBG("PowerKeyDetect->go to PowerDown\n");
-			SysSetWakeUpSrcInPowerDown(WAKEUP_SRC_PD_POWERKEY);
+			SysSetWakeUpSrcInPowerDown(WAKEUP_SRC_PD_RTC);//(WAKEUP_SRC_PD_POWERKEY);
 			SysGotoPowerDown(); 
 			while(1);
 		#endif

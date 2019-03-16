@@ -29,14 +29,14 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 /*****************************************************************************
  * Module    : Function选择相关配置
  *****************************************************************************/
-#define FUNC_MUSIC_EN                   0   //是否打开MUSIC功能
-#define FUNC_CLOCK_EN                   0   //是否打开时钟功能
-#define FUNC_FMRX_EN                    0   //是否打开FM功能
+#define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
+#define FUNC_CLOCK_EN                   1   //是否打开时钟功能
+#define FUNC_FMRX_EN                    1   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
-#define FUNC_BTHID_EN                   0   //是否打开独立自拍器模式
-#define FUNC_AUX_EN                     0   //是否打开AUX功能
-#define FUNC_USBDEV_EN                  0   //是否打开USB DEVICE功能
-#define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
+#define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
+#define FUNC_AUX_EN                     1   //是否打开AUX功能
+#define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
+#define FUNC_SPEAKER_EN                 1   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
 #define FUNC_IDLE_EN                    0   //是否打开IDLE功能
@@ -53,7 +53,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量, 四声道车机的系统总音量调数字音量
 #define GUI_SELECT                      GUI_NO         //GUI Display Select
 #define FLASH_SIZE                      FSIZE_1M              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
+#define UART0_PRINTF_SEL                PRINTF_PA7             //选择UART打印信息输出IO，或关闭打印信息输出
 
 /*****************************************************************************
  * Module    : 音乐功能配置
@@ -100,7 +100,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define BT_DISCOVER_TIMEOUT             100 //按键打开可被发现后，多久后仍无连接自动关闭，0不自动关闭，单位100ms
 #define BT_ANTI_LOST_EN                 0   //是否打开蓝牙防丢报警
 #define BT_CBT_TEST_EN                  0   //蓝牙CBT测试使能
-#define BT_FCC_TEST_EN                  1   //蓝牙FCC测试使能
+#define BT_FCC_TEST_EN                  0   //蓝牙FCC测试使能
 #define BT_LOCAL_ADDR                   0   //蓝牙是否使用本地地址，0使用配置工具地址
 
 #define BT_TWS_EN                       1   //是否支持TWS
