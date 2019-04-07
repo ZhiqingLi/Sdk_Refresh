@@ -20,7 +20,7 @@
 #define FUNC_AUX_EN                     1   //是否打开AUX功能
 #define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
 #define FUNC_SPEAKER_EN                 1   //是否打开Speaker模式
-#define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能(未开发)
+#define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
 #define FUNC_IDLE_EN                    0   //是否打开IDLE功能
 
@@ -406,8 +406,8 @@
 /*****************************************************************************
  * Module    : Loudspeaker mute及耳机检测配置
  *****************************************************************************/
-#define EARPHONE_DETECT_EN              1           //是否打开耳机检测
-#define SDCMD_MUX_DETECT_EARPHONE       1           //是否复用SDCMD检测耳机插入
+#define EARPHONE_DETECT_EN              0           //是否打开耳机检测
+#define SDCMD_MUX_DETECT_EARPHONE       0           //是否复用SDCMD检测耳机插入
 
 ///通过配置工具选择检测GPIO
 #define EARPHONE_DETECT_INIT()          earphone_detect_init()

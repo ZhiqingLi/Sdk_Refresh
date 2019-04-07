@@ -45,7 +45,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D33" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:01:77" />
+        <add key="bt_addr" value="41:42:00:00:01:7F" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -115,7 +115,7 @@
         <add key="dblkey_num3" value="None" />
         <add key="dblkey_num4" value="None" />
         <add key="pwrkey_config_en" value="True" />
-        <add key="pwrkey_num0" value="PP/POWER" />
+        <add key="pwrkey_num0" value="MODE/POWER" />
         <add key="pwrkey_num1" value="None" />
         <add key="pwrkey_num2" value="None" />
         <add key="pwrkey_num3" value="None" />

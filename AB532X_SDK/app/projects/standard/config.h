@@ -20,7 +20,7 @@
 #define FUNC_AUX_EN                     1   //是否打开AUX功能
 #define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
 #define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
-#define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能(未开发)
+#define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
 #define FUNC_IDLE_EN                    0   //是否打开IDLE功能
 
@@ -123,7 +123,7 @@
 #define LE_EN                           0   //是否打开BLE功能（暂不支持蓝牙后台）
 #define LE_LIGHTING_EN                  0   //是否打开BLE灯光控制服务
 #define LE_MUSIC_CTRL_EN                0   //是否打开BLE音乐控制服务
-
+#define LE_BAT_HOUSE_EN                 0   //是否打开苹果充电盒弹窗功能
 
 /*****************************************************************************
  * Module    : FMRX功能配置
@@ -202,7 +202,7 @@
 /*****************************************************************************
  * Module    :外接SPIFLASH配置, 外接SPIFLASH可以播放MP3音乐文件, 及录音
  *****************************************************************************/
-#define EX_SPIFLASH_SUPPORT              EXSPI_NOT_SUPPORT //可以配置为 EXSPI_NOT_SUPPORT(0) 或 EXSPI_MUSIC 或 EXSPI_REC 或 (EXSPI_MUSIC | EXSPI_REC)
+#define EX_SPIFLASH_SUPPORT              0           //可以配置为 EXSPI_NOT_SUPPORT(0) 或 EXSPI_MUSIC 或 EXSPI_REC 或 (EXSPI_MUSIC | EXSPI_REC)
 
 #define SPIFLASH_ID                      0x40170000  //通过读ID判断FLASH是否在线, 需要改成SPIFLASH对应的ID
 #define SPIFALSH_BAUD                    (500000)    //SPI波特率500K
@@ -344,7 +344,7 @@
 /*****************************************************************************
  * Module    : IRRX配置
  *****************************************************************************/
-#define IRRX_HW_EN                      1           //是否打IRRX硬件模块
+#define IRRX_HW_EN                      0           //是否打IRRX硬件模块
 #define IRRX_SW_EN                      0           //是否打开timer capture ir
 #define IR_NUMKEY_EN                    1           //是否打开数字键输入
 #define IR_INPUT_NUM_MAX                999         //最大输入数字9999
@@ -411,8 +411,8 @@
 /*****************************************************************************
  * Module    : Loudspeaker mute及耳机检测配置
  *****************************************************************************/
-#define EARPHONE_DETECT_EN              1           //是否打开耳机检测
-#define SDCMD_MUX_DETECT_EARPHONE       1           //是否复用SDCMD检测耳机插入
+#define EARPHONE_DETECT_EN              0           //是否打开耳机检测
+#define SDCMD_MUX_DETECT_EARPHONE       0           //是否复用SDCMD检测耳机插入
 
 ///通过配置工具选择检测GPIO
 #define EARPHONE_DETECT_INIT()          earphone_detect_init()

@@ -474,7 +474,7 @@ void power_on_check(void)
 #if CHARGE_EN
     u16 charge_cnt = 0;
 #if CHARGE_FINISH_INTO_LOWPOWER
-    u32 buf[2] = {0};
+    u32 buf[3] = {0};
     u8 charge_into_rc_flag = 0;
     u8 p111_en = 0;
 #endif
@@ -605,6 +605,14 @@ void power_on_check(void)
             }
 #endif // LINEIN_2_PWRDOWN_EN
             //长按PP/POWER开机
+#if CHARGE_FINISH_INTO_LOWPOWER
+            if(charge_into_rc_flag){
+                sys_clk_restore(buf);
+            }
+            if (p111_en) {
+                pll1_enable();
+            }
+#endif // CHARGE_FINISH_INTO_LOWPOWER
             break;
         } else {
             //PWKKEY松开，立刻开关

@@ -154,7 +154,7 @@ void led_music_play(void)
 AT(.text.led_disp)
 void led_aux_play(void)
 {
-     led_set_sta(0x00, 0xaa, 20, 0);           //¿∂µ∆1s÷‹∆⁄…¡À∏
+    led_set_sta(0x00, 0xff, 1, 0);           //¿∂µ∆≥£¡¡
 }
 
 AT(.text.led_disp)

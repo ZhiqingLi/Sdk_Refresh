@@ -167,6 +167,11 @@ SECTIONS
         . = ALIGN(512);
         __code_end_eq = .;
 
+        __code_start_spdif = .;
+        *(.spdif_text*)
+        . = ALIGN(512);
+        __code_end_spdif = .;
+
         *(.irq_init.aligned)
         *(.text*)
         *(.rodata*)
@@ -348,6 +353,11 @@ SECTIONS
     .dram_usb __dram_vma (NOLOAD) : {
         *(.usb.device.desc.buf)
         *(.ude.aubuf)
+        . = 0x3000;
+    } > dram
+
+    .dram_spf __dram_vma (NOLOAD) : {
+        *(.spf_buf)
         . = 0x3000;
     } > dram
 }

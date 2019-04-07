@@ -479,7 +479,7 @@ void sfunc_pwrdown(void)
     pmu_ldo_mode();
 
 #if ALARM_WAKEUP_EN
-    rtc_set_alarm_wakeup(10);
+    rtc_set_alarm_wakeup(60);
 #endif // ALARM_WAKEUP_EN
     PICCONCLR = BIT(0);                 //Globle IE disable
     CLKCON0 |= BIT(0);                  //enable RC

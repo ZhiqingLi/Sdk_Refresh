@@ -49,7 +49,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 #define POWKEY_10S_RESET                xcfg_cb.powkey_10s_reset
 #define SOFT_POWER_ON_OFF               1                       //是否使用软开关机功能  //外部MOS管软开关机请开宏 USER_PWRKEY_EXT
 #define USB_SD_UPDATE_EN                1                       //是否支持UDISK/SD的离线升级
-#define EXT_32K_EN                      0                       //是否使用外部32K晶振,否则内部32K OSC。软关机需要闹钟唤醒时必须使用外部32K晶振
+#define EXT_32K_EN                      1                       //是否使用外部32K晶振,否则内部32K OSC。软关机需要闹钟唤醒时必须使用外部32K晶振
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量, 四声道车机的系统总音量调数字音量
 #define GUI_SELECT                      GUI_NO         //GUI Display Select
 #define FLASH_SIZE                      FSIZE_1M              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
@@ -156,7 +156,7 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
 /*****************************************************************************
  * Module    : 时钟功能配置
  *****************************************************************************/
-#define ALARM_WAKEUP_EN                 0   //是否使能ALARM软关机唤醒(需要使用外部32K晶振)
+#define ALARM_WAKEUP_EN                 1   //是否使能ALARM软关机唤醒(需要使用外部32K晶振)
 
 
 /*****************************************************************************
@@ -418,8 +418,8 @@ PWRKEY:  支持5个按键 (可在Boombox.setting中修改)
  *****************************************************************************/
 #define UDE_STORAGE_EN                 1
 #define UDE_SPEAKER_EN                 1
-#define UDE_HID_EN                     1
-#define UDE_MIC_EN                     1
+#define UDE_HID_EN                     0
+#define UDE_MIC_EN                     0
 
 
 /*****************************************************************************

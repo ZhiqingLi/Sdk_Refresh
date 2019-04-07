@@ -187,9 +187,9 @@
 #define DAC_DUAL        1              //DAC双声道输出
 #define DAC_VCMBUF_MONO 2              //DAC VCMBUF单声道输出
 #define DAC_VCMBUF_DUAL 3              //DAC VCMBUF双声道输出
-#define DAC_MIX_MONO2   4              //DAC_R MIX to VCMBUF(省电容)
+#define DAC_MIX_MONO2   4              //DAC_R MIX to VCMBUF(省电容)  //DAC_MIX_MONO2  和 DAC_MIX_MONO 效果一样,但DAC_MIX_MONO2是硬件实现的,更省电，建议用DAC_MIX_MONO2
 #define DAC_MIX_MONO    5              //软件MIX VCMBUF方式,左声道输出(L+R)/2, 右声道输出0.(省电容)
-
+#define DAC_MIX_MONO_INVERT     6      //DACL /DACR 反推喇叭
 /*****************************************************************************
 * Module    : DAC OUT Sample Rate
 *****************************************************************************/

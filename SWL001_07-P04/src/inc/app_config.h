@@ -532,7 +532,7 @@ extern "C" {
 	#define DAC_DIGITAL_VOL				VOLUME_DAC_DIGITAL
 	
 //	#define SOUND_REMIND_VOL	    24	//设置提示音音量
-	#define WIFI_SOUND_REMIND_VOL   24  //WiFi提示音音量
+//	#define WIFI_SOUND_REMIND_VOL   24  //WiFi提示音音量
 	
 //****************************************************************************************
 //                  输出通道选择       
@@ -1029,7 +1029,7 @@ extern "C" {
 #ifdef FUNC_AUDIO_EFFECT_EN
 	#include "audio_effect_codec.h"
 	#define DIGITAL_PER_GAIN_EN                      //数字信号预增益设置，
-	#define DIGITAL_PER_GAIN_VAL              2500   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
+	#define DIGITAL_PER_GAIN_VAL              1640   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
 	//#define FUNC_AUDIO_EFFECT_EQ_EN                  //EQ功能开关
 #endif
 

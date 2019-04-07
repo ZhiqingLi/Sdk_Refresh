@@ -923,6 +923,7 @@ void WiFi_CtrlPwmLight(uint8_t* Cmdbuf, bool IsPasCmd)
 		WaitMs(10);
 
 		LightBrightness = MAX_BRIGHTNESS;
+		PwmLightDisplayMode = PWM_LED_COLOUR_WHITE;
 		
 		Mcu_SendCmdToWiFi(MCU_IOTN_LIGHT, &LightBrightness);
 	}

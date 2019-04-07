@@ -32,7 +32,7 @@
 
 1543484477 f:\soft_sdk\ab532x_sdk\app\platform\header\sfr.h
 
-1552572231 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
+1553239908 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -350,7 +350,7 @@
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1552306305 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
+1552899819 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\fmrx\fmrx_external.c
@@ -379,7 +379,7 @@
 	"func.h"
 	"func_bt_hid.h"
 
-1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_clock.c
+1552901580 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_clock.c
 	"include.h"
 	"func.h"
 	"func_clock.h"
@@ -399,7 +399,7 @@
 	"func.h"
 	"func_idle.h"
 
-1551429725 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
+1552916725 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
 	"include.h"
 	"func.h"
 
@@ -601,7 +601,7 @@
 1551234639 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_key.c
 	"include.h"
 
-1552438331 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_led.c
+1553236848 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_led.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_ledseg.c

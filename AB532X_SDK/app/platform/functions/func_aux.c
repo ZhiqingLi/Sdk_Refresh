@@ -39,6 +39,23 @@ void aux_rec_init(void)
 }
 #endif // AUX_REC_EN
 
+
+//AT(.com_text)
+//void pcm_manual_amplify(void *pcm_buf,u32 len, u16 gain)  //2^13  0DB
+//{
+//    s32 tem;
+//    s16 *buf = (s16*)pcm_buf;
+//    for(u32 i=0; i<len/2; i++){
+//        tem = (buf[i]* gain)>>13;   //2^13 8192
+//         if(tem < -32768){
+//            tem = -32768;
+//       }else if(tem > 32767){
+//            tem = 32767;
+//       }
+//       buf[i] = tem;
+//    }
+//}
+
 AT(.com_text.func.aux)
 void aux_sdadc_process(u8 *ptr, u32 samples, int ch_mode)
 {
@@ -53,6 +70,7 @@ void aux_sdadc_process(u8 *ptr, u32 samples, int ch_mode)
     aux_dnr_process(ptr, samples);
 #endif // AUX_SNR_EN
 
+    //pcm_manual_amplify(ptr,(samples*2)<<ch_mode,GAIN_DIG_P7DB);  //ch_mode 0 单声道, 1双声道
     if (f_aux.aux2adc & AUX2ADC_MASK) {
         sdadc_pcm_2_dac(ptr, samples, ch_mode);
     }

@@ -63,11 +63,13 @@ void LineInModuleLedCb(void)
 	else
 	{
 		TimeOutSet(&LineInLedTmr, 500);
+#ifdef FUNC_SLEEP_LEDOFF_EN
 		if(!gSys.SleepLedOffFlag)
 		{
 			LED_PURPLE_MODE_ON();	
 		}
 		else
+#endif
 		{
 			LED_WHITE_MODE_OFF();
 		}

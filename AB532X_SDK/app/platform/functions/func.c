@@ -238,13 +238,36 @@ void func_message(u16 msg)
 #if MUSIC_UDISK_EN
         case EVT_UDISK_INSERT:
             if (dev_is_online(DEV_UDISK)) {
-            #if SD_USB_MUX_IO_EN
+#if BT_BACKSTAGE_EN && FMRX_INSIDE_EN
+                if(func_cb.sta == FUNC_FMRX) {
+                    if(fmrx_cb.sta>FMRX_IDLE) {
+                    	func_fmrx_stop();
+                   	    fmrx_power_off();
+                    }
+#if SD_USB_MUX_IO_EN
+               		 sys_cb.cur_dev = DEV_UDISK;
+#endif // SD_USB_MUX_IO_EN
+               		 if (dev_udisk_activation_try(0)) {
+                  		 sys_cb.cur_dev = DEV_UDISK;
+                    	 func_cb.sta = FUNC_MUSIC;
+                	}
+                	if((fmrx_cb.sta>FMRX_IDLE)&&(func_cb.sta != FUNC_MUSIC)) {
+                  	 	 fmrx_power_on(BT_BACKSTAGE_EN << 31);
+                  	 	 if ((fmrx_cb.sta <FMRX_PAUSE)&&(fmrx_cb.sta >FMRX_IDLE)) {
+                      		  func_fmrx_start();
+                       	 }
+              		}
+			}else
+#endif // BT_BACKSTAGE_EN&&FMRX_INSIDE_EN
+            {
+#if SD_USB_MUX_IO_EN
                 sys_cb.cur_dev = DEV_UDISK;
-            #endif // SD_USB_MUX_IO_EN
+#endif // SD_USB_MUX_IO_EN
                 if (dev_udisk_activation_try(0)) {
                     sys_cb.cur_dev = DEV_UDISK;
                     func_cb.sta = FUNC_MUSIC;
                 }
+            }
             }
             break;
 #endif // MUSIC_UDISK_EN

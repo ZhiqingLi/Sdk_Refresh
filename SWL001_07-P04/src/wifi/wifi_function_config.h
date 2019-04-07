@@ -36,8 +36,8 @@ extern "C" {
 //#define FUNC_WIFI_SUPPORT_RTC_EN					//打开此宏定义，支持RTC功能
 //#define FUNC_WIFI_SUPPORT_ALARM_EN					//打开此宏定义，支持闹钟功能
 //#define FUNC_WIFI_ALI_PROJECT_EN	 				//打开此宏定义，支持阿里项目特殊功能
-//#define FUNC_WIFI_ALEXA_PROJECT_EN	 				//打开此宏定义，支持亚马逊项目
-#define FUNC_WIFI_DUMI_PROJECT_EN	 				//打开此宏定义，支持百度度秘项目
+#define FUNC_WIFI_ALEXA_PROJECT_EN	 				//打开此宏定义，支持亚马逊项目
+//#define FUNC_WIFI_DUMI_PROJECT_EN	 				//打开此宏定义，支持百度度秘项目
 #define FUNC_WIFI_SPOTIFY_NEED_EN 					//打开此宏定义，支持Spotify认证
 //#define FUNC_WIFI_I2S_BYPASS_NEED_EN 				//打开此宏定义，支持I2SBypass模式
 #define FUNC_WIFI_PASS_THROUGH_DATA_EN				//打开此宏定义，支持WiFi 透传数据功能

@@ -276,6 +276,7 @@ int bt_spp_tx(uint8_t *packet, uint16_t len);
 bool bt_hid_key(int keycode);                 //标准HID键, 如Enter
 bool bt_hid_consumer(int keycode);            //自定义HID键, 如VOL+ VOL-
 bool bt_hid_touch_screen(int keycode);
+bool bt_hid_touch_screen_set_key(void *ts);
 
 /*****************************************************************************
  * BLE API函数接口

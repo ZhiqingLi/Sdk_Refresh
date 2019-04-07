@@ -37,7 +37,7 @@ extern "C" {
 //****************************************************************************************
 //#define FUNC_D5_WiFi_EN 
 #define FUNC_ALEXA_WIFI_EN
-#define FUNC_POWERON_USB_UPDATA_EN						//开机检查U盘升级
+//#define FUNC_POWERON_USB_UPDATA_EN						//开机检查U盘升级
 
 //****************************************************************************************
 //                 			WiFi 模组控制硬件配置        
@@ -742,21 +742,22 @@ extern "C" {
 //****************************************************************************************
 //                 LINEIN模式配置 
 //****************************************************************************************
-//	#define FUNC_LINEIN_EN   					// Linein
+	#define FUNC_LINEIN_EN   					// Linein
 	#ifdef FUNC_LINEIN_EN
 		#define LINEIN_ANA_GAIN_VAL			VOLUME_ADC_ANA_LIN1	//LINEIN输入通道的模拟增益(-3.83),GIAN 对应关系见 sys_vol.h
-		#define LINEIN_DETECT_PORT_IN		GPIO_B_IN
-		#define LINEIN_DETECT_PORT_OE		GPIO_B_OE
-		#define LINEIN_DETECT_PORT_IE		GPIO_B_IE
-		#define LINEIN_DETECT_PORT_PU		GPIO_B_PU
-		#define LINEIN_DETECT_PORT_PD		GPIO_B_PD
-		#define LINEIN_DETECT_BIT_MASK		GPIOB7
+		#define LINEIN_DETECT_PORT_IN		GPIO_A_IN
+		#define LINEIN_DETECT_PORT_OE		GPIO_A_OE
+		#define LINEIN_DETECT_PORT_IE		GPIO_A_IE
+		#define LINEIN_DETECT_PORT_PU		GPIO_A_PU
+		#define LINEIN_DETECT_PORT_PD		GPIO_A_PD
+		#define LINEIN_DETECT_PORT_DS		GPIO_A_DS
+		#define LINEIN_DETECT_BIT_MASK		GPIOA24
 	#endif
 
 //****************************************************************************************
 //                 earphone模式配置 
 //****************************************************************************************
-	#define FUNC_EARPHONE_EN   					// Linein
+//	#define FUNC_EARPHONE_EN   					// Linein
 	#ifdef FUNC_EARPHONE_EN
 		#define EARPHONE_DETECT_PORT_IN		GPIO_A_IN
 		#define EARPHONE_DETECT_PORT_OE		GPIO_A_OE

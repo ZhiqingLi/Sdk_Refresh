@@ -3,6 +3,8 @@
 #include "func_bt.h"
 
 void sbc_decode_exit(void);
+void ble_bat_house_update_state(uint step);
+uint8_t bt_tws_get_force_role(void);
 
 func_bt_t f_bt;
 
@@ -194,6 +196,9 @@ void func_bt_warning(void)
     }
 
 	if(func_bt_chkclr_warning(BT_WARN_CON)) {
+#if LE_BAT_HOUSE_EN
+       ble_bat_house_update_state(1);
+#endif // LE_BAT_HOUSE_EN
 #if BT_TWS_EN
         if(xcfg_cb.bt_tws_en) {
             func_bt_status_update();
@@ -202,6 +207,10 @@ void func_bt_warning(void)
 #if WARNING_BT_CONNECT
         func_cb.mp3_res_play(RES_BUF_CONNECTED_MP3, RES_LEN_CONNECTED_MP3);
 #endif
+#if LE_BAT_HOUSE_EN
+        delay_5ms(200);
+        ble_bat_house_update_state(0);
+#endif // LE_BAT_HOUSE_EN
     }
 
     if(func_bt_chkclr_warning(BT_WARN_PAIRING)) {
@@ -288,7 +297,6 @@ void func_bt_disp_status(void)
             dis_auto_pwroff();
             sys_cb.sleep_en = 1;
         }
-        //printf ("cur f_bt.disp_status = %d!\n", f_bt.disp_status);
 
         switch (f_bt.disp_status) {
         case BT_STA_CONNECTING:
@@ -436,6 +444,12 @@ static void func_bt_enter(void)
     mp3_res_play(RES_BUF_WAIT4CONN_MP3, RES_LEN_WAIT4CONN_MP3);
 #endif // WARNING_BT_WAIT_CONNECT
 
+#if LE_BAT_HOUSE_EN
+    if (bt_tws_get_force_role() != 0x81) {
+        ble_bat_house_update_state(1);
+    }
+#endif // LE_BAT_HOUSE_EN
+
 #if !BT_BACKSTAGE_EN
     bsp_bt_init();
     dis_auto_pwroff();
@@ -477,6 +491,11 @@ static void func_bt_enter(void)
 #endif
     f_bt.dac_sta = 1;
     func_bt_set_dac(0);
+#if LE_BAT_HOUSE_EN
+    if (bt_tws_get_force_role() != 0x81) {
+        ble_bat_house_update_state(2);
+    }
+#endif
 }
 
 AT(.text.func.bt)

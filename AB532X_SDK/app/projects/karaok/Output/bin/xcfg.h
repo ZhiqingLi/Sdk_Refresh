@@ -48,8 +48,19 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u8 charge_trickle_curr;                     //涓流充电电流: 0:30mA, 1:40mA, 2:50mA
     char bt_name[32];                           //蓝牙名称
     u8 bt_addr[6];                              //蓝牙地址
-    u8 bt_txpwr;                                //发射功率: 0:+4DBM, 1:+3DBM, 2:+2DBM, 3:+1DBM, 4:0DBM, 5:-1DBM, 6:-2DBM, 7:-3DBM, 8:-4DBM
-    u32 bt_rf_param                      : 8;   //RF参数选择: LQFP48: 0, QFN32: 1, SOP28: 2, TSSOP24: 3, TSSOP20: 4, SOP16: 5, QFN32小耳机板: 129, SOP16小耳机板: 133, AUTO: 255
+    u8 bt_txpwr;                                //预置RF发射功率: 0:+4DBM, 1:+3DBM, 2:+2DBM, 3:+1DBM, 4:0DBM, 5:-1DBM, 6:-2DBM, 7:-3DBM, 8:-4DBM
+    u32 bt_rf_param                      : 8;   //预置RF参数选择: LQFP48: 0, QFN32: 1, SOP28: 2, TSSOP24: 3, TSSOP20: 4, SOP16: 5, QFN32小耳机板: 129, SOP16小耳机板: 133, AUTO: 255
+    u32 bt_user_param_en                 : 1;   //是否自定义RF参数
+    u8 rf_tag0;                                 //TAG0
+    u8 rf_tag1;                                 //TAG1
+    u8 rf_captune;                              //CAPTUNE
+    u8 rf_pa_gain;                              //PA_GAIN
+    u8 rf_mix_gain;                             //MIX_GAIN
+    u8 rf_dig_gain;                             //DIG_GAIN
+    u8 rf_pa_bias;                              //PA_BIAS
+    u8 rf_vbko_add;                             //VBKO_ADD
+    u8 rf_txdbm;                                //DBM
+    u8 rf_udf;                                  //UDF
     u32 bt_2acl_en                       : 1;   //连接两部手机功能
     u32 bt_a2dp_en                       : 1;   //音乐播放功能
     u32 bt_a2dp_vol_ctrl_en              : 1;   //音乐音量同步
@@ -64,7 +75,6 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     char bthid_name[32];                        //HID蓝牙名称
     u32 bt_tws_en                        : 1;   //TWS功能
     u32 bt_tws_pair_mode                 : 3;   //TWS配对方式选择: 自动配对: 0, 双击PLAY键配对: 1, 长按MODE键配对: 2, 自定义配对<调用api>: 3
-    u32 bt_tws_recon_mode                : 1;   //TWS主机回连方式选择: 主机回连手机: 0, 主机回连手机和从机: 1
     u32 bt_tws_lr_mode                   : 4;   //TWS声道分配选择: 不分配，主副均双声道输出: 0, 自动分配，主右声道副左声道: 1, PWRKEY,有820K接地为左: 2, GPIOx有接地为左: 3, 自动分配，主左声道副右声道: 4
     u32 tws_sel_left_gpio_sel            : 6;   //TWS GPIOx有接地为左: None: 0, PA0: 1, PA1: 2, PA2: 3, PA3: 4, PA4: 5, PA5: 6, PA6: 7, PA7: 8, PB0: 9, PB1: 10, PB2: 11, PB3: 12, PB4: 13, PE0: 14, PE1: 15, PE2: 16, PE3: 17, PE4: 18, PE5: 19, PE6: 20, PE7: 21, PF0: 22, PF1: 23, PF2: 24, PF3: 25, PF4: 26, PF5: 27
     u32 ble_en                           : 1;   //BLE控制功能

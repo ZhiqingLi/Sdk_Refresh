@@ -23,7 +23,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 eq_dgb_spp_en                    : 1;   //EQ调试（蓝牙串口）
     u32 eq_dgb_uart_en                   : 1;   //EQ调试（UART）
     u32 eq_uart_sel                      : 2;   //EQ调试串口选择: PA7: 0, PB2: 1, PB3: 2
-    u32 dac_sel                          : 4;   //DAC声道选择: 单声道: 0, 双声道: 1, VCMBUF单声道: 2, VCMBUF双声道: 3, MIX_VCMBUF单声道: 4
+    u32 dac_sel                          : 4;   //DAC声道选择: 单声道: 0, 双声道: 1, VCMBUF单声道: 2, VCMBUF双声道: 3, MIX_VCMBUF单声道: 4, MIX_VCM差分: 6
     u32 dac_ldoh_sel                     : 4;   //VDDDAC电压: 2.4V: 0, 2.5V: 1, 2.7V: 2, 2.9V: 3, 3.1V: 4, 3.2V: 5, 3.1V_VSEL2: 6, 3.2V_VSEL2: 7
     u32 dac_vcm_less_en                  : 1;   //省VCM方案
     u32 dacvdd_bypass_en                 : 1;   //省VDDDAC方案

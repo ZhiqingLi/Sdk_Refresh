@@ -166,6 +166,12 @@ void tws_send_pkt(void)
 void lc_tsco_init(void) {
 }
 AT(.bcom_text.bb.tws.sco)
+void ext_lc_tsco_flush_txfifo(uint8_t lid) {
+}
+AT(.bcom_text.bb.tws.sco)
+void ext_lc_tsco_flush_txbuf(uint8_t lid) {
+}
+AT(.bcom_text.bb.tws.sco)
 void ext_lc_fill_tsco_dat(void) {
 }
 AT(.bcom_text.bb.tws.sco)
@@ -207,6 +213,10 @@ bool bt_tsco_is_en(void) {
 void huart_init(void)
 {
 }
+AT(.bcom_text.stack.uart_isr)
+bool bt_uart_isr(void) {
+    return false;
+}
 #endif
 
 #if !BT_HFP_REC_EN
@@ -221,7 +231,7 @@ void mav_kick_start(void) {}
 #endif
 
 #if !FUNC_SPDIF_EN
-void spdif_process(void){}
+void spdif_pcm_process(void){}
 bool spdif_smprate_detect(void) {    return false;}
 void spdif_isr(void){}
 #endif

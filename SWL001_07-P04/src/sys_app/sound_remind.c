@@ -364,6 +364,7 @@ void SoundRemind(uint16_t SoundId)
 #endif
 	 	MixerMute(MIXER_SOURCE_ANA_MONO);
 		MixerMute(MIXER_SOURCE_ANA_STERO);
+		WaitMs(100);												//µÈ´ýUnMute¹¦·Å
 		DecoderTaskSyncPlay(&SoundRemindFile, IO_TYPE_MEMORY);
 		MixerUnmute(MIXER_SOURCE_ANA_MONO);
 		MixerUnmute(MIXER_SOURCE_ANA_STERO);

@@ -7,6 +7,16 @@
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
+	<File name="config.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="151" topLine="3" />
+		</Cursor>
+	</File>
+	<File name="message\msg_bt.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1472" topLine="53" />
+		</Cursor>
+	</File>
 	<File name="..\..\platform\bsp\bsp_bt.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="6646" topLine="186" />
@@ -20,16 +30,6 @@
 	<File name="config.h" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="4295" topLine="78" />
-		</Cursor>
-	</File>
-	<File name="config.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="151" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="message\msg_bt.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1472" topLine="53" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

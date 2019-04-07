@@ -20,11 +20,11 @@ const char week_str[7][4] = {
 AT(.text.func.clock.init)
 void rtc_clock_init(void)
 {
-    rtc_tm.tm_year = (2018-1970);
-    rtc_tm.tm_mon  = 7;
-    rtc_tm.tm_mday = 11;
-    rtc_tm.tm_hour = 23;
-    rtc_tm.tm_min  = 59;
+    rtc_tm.tm_year = (2019-1970);
+    rtc_tm.tm_mon  = 3;
+    rtc_tm.tm_mday = 18;
+    rtc_tm.tm_hour = 0;
+    rtc_tm.tm_min  = 0;
     rtc_tm.tm_sec  = 0;
     rtc_tm.tm_wday = get_weekday(rtc_tm.tm_year, rtc_tm.tm_mon, rtc_tm.tm_mday);
     irtc_time_write(RTCCNT_CMD, rtc_tm_to_time(&rtc_tm));

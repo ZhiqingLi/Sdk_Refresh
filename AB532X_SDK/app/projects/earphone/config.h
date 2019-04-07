@@ -121,7 +121,7 @@
 #define LE_EN                           0   //是否打开BLE功能（暂不支持蓝牙后台）
 #define LE_LIGHTING_EN                  0   //是否打开BLE灯光控制服务
 #define LE_MUSIC_CTRL_EN                0   //是否打开BLE音乐控制服务
-
+#define LE_BAT_HOUSE_EN                 0   //是否打开苹果充电盒弹窗功能
 
 /*****************************************************************************
  * Module    : FMRX功能配置

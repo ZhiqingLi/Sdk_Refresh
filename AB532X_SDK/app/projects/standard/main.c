@@ -1,5 +1,13 @@
 #include "include.h"
 
+const uint8_t *bt_get_rf_param(void)
+{
+    if(xcfg_cb.bt_user_param_en) {
+        return (const uint8_t *)&xcfg_cb.rf_tag0;
+    }
+    return NULL;
+}
+
 u32 get_test_sbc_addr(void)
 {
     //return RES_BUF_TEST_SBC;

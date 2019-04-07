@@ -145,9 +145,14 @@ void dac_pull_down_delay(void)
     delay_5ms(DAC_PULL_DOWN_DELAY);
 }
 
+
+//AT(.com_text*)
+//const char strm[] = "mute_callback:%d\n";
+
 AT(.com_text.dac)
 void dac_set_mute_callback(u8 mute_flag)
 {
+    //printf(strm,mute_flag);
     if (mute_flag) {
         bsp_loudspeaker_mute();
     } else {

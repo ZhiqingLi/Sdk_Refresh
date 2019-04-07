@@ -352,6 +352,16 @@
 #define BT_TWS_LR_EN                0
 #endif
 
+
+#ifndef LE_BAT_HOUSE_EN
+#define LE_BAT_HOUSE_EN             0
+#endif
+
+#if LE_BAT_HOUSE_EN
+#undef LE_EN
+#define LE_EN                       1
+#endif // LE_BAT_HOUSE_EN
+
 #if !LE_EN
 #undef LE_LIGHTING_EN
 #undef LE_MUSIC_CTRL_EN
@@ -581,6 +591,15 @@
 #undef  UDE_STORAGE_EN
 #define UDE_STORAGE_EN                 0
 #endif
+
+
+/*****************************************************************************
+* Module    : 有冲突或功能上不能同时打开的宏
+*****************************************************************************/
+#if (SYS_KARAOK_EN && BT_BACKSTAGE_EN)
+#error "SYS_KARAOK_EN and BT_BACKSTAGE_EN (include BT_APP_EN) can't open at sametime"
+#endif
+
 
 #endif // __CONFIG_EXTRA_H__
 

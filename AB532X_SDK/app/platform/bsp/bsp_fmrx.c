@@ -59,6 +59,11 @@ void fmrx_inside_init(void)
 }
 #endif // FMRX_INSIDE_EN
 
+//u8 fmrx_get_rf_res(void)
+//{
+//    return 3;   //0~3
+//}
+
 //设置收音LOC/DX, 本地电台/远程电台
 AT(.text.bsp.fmrx)
 void bsp_fmrx_set_loc_dx(u8 loc_flag)

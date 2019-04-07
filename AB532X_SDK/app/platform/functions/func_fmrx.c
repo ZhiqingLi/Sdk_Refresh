@@ -349,8 +349,14 @@ void func_fmrx_enter(void)
     dac_fade_out();
     bsp_karaok_exit(AUDIO_PATH_KARAOK);
 #endif
+#if BT_BACKSTAGE_EN
+  if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
+    }else
+#endif // BT_BACKSTAGE_EN
+    {
+        bsp_fmrx_init();
+    }
 
-    bsp_fmrx_init();
     MEMCON &= ~0x3ff;                   // ram & rom memory always work
 
 //外置收音配置AUX通路
@@ -366,7 +372,13 @@ void func_fmrx_enter(void)
     led_fm_play();
 
     fmrx_cb.sta = FMRX_PLAY;
-    bsp_fmrx_set_freq(fmrx_cb.freq);
+#if BT_BACKSTAGE_EN
+  if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
+    }else
+#endif // BT_BACKSTAGE_EN
+    {
+        bsp_fmrx_set_freq(fmrx_cb.freq);
+    }
     dac_fade_in();
 #if SYS_KARAOK_EN
     bsp_karaok_init(AUDIO_PATH_KARAOK, FUNC_FMRX);
@@ -388,7 +400,13 @@ void func_fmrx_exit(void)
     dac_fade_out();
     func_fmrx_exit_display();
     if (fmrx_cb.sta > FMRX_IDLE) {
+#if BT_BACKSTAGE_EN
+  if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
+    }else
+#endif // BT_BACKSTAGE_EN
+    {
         bsp_fmrx_exit();
+    }
 #if I2C_MUX_SD_EN
         sd_gpio_init(2);
 #endif // I2C_MUX_SD_EN

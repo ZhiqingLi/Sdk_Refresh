@@ -452,7 +452,7 @@ void sfunc_pwrdown(void)
     WDT_DIS();
 
 #if USER_EXT_POWERON_EN
-	EXT_GPIO_POWERON();					//20190224,关机前关闭外部电源。
+	EXT_GPIO_POWEROFF();				//20190224,关机前关闭外部电源。
 #endif //USER_EXT_POWERON_EN
 
 #if CHARGE_EN
@@ -561,24 +561,31 @@ void func_pwroff(int pwroff_tone_en)
 #define CHARGE_FULL_POWER_ON_TIME      0XFFFFFFFFL   //长期开机   //(8*60*1000/200)/*充满电后8分钟内拿起可以开机*/
 void charge_stop(u8 mode);
 
+ALIGNED(128)
 AT(.text.bsp.power)
 void sys_clk_seclet_RC(u32 *buf)
 {
     buf[0] = get_cur_sysclk();
     buf[1] = CLKCON0;
+    buf[2] = TMR0CON;
+    GLOBAL_INT_DISABLE();
     CLKCON0  &= ~BIT(28);                //select saradc_clk  1: x26m_clkdiv4  //0 rc clk
     CLKCON0 |= BIT(0);                  //enable RC
-    CLKCON0 = (CLKCON0 & ~(0x3 << 2));  //system clk select RC
+    CLKCON0 &= ~(0x3 << 2);             //system clk select RC
+    TMR0CON &= ~(BIT(2)|BIT(3));        // timer sys clk
 
     XO26MCON &= ~(0xf<<24);             //X26 output DIS
 
     XO26MCON &= ~BIT(10);               //X26 DIS
     XO26MCON &= ~BIT(9);                //X26 LDO DIS
+    GLOBAL_INT_RESTORE();
 }
 
+ALIGNED(128)
 AT(.text.bsp.power)
 void sys_clk_restore(u32 *buf)
 {
+    GLOBAL_INT_DISABLE();
     XO26MCON |= BIT(9);                //X26 LDO en
     delay_us(100);
     XO26MCON |= BIT(10);               //X26 en
@@ -587,6 +594,9 @@ void sys_clk_restore(u32 *buf)
     delay_us(100);
     CLKCON0 = buf[1];
     asm("nop");asm("nop");asm("nop");
+    delay_us(30);
+    TMR0CON = buf[2];
+    GLOBAL_INT_RESTORE();
     set_sys_clk(buf[0]);
 }
 

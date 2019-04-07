@@ -70,13 +70,6 @@ void func_bt_message(u16 msg)
         }
         break;
 
-	case KL_PLAY_HSF:
-		if(bt_nor_is_connected()) {
-			bt_nor_disconnect();
-		} else {
-			bt_nor_connect();
-		}
-
 #if BT_TWS_EN
     case KL_MODE:
         if(xcfg_cb.bt_tws_en && xcfg_cb.bt_tws_pair_mode == 2) {

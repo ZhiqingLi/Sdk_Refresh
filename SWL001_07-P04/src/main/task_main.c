@@ -268,11 +268,11 @@ void GuiTaskEntrance(void)
 #endif
 
 #ifdef FUNC_I2SIN_EN
-      case MODULE_ID_I2SIN:
+			case MODULE_ID_I2SIN:
 #ifndef FUNC_WIFI_EN
-                I2sInControl();
+				I2sInControl();
 #endif
-        break;
+				break;
 #endif			
 			
 #ifdef FUNC_WIFI_EN
@@ -283,8 +283,8 @@ void GuiTaskEntrance(void)
 			case MODULE_ID_PLAYER_WIFI_USB:
 #endif
 			case MODULE_ID_WIFI:
-        WiFiControl();
-        break;			
+				WiFiControl();
+				break;			
 #endif
             
 #ifdef FUNC_RECORD_EN

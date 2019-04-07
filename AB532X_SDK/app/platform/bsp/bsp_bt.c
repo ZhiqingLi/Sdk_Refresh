@@ -190,7 +190,7 @@ void bsp_bt_init(void)
 
     memset(&f_bt, 0, sizeof(func_bt_t));
     f_bt.disp_status = 0xfe;
-    f_bt.need_pairing = 1;  //开机若回连不成功，需要播报pairing。
+    f_bt.need_pairing = 1;  //开机若回连不成功，需要播报pairing
     if (!is_bthid_mode()) {
         f_bt.hid_menu_flag = 1;
     }
@@ -639,4 +639,49 @@ void huart_init(void)
 {
     huart_init_do(HUART_TR_PB3, HUART_TR_PB3, 1500000, huart_buffer, 512);
 }
+#endif
+#if LE_BAT_HOUSE_EN
+void le_bat_house_ctrl(uint opcode);
+
+bool house_state = 1;
+bool ble_get_house_state(void)
+{
+    return house_state;
+}
+
+void bt_bat_house_set_state(bool state)
+{
+#if LE_BAT_HOUSE_EN
+    if(state) {
+        house_state = 1;    //电池仓打开
+        le_bat_house_ctrl(1);
+    } else {
+        house_state = 0;    //电池仓闭合
+        le_bat_house_ctrl(1);
+        delay_5ms(200);
+        le_bat_house_ctrl(0);
+    }
+#endif
+}
+
+
+void ble_bat_house_update_state(uint step)
+{
+#if LE_BAT_HOUSE_EN
+    if(step == 0) {
+        le_bat_house_ctrl(0);
+    } else {
+        house_state = (step==2)? 1:0;
+        le_bat_house_ctrl(1);
+    }
+#endif
+}
+
+////弹窗类型：airpod(0), PowerBeats3(1), Beatsx(2), BeatsSolo3(3)
+//u16 ble_bat_house_get_type(void)
+//{
+//    //格式：color[15:8] | type[7:0]
+//    return (1 << 8) | 2;    //纯黑Beatsx
+//}
+
 #endif

@@ -133,6 +133,16 @@ void ble_init_att(void)
     }
 }
 
+u8 ble_address_get_mode(void)
+{
+    return 1;   //0:public 1:random no resolvable 2:random resolvable
+}
+
+void ble_get_local_bd_addr(u8 *addr)
+{
+    memset(addr, 0xaa, 6);
+}
+
 u8 ble_att_write_callback(u16 handle, u8 *ptr, u8 len)
 {
     printf("BLE RX:");
@@ -175,4 +185,11 @@ void bsp_ble_process(void)
         bt_app_cmd_process(ptr, len);
     }
 }
+
+////弹窗类型：airpod(0), PowerBeats3(1), Beatsx(2), BeatsSolo3(3)
+//u16 ble_bat_house_get_type(void)
+//{
+//    //格式：color[15:8] | type[7:0]
+//    return (1 << 8) | 2;    //纯黑Beatsx
+//}
 #endif
