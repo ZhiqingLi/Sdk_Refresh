@@ -43,10 +43,15 @@ void func_bt_message(u16 msg)
         bsp_clr_mute_sta();
         bt_music_fast_forward_end();
         break;
-//    case KL_PLAY:
-//        bsp_clr_mute_sta();
-//        bt_disconnect();
-//        break;
+        
+    case KL_PLAY:
+    	bsp_clr_mute_sta();
+    	if (bt_nor_is_connected()) {
+        	bt_disconnect();
+        } else {
+        	bt_connect();
+        }
+        break;
 
     case KU_HSF:
     case KD_PLAY:

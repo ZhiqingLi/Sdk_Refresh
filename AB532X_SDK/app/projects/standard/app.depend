@@ -32,16 +32,16 @@
 
 1543484477 f:\soft_sdk\ab532x_sdk\app\platform\header\sfr.h
 
-1553239908 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
+1554857921 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
 
-1552306720 f:\soft_sdk\ab532x_sdk\app\platform\header\config_define.h
+1553654180 f:\soft_sdk\ab532x_sdk\app\platform\header\config_define.h
 
-1552398409 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
+1553655048 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
 
-1552310812 f:\soft_sdk\ab532x_sdk\app\platform\header\config_extra.h
+1554293629 f:\soft_sdk\ab532x_sdk\app\platform\header\config_extra.h
 
 1552306987 f:\soft_sdk\ab532x_sdk\app\platform\header\io_def.h
 	"global.h"
@@ -71,7 +71,7 @@
 	"api_uart.h"
 	"api_karaok.h"
 
-1552483279 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_btstack.h
+1553654269 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_btstack.h
 
 1543476618 f:\soft_sdk\ab532x_sdk\app\platform\libs\api_cm.h
 
@@ -268,11 +268,11 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_aux.c
 	"include.h"
 
-1547622267 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_ble.c
+1553653589 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_ble.c
 	"include.h"
 	"bsp_ble.h"
 
-1552523216 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
+1553653650 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
 	"include.h"
 	"api.h"
 
@@ -282,7 +282,7 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_cm.c
 	"include.h"
 
-1552305996 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_dac.c
+1553653687 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_dac.c
 	"include.h"
 	"bsp_dac.h"
 
@@ -290,7 +290,7 @@
 	"include.h"
 	"bsp_eq.h"
 
-1547622381 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_fmrx.c
+1553653702 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_fmrx.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_fs.c
@@ -322,7 +322,7 @@
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_karaok.c
 	"include.h"
 
-1552306083 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.c
+1553653748 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_key.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_lcd.c
@@ -350,7 +350,7 @@
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1552899819 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
+1554949445 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\fmrx\fmrx_external.c
@@ -361,15 +361,15 @@
 	"include.h"
 	"qn8035.h"
 
-1552642018 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
+1554949517 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
 	"include.h"
 
-1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_aux.c
+1553653937 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_aux.c
 	"include.h"
 	"func.h"
 	"func_aux.h"
 
-1552486258 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.c
+1553654011 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"
@@ -389,7 +389,7 @@
 	"func.h"
 	"func_fmam_freq.h"
 
-1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_fmrx.c
+1553654063 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_fmrx.c
 	"include.h"
 	"func.h"
 	"func_fmrx.h"
@@ -399,7 +399,7 @@
 	"func.h"
 	"func_idle.h"
 
-1552916725 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
+1554293590 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_lowpwr.c
 	"include.h"
 	"func.h"
 
@@ -466,7 +466,7 @@
 	"ledseg_common.h"
 	"ledseg_7p7s.h"
 
-1549971441 source:f:\soft_sdk\ab532x_sdk\app\platform\libs\strong_symbol.c
+1553654327 source:f:\soft_sdk\ab532x_sdk\app\platform\libs\strong_symbol.c
 	"include.h"
 
 1551320000 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\config.c
@@ -527,14 +527,14 @@
 	"include.h"
 	"ledseg/display_ledseg.h"
 
-1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\main.c
+1553655018 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\main.c
 	"include.h"
 
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_aux.c
 	"include.h"
 	"func.h"
 
-1552483975 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
+1554858222 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"
@@ -628,7 +628,7 @@
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_update.c
 	"include.h"
 
-1552307950 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\ram.ld
+1553655029 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\ram.ld
 
 1549971188 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spiflash1.c
 	"include.h"
