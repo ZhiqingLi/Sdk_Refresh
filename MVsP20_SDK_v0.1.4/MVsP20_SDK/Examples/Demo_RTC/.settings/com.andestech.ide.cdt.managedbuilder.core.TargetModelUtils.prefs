@@ -1,7 +1,0 @@
-#Fri Mar 03 13:49:03 CST 2017
-autoBuildEnable=false
-connectType=ICE
-eclipse.preferences.version=1
-iceman.misc.args=-A -N reset-hold-script.tpl -H
-name=ADP-AG101P-4GB-N968A-S-32I
-targetURI=rse\://LOCALHOST/~target/ADP-AG101P-4GB-N968A-S-32I
