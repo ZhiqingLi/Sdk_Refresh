@@ -16,14 +16,20 @@
     修改内容   : 创建文件
 
 ******************************************************************************/
+#ifndef _APP_CONFIG_H_
+#define _APP_CONFIG_H_
 
 /*----------------------------------------------*
  * 包含头文件                                   *
  *----------------------------------------------*/
 #include <stdio.h>
 #include <stdint.h>
-#include "main.h"
+#include <string.h>
 #include "Platformconfig.h"
+#include "timeout_api.h"
+#include "single_pwm_led.h"
+#include "single_pwm_light.h"
+#include "func_keymsg.h"
 
 /*----------------------------------------------*
  * 外部变量说明                                 *
@@ -48,15 +54,14 @@
 /*----------------------------------------------*
  * 常量定义                                     *
  *----------------------------------------------*/
-
+#define GUI_DisplayScan()			DisplayScan()
 /*----------------------------------------------*
  * 宏定义                                       *
  *----------------------------------------------*/
- #ifndef _APP_CONFIG_H_
- #define _APP_CONFIG_H_
 
  #if defined(STM32F030)
  #include "stm32f0xx.h"
+ #include "stm32072b_eval.h"
  #include "stm32f0xx_conf.h"
  #elif defined(GD32E230)
  #include "gd32e230.h"

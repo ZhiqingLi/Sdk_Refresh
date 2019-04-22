@@ -13,7 +13,7 @@
 #define __TIMEROUT_H__
 
 #include <stdint.h>
-#include "app_config.h"
+#include "stm32f0xx_conf.h"
 
 /*
  * define timer check for init task period event

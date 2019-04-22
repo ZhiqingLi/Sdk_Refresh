@@ -36,6 +36,87 @@ OF SUCH DAMAGE.
 
 #include "app_config.h"
 
+#define	WAVE_MIN_FREQ					490			//喇叭输出最小频率
+#define WAVE_MAX_FREQ					510			//喇叭输出最大频率
+#define WAVE_STILL_FREQ					495			//水珠静止状态频率		
+#define WAVE_PWM_DUTY					500			//喇叭输出信号占空比
+#define WAVE_MAX_OPERATION				42			//喇叭输出参数最大种组合
+#define PWM_OUTPUT_OFF					0
+#define	LIGHT_MAX_DISP_NUM				4			//LED照明灯的工作状态
+
+
+typedef struct _LED_SET_PARAM_ {
+	DISP_STATE_TYPEDEF CurDispStateNum;
+	DISP_COLOR_TYPEDEF CurDispColorNum;
+	uint32_t ScanTimerNum;
+}LED_SET;
+
+typedef struct _WAVE_SET_PARAM_ {
+	uint32_t Timer;
+	uint16_t Freq;
+}WAVE_SET;
+
+const LED_SET Light_WorkState[LIGHT_MAX_DISP_NUM] = {
+	{DISP_STATE_IDLE, DISP_COLOR_OFF, 0},
+	{DISP_STATE_SINGLE_COLOR, DISP_COLOR_WHITE, 1500},
+	{DISP_STATE_SINGLE_COLOR, DISP_COLOR_BLUE, 1500},
+	{DISP_STATE_FULL_COLOR, DISP_COLOR_RED, 1500},
+};
+
+
+const WAVE_SET WAVE_OPERATION_DATA[WAVE_MAX_OPERATION] = {
+	{5000*5, WAVE_MIN_FREQ},
+	{5000*5, WAVE_MIN_FREQ},
+	{5000*5, WAVE_MIN_FREQ},
+	
+	{1000, WAVE_MIN_FREQ+10},
+	{1000, WAVE_MIN_FREQ+20},        
+	{1000, WAVE_MIN_FREQ+30},
+	{1000, WAVE_MIN_FREQ+40},
+	{1000, WAVE_MIN_FREQ+50},
+	{1000, WAVE_MIN_FREQ+60},
+	{1000, WAVE_MIN_FREQ+70},        
+	{1000, WAVE_MIN_FREQ+80},
+	{1000, WAVE_MIN_FREQ+90},
+	
+	{3000*5, WAVE_STILL_FREQ},        
+	{1000, WAVE_MAX_FREQ-90},
+	{1000, WAVE_MAX_FREQ-80},
+	{1000, WAVE_MAX_FREQ-70},
+	{1000, WAVE_MAX_FREQ-60},
+	{1000, WAVE_MAX_FREQ-50},        
+	{1000, WAVE_MAX_FREQ-40},
+	{1000, WAVE_MAX_FREQ-30},
+	{1000, WAVE_MAX_FREQ-20},
+	{1000, WAVE_MAX_FREQ-10},  
+
+	{4000*5, WAVE_MAX_FREQ},        
+	{1000, WAVE_MAX_FREQ-10},
+	{1000, WAVE_MAX_FREQ-20},
+	{1000, WAVE_MAX_FREQ-30},
+	{1000, WAVE_MAX_FREQ-40},
+	{1000, WAVE_MAX_FREQ-50},
+	{1000, WAVE_MAX_FREQ-60},
+	{1000, WAVE_MAX_FREQ-70},
+	{1000, WAVE_MAX_FREQ-80},
+	{1000, WAVE_MAX_FREQ-90},
+
+	{3000*5, WAVE_STILL_FREQ},
+	{1000, WAVE_MIN_FREQ+90},
+	{1000, WAVE_MIN_FREQ+80},
+	{1000, WAVE_MIN_FREQ+70},
+	{1000, WAVE_MIN_FREQ+60},
+	{1000, WAVE_MIN_FREQ+50},
+	{1000, WAVE_MIN_FREQ+40},
+	{1000, WAVE_MIN_FREQ+30},   
+	{1000, WAVE_MIN_FREQ+20},        
+	{1000, WAVE_MIN_FREQ+10},
+};
+
+/* 常量定义 */
+static uint8_t CurWorkMode = 0;
+static TIMER WaveAutoSwitchTimer;
+
 /*!
     \brief      main function
     \param[in]  none
@@ -49,9 +130,74 @@ int main(void)
 	Usart_Debug_Init(115200);
 	//系统滴答定时器初始化，单位uS
 	System_Systick_Init(1000);
-	while (1){
+	/* 喇叭驱动信号输出初始化 */
+	Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+	TimeOutSet(&WaveAutoSwitchTimer, 0);
+	/* GUI LED显示初始化 */
+	Led_DispInit();
+	Led_DispStateSet(DISP_STATE_POWER_ON, DISP_COLOR_WHITE, 1500);
+	
+	/* 按键扫描初始化 */
+	GpioKeyInit();
+	/* 水泵控制及检测初始化 */
+	System_WaterPump_Init();
+	/* 照明灯初始化 */
+	Light_DispInit();
+	Light_DispStateSet(DISP_STATE_IDLE, DISP_COLOR_OFF, 0);
+
+	while (1) {
+		static uint8_t WaveAutoIndex = 0;
+		
+		Display();
+		
+		if (MSG_NEXT == GpioKeyScan()) {
+			CurWorkMode++;
+			CurWorkMode %= LIGHT_MAX_DISP_NUM;
+			WaveAutoIndex = 0;
+
+			if (DISP_STATE_IDLE != Light_WorkState[CurWorkMode].CurDispStateNum) {
+				System_WaterPump_Control(ENABLE);
+				Pwm_SaveConfig(WAVE_OPERATION_DATA[WaveAutoIndex].Freq, WAVE_PWM_DUTY);
+				Led_DispStateSet(DISP_STATE_LOOP_SPIN, DISP_COLOR_CYAN, 1500);
+			}
+			else {
+				System_WaterPump_Control(DISABLE);
+				Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+				Led_DispStateSet(DISP_STATE_POWER_ON, DISP_COLOR_WHITE, 1500);
+			}
+			Light_DispStateSet(Light_WorkState[CurWorkMode].CurDispStateNum, Light_WorkState[CurWorkMode].CurDispColorNum, Light_WorkState[CurWorkMode].ScanTimerNum);
+		}
+
+		if (0 == CurWorkMode) {
+			continue;
+		}
+
+		if (IsTimeOut(&WaveAutoSwitchTimer)) {
+			WaveAutoIndex++;
+			WaveAutoIndex %= WAVE_MAX_OPERATION;
+			
+			TimeOutSet(&WaveAutoSwitchTimer, WAVE_OPERATION_DATA[WaveAutoIndex].Timer);
+			Pwm_SaveConfig(WAVE_OPERATION_DATA[WaveAutoIndex].Freq, WAVE_PWM_DUTY);
+		}
+		
+			
+		if (MSG_VOL_LOW == WaterPump_WorkStateDetect()) {
+			CurWorkMode = 0;
+			Led_DispStateSet(DISP_STATE_LOOP_CHANGE, DISP_COLOR_RED, 2000);
+			Light_DispStateSet(DISP_STATE_IDLE, DISP_COLOR_OFF, 0);
+			Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+			System_WaterPump_Control(DISABLE);
+		}
+		else if (MSG_VOL_HIGHT == WaterPump_WorkStateDetect()) {
+			CurWorkMode = 0;		
+			Led_DispStateSet(DISP_STATE_LOOP_CHANGE, DISP_COLOR_RED, 500);
+			Light_DispStateSet(DISP_STATE_IDLE, DISP_COLOR_OFF, 0);
+			Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+			System_WaterPump_Control(DISABLE);
+		}
 	}
 }
+
 
 #ifdef  USE_FULL_ASSERT
 

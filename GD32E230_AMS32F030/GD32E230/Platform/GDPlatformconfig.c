@@ -72,7 +72,7 @@ void Usart_Debug_Init(uint32_t Baudrate){
     rcu_periph_clock_enable(RCU_GPIOA);
 
     /* connect port to USARTx_Tx */
-    gpio_af_set(GPIOA, GPIO_AF_1, GPIO_PIN_14);
+    gpio_af_set(GPIOA, GPIO_AF_0, GPIO_PIN_14);
 
     /* connect port to USARTx_Rx */
     //gpio_af_set(GPIOA, GPIO_AF_1, GPIO_PIN_15);

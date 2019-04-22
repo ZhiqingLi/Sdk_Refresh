@@ -16,6 +16,21 @@
 volatile uint32_t CORET_Systick_Count;			//CORET Systick count
 
 // 获得当前Timer实际运行时间，单位ms
+/*****************************************************************************
+ 函 数 名  : GetPassTime
+ 功能描述  : 获取当前timer实际运行时间
+ 输入参数  : SW_TIMER* TimerHandle  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年4月20日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
 uint16_t GetPassTime(SW_TIMER* TimerHandle)
 {
 	uint64_t LastSystickVal;

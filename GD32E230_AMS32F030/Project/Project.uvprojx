@@ -383,14 +383,24 @@
           <GroupName>Function</GroupName>
           <Files>
             <File>
+              <FileName>timeout_api.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Function\timeout_api.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Function\main.c</FilePath>
             </File>
             <File>
-              <FileName>timeout_api.c</FileName>
+              <FileName>single_pwm_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Function\timeout_api.c</FilePath>
+              <FilePath>..\Function\single_pwm_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>single_pwm_light.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Function\single_pwm_light.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -810,6 +820,21 @@
               <FileType>1</FileType>
               <FilePath>..\AMS32F030\Platform\AsmPlatformconfig.c</FilePath>
             </File>
+            <File>
+              <FileName>stm32072b_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Utilities\STM32_EVAL\STM32072B_EVAL\stm32072b_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Platform\stm32f0xx_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Platform\gpio_key.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -863,7 +888,7 @@
           <OutputName>ASM32F030</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
-          <CreateHexFile>0</CreateHexFile>
+          <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
           <ListingPath>.\ASM32F030\List\</ListingPath>
@@ -1149,7 +1174,7 @@
               <MiscControls>--C99</MiscControls>
               <Define>USE_STDPERIPH_DRIVER,STM32F030,USE_FULL_ASSERT</Define>
               <Undefine></Undefine>
-              <IncludePath>..\AMS32F030\Platform;..\Function;..\AMS32F030\Libraries\STM32F0xx_StdPeriph_Driver\inc;..\AMS32F030\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\AMS32F030\Libraries\CMSIS\Include;..\AMS32F030\Libraries\STM32F0xx_CPAL_Driver\inc;..\AMS32F030\Libraries\CMSIS\RTOS</IncludePath>
+              <IncludePath>..\AMS32F030\Platform;..\Function;..\AMS32F030\Libraries\STM32F0xx_StdPeriph_Driver\inc;..\AMS32F030\Libraries\CMSIS\Device\ST\STM32F0xx\Include;..\AMS32F030\Libraries\CMSIS\Include;..\AMS32F030\Libraries\STM32F0xx_CPAL_Driver\inc;..\AMS32F030\Libraries\CMSIS\RTOS;..\AMS32F030\Utilities\STM32_EVAL\STM32072B_EVAL;..\AMS32F030\Utilities\STM32_EVAL\Common;..\AMS32F030\Utilities\STM32_EVAL\STM320518_EVAL</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1194,14 +1219,24 @@
           <GroupName>Function</GroupName>
           <Files>
             <File>
+              <FileName>timeout_api.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Function\timeout_api.c</FilePath>
+            </File>
+            <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Function\main.c</FilePath>
             </File>
             <File>
-              <FileName>timeout_api.c</FileName>
+              <FileName>single_pwm_led.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Function\timeout_api.c</FilePath>
+              <FilePath>..\Function\single_pwm_led.c</FilePath>
+            </File>
+            <File>
+              <FileName>single_pwm_light.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Function\single_pwm_light.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -1926,6 +1961,21 @@
               <FileName>AsmPlatformconfig.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\AMS32F030\Platform\AsmPlatformconfig.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32072b_eval.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Utilities\STM32_EVAL\STM32072B_EVAL\stm32072b_eval.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f0xx_pwm.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Platform\stm32f0xx_pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>gpio_key.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\AMS32F030\Platform\gpio_key.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -1,6 +1,8 @@
 --cpu Cortex-M0
-".\asm32f030\main.o"
 ".\asm32f030\timeout_api.o"
+".\asm32f030\main.o"
+".\asm32f030\single_pwm_led.o"
+".\asm32f030\single_pwm_light.o"
 ".\asm32f030\stm32f0xx_adc.o"
 ".\asm32f030\stm32f0xx_crc.o"
 ".\asm32f030\stm32f0xx_dbgmcu.o"
@@ -23,6 +25,9 @@
 ".\asm32f030\system_stm32f0xx.o"
 ".\asm32f030\startup_stm32f030.o"
 ".\asm32f030\asmplatformconfig.o"
+".\asm32f030\stm32072b_eval.o"
+".\asm32f030\stm32f0xx_pwm.o"
+".\asm32f030\gpio_key.o"
 --library_type=microlib --strict --scatter ".\ASM32F030\ASM32F030.sct"
 --diag_suppress=L6329 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

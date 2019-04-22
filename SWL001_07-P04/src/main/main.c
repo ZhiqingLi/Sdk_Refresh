@@ -454,19 +454,19 @@ int32_t main(void)
 //注意：原定时关机功能是在定时器1中处理，因定时器中断处理过多代码会出现
 //蓝牙协议栈阻塞，所以将定时关机改到主任务中处理。
 #ifdef FUNC_SLEEP_EN
-	if((gSys.SleepTime != 0) && (gSys.CurModuleID != MODULE_ID_RTC))
-	{
-		if(gSys.SleepTimeCnt > 6000*gSys.SleepTime)
-		{		   
-			WiFiRequestMcuPowerOff();
-			gSys.SleepTime = FALSE;
-			gSys.SleepTimeCnt = FALSE;
-		}
-		else
+		if((gSys.SleepTime != 0) && (gSys.CurModuleID != MODULE_ID_RTC))
 		{
-			gSys.SleepTimeCnt++;
+			if(gSys.SleepTimeCnt > 6000*gSys.SleepTime)
+			{		   
+				WiFiRequestMcuPowerOff();
+				gSys.SleepTime = FALSE;
+				gSys.SleepTimeCnt = FALSE;
+			}
+			else
+			{
+				gSys.SleepTimeCnt++;
+			}
 		}
-	}
 #endif
 		
 #ifdef FUNC_SLEEP_LEDOFF_EN

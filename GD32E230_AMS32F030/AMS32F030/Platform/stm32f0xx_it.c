@@ -30,6 +30,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include <stdint.h>
 #include "stm32f0xx_it.h"
+#include "app_config.h"
 
 /** @addtogroup Template_Project
   * @{
@@ -95,6 +96,7 @@ void SysTick_Handler(void)
 {
 	extern volatile uint32_t CORET_Systick_Count;
 	CORET_Systick_Count++;
+	GUI_DisplayScan();
 }
 
 /******************************************************************************/
@@ -109,9 +111,9 @@ void SysTick_Handler(void)
   * @param  None
   * @retval None
   */
-/*void PPP_IRQHandler(void)
+void TIM16_IRQHandler(void)
 {
-}*/
+}
 
 /**
   * @}
