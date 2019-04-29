@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="com.beyondsemi.config.ba.elf.exe.debug.23224644">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.beyondsemi.config.ba.elf.exe.debug.23224644" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="com.beyondsemi.base.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.debug,org.eclipse.cdt.build.core.buildArtefactType=com.beyondsemi.base.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="com.beyondsemi.config.ba.elf.exe.debug.23224644" name="Debug" parent="com.beyondsemi.config.ba.elf.exe.debug" postbuildStep="./encrypt.bat" prebuildStep="rm -rf *.dmp *.map *.bin *.out *.elf *.txt *.IMG">
+					<folderInfo id="com.beyondsemi.config.ba.elf.exe.debug.23224644." name="/" resourcePath="">
+						<toolChain id="com.beyondsemi.toolchain.gnu.ba.elf.exe.debug.561184622" name="BA ELF GNU toolchain" superClass="com.beyondsemi.toolchain.gnu.ba.elf.exe.debug">
+							<targetPlatform id="com.beyondsemi.target.gnu.platform.ba.elf.exe.debug.1602754349" superClass="com.beyondsemi.target.gnu.platform.ba.elf.exe.debug"/>
+							<builder buildPath="${workspace_loc:/hello_cache/Debug}" id="com.beyondsemi.builder.ba.elf.exe.debug.1481579829" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.beyondsemi.builder.ba.elf.exe.debug"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.debug.1145455110" name="BA ELF GNU C compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.debug">
+								<option defaultValue="gnu.c.optimization.level.none" id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.optimization.1880933170" name="Optimization Level" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.optimization" value="gnu.c.optimization.level.optimize" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.1271890588" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.max" valueType="enumerated"/>
+								<option id="com.beyondsemi.option.gnu.c.compiler.endianness.1565093851" name="Endianness" superClass="com.beyondsemi.option.gnu.c.compiler.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.preprocessor.def.symbols.585727425" name="Defined symbols (-D)" superClass="gnu.c.compiler.option.preprocessor.def.symbols" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="BA22_DEee"/>
+								</option>
+								<option id="gnu.c.compiler.option.include.paths.137521369" name="Include paths (-I)" superClass="gnu.c.compiler.option.include.paths" valueType="includePath">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/mdd}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/pdd}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/common/utils/print}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/common/linkplay}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/common/utils/cqueue}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/common/utils/libc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/bluetooth/protocol/avctp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/bluetooth/protocol/avdtp}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/libs/FatLib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/include/os}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/libs/Mp3Lib}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/libs/opus}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/bluetooth}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/bluetooth/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/jos}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/pkg/sbc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/jos/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/beken_app}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/beken_driver}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/beken_no_os}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/common}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/common/bluetooth}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/include/bluetooth}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/bt/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/hc/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/lc/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/lc/dl/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/lc/uslc/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/lc/lslc/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/lmp/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/sys/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/tc/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/transport/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/hw/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/hal/hw/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/hal/hw/radio/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/hal/beken/hw/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/hal/beken/sys/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/include/class}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/src/systems}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/src/systems/none}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/src/systems/none/afs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/port/usb/src/drivers/msd}&quot;"/>
+								</option>
+								<option id="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mmac.816701508" name="use multiply-accumulate extensions (-mmac)" superClass="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mmac" value="true" valueType="boolean"/>
+								<option id="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mdsp.1107372013" name="use DSP extensions (-mdsp)" superClass="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mdsp" value="true" valueType="boolean"/>
+								<option id="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mnoharddiv.389125240" name="don't generate hardware division instruction (-mno-hard-div)" superClass="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mnoharddiv" value="false" valueType="boolean"/>
+								<option id="com.beyondsemi.optioncategory.gnu.c.compiler.insns.msinglefloat.2059500120" name="Make the double type single precision (32bit) to facilitate use of fast hardware floating point instructions (-msingle-float)" superClass="com.beyondsemi.optioncategory.gnu.c.compiler.insns.msinglefloat" value="true" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.misc.other.1492157023" name="Other flags" superClass="gnu.c.compiler.option.misc.other" value="-c -fmessage-length=0  -mno-hard-float -ffast-math " valueType="string"/>
+								<option id="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mnohardmul.2031007700" name="don't generate hardware multiplication instruction (-mno-hard-mul)" superClass="com.beyondsemi.optioncategory.gnu.c.compiler.insns.mnohardmul" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.optimization.flags.775374894" name="Other optimization flags" superClass="gnu.c.compiler.option.optimization.flags" value="-flto -G 100000 " valueType="string"/>
+								<option id="gnu.c.compiler.option.misc.pic.1520345203" name="Position Independent Code (-fPIC)" superClass="gnu.c.compiler.option.misc.pic" value="false" valueType="boolean"/>
+								<option id="gnu.c.compiler.option.warnings.toerrors.1285722919" name="Warnings as errors (-Werror)" superClass="gnu.c.compiler.option.warnings.toerrors" value="false" valueType="boolean"/>
+								<inputType id="com.beyondsemi.base.ba.elf.c.compiler.input.2102710948" superClass="com.beyondsemi.base.ba.elf.c.compiler.input"/>
+								<inputType id="com.beyondsemi.assembler.macro.input.1422009741" superClass="com.beyondsemi.assembler.macro.input"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.exe.debug.1924603311" name="BA ELF GNU C++ compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.exe.debug">
+								<option defaultValue="gnu.cpp.compiler.optimization.level.none" id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.optimization.1213999181" name="Optimization Level" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.optimization" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.1336479711" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
+								<option id="com.beyondsemi.option.gnu.cpp.compiler.endianness.1230012341" name="Endianness" superClass="com.beyondsemi.option.gnu.cpp.compiler.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.c.exe.debug.115308290" name="BA ELF GNU C linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.c.exe.debug">
+								<option id="com.beyondsemi.option.gnu.c.linker.endianness.1709012479" name="Endianness" superClass="com.beyondsemi.option.gnu.c.linker.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+								<option id="gnu.c.link.option.nostart.1826528084" name="Do not use standard start files (-nostartfiles)" superClass="gnu.c.link.option.nostart" value="true" valueType="boolean"/>
+								<option id="gnu.c.link.option.ldflags.124399501" name="Linker flags" superClass="gnu.c.link.option.ldflags" value="-T ../ram.ld -flto -Os -G 100000" valueType="string"/>
+								<option id="gnu.c.link.option.libs.147774128" name="Libraries (-l)" superClass="gnu.c.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+									<listOptionValue builtIn="false" value="mdd"/>
+									<listOptionValue builtIn="false" value="pdd"/>
+									<listOptionValue builtIn="false" value="opus"/>
+									<listOptionValue builtIn="false" value="BK3266_DM_OTA_Full_Func_lib"/>
+								</option>
+								<option id="gnu.c.link.option.paths.267008334" name="Library search path (-L)" superClass="gnu.c.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/mdd/libs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/controller/core/le/ai_voice/pdd/libs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/libs}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/host/libs/opus}&quot;"/>
+								</option>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.403635839" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.exe.debug.118950384" name="BA ELF GNU C++ linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.exe.debug">
+								<option id="com.beyondsemi.option.gnu.cpp.linker.endianness.70673811" name="Endianness" superClass="com.beyondsemi.option.gnu.cpp.linker.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.assembler.exe.debug.910627692" name="BA ELF GNU assembler" superClass="com.beyondsemi.tool.gnu.ba.elf.assembler.exe.debug">
+								<option id="com.beyondsemi.option.gnu.assembler.endianness.1632290520" name="Endianness" superClass="com.beyondsemi.option.gnu.assembler.endianness" value="com.beyondsemi.base.assembler.option.endianness.little" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.165798834" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="com.beyondsemi.assembler.input.1788062181" superClass="com.beyondsemi.assembler.input"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.archiver.base.1164429167" name="BA ELF GNU archiver" superClass="com.beyondsemi.tool.gnu.ba.elf.archiver.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.size.exe.debug.1459094188" name="BA ELF GNU size" superClass="com.beyondsemi.tool.gnu.ba.elf.size.exe.debug"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.objcopy.exe.debug.1680963084" name="BA ELF GNU objcopy" superClass="com.beyondsemi.tool.gnu.ba.elf.objcopy.exe.debug"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="host" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="host"/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+		<cconfiguration id="com.beyondsemi.config.ba.elf.exe.release.702650377">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.beyondsemi.config.ba.elf.exe.release.702650377" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.CWDLocator" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="com.beyondsemi.base.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildType=org.eclipse.cdt.build.core.buildType.release,org.eclipse.cdt.build.core.buildArtefactType=com.beyondsemi.base.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="com.beyondsemi.config.ba.elf.exe.release.702650377" name="Release" parent="com.beyondsemi.config.ba.elf.exe.release">
+					<folderInfo id="com.beyondsemi.config.ba.elf.exe.release.702650377." name="/" resourcePath="">
+						<toolChain id="com.beyondsemi.toolchain.gnu.ba.elf.exe.release.1526933230" name="BA ELF GNU toolchain" superClass="com.beyondsemi.toolchain.gnu.ba.elf.exe.release">
+							<targetPlatform id="com.beyondsemi.target.gnu.platform.ba.elf.exe.release.52526304" superClass="com.beyondsemi.target.gnu.platform.ba.elf.exe.release"/>
+							<builder buildPath="${workspace_loc:/hello_cache/Release}" id="com.beyondsemi.builder.ba.elf.exe.release.535828647" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Gnu Make Builder" superClass="com.beyondsemi.builder.ba.elf.exe.release"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.release.233472553" name="BA ELF GNU C compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.release">
+								<option defaultValue="gnu.c.optimization.level.size" id="com.beyondsemi.tool.gnu.ba.elf.compiler.c.optimization.649089002" name="Optimization Level" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.c.optimization" valueType="enumerated"/>
+								<option id="gnu.c.compiler.option.debugging.level.1561045274" name="Debug Level" superClass="gnu.c.compiler.option.debugging.level" value="gnu.c.debugging.level.none" valueType="enumerated"/>
+								<option id="com.beyondsemi.option.gnu.c.compiler.endianness.2049549206" name="Endianness" superClass="com.beyondsemi.option.gnu.c.compiler.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+								<inputType id="com.beyondsemi.base.ba.elf.c.compiler.input.1855469482" superClass="com.beyondsemi.base.ba.elf.c.compiler.input"/>
+								<inputType id="com.beyondsemi.assembler.macro.input.1837707280" superClass="com.beyondsemi.assembler.macro.input"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.exe.release.2034388926" name="BA ELF GNU C++ compiler" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.exe.release">
+								<option defaultValue="gnu.cpp.compiler.optimization.level.size" id="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.optimization.577936006" name="Optimization Level" superClass="com.beyondsemi.tool.gnu.ba.elf.compiler.cpp.optimization" valueType="enumerated"/>
+								<option id="gnu.cpp.compiler.option.debugging.level.1963856270" name="Debug Level" superClass="gnu.cpp.compiler.option.debugging.level" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
+								<option id="com.beyondsemi.option.gnu.cpp.compiler.endianness.345926028" name="Endianness" superClass="com.beyondsemi.option.gnu.cpp.compiler.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.c.exe.release.415687517" name="BA ELF GNU C linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.c.exe.release">
+								<option id="com.beyondsemi.option.gnu.c.linker.endianness.545906427" name="Endianness" superClass="com.beyondsemi.option.gnu.c.linker.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.linker.input.270335430" superClass="cdt.managedbuild.tool.gnu.c.linker.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.exe.release.1582079235" name="BA ELF GNU C++ linker" superClass="com.beyondsemi.tool.gnu.ba.elf.linker.cpp.exe.release">
+								<option id="com.beyondsemi.option.gnu.cpp.linker.endianness.1123145195" name="Endianness" superClass="com.beyondsemi.option.gnu.cpp.linker.endianness" value="com.beyondsemi.base.option.endianness.little" valueType="enumerated"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.assembler.exe.release.968180180" name="BA ELF GNU assembler" superClass="com.beyondsemi.tool.gnu.ba.elf.assembler.exe.release">
+								<option id="com.beyondsemi.option.gnu.assembler.endianness.1127000143" name="Endianness" superClass="com.beyondsemi.option.gnu.assembler.endianness" value="com.beyondsemi.base.assembler.option.endianness.little" valueType="enumerated"/>
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1367083493" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+								<inputType id="com.beyondsemi.assembler.input.2018134570" superClass="com.beyondsemi.assembler.input"/>
+							</tool>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.archiver.base.2040599919" name="BA ELF GNU archiver" superClass="com.beyondsemi.tool.gnu.ba.elf.archiver.base"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.size.exe.release.379081057" name="BA ELF GNU size" superClass="com.beyondsemi.tool.gnu.ba.elf.size.exe.release"/>
+							<tool id="com.beyondsemi.tool.gnu.ba.elf.objcopy.exe.release.638279372" name="BA ELF GNU objcopy" superClass="com.beyondsemi.tool.gnu.ba.elf.objcopy.exe.release"/>
+						</toolChain>
+					</folderInfo>
+					<sourceEntries>
+						<entry excluding="port/beken_app/app_hfp.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="host"/>
+						<entry excluding="host" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="hello_cache.com.beyondsemi.projecttype.ba.elf.exe.1512965418" name="Beyond BA application" projectType="com.beyondsemi.projecttype.ba.elf.exe"/>
+	</storageModule>
+	<storageModule moduleId="refreshScope" versionNumber="1">
+		<resource resourceType="PROJECT" workspacePath="/hello_cache"/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.beyondsemi.config.ba.elf.exe.debug.23224644;com.beyondsemi.config.ba.elf.exe.debug.23224644.;com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.debug.1145455110;com.beyondsemi.base.ba.elf.c.compiler.input.2102710948">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.beyondsemi.base.elf.c.scanner.configdiscovery"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.beyondsemi.config.ba.elf.exe.release.702650377;com.beyondsemi.config.ba.elf.exe.release.702650377.;com.beyondsemi.tool.gnu.ba.elf.compiler.c.exe.release.233472553;com.beyondsemi.base.ba.elf.c.compiler.input.1855469482">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.beyondsemi.base.elf.c.scanner.configdiscovery"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
+</cproject>

@@ -1,0 +1,157 @@
+; --------------------------------------------------------------------------------
+; @Title: Configuration for setting up a BA22 custom core.
+; @Copyright: (C) 2013-2114 BEKEN CORP, licensed for use with TRACE32(R) only
+; --------------------------------------------------------------------------------
+
+  winpage.reset
+  print ""
+  print "--------------------------------------------------------------------------------"
+  print "Configuration for setting up a BA22 custom core"
+  print "--------------------------------------------------------------------------------"
+
+  area
+  print "Step1: Reset         "
+  RESet
+  SYStem.RESet
+  SYStem.CPU BA22
+  
+  print "Step2: select JTAG Protocol        "
+; select JTAG Protocol 34bit FAST or 80bit ORIGINAL
+  SYStem.CONFIG.DebugProtocol ORIGINAL
+
+  print "Step3: select Memory Access Module        "
+; select Memory Access Module
+; SPR mapped CPU module or WISHBONE
+  SYStem.CONFIG.MemAccessModule CPU 
+ 
+  SYStem.memaccess DENIED
+  SYStem.cpuaccess Enable
+  SYStem.Option IMASKASM ON
+  SYStem.Option IMASKHLL ON
+
+  print "Step4: Set Little Endian        "
+; Big or Little Endian
+  SYStem.Option LittleEnd ON
+
+  print "Step5: Set Jtag Clock        "
+  SYStem.JtagClock                      200khz
+
+  print "Step6: Configure Exception Vectors of the Design         "
+; Configure Exception Vectors of the Design
+  SYStem.CONFIG.ReSeTException          0x008
+  SYStem.CONFIG.BUSErrorException       0x010
+  SYStem.CONFIG.AlignmentException      0x018
+  SYStem.CONFIG.IllegalInstrException   0x020
+  SYStem.CONFIG.TRAPException           0x028
+  SYStem.CONFIG.TickTimerException      0x030
+  SYStem.CONFIG.INTerruptException      0x038
+  SYStem.CONFIG.SystemCallException     0x040
+  SYStem.CONFIG.FloatingPointException  0x048
+  SYStem.CONFIG.InstrPageFaultException 0x060
+  SYStem.CONFIG.DataPageFaultException  0x068
+  SYStem.CONFIG.ItlbMissException       0x070
+  SYStem.CONFIG.DtlbMissException       0x078
+  
+; RESET and connect to BA2x core
+  print "Step7: Configure System Reset Duration         "
+  SYStem.Option ResetDURation 250ms
+  SYStem.Option WaitReset 200ms /Poll
+  
+  print "Step8: System Up         "
+  SYStem.Up 
+  
+  print "STEP9: Inform the debugger about read only address ranges(0x0, 0x400000)."
+  MAP.BOnchip 0x00000000++0x00400000
+
+  print "Step10: Invoke InitializationBK3260 Routine        "
+  gosub InitializationBK3260
+   
+  print "                              "
+  print "Step11: Load Elf File         "
+  SYStem.JtagClock                      1MHz
+  y.Spath ../
+  Data.LOAD.Elf "./BK3260.elf" /NoCODE
+  
+  ;SYStem.JtagClock                      200khz
+  print "Step12: Over         "
+  
+  ;==Open some basic windows======================================================================
+  print "WINPAGE.RESET                              "
+  TOOLBAR ON
+  STATUSBAR ON
+  ;FRAMEPOS 17.857,10.417,,,Maximized
+  WINPAGE.RESET
+  
+  ;WINCLEAR 
+  print "Breakpoint listing                              "
+  WINPOS 99.429 44.083 78. 6. 23. 1. W002
+  WINTABS 13. 16. 0. 0. 0. 0. 0.
+  Break.List
+  
+  ;WINPOS 99.714 56.833 77. 7. 0. 0. W003
+  ;AREA.RESet
+  ;AREA
+   
+  print "CPU registers and stack view                             "
+  WINPOS 0.0 51.75 94. 12. 0. 0. W005
+  Register
+   
+  print "Data list window with disassembly and/or C/C++ code                            "
+  WINPOS 0.0 0.0 94. 45. 11. 1. W000
+  WINTABS 10. 10. 25. 62.
+  Data.List   
+   
+  ENDDO
+
+
+; --------------------------------------------------------------------------------  
+;                            BK3260 Initialization                     
+; --------------------------------------------------------------------------------
+InitializationBK3260:
+
+  LOCAL &reg &busyFlag
+
+  print "    1, Disable Gate"
+  D.S AD:0x0080000c %LE %Long 0x00000000 
+  PRINT Data.Long(AD:0x0080000c)
+
+  ;watchdog needs be deactivated
+  print "    2, Disable Watchdog"
+  D.S AD:0x0F48000 %LE %Long 0x005A4000 
+  PRINT Data.Long(AD:0x00F48000)
+
+  D.S AD:0x0F48000 %LE %Long 0x00A54000 
+  PRINT Data.Long(AD:0x00F48000)
+  
+  print "    3, Select 26MHz of System"
+  D.S AD:0x00800000 %LE %Long 0x00000100 
+  PRINT Data.Long(AD:0x00800000)
+  
+  print "    4, Select Clock of Flash"
+  D.S AD:0x0080101c %LE %Long 0x0000020c
+  PRINT Data.Long(AD:0x0080101c)
+
+  print "    5, Erase Flash"
+  &reg=Data.Long(AD:0x0080101c)
+  &reg=&reg|0x100
+  D.S AD:0x0080101c %LE %Long &reg
+  PRINT Data.Long(AD:0x0080101c)
+
+  D.S AD:0x00801000 %LE %Long 0x67000000
+  PRINT Data.Long(AD:0x00801000)
+
+  RETURN
+
+; --------------------------------------------------------------------------------  
+;                            BK3261 Check Flash Busy Bit                     
+; --------------------------------------------------------------------------------
+BK3260CheckFlashIsBusy:
+  LOCAL &temp
+  &temp=0x1
+  ON ERROR GOTO _retry
+_retry:
+  WAIT 0.1s
+  PRINT "This is a dummy read to check if flash is ready"
+  &temp=Data.Long(AD:0x801000)
+  ON ERROR inherit
+  RETURN &temp

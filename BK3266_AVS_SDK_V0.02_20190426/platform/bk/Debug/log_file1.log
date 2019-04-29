@@ -1,0 +1,13 @@
+This is log file for the JTAG Download HID.exe, please don't modify!
+
+2017-05-02 15:58:34 FillDeviceList
+2017-05-02 15:58:34 OpenUsbDevice(0)
+2017-05-02 15:58:34 DeviceUpdate
+2017-05-02 16:02:34 OnSelChangeChipType
+2017-05-02 16:02:34 UpdateBTAddrUI
+2017-05-02 16:02:38 OnButtonLoad
+2017-05-02 16:02:51 UpdateBTAddrUI
+2017-05-02 16:03:40 OnClose
+2017-05-02 16:03:40 OnCancel
+2017-05-02 16:03:40 OnClose
+2017-05-02 16:03:40 DestroyWindow
