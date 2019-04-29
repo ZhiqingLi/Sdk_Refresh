@@ -1,0 +1,6 @@
+
+VENDOR          := Linkplay
+BUILD_PLATFORM  := actions
+LINKPLAY_CFLAGS := -DBOARD_JL_36410_FAR
+
+

@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\ASM32F030\ASM32F030.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\ASM32F030\ASM32F030.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 22 11:37:53 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 23 15:05:16 2019
 <BR><P>
 <H3>Maximum Stack Usage =        156 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -168,6 +168,7 @@ Global Symbols
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmConfigChannel
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispScan
 <LI><a href="#[21]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispAutoChange
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaterPump_WorkStateDetect
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_Systick_Init
 <LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
@@ -416,8 +417,8 @@ Global Symbols
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispInit
 </UL>
 
-<P><STRONG><a name="[48]"></a>IsTimeOut</STRONG> (Thumb, 40 bytes, Stack size 12 bytes, timeout_api.o(i.IsTimeOut))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = IsTimeOut
+<P><STRONG><a name="[48]"></a>IsTimeOut</STRONG> (Thumb, 36 bytes, Stack size 8 bytes, timeout_api.o(i.IsTimeOut))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = IsTimeOut
 </UL>
 <BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaterPump_WorkStateDetect
 <LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GpioKeyScan
@@ -526,7 +527,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispScan
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispScan
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_SaveConfig
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_WaveConfig
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispInit
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispInit
 </UL>
@@ -544,13 +545,13 @@ Global Symbols
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PolarityConfig
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_SaveConfig
+<BR>[Called By]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_WaveConfig
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispInit
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispInit
 </UL>
 
-<P><STRONG><a name="[69]"></a>Pwm_SaveConfig</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, asmplatformconfig.o(i.Pwm_SaveConfig))
-<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = Pwm_SaveConfig &rArr; PwmEnableChannel &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf
+<P><STRONG><a name="[69]"></a>Pwm_WaveConfig</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, asmplatformconfig.o(i.Pwm_WaveConfig))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = Pwm_WaveConfig &rArr; PwmEnableChannel &rArr; GPIO_Init &rArr; assert_failed &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmEnableChannel
 <LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PwmConfigChannel
@@ -869,13 +870,15 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[78]"></a>WaterPump_WorkStateDetect</STRONG> (Thumb, 128 bytes, Stack size 32 bytes, asmplatformconfig.o(i.WaterPump_WorkStateDetect))
-<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = WaterPump_WorkStateDetect &rArr; ADC_GetFlagStatus &rArr; assert_failed &rArr; __2printf
+<P><STRONG><a name="[78]"></a>WaterPump_WorkStateDetect</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, asmplatformconfig.o(i.WaterPump_WorkStateDetect))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = WaterPump_WorkStateDetect &rArr; ADC_GetFlagStatus &rArr; assert_failed &rArr; __2printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
 <LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsTimeOut
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
+<LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
@@ -889,10 +892,12 @@ Global Symbols
 <P><STRONG><a name="[53]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printf5.o(i.__0printf$5))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = __2printf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+<BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaterPump_WorkStateDetect
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_Systick_Init
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispInit
 <LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispInit
+<LI><a href="#[1e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;assert_failed
 </UL>
 
@@ -962,7 +967,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> printf5.o(i.__0printf$5)
 </UL>
-<P><STRONG><a name="[1e]"></a>main</STRONG> (Thumb, 322 bytes, Stack size 0 bytes, main.o(i.main))
+<P><STRONG><a name="[1e]"></a>main</STRONG> (Thumb, 338 bytes, Stack size 0 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 156<LI>Call Chain = main &rArr; Usart_Debug_Init &rArr; USART_Init &rArr; RCC_GetClocksFreq &rArr; __aeabi_uidivmod
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WaterPump_WorkStateDetect
@@ -970,7 +975,7 @@ Global Symbols
 <LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_WaterPump_Init
 <LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_WaterPump_Control
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_Systick_Init
-<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_SaveConfig
+<LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Pwm_WaveConfig
 <LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispStateSet
 <LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Light_DispInit
 <LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Led_DispStateSet
@@ -980,6 +985,7 @@ Global Symbols
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Display
 <LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
 <LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsTimeOut
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 <LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)

@@ -45,13 +45,13 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="Carry Spk" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="53:25:0D:19:01:61" />
+        <add key="bt_addr" value="53:25:0D:19:01:6B" />
         <add key="bt_addr_start" value="53:25:0D:19:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="53:25:0D:19:FF:FF" />
         <add key="bt_txpwr" value="+2DBM" />
         <add key="bt_rf_param" value="255" />
-        <add key="bt_2acl_en" value="True" />
+        <add key="bt_2acl_en" value="False" />
         <add key="bt_a2dp_en" value="True" />
         <add key="bt_a2dp_vol_ctrl_en" value="True" />
         <add key="bt_sco_en" value="True" />
@@ -230,5 +230,14 @@
         <add key="led_tws_slave_conn_bluepat" value="2" />
         <add key="led_tws_slave_conn_unit" value="2" />
         <add key="led_tws_slave_conn_cycle" value="86" />
+        <add key="bt_user_param_en" value="False" />
+        <add key="rf_captune" value="7" />
+        <add key="rf_pa_gain" value="7" />
+        <add key="rf_mix_gain" value="5" />
+        <add key="rf_dig_gain" value="55" />
+        <add key="rf_pa_bias" value="4" />
+        <add key="rf_vbko_add" value="0" />
+        <add key="bt_dis_reconnect_en" value="True" />
+        <add key="bt_dis_reconnect_cnt" value="10" />
     </appSettings>
 </configuration>

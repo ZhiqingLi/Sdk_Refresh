@@ -103,6 +103,13 @@ void func_bt_message(u16 msg)
 
     case MSG_SYS_1S:
         bt_send_msg(BT_MSG_HFP_REPORT_BAT);
+        if (xcfg_cb.bt_dis_reconnect_en && (f_bt.dis_reconnect_cnt < xcfg_cb.bt_dis_reconnect_cnt)) {
+    		f_bt.dis_reconnect_cnt++;
+    		if (bt_get_status() < BT_STA_DISCONNECTING) {
+    			bt_connect();
+    		}
+    		printf("bt disconnect reconnect %d S;\n", f_bt.dis_reconnect_cnt);
+        }
         break;
 
     case EVT_A2DP_MUSIC_PLAY:

@@ -1,0 +1,8 @@
+NAME=actions_linkplay_demo
+INTRO=project linkplay_demo
+BUILD_PLATFORM=actions
+CHIPSET=
+
+DEVICE_INI_FILE=linkplay_demo.ini
+DEVICE_CFG_FILE=linkplay_demo.cfg
+DEVICE_TXT_FILE=linkplay_demo.txt

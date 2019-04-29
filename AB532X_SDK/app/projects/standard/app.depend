@@ -32,14 +32,14 @@
 
 1543484477 f:\soft_sdk\ab532x_sdk\app\platform\header\sfr.h
 
-1554857921 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
+1556270363 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
 
 1553654180 f:\soft_sdk\ab532x_sdk\app\platform\header\config_define.h
 
-1553655048 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
+1556159336 f:\soft_sdk\ab532x_sdk\app\projects\standard\xcfg.h
 
 1554293629 f:\soft_sdk\ab532x_sdk\app\platform\header\config_extra.h
 
@@ -130,7 +130,7 @@
 	"func_update.h"
 	"func_spdif.h"
 
-1552486234 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.h
+1556158891 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt.h
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_bt_hid.h
 
@@ -272,7 +272,7 @@
 	"include.h"
 	"bsp_ble.h"
 
-1553653650 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
+1556159446 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_bt.c
 	"include.h"
 	"api.h"
 
@@ -361,7 +361,7 @@
 	"include.h"
 	"qn8035.h"
 
-1554949517 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
+1556260684 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func.c
 	"include.h"
 
 1553653937 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_aux.c
@@ -534,7 +534,7 @@
 	"include.h"
 	"func.h"
 
-1554858222 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
+1556266596 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\message\msg_bt.c
 	"include.h"
 	"func.h"
 	"func_bt.h"

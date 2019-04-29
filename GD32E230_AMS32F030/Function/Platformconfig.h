@@ -62,9 +62,10 @@ extern "C"{
 extern void Display(void);
 extern void DisplayScan(void);
 extern int fputc(int ch, FILE *f);
-extern void Pwm_SaveConfig(uint32_t Freq, uint16_t Duty);
+extern void Pwm_WaveConfig(uint32_t Freq, uint16_t Duty);
 extern void System_Systick_Init(uint32_t ticks);
 extern void System_WaterPump_Control(FunctionalState NewState);
+extern void WaterPump_WorkDetectInit(void);
 extern uint16_t WaterPump_WorkStateDetect(void);
 extern void System_WaterPump_Init(void);
 extern void Usart_Debug_Init(uint32_t Baudrate);

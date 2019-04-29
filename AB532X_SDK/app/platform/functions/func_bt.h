@@ -16,6 +16,7 @@ typedef struct{
     u8 hid_menu_flag;
     u8 hid_discon_flag;
     u8 tws_status;
+    u8 dis_reconnect_cnt;
     u8 rec_pause    : 1;
     u8 pp_2_unmute  : 1;
     u8 need_pairing : 1;

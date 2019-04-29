@@ -69,48 +69,48 @@ const WAVE_SET WAVE_OPERATION_DATA[WAVE_MAX_OPERATION] = {
 	{5000*5, WAVE_MIN_FREQ},
 	{5000*5, WAVE_MIN_FREQ},
 	
-	{1000, WAVE_MIN_FREQ+10},
-	{1000, WAVE_MIN_FREQ+20},        
-	{1000, WAVE_MIN_FREQ+30},
-	{1000, WAVE_MIN_FREQ+40},
-	{1000, WAVE_MIN_FREQ+50},
-	{1000, WAVE_MIN_FREQ+60},
-	{1000, WAVE_MIN_FREQ+70},        
-	{1000, WAVE_MIN_FREQ+80},
-	{1000, WAVE_MIN_FREQ+90},
+	{1000, WAVE_MIN_FREQ+1},
+	{1000, WAVE_MIN_FREQ+2},        
+	{1000, WAVE_MIN_FREQ+3},
+	{1000, WAVE_MIN_FREQ+4},
+	{1000, WAVE_MIN_FREQ+5},
+	{1000, WAVE_MIN_FREQ+6},
+	{1000, WAVE_MIN_FREQ+7},        
+	{1000, WAVE_MIN_FREQ+8},
+	{1000, WAVE_MIN_FREQ+9},
 	
 	{3000*5, WAVE_STILL_FREQ},        
-	{1000, WAVE_MAX_FREQ-90},
-	{1000, WAVE_MAX_FREQ-80},
-	{1000, WAVE_MAX_FREQ-70},
-	{1000, WAVE_MAX_FREQ-60},
-	{1000, WAVE_MAX_FREQ-50},        
-	{1000, WAVE_MAX_FREQ-40},
-	{1000, WAVE_MAX_FREQ-30},
-	{1000, WAVE_MAX_FREQ-20},
-	{1000, WAVE_MAX_FREQ-10},  
+	{1000, WAVE_MAX_FREQ-9},
+	{1000, WAVE_MAX_FREQ-8},
+	{1000, WAVE_MAX_FREQ-7},
+	{1000, WAVE_MAX_FREQ-6},
+	{1000, WAVE_MAX_FREQ-5},        
+	{1000, WAVE_MAX_FREQ-4},
+	{1000, WAVE_MAX_FREQ-3},
+	{1000, WAVE_MAX_FREQ-2},
+	{1000, WAVE_MAX_FREQ-1},  
 
 	{4000*5, WAVE_MAX_FREQ},        
-	{1000, WAVE_MAX_FREQ-10},
-	{1000, WAVE_MAX_FREQ-20},
-	{1000, WAVE_MAX_FREQ-30},
-	{1000, WAVE_MAX_FREQ-40},
-	{1000, WAVE_MAX_FREQ-50},
-	{1000, WAVE_MAX_FREQ-60},
-	{1000, WAVE_MAX_FREQ-70},
-	{1000, WAVE_MAX_FREQ-80},
-	{1000, WAVE_MAX_FREQ-90},
+	{1000, WAVE_MAX_FREQ-1},
+	{1000, WAVE_MAX_FREQ-2},
+	{1000, WAVE_MAX_FREQ-3},
+	{1000, WAVE_MAX_FREQ-4},
+	{1000, WAVE_MAX_FREQ-5},
+	{1000, WAVE_MAX_FREQ-6},
+	{1000, WAVE_MAX_FREQ-7},
+	{1000, WAVE_MAX_FREQ-8},
+	{1000, WAVE_MAX_FREQ-9},
 
 	{3000*5, WAVE_STILL_FREQ},
-	{1000, WAVE_MIN_FREQ+90},
-	{1000, WAVE_MIN_FREQ+80},
-	{1000, WAVE_MIN_FREQ+70},
-	{1000, WAVE_MIN_FREQ+60},
-	{1000, WAVE_MIN_FREQ+50},
-	{1000, WAVE_MIN_FREQ+40},
-	{1000, WAVE_MIN_FREQ+30},   
-	{1000, WAVE_MIN_FREQ+20},        
-	{1000, WAVE_MIN_FREQ+10},
+	{1000, WAVE_MIN_FREQ+9},
+	{1000, WAVE_MIN_FREQ+8},
+	{1000, WAVE_MIN_FREQ+7},
+	{1000, WAVE_MIN_FREQ+6},
+	{1000, WAVE_MIN_FREQ+5},
+	{1000, WAVE_MIN_FREQ+4},
+	{1000, WAVE_MIN_FREQ+3},   
+	{1000, WAVE_MIN_FREQ+2},        
+	{1000, WAVE_MIN_FREQ+1},
 };
 
 /* 常量定义 */
@@ -131,7 +131,7 @@ int main(void)
 	//系统滴答定时器初始化，单位uS
 	System_Systick_Init(1000);
 	/* 喇叭驱动信号输出初始化 */
-	Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+	Pwm_WaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
 	TimeOutSet(&WaveAutoSwitchTimer, 0);
 	/* GUI LED显示初始化 */
 	Led_DispInit();
@@ -157,42 +157,49 @@ int main(void)
 
 			if (DISP_STATE_IDLE != Light_WorkState[CurWorkMode].CurDispStateNum) {
 				System_WaterPump_Control(ENABLE);
-				Pwm_SaveConfig(WAVE_OPERATION_DATA[WaveAutoIndex].Freq, WAVE_PWM_DUTY);
-				Led_DispStateSet(DISP_STATE_LOOP_SPIN, DISP_COLOR_CYAN, 1500);
+				TimeOutSet(&WaveAutoSwitchTimer, 0);
+				Led_DispStateSet(DISP_STATE_LOOP_CHANGE, DISP_COLOR_CYAN, 2000);
 			}
 			else {
 				System_WaterPump_Control(DISABLE);
-				Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+				Pwm_WaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
 				Led_DispStateSet(DISP_STATE_POWER_ON, DISP_COLOR_WHITE, 1500);
 			}
-			Light_DispStateSet(Light_WorkState[CurWorkMode].CurDispStateNum, Light_WorkState[CurWorkMode].CurDispColorNum, Light_WorkState[CurWorkMode].ScanTimerNum);
+			Light_DispStateSet(Light_WorkState[CurWorkMode].CurDispStateNum,
+			Light_WorkState[CurWorkMode].CurDispColorNum, Light_WorkState[CurWorkMode].ScanTimerNum);
 		}
 
 		if (0 == CurWorkMode) {
 			continue;
 		}
 
-		if (IsTimeOut(&WaveAutoSwitchTimer)) {
-			WaveAutoIndex++;
-			WaveAutoIndex %= WAVE_MAX_OPERATION;
-			
-			TimeOutSet(&WaveAutoSwitchTimer, WAVE_OPERATION_DATA[WaveAutoIndex].Timer);
-			Pwm_SaveConfig(WAVE_OPERATION_DATA[WaveAutoIndex].Freq, WAVE_PWM_DUTY);
+		uint16_t Msg = WaterPump_WorkStateDetect();
+		if (MSG_NONE != Msg) {
+			printf("WaterPump_WorkStateDetect Msg = %x;\n", Msg);
 		}
-		
-			
-		if (MSG_VOL_LOW == WaterPump_WorkStateDetect()) {
-			CurWorkMode = 0;
+
+		if (MSG_VOL_NORMAL == Msg) {
+			if (IsTimeOut(&WaveAutoSwitchTimer)) {
+				WaveAutoIndex++;
+				WaveAutoIndex %= WAVE_MAX_OPERATION;
+
+				TimeOutSet(&WaveAutoSwitchTimer, WAVE_OPERATION_DATA[WaveAutoIndex].Timer);
+				Pwm_WaveConfig(WAVE_OPERATION_DATA[WaveAutoIndex].Freq, WAVE_PWM_DUTY);
+				Led_DispStateSet(DISP_STATE_LOOP_SPIN, DISP_COLOR_CYAN, 1500);
+			}
+		}
+		else if (MSG_VOL_LOW == Msg){
 			Led_DispStateSet(DISP_STATE_LOOP_CHANGE, DISP_COLOR_RED, 2000);
+			CurWorkMode = 0;
 			Light_DispStateSet(DISP_STATE_IDLE, DISP_COLOR_OFF, 0);
-			Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+			Pwm_WaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
 			System_WaterPump_Control(DISABLE);
 		}
-		else if (MSG_VOL_HIGHT == WaterPump_WorkStateDetect()) {
-			CurWorkMode = 0;		
+		else if (MSG_VOL_HIGHT == Msg) {	
 			Led_DispStateSet(DISP_STATE_LOOP_CHANGE, DISP_COLOR_RED, 500);
+			CurWorkMode = 0;
 			Light_DispStateSet(DISP_STATE_IDLE, DISP_COLOR_OFF, 0);
-			Pwm_SaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
+			Pwm_WaveConfig(WAVE_MIN_FREQ, PWM_OUTPUT_OFF);
 			System_WaterPump_Control(DISABLE);
 		}
 	}

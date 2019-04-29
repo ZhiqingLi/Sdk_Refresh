@@ -66,6 +66,8 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u8 rf_txdbm;                                //DBM
     u8 rf_udf;                                  //UDF
     u8 bt_pwrkey_nsec_discover;                 //PWRKEY开机长按进入配对: 0:不支持, 1:1秒, 2:2秒, 3:3秒, 4:4秒, 5:5秒, 6:6秒, 7:7秒, 8:8秒
+    u32 bt_dis_reconnect_en              : 1;   //蓝牙断开主动回连
+    u8 bt_dis_reconnect_cnt;                    //主动回连时间(单位S)
     u32 bt_2acl_en                       : 1;   //连接两部手机功能
     u32 bt_a2dp_en                       : 1;   //音乐播放功能
     u32 bt_a2dp_vol_ctrl_en              : 1;   //音乐音量同步

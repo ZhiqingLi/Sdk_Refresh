@@ -140,7 +140,6 @@ FlagStatus IsTimeOut(TIMER* timer)
 
 	if(LastSystickVal >= (timer->TickValCache +timer->TimeOutVal))
 	{
-		timer->TickValCache = CORET_Systick_Count;
 		return SET;
 	}
 

@@ -257,7 +257,7 @@ void System_WaterPump_Init(void) {
     修改内容   : 新生成函数
 
 *****************************************************************************/
-void Pwm_SaveConfig(uint32_t Freq, uint16_t Duty) {
+void Pwm_WaveConfig(uint32_t Freq, uint16_t Duty) {
 	PwmConfigChannel(PWM14_CH1_A4_B1, Freq, Duty);
 	PwmEnableChannel(PWM14_CH1_A4_B1, PWM_IO_SEL1, PWM_OUTPUT_HIGH);
 }
@@ -300,22 +300,50 @@ void System_WaterPump_Control(FunctionalState NewState) {
     修改内容   : 新生成函数
 
 *****************************************************************************/
-#define WATER_PUMP_DET_JITTER			20
-#define WATER_PUMP_DETECT_NULL			(100*4095/3300)
+#define WATER_PUMP_DET_JITTER			5000
+#define WATER_PUMP_DETECT_CNT			1000
+#define WATER_PUMP_DETECT_NULL			(70*4095/3300)
 #define WATER_PUMP_DETECT_SORT			(500*4095/3300)
 
+const uint16_t WaterPumpParam[3] = {WATER_PUMP_DETECT_NULL, WATER_PUMP_DETECT_SORT, 4095};
+const uint16_t WaterPumpDetMsg[3] = {MSG_VOL_LOW, MSG_VOL_NORMAL, MSG_VOL_HIGHT};
+
+/*****************************************************************************
+ 函 数 名  : WaterPump_WorkStateDetect
+ 功能描述  : 水泵工作电流检测，通过检测电流大小判断?-
+                 ??位
+ 输入参数  : void  
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年4月22日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
 uint16_t WaterPump_WorkStateDetect(void) {
-	uint16_t WaterPumpDetectVal = 0, DetectMsg = MSG_VOL_NORMAL;
-	static uint8_t	 CurIndex,PrevIndex = 0xFF;
+	static uint32_t SampleWaterPuapDetVal = 0, AverageWaterPampDetVal = 0;
+	static uint16_t	WaterPampDetCnt = WATER_PUMP_DETECT_CNT,PrevIndex = 0xFF;
 	static TIMER WaterPumpDetTimer;
-	const uint16_t WaterPumpParam[3] = {WATER_PUMP_DETECT_NULL, WATER_PUMP_DETECT_SORT, 4095};
-	const uint16_t WaterPumpDetMsg[3] = {MSG_VOL_LOW, MSG_VOL_NORMAL, MSG_VOL_HIGHT};
 	
 	if (SET == ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC)) {
-		WaterPumpDetectVal = ADC_GetConversionValue(ADC1);
+		SampleWaterPuapDetVal += ADC_GetConversionValue(ADC1);
+		WaterPampDetCnt--;
+	}
 
+	if (0 == WaterPampDetCnt) {
+		WaterPampDetCnt = WATER_PUMP_DETECT_CNT;
+		AverageWaterPampDetVal = (SampleWaterPuapDetVal/WATER_PUMP_DETECT_CNT);
+		SampleWaterPuapDetVal = 0;
+
+		printf("WaterPump_WorkStateDetect ADC_Value=%d;\n", AverageWaterPampDetVal);
+
+		uint8_t CurIndex = 0;
 		for (CurIndex = 0; CurIndex < 3; CurIndex++) {
-			if (WaterPumpDetectVal < WaterPumpParam[CurIndex]) {
+			if (AverageWaterPampDetVal < WaterPumpParam[CurIndex]) {
 				break;
 			}
 		}
@@ -325,12 +353,13 @@ uint16_t WaterPump_WorkStateDetect(void) {
 			PrevIndex = CurIndex;
 		}
 		else if (IsTimeOut(&WaterPumpDetTimer)) {
-			TimeOutSet(&WaterPumpDetTimer, 500);
-			DetectMsg = WaterPumpDetMsg[CurIndex];
+			TimeOutSet(&WaterPumpDetTimer, WATER_PUMP_DET_JITTER/2);
+			return WaterPumpDetMsg[CurIndex];
 		}
+
 	}
 
-	return DetectMsg;
+	return MSG_NONE;
 }
 /*****************************************************************************
  函 数 名  : Display

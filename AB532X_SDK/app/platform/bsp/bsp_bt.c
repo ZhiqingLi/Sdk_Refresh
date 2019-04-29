@@ -389,6 +389,9 @@ void bt_emit_notice(uint evt, u32 param)
         }
 #endif
         f_bt.warning_status |= BT_WARN_DISCON;
+        if (xcfg_cb.bt_dis_reconnect_en) {		//增加蓝牙断开是否主动回连手机功能
+        	f_bt.dis_reconnect_cnt = 0;			//启动断开回连
+        }
         delay_5ms(5);
         break;
     case BT_NOTICE_CONNECTED:

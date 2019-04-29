@@ -1,0 +1,8 @@
+NAME=actions_linkplay_muvo
+INTRO=project linkplay_muvo
+BUILD_PLATFORM=actions
+CHIPSET=
+
+DEVICE_INI_FILE=linkplay_muvo.ini
+DEVICE_CFG_FILE=linkplay_muvo.cfg
+DEVICE_TXT_FILE=linkplay_muvo.txt

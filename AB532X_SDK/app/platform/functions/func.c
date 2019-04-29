@@ -191,8 +191,8 @@ void func_message(u16 msg)
             	func_cb.sta = FUNC_NULL;
             }
             else if (bt_nor_is_connected()) {
-            	//printf ("bt_disconnect()");
-            	//bt_disconnect();
+            	printf ("bt_disconnect();\n");
+            	bt_disconnect();
             }
             break;
 
