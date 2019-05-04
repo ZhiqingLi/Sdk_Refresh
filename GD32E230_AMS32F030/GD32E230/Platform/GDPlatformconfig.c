@@ -85,14 +85,16 @@ void Usart_Debug_Init(uint32_t Baudrate){
     //gpio_mode_set(GPIOA, GPIO_MODE_AF, GPIO_PUPD_PULLUP, GPIO_PIN_15);
     //gpio_output_options_set(GPIOA, GPIO_OTYPE_PP, GPIO_OSPEED_10MHZ, GPIO_PIN_15);
     
-	/* USARTx configured as follow:
+	/* enable USART clock */
+    rcu_periph_clock_enable(RCU_USART1);
+    
+    /* USARTx configured as follow:
 	- BaudRate = 115200 baud  
 	- Word Length = 8 Bits
 	- Stop Bit = 1 Stop Bit
 	- Parity = No Parity
 	- Hardware flow control disabled (RTS and CTS signals)
-	- Receive and transmit enabled
-	*/
+	- Receive and transmit enabled*/
     usart_deinit(USART1);
     usart_word_length_set(USART1, USART_WL_8BIT);
     usart_stop_bit_set(USART1, USART_STB_1BIT);
