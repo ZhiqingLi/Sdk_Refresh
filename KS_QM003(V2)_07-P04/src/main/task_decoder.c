@@ -306,7 +306,7 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
 	TempVol = gSys.Volume;
 	if(TempVol < 7)
 	{
-		TempVol = 10;
+		TempVol = 7;
 	}
 
 #ifdef SOUND_REMIND_VOL

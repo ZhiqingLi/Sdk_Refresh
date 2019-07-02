@@ -436,6 +436,11 @@ static void func_bt_enter(void)
     func_bt_enter_display();
     led_bt_init();
 
+#if PWM_TIMER_EN
+	pwm_gui_setting(GUI_ERRO_TIMER);
+	pwm_rgb_setting(COLOUR_YELLOW, RGB_SWAP_TIMER);
+#endif
+
 #if WARNING_FUNC_BT
     mp3_res_play(RES_BUF_BT_MODE_MP3, RES_LEN_BT_MODE_MP3);
 #endif // WARNING_FUNC_BT

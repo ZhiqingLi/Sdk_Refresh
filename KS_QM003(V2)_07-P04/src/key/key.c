@@ -77,6 +77,7 @@ void KeyInit(void)
 #endif
 
 #ifdef FUNC_ADC_ADJUST_VOLUME_EN
+	//执行开机音量检查及同步。
 	AdcAdjustVolInit();
 #endif
 	
@@ -418,8 +419,13 @@ void KeyScan(void)
 		gSys.SleepLedOffFlag = FALSE;
 #endif
 		
-#ifdef FUNC_WIFI_EN                             //WiFi升级中禁止按键操作
-		if(!WiFiFirmwareUpgradeStateGet() && !WiFiKaiShuChildLockStateGet())
+#ifdef FUNC_WIFI_EN                             
+		if (WiFiKaiShuChildLockStateGet()) {
+			MsgSend(MSG_SOUND_LOCK_ON);
+			return;
+		}
+		
+		if(!WiFiFirmwareUpgradeStateGet())				//WiFi升级中禁止按键操作
 #endif
 		{
 			APP_DBG("Key Msg : %x\n", Msg);

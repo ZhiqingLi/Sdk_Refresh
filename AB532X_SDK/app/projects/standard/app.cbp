@@ -391,6 +391,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="port/port_led.h" />
+		<Unit filename="port/port_ledpwm.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="port/port_ledpwm.h" />
 		<Unit filename="port/port_ledseg.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -85,6 +85,6 @@
 ".\output\wifi_uart_com.o"
 ".\output\wifi_bt_control.o"
 --strict --scatter ".\MVs18.sct"
---keep *.o(.mach*.init) --keep *.o(.shell*.cmd) --keep *.o(.notify*.init) --keep *.o(.sched.stub*) --keep *.o(.driver*.isr) --keep *.o(CACHE.4KBMEM) --diag_suppress=L6314W,L6319W --summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--keep *.o(.mach*.init) --keep *.o(.shell*.cmd) --keep *.o(.notify*.init) --keep *.o(.sched.stub*) --keep *.o(.driver*.isr) --keep *.o(CACHE.4KBMEM) --diag_suppress=L6314W,L6319W --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\output\SWL001.map" -o .\output\SWL001.axf

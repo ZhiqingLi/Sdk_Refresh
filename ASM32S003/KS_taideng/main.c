@@ -30,10 +30,10 @@ extern volatile uint8_t I2CWrBuffer[BUFSIZE];
 extern volatile uint8_t I2CRdBuffer[BUFSIZE];
 
 #define MAX_PWM_DUTY_CNT		16
-#define LIGHT_PWM_CHANGE_CNT	200						//每次调整亮度的时间间隔，单位mS
+#define LIGHT_PWM_CHANGE_CNT	200						//脙驴麓脦碌梅脮没脕脕露脠碌脛脢卤录盲录盲赂么拢卢碌楼脦禄mS
 
 
-//全局变量结构体定义
+//脠芦戮脰卤盲脕驴陆谩鹿鹿脤氓露篓脪氓
 typedef enum _LIGHT_WORK_STATUS_
 {
 	LIGHT_WORK_STATUS_SUNLIGHT = 0,
@@ -258,7 +258,7 @@ void LightDutyContorlChange(uint16_t Msg)
 	gSys.IsPwmSetDone = TRUE;
 	
 }
-//七彩灯闪烁控制
+//脝脽虏脢碌脝脡脕脣赂驴脴脰脝
 void RGBDisplayScan(void)
 {
 	switch(gSys.LightBlinkState)
@@ -323,7 +323,7 @@ void RGBDisplayScan(void)
 	gSys.IsPwmSetDone = TRUE;
 }
 
-//PWM输出扫描
+//PWM脢盲鲁枚脡篓脙猫
 void PwmDisplayScan(void)
 {
 #ifdef FUNC_PWM_EN

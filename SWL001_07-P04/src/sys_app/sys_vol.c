@@ -1521,8 +1521,9 @@ void SilenceAmpMuteProc(int16_t* Buffer, uint32_t Len)
 void AmpMuteControl(bool Mute)
 {
 	static bool IsMuteFlag = TRUE;
+	static TIMER MuteDelay;
 	//这里保证Mute只会执行一次
-	if(IsMuteFlag == Mute)
+	if((IsMuteFlag == Mute) || !IsTimeOut(&MuteDelay))
 	{
 		return;
 	}
@@ -1532,15 +1533,12 @@ void AmpMuteControl(bool Mute)
 	if(Mute)
 	{
 		GpioAmpMuteEnable();
+		TimeOutSet(&MuteDelay, 0);
 	}
 	else
 	{
 		GpioAmpMuteDisable();
-	}
-#elif defined(FUNC_ST_DDX33X_EN)
-	if(STA33X_MuteControl(Mute))
-	{
-		IsMuteFlag = Mute;
+		TimeOutSet(&MuteDelay, UNMUTE_DELAY_TIMER);
 	}
 #endif
 	APP_DBG("****************Mute:%d*******************\n", Mute);

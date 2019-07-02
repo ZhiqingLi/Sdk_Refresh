@@ -53,10 +53,6 @@
 #include "singled_display.h"
 #endif
 
-#ifdef	OPTION_CHARGER_DETECT
-extern bool IsInCharge(void);
-#endif
-
 #ifdef FUNC_WIFI_EN
 #ifdef FUNC_WIFI_POWER_KEEP_ON
 #define WIFI_POWER_ON_INIT_TIME		400	//WiFi模组上电后的初始化持续时间(单位: 10ms)
@@ -795,6 +791,18 @@ void WiFiEthStateSet(uint8_t State)
 //WiFi模组互联网络连接状态设置
 void WiFiWwwStateSet(uint8_t State)
 {
+#ifdef FUNC_BREAKPOINT_EN	
+	BP_SYS_INFO *pSysInfo;
+
+	pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+	gSys.IsWiFiRepeatPowerOn = TRUE;
+	BP_SET_ELEMENT(pSysInfo->IsWiFiRepeatPowerOn, gSys.IsWiFiRepeatPowerOn);
+	BP_SaveInfo(BP_SAVE2NVM);
+#ifdef BP_SAVE_TO_FLASH // 掉电记忆
+	BP_SaveInfo(BP_SAVE2FLASH);
+#endif
+#endif
+
 	gWiFi.WWWState = State;
 }
 
@@ -861,7 +869,7 @@ void WiFiRequestMcuPowerOff(void)
 		//断点信息保存
 		AudioSysInfoSetBreakPoint();
 		PowerOffCnt++;
-		if((PowerOffCnt == 2) || (gWiFi.InitState == WIFI_STATUS_IDLE))
+		if((PowerOffCnt >= 2) || (gWiFi.InitState == WIFI_STATUS_IDLE))
 		{
 			APP_DBG("McuWillPowerOff.......\n");
 			PowerOffCnt = FALSE;
@@ -872,10 +880,10 @@ void WiFiRequestMcuPowerOff(void)
 		{
 			APP_DBG("McuRequestWiFiPowerOff.......\n");
 			PowerOffCnt = 1;
-			gWiFi.WiFiPowerOffRequestFlag = TRUE;
-			TimeOutSet(&WiFiPowerOffTimer, 5000);	
 			Mcu_SendCmdToWiFi(MCU_POW_OFF, NULL);
 		}
+		gWiFi.WiFiPowerOffRequestFlag = TRUE;
+		TimeOutSet(&WiFiPowerOffTimer, 5000);	
 	}
 }
 
@@ -1619,7 +1627,7 @@ void WiFiSetMcuSystemTime(uint8_t* DateData)
 		SystemTime.Min = (DateData[10] - 0x30) * 10 + (DateData[11] - 0x30);
 		SystemTime.Sec = (DateData[12] - 0x30) * 10 + (DateData[13] - 0x30);
 		SystemTime.WDay = sRtcControl->DataTime.WDay;
-		McuChangeSystemTimeZone(&SystemTime);
+		//McuChangeSystemTimeZone(&SystemTime);
 		RtcSetCurrTime(&SystemTime);
 		WiFiDataRcvStartFlag = FALSE;
 		DateData[RcvCnt] = '\0';
@@ -1695,10 +1703,10 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 #ifdef FUNC_WIFI_SUPPORT_ALARM_EN
 #ifdef FUNC_WIFI_SUPPORT_RTC_EN
 #ifdef FUNC_RTC_EN
-	uint32_t TimeSecond;	
-	//uint32_t  CurRtcTimeSecond;	
+	uint32_t TimeSecond, Times;	
+	uint32_t  CurRtcTimeSecond;	
 	static uint8_t RcvCnt;
-	//RTC_DATE_TIME AlarmTime;
+	RTC_DATE_TIME AlarmTime;
 	
 	if(WiFiDataRcvStartFlag == FALSE)
 	{
@@ -1709,53 +1717,39 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 	
 	if(SecondData[RcvCnt++] == '&')
 	{	
-		TimeSecond = 0;
-		RcvCnt -= 1;
+		SecondData[RcvCnt] = '\0';
+		APP_DBG("WiFiNoticeMcuNextAlarmTime:%s\n", &SecondData[0]);
 		
-		switch(RcvCnt)
-		{
-			case 5:
-				TimeSecond += SecondData[4] - 0x30;
-				
-			case 4:
-				TimeSecond += (SecondData[3] - 0x30) * 10;
-
-			case 3:
-				TimeSecond += (SecondData[2] - 0x30) * 100;
-
-			case 2:
-				TimeSecond += (SecondData[1] - 0x30) * 1000;
-
-			case 1:
-				TimeSecond += (SecondData[0] - 0x30) * 10000;
-				break;
+		TimeSecond = 0;
+		Times = 1;
+		
+		while (--RcvCnt > 0) {		
+			TimeSecond += (SecondData[RcvCnt-1] - 0x30) * Times;
+			Times *= 10;
 		}
 		
 		WiFiDataRcvStartFlag = FALSE;
 		sRtcControl->AlarmNum = 1;
 		sRtcControl->AlarmMode = ALARM_MODE_PER_DAY;
-
-		SecondData[RcvCnt] = '\0';
-		APP_DBG("WiFiNoticeMcuNextAlarmTime:%s\n", &SecondData[0]);
 		
 		//闹钟开关状态设置
 		if((SecondData[0] == '-') && (SecondData[1] == '1'))	
 		{
-			if(RtcGetAlarmStatus(1) != ALARM_STATUS_CLOSED)
+			if(RtcGetAlarmStatus(sRtcControl->AlarmNum) != ALARM_STATUS_CLOSED)
 			{
-				//RtcAlarmSetStatus(1, ALARM_STATUS_CLOSED);	//关闭闹钟
+				RtcAlarmSetStatus(sRtcControl->AlarmNum, ALARM_STATUS_CLOSED);	//关闭闹钟
 			}
 			return;
 		}
 		else
 		{
-			if(RtcGetAlarmStatus(1) != ALARM_STATUS_OPENED)
+			if(RtcGetAlarmStatus(sRtcControl->AlarmNum) != ALARM_STATUS_OPENED)
 			{
-				RtcAlarmSetStatus(1, ALARM_STATUS_OPENED); //打开闹钟
+				RtcAlarmSetStatus(sRtcControl->AlarmNum, ALARM_STATUS_OPENED); //打开闹钟
 			}
 		}
-#if 0		
-		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
+#if 1
+		//RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
 
 		AlarmTime.WDay = sRtcControl->AlarmTime.WDay;
 		AlarmTime.Year = sRtcControl->AlarmTime.Year;
@@ -1763,35 +1757,21 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 		AlarmTime.Date = sRtcControl->AlarmTime.Date;
 
 		CurRtcTimeSecond = (sRtcControl->DataTime.Hour * 3600) + (sRtcControl->DataTime.Min * 60) + sRtcControl->DataTime.Sec;
+		
+		APP_DBG("Time(%d/%d; %02d:%02d:%02d)!!!\n", TimeSecond, CurRtcTimeSecond, sRtcControl->DataTime.Hour, sRtcControl->DataTime.Min, sRtcControl->DataTime.Sec);
 		//计算闹钟时间
 		AlarmTime.Hour = (TimeSecond  + CurRtcTimeSecond) / 3600;
 		if(AlarmTime.Hour >= 24)
 		{
 			AlarmTime.Hour -= 24;
 		}
-		AlarmTime.Min = ((TimeSecond - (AlarmTime.Hour * 3600))  + (CurRtcTimeSecond - (sRtcControl->DataTime.Hour * 3600))) / 60 ;
-		if(AlarmTime.Min >= 60)
-		{
-			AlarmTime.Hour += 1;
-			AlarmTime.Min -= 60;
-		}		
-		AlarmTime.Sec = (TimeSecond - (AlarmTime.Hour * 3600) - (AlarmTime.Min * 60)) + sRtcControl->DataTime.Sec;
-		if(AlarmTime.Sec >= 60)
-		{
-			AlarmTime.Min += 1;
-			AlarmTime.Sec -= 60;
-		}
-		if(AlarmTime.Min >= 60)
-		{
-			AlarmTime.Hour += 1;
-			AlarmTime.Min -= 60;
-		}	
-		if(AlarmTime.Hour >= 24)
-		{
-			AlarmTime.Hour -= 24;
-		}
+		AlarmTime.Min = ((TimeSecond  + CurRtcTimeSecond) % 3600) / 60 ;		
+		AlarmTime.Sec = ((TimeSecond  + CurRtcTimeSecond) % 3600) % 60;
+
 		RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &AlarmTime);
 		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
+		APP_DBG("WifiSerRtcAralmTime(AralmNum:%d; %02d:%02d:%02d)!!!\n", sRtcControl->AlarmNum, 
+	        	sRtcControl->AlarmTime.Hour, sRtcControl->AlarmTime.Min, sRtcControl->AlarmTime.Sec);
 #endif
 
 	}
@@ -2187,12 +2167,12 @@ void WiFiStateCheck(void)
 	WiFiPowerOnInitProcess();          //为了配置WiFi串口。
 #endif	
 
-	if(!gWiFi.InitState || WiFiFactoryStateGet() || WiFiFirmwareUpgradeStateGet())
+	if(WiFiFactoryStateGet() || WiFiFirmwareUpgradeStateGet())
 	{
 		return;
 	}
 	
-	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (gSys.CurModuleID != MODULE_ID_IDLE))
+	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (gSys.CurModuleID <= MODULE_ID_END))
 	{
 		WiFiRequestMcuPowerOff();	
 	}		

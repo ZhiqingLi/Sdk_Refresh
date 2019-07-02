@@ -31,7 +31,6 @@
 #include "singled_display.h"
 #endif
 
-
 #ifdef BT_APPLE_BATTERY_STATUS 
 #define BT_BATTERY_LEVEL_CNT    9
 static uint8_t BtBatteryLevel = BT_BATTERY_LEVEL_CNT;
@@ -42,8 +41,6 @@ TIMER BtBatteryDetTim;
 TIMER		PowerOffDelTmr;
 #endif
 
-extern void SysPowerOnControl(bool Flag);
-
 #ifdef FUNC_POWER_MONITOR_EN
 
 //#define POWER_MONITOR_DISP_EN
@@ -51,14 +48,14 @@ extern void SysPowerOnControl(bool Flag);
 #define LDOIN_SAMPLE_COUNT			20		//获取LDOIN幅度时用来平均的采样次数
 #define LDOIN_SAMPLE_PERIOD			50		//获取LDOIN幅度时获取采样值的间隔(ms)
 #define LOW_POWER_DET_COUNT 		3		//低电检测报警次数
-#define LOW_POWER_SOUND_CNT 		20		//低电报警提示音间隔时间(单位s)
+#define LOW_POWER_SOUND_CNT 		300		//低电报警提示音间隔时间(单位s)
 
 //获取LDOIN幅度时获取采样值的总时间间隔(ms)
 #define LDOIN_SAMPLE_TIMER			(LDOIN_SAMPLE_COUNT*LDOIN_SAMPLE_PERIOD)
 //低电检测延时时间参数，用于消抖和提示音播放。
 #define LOW_POWEROFF_COUNT			(5000/LDOIN_SAMPLE_TIMER)
 //低电检测关机连续检测时间(单位s)
-#define LOW_POWEROFF_DET_TMR		((LOW_POWER_DET_COUNT-1)*LOW_POWER_SOUND_CNT)
+#define LOW_POWEROFF_DET_TMR		(LOW_POWER_DET_COUNT*LOW_POWER_SOUND_CNT*1000/LDOIN_SAMPLE_TIMER+(LOW_POWEROFF_COUNT*2))
 
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置
 #ifdef ADC_POWER_MONITOR_EN 
@@ -103,7 +100,8 @@ uint32_t LdoinLevelAverage = 0;		//当前LDOIN电压平均值
 
 #ifdef FUNC_SOUND_REMIND
 #include "sound_remind.h"
-static uint16_t     LowPowerDetCnt = ((LOW_POWEROFF_DET_TMR*1000)/LDOIN_SAMPLE_TIMER)+(LOW_POWEROFF_COUNT*2);
+static bool 	IsSystemPowerLow = FALSE;
+static uint16_t LowPowerDetCnt = LOW_POWEROFF_DET_TMR;
 #endif
 
 #ifdef	OPTION_CHARGER_DETECT
@@ -111,17 +109,15 @@ static uint16_t     LowPowerDetCnt = ((LOW_POWEROFF_DET_TMR*1000)/LDOIN_SAMPLE_T
 //使能内部下拉。无PC或充电器连接时，检测口为低电平，有时检测口为高电平
 bool IsInCharge(void)
 {
-//设为输入，无上下拉
-
 	GpioSetRegBits(CHARGE_DETECT_PORT_PU, CHARGE_DETECT_BIT);
 	GpioClrRegBits(CHARGE_DETECT_PORT_PD, CHARGE_DETECT_BIT);
 	GpioClrRegBits(CHARGE_DETECT_PORT_OE, CHARGE_DETECT_BIT);	   
 	GpioSetRegBits(CHARGE_DETECT_PORT_IE, CHARGE_DETECT_BIT);
 	WaitUs(2);
-	if(GpioGetReg(CHARGE_DETECT_PORT_IN) & CHARGE_DETECT_BIT)
-	{
+
+	if(GpioGetReg(CHARGE_DETECT_PORT_IN)&CHARGE_DETECT_BIT) {
 		return TRUE;
-	}   	
+	} 
 
 	return FALSE;
 }
@@ -288,38 +284,26 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 		LdoinSampleSum = 0;
 
 #ifdef BT_APPLE_BATTERY_STATUS 
+		if(IsTimeOut(&BtBatteryDetTim) && GetCurBtConnectedFlag())
 		{
-			if(IsTimeOut(&BtBatteryDetTim) && GetCurBtConnectedFlag())
+			TimeOutSet(&BtBatteryDetTim, 5000);
+			BtBatteryLevel = (LdoinLevelAverage - LDOIN_VOLTAGE_OFF)/100;
+			if(BtBatteryLevel > BT_BATTERY_LEVEL_CNT)
 			{
-				TimeOutSet(&BtBatteryDetTim, 5000);
-				BtBatteryLevel = (LdoinLevelAverage - LDOIN_VOLTAGE_OFF)/100;
-				if(BtBatteryLevel > BT_BATTERY_LEVEL_CNT)
-				{
-					BtBatteryLevel = BT_BATTERY_LEVEL_CNT;
-				}
-                BTSetBatteryState(BtBatteryLevel, TRUE);
-                DBG("Bt Battery Volt: %lu\n", (uint32_t)LdoinLevelAverage);
+				BtBatteryLevel = BT_BATTERY_LEVEL_CNT;
 			}
+            BTSetBatteryState(BtBatteryLevel, TRUE);
+            DBG("Bt Battery Volt: %lu\n", (uint32_t)LdoinLevelAverage);
 		}
 //#else
 		//BtDisableBatteryState();
 #endif	
 
 #ifdef	OPTION_CHARGER_DETECT
-		if(IsInCharge() && !IsChargeFul())		//充电器已经接入的处理
+		if(IsInCharge())		//充电器已经接入的处理
 		{	
-#ifdef FUNC_SINGLE_LED_EN
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_CHARGING, TRUE, LED_DISPLAY_LOOP);
-#endif
 			//DBG("IsInCharge\n");
 			return;
-		}
-#endif
-
-#ifdef FUNC_SINGLE_LED_EN
-		if(TRUE == GetSingleLedDispMode(LED_DISPLAY_MODE_CHARGING))
-		{
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_CHARGING, FALSE, LED_DISPLAY_LOOP);
 		}
 #endif
 
@@ -330,7 +314,6 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			PwrMntDisp = PWR_MNT_DISP_HIGH_V;
 			//DBG("bat full\n");
 		}
-
 		else if(LdoinLevelAverage > LDOIN_VOLTAGE_MID)
 		{
 			//可以显示2格电量，请在PowerMonitorDisp中添加显示代码
@@ -352,23 +335,22 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 		    PwrMntDisp = PWR_MNT_DISP_SYS_OFF;
 		}
 #endif
+		//电池电压高于一定电压或者电压检查消抖时电压出现高于阀值，恢复低电播放
+		if ((LdoinLevelAverage > LDOIN_VOLTAGE_MID)
+		|| ((LdoinLevelAverage > LDOIN_VOLTAGE_LOW) && !IsSystemPowerLow))
+		{
+			IsSystemPowerLow = FALSE;
+			LowPowerDetCnt = LOW_POWEROFF_DET_TMR;
+		}
 
-		if((LdoinLevelAverage <= LDOIN_VOLTAGE_LOW)
-#ifdef FUNC_WIFI_EN
-		 && (WiFiFirmwareUpgradeStateGet() != TRUE)
-#endif
-			)
+		if(LdoinLevelAverage <= LDOIN_VOLTAGE_LOW)
 		{
 			//低于关机电压，进入关机流程
 			//可以先行显示低电压提示，然后执行关机动作
-#ifdef POWER_MONITOR_DISP_EN			
-			PwrMntDisp = PWR_MNT_DISP_SYS_OFF;
-			PowerMonitorDisp();
-#endif	
-            if(LowPowerDetCnt > 0)
-            {
-                LowPowerDetCnt--;
-            }
+			if(LowPowerDetCnt > 0)
+			{
+			    LowPowerDetCnt--;
+			}
 			//停止正常工作流程，包括关显示、关DAC、关功放电源等动作
 			DBG("PowerMonitor, Low Voltage!PD. %d\n", LowPowerDetCnt);
 			
@@ -377,26 +359,33 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			{
 				APP_DBG("Power on Low level voltage detected->Power Off\n");
 				LowPowerDetCnt = LOW_POWEROFF_COUNT;
-				//SysSetWakeUpSrcInPowerDown(WAKEUP_SRC_PD_POWERKEY);
-				//SysGotoPowerDown(); 
+				IsSystemPowerLow = TRUE; 
 			}
 			    
 			if(LowPowerDetCnt%(LOW_POWER_SOUND_CNT*1000/LDOIN_SAMPLE_TIMER) == LOW_POWEROFF_COUNT)
 			{
-				APP_DBG("PowerMonitor, Low Voltage sound remind!!!!");
-				MsgSend(MSG_BAT_LOW_PWR);
+				if (TRUE == IsSystemPowerLow) {
+					APP_DBG("PowerMonitor, Low Voltage sound remind!!!!");
+					MsgSend(MSG_BAT_LOW_PWR);
 			#ifdef FUNC_SINGLE_LED_EN
-				SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, TRUE, LED_DISPLAY_ONCE);
+					SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, TRUE, LED_DISPLAY_ONCE);
 			#endif
+				}
+
+				IsSystemPowerLow = TRUE;
 			}
-			else if(LowPowerDetCnt == FALSE)	// PowerOnInitFlag == FALSE
-			{
-			    static bool IsPowerOff = TRUE;
+			
+			if((LowPowerDetCnt == FALSE)	// PowerOnInitFlag == FALSE
+#ifdef FUNC_WIFI_EN
+			&& (WiFiFirmwareUpgradeStateGet() != TRUE)
+#endif
+			) {
+				static bool IsPowerOff = TRUE;
 				if((gSys.NextModuleID != MODULE_ID_POWEROFF) && IsPowerOff)	/*MSG_COMMON_CLOSE only need send once*/
 				{
-					/*if use push button, send message, for task's saving info.*/
+				/*if use push button, send message, for task's saving info.*/
 					APP_DBG("Low level voltage detected->send message common close\n");
-                    IsPowerOff = FALSE;
+					IsPowerOff = FALSE;
 				#ifdef FUNC_WIFI_POWER_KEEP_ON
 					WiFiRequestMcuPowerOff();
 				#else
@@ -406,10 +395,6 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				}
 			}
 		}	
-		else //if(LdoinLevelAverage >= LDOIN_VOLTAGE_MID)
-		{
-			LowPowerDetCnt = ((LOW_POWEROFF_DET_TMR*1000)/LDOIN_SAMPLE_TIMER)+(LOW_POWEROFF_COUNT*2);
-		}
 	}
 	PowerMonitorDisp();
 }
@@ -483,22 +468,15 @@ void PowerMonitor(void)
 	if(IsTimeOut(&PowerMonitorTimer))
 	{
 		TimeOutSet(&PowerMonitorTimer, LDOIN_SAMPLE_PERIOD);
-
 #ifdef OPTION_CHARGER_DETECT
 		if(IsInCharge())		//充电器已经接入的处理
-		{		
-			if(LdoinLevelAverage >= LDOIN_VOLTAGE_FULL)	
-			{
-				//SingLedDispStateSet(LED_DISP_STATE_CHREGERED, TRUE);
-				//DBG("charger.....\n");
-			}
-			else
-			{
-				//SingLedDispStateSet(LED_DISP_STATE_CHREGERED, FALSE);
-				//DBG("charger full\n");
+		{	
+			if (gSys.CurModuleID < MODULE_ID_END) {
+				gSys.NextModuleID = MODULE_ID_POWEROFF;
+				MsgSend(MSG_COMMON_CLOSE);
 			}
 		}
-#endif		
+#endif
 		//没有采样够LDOIN_SAMPLE_COUNT次数，继续采样
 		PowerLdoinLevelMonitor(FALSE);
 	}
@@ -520,6 +498,62 @@ void LowPowerDetProc(void)
 #endif
 #endif	//end of FUNC_POWER_MONITOR_EN
 
+/*****************************************************************************
+ 函 数 名  : powerkey软件检测函数，配合实现硬开关
+ 功能描述  : 
+ 输入参数  : 无
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年6月20日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+
+#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
+#define SOFT_SWITCH_ONTIME				500
+
+bool SoftPowerKeyDetect(void)
+{
+	static uint16_t PowerKeyLinkState = 0;
+	static bool PrevPowerKeyState = FALSE, gWakeStateRest = FALSE;
+	bool CurPowerKeyState, ret = FALSE;
+
+	//设为输入，带下拉
+	GpioClrRegBits(POWERKEY_DETECT_PORT_OE, POWERKEY_DETECT_PORT_BIT);
+	GpioSetRegBits(POWERKEY_DETECT_PORT_IE, POWERKEY_DETECT_PORT_BIT);
+	GpioClrRegBits(POWERKEY_DETECT_PORT_PU, POWERKEY_DETECT_PORT_BIT);
+	GpioClrRegBits(POWERKEY_DETECT_PORT_PD, POWERKEY_DETECT_PORT_BIT);
+
+	CurPowerKeyState = ((GpioGetReg(POWERKEY_DETECT_PORT_IN)&POWERKEY_DETECT_PORT_BIT) != FALSE);
+
+	if (CurPowerKeyState != PrevPowerKeyState) {
+		PowerKeyLinkState = 0;
+		PrevPowerKeyState = CurPowerKeyState;
+	}
+	else if (PowerKeyLinkState < SOFT_SWITCH_ONTIME)
+	{
+		PowerKeyLinkState++;
+	}
+
+	if (PowerKeyLinkState >= SOFT_SWITCH_ONTIME ) {
+		if ((WAKEUP_FLAG_POR_RTC&gWakeUpFlag) && (!gWakeStateRest)) {
+			if (FALSE == CurPowerKeyState) {
+				gWakeStateRest = TRUE;
+			}
+		}
+		else {
+			ret = CurPowerKeyState;
+		}
+	}
+
+	return ret;
+}
+#endif
 /**
  * @brief 		system power off detect function
  *			this function should be called in timer INT function or systick function for periodically detecting
@@ -533,21 +567,19 @@ void SystemPowerOffDetect(void)
 {
 
 #ifdef USE_POWERKEY_SLIDE_SWITCH
-#define SLIDE_SWITCH_ONTIME 1000
+#define SLIDE_SWITCH_ONTIME 200
 	static uint16_t  slide_switch_pd_cnt = SLIDE_SWITCH_ONTIME;//消抖时间0.5s，见PowerKeyDetect()描述
+
 	if(PowerKeyDetect())
 	{
 		if((slide_switch_pd_cnt-- == 0)
 #ifdef FUNC_WIFI_EN                             //WiFi升级中禁止关机
-		 && (WiFiFirmwareUpgradeStateGet() != TRUE)
+		&& (WiFiFirmwareUpgradeStateGet() != TRUE)
 #endif
-			)
+		)
 		{
-		#if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
-			AmpMuteControl(1);
-		#endif
 			/*if slide switch, power down system directly*/
-		#if 0//def FUNC_WIFI_POWER_KEEP_ON
+		#ifdef FUNC_WIFI_POWER_KEEP_ON
 			WiFiRequestMcuPowerOff();
 		#else
 			APP_DBG("PowerKeyDetect->go to PowerDown\n");
@@ -564,68 +596,22 @@ void SystemPowerOffDetect(void)
 #endif 
 	
 #ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
+	static bool IsPowerOff = FALSE;
 #ifdef FUNC_POWERKEY_SOFT_POWERON_EN
-	static uint16_t  soft_switch_pd_cnt = 500;
-	
-	if(PowerkeyGetOnkeyReg() 
-#ifdef FUNC_WIFI_EN
-	//WiFi升级中禁止关机
-	&& (WiFiFirmwareUpgradeStateGet() != TRUE)
-#endif
-	)
-	{
-		if(soft_switch_pd_cnt > 0)	
-		{	
-			soft_switch_pd_cnt--;
-			if(soft_switch_pd_cnt == FALSE)
-			{
-				if(gSys.CurModuleID == MODULE_ID_IDLE)
-				{
-					APP_DBG("PowerKeyDetect->send message power on\n");
-				#ifdef FUNC_GPIO_POWER_ON_EN
-					SysPowerOnControl(TRUE);
-				#endif	
-					if(IsLineInLink())
-					{
-						gSys.NextModuleID = MODULE_ID_LINEIN;
-					}
-					else
-					{
-						gSys.NextModuleID = MODULE_ID_WIFI;
-					}
-					MsgSend(MSG_COMMON_CLOSE);
-				}
-				else if((gSys.CurModuleID != MODULE_ID_IDLE) && (gSys.NextModuleID != MODULE_ID_IDLE))
-				{
-					/*if use push button, send message, for task's saving info.*/
-					APP_DBG("PowerKeyDetect->send message common close\n"); 
-				#ifdef FUNC_WIFI_POWER_KEEP_ON
-					WiFiRequestMcuPowerOff();
-				#else
-					gSys.NextModuleID = MODULE_ID_POWEROFF;
-					MsgSend(MSG_COMMON_CLOSE);
-				#endif
-				}
-			}
-		}
-	}
-	else
-	{
-		soft_switch_pd_cnt = 2000;
-	}
+	if(SoftPowerKeyDetect()
 #else
 	if(PowerKeyDetect()
+#endif
 #ifdef FUNC_WIFI_EN
 	//WiFi升级中禁止关机
 	&& (WiFiFirmwareUpgradeStateGet() != TRUE)
 #endif
 	)
 	{
-		static bool IsPowerOff = FALSE;
 		if((gSys.NextModuleID != MODULE_ID_POWEROFF) && !IsPowerOff)	/*MSG_COMMON_CLOSE only need send once*/
 		{
 			/*if use push button, send message, for task's saving info.*/
-			APP_DBG("PowerKeyDetect->send message common close\n");
+			APP_DBG("PowerKeyDetect->send message common close;\n");
 			IsPowerOff = TRUE;
 		#ifdef FUNC_WIFI_POWER_KEEP_ON
 			WiFiRequestMcuPowerOff();
@@ -635,7 +621,9 @@ void SystemPowerOffDetect(void)
 		#endif
 		}
 	}
-#endif
+	else {
+		IsPowerOff = FALSE;
+	}
 #endif	
 	
 }
@@ -674,6 +662,14 @@ void SysGotoDeepSleepGpioCfg(void)
 void SystemPowerOffControl(void)
 {
 	APP_DBG("SystemPowerOffControl->system will power off soon!\n");
+
+#ifdef FUNC_AMP_MUTE_EN
+	GpioAmpMuteEnable();
+#endif
+	
+#ifdef FUNC_WIFI_POWER_KEEP_ON
+	WiFiPowerOff();
+#endif
 	
 #ifdef FUNC_SLEEP_EN
 	if(gSys.SleepStartPowerOff)

@@ -71,7 +71,7 @@
 										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
 										}while(0)
 #define SINGLE_RLED_SETTING(Duty)		do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*Duty/100);\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*(100-Duty)/100);\
 										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
 										}while(0)
 

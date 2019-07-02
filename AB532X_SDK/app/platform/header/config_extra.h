@@ -50,6 +50,25 @@
 #ifndef SPIFLASH_SPEED_UP_EN
 #define SPIFLASH_SPEED_UP_EN         1
 #endif
+
+/*****************************************************************************
+ * Module    : 定时器配置成PWM功能
+ *****************************************************************************/
+#if PWM_TIMER_EN
+#if (PWM_TIMER_SEL&PWM_TIMER3)
+#undef IRRX_HW_EN
+#undef IRRX_SW_EN
+
+#define IRRX_HW_EN				0
+#define IRRX_SW_EN				0
+#endif
+
+#if ((PWM_TIMER_SEL&PWM_TIMER4) || (PWM_TIMER_SEL&PWM_TIMER5))
+#undef BT_TWS_EN
+#define BT_TWS_EN				0
+#endif
+#endif	//PWM_TIMER_EN
+
 /*****************************************************************************
  * Module    : 音乐功能配置
  *****************************************************************************/

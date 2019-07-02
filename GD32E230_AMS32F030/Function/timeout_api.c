@@ -74,30 +74,30 @@ void CheckTimer(SW_TIMER* TimerHandle)
 }
 
 // 初始化Timer
-FlagStatus InitTimer(SW_TIMER* TimerHandle,uint32_t TimerPeriod, /*定时间隔ms*/TIMER_CALLBACK CallbackFunc/*定时回调函数*/)
+bool InitTimer(SW_TIMER* TimerHandle,uint32_t TimerPeriod, /*定时间隔ms*/TIMER_CALLBACK CallbackFunc/*定时回调函数*/)
 {
 	TimerHandle->TimerPeriod = TimerPeriod;
-	TimerHandle->IsRunning = RESET;
+	TimerHandle->IsRunning = FALSE;
 	TimerHandle->Callback = CallbackFunc;
-	return SET;
+	return TRUE;
 }
 
 // 启动Timer
-FlagStatus StartTimer(SW_TIMER* TimerHandle)
+bool StartTimer(SW_TIMER* TimerHandle)
 {
 	TimerHandle->LastTickets = CORET_Systick_Count;
-	TimerHandle->IsRunning = SET;
-	return SET;
+	TimerHandle->IsRunning = TRUE;
+	return TRUE;
 }
 
 // 更改Timer定时间隔
-FlagStatus ChangeTimerPeriod(SW_TIMER* TimerHandle, uint32_t TimerPeriod/*定时间隔*/)
+bool ChangeTimerPeriod(SW_TIMER* TimerHandle, uint32_t TimerPeriod/*定时间隔*/)
 {
-	TimerHandle->IsRunning = RESET;
+	TimerHandle->IsRunning = FALSE;
 	TimerHandle->TimerPeriod = TimerPeriod;
 	TimerHandle->LastTickets = CORET_Systick_Count;
-	TimerHandle->IsRunning = SET;
-	return SET;
+	TimerHandle->IsRunning = TRUE;
+	return TRUE;
 }
 
 // Get time of some softtimer from setting to now.
@@ -125,7 +125,7 @@ void TimeOutSet(TIMER* timer, uint32_t timeout)
 }
 
 // Check whether time out.
-FlagStatus IsTimeOut(TIMER* timer)
+bool IsTimeOut(TIMER* timer)
 {
 	uint64_t LastSystickVal;
 
@@ -140,10 +140,10 @@ FlagStatus IsTimeOut(TIMER* timer)
 
 	if(LastSystickVal >= (timer->TickValCache +timer->TimeOutVal))
 	{
-		return SET;
+		return TRUE;
 	}
 
-	return RESET;
+	return FALSE;
 }
 /*****************************************************************************
  函 数 名  : WaitMs

@@ -9,11 +9,11 @@
         <add key="ext_power_io_sel" value="None" />
         <add key="spk_mute_en" value="True" />
         <add key="spk_mute_io_sel" value="PE0" />
-        <add key="high_mute" value="False" />
+        <add key="high_mute" value="True" />
         <add key="loudspeaker_unmute_delay" value="20" />
         <add key="ampabd_type" value="独立IO电平控制" />
-        <add key="ampabd_io_sel" value="None" />
-        <add key="ampabd_level" value="False" />
+        <add key="ampabd_io_sel" value="PE7" />
+        <add key="ampabd_level" value="True" />
         <add key="earphone_det_iosel" value="0" />
         <add key="sys_sleep_time" value="30" />
         <add key="sys_off_time" value="0" />
@@ -48,7 +48,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D85" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:01:0C" />
+        <add key="bt_addr" value="41:42:00:00:01:14" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
@@ -87,7 +87,7 @@
         <add key="music_ape_support" value="False" />
         <add key="music_flac_support" value="False" />
         <add key="music_sdcard_en" value="True" />
-        <add key="music_udisk_en" value="True" />
+        <add key="music_udisk_en" value="False" />
         <add key="sddet_iosel" value="28" />
         <add key="sd1det_iosel" value="0" />
         <add key="fmrx_rfcap_val" value="0" />
@@ -99,7 +99,7 @@
         <add key="aux_dig_gain" value="0" />
         <add key="auxl_sel" value="4" />
         <add key="auxr_sel" value="4" />
-        <add key="linein_det_iosel" value="21" />
+        <add key="linein_det_iosel" value="29" />
         <add key="user_pwrkey_en" value="True" />
         <add key="user_adkey_en" value="False" />
         <add key="user_adkey2_en" value="False" />
@@ -219,5 +219,28 @@
         <add key="led_lowbat_unit" value="6" />
         <add key="led_lowbat_cycle" value="0" />
         <add key="RESOURCE_DIR_SEL" value="D19" />
+        <add key="powkey_soft_on_off" value="False" />
+        <add key="bt_user_param_en" value="False" />
+        <add key="rf_captune" value="7" />
+        <add key="rf_pa_gain" value="7" />
+        <add key="rf_mix_gain" value="5" />
+        <add key="rf_dig_gain" value="55" />
+        <add key="rf_pa_bias" value="4" />
+        <add key="rf_vbko_add" value="0" />
+        <add key="bt_pwrkey_nsec_discover" value="不支持" />
+        <add key="bt_dis_reconnect_en" value="False" />
+        <add key="bt_dis_reconnect_cnt" value="15" />
+        <add key="bt_key_discon_en" value="False" />
+        <add key="bt_key_discon_mode" value="1" />
+        <add key="led_tws_main_config_en" value="False" />
+        <add key="led_tws_main_conn_redpat" value="0" />
+        <add key="led_tws_main_conn_bluepat" value="2" />
+        <add key="led_tws_main_conn_unit" value="2" />
+        <add key="led_tws_main_conn_cycle" value="86" />
+        <add key="led_tws_slave_config_en" value="False" />
+        <add key="led_tws_slave_conn_redpat" value="0" />
+        <add key="led_tws_slave_conn_bluepat" value="2" />
+        <add key="led_tws_slave_conn_unit" value="2" />
+        <add key="led_tws_slave_conn_cycle" value="86" />
     </appSettings>
 </configuration>

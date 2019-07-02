@@ -1,9 +1,9 @@
 #include "include.h"
 
-volatile int pwrkey_detect_flag;            //pwrkey 820K用于复用检测的标志。
+volatile int pwrkey_detect_flag;            //pwrkey 820K用于复用检测的标志�?
 
 #if SYS_KARAOK_EN
-//{第一级混响幅度[0, 256]， 每级混响衰减系数[0, 256]}
+//{第一级混响幅度[0, 256]�?每级混响衰减系数[0, 256]}
 const u16 echo_level_gain_16[16 + 1][2] = {
     {0, 0},
     {45, 20},   {60, 25},   {65, 30},   {65, 51},
@@ -12,7 +12,7 @@ const u16 echo_level_gain_16[16 + 1][2] = {
     {88, 163},  {88, 167},  {95, 171},  {170, 150},
 };
 
-//{第一级混响幅度[0, 256]， 每级混响衰减系数[0, 256]}
+//{第一级混响幅度[0, 256]�?每级混响衰减系数[0, 256]}
 const u16 echo_level_gain_12[12 + 1][2] = {
     {0, 0},
     {45, 20},   {65, 30},   {65, 51},    {79, 51},
@@ -96,6 +96,10 @@ void plugin_tmr5ms_isr(void)
 #if ENERGY_LED_EN
     energy_led_level_calc();
 #endif
+
+#if PWM_TIMER_EN
+	func_led_pwm_scan();
+#endif
 }
 
 AT(.com_text.plugin)
@@ -112,10 +116,54 @@ void plugin_saradc_init(u16 *adc_ch)
     *adc_ch |= BIT(ADCCH_PE5);       //旋钮1
     *adc_ch |= BIT(ADCCH_PE6);       //旋钮2
 #endif
+
+#if USER_ADC_DETECT_EN
+	*adc_ch |= BIT(ADCCH_PE6);       //ADC ���
+#endif
 }
 
+#if USER_ADC_DETECT_EN
+const uint16_t tbl_adc_detect_val[5][2] = {
+    {0x08, EVT_ADC_DET_IDE},
+    {0x0f, EVT_ADC_DET_LOW}, 
+    {0x3f, EVT_ADC_DET_MID},
+    {0x7f, EVT_ADC_DET_HIG},
+    {0xff, EVT_ADC_DET_HIG},
+};
+
+//每5ms检测一次
+AT(.com_text.port.key)
+void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
+{
+	#define ADC_JITTER_VAL				1000
+	
+	static uint32_t all_adc_val;
+	static uint16_t jitter_cnt = 0;
+
+	if (jitter_cnt < ADC_JITTER_VAL) {
+		all_adc_val += adc_val;
+		jitter_cnt++;
+	}
+	else {
+		uint8_t adc_index = 0, average_val = 0;
+
+		average_val = all_adc_val/jitter_cnt;
+		printf ("adc detect value = %d;\n", average_val);
+		
+		while (average_val > (u8)tbl_adc_detect_val[adc_index][0]) {
+			adc_index++;
+		}
+		
+		*adc_event = tbl_adc_detect_val[adc_index][1];
+		all_adc_val = 0;
+		jitter_cnt = 0;
+	}
+}
+#endif
+
+
 #if USER_KEY_KNOB_EN
-//16级旋钮
+//16级旋�?
 AT(.com_rodata.port.key)
 const u8 tbl_knob_level_16[16 + 1] = {
     0x02, 0x13, 0x24, 0x36, 0x47, 0x59, 0x6A, 0x7B,
@@ -145,6 +193,18 @@ void plugin_saradc_sel_channel(u16 *adc_ch)
         msg_enqueue(EVT_MIC_VOL);
     }
 #endif
+
+#if USER_ADC_DETECT_EN
+	static uint16_t prev_detect_event = 0, detect_event = 0;
+
+	adc_detect_process(&detect_event, (u8)(adc_cb.sfr[ADCCH_PE6] >> 2));
+	
+	if (detect_event != prev_detect_event) {
+		printf ("adc detect event = %x;\n", detect_event);
+		prev_detect_event = detect_event;
+		msg_enqueue(detect_event);
+	}
+#endif
 }
 
 #if (MUSIC_SDCARD_EN || MUSIC_SDCARD1_EN)
@@ -169,32 +229,32 @@ void sleep_wakeup_config(void)
 {
 #if USER_ADKEY
     if (xcfg_cb.user_adkey_en) {
-        adcch_io_wakeup_config(ADKEY_CH);           //配置ADKEY IO下降沿唤醒。
+        adcch_io_wakeup_config(ADKEY_CH);           //配置ADKEY IO下降沿唤醒�?
     }
 #endif // USER_ADKEY
 
 #if USER_ADKEY2
     if (xcfg_cb.user_adkey2_en) {
-        adcch_io_wakeup_config(ADKEY2_CH);          //配置ADKEY1 IO下降沿唤醒。
+        adcch_io_wakeup_config(ADKEY2_CH);          //配置ADKEY1 IO下降沿唤醒�?
     }
 #endif // USER_ADKEY2
 
 #if USER_ADKEY_MUX_SDCLK
     if (xcfg_cb.user_adkey_mux_sdclk_en) {
-        adcch_io_wakeup_config(SDCLK_AD_CH);      //IO下降沿唤醒。
+        adcch_io_wakeup_config(SDCLK_AD_CH);      //IO下降沿唤醒�?
     }
 #endif // USER_ADKEY_MUX_SDCLK
 
 #if USER_IOKEY
     if (xcfg_cb.user_iokey_en) {
         if (xcfg_cb.iokey_config_en) {
-            wakeup_gpio_config(xcfg_cb.iokey_io0, 1);   //配置IO下降沿唤醒。
+            wakeup_gpio_config(xcfg_cb.iokey_io0, 1);   //配置IO下降沿唤醒�?
             wakeup_gpio_config(xcfg_cb.iokey_io1, 1);
             wakeup_gpio_config(xcfg_cb.iokey_io2, 1);
             wakeup_gpio_config(xcfg_cb.iokey_io3, 1);
             wakeup_gpio_config(xcfg_cb.iokey_io4, 1);
         } else {
-            //不用工具配置IOKEY时，根据实际使用的IOKEY IO进行修改。
+            //不用工具配置IOKEY时，根据实际使用的IOKEY IO进行修改�?
             wakeup_gpio_config(IO_PF0, 1);
             wakeup_gpio_config(IO_PF1, 1);
             wakeup_gpio_config(IO_PF3, 1);
@@ -346,7 +406,7 @@ void plugin_playmode_warning(void)
 void plugin_lowbat_vol_reduce(void)
 {
 #if LOWPWR_REDUCE_VOL_EN
-    music_src_set_volume(0x50c0);       //设置音乐源音量达到整体降低系统音量 (范围：0~0x7fff)
+    music_src_set_volume(0x50c0);       //设置音乐源音量达到整体降低系统音�?(范围�?~0x7fff)
 #endif // LOWPWR_REDUCE_VOL_EN
 }
 
@@ -369,8 +429,8 @@ AT(.com_text.port.vbat)
 void plugin_vbat_filter(u32 *vbat)
 {
 #if  VBAT_FILTER_USE_PEAK
-    //电源波动比较大的音箱方案, 取一定时间内的电量"最大值"或"次大值",更能真实反应电量.
-    #define VBAT_MAX_TIME  (3000/5)   //电量峰值判断时间 3S
+    //电源波动比较大的音箱方案, 取一定时间内的电�?最大�?�?次大�?,更能真实反应电量.
+    #define VBAT_MAX_TIME  (3000/5)   //电量峰值判断时�?3S
     static u16 cnt = 0;
 	static u16 vbat_max_cnt = 0;
     static u32 vbat_max[2] = {0,0};
@@ -378,16 +438,16 @@ void plugin_vbat_filter(u32 *vbat)
     u32 vbat_cur = *vbat;
     if (cnt++  < VBAT_MAX_TIME) {
         if (vbat_max[0] < vbat_cur) {
-            vbat_max[1] = vbat_max[0];  //vbat_max[1] is less max (次大值)
-            vbat_max[0] = vbat_cur;     //vbat_max[0] is max(最大值)
+            vbat_max[1] = vbat_max[0];  //vbat_max[1] is less max (次大�?
+            vbat_max[0] = vbat_cur;     //vbat_max[0] is max(最大�?
             vbat_max_cnt = 0;
         } else if (vbat_max[0] == vbat_cur) {
             vbat_max_cnt ++;
         }
     } else {
-        if (vbat_max_cnt >= VBAT_MAX_TIME/5) {  //总次数的(1/5)都采到最大值,则返回最大值.
+        if (vbat_max_cnt >= VBAT_MAX_TIME/5) {  //总次数的(1/5)都采到最大�?则返回最大�?
             vbat_ret = vbat_max[0];
-        } else if (vbat_max[1] != 0) {   //最大值次数较少,则返回次大值(舍弃最大值)
+        } else if (vbat_max[1] != 0) {   //最大值次数较�?则返回次大�?舍弃最大�?
             vbat_ret = vbat_max[1];
         }
         vbat_max[0] = 0;
@@ -395,14 +455,14 @@ void plugin_vbat_filter(u32 *vbat)
         vbat_max_cnt = 0;
         cnt = 0;
     }
-    //返回值
+    //返回�?
     if (vbat_ret != 0) {
         *vbat = vbat_ret;
     }
 #endif
 }
 
-//初始化完成, 各方案可能还有些不同参数需要初始化,预留接口到各方案
+//初始化完�? 各方案可能还有些不同参数需要初始化,预留接口到各方案
 void plugin_sys_init_finish_callback(void)
 {
 #if ENERGY_LED_EN
@@ -418,7 +478,7 @@ bool plugin_func_idle_enter_check(void)
 
 void plugin_hfp_karaok_configure(void)
 {
-    //android用于通话，iphone用于K歌
+    //android用于通话，iphone用于K�?
 #if BT_HFP_CALL_KARAOK_EN
     if (bt_is_ios_device()) {
         sys_cb.hfp_karaok_en = 1;
@@ -428,12 +488,12 @@ void plugin_hfp_karaok_configure(void)
 #endif
 }
 
-//用于karaok初始化
+//用于karaok初始�?
 void plugin_karaok_init(void)
 {
 #if SYS_KARAOK_EN
     sys_cb.echo_delay = SYS_ECHO_DELAY;
-#if !USER_KEY_KNOB_EN   //没有旋钮的话就固定一个值
+#if !USER_KEY_KNOB_EN   //没有旋钮的话就固定一个�?
     sys_cb.music_vol = USER_KEY_KNOB_LEVEL - 1;
     sys_cb.echo_level = USER_KEY_KNOB_LEVEL - 1;
     sys_cb.mic_vol = USER_KEY_KNOB_LEVEL - 1;

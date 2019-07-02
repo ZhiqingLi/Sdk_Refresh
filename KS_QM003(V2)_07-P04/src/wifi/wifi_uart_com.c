@@ -531,7 +531,30 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 
 		case MCU_SND_RTC:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+SND+RTC", 11);
-			Len = 11;
+			Temp = 11;
+#ifdef FUNC_WIFI_SUPPORT_ALARM_EN
+#ifdef FUNC_WIFI_SUPPORT_RTC_EN
+#ifdef FUNC_RTC_EN
+			CmdBuf[Temp++] = sRtcControl->DataTime.Year / 1000 + 0x30;
+			CmdBuf[Temp++] = (sRtcControl->DataTime.Year % 1000) / 100 + 0x30;
+			CmdBuf[Temp++] = (sRtcControl->DataTime.Year % 100) / 10 + 0x30;
+			CmdBuf[Temp++] = (sRtcControl->DataTime.Year % 10) + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Mon / 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Mon % 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Date / 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Date % 10 + 0x30;
+
+			CmdBuf[Temp++] = sRtcControl->DataTime.Hour / 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Hour % 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Min / 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Min % 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Sec / 10 + 0x30;
+			CmdBuf[Temp++] = sRtcControl->DataTime.Sec % 10 + 0x30;
+			CmdBuf[Temp++] = '&';
+			Len = Temp;
+#endif
+#endif
+#endif
 			break;					
 
 		case MCU_PLY_PAU:	
@@ -1692,7 +1715,9 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			
 		case AXX_BOT_DON:
 			//升级重启后，初始化所有参数，为了显示LED灯
+			Temp = gWiFi.WiFiPowerOffRequestFlag;
 			memcpy((void*)&gWiFi, (void*)&InitgWiFi, sizeof(WIFI_WORK_STATE));
+			gWiFi.WiFiPowerOffRequestFlag = (uint8_t)Temp;
 			break;
 			
 		case AXX_MCU_RDY:
@@ -1727,10 +1752,10 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 				FlshBTInfoAreaErase();
 			}
 #endif
+
 			WiFiFactoryStateSet(1);
 			WiFiMicOn();
-			gSys.Volume = DEFAULT_VOLUME;
-			AudioSysInfoSetBreakPoint();
+			BP_InfoInit();
 			if(gSys.CurModuleID != MODULE_ID_WIFI)
 			{
 				gSys.NextModuleID = MODULE_ID_WIFI;
@@ -1980,6 +2005,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_GET_RTC:
+			Mcu_SendCmdToWiFi(MCU_SND_RTC, NULL);
 			break;
 
 		case AXX_APP_RTC:
@@ -2325,7 +2351,11 @@ void WiFi_CmdProcess(void)
 	else if(memcmp(gWiFiCmd, "+LAU+", 5) == 0)
 	{
 		WiFi_SendCmdToMcu(AXX_LAU_XXX, &gWiFiCmd[5]);		
-	}				
+	}
+	else if(memcmp(gWiFiCmd, "+GET+RTC", 8) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_GET_RTC, NULL);	
+	}
 	else if(memcmp(gWiFiCmd, "+SET+RTC", 8) == 0)
 	{
 		WiFi_SendCmdToMcu(AXX_SET_RTC, NULL);		

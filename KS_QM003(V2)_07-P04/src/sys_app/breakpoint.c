@@ -48,6 +48,9 @@ const static BP_SYS_INFO sInitSysInfo =
 #ifdef FUNC_SPI_UPDATE_EN
     UPGRADE_SOURCE_IDLE,
 #endif
+#ifdef FUNC_WIFI_EN
+	FALSE,
+#endif
 };
 
 #if (defined(FUNC_USB_EN) || defined(FUNC_CARD_EN)) // player module default init nvm value
@@ -111,7 +114,16 @@ void BP_InfoLog(void)
 }
 #endif
 
-
+void BP_InfoInit(void)
+{
+#ifdef FUNC_BREAKPOINT_EN	
+	memcpy((void*)&bp_info.SysInfo, (void*)&sInitSysInfo, sizeof(BP_SYS_INFO));
+    BP_SaveInfo(BP_SAVE2NVM);
+#ifdef BP_SAVE_TO_FLASH // 掉电记忆
+    BP_SaveInfo(BP_SAVE2FLASH);
+#endif
+#endif
+}
 // 系统启动时装载, 从NVM 或Flash加载BP 信息
 //如果加载失败则加载默认BP 值
 //注意，该函数可能会读取Flash，因此需要在SpiFlashInfoInit()函数之后调用

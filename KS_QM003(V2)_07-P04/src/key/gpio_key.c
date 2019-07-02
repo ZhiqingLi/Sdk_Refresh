@@ -173,4 +173,4 @@ uint16_t GpioKeyScan(void)
 }
 
 #endif
-//end #if (defined(FUNC_POWER_KEY_EN) && defined(USE_POWERKEY_SOFT_PUSH_BUTTON))
+//end 

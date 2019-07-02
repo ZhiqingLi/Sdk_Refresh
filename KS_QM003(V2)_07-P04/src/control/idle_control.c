@@ -10,11 +10,10 @@
 #include "sys_app.h"
 #include "sys_vol.h"
 #include "gpio.h"
+#include "sound_remind.h"
 #include "wifi_control.h"
 
 TIMER ChargeLedTmr;
-
-void SysPowerOnControl(bool Flag);
 
 void IdleControl(void)
 {

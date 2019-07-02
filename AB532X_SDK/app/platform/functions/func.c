@@ -58,7 +58,7 @@ void lowpower_vbat_process(void)
             if (!sys_cb.lpwr_warning_times) {
             	sys_cb.pwrdwn_tone_en = 1;
 				func_cb.sta = FUNC_PWROFF;     //低电提示音播放完，进入关机或省电模式
-				//printf("low power warning time out power off;\n");
+				printf("low power warning time out power off;\n");
             }
         }
     }
@@ -167,16 +167,17 @@ void func_message(u16 msg)
 #endif // WARNING_MIN_VOLUME
             break;
 
-#if SOFT_POWER_ON_OFF
+
         //长按PP/POWER软关机(通过PWROFF_PRESS_TIME控制长按时间)
         case KLH_PLAY_POWER:
         case KLH_MODE_POWER:
         case KLH_HSF_POWER:
         case KLH_POWER:
-            sys_cb.pwrdwn_tone_en = 1;
-            func_cb.sta = FUNC_PWROFF;
+        	if (SOFT_POWER_ON_OFF) {
+		        sys_cb.pwrdwn_tone_en = 1;
+		        func_cb.sta = FUNC_PWROFF;
+            }
             break;
-#endif // SOFT_POWER_ON_OFF
 
 #if IRRX_HW_EN
         case KU_IR_POWER:
@@ -190,9 +191,11 @@ void func_message(u16 msg)
         	if (is_next_func_switch()) {
             	func_cb.sta = FUNC_NULL;
             }
-            else if (bt_nor_is_connected()) {
-            	printf ("bt_disconnect();\n");
-            	bt_disconnect();
+            else if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 0)) {
+            	if (bt_nor_is_connected()) {
+	            	printf ("bt_disconnect();\n");
+	            	bt_disconnect();
+            	}
             }
             break;
 

@@ -42,7 +42,7 @@ static TIMER RtcAutoOutTimer;
 #define RTC_ALARM_MAX_COUNT          3                     //闹钟循环最大次数
 
 ////////////////////////////////////
-const RTC_DATE_TIME gSysCurDate = {2018, 01, 01, 01, 00, 00, 00};
+const RTC_DATE_TIME gSysCurDate = {2019, 06, 01, 01, 23, 59, 59};
 const uint8_t Alarm_Ring[7] = {0xff, SOUND_ALARM_RING1, SOUND_ALARM_RING2, SOUND_ALARM_RING3, SOUND_ALARM_RING4, SOUND_ALARM_RING5, 0xff};
 
 
@@ -485,7 +485,7 @@ void RtcTimerCB(uint32_t unused)
 {
 	RtcGetCurrTime(&sRtcControl->DataTime);
 
-	if(0)//(RTC_STATE_IDLE == sRtcControl->State) || (sRtcControl->SubState == RTC_SET_IDLE))
+	if((RTC_STATE_IDLE == sRtcControl->State) || (sRtcControl->SubState == RTC_SET_IDLE))
 	{
 		APP_DBG("RtcTime(%04d-%02d-%02d %02d:%02d:%02d) Week:%d ",
 	        sRtcControl->DataTime.Year, sRtcControl->DataTime.Mon, sRtcControl->DataTime.Date,
@@ -615,7 +615,7 @@ bool RtcInitialize(void)
 	
 	// 定时器
 	TimeOutSet(&RtcAutoOutTimer, 0);
-	InitTimer((SW_TIMER*)&sRtcControl->TimerHandle, 1000, (TIMER_CALLBACK)RtcTimerCB);
+	InitTimer((SW_TIMER*)&sRtcControl->TimerHandle, 30000, (TIMER_CALLBACK)RtcTimerCB);
 	StartTimer(&sRtcControl->TimerHandle);
 #ifdef FUNC_RTC_ALARM	
 #ifdef FUNC_RTC_ALARM_SAVE2FLASH

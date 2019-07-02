@@ -54,7 +54,6 @@ void pwm_test(void)
 */
 #endif // PWM_RGB_EN
 
-
 #if ENERGY_LED_EN    //能量灯软件PWM输出.
 
 #define  ENERGY_LED_NUM 4         //灯的个数
@@ -236,4 +235,394 @@ void rgb_spi_test(void)
 }
 
 #endif // RGB_SERIAL_EN
+
+//定时器PWM功能，注意用Timer3时遥控功能不能实现，用Timer4/5时 TWS不能实现
+#if PWM_TIMER_EN
+//常量宏定义
+#define	TIMER_MASK				0xF0			//timer MASK
+#define CHANNEL_MASK			0x0F			//CHANNEL MASK
+#define SYSTEM_CLK				260000000L		//系统时钟频率
+#define TIMER_DUTY_MAX			0xffff			//占空比最大值
+
+typedef struct {
+	uint32_t DIR;
+	uint32_t DE;
+	uint32_t FEN;
+	uint32_t IO;
+}pwm_cb_t;
+
+const pwm_cb_t timer3_map[4] = {
+	//GPIOXDIR			//GPIOXDE			//GPIOXFEN			//BITS
+	{(SFR6_BASE+0x03*4),(SFR6_BASE+0x04*4),(SFR6_BASE+0x05*4),(uint32_t)(BIT(2)|(BIT(3)<<8)|(BIT(4)<<16)),},
+	{(SFR6_BASE+0x13*4),(SFR6_BASE+0x14*4),(SFR6_BASE+0x15*4),(uint32_t)((0xff)|(BIT(3)<<8)|(BIT(4)<<16)),},
+	{(SFR6_BASE+0x13*4),(SFR6_BASE+0x14*4),(SFR6_BASE+0x15*4),(uint32_t)(BIT(0)|(BIT(1)<<8)|(BIT(2)<<16)),},
+	{(SFR6_BASE+0x23*4),(SFR6_BASE+0x24*4),(SFR6_BASE+0x25*4),(uint32_t)(BIT(0)|(BIT(1)<<8)|((0xff)<<16)),},
+};
+
+const pwm_cb_t timer4_map[3] = {
+	//GPIOXDIR			//GPIOXDE			//GPIOXFEN			//BITS
+	{(SFR6_BASE+0x03*4),(SFR6_BASE+0x04*4),(SFR6_BASE+0x05*4),(uint32_t)(BIT(0)|(BIT(1)<<8)|((0xff)<<16)),},
+	{(SFR6_BASE+0x23*4),(SFR6_BASE+0x24*4),(SFR6_BASE+0x25*4),(uint32_t)(BIT(5)|(BIT(6)<<8)|(BIT(7)<<16)),},
+	{(SFR6_BASE+0x33*4),(SFR6_BASE+0x34*4),(SFR6_BASE+0x35*4),(uint32_t)(BIT(1)|(BIT(0)<<8)|(BIT(5)<<16)),},
+};
+
+const pwm_cb_t timer5_map[3] = {
+	//GPIOXDIR			//GPIOXDE			//GPIOXFEN			//BITS
+	{(SFR6_BASE+0x03*4),(SFR6_BASE+0x04*4),(SFR6_BASE+0x05*4),(uint32_t)(BIT(5)|(BIT(6)<<8)|(BIT(7)<<16)),},
+	{(SFR6_BASE+0x23*4),(SFR6_BASE+0x24*4),(SFR6_BASE+0x25*4),(uint32_t)(BIT(2)|(BIT(3)<<8)|(BIT(4)<<16)),},
+	{(SFR6_BASE+0x13*4),(SFR6_BASE+0x14*4),(SFR6_BASE+0x15*4),(uint32_t)(BIT(5)|(BIT(6)<<8)|(BIT(7)<<16)),},
+};
+
+/*****************************************************************************
+ 函 数 名  : timer_pwm_enable
+ 功能描述  : 定时器PWM通道配置
+ 输入参数  : uint8_t PwmChannel		定时器与通道组合，参见config_define.h  
+           uint8_t MapSel
+           @ TIMER3PWM MAP G1	PWM0(PA2), PWM1(PA3), PWM2(PA4)
+           @ TIMER3PWM MAP G2	PWM1(PB3), PWM2(PB4)
+           @ TIMER3PWM MAP G3	PWM0(PB0), PWM1(PB1), PWM2(PB2)
+           @ TIMER3PWM MAP G4	PWM0(PE0), PWM1(PE1)
+
+           @ TIMER4PWM MAP G1	PWM0(PA0), PWM1(PA1)
+           @ TIMER4PWM MAP G2	PWM0(PE5), PWM1(PE6), PWM2(PE7)
+           @ TIMER4PWM MAP G3	PWM0(PF1), PWM1(PF0), PWM2(PF5)
+
+           @ TIMER5PWM MAP G1	PWM0(PA5), PWM1(PA6), PWM2(PA7)
+           @ TIMER5PWM MAP G2	PWM0(PE2), PWM1(PE3), PWM2(PE4)
+           @ TIMER5PWM MAP G3	PWM0(PB5), PWM1(PB6), PWM2(PB7) 
+		   bool OutLevel        1:HIGHT    0:LOW
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年5月17日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void timer_pwm_enable(uint8_t PwmChannel, uint8_t MapSel)
+{
+	uint8_t TimerIndex = PwmChannel&TIMER_MASK;
+	uint8_t ChannelID = PwmChannel&CHANNEL_MASK;
+	uint8_t io_index = 0xff;
+	
+	if (PWM_TIMER3 == TimerIndex) {
+		io_index = (timer3_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer3 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer3_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer3_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer3_map[MapSel-1].FEN) |= io_index;
+		
+		FUNCMCON2 |= (uint32_t)(0x0f<<8);
+		FUNCMCON2 |= (uint32_t)(MapSel<<8);
+		TMR3CON	&= ~(uint32_t)(0x0c);
+		TMR3CNT = 0;
+
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR3CON	|= BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR3CON	|= BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR3CON	|= BIT(11);
+		}	
+	}
+	else if (PWM_TIMER4 == TimerIndex) {
+		io_index = (timer4_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer4 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer4_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer4_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer4_map[MapSel-1].FEN) |= io_index;
+
+		FUNCMCON2 |= (uint32_t)(0x0f<<12);
+		FUNCMCON2 |= (uint32_t)(MapSel<<12);
+		TMR4CON	&= ~(uint32_t)(0x0c);
+		TMR4CNT = 0;
+
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR4CON	|= BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR4CON	|= BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR4CON	|= BIT(11);
+		}
+	}
+	else if (PWM_TIMER5 == TimerIndex) {
+		io_index = (timer5_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer5 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer5_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer5_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer5_map[MapSel-1].FEN) |= io_index;
+		
+		FUNCMCON2 |= (uint32_t)(0x0f<<16);
+		FUNCMCON2 |= (uint32_t)(MapSel<<16);
+		TMR5CON	&= ~(uint32_t)(0x0c);
+		TMR5CNT = 0;
+
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR5CON	|= BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR5CON	|= BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR5CON	|= BIT(11);
+		}
+	}
+}
+
+/*****************************************************************************
+ 函 数 名  : timer_pwm_disable
+ 功能描述  : 关闭定时器PWM通道
+ 输入参数  : uint8_t PwmChannel  
+             uint8_t MapSel      
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年5月18日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void timer_pwm_disable(uint8_t PwmChannel, uint8_t MapSel)
+{
+	uint8_t TimerIndex = PwmChannel&TIMER_MASK;
+	uint8_t ChannelID = PwmChannel&CHANNEL_MASK;
+	uint8_t io_index = 0xff;
+	
+	if (PWM_TIMER3 == TimerIndex) {
+		io_index = (timer3_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer3 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer3_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer3_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer3_map[MapSel-1].FEN) &= ~io_index;
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR3CON &= ~BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR3CON &= ~BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR3CON &= ~BIT(11);
+		}
+
+		if (!(TMR3CON & (BIT(9)|BIT(10)|BIT(11)))) {
+			TMR3CON &= ~BIT(0);
+		}
+	}
+	else if (PWM_TIMER4 == TimerIndex) {
+		io_index = (timer4_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer4 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer4_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer4_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer4_map[MapSel-1].FEN) &= ~io_index;
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR4CON &= ~BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR4CON &= ~BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR4CON &= ~BIT(11);
+		}
+
+		if (!(TMR4CON & (BIT(9)|BIT(10)|BIT(11)))) {
+			TMR4CON &= ~BIT(0);
+		}
+	}
+	else if (PWM_TIMER5 == TimerIndex) {
+		io_index = (timer5_map[MapSel-1].IO>>(ChannelID*8))&0xff;
+		
+		if (0xff == io_index) {
+			printf("timer5 is not this channel;\n");
+			return;
+		}
+		
+		SFR_RW(timer5_map[MapSel-1].DIR) &= ~io_index;
+		SFR_RW(timer5_map[MapSel-1].DE) |= io_index;
+		SFR_RW(timer5_map[MapSel-1].FEN) &= ~io_index;
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR5CON &= ~BIT(9);
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR5CON &= ~BIT(10);
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR5CON &= ~BIT(11);
+		}
+
+		if (!(TMR5CON & (BIT(9)|BIT(10)|BIT(11)))) {
+			TMR5CON &= ~BIT(0);
+		}
+	}
+}
+
+/*****************************************************************************
+ 函 数 名  : timer_pwm_config
+ 功能描述  : PWM通道频率及占空比配置
+ 输入参数  : uint8_t PwmChannel  
+             uint16_t Freq  		步进0.1HZ     
+             uint16_t Duty  		步进0.1%     
+             bool OutLevel 			1：HIGHT    0：LOW      
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年5月18日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void timer_pwm_config(uint8_t PwmChannel, uint16_t Freq, uint16_t Duty, bool OutLevel)
+{
+	uint8_t TimerIndex = PwmChannel&TIMER_MASK;
+	uint8_t ChannelID = PwmChannel&CHANNEL_MASK;
+	
+	if (PWM_TIMER3 == TimerIndex) {
+		if (TMR3CON & BIT(0)) {
+			if ((SYSTEM_CLK/Freq-1) != TMR3PR) {
+				printf("timer3 diff channel not set diff freq;\n");
+				return;
+			}
+		}
+		else {
+			TMR3CON &= ~(uint32_t)(0x0c);
+			TMR3PR = SYSTEM_CLK/Freq-1;
+			TMR3CON |= BIT(0);
+		}
+
+		uint32_t tmr_duty = ((TMR3PR+1)*Duty/1000-1);
+
+		if (OutLevel) {
+			tmr_duty = (TMR3PR-tmr_duty+1);
+		}
+		tmr_duty += 1;
+		
+		if (tmr_duty > TIMER_DUTY_MAX) {
+			printf("timer3 channel duty setting is ERRO!!! %d,%d;\n", Duty,ChannelID);
+			tmr_duty = TIMER_DUTY_MAX;
+		}
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR3DUTY0 = tmr_duty;
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR3DUTY1 = tmr_duty;
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR3DUTY2 = tmr_duty;
+		}		
+	}
+	else if (PWM_TIMER4 == TimerIndex) {
+		if (TMR4CON & BIT(0)) {
+			if ((SYSTEM_CLK/Freq-1) != TMR4PR) {
+				printf("timer4 diff channel not set diff freq;\n");
+				return;
+			}
+		}
+		else {
+			TMR4CON &= ~(uint32_t)(0x0c);
+			TMR4PR = SYSTEM_CLK/Freq-1;
+			TMR4CON |= BIT(0);
+		}
+
+		uint32_t tmr_duty = ((TMR4PR+1)*Duty/1000-1);
+
+		if (OutLevel) {
+			tmr_duty = (TMR4PR-tmr_duty);
+		}
+		tmr_duty += 1;
+		//printf ("timer4 channel duty setting is %d,%d;\n", tmr_duty,ChannelID);
+		
+		if (tmr_duty > TIMER_DUTY_MAX) {
+			printf("timer4 channel duty setting is ERRO!!! %d,%d;\n", Duty,ChannelID);
+			tmr_duty = TIMER_DUTY_MAX;
+		}
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR4DUTY0 = tmr_duty;
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR4DUTY1 = tmr_duty;
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR4DUTY2 = tmr_duty;
+		}
+	}
+	else if (PWM_TIMER5 == TimerIndex) {
+		if (TMR5CON & BIT(0)) {
+			if ((SYSTEM_CLK/Freq-1) != TMR5PR) {
+				printf("timer5 diff channel not set diff freq;\n");
+				return;
+			}
+		}
+		else {
+			TMR5CON &= ~(uint32_t)(0x0c);
+			TMR5PR = SYSTEM_CLK/Freq-1;
+			TMR5CON |= BIT(0);
+		}
+
+		uint32_t tmr_duty = ((TMR5PR+1)*Duty/1000-1);
+
+		if (OutLevel) {
+			tmr_duty = (TMR5PR-tmr_duty);
+		}
+		tmr_duty += 1;
+
+		if (tmr_duty > TIMER_DUTY_MAX) {
+			printf("timer5 channel duty setting is ERRO!!! %d,%d;\n", Duty,ChannelID);
+			tmr_duty = TIMER_DUTY_MAX;
+		}
+		
+		if (PWM_CHANNEL0 == ChannelID) {
+			TMR5DUTY0 = tmr_duty;
+		}
+		else if (PWM_CHANNEL1 == ChannelID) {
+			TMR5DUTY1 = tmr_duty;
+		}
+		else if (PWM_CHANNEL2 == ChannelID) {
+			TMR5DUTY2 = tmr_duty;
+		}
+	}
+}
+
+#endif // PWM_TIMER_EN
 

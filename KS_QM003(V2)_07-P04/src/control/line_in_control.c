@@ -35,9 +35,7 @@
 #include "slave_mcu_command.h"
 #include "slave_uart_com.h"
 #endif
-#ifdef	OPTION_CHARGER_DETECT
-extern bool IsInCharge(void);
-#endif
+
 TIMER LineInLedTmr;
 
 #ifdef FUNC_LINEIN_EN

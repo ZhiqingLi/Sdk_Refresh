@@ -447,7 +447,7 @@ int32_t main(void)
 		}
 		else
 		{
-			AmpMuteControl(1);
+			//AmpMuteControl(1);
 		}
 #endif
 

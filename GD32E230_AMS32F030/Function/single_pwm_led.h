@@ -41,7 +41,7 @@ extern "C"{
 //实际使用功能宏定义
 #define PWM_LED_SCAN_FREQ					10000
 #define USE_LED_SCAN_PIN					12	
-#define USE_PWM_SCAN_CHANNEL				3
+#define USE_PWM_SCAN_CHANNEL				1
 
 #define MAX_DISP_DUTY						100
 #define MIN_DISP_DUTY						5
@@ -52,64 +52,64 @@ extern "C"{
 //扫描GPIO定义，根据硬件连接定义
 #define LED_SCAN_GPIO_PORT1					GPIOB
 #define LED_SCAN_GPIO_CLK1					RCC_AHBPeriph_GPIOB
-#define LED_SCAN_GPIO_PIN1					GPIO_Pin_7
+#define LED_SCAN_GPIO_PIN1					GPIO_Pin_4
 
 #define LED_SCAN_GPIO_PORT2					GPIOB
 #define LED_SCAN_GPIO_CLK2					RCC_AHBPeriph_GPIOB
-#define LED_SCAN_GPIO_PIN2					GPIO_Pin_6
+#define LED_SCAN_GPIO_PIN2					GPIO_Pin_5
 
 #define LED_SCAN_GPIO_PORT3					GPIOB
 #define LED_SCAN_GPIO_CLK3					RCC_AHBPeriph_GPIOB
-#define LED_SCAN_GPIO_PIN3					GPIO_Pin_5
+#define LED_SCAN_GPIO_PIN3					GPIO_Pin_6
 
 #define LED_SCAN_GPIO_PORT4					GPIOB
 #define LED_SCAN_GPIO_CLK4					RCC_AHBPeriph_GPIOB
-#define LED_SCAN_GPIO_PIN4					GPIO_Pin_4
+#define LED_SCAN_GPIO_PIN4					GPIO_Pin_7
 
-#define LED_SCAN_GPIO_PORT5					GPIOB
+#define LED_SCAN_GPIO_PORT5					GPIOA
 #define LED_SCAN_GPIO_CLK5					RCC_AHBPeriph_GPIOB
-#define LED_SCAN_GPIO_PIN5					GPIO_Pin_3
+#define LED_SCAN_GPIO_PIN5					GPIO_Pin_7
 
 #define LED_SCAN_GPIO_PORT6					GPIOA
 #define LED_SCAN_GPIO_CLK6					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN6					GPIO_Pin_15
+#define LED_SCAN_GPIO_PIN6					GPIO_Pin_6
 
 #define LED_SCAN_GPIO_PORT7					GPIOA
 #define LED_SCAN_GPIO_CLK7					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN7					GPIO_Pin_13
+#define LED_SCAN_GPIO_PIN7					GPIO_Pin_5
 
 #define LED_SCAN_GPIO_PORT8					GPIOA
 #define LED_SCAN_GPIO_CLK8					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN8					GPIO_Pin_12
+#define LED_SCAN_GPIO_PIN8					GPIO_Pin_4
 
 #define LED_SCAN_GPIO_PORT9					GPIOA
 #define LED_SCAN_GPIO_CLK9					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN9					GPIO_Pin_11
+#define LED_SCAN_GPIO_PIN9					GPIO_Pin_3
 
 #define LED_SCAN_GPIO_PORT10				GPIOA
 #define LED_SCAN_GPIO_CLK10					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN10					GPIO_Pin_5
+#define LED_SCAN_GPIO_PIN10					GPIO_Pin_11
 
 #define LED_SCAN_GPIO_PORT11				GPIOA
 #define LED_SCAN_GPIO_CLK11					RCC_AHBPeriph_GPIOA
-#define LED_SCAN_GPIO_PIN11					GPIO_Pin_4
+#define LED_SCAN_GPIO_PIN11					GPIO_Pin_12
 
-#define LED_SCAN_GPIO_PORT12				GPIOA
+#define LED_SCAN_GPIO_PORT12				GPIOB
 #define LED_SCAN_GPIO_CLK12					RCC_AHBPeriph_GPIOA
 #define LED_SCAN_GPIO_PIN12					GPIO_Pin_3
 
 //PWM控制接口定义，根据硬件修改
-#define PWM_SCAN_CHANNEL_SEL1				PWM3_CH1_A6_B4
+#define PWM_SCAN_CHANNEL_SEL1				PWM3_CH3_B0
 #define PWM_SCAN_OUTIO_SEL1					PWM_IO_SEL0
-#define PWM_SCAN_LEVEL_SEL1					PWM_OUTPUT_HIGH
+#define PWM_SCAN_LEVEL_SEL1					PWM_OUTPUT_LOW
 
 #define PWM_SCAN_CHANNEL_SEL2				PWM3_CH2_A7_B5
 #define PWM_SCAN_OUTIO_SEL2					PWM_IO_SEL0
-#define PWM_SCAN_LEVEL_SEL2					PWM_OUTPUT_HIGH
+#define PWM_SCAN_LEVEL_SEL2					PWM_OUTPUT_LOW
 
-#define PWM_SCAN_CHANNEL_SEL3				PWM3_CH3_B0
+#define PWM_SCAN_CHANNEL_SEL3				PWM3_CH1_A6_B4
 #define PWM_SCAN_OUTIO_SEL3					PWM_IO_SEL0
-#define PWM_SCAN_LEVEL_SEL3					PWM_OUTPUT_HIGH
+#define PWM_SCAN_LEVEL_SEL3					PWM_OUTPUT_LOW
 
 /*----------------------------------------------*
  * 外部变量说明                                 *

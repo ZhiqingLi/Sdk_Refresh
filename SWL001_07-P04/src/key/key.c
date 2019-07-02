@@ -409,8 +409,9 @@ void KeyScan(void)
 		gSys.SleepLedOffFlag = FALSE;
 #endif
 		
-#ifdef FUNC_WIFI_EN                             //WiFi升级中禁止按键操作
-		if(WiFiFirmwareUpgradeStateGet() != TRUE)
+#ifdef FUNC_WIFI_EN     
+		AmpMuteControl(0);							//提前UNMUTE，有些功放UnMute延时太长，防止切断提示音
+		if(WiFiFirmwareUpgradeStateGet() != TRUE)	//WiFi升级中禁止按键操作
 #endif
 		{
 			APP_DBG("Key Msg : %x\n", Msg);

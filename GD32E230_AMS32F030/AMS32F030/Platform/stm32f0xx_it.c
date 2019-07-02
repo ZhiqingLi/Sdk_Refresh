@@ -118,6 +118,28 @@ void TIM16_IRQHandler(void)
 /**
   * @}
   */ 
+/*****************************************************************************
+ 函 数 名  : USART1_IRQHandler
+ 功能描述  : 串口中断服务函数
+ 输入参数  : 无
+ 输出参数  : 无
+ 返 回 值  : 
+ 调用函数  : 
+ 被调函数  : 
+ 
+ 修改历史      :
+  1.日    期   : 2019年5月9日
+    作    者   : qing
+    修改内容   : 新生成函数
+
+*****************************************************************************/
+void USART1_IRQHandler(void) 
+{
+	if ((SET == USART_GetFlagStatus(USART1, USART_FLAG_TXE)) && (FALSE != GetDebugDataLen())) {
+		USART_SendData(USART1, (uint16_t)GetDebugBufferData()); 	
+	}
+	USART_ClearFlag(USART1, USART_FLAG_TC);
+}
 
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

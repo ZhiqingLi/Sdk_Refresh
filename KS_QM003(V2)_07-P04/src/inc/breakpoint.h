@@ -126,6 +126,10 @@ typedef struct _BP_SYS_INFO_
 #ifdef FUNC_SPI_UPDATE_EN
     UPGRADE_SOURCE UpgradeFileSource;
 #endif
+#ifdef FUNC_WIFI_EN
+	bool	IsWiFiRepeatPowerOn;
+#endif
+
 } BP_SYS_INFO;
 
 
@@ -181,6 +185,7 @@ bool EraseFlashOfUserArea(void);
 void BP_InfoLog(void);
 uint8_t GetCrc8CheckSum(uint8_t* ptr, uint32_t len);	// º∆À„CRC
 void BP_LoadInfo(void);
+void BP_InfoInit(void);
 void* BP_GetInfo(BP_INFO_TYPE InfoType);
 bool BP_SaveInfo(BP_SAVE_TYPE SaveType);
 

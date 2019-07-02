@@ -26,13 +26,13 @@ void sd_detect(void)
         if (dev_online_filter(DEV_SDCARD)) {
             sd_insert();
             msg_enqueue(EVT_SD_INSERT);
-//            printf("sd insert\n");
+            printf("sd insert\n");
         }
     } else {
         if (dev_offline_filter(DEV_SDCARD)) {
             sd_remove();
             msg_enqueue(EVT_SD_REMOVE);
-//            printf("sd remove\n");
+            printf("sd remove\n");
         }
     }
 }
@@ -474,7 +474,7 @@ bool rtc_init(void)
 //UART0打印信息输出GPIO选择，UART0默认G1(PA7)
 void uart0_mapping_sel(void)
 {
-    //等待uart0发送完成
+    //等待uart0发送完�?
     if(UART0CON & BIT(0)) {
         while (!(UART0CON & BIT(8)));
     }
@@ -534,7 +534,7 @@ void uart0_mapping_sel(void)
 
 const u8 maxvol_tbl[4] = {16, 30, 32, 50};
 
-//开user timer前初始化的内容
+//开user timer前初始化的内�?
 AT(.text.bsp.sys.init)
 static void bsp_var_init(void)
 {
@@ -554,10 +554,10 @@ static void bsp_var_init(void)
     sys_cb.sleep_time = -1L;
     sys_cb.pwroff_time = -1L;
     if (xcfg_cb.sys_sleep_time != 0) {
-        sys_cb.sleep_time = (u32)xcfg_cb.sys_sleep_time * 10;   //100ms为单位
+        sys_cb.sleep_time = (u32)xcfg_cb.sys_sleep_time * 10;   //100ms为单�?
     }
     if (xcfg_cb.sys_off_time != 0) {
-        sys_cb.pwroff_time = (u32)xcfg_cb.sys_off_time * 10;    //100ms为单位
+        sys_cb.pwroff_time = (u32)xcfg_cb.sys_off_time * 10;    //100ms为单�?
     }
 
     sys_cb.sleep_delay = -1L;
@@ -583,13 +583,13 @@ static void bsp_var_init(void)
 
 #if MUSIC_SDCARD_EN
     if((xcfg_cb.sddet_iosel == IO_MUX_SDCLK) || (xcfg_cb.sddet_iosel == IO_MUX_SDCMD)) {
-        dev_delay_offline_times(DEV_SDCARD, 3); //复用时, 加快拔出检测. 这里拔出检测为3次.
+        dev_delay_offline_times(DEV_SDCARD, 3); //复用�? 加快拔出检�? 这里拔出检测为3�?
     }
 #endif
 
 #if MUSIC_SDCARD1_EN
     if((xcfg_cb.sd1det_iosel == IO_MUX_SDCLK) || (xcfg_cb.sd1det_iosel == IO_MUX_SDCMD)) {
-        dev_delay_offline_times(DEV_SDCARD1, 3); //复用时, 加快拔出检测. 这里拔出检测为3次.
+        dev_delay_offline_times(DEV_SDCARD1, 3); //复用�? 加快拔出检�? 这里拔出检测为3�?
     }
 #endif
 
@@ -606,14 +606,14 @@ static void bsp_var_init(void)
 
 AT(.text.bsp.sys.init)
 static void bsp_io_init(void)
-{
+{	
     GPIOADE = BIT(7); //UART
     GPIOBDE = 0;
     GPIOEDE = 0;
     GPIOFDE = 0;
     GPIOGDE = 0x3F; //MCP FLASH
 
-    uart0_mapping_sel();        //调试UART IO选择或关闭
+    uart0_mapping_sel();        //调试UART IO选择或关�?
 
 #if LINEIN_DETECT_EN
     LINEIN_DETECT_INIT();
@@ -637,6 +637,11 @@ static void bsp_io_init(void)
 #if MIC_DETECT_EN
     MIC_DETECT_INIT();
 #endif
+
+#if PWM_TIMER_EN
+	timer_pwm_init();
+#endif
+
 }
 
 void bsp_get_xosc_xcfg(u8 *osci_cap, u8 *osco_cap, u8 *both_cap)
@@ -718,7 +723,7 @@ bool tws_gpiox_2_gnd_check(void)  //TWS 特定GPIO 接地为左声道
             break;
         }
     }
-    //检测完成, 恢复以前IO状态
+    //检测完�? 恢复以前IO状�?
     g->sfr[GPIOxDE] =  bk_de;
     g->sfr[GPIOxPU] =  bk_pu;
     g->sfr[GPIOxDIR] = bk_dir;
@@ -729,18 +734,18 @@ bool tws_gpiox_2_gnd_check(void)  //TWS 特定GPIO 接地为左声道
 AT(.text.bsp.sys.init)
 void tws_lr_xcfg_sel(void)
 {
-    static bool checked_flag = false;  //只检测一次.
+    static bool checked_flag = false;  //只检测一�?
     if ((!xcfg_cb.bt_tws_en) || (checked_flag)) {
         return;
     }
     sys_cb.tws_left_channel = 0;
     //printf("xcfg_cb.bt_tws_lr_mode = %d\n",xcfg_cb.bt_tws_lr_mode);
-    if (2 == xcfg_cb.bt_tws_lr_mode) { //有PWRKEY 820K接地则为左声道
+    if (2 == xcfg_cb.bt_tws_lr_mode) { //有PWRKEY 820K接地则为左声�?
         checked_flag = true;
         if (tws_pwrkey_820k_check()) {
             sys_cb.tws_left_channel = 1;
         }
-    }else if(3 == xcfg_cb.bt_tws_lr_mode) {  //有GPIOx接地则为左声道
+    }else if(3 == xcfg_cb.bt_tws_lr_mode) {  //有GPIOx接地则为左声�?
         checked_flag = true;
         if (tws_gpiox_2_gnd_check()) {
             sys_cb.tws_left_channel = 1;
@@ -805,7 +810,7 @@ void port_isr(void)
 
 }
 
-void port_int_example(void)     //sys_set_tmr_enable(1, 1); 前调用 测试OK
+void port_int_example(void)     //sys_set_tmr_enable(1, 1); 前调�?测试OK
 {
     GPIOFDE |= BIT(0);  GPIOFDIR |= BIT(0); GPIOFFEN &= ~BIT(0);
     GPIOFPU |= BIT(0);
@@ -825,16 +830,7 @@ void port_int_example(void)     //sys_set_tmr_enable(1, 1); 前调用 测试OK
 }
 #endif
 
-/*
-void timer3_init(void)
-{
-	TMR3CON =  BIT(7);                  //Timer overflow interrupt enable
-	TMR3CNT = 0;
-	TMR3PR  = 1000000 / 2 - 1;          //500ms, select xosc26_div 1M clk
-	TMR3CON |= BIT(2) | BIT(0);         //Timer works in Counter Mode
-    sys_irq_init(IRQ_TMR3_IRRX_VECTOR, 1, timer3_isr);
-}
-
+#if 0					//timer3 interrupt example
 AT(.com_rodata.isr)
 const char str_t3[] = "T3 ";
 
@@ -846,7 +842,16 @@ void timer3_isr(void)
     }
     printk(str_t3);
 }
-*/
+
+void timer3_init(void)
+{
+	TMR3CON =  BIT(7);                  //Timer overflow interrupt enable
+	TMR3CNT = 0;
+	TMR3PR  = 1000000 / 2 - 1;          //500ms, select xosc26_div 1M clk
+	TMR3CON |= BIT(2) | BIT(0);         //Timer works in Counter Mode
+    sys_irq_init(IRQ_TMR3_IRRX_VECTOR, 1, timer3_isr);
+}
+#endif
 
 AT(.text.bsp.sys.init)
 void bsp_sys_init(void)
@@ -898,14 +903,14 @@ void bsp_sys_init(void)
     key_init();
 
 #if USER_EXT_POWERON_EN
-	EXT_GPIO_POWERON();						//20190224，进入开机时打开外部电源。
+	EXT_GPIO_POWERON();						//20190224，进入开机时打开外部电源�?
 #endif //USER_EXT_POWERON_EN
 
     gui_init();
 #if PWM_RGB_EN
     pwm_init();
 #endif // PWM_RGB_EN
-
+	
     /// enable user timer for display & dac
     sys_set_tmr_enable(1, 1);
 
@@ -953,7 +958,11 @@ void bsp_sys_init(void)
             } else
 #endif // FUNC_AUX_EN
             {
+#if FUNC_IDLE_EN
+				func_cb.sta = FUNC_IDLE;
+#else
                 func_cb.sta = FUNC_BT;
+#endif
             }
         }
     }
@@ -984,9 +993,7 @@ void bsp_sys_init(void)
 #endif // EQ_DBG_IN_UART
 
 #if PLUGIN_SYS_INIT_FINISH_CALLBACK
-    plugin_sys_init_finish_callback(); //初始化完成, 各方案可能还有些不同参数需要初始化,预留接口到各方案
+    plugin_sys_init_finish_callback(); //初始化完�? 各方案可能还有些不同参数需要初始化,预留接口到各方案
 #endif
-
-
 }
 

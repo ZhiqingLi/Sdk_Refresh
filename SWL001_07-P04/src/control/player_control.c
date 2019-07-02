@@ -2271,8 +2271,8 @@ bool PlayerControl(void)
 	APP_DBG("exit player\n");
 
 #if (defined(FUNC_WIFI_EN) && defined(FUNC_WIFI_BT_CONTROL_EN))
-	if(!GetCurBtConnectedFlag(
-) && (gSys.CurModuleID == MODULE_ID_BLUETOOTH)
+	if(!GetCurBtConnectedFlag() 
+	&& (gSys.CurModuleID == MODULE_ID_BLUETOOTH)
 	&& (gWiFi.WiFiAppPlayMode != WIFI_PLAY_MODE_AVS))
 	{
 		BTSetScanDisable();

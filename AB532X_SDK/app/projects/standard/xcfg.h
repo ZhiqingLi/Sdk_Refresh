@@ -10,6 +10,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 func_aux_en                      : 1;   //AUX输入功能
     u32 func_fmrx_en                     : 1;   //FM收音功能
     u32 powkey_10s_reset                 : 1;   //POWKEY 10s复位系统
+    u32 powkey_soft_on_off               : 1;   //POWKEY 软开关机功能
     u8 ext_power_io_sel;                        //外部POWER控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
     u32 spk_mute_en                      : 1;   //功放MUTE功能
     u8 spk_mute_io_sel;                         //功放MUTE控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
@@ -87,6 +88,8 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 ble_en                           : 1;   //BLE控制功能
     char le_name[32];                           //BLE名称
     u32 dac_off_for_conn                 : 1;   //蓝牙连接时关闭DAC
+    u32 bt_key_discon_en                 : 1;   //按键断开蓝连接功能
+    u32 bt_key_discon_mode               : 2;   //断开连接按键选择: MODE键无其他模式时断开: 0, 长按PLAY键断开: 1, 长按HSF键断开: 2
     u8 bt_ch_mic;                               //MIC通路选择: 0:MIC_PF2, 1:MIC_PF5
     u8 bt_anl_gain;                             //MIC模拟增益
     u8 bt_dig_gain;                             //MIC数字增益(0~3DB)

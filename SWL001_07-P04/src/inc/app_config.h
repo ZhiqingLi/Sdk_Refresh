@@ -764,6 +764,7 @@ extern "C" {
 //	#define FUNC_AMP_POWER_EN
 	
 	#ifdef  AMP_SILENCE_MUTE_EN
+		#define UNMUTE_DELAY_TIMER		  1000	  //功放UnMute延时
 		#define SILENCE_MUTE_TIMER        500     //无信号MUTE检测时间
 		#define SILENCE_UNMUTE_TIMER      30      //解MUTE检测时间
 		#define DEC_SILENCE_MUTE_VALUE    1       //DEC解码MUTE阀值
@@ -1029,7 +1030,7 @@ extern "C" {
 #ifdef FUNC_AUDIO_EFFECT_EN
 	#include "audio_effect_codec.h"
 	#define DIGITAL_PER_GAIN_EN                      //数字信号预增益设置，
-	#define DIGITAL_PER_GAIN_VAL              1640   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
+	#define DIGITAL_PER_GAIN_VAL              2500//1640   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
 	//#define FUNC_AUDIO_EFFECT_EQ_EN                  //EQ功能开关
 #endif
 

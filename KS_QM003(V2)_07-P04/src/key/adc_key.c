@@ -43,7 +43,7 @@ static const uint16_t AdcKeyEvent[][5] =
 	
 	{MSG_NONE,			MSG_RTC_SET_UP, 	MSG_RTC_SET_UP, 	 MSG_RTC_SET_UP,	  MSG_NONE		},  //无实际按键
 	{MSG_NONE,			MSG_RTC_SET_DW, 	MSG_RTC_SET_DW, 	 MSG_RTC_SET_DW,      MSG_NONE		},	//SW7
-	{MSG_NONE,			MSG_WIFI_SAVE, 		MSG_MODE,        	 MSG_NONE,            MSG_NONE		},	//SW8
+	{MSG_NONE,			MSG_WIFI_SAVE, 		MSG_NONE,        	 MSG_NONE,            MSG_NONE		},	//SW8
 	{MSG_NONE,			MSG_RTC_SET_PARM,	MSG_RTC_SET_NEXT,	 MSG_NONE, 			  MSG_NONE		},	//SW9
 	{MSG_NONE,			MSG_REC, 			MSG_REC_PLAYBACK,    MSG_NONE, 			  MSG_NONE		},	//SW10
 	{MSG_NONE,			MSG_NONE, 			MSG_NONE, 			 MSG_NONE, 			  MSG_NONE		},  //无实际按键

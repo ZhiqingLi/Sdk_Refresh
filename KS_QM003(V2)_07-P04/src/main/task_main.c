@@ -50,18 +50,26 @@ void EnterIntoNextMode(void);
 void SysClkSet(uint8_t clk_sel, uint8_t clk_div);
 #endif
 
-#ifdef FUNC_GPIO_POWER_ON_EN
-#ifndef FUNC_POWERKEY_SOFT_POWERON_EN
-void SysPowerOnControl(bool Flag);
-#endif
-#endif
-
 extern bool BtHfControl(void);
 
 extern uint32_t GetNextModeId(uint32_t CurModeId);
 
 extern int32_t BtTaskHandle;
 
+static const uint8_t frist_poweron_remind[3] = {
+	SOUND_PWR_ON,
+	SOUND_PWKON_RING1,
+	SOUND_PWKON_RING2,
+};
+
+static const uint8_t repeat_poweron_remind[6] = {
+	SOUND_PWKON_RING3,
+	SOUND_PWKON_RING4,
+	SOUND_PWKON_RING5,
+	SOUND_PWKON_RING6,
+	SOUND_PWKON_RING7,
+	SOUND_PWKON_RING8,
+};
 
 //main entrance of main task
 //主任务程序入口，可按需在对应入口处增加对应的模块调用
@@ -78,31 +86,39 @@ void GuiTaskEntrance(void)
 
 	APP_DBG("main task Init...\n");
 	SetSysVol();
-#ifdef FUNC_SPI_UPDATE_EN
-    if(gSys.UpgradeFileSource == UPGRADE_SOURCE_USBSD)
-    {
-        SoundRemind(SOUND_UPDATE_SUCC);
-        gSys.NextModuleID = MODULE_ID_POWEROFF;
-        gSys.UpgradeFileSource = UPGRADE_SOURCE_IDLE;
-#ifdef FUNC_BREAKPOINT_EN	
-        {
-            BP_SYS_INFO *pSysInfo;
 
-    		pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
-            BP_SET_ELEMENT(pSysInfo->UpgradeFileSource, gSys.UpgradeFileSource);
-            BP_SaveInfo(BP_SAVE2NVM);
-#ifdef BP_SAVE_TO_FLASH // 掉电记忆
-            BP_SaveInfo(BP_SAVE2FLASH);
-#endif
-        }
-#endif
-    }
-    else
-#endif
-	if(MODULE_ID_END >= gSys.CurModuleID)
+#ifdef FUNC_SPI_UPDATE_EN
+	if(gSys.UpgradeFileSource == UPGRADE_SOURCE_USBSD)
 	{
-		SoundRemind(SOUND_PWR_ON);
+		SoundRemind(SOUND_UPDATE_SUCC);
+		gSys.NextModuleID = MODULE_ID_POWEROFF;
+		gSys.UpgradeFileSource = UPGRADE_SOURCE_IDLE;
+#ifdef FUNC_BREAKPOINT_EN	
+		{
+			BP_SYS_INFO *pSysInfo;
+
+			pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+			BP_SET_ELEMENT(pSysInfo->UpgradeFileSource, gSys.UpgradeFileSource);
+			BP_SaveInfo(BP_SAVE2NVM);
+#ifdef BP_SAVE_TO_FLASH // 掉电记忆
+			BP_SaveInfo(BP_SAVE2FLASH);
+#endif
+		}
+#endif
 	}
+	else
+#endif
+	if((MODULE_ID_END >= gSys.CurModuleID) && (WAKEUP_FLAG_POR_RTC != gWakeUpFlag)
+	)
+	{
+		if (gSys.IsWiFiRepeatPowerOn) {
+			SoundRemind(repeat_poweron_remind[GetRandNum(6)-1]);
+		}
+		else {
+			SoundRemind(frist_poweron_remind[GetRandNum(3)-1]);
+		}
+	}
+
 
 	OSRescheduleTimeout(500);
 
@@ -328,6 +344,9 @@ void GuiTaskEntrance(void)
 #endif
 
 			case MODULE_ID_POWEROFF:
+				if (IsInCharge()) {
+					SoundRemind(SOUND_CHARGING);
+				} 
 				SystemPowerOffControl();
 				break;
 		
@@ -344,7 +363,6 @@ void GuiTaskEntrance(void)
 				APP_DBG("Enter Module error");
 				break;
 		}
-		//gSys.MuteFlag = TRUE;     //20160413 MUTE功放，防止POP音
 		//from cache list or top-frame, update gCurBackModuleID for two UI task's mode
 		//use module top diagram for one UI task
 		//new device plugin, then switch to the related module:
@@ -353,17 +371,6 @@ void GuiTaskEntrance(void)
 		{
 			gSys.NextModuleID = GetNextModeId(gSys.CurModuleID);
 			APP_DBG("Next ModuleId = %d\n", gSys.NextModuleID);
-		}
-
-		if(gSys.NextModuleID >= MODULE_ID_END)
-		{
-			SoundRemind(SOUND_PWR_OFF);
-        #ifdef FUNC_AMP_MUTE_EN
-            GpioAmpMuteEnable();
-        #endif
-        #ifdef FUNC_WIFI_POWER_KEEP_ON
-			WiFiPowerOff();
-		#endif
 		}
 		
 		gSys.CurModuleID = gSys.NextModuleID;//set mode to the next mode

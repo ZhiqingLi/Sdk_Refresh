@@ -519,7 +519,7 @@ extern "C" {
 //获取一个随机数，原是在player_control.c中定义的，为了方便使用，改为定义在app_config.h中
 //****************************************************************************************
 
-  #define GetRandNum(MaxValue) ((OSSysTickGet()%MaxValue) + 3) 
+  #define GetRandNum(MaxValue) ((OSSysTickGet()%MaxValue) + 1) 
 	
 //****************************************************************************************
 //                  系统默认音量配置         
@@ -742,7 +742,7 @@ extern "C" {
 //****************************************************************************************
 //                 LINEIN模式配置 
 //****************************************************************************************
-	#define FUNC_LINEIN_EN   					// Linein
+//	#define FUNC_LINEIN_EN   					// Linein
 	#ifdef FUNC_LINEIN_EN
 		#define LINEIN_ANA_GAIN_VAL			VOLUME_ADC_ANA_LIN1	//LINEIN输入通道的模拟增益(-3.83),GIAN 对应关系见 sys_vol.h
 		#define LINEIN_DETECT_PORT_IN		GPIO_A_IN
@@ -757,7 +757,7 @@ extern "C" {
 //****************************************************************************************
 //                 earphone模式配置 
 //****************************************************************************************
-//	#define FUNC_EARPHONE_EN   					// Linein
+	#define FUNC_EARPHONE_EN   					// Linein
 	#ifdef FUNC_EARPHONE_EN
 		#define EARPHONE_DETECT_PORT_IN		GPIO_A_IN
 		#define EARPHONE_DETECT_PORT_OE		GPIO_A_OE
@@ -1082,8 +1082,8 @@ extern "C" {
 // 该功能宏打开后，默认包含电池电压检测功能，有关电池电压检测的其它可定义参数，请详见power_monitor.c文件
 
 //USE_POWERKEY_SLIDE_SWITCH 和USE_POWERKEY_SOFT_PUSH_BUTTON 两个宏不要同时定义
-	#define USE_POWERKEY_SLIDE_SWITCH           //for slide switch case ONLY
-//	#define USE_POWERKEY_SOFT_PUSH_BUTTON       //for soft push button case ONLY
+//	#define USE_POWERKEY_SLIDE_SWITCH           //for slide switch case ONLY
+	#define USE_POWERKEY_SOFT_PUSH_BUTTON       //for soft push button case ONLY
 
 	#define	POWERON_DETECT_VOLTAGE              //开机检测电池电压，低于关机电压则直接进入关机流程
 	#define	FUNC_POWER_MONITOR_EN
@@ -1098,6 +1098,7 @@ extern "C" {
 			#define CHARGE_DETECT_PORT_IE			GPIO_C_IE
 			#define CHARGE_DETECT_PORT_OE			GPIO_C_OE
 			#define CHARGE_DETECT_BIT				GPIOC12
+			extern bool IsInCharge(void);
 	#endif
 	#ifdef  OPTION_CHAR_FUL_DETECT
 			//充满电检测端口配置
@@ -1109,8 +1110,8 @@ extern "C" {
 			#define CHAR_FUL_DETECT_BIT				GPIOC11
 	#endif
 
-//	#define FUNC_POWERKEY_SOFT_POWERON_EN //软开关用普通GPIO检测，该功能需要用硬开机和普通GPIO配合实现
-//	#define FUNC_GPIO_POWER_ON_EN         //GPIO控制系统上电
+	#define FUNC_POWERKEY_SOFT_POWERON_EN //软开关用普通GPIO检测
+	#define FUNC_GPIO_POWER_ON_EN         //GPIO控制系统上电
 
 	#ifdef FUNC_GPIO_POWER_ON_EN          //GPIO控制系统上电
 			#define POWERON_GPIO_PORT_PU			GPIO_A_PU
@@ -1118,7 +1119,20 @@ extern "C" {
 			#define POWERON_GPIO_PORT_OUT			GPIO_A_OUT
 			#define POWERON_GPIO_PORT_IE			GPIO_A_IE
 			#define POWERON_GPIO_PORT_OE			GPIO_A_OE
-			#define POWERON_GPIO_PORT_BIT			GPIOA10
+			#define POWERON_GPIO_PORT_BIT			GPIOA21
+
+			extern void SysPowerOnControl(bool Flag);
+	#endif
+
+	#ifdef FUNC_POWERKEY_SOFT_POWERON_EN    //GPIO检测POWERKEY状态
+			#define POWERKEY_DETECT_PORT_PU			GPIO_A_PU
+			#define POWERKEY_DETECT_PORT_PD			GPIO_A_PD
+			#define POWERKEY_DETECT_PORT_IN			GPIO_A_IN
+			#define POWERKEY_DETECT_PORT_IE			GPIO_A_IE
+			#define POWERKEY_DETECT_PORT_OE			GPIO_A_OE
+			#define POWERKEY_DETECT_PORT_BIT		GPIOA20
+
+			extern bool SoftPowerKeyDetect(void);
 	#endif
 
 
@@ -1181,8 +1195,8 @@ extern "C" {
 		#define		CODING_KEY_B_PORT_PD	GPIO_A_PD 					
 		#define		CODING_KEY_B_BIT		(1 << 20)	//GPIO_B[20] for signal B
 	#endif
-	
-	#define FUNC_POWER_KEY_EN							//POWER KEY宏开关，软开关复用功能
+
+//	#define FUNC_POWER_KEY_EN							//POWER KEY宏开关，软开关复用功能
 														//需要同时开启宏USE_POWERKEY_SOFT_PUSH_BUTTON 该功能才真正有效
 														
   #define FUNC_KEY_CPH_EN							    //按键长按保持功能
@@ -1435,7 +1449,7 @@ enum EnumModuleID
 
 /////////////////////FLASH 操作/////////////////////////
 #ifdef FUNC_WIFI_EN
-  #define FLASH_ERASE_IN_TCM			//FLASH擦除代码放在TCM中,目前只适用于GD的FLASH
+  //#define FLASH_ERASE_IN_TCM			//FLASH擦除代码放在TCM中,目前只适用于GD的FLASH
 #endif
 
 #include "debug.h"

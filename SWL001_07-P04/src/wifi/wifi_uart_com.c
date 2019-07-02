@@ -2363,10 +2363,6 @@ void WiFi_CmdProcess(void)
 	{    	
 		WiFi_SendCmdToMcu(AXX_PLM_XXX, &gWiFiCmd[5]);
 	}
-	else if(memcmp(gWiFiCmd, "+PLM-", 5) == 0)
-	{
-		WiFi_SendCmdToMcu(AXX_PLM_AVS, &gWiFiCmd[5]);
-	}
 	else if(memcmp(gWiFiCmd, "+SLV+NOT", 8) == 0)
 	{		
 		WiFi_SendCmdToMcu(AXX_SLV_NOT, NULL);
@@ -2678,6 +2674,10 @@ void WiFi_CmdProcess(void)
 	}
 #endif
 #ifdef FUNC_WIFI_BT_CONTROL_EN
+	else if(memcmp(gWiFiCmd, "+PLM-", 5) == 0)
+	{
+		WiFi_SendCmdToMcu(AXX_PLM_AVS, &gWiFiCmd[5]);
+	}
 	else
 	{
 		WiFi_CtrlBtCmdProcess(&gWiFiCmd[0]);

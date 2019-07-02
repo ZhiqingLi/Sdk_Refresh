@@ -7,11 +7,12 @@
 #include "sys_app.h"
 #include "sys_vol.h"
 #include "adc.h"
+#include "wakeup.h"
 #include "wifi_control.h"
 
 #ifdef FUNC_ADC_ADJUST_VOLUME_EN
 
-#define 	ADC_ADJUST_VOL_SCAN_COUNT	10
+#define 	ADC_ADJUST_VOL_SCAN_COUNT	5
 
 static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] = 
 {
@@ -24,7 +25,7 @@ static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] =
 
 uint32_t AdcAdjustSampleSum = 0; 
 uint16_t AdcAdjustSampleCnt = ADC_ADJUST_VOL_SCAN_COUNT;
-uint32_t AdcAdjustLevelAverage = 0;		//å½“å‰ADCå¹³å‡å€?
+uint16_t AdcAdjustLevelAverage = 0;		//å½“å‰ADCå¹³å‡å€?
 
 uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 {
@@ -46,7 +47,8 @@ uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 // return: 0---no key, else---key msg
 void AdcAdjustVolScan(void)
 {
-	static uint8_t	CurVolumeIndex = 0;
+	static uint8_t	CurVolumeIndex = MAX_VOLUME;
+	static uint16_t PrevAverageValue = 0;
 
 	if(AdcAdjustSampleCnt > 0)
 	{
@@ -60,13 +62,15 @@ void AdcAdjustVolScan(void)
 		AdcAdjustSampleCnt = ADC_ADJUST_VOL_SCAN_COUNT;
 		AdcAdjustSampleSum = 0;
 
-		if(CurVolumeIndex != GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage))
+		if((abs(AdcAdjustLevelAverage - PrevAverageValue) > 50)
+		&& (CurVolumeIndex != GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage)))
 		{
 			CurVolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
 			gSys.Volume = CurVolumeIndex;
-			//APP_DBG("AdcAdjustvolume = %d;\n", gSys.Volume);
 			SetSysVol();
 			McuSyncWiFiVolume(gSys.Volume);
+			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", PrevAverageValue, AdcAdjustLevelAverage, gSys.Volume);
+			PrevAverageValue = AdcAdjustLevelAverage;
 		}
 	}
 }
@@ -80,6 +84,13 @@ int32_t AdcAdjustVolInit(void)
 	AdcAdjustLevelAverage = 0;
 
 	SarAdcGpioSel(ADC_ADJUST_VOLUME_PORT);
+	//¿ª»úÒôÁ¿¼ì²é¡£
+	while (AdcAdjustSampleCnt > 0) {
+		AdcAdjustSampleSum += SarAdcChannelGetValue(ADC_ADJUST_VOLUME_PORT);
+		AdcAdjustSampleCnt--;
+		WaitMs(10);
+	}
+	AdcAdjustVolScan();
 
 	return 0;
 }

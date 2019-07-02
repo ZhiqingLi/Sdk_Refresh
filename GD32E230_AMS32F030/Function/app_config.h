@@ -20,18 +20,6 @@
 #define _APP_CONFIG_H_
 
 /*----------------------------------------------*
- * 包含头文件                                   *
- *----------------------------------------------*/
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include "Platformconfig.h"
-#include "timeout_api.h"
-#include "single_pwm_led.h"
-#include "single_pwm_light.h"
-#include "func_keymsg.h"
-
-/*----------------------------------------------*
  * 外部变量说明                                 *
  *----------------------------------------------*/
 
@@ -46,6 +34,7 @@
 /*----------------------------------------------*
  * 全局变量                                     *
  *----------------------------------------------*/
+ typedef enum {FALSE = 0, TRUE = !FALSE} bool;
 
 /*----------------------------------------------*
  * 模块级变量                                   *
@@ -54,20 +43,31 @@
 /*----------------------------------------------*
  * 常量定义                                     *
  *----------------------------------------------*/
-#define GUI_DisplayScan()			DisplayScan()
+ #define GUI_DisplayScan()			DisplayScan()
 /*----------------------------------------------*
  * 宏定义                                       *
  *----------------------------------------------*/
+ #include <stdio.h>
+ #include <stdint.h>
+ #include <string.h>
+ #include "Platformconfig.h"
+ #include "timeout_api.h"
+ #include "app_debug.h"
 
  #if defined(STM32F030)
  #include "stm32f0xx.h"
  #include "stm32072b_eval.h"
  #include "stm32f0xx_conf.h"
+ #include "single_pwm_led.h"
+ #include "single_pwm_light.h"
+ #include "func_keymsg.h"
+
  #elif defined(GD32E230)
  #include "gd32e230.h"
  #include "gd32e230c_eval.h"
  #include "gd32e230_libopt.h"
- #endif
 
  #endif
+
+#endif
 

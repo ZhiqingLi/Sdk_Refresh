@@ -226,6 +226,7 @@ void Led_DispScan(void) {
 
 		Duty = (Duty*Led_ScanParam[LedScanIndex].DispDuty/100);					//计算实际需要设置的占空比
 		PwmConfigChannel(Pwm_Define[ScanNum].Pwm_OutChSel, PWM_LED_SCAN_FREQ, Duty);
+		//printf("Scan = %d :%d;\n", Color, Duty);
 	}
 
 	GPIO_SetBits(Gpio_Define[LedScanIndex].Gpio_Port, Gpio_Define[LedScanIndex].Gpio_Pin);

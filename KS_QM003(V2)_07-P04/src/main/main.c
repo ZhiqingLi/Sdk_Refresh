@@ -66,18 +66,10 @@ extern SwEqContext * p_gSwEq;
 SPI_FLASH_INFO gFlashInfo;
 #endif
 
-#ifdef	OPTION_CHARGER_DETECT
-extern bool IsInCharge(void);
-#endif
-
 #ifdef FUNC_SPI_UPDATE_EN
 extern void BootUpgradeChk(void);
 #endif
 extern void AudioProcessTaskEntrance(void);
-extern void SysPowerOnControl(bool Flag);
-
-//extern uint8_t UpgradeFileFound;
-
 extern void DetectMassTestCondition(void);
 extern bool GetMassTestFlag(void);
 extern bool GetHfTransferState(void);
@@ -162,6 +154,10 @@ int32_t main(void)
     GpioSetRegOneBit(GPIO_B_IE, GPIOB30);
     GpioClrRegOneBit(GPIO_B_OE, GPIOB30);
 #endif
+
+#ifdef FUNC_GPIO_POWER_ON_EN
+	SysPowerOnControl(TRUE);
+#endif
 	
 #if defined(FUNC_ALEXA_PWM_LED_EN)
 	LED_ALL_MODE_OFF();
@@ -193,10 +189,10 @@ int32_t main(void)
 	SysGetWakeUpFlag(); //get wake up flag, DO NOT remove this!!
 
 #ifdef USE_POWERKEY_SLIDE_SWITCH
-	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 200);//200ms
+	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 500);//200ms
 #endif
 #ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
-	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 1000); //2s
+	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 2000); //2s
 #endif
 
 	SpiFlashInfoInit();		//Flash RD/WR/ER/LOCK initialization
@@ -237,7 +233,7 @@ int32_t main(void)
 #else
 	OsSetDebugFlag(0);
 #endif
-
+	APP_DBG ("poweron>>>>SystemWakeUpFlag = 0x%08X;\n", gWakeUpFlag);
 
 #if (!defined(FUNC_USB_AUDIO_EN) && !defined(FUNC_USB_READER_EN) && !defined(FUNC_USB_AUDIO_READER_EN))
 #undef PC_PORT_NUM

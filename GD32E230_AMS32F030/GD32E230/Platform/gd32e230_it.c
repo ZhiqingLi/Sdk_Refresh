@@ -91,3 +91,19 @@ void SysTick_Handler(void)
 	extern volatile uint32_t CORET_Systick_Count;
 	CORET_Systick_Count++;
 }
+
+/*!
+    \brief      this function handles usart1 exception
+    \param[in]  none
+    \param[out] none
+    \retval     none
+*/
+void USART1_IRQHandler(void)
+{
+	if (SET == usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)) {
+		usart_interrupt_flag_clear(USART1, USART_INT_FLAG_TC);
+		if (FALSE != GetDebugDataLen()) {
+			usart_data_transmit(USART1, (uint32_t)GetDebugBufferData());
+		}
+	}
+}

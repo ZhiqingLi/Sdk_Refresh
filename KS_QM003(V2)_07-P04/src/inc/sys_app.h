@@ -116,13 +116,13 @@ typedef struct _SYS_INFO_
 	uint8_t OutputChannelSelect;
 #endif
 #ifdef FUNC_SLEEP_EN
-  uint8_t SleepTime;
+	uint8_t SleepTime;
 	uint32_t SleepTimeCnt;
 	uint8_t SleepStartPowerOff;
 #endif
 
 #ifdef FUNC_SLEEP_LEDOFF_EN
-  uint32_t SleepLedOffCnt;
+	uint32_t SleepLedOffCnt;
 	bool    SleepLedOffFlag;
 #endif
 
@@ -131,6 +131,9 @@ typedef struct _SYS_INFO_
 #endif
 #ifdef FUNC_SPI_UPDATE_EN
     UPGRADE_SOURCE UpgradeFileSource;
+#endif
+#ifdef FUNC_WIFI_EN
+	bool IsWiFiRepeatPowerOn;
 #endif
 } SYS_INFO;
 

@@ -22,19 +22,19 @@
 #define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
-#define FUNC_IDLE_EN                    0   //是否打开IDLE功能
+#define FUNC_IDLE_EN                    1   //是否打开IDLE功能
 
 /*****************************************************************************
  * Module    : 系统功能选择配置
  *****************************************************************************/
 #define SYS_CLK_SEL                     SYS_26M                 //选择系统时钟
 #define POWKEY_10S_RESET                xcfg_cb.powkey_10s_reset
-#define SOFT_POWER_ON_OFF               1                       //是否使用软开关机功能
+#define SOFT_POWER_ON_OFF               xcfg_cb.powkey_soft_on_off//是否使用软开关机功能
 #define USB_SD_UPDATE_EN                1                       //是否支持UDISK/SD的离线升级
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量
 #define GUI_SELECT                      GUI_NO					//GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
+#define UART0_PRINTF_SEL                PRINTF_PB3             //选择UART打印信息输出IO，或关闭打印信息输出
 #define SPIFLASH_SPEED_UP_EN            1                       //SPI FLASH提速。注意5327A,5327C,5325F不支持提速，这三颗芯请配置成0
 /*****************************************************************************
  * Module    : 音乐功能配置
@@ -76,7 +76,7 @@
 #define BT_TIME_OUT_RECONNECT_TIMES     20  //掉线回连次数
 #define BT_SIMPLE_PAIR_EN               1   //是否打开蓝牙简易配对功能（关闭时需要手机端输入PIN码）
 #define BT_DISCOVER_CTRL_EN             0   //是否使用按键打开可被发现（按一下按键才能被连接配对）
-#define BT_PWRKEY_5S_DISCOVER_EN        0   //是否使用长按5S开机进入可被发现(耳机长按开机功能)
+#define BT_PWRKEY_5S_DISCOVER_EN        1   //是否使用长按5S开机进入可被发现(耳机长按开机功能)
 #define BT_DISCOVER_TIMEOUT             100 //按键打开可被发现后，多久后仍无连接自动关闭，0不自动关闭，单位100ms
 #define BT_ANTI_LOST_EN                 0   //是否打开蓝牙防丢报警
 #define BT_CBT_TEST_EN                  0   //蓝牙CBT测试使能
@@ -271,6 +271,8 @@
 #define USER_KEY_KNOB_EN                0           //旋钮的使用，0为不使用
 #define USER_KEY_KNOB_LEVEL             16          //旋钮的级数
 
+#define USER_ADC_DETECT_EN				1           //自定义ADC检测，0为不使用;20190624
+
 #define USER_KEY_DOUBLE_EN              1           //按键双击使能
 #define USER_KEY_THRICE_EN              0           //按键三击功能，需要先开双击功能
 #define USER_KEY_DOUBLE                 {KU_HSF, KU_REC, KU_PLAY_POWER, KU_PLAY}        //支持双击的按键
@@ -376,6 +378,9 @@
 #define RGB_SERIAL_EN                   0           //RGB串行推灯功能
 #define PWM_RGB_EN                      0           //PWM RGB三色灯功能
 #define ENERGY_LED_EN                   0           //能量灯软件PWM显示,声音越大,点亮的灯越多.
+#define	PWM_TIMER_EN					1			//定时器PWM功能开关
+//PWM占用定时器选择,注意用Timer3时遥控功能不能实现，用Timer4/5时 TWS不能实现
+#define PWM_TIMER_SEL					(PWM_TIMER4|PWM_TIMER5)	
 #define SYS_PARAM_RTCRAM                0           //是否系统参数保存到RTCRAM
 #define PWRON_ENTER_BTMODE_EN           0           //是否上电默认进蓝牙模式
 #define VBAT_DETECT_EN                  1           //电池电量检测功能
@@ -391,6 +396,7 @@
 #define LPWR_OFF_VBAT                   xcfg_cb.lpwr_off_vbat       //低电关机电压
 #define LOWPWR_REDUCE_VOL_EN            1                           //低电是否降低音量
 #define LPWR_WARING_TIMES               xcfg_cb.lpwr_warning_count  //报低电次数
+
 /*****************************************************************************
  * Module    : LED指示灯配置
  *****************************************************************************/

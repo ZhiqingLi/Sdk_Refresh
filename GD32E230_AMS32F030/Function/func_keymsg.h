@@ -84,9 +84,9 @@ enum
 
 	/* 警告类消息 */
 	MSG_ERRO_CLASS			= 0x1100,
-	MSG_VOL_HIGHT,
-	MSG_VOL_LOW,
-	MSG_VOL_NORMAL,
+	MSG_VAL_HIGHT,
+	MSG_VAL_LOW,
+	MSG_VAL_NORMAL,
 };
 
 #pragma pack()

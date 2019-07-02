@@ -1113,10 +1113,9 @@ void WiFiSoundRemindVolSet(bool WorkFlag)
 void OtherModulePlayWiFiSoundRemind(bool State)
 {
 	static bool AudioChannelState = FALSE;
-	static uint8_t BtPlayState = PLAYER_STATE_IDLE;
+	static uint8_t PlayState = PLAYER_STATE_IDLE;
 	
-	if(AudioChannelState != State)
-	{
+	if	(AudioChannelState != State)	{
 		if(gSys.CurModuleID != MODULE_ID_WIFI 
 #ifdef FUNC_WIFI_PLAY_CARD_EN
 		&& gSys.CurModuleID != MODULE_ID_PLAYER_WIFI_SD
@@ -1131,11 +1130,9 @@ void OtherModulePlayWiFiSoundRemind(bool State)
 			AudioSampleRateSet(44100);
 #endif
 			APP_DBG("OtherModulePlayWiFiSoundRemind Switch = %d\n", State);
-			if(!State)
-			{
+			if (!State) {
 				gWiFi.OtherModuleWiFiAudioEn = FALSE;
-				switch(gSys.CurModuleID)
-				{
+				switch (gSys.CurModuleID) {
 					case MODULE_ID_LINEIN:
 						AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC_LINEIN : AUDIO_CH_LINEIN);
 						break;
@@ -1145,13 +1142,19 @@ void OtherModulePlayWiFiSoundRemind(bool State)
 						break;
 				
 					case MODULE_ID_PLAYER_SD:  // enter into module player
-					case MODULE_ID_PLAYER_USB: // enter into module player		
+					case MODULE_ID_PLAYER_USB: // enter into module player
+						AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC : AUDIO_CH_NONE);
+						if (PLAYER_STATE_PLAYING == PlayState) {
+							AudioPlayerControlPlay();
+							PlayState = PLAYER_STATE_IDLE;
+						}
+						break;
+						
 					case MODULE_ID_BLUETOOTH:  // BT shares the same entry func.
 						AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC : AUDIO_CH_NONE);
-						if((BtPlayState == PLAYER_STATE_PLAYING) && (gSys.CurModuleID == MODULE_ID_BLUETOOTH))
-						{
+						if (PLAYER_STATE_PLAYING == PlayState) {
 							BTAudioPlayStart();
-							BtPlayState = PLAYER_STATE_IDLE;
+							PlayState = PLAYER_STATE_IDLE;
 						}
 						break;
 				
@@ -1162,21 +1165,13 @@ void OtherModulePlayWiFiSoundRemind(bool State)
 			}
 			else
 			{
-				switch(gSys.CurModuleID)
-				{	
-					case MODULE_ID_PLAYER_SD:  // enter into module player
-					case MODULE_ID_PLAYER_USB: // enter into module player					
-					case MODULE_ID_BLUETOOTH:  // BT shares the same entry func.
-						if((GetPlayState() == PLAYER_STATE_PLAYING) && (gSys.CurModuleID == MODULE_ID_BLUETOOTH))
-						{
-							BtPlayState = PLAYER_STATE_PLAYING;
-							BTAudioPlayStop();
-							WaitMs(500);
-						}
-						break;
-				
-					default:
-						break;
+				PlayState = GetPlayState();
+				if (gSys.CurModuleID == MODULE_ID_BLUETOOTH) {
+					BTAudioPlayStop();
+				}
+				else if ((gSys.CurModuleID == MODULE_ID_PLAYER_USB)
+				|| (gSys.CurModuleID == MODULE_ID_PLAYER_SD)) {
+					AudioPlayerStop();
 				}
 				gWiFi.OtherModuleWiFiAudioEn = TRUE;
 				AudioAnaSetChannel(AUDIO_CH_I2SIN);
@@ -1247,7 +1242,7 @@ void McuSyncWiFiVolume(uint8_t Vol)
 }
 
 //通过App设置播放模式
-void WiFiAppSetPlayMode(uint8_t Cmd,uint8_t Mode)
+void WiFiAppSetPlayMode(uint16_t Cmd,uint8_t Mode)
 {
 	uint8_t SetMcuPlayMode;
 

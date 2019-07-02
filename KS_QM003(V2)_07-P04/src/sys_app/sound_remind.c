@@ -136,6 +136,7 @@ static const SOUND_TABLE_ITEM SoundTable[] =
 	{SOUND_OPEN,					    STR_TO_UINT("D  K"),	STR_TO_UINT("OPEN")},	//打开
 	{SOUND_CLOSE,					    STR_TO_UINT("G  B"),	STR_TO_UINT("CLOS")},	//关闭
 	{SOUND_BAT_LOW_PWR,					STR_TO_UINT("DLDI"),	STR_TO_UINT("LPWR")},	//电池电量低，请充电
+	{SOUND_BAT_LOW_PWR1,				STR_TO_UINT("DLD1"),	STR_TO_UINT("LPW1")},	//电池电量低，请充电
 	{SOUND_CHARGING,				  	STR_TO_UINT("ZZCD"),	STR_TO_UINT("CHAG")},	//正在充电
 	{SOUND_BAT_FULL,				 	STR_TO_UINT("DLYM"),	STR_TO_UINT("FULL")},	//电量已充满
 	{SOUND_WAIT_PAIR,				  	STR_TO_UINT("DDPD"),	STR_TO_UINT("WTPA")},	//等待配对设备
@@ -164,11 +165,21 @@ static const SOUND_TABLE_ITEM SoundTable[] =
 	{SOUND_STEREO_PLAYER,				STR_TO_UINT("LTBF"),	STR_TO_UINT("STPY")},	//立体声播放
 	{SOUND_MAX_VOL,           			STR_TO_UINT("ZDYL"),  	STR_TO_UINT("ZDYL")},   //最大音量
 	{SOUND_MIN_VOL,           			STR_TO_UINT("ZXYL"),  	STR_TO_UINT("ZXYL")},   //最小音量
+	{SOUND_LOCK_ON,           			STR_TO_UINT("TSON"),  	STR_TO_UINT("LCON")},   //童锁打开
 	{SOUND_ALARM_RING1,				    STR_TO_UINT("NZS1"),	STR_TO_UINT("NZS1")},	//50
 	{SOUND_ALARM_RING2,			    	STR_TO_UINT("NZS2"),	STR_TO_UINT("NZS2")},	//100
 	{SOUND_ALARM_RING3,			    	STR_TO_UINT("NZS3"),	STR_TO_UINT("NZS3")},	//150
 	{SOUND_ALARM_RING4,			    	STR_TO_UINT("NZS4"),	STR_TO_UINT("NZS4")},	//200  	
 	{SOUND_ALARM_RING5,			    	STR_TO_UINT("NZS5"),	STR_TO_UINT("NZS5")},	//200  	
+	{SOUND_PWKON_RING1,				    STR_TO_UINT("KJS1"),	STR_TO_UINT("PWK1")},	//开机提示音1
+	{SOUND_PWKON_RING2,			    	STR_TO_UINT("KJS2"),	STR_TO_UINT("PWK2")},	//开机提示音2
+	{SOUND_PWKON_RING3,			    	STR_TO_UINT("KJS3"),	STR_TO_UINT("PWK3")},	//开机提示音3
+	{SOUND_PWKON_RING4,			    	STR_TO_UINT("KJS4"),	STR_TO_UINT("PWK4")},	//开机提示音4 	
+	{SOUND_PWKON_RING5,			    	STR_TO_UINT("KJS5"),	STR_TO_UINT("PWK5")},	//开机提示音5  	
+	{SOUND_PWKON_RING6,			    	STR_TO_UINT("KJS6"),	STR_TO_UINT("PWK6")},	//开机提示音6
+	{SOUND_PWKON_RING7,			    	STR_TO_UINT("KJS7"),	STR_TO_UINT("PWK7")},	//开机提示音7
+	{SOUND_PWKON_RING8,			    	STR_TO_UINT("KJS8"),	STR_TO_UINT("PWK8")},	//开机提示音8	
+	{SOUND_PWKON_RING9,			    	STR_TO_UINT("KJS9"),	STR_TO_UINT("PWK9")},	//开机提示音9  	
 };
 
 typedef struct _SOUND_REMIND_CONTROL

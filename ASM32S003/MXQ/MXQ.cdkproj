@@ -68,7 +68,6 @@
     <File Name="key/key.c"/>
     <File Name="key/power_key.c"/>
   </VirtualDirectory>
-  <Dependencies Name="BuildSet"/>
   <BuildConfigs>
     <BuildConfig Name="BuildSet">
       <Target>
@@ -234,4 +233,5 @@
       </Flash>
     </BuildConfig>
   </BuildConfigs>
+  <Dependencies Name="BuildSet"/>
 </Project>

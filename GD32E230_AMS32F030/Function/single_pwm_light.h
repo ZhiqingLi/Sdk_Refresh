@@ -39,9 +39,9 @@ extern "C"{
 
 //实际使用功能宏定义
 #define PWM_LIGHT_SCAN_FREQ					500
-#define USE_LIGHT_SCAN_RATIO				10
+#define USE_LIGHT_SCAN_RATIO				20
 #define USE_LIGHT_SCAN_CHANNEL				3 
-#define PWM_LIGHT_MAX_DUTY					30
+#define PWM_LIGHT_MAX_DUTY					60
 #define PWM_LIGHT_MIN_DUTY					(PWM_LIGHT_MAX_DUTY/USE_LIGHT_SCAN_RATIO)
 
 //PWM控制接口定义，根据硬件修改

@@ -1,0 +1,659 @@
+<!doctype html public "-//w3c//dtd html 4.0 transitional//en">
+<html><head>
+<title>Static Call Graph - [.\GD32E230\GD32E230.axf]</title></head>
+<body><HR>
+<H1>Static Call Graph for image .\GD32E230\GD32E230.axf</H1><HR>
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6120001: Last Updated: Mon May 20 22:36:48 2019
+<BR><P>
+<H3>Maximum Stack Usage =        240 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
+Call chain for Maximum Stack Depth:</H3>
+main &rArr; Bsp_SystemInit &rArr; Usart_Debug_Init &rArr; usart_baudrate_set &rArr; rcu_clock_freq_get
+<P>
+<H3>
+Mutually Recursive functions
+</H3> <LI><a href="#[11]">ADC_CMP_IRQHandler</a>&nbsp;&nbsp;&nbsp;&rArr;&nbsp;&nbsp;&nbsp;<a href="#[11]">ADC_CMP_IRQHandler</a><BR>
+</UL>
+<P>
+<H3>
+Function Pointers
+</H3><UL>
+ <LI><a href="#[11]">ADC_CMP_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[e]">DMA_Channel0_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[f]">DMA_Channel1_2_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[10]">DMA_Channel3_4_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[b]">EXTI0_1_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[c]">EXTI2_3_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[d]">EXTI4_15_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[9]">FMC_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[2]">HardFault_Handler</a> from gd32e230_it.o(.text.HardFault_Handler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[20]">I2C0_ER_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1a]">I2C0_EV_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[21]">I2C1_ER_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1b]">I2C1_EV_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[7]">LVD_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1]">NMI_Handler</a> from gd32e230_it.o(.text.NMI_Handler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[4]">PendSV_Handler</a> from gd32e230_it.o(.text.PendSV_Handler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[a]">RCU_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[8]">RTC_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[0]">Reset_Handler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1c]">SPI0_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1d]">SPI1_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[3]">SVC_Handler</a> from gd32e230_it.o(.text.SVC_Handler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[5]">SysTick_Handler</a> from gd32e230_it.o(.text.SysTick_Handler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[23]">SystemInit</a> from system_gd32e230.o(.text.SystemInit) referenced from startup_gd32e230.o(.text)
+ <LI><a href="#[12]">TIMER0_BRK_UP_TRG_COM_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[13]">TIMER0_Channel_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[16]">TIMER13_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[17]">TIMER14_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[18]">TIMER15_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[19]">TIMER16_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[14]">TIMER2_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[15]">TIMER5_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1e]">USART0_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[1f]">USART1_IRQHandler</a> from gd32e230_it.o(.text.USART1_IRQHandler) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[6]">WWDGT_IRQHandler</a> from startup_gd32e230.o(.text) referenced from startup_gd32e230.o(RESET)
+ <LI><a href="#[24]">__main</a> from entry.o(.ARM.Collect$$$$00000000) referenced from startup_gd32e230.o(.text)
+ <LI><a href="#[25]">fputc</a> from app_debug.o(.text.fputc) referenced from printfa.o(i.__0printf)
+ <LI><a href="#[22]">main</a> from main.o(.text.main) referenced from entry9a.o(.ARM.Collect$$$$0000000B)
+</UL>
+<P>
+<H3>
+Global Symbols
+</H3>
+<P><STRONG><a name="[24]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(.text)
+</UL>
+<P><STRONG><a name="[64]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+
+<P><STRONG><a name="[26]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Calls]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+
+<P><STRONG><a name="[34]"></a>__main_after_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
+<BR><BR>[Called By]<UL><LI><a href="#[27]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
+</UL>
+
+<P><STRONG><a name="[65]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+
+<P><STRONG><a name="[66]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+
+<P><STRONG><a name="[67]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+
+<P><STRONG><a name="[68]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+
+<P><STRONG><a name="[69]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+
+<P><STRONG><a name="[0]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[11]"></a>ADC_CMP_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CMP_IRQHandler
+</UL>
+<BR>[Called By]<UL><LI><a href="#[11]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CMP_IRQHandler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[e]"></a>DMA_Channel0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[f]"></a>DMA_Channel1_2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[10]"></a>DMA_Channel3_4_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[b]"></a>EXTI0_1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[c]"></a>EXTI2_3_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[d]"></a>EXTI4_15_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[9]"></a>FMC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[20]"></a>I2C0_ER_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1a]"></a>I2C0_EV_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[21]"></a>I2C1_ER_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1b]"></a>I2C1_EV_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[7]"></a>LVD_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[a]"></a>RCU_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[8]"></a>RTC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1c]"></a>SPI0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1d]"></a>SPI1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[12]"></a>TIMER0_BRK_UP_TRG_COM_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[13]"></a>TIMER0_Channel_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[16]"></a>TIMER13_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[17]"></a>TIMER14_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[18]"></a>TIMER15_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[19]"></a>TIMER16_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[14]"></a>TIMER2_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[15]"></a>TIMER5_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1e]"></a>USART0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[6]"></a>WWDGT_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_gd32e230.o(.text))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[6a]"></a>__aeabi_uidiv</STRONG> (Thumb, 0 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+
+<P><STRONG><a name="[63]"></a>__aeabi_uidivmod</STRONG> (Thumb, 44 bytes, Stack size 12 bytes, uidiv.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[28]"></a>__aeabi_uldivmod</STRONG> (Thumb, 96 bytes, Stack size 48 bytes, uldiv.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+</UL>
+
+<P><STRONG><a name="[6b]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 48 bytes, iusefp.o(.text), UNUSED)
+
+<P><STRONG><a name="[2b]"></a>__aeabi_dadd</STRONG> (Thumb, 328 bytes, Stack size 48 bytes, dadd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_lasr
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+<LI><a href="#[30]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<LI><a href="#[2f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
+</UL>
+
+<P><STRONG><a name="[2f]"></a>__aeabi_dsub</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, dadd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+
+<P><STRONG><a name="[30]"></a>__aeabi_drsub</STRONG> (Thumb, 12 bytes, Stack size 8 bytes, dadd.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+
+<P><STRONG><a name="[31]"></a>__aeabi_dmul</STRONG> (Thumb, 202 bytes, Stack size 72 bytes, dmul.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+</UL>
+
+<P><STRONG><a name="[32]"></a>__aeabi_ddiv</STRONG> (Thumb, 234 bytes, Stack size 40 bytes, ddiv.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+</UL>
+
+<P><STRONG><a name="[33]"></a>__aeabi_d2ulz</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, dfixul.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+</UL>
+
+<P><STRONG><a name="[60]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, cdrcmple.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+</UL>
+
+<P><STRONG><a name="[27]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[34]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__main_after_scatterload
+</UL>
+<BR>[Called By]<UL><LI><a href="#[26]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
+</UL>
+
+<P><STRONG><a name="[6c]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+
+<P><STRONG><a name="[2a]"></a>__aeabi_llsl</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+
+<P><STRONG><a name="[6d]"></a>_ll_shift_l</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llshl.o(.text), UNUSED)
+
+<P><STRONG><a name="[29]"></a>__aeabi_llsr</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+
+<P><STRONG><a name="[6e]"></a>_ll_ushift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llushr.o(.text), UNUSED)
+
+<P><STRONG><a name="[2c]"></a>__aeabi_lasr</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, llsshr.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+
+<P><STRONG><a name="[6f]"></a>_ll_sshift_r</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, llsshr.o(.text), UNUSED)
+
+<P><STRONG><a name="[2e]"></a>_double_round</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, depilogue.o(.text), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[2d]"></a>_double_epilogue</STRONG> (Thumb, 164 bytes, Stack size 48 bytes, depilogue.o(.text), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[35]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__ARM_clz
+<LI><a href="#[29]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsr
+<LI><a href="#[2a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_llsl
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_round
+</UL>
+<BR>[Called By]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+</UL>
+
+<P><STRONG><a name="[36]"></a>Bsp_FuncRuning</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, gdplatformconfig.o(.text.Bsp_FuncRuning))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = Bsp_FuncRuning &rArr; printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[38]"></a>Bsp_SystemInit</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gdplatformconfig.o(.text.Bsp_SystemInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 224<LI>Call Chain = Bsp_SystemInit &rArr; Usart_Debug_Init &rArr; usart_baudrate_set &rArr; rcu_clock_freq_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_DetectInit
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[22]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[3c]"></a>Gd_Usart_Debug_Busy</STRONG> (Thumb, 76 bytes, Stack size 24 bytes, gdplatformconfig.o(.text.Gd_Usart_Debug_Busy))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = Gd_Usart_Debug_Busy &rArr; usart_flag_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_flag_get
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_data_transmit
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetDebugDataLen
+</UL>
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
+</UL>
+
+<P><STRONG><a name="[47]"></a>GetDebugBufferData</STRONG> (Thumb, 52 bytes, Stack size 4 bytes, app_debug.o(.text.GetDebugBufferData))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = GetDebugBufferData
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[3e]"></a>GetDebugDataLen</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, app_debug.o(.text.GetDebugDataLen))
+<BR><BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gd_Usart_Debug_Busy
+</UL>
+
+<P><STRONG><a name="[2]"></a>HardFault_Handler</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, gd32e230_it.o(.text.HardFault_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[1]"></a>NMI_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, gd32e230_it.o(.text.NMI_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[4]"></a>PendSV_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, gd32e230_it.o(.text.PendSV_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[3]"></a>SVC_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, gd32e230_it.o(.text.SVC_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[56]"></a>SendData2DebugBuf</STRONG> (Thumb, 56 bytes, Stack size 16 bytes, app_debug.o(.text.SendData2DebugBuf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = SendData2DebugBuf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fputc
+</UL>
+
+<P><STRONG><a name="[5]"></a>SysTick_Handler</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, gd32e230_it.o(.text.SysTick_Handler))
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[23]"></a>SystemInit</STRONG> (Thumb, 172 bytes, Stack size 16 bytes, system_gd32e230.o(.text.SystemInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = SystemInit &rArr; nvic_vector_table_set
+</UL>
+<BR>[Calls]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_vector_table_set
+<LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_clock_config
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(.text)
+</UL>
+<P><STRONG><a name="[3b]"></a>System_DetectInit</STRONG> (Thumb, 280 bytes, Stack size 48 bytes, gdplatformconfig.o(.text.System_DetectInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = System_DetectInit &rArr; printf
+</UL>
+<BR>[Calls]<UL><LI><a href="#[43]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_flag_get
+<LI><a href="#[44]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_all_reset_flag_clear
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_SystemInit
+</UL>
+
+<P><STRONG><a name="[1f]"></a>USART1_IRQHandler</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, gd32e230_it.o(.text.USART1_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = USART1_IRQHandler &rArr; usart_interrupt_flag_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[45]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_interrupt_flag_get
+<LI><a href="#[46]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_interrupt_flag_clear
+<LI><a href="#[3f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_data_transmit
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetDebugDataLen
+<LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetDebugBufferData
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_gd32e230.o(RESET)
+</UL>
+<P><STRONG><a name="[39]"></a>Usart_Debug_Init</STRONG> (Thumb, 184 bytes, Stack size 48 bytes, gdplatformconfig.o(.text.Usart_Debug_Init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 208<LI>Call Chain = Usart_Debug_Init &rArr; usart_baudrate_set &rArr; rcu_clock_freq_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[4d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_word_length_set
+<LI><a href="#[51]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_transmit_config
+<LI><a href="#[4e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_stop_bit_set
+<LI><a href="#[4f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_parity_config
+<LI><a href="#[52]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_invert_config
+<LI><a href="#[53]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_interrupt_enable
+<LI><a href="#[54]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_enable
+<LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+<LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
+<LI><a href="#[48]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_clock_enable
+<LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_irq_enable
+<LI><a href="#[4b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_output_options_set
+<LI><a href="#[4a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_mode_set
+<LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;gpio_af_set
+<LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_SystemInit
+</UL>
+
+<P><STRONG><a name="[25]"></a>fputc</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, app_debug.o(.text.fputc))
+<BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = fputc &rArr; Gd_Usart_Debug_Busy &rArr; usart_flag_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[56]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SendData2DebugBuf
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gd_Usart_Debug_Busy
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> printfa.o(i.__0printf)
+</UL>
+<P><STRONG><a name="[49]"></a>gpio_af_set</STRONG> (Thumb, 210 bytes, Stack size 52 bytes, gd32e230_gpio.o(.text.gpio_af_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = gpio_af_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[4a]"></a>gpio_mode_set</STRONG> (Thumb, 162 bytes, Stack size 64 bytes, gd32e230_gpio.o(.text.gpio_mode_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = gpio_mode_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[4b]"></a>gpio_output_options_set</STRONG> (Thumb, 156 bytes, Stack size 60 bytes, gd32e230_gpio.o(.text.gpio_output_options_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 60<LI>Call Chain = gpio_output_options_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[22]"></a>main</STRONG> (Thumb, 20 bytes, Stack size 16 bytes, main.o(.text.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 240<LI>Call Chain = main &rArr; Bsp_SystemInit &rArr; Usart_Debug_Init &rArr; usart_baudrate_set &rArr; rcu_clock_freq_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_SystemInit
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_FuncRuning
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
+</UL>
+<P><STRONG><a name="[55]"></a>nvic_irq_enable</STRONG> (Thumb, 52 bytes, Stack size 32 bytes, gd32e230_misc.o(.text.nvic_irq_enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = nvic_irq_enable &rArr; __NVIC_SetPriority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[57]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
+<LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[42]"></a>nvic_vector_table_set</STRONG> (Thumb, 44 bytes, Stack size 24 bytes, gd32e230_misc.o(.text.nvic_vector_table_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = nvic_vector_table_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[44]"></a>rcu_all_reset_flag_clear</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, gd32e230_rcu.o(.text.rcu_all_reset_flag_clear))
+<BR><BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_DetectInit
+</UL>
+
+<P><STRONG><a name="[5a]"></a>rcu_clock_freq_get</STRONG> (Thumb, 648 bytes, Stack size 112 bytes, gd32e230_rcu.o(.text.rcu_clock_freq_get))
+<BR><BR>[Stack]<UL><LI>Max Depth = 112<LI>Call Chain = rcu_clock_freq_get
+</UL>
+<BR>[Called By]<UL><LI><a href="#[50]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_baudrate_set
+</UL>
+
+<P><STRONG><a name="[43]"></a>rcu_flag_get</STRONG> (Thumb, 64 bytes, Stack size 12 bytes, gd32e230_rcu.o(.text.rcu_flag_get))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = rcu_flag_get
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_DetectInit
+</UL>
+
+<P><STRONG><a name="[48]"></a>rcu_periph_clock_enable</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gd32e230_rcu.o(.text.rcu_periph_clock_enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = rcu_periph_clock_enable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[5c]"></a>rcu_periph_reset_disable</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gd32e230_rcu.o(.text.rcu_periph_reset_disable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = rcu_periph_reset_disable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+</UL>
+
+<P><STRONG><a name="[5b]"></a>rcu_periph_reset_enable</STRONG> (Thumb, 44 bytes, Stack size 16 bytes, gd32e230_rcu.o(.text.rcu_periph_reset_enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = rcu_periph_reset_enable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[4c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;usart_deinit
+</UL>
+
+<P><STRONG><a name="[50]"></a>usart_baudrate_set</STRONG> (Thumb, 192 bytes, Stack size 48 bytes, gd32e230_usart.o(.text.usart_baudrate_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 160<LI>Call Chain = usart_baudrate_set &rArr; rcu_clock_freq_get
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_clock_freq_get
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[3f]"></a>usart_data_transmit</STRONG> (Thumb, 32 bytes, Stack size 16 bytes, gd32e230_usart.o(.text.usart_data_transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = usart_data_transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+<LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gd_Usart_Debug_Busy
+</UL>
+
+<P><STRONG><a name="[4c]"></a>usart_deinit</STRONG> (Thumb, 88 bytes, Stack size 32 bytes, gd32e230_usart.o(.text.usart_deinit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = usart_deinit &rArr; rcu_periph_reset_enable
+</UL>
+<BR>[Calls]<UL><LI><a href="#[5b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_enable
+<LI><a href="#[5c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rcu_periph_reset_disable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[54]"></a>usart_enable</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, gd32e230_usart.o(.text.usart_enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = usart_enable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[3d]"></a>usart_flag_get</STRONG> (Thumb, 66 bytes, Stack size 28 bytes, gd32e230_usart.o(.text.usart_flag_get))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = usart_flag_get
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Gd_Usart_Debug_Busy
+</UL>
+
+<P><STRONG><a name="[53]"></a>usart_interrupt_enable</STRONG> (Thumb, 44 bytes, Stack size 32 bytes, gd32e230_usart.o(.text.usart_interrupt_enable))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = usart_interrupt_enable
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[46]"></a>usart_interrupt_flag_clear</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, gd32e230_usart.o(.text.usart_interrupt_flag_clear))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = usart_interrupt_flag_clear
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[45]"></a>usart_interrupt_flag_get</STRONG> (Thumb, 110 bytes, Stack size 44 bytes, gd32e230_usart.o(.text.usart_interrupt_flag_get))
+<BR><BR>[Stack]<UL><LI>Max Depth = 44<LI>Call Chain = usart_interrupt_flag_get
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_IRQHandler
+</UL>
+
+<P><STRONG><a name="[52]"></a>usart_invert_config</STRONG> (Thumb, 198 bytes, Stack size 36 bytes, gd32e230_usart.o(.text.usart_invert_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = usart_invert_config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[4f]"></a>usart_parity_config</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, gd32e230_usart.o(.text.usart_parity_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = usart_parity_config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[4e]"></a>usart_stop_bit_set</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, gd32e230_usart.o(.text.usart_stop_bit_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = usart_stop_bit_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[51]"></a>usart_transmit_config</STRONG> (Thumb, 40 bytes, Stack size 24 bytes, gd32e230_usart.o(.text.usart_transmit_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = usart_transmit_config
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[4d]"></a>usart_word_length_set</STRONG> (Thumb, 52 bytes, Stack size 24 bytes, gd32e230_usart.o(.text.usart_word_length_set))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = usart_word_length_set
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+</UL>
+
+<P><STRONG><a name="[5d]"></a>__0printf</STRONG> (Thumb, 24 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[70]"></a>__1printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
+
+<P><STRONG><a name="[71]"></a>__2printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
+
+<P><STRONG><a name="[72]"></a>__c89printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf), UNUSED)
+
+<P><STRONG><a name="[37]"></a>printf</STRONG> (Thumb, 0 bytes, Stack size 24 bytes, printfa.o(i.__0printf))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = printf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Usart_Debug_Init
+<LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;System_DetectInit
+<LI><a href="#[36]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_FuncRuning
+</UL>
+
+<P><STRONG><a name="[35]"></a>__ARM_clz</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, depilogue.o(i.__ARM_clz), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[2d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_double_epilogue
+</UL>
+
+<P><STRONG><a name="[73]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+
+<P><STRONG><a name="[74]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+
+<P><STRONG><a name="[75]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+<P>
+<H3>
+Local Symbols
+</H3>
+<P><STRONG><a name="[59]"></a>system_clock_72m_hxtal</STRONG> (Thumb, 228 bytes, Stack size 12 bytes, system_gd32e230.o(.text.system_clock_72m_hxtal))
+<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = system_clock_72m_hxtal
+</UL>
+<BR>[Called By]<UL><LI><a href="#[41]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_clock_config
+</UL>
+
+<P><STRONG><a name="[41]"></a>system_clock_config</STRONG> (Thumb, 8 bytes, Stack size 8 bytes, system_gd32e230.o(.text.system_clock_config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = system_clock_config &rArr; system_clock_72m_hxtal
+</UL>
+<BR>[Calls]<UL><LI><a href="#[59]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;system_clock_72m_hxtal
+</UL>
+<BR>[Called By]<UL><LI><a href="#[23]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
+</UL>
+
+<P><STRONG><a name="[3a]"></a>SysTick_Config</STRONG> (Thumb, 88 bytes, Stack size 24 bytes, gdplatformconfig.o(.text.SysTick_Config))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = SysTick_Config &rArr; __NVIC_SetPriority
+</UL>
+<BR>[Calls]<UL><LI><a href="#[40]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bsp_SystemInit
+</UL>
+
+<P><STRONG><a name="[40]"></a>__NVIC_SetPriority</STRONG> (Thumb, 140 bytes, Stack size 32 bytes, gdplatformconfig.o(.text.__NVIC_SetPriority))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Config
+</UL>
+
+<P><STRONG><a name="[58]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, gd32e230_misc.o(.text.__NVIC_EnableIRQ))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __NVIC_EnableIRQ
+</UL>
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_irq_enable
+</UL>
+
+<P><STRONG><a name="[57]"></a>__NVIC_SetPriority</STRONG> (Thumb, 140 bytes, Stack size 32 bytes, gd32e230_misc.o(.text.__NVIC_SetPriority))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __NVIC_SetPriority
+</UL>
+<BR>[Called By]<UL><LI><a href="#[55]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvic_irq_enable
+</UL>
+
+<P><STRONG><a name="[5f]"></a>_fp_digits</STRONG> (Thumb, 344 bytes, Stack size 64 bytes, printfa.o(i._fp_digits), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[31]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[2b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dadd
+<LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2ulz
+<LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[5e]"></a>_printf_core</STRONG> (Thumb, 1754 bytes, Stack size 128 bytes, printfa.o(i._printf_core), UNUSED)
+<BR><BR>[Calls]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_pre_padding
+<LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_post_padding
+<LI><a href="#[5f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_fp_digits
+<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uldivmod
+<LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_uidivmod
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__0printf
+</UL>
+
+<P><STRONG><a name="[62]"></a>_printf_post_padding</STRONG> (Thumb, 32 bytes, Stack size 24 bytes, printfa.o(i._printf_post_padding), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+
+<P><STRONG><a name="[61]"></a>_printf_pre_padding</STRONG> (Thumb, 44 bytes, Stack size 40 bytes, printfa.o(i._printf_pre_padding), UNUSED)
+<BR><BR>[Called By]<UL><LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_printf_core
+</UL>
+<P>
+<H3>
+Undefined Global Symbols
+</H3><HR></body></html>

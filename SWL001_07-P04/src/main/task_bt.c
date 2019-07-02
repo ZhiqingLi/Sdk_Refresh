@@ -22,6 +22,9 @@ maintainer: Halley
 #include "ble_api.h"
 #include "sound_remind.h"
 #include "micro_adjust.h"
+#ifdef FUNC_WIFI_POWER_KEEP_ON
+#include "wifi_control.h"
+#endif
 
 uint32_t	gBtStatckReady = 0;
 
@@ -109,7 +112,7 @@ static void BTStackLoop(void)
 
 			if(IsBtAudioPlay()
 #ifdef FUNC_SOUND_REMIND
-				&& !IsSoundRemindPlaying()
+			&& !IsSoundRemindPlaying()
 #endif
 				)
 			{

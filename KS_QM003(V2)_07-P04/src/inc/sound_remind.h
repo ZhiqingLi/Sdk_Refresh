@@ -85,7 +85,7 @@ typedef enum _SOUND_ID
 	SOUND_PRE_STATION,	    		//上一电台
 	SOUND_NXT_STATION,	    		//下一电台
 	SOUND_PWR_OFF,	        		//已关机
-	SOUND_PWR_ON,               //已开机
+	SOUND_PWR_ON,               // 70 ;已开机
 	SOUND_GUITAR_VOL,	    		//吉他音量
 	SOUND_SEARCHING,	        	//搜索中
 	SOUND_MUTE_ON,	        		//静音打开
@@ -95,10 +95,11 @@ typedef enum _SOUND_ID
 	SOUND_MIC_MODE_OPEN,	    	//话筒模式开
 	SOUND_MIC_MODE_CLOSE,			//话筒模式关
 	SOUND_MIC_FIRST_OPEN,			//MIC优先开
-	SOUND_MIC_FIRST_CLOSE,			//MIC优先关
+	SOUND_MIC_FIRST_CLOSE,			//80:MIC优先关
 	SOUND_OPEN,	            		//打开
 	SOUND_CLOSE,	            	//关闭
 	SOUND_BAT_LOW_PWR,	    		//电池电量低，请充电
+	SOUND_BAT_LOW_PWR1,	    		//电池电量低，请充电
 	SOUND_CHARGING,	        		//正在充电
 	SOUND_BAT_FULL,	        		//电量已充满
 	SOUND_WAIT_PAIR,	        	//等待配对设备
@@ -127,11 +128,23 @@ typedef enum _SOUND_ID
 	SOUND_STEREO_PLAYER,
 	SOUND_MAX_VOL,
 	SOUND_MIN_VOL,
+	SOUND_LOCK_ON,
+	
 	SOUND_ALARM_RING1,	            //闹钟铃声1
 	SOUND_ALARM_RING2,	            //闹钟铃声2
 	SOUND_ALARM_RING3,	            //闹钟铃声3
 	SOUND_ALARM_RING4,	            //闹钟铃声4
 	SOUND_ALARM_RING5,				//闹钟铃声5
+
+	SOUND_PWKON_RING1,	            //开机提示音1
+	SOUND_PWKON_RING2,	            //开机提示音2
+	SOUND_PWKON_RING3,	            //开机提示音3
+	SOUND_PWKON_RING4,	            //开机提示音4
+	SOUND_PWKON_RING5,				//开机提示音5
+	SOUND_PWKON_RING6,	            //开机提示音2
+	SOUND_PWKON_RING7,	            //开机提示音3
+	SOUND_PWKON_RING8,	            //开机提示音4
+	SOUND_PWKON_RING9,				//开机提示音5
 	
 	SOUND_BT_STATE_READY_RING,
 	SOUND_BT_STATE_UNREADY_RING,

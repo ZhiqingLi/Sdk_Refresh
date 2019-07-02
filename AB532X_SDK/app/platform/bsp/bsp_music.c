@@ -134,7 +134,7 @@ void mp3_res_play(u32 addr, u32 len)
 {
     u16 msg;
     u8 mute_bak;
-//    printf("%s: addr: %x, len: %x\n", __func__, addr, len);
+    //printf("%s: addr: %x, len: %x\n", __func__, addr, len);
     if (len == 0) {
         return;
     }
@@ -169,7 +169,7 @@ void mp3_res_play(u32 addr, u32 len)
     if (sys_cb.mute) {
         bsp_loudspeaker_unmute();
     }
-    if(get_music_dec_sta() != MUSIC_STOP) { //避免来电响铃/报号未完成，影响get_music_dec_sta()状态
+    if(get_music_dec_sta() != MUSIC_STOP) { //避免来电响铃/报号未完成，影响get_music_dec_sta()状�?
         music_control(MUSIC_MSG_STOP);
     }
     bsp_change_volume(WARNING_VOLUME);

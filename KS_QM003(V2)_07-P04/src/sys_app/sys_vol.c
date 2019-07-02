@@ -1341,7 +1341,15 @@ void CommonMsgProccess(uint16_t Msg)
 
 		//低电提示音
 		case MSG_BAT_LOW_PWR:
-			SoundRemind(SOUND_BAT_LOW_PWR);
+			{
+				const uint8_t low_power_remind[2] = {SOUND_BAT_LOW_PWR, SOUND_BAT_LOW_PWR1};
+				SoundRemind(low_power_remind[GetRandNum(2)-1]);
+			}
+			break;
+
+		//童锁提示音
+		case MSG_SOUND_LOCK_ON:
+			SoundRemind(SOUND_LOCK_ON);
 			break;
 
 		//关机提示音
@@ -1438,7 +1446,7 @@ void SilenceAmpMuteProc(int16_t* Buffer, uint32_t Len)
 	uint32_t i;
 	int32_t TempSampleData = 0;
 	static uint32_t MuteCnt = 0,DataLenCnt;
-	uint8_t Temp = GetRandNum(5);
+	uint8_t Temp = GetRandNum(8);
 
 	if(!SysMuteDetStart)
 		return;

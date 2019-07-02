@@ -99,6 +99,21 @@
 #define LPWM2MAP_PA2    (3 << 24)       //G3 LPWM2 mapping: PA2
 #define LPWM3MAP_PA3    (3 << 28)       //G3 LPWM3 mapping: PA3
 
+/*****************************************************************************
+ * Module    : TIMER PWM Mapping选择列表 20190516@qing
+ *****************************************************************************/
+#define PWM_TIMER3		0x10			//占用TIMER3
+#define PWM_TIMER4		0x20			//占用TIMER4
+#define PWM_TIMER5		0x40			//占用TIMER5
+
+#define PWM_CHANNEL0	0x00			//PWM CHANNEL0
+#define PWM_CHANNEL1	0x01			//PWM CHANNEL1
+#define PWM_CHANNEL2	0x02			//PWM CHANNEL2
+
+#define TIMEPWMMAP_G1	(1 << 0)       //G1  
+#define TIMEPWMMAP_G2	(2 << 0)       //G2  
+#define TIMEPWMMAP_G3	(3 << 0)       //G3  
+#define TIMEPWMMAP_G4	(4 << 0)       //G4  
 
 /*****************************************************************************
  * Module    : Clock output Mapping选择列表

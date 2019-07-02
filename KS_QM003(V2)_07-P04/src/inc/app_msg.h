@@ -119,6 +119,7 @@ enum
 	MSG_BAT_LOW_PWR,
 	MSG_KEY_PWR_OFF,
 	MSG_SOUND_ALARM_RING,
+	MSG_SOUND_LOCK_ON,
 	
 	////设备插拔消息/////////////////////////////////////////////////////////////
 	MSG_DEV_CLASS			= 0x1100,

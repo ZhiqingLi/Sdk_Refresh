@@ -1,4 +1,4 @@
-//Í¨ÓÃ¹¦ÄÜºê¶¨Òå¼°º¯ÊýÉùÃ÷
+
 
 #ifndef _APP_CONFIG_H_
 #define _APP_CONFIG_H_

@@ -102,6 +102,11 @@ void SysVarInit(void)
     gSys.UpgradeFileSource = UPGRADE_SOURCE_IDLE;
 #endif
 
+#ifdef FUNC_WIFI_EN
+	gSys.IsWiFiRepeatPowerOn = FALSE;
+#endif
+	gSys.MuteFlag = TRUE;
+
 	// 装载断点信息，设置信息
 #ifdef FUNC_BREAKPOINT_EN
 {
@@ -142,7 +147,7 @@ void SysVarInit(void)
 	if(gSys.Volume > MAX_VOLUME || gSys.Volume < 7)
 #endif
 	{
-		gSys.Volume = 7;
+		gSys.Volume = DEFAULT_VOLUME;
 	}
 	APP_DBG("SysVarInit gSys.Volume = %d\n", gSys.Volume);
 	
@@ -159,11 +164,9 @@ void SysVarInit(void)
         
 	gSys.LanguageMode = BP_GET_ELEMENT(pBpSysInfo->LanguageMode);    
 #ifdef FUNC_WIFI_EN
-#if 0 //(MCU_CAP_LAU_CHINESE == 1)
-	gSys.LanguageMode = LANG_ZH;
-#else
+	gSys.IsWiFiRepeatPowerOn = BP_GET_ELEMENT(pBpSysInfo->IsWiFiRepeatPowerOn);
+    APP_DBG("SysVarInit gSys.IsWiFiRepeatPowerOn = %d\n", gSys.IsWiFiRepeatPowerOn);
 	gSys.LanguageMode = LANG_EN;
-#endif
 #endif
 	
 #endif	

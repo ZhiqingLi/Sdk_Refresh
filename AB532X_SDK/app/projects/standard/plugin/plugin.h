@@ -3,6 +3,7 @@
 
 #include "multi_lang.h"
 #include "port_pwm.h"
+#include "port_ledpwm.h"
 #include "port_linein.h"
 #include "port_led.h"
 #include "port_sd.h"

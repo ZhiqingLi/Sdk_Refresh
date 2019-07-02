@@ -45,15 +45,38 @@ void func_bt_message(u16 msg)
         break;
         
     case KL_PLAY:
-    	bsp_clr_mute_sta();
-    	if (bt_nor_is_connected()) {
-        	bt_disconnect();
-        } else {
-        	bt_connect();
+    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 1)) {
+	    	bsp_clr_mute_sta();
+	    	if (bt_nor_is_connected()) {
+	        	bt_disconnect();
+	        } else {
+	        	bt_connect();
+	        }
         }
         break;
 
-    case KU_HSF:
+    case KL_HSF:
+    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 2)) {
+	    	bsp_clr_mute_sta();
+	    	if (bt_nor_is_connected()) {
+	        	bt_disconnect();
+	        } else {
+	        	bt_connect();
+	        }
+        }
+        break;
+
+
+	case KU_HSF:
+		if(xcfg_cb.bt_tws_en && xcfg_cb.bt_tws_pair_mode == 3) {
+			if(bt_tws_is_connected()) {
+				bt_tws_disconnect();
+			} else {
+				bt_tws_search_slave();
+			}
+		}
+		break;
+
     case KD_PLAY:
 	case KD_PLAY_HSF:
     case KD_PLAY_POWER:
@@ -159,7 +182,7 @@ void sfunc_bt_ring_message(u16 msg)
 {
     switch (msg) {
     case KU_PLAY:
-    case KU_HSF:                //接听
+    //case KU_HSF:                //接听
     case KU_PLAY_POWER:
     case KU_PLAY_MODE:
     case KU_PLAY_HSF:
@@ -168,7 +191,7 @@ void sfunc_bt_ring_message(u16 msg)
         break;
 
     case KL_PLAY:
-    case KL_HSF:
+    //case KL_HSF:
     case KL_PLAY_HSF:
     case KL_PLAY_POWER:
     case KL_PLAY_MODE:
@@ -191,7 +214,7 @@ void sfunc_bt_call_message(u16 msg)
     u8 call_status;
     switch (msg) {
     case KU_PLAY:
-    case KU_HSF:
+    //case KU_HSF:
 	case KU_PLAY_HSF:
     case KU_PLAY_POWER:
     case KU_PLAY_MODE:
@@ -221,7 +244,7 @@ void sfunc_bt_call_message(u16 msg)
 #endif // BT_HFP_CALL_PRIVATE_EN
         break;
 
-    case KL_HSF:
+    /*case KL_HSF:
         bsp_clr_mute_sta();
         call_status = bt_get_call_indicate();
         if(call_status == BT_CALL_INCOMING) {
@@ -229,7 +252,7 @@ void sfunc_bt_call_message(u16 msg)
         } else if(call_status == BT_CALL_3WAY_CALL) {
             bt_call_swap();             //切换两路通话
         }
-        break;
+        break;*/
 
     case KL_NEXT_VOL_UP:
     case KH_NEXT_VOL_UP:

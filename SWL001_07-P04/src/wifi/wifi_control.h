@@ -253,7 +253,7 @@ extern void McuSyncWiFiVolume(uint8_t Vol);
 extern void McuGetWiFiPlayStateParams(void);
 extern void WiFiGetProjectParams(void);
 extern void WiFiControlGpioInit(void);
-extern void WiFiAppSetPlayMode(uint8_t Cmd,uint8_t Mode);
+extern void WiFiAppSetPlayMode(uint16_t Cmd,uint8_t Mode);
 extern void McuSetPlayMode(uint8_t ChangeMode);
 extern void WiFiGetMcuCurPlayMode(void);
 extern void WiFiSetRepeatMode(uint8_t RepeatMode);

@@ -109,7 +109,7 @@
  *----------------------------------------------*/
 
 
-#define 	POWER_KEY_JITTER_TIME		10			//消抖时间，该时间和软开关开关机硬件时间有关
+#define 	POWER_KEY_JITTER_TIME		20			//消抖时间，该时间和软开关开关机硬件时间有关
 #define 	POWER_KEY_CP_JITTER_TIME	500	
 #define 	POWER_KEY_CP_HOLD_TIME		1000			
 

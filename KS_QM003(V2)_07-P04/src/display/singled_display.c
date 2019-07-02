@@ -106,8 +106,7 @@ static void SingleLedDisplayCfg(void)
 	else if(Led_Cb_Keep.CurDisplayMode)
 	{
 		Led_Cb = &Led_Cb_Keep;
-	
-}
+	}
 	else
 	{
 		Led_Cb = &Led_Cb_Loop;
@@ -129,7 +128,7 @@ static void SingleLedDisplayCfg(void)
 	}
 	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_LOWBATTER))
 	{
-		SingleLedCfg(0x00, 0xAA, 100, 350);
+		SingleLedCfg(0x00, 0xAA, 100/SINGLE_LED_DISP_SCAN_CNT, 1500);
 	}
 	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_POWER_ON))
 	{

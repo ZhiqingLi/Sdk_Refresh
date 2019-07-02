@@ -47,6 +47,10 @@
 #define EVT_ECHO_LEVEL          0x7e6
 #define EVT_MIC_VOL             0x7e5
 #define EVT_MUSIC_VOL           0x7e4
+#define EVT_ADC_DET_HIG			0x7e3
+#define EVT_ADC_DET_MID         0x7e2
+#define EVT_ADC_DET_LOW         0x7e1
+#define EVT_ADC_DET_IDE         0x7e0
 
 //普通按键定义，可以支持短按，长按，双击等。范围：0 ~ 0xdf
 #define NO_KEY                  0x00

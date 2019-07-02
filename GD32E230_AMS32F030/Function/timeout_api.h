@@ -13,7 +13,12 @@
 #define __TIMEROUT_H__
 
 #include <stdint.h>
-#include "stm32f0xx_conf.h"
+#include "app_config.h"
+#if defined(STM32F030)
+#include "stm32f0xx.h"
+#elif defined(GD32E230)
+#include "gd32e230.h"
+#endif
 
 /*
  * define timer check for init task period event
@@ -27,7 +32,7 @@ typedef struct _SW_TIMER_
 	uint16_t TimerPeriod;  // ms,【注意】最小定时间隔与应用模式主循环的其他功能阻塞时间有关，建议不要低于主循环的最大阻塞时间；
 	uint32_t LastTickets;  // 用于timeout判断
 	TIMER_CALLBACK Callback;
-	FlagStatus  IsRunning;
+	bool  IsRunning;
 } SW_TIMER;
 
 // define softtimer structure.
@@ -44,16 +49,16 @@ uint16_t GetPassTime(SW_TIMER* TimerHandle);
 void CheckTimer(SW_TIMER* TimerHandle);
 
 // 初始化Timer
-FlagStatus InitTimer(SW_TIMER* TimerHandle,
+bool InitTimer(SW_TIMER* TimerHandle,
 	               uint32_t TimerPeriod, /*定时间隔ms*/
 	               TIMER_CALLBACK CallbackFunc/*定时回调函数*/);
 
 // 启动Timer
-FlagStatus StartTimer(SW_TIMER* TimerHandle);
+bool StartTimer(SW_TIMER* TimerHandle);
 
 
 // 更改Timer定时间隔
-FlagStatus ChangeTimerPeriod(SW_TIMER* TimerHandle, uint32_t TimerPeriod/*定时间隔*/);
+bool ChangeTimerPeriod(SW_TIMER* TimerHandle, uint32_t TimerPeriod/*定时间隔*/);
 
 // Get time of some softtimer from setting to now.
 uint16_t PastTimeGet(TIMER* timer);
@@ -62,7 +67,7 @@ uint16_t PastTimeGet(TIMER* timer);
 void TimeOutSet(TIMER* timer, uint32_t timeout);
 
 // Check whether time out.
-FlagStatus IsTimeOut(TIMER* timer);
+bool IsTimeOut(TIMER* timer);
 void WaitMs(uint32_t Time);
 #endif
 
