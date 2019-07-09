@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <CDK_Workspace Name="ASM32S003" Database="">
   <Project Name="MXQ" Path="MXQ/MXQ.cdkproj" Active="Yes"/>
-  <Project Name="KS_QM" Path="KS_QM/KS_QM.cdkproj"/>
+  <Project Name="KS_taideng" Path="KS_taideng/KS_taideng.cdkproj" Active="No"/>
   <BuildMatrix>
     <WorkspaceConfiguration Name="Debug" Selected="yes">
       <Environment/>
       <Project Name="MXQ" ConfigName="BuildSet"/>
-      <Project Name="KS_QM" ConfigName="BuildSet"/>
+      <Project Name="KS_taideng" ConfigName="BuildSet"/>
     </WorkspaceConfiguration>
   </BuildMatrix>
 </CDK_Workspace>

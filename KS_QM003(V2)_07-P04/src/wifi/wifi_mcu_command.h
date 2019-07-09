@@ -316,6 +316,8 @@ extern "C" {
 #define MCU_VLM_XXX  			0x1C06	//- MCU通知WIFI最大音量限制
 #define MCU_SLP__ON   			0x1C07	//- MCU通知WIFI进入哄睡模式
 #define MCU_SLP_OFF  			0x1C08	//- MCU通知WIFI退出哄睡模式
+#define MCU_SLP_PWR				0x1C09	//- MCU通知WIFI哄睡完成关机
+#define MCU_POW_NNN				0x1C0A	//- MCU回复模块开机模式
 
 #ifdef __cplusplus
 }

@@ -106,6 +106,7 @@ void SysVarInit(void)
 	gSys.IsWiFiRepeatPowerOn = FALSE;
 #endif
 	gSys.MuteFlag = TRUE;
+	gSys.WakeUpSource = gWakeUpFlag;
 
 	// 装载断点信息，设置信息
 #ifdef FUNC_BREAKPOINT_EN

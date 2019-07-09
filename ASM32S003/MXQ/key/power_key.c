@@ -265,6 +265,7 @@ void SystemGotoDeepSleepPowerDown(void)
 
     /* 设置睡眠模式的功耗，并挂起系统 */
     //SYSCON_PWRCR_CONFIG(POWER_DRIVE_IDLE_LOW);
+    SYSCON_WDT_CMD(DISABLE);
     PCLK_goto_deepsleep_mode();
     APP_DBG("From deep sleep mode WakeUp!!!\n");
     /* 从睡眠模式唤醒，执行软件复位 */
@@ -351,7 +352,7 @@ void SystemPowerOnDetect(void)
 		if((!GPIO_Read_Status(GPIO_UPGRADE_DETECT_PORT_OUT,GPIO_UPGRADE_DETECT_PORT_BIT))
 		&& IsTimeOut(&UpgradeWiatTime))
 		{
-			APP_DBG("Enter Upgrade Mode!!!");
+			APP_DBG("Enter Upgrade Mode!!!\n");
 			while(GetDebugDataLen());
 			GPIO_Debug_IO_12_13();
 #ifdef EXTE_UPGRADE_PORT_OUT_EN

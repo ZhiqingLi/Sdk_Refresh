@@ -180,6 +180,8 @@ static const SOUND_TABLE_ITEM SoundTable[] =
 	{SOUND_PWKON_RING7,			    	STR_TO_UINT("KJS7"),	STR_TO_UINT("PWK7")},	//开机提示音7
 	{SOUND_PWKON_RING8,			    	STR_TO_UINT("KJS8"),	STR_TO_UINT("PWK8")},	//开机提示音8	
 	{SOUND_PWKON_RING9,			    	STR_TO_UINT("KJS9"),	STR_TO_UINT("PWK9")},	//开机提示音9  	
+	{SOUND_SLEEP_RING1,			    	STR_TO_UINT("XMS1"),	STR_TO_UINT("SLP1")},	//开机提示音8	
+	{SOUND_SLEEP_RING2,			    	STR_TO_UINT("XMS2"),	STR_TO_UINT("SLP2")},	//开机提示音9  	
 };
 
 typedef struct _SOUND_REMIND_CONTROL

@@ -273,6 +273,7 @@ extern "C" {
 #define AXX_VLM_XXX  			0x1C76	//- WiFi通知MCU最大音量限制
 #define AXX_SLP__ON				0x1C77	//- WiFi通知MCU，进入哄睡模式
 #define AXX_SLP_OFF				0x1C78	//- WiFi通知MCU，退出哄睡模式
+#define AXX_POW_GET				0x1C79	//- WiFi开机时获取开机模式
 
 #ifdef __cplusplus
 }

@@ -425,16 +425,7 @@ void Mcu_SendBtCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 	BuartSend(CmdBuf, Len);
 #endif
 
-	APP_DBG("Send gWiFiBtCmd is:%s; Len = %d\n", CmdBuf, Len);
-#ifdef FUNC_SLEEP_EN
-	gSys.SleepTimeCnt = 0;
-	gSys.SleepStartPowerOff = FALSE;
-#endif
-	
-#ifdef FUNC_SLEEP_LEDOFF_EN
-	gSys.SleepLedOffCnt = FALSE;
-	gSys.SleepLedOffFlag = FALSE;
-#endif	
+	APP_DBG("Send gWiFiBtCmd is:%s; Len = %d\n", CmdBuf, Len);	
 }
 
 //WiFi模组发送给MCU的命令功能处理

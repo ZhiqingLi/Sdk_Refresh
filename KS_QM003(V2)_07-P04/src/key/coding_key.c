@@ -63,7 +63,7 @@ void CodingKeyInit(void)
 
 	//enable int
 	GpioIntEn(CODING_KEY_A_PORT_INT, CODING_KEY_A_BIT, GPIO_NEG_EDGE_TRIGGER);
-
+	GpioIntEn(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT, GPIO_NEG_EDGE_TRIGGER);
 	ClockWiseCnt = 0;
 	CounterClockWiseCnt = 0;
 
@@ -78,20 +78,20 @@ __attribute__((section(".driver.isr"))) void GpioInterrupt(void)
 	if(GpioIntFlagGet(CODING_KEY_A_PORT_INT) == CODING_KEY_A_BIT)
 	{
 		GpioIntClr(CODING_KEY_A_PORT_INT, CODING_KEY_A_BIT);
-		if((GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) || (ClockWiseCnt != 0) || (CounterClockWiseCnt != 0))
-		{			
-			return;
-		}
-
-		if(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT)
-		{
-			//clockwise rotation
-			ClockWiseCnt++;
-		}
-		else
+		if(!(GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) && !ClockWiseCnt)
 		{
 			//counterclockwise rotation
 			CounterClockWiseCnt++;
+		}
+	}
+
+	if(GpioIntFlagGet(CODING_KEY_B_PORT_INT) == CODING_KEY_B_BIT)
+	{
+		GpioIntClr(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT);
+		if(!(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT) && !CounterClockWiseCnt)
+		{
+			//clockwise rotation
+			ClockWiseCnt++;
 		}
 	}
 }
@@ -103,11 +103,11 @@ uint16_t CodingKeyScan(void)
 
 	if(ClockWiseCnt)
 	{
-		Msg = MSG_VOL_UP;
+		Msg = MSG_WIFI_PREV_CH;
 	}
 	else if(CounterClockWiseCnt)
 	{
-		Msg = MSG_VOL_DW;
+		Msg = MSG_WIFI_NEXT_CH;
 	}
 	ClockWiseCnt = 0;
 	CounterClockWiseCnt = 0;

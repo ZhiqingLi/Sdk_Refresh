@@ -116,7 +116,6 @@ typedef struct _SYS_INFO_
 	uint8_t OutputChannelSelect;
 #endif
 #ifdef FUNC_SLEEP_EN
-	uint8_t SleepTime;
 	uint32_t SleepTimeCnt;
 	uint8_t SleepStartPowerOff;
 #endif
@@ -135,6 +134,7 @@ typedef struct _SYS_INFO_
 #ifdef FUNC_WIFI_EN
 	bool IsWiFiRepeatPowerOn;
 #endif
+	uint32_t WakeUpSource;
 } SYS_INFO;
 
 extern SYS_INFO gSys;

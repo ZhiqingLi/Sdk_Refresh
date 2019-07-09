@@ -724,7 +724,7 @@
 
 1538020972 f:\soft_sdk\ab53xx_sdk\app\platform\header\sfr.h
 
-1552726887 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
+1554210455 f:\soft_sdk\ab53xx_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -1062,7 +1062,7 @@
 	"func.h"
 	"func_bt_hid.h"
 
-1541036261 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_clock.c
+1552910601 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_clock.c
 	"include.h"
 	"func.h"
 	"func_clock.h"
@@ -1259,7 +1259,7 @@
 1547005603 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_audio.c
 	"include.h"
 
-1547005756 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_bt.c
+1559552066 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_bt.c
 	"include.h"
 	"api.h"
 
@@ -1283,11 +1283,11 @@
 1547729559 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_key.c
 	"include.h"
 
-1547721448 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.c
+1554260587 source:f:\soft_sdk\ab53xx_sdk\app\platform\bsp\bsp_led.c
 	"include.h"
 	"bsp_led.h"
 
-1550999927 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
+1555745315 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func.c
 	"include.h"
 
 1548745364 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_aux.c
@@ -1310,7 +1310,7 @@
 	"bsp_spiflash1.h"
 	"spiflash_cyc_fs.h"
 
-1547781425 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.c
+1552910566 source:f:\soft_sdk\ab53xx_sdk\app\platform\functions\func_lowpwr.c
 	"include.h"
 	"func.h"
 

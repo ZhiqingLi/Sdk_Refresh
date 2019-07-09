@@ -1347,6 +1347,14 @@ void CommonMsgProccess(uint16_t Msg)
 			}
 			break;
 
+		//休眠提示音
+		case MSG_SOUND_SLEEP_ON:
+			{
+				const uint8_t sleep_remind[2] = {SOUND_SLEEP_RING1, SOUND_SLEEP_RING2};
+				SoundRemind(sleep_remind[GetRandNum(2)-1]);
+			}
+			break;
+
 		//童锁提示音
 		case MSG_SOUND_LOCK_ON:
 			SoundRemind(SOUND_LOCK_ON);

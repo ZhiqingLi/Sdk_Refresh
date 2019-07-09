@@ -336,7 +336,7 @@
 	"include.h"
 	"bsp_led.h"
 
-1552306158 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_music.c
+1561990028 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_music.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_param.c
@@ -351,7 +351,7 @@
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1561514901 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
+1561990006 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\fmrx\fmrx_external.c

@@ -59,6 +59,8 @@ void PowerMonitor(void);
 
 void PowerMonitorDisp(void);
 
+uint8_t GetCurBatterLevelAverage(void);
+
 #ifdef __cplusplus
 }
 #endif//__cplusplus

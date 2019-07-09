@@ -120,6 +120,7 @@ enum
 	MSG_KEY_PWR_OFF,
 	MSG_SOUND_ALARM_RING,
 	MSG_SOUND_LOCK_ON,
+	MSG_SOUND_SLEEP_ON,
 	
 	////设备插拔消息/////////////////////////////////////////////////////////////
 	MSG_DEV_CLASS			= 0x1100,

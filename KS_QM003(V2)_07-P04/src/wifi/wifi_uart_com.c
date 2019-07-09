@@ -486,6 +486,16 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 			Len = 11;
 			break;	
 
+		case MCU_POW_NNN:	
+			if (IS_RTC_WAKEUP()) {
+				memcpy((void*)&CmdBuf[Temp], (void*)"MCU+POW+001", 11);
+			}
+			else {
+				memcpy((void*)&CmdBuf[Temp], (void*)"MCU+POW+000", 11);
+			}
+			Len = 11;
+			break;
+
 		case MCU_BAT_ON:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+BAT++ON", 11);
 			Len = 11;
@@ -884,7 +894,12 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 		case MCU_POW_OFF:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+POW+OFF", 11);
 			Len = 11;
-			break;		
+			break;
+
+		case MCU_SLP_PWR:
+			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+POW-OFF", 11);
+			Len = 11;
+			break;
 
 		case MCU_PLM_SUB:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+PLM-", 8);
@@ -1677,19 +1692,6 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 
 	CmdBuf[Len] = '\0';
 	APP_DBG("Send gWiFiCmd is:%s\n", CmdBuf);
-
-	if(memcmp(CmdBuf, "MCU+BAT+", 8) != 0)
-	{
-#ifdef FUNC_SLEEP_EN
-		gSys.SleepTimeCnt = 0;
-		gSys.SleepStartPowerOff = FALSE;
-#endif
-
-#ifdef FUNC_SLEEP_LEDOFF_EN
-		gSys.SleepLedOffCnt = FALSE;
-		gSys.SleepLedOffFlag = FALSE;
-#endif	
-	}
 	
 #ifdef WIFI_SELECT_BUART_COM
 	BuartSend(CmdBuf, Len);
@@ -1737,6 +1739,10 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			
 		case AXX_POW_OFF:
 			WiFiRequestMcuPowerOff();
+			break;
+
+		case AXX_POW_GET:
+			Mcu_SendCmdToWiFi(MCU_POW_NNN, NULL);
 			break;
 
 		case AXX_POW_STA:
@@ -1812,7 +1818,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 					WiFiStationStateSet(WIFI_STATUS_STATION_CONNECTING);
 				}
 #ifdef FUNC_SINGLE_LED_EN
-				SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE, LED_DISPLAY_KEEP);
+				SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
 #endif
 			}	
 			else
@@ -1857,7 +1863,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 				WiFiWwwStateSet(WIFI_STATUS_WWW_DISABLE);
 			}
 #ifdef FUNC_SINGLE_LED_EN
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, FALSE, LED_DISPLAY_KEEP);
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, FALSE);
 #endif
 			break;
 
@@ -2075,22 +2081,16 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 
 		case AXX_ALM_STT:
 			WiFiSetAlarmRemindState(TRUE);
-#ifdef FUNC_SINGLE_LED_EN
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_ALARM_CLOCK, TRUE, LED_DISPLAY_KEEP);
-#endif
 			break;
 
 		case AXX_ALM_STP:
 			WiFiSetAlarmRemindState(FALSE);
-#ifdef FUNC_SINGLE_LED_EN
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_ALARM_CLOCK, FALSE, LED_DISPLAY_KEEP);
-#endif
 			break;
 
 		case AXX_LGT__ON:
 		    gWiFi.KaiShuLightState = TRUE;
 #ifdef FUNC_SINGLE_LED_EN
-			SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE, LED_DISPLAY_LOOP);
+			SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE);
 #endif
 			break;
 			
@@ -2099,7 +2099,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 #ifdef FUNC_SINGLE_LED_EN
 			if(GetSingleLedDispMode(LED_DISPLAY_MODE_NIGHTLAMP))
 			{
-				SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, FALSE, LED_DISPLAY_LOOP);
+				SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, FALSE);
 			}
 #endif
 			break;
@@ -2274,6 +2274,10 @@ void WiFi_CmdProcess(void)
 	else if(memcmp(gWiFiCmd, "+POW+OFF", 8) == 0)
 	{		
 		WiFi_SendCmdToMcu(AXX_POW_OFF, NULL);		
+	}
+	else if(memcmp(gWiFiCmd, "+POW+GET", 8) == 0)
+	{		
+		WiFi_SendCmdToMcu(AXX_POW_GET, NULL);		
 	}
 	else if(memcmp(gWiFiCmd, "+POW+%03", 8) == 0)
 	{

@@ -43,11 +43,6 @@
     <File Name="FWlib/asm32s003_pwm.c"/>
     <File Name="FWlib/timeout_api.c"/>
   </VirtualDirectory>
-  <DebugSessions>
-    <watchExpressions>Sampling_Data;Baseline_Data;Offset_Data</watchExpressions>
-    <memoryExpressions>;;;</memoryExpressions>
-    <statistics>E0011100;10;MHZ</statistics>
-  </DebugSessions>
   <VirtualDirectory Name="Lib">
     <File Name="Lib/lib_S003TKey_V1_20.a"/>
   </VirtualDirectory>
@@ -233,5 +228,10 @@
       </Flash>
     </BuildConfig>
   </BuildConfigs>
+  <DebugSessions>
+    <watchExpressions>Sampling_Data;Baseline_Data;Offset_Data</watchExpressions>
+    <memoryExpressions>;;;</memoryExpressions>
+    <statistics>E0011100;10;MHZ</statistics>
+  </DebugSessions>
   <Dependencies Name="BuildSet"/>
 </Project>

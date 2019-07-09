@@ -56,13 +56,13 @@ extern uint32_t GetNextModeId(uint32_t CurModeId);
 
 extern int32_t BtTaskHandle;
 
-static const uint8_t frist_poweron_remind[3] = {
+const uint8_t frist_poweron_remind[3] = {
 	SOUND_PWR_ON,
 	SOUND_PWKON_RING1,
 	SOUND_PWKON_RING2,
 };
 
-static const uint8_t repeat_poweron_remind[6] = {
+const uint8_t repeat_poweron_remind[6] = {
 	SOUND_PWKON_RING3,
 	SOUND_PWKON_RING4,
 	SOUND_PWKON_RING5,
@@ -81,7 +81,7 @@ void GuiTaskEntrance(void)
 	
 
 #ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE, LED_DISPLAY_KEEP);
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
 #endif
 
 	APP_DBG("main task Init...\n");
@@ -108,7 +108,10 @@ void GuiTaskEntrance(void)
 	}
 	else
 #endif
-	if((MODULE_ID_END >= gSys.CurModuleID) && (WAKEUP_FLAG_POR_RTC != gWakeUpFlag)
+	if((MODULE_ID_END > gSys.CurModuleID) && !IS_RTC_WAKEUP()
+#ifdef OPTION_CHARGER_DETECT
+	&& !IsInCharge()
+#endif
 	)
 	{
 		if (gSys.IsWiFiRepeatPowerOn) {
@@ -286,8 +289,8 @@ void GuiTaskEntrance(void)
 			case MODULE_ID_PLAYER_WIFI_USB:
 #endif
 			case MODULE_ID_WIFI:
-        WiFiControl();
-        break;			
+				WiFiControl();
+				break;			
 #endif
             
 #ifdef FUNC_RECORD_EN
@@ -344,9 +347,6 @@ void GuiTaskEntrance(void)
 #endif
 
 			case MODULE_ID_POWEROFF:
-				if (IsInCharge()) {
-					SoundRemind(SOUND_CHARGING);
-				} 
 				SystemPowerOffControl();
 				break;
 		
@@ -374,6 +374,10 @@ void GuiTaskEntrance(void)
 		}
 		
 		gSys.CurModuleID = gSys.NextModuleID;//set mode to the next mode
+
+		if (MODULE_ID_END <= gSys.CurModuleID) {
+			
+		}
 		// quick response
 		SetQuickResponseFlag(FALSE);
 #ifdef FUNC_BREAKPOINT_EN		

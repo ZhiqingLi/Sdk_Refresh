@@ -253,9 +253,33 @@ int main(void)
 	while(1)
 	{
 		uint16_t Msg;
-		
+		static B_T IsDebugReset = TRUE;
+		TIMER DebugResetTimer;
+
+		SYSCON_IWDCNT_Reload();
 		CORET_Systick_Check();
 		CheckTimer(&PwmScanTimer);
+
+#ifdef FUNC_POWERON_DETECT_UPGRADE_EN
+		if(GPIO_Read_Status(GPIO_UPGRADE_DETECT_PORT_OUT,GPIO_UPGRADE_DETECT_PORT_BIT)) {
+			if (IsTimeOut(&DebugResetTimer) && IsDebugReset) {
+				IsDebugReset = FALSE;
+#ifdef FUNC_APP_DEBUG_EN
+				UartAppDebugConfig();
+#endif
+#ifdef EXTE_UPGRADE_PORT_OUT_EN
+				GPIO_PullHigh_Init(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT);
+				GPIO_Init(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT,Output); 
+				GPIO_Write_Low(EXTE_UPGRADE_OUT_PORT_OUT,EXTE_UPGRADE_OUT_PORT_BIT);
+#endif
+				APP_DBG("Exit Upgrade Mode!!! %d \n", GPIO_Read_Status(GPIO_UPGRADE_DETECT_PORT_OUT,GPIO_UPGRADE_DETECT_PORT_BIT));
+			}
+		}
+		else {
+			TimeOutSet(&DebugResetTimer, 100);
+		}
+#endif
+		
 #ifdef FUNC_KEY_EN
 		Msg = KeyScan();
 #endif

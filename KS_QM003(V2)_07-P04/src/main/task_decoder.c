@@ -1206,7 +1206,7 @@ void DecoderTaskEntrance(void)
 	PlayerControlValue = DECODER_TASK_CTRL_NONE;		// 采用互斥机制
 	PlayerControlParam = 0; 							// 互斥命令携带的参数信息
 
-	DBG("enter decoder task，wait gui task init...\n");
+	DBG("enter decoder task，wait gui task init...%d;\n", OSSysTickGet());
 	audio_decoder = NULL;
 
 	// 注册消息

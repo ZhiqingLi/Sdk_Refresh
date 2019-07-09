@@ -42,6 +42,7 @@
 #include "rtc_control.h"
 #include "wifi_uart_com.h"
 #include "wifi_control.h"
+#include "power_management.h"
 #include "wifi_init_setting.h"
 #include "wifi_mcu_command.h"
 #include "wifi_wifi_command.h"
@@ -55,19 +56,19 @@
 
 #ifdef FUNC_WIFI_EN
 #ifdef FUNC_WIFI_POWER_KEEP_ON
-#define WIFI_POWER_ON_INIT_TIME		400	//WiFi模组上电后的初始化持续时间(单位: 10ms)
+#define WIFI_POWER_ON_INIT_TIME				400		//WiFi模组上电后的初始化持续时间(单位: 10ms)
 #else
-#define WIFI_POWER_ON_INIT_TIME		60	//6s(WiFi模组上电后的初始化持续时间)
+#define WIFI_POWER_ON_INIT_TIME				60		//6s(WiFi模组上电后的初始化持续时间)
 #endif
-#define WIFI_LED_CB_TIME			50	 //设置WiFiLedCb()函数调用时间间隔(单位:ms)
-#define WIFI_LED_SLOW_FLASH_TIME	1000 //设置LED慢闪烁时间(单位:ms)
-#define WIFI_LED_FAST_FLASH_TIME	100 //设置LED快闪烁时间(单位:ms)
-#define WIFI_POWERON_RECONNECTION_TIME		600	//60s(WiFi模组上电后的自动回连AP时间)
+#define WIFI_LED_CB_TIME					50		//设置WiFiLedCb()函数调用时间间隔(单位:ms)
+#define WIFI_LED_SLOW_FLASH_TIME			1000	//设置LED慢闪烁时间(单位:ms)
+#define WIFI_LED_FAST_FLASH_TIME			100		//设置LED快闪烁时间(单位:ms)
+#define WIFI_POWERON_RECONNECTION_TIME		600		//60s(WiFi模组上电后的自动回连AP时间)
 
-uint16_t McuSoftSdkVerNum = 0;	//MCU软件版本号
+uint16_t McuSoftSdkVerNum = 0;						//MCU软件版本号
 
 WIFI_WORK_STATE gWiFi;
-TIMER WiFiCmdRespTimer;	//WiFi模组命令响应时间
+TIMER WiFiCmdRespTimer;								//WiFi模组命令响应时间
 TIMER WiFiPowerOffTimer;
 TIMER WiFiLedBlinkTimer;
 TIMER WiFiSoundRemindTimer;
@@ -82,11 +83,6 @@ uint16_t PassThroughDataLen = 0;  		//透传数据长度,此数值不为0表示有透传数据接收
 uint8_t PassThroughDataState = 0; 		//透传数据状态
 int8_t  ChangeSystemTimeZoneFlag = 0;	//MCU修改时区时是否有日期变更，用于修改周设置
 
-#ifdef FUNC_POWER_MONITOR_EN
-#ifdef FUNC_WIFI_BATTERY_POWER_CHECK_EN	
-uint8_t GetCurBatterLevelAverage(void);
-#endif
-#endif
 
 #ifdef	FUNC_WIFI_UART_UPGRADE
 #define UPGRADE_CODE_BANK_ADDR	0x100000	//升级代码在Spi Flash中存放的起始地址
@@ -746,25 +742,35 @@ uint8_t WiFiKaiShuSleepModeDeal(bool IsEnter, bool IsPushOut)
 {
 	#define SLEEP_VOLUME_VAL      3
 	static uint8_t TempVol = 0;
+	static bool IsSleepModeOn = FALSE;
 	extern const uint16_t gAnaVolArr[MAX_VOLUME + 1];
 
 	if((TRUE == IsEnter) && (FALSE == IsPushOut))
 	{
 		TempVol = gSys.Volume;	
+		IsSleepModeOn = TRUE;
 		APP_DBG("Kai shu Enter sleep mode!!!\n");
 	}
 	else if((FALSE == IsEnter) && (TRUE == IsPushOut))
 	{
 		SetSysVol();
 		TempVol = FALSE;
+		IsSleepModeOn = FALSE;
 		APP_DBG("Kai shu push out sleep mode!!!\n");
 	}
-	else if(TempVol > SLEEP_VOLUME_VAL)
+	else if (IsSleepModeOn)
 	{
 		TempVol--;
-		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
-		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
-		APP_DBG("Kai shu sleep mode volume down!!! %d;\n", TempVol);
+		TempVol %= gSys.Volume;
+		
+		if(TempVol > SLEEP_VOLUME_VAL) {
+			MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
+			MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
+			APP_DBG("Kai shu sleep mode volume down!!! %d;\n", TempVol);
+		}
+		else {
+			Mcu_SendCmdToWiFi(MCU_SLP_PWR, NULL);
+		}
 	}
 
 	return gSys.Volume-SLEEP_VOLUME_VAL;
@@ -1242,17 +1248,6 @@ void WiFiSoundRemindStateSet(uint16_t State)
 	{
 		TimeOutSet(&WiFiSoundRemindTimer, 1000);
 	}
-
-#ifdef FUNC_SINGLE_LED_EN
-	if(State && (WIFI_AVS_STATUS_IDLE == gWiFi.MicState))
-	{
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, FALSE, LED_DISPLAY_KEEP);
-	}
-	else
-	{
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, TRUE, LED_DISPLAY_KEEP);
-	}
-#endif
 }
 
 //WiFi端语音播报状态
@@ -1519,9 +1514,6 @@ void WiFiTalkStateSet(bool State)
 		gSys.MicEnable = TRUE;
 		MixerUnmute(MIXER_SOURCE_MIC);
 #endif
-#ifdef FUNC_SINGLE_LED_EN
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_TLAK_ON, TRUE, LED_DISPLAY_KEEP);
-#endif
 	}
 	else
 	{		
@@ -1537,10 +1529,6 @@ void WiFiTalkStateSet(bool State)
 		DacVolumeSet(DAC_DIGITAL_VOL, DAC_DIGITAL_VOL);
 #endif
 		DacSoftMuteSet(FALSE, FALSE);
-
-#ifdef FUNC_SINGLE_LED_EN
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_TLAK_ON, FALSE, LED_DISPLAY_KEEP);
-#endif
 	}
 #endif
 }
@@ -2245,16 +2233,6 @@ void WiFiSetMcuLedState(uint16_t State)
 void WiFiSetMicState(WIFI_AVS_STATUS State)
 {
 	gWiFi.MicState = State;
-#ifdef FUNC_SINGLE_LED_EN
-	if((WIFI_AVS_STATUS_IDLE == State) && gWiFi.WiFiSoundRemindState)
-	{
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, FALSE, LED_DISPLAY_KEEP);
-	}
-	else
-	{		
-		SingleLedDisplayModeSet(LED_DISPLAY_MODE_BREATHING, TRUE, LED_DISPLAY_KEEP);
-	}
-#endif
 }
 
 //MCU获取WiFi当前播放状态相关参数(注:由于在断电记忆中会关闭串口中断,

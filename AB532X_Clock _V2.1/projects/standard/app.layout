@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<FileVersion major="1" minor="0" />
+	<ActiveTarget name="Debug" />
+	<File name="..\..\platform\functions\func_clock.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2425" topLine="69" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\header\clib.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="53" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\bsp\bsp_music.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4810" topLine="166" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\functions\func_bt.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="8261" topLine="273" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\bsp\bsp_key.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7145" topLine="274" />
+		</Cursor>
+	</File>
+	<File name="display\ledseg\display_ledseg.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1485" topLine="42" />
+		</Cursor>
+	</File>
+	<File name="message\msg_aux.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="426" topLine="1" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\gui\ledseg\ledseg_7p3s_HBS7642.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1388" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\bsp\bsp_sys.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5752" topLine="239" />
+		</Cursor>
+	</File>
+	<File name="display\ledseg\display_ledseg.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5905" topLine="236" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\functions\func_clock.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="619" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\gui\ledseg\ledseg_7p3s_HBS7642.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1078" topLine="28" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\gui\ledseg\ledseg_common.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="875" topLine="12" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="0" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="341" topLine="4" />
+		</Cursor>
+	</File>
+	<File name="config.h" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1807" topLine="15" />
+		</Cursor>
+	</File>
+	<File name="display\display_clock.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1869" topLine="46" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\bsp\bsp_karaok.c" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="5539" topLine="182" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\functions\func_lowpwr.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="7115" topLine="267" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\functions\func.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2298" topLine="50" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\gui\gui.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1873" topLine="31" />
+		</Cursor>
+	</File>
+	<File name="..\..\platform\libs\api_btstack.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3044" topLine="71" />
+		</Cursor>
+	</File>
+</CodeBlocks_layout_file>

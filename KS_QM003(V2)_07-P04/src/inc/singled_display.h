@@ -58,11 +58,11 @@
 #define SINGLE_LED_MIN_DUTY				0
 
 #define SINGLE_BLED_INIT()				do{\
-										PwmConfig(PWM_CH3_A10_B24, 1200, 0);\
+										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
 										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
 										}while(0)
 #define SINGLE_RLED_INIT()				do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 0);\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 100);\
 										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
 										}while(0)
 										
@@ -98,22 +98,17 @@ typedef enum _LED_DISPLAY_STATUS_
 
 typedef struct SINGLE_LED_DISP
 {
+	uint8_t CurDisplayMode;				//当前显示模式
     uint8_t BledFlag;					//利用每个bit控制LED闪烁，呼吸等
     uint8_t RledFlag;					//利用每个bit控制LED闪烁，呼吸等
     uint8_t BledDuty;					//LED当前实时占空比
     uint8_t RledDuty;					//LED当前实时占空比
     uint8_t StepUpDuty;					//扫描占空比步进，利用这个实现灯光呼吸/闪烁等效果
+    uint8_t MinDispDuty;				//最小占空比，用于呼吸效果时防止占空比设置为0；
     uint8_t DispBitCnt;					//当前BIT位指针
     uint32_t DispChangeTime;			//每调整一个亮度等级的时间，单位：ms
-    uint8_t MinDispDuty;				//最小占空比，用于呼吸效果时防止占空比设置为0；
+    uint32_t DisplayTime;				//每一个循环显示时间，单位：ms
 }SINGLE_LED_DISP_STRU;
-
-typedef struct SINGLE_LED_CB
-{
-	uint8_t CurDisplayMode;				//当前显示模式
-    LED_DISPLAY_STATUS	DispStatus;		//当前显示模式
-    uint32_t DisplayTimer;
-}SINGLE_LED_CB_STRU;
 
 #ifdef __cplusplus
 #if __cplusplus
@@ -123,7 +118,7 @@ extern "C"{
 
 extern void LedFlushDisp(void);
 extern void SingleLedFlushDispInit(void);
-extern void SingleLedDisplayModeSet(uint8_t DisplayMode, bool IsOnOff, LED_DISPLAY_STATUS IsBackup);
+extern void SingleLedDisplayModeSet(uint8_t DisplayMode, bool IsOnOff);
 extern bool GetSingleLedDispMode(LED_MODE_TYPE Mode);
 #ifdef __cplusplus
 #if __cplusplus

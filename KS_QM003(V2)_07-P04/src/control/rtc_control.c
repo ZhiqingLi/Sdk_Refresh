@@ -1620,6 +1620,7 @@ __attribute__((section(".driver.isr"), weak)) void RtcInterrupt(void)
     /* 新闹钟时间到，先停掉正在闹响的闹钟 */
     RtcCurAlarmSleepAndStop(RTC_ALARM_STATE_STOP);
 	sRtcControl->CurAlarmNum = RtcCheckAlarmFlag();
+	sRtcControl->CurAlarmNum = 0;
 	RtcAlarmIntClear();// 清除闹钟提醒中断
 }
 #endif

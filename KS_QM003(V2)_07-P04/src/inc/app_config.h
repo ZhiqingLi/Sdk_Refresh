@@ -27,6 +27,7 @@ extern "C" {
 #include "os.h"
 #include "eq.h"
 #include "eq_params.h"
+#include "wakeup.h"
 #include "wifi_function_config.h"
 #include "wifi_init_setting.h"
 #include "wifi_mcu_command.h"
@@ -832,7 +833,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_POWER_PORT_PD, AMP_POWER_PORT_BIT);\
 												GpioClrRegOneBit(AMP_POWER_PORT_IE, AMP_POWER_PORT_BIT);\
 												GpioSetRegOneBit(AMP_POWER_PORT_OE, AMP_POWER_PORT_BIT);\
-												GpioSetRegOneBit(AMP_POWER_PORT_OUT, AMP_POWER_PORT_BIT);\
+												GpioClrRegOneBit(AMP_POWER_PORT_OUT, AMP_POWER_PORT_BIT);\
 												}while(0)
 
 		#define AmpPowerDisable()				do{\
@@ -840,7 +841,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_POWER_PORT_PD, AMP_POWER_PORT_BIT);\
 												GpioClrRegOneBit(AMP_POWER_PORT_IE, AMP_POWER_PORT_BIT);\
 												GpioSetRegOneBit(AMP_POWER_PORT_OE, AMP_POWER_PORT_BIT);\
-												GpioClrRegOneBit(AMP_POWER_PORT_OUT, AMP_POWER_PORT_BIT);\
+												GpioSetRegOneBit(AMP_POWER_PORT_OUT, AMP_POWER_PORT_BIT);\
 												}while(0)
 
 	#endif	
@@ -911,6 +912,8 @@ extern "C" {
 		#define FUNC_RTC_ALARM 				//alarm功能
 		#define FUNC_RTC_LUNAR
 		#define FUNC_RTC_ALARM_SAVE2FLASH 	//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
+		#define IS_RTC_WAKEUP()				(WAKEUP_FLAG_POR_RTC&gSys.WakeUpSource)
+		#define RTC_WAKEUP_FLAG_CLR()		(gSys.WakeUpSource &= ~WAKEUP_FLAG_POR_RTC)
 	#endif
 
 
@@ -1170,7 +1173,7 @@ extern "C" {
 	#endif
 
 	//GPIO按键定义
-	#define FUNC_GPIO_KEY_EN   								//GPIO按键
+	//#define FUNC_GPIO_KEY_EN   								//GPIO按键
 	#ifdef FUNC_GPIO_KEY_EN
 		#define GPIO_KEY1_PORT_OUT			GPIO_A_OUT		
 		#define GPIO_KEY1_PORT_BIT			GPIOA19	
@@ -1180,20 +1183,21 @@ extern "C" {
 	#endif
 
 	//CODING KEY定义
-	//#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
+	#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
 	#ifdef FUNC_CODING_KEY_EN
 		#define 	CODING_KEY_A_PORT_IN	GPIO_A_IN	
 		#define		CODING_KEY_A_PORT_OE	GPIO_A_OE 			
 		#define		CODING_KEY_A_PORT_PU	GPIO_A_PU 
 		#define		CODING_KEY_A_PORT_PD	GPIO_A_PD 					
 		#define		CODING_KEY_A_PORT_INT	GPIO_A_INT 				
-		#define		CODING_KEY_A_BIT		(1 << 21)		//GPIO_B[21] for signal A 
+		#define		CODING_KEY_A_BIT		(1 << 19)		//GPIO_B[21] for signal A 
 
-		#define		CODING_KEY_B_PORT_IN	GPIO_A_IN 				
-		#define		CODING_KEY_B_PORT_OE	GPIO_A_OE 			
-		#define		CODING_KEY_B_PORT_PU	GPIO_A_PU 
-		#define		CODING_KEY_B_PORT_PD	GPIO_A_PD 					
-		#define		CODING_KEY_B_BIT		(1 << 20)	//GPIO_B[20] for signal B
+		#define		CODING_KEY_B_PORT_IN	GPIO_B_IN 				
+		#define		CODING_KEY_B_PORT_OE	GPIO_B_OE 			
+		#define		CODING_KEY_B_PORT_PU	GPIO_B_PU 
+		#define		CODING_KEY_B_PORT_PD	GPIO_B_PD 	
+		#define 	CODING_KEY_B_PORT_INT	GPIO_B_INT				
+		#define		CODING_KEY_B_BIT		(1 << 2)	//GPIO_B[20] for signal B
 	#endif
 
 //	#define FUNC_POWER_KEY_EN							//POWER KEY宏开关，软开关复用功能
@@ -1347,12 +1351,15 @@ extern "C" {
 //****************************************************************************************
 //                 定时关机功能配置        
 //****************************************************************************************
-//#define FUNC_SLEEP_EN
-//#define FUNC_SLEEP_LEDOFF_EN
+#define FUNC_SLEEP_EN
+#define FUNC_SLEEP_LEDOFF_EN
 															
 #ifdef FUNC_SLEEP_EN
-  #define SLEEP_POWEROFF_TMR   10   //单位：分钟
-  #define SLEEP_LED_OFF_TMR    3
+	#define SLEEP_POWEROFF_TMR   30   //单位：分钟
+#endif
+
+#ifdef FUNC_SLEEP_LEDOFF_EN
+	#define SLEEP_LED_OFF_TMR	5	//单位：分钟
 #endif
 									
 //****************************************************************************************

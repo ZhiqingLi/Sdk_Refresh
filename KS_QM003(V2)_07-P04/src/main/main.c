@@ -96,25 +96,6 @@ __attribute__((section(".driver.isr"))) void Timer1Interrupt(void)
 #if (defined(FUNC_SINGLE_LED_EN) || defined(FUNC_7PIN_SEG_LED_EN) || defined(FUNC_6PIN_SEG_LED_EN))
 	//LedFlushDisp();
 #endif
-#ifdef FUNC_SLEEP_EN
-	if(GetSilenceMuteFlag()
-#ifdef OPTION_CHARGER_DETECT
-		&& !IsInCharge()
-#endif
-	)
-	{
-		if(gSys.SleepTime == FALSE)
-		{
-		  gSys.SleepTime = SLEEP_POWEROFF_TMR;
-		  gSys.SleepTimeCnt = 0;
-		}
-	}
-	else
-	{
-		gSys.SleepTime = FALSE;
-		gSys.SleepStartPowerOff = FALSE;
-	}
-#endif
 
 #ifdef FUNC_WIFI_BT_CONTROL_EN
 	if(BtCtrl.ScanEnable_Timer != FALSE)
@@ -155,6 +136,10 @@ int32_t main(void)
     GpioClrRegOneBit(GPIO_B_OE, GPIOB30);
 #endif
 
+#ifdef FUNC_AMP_MUTE_EN
+	GpioAmpMuteEnable();
+#endif
+
 #ifdef FUNC_GPIO_POWER_ON_EN
 	SysPowerOnControl(TRUE);
 #endif
@@ -172,9 +157,6 @@ int32_t main(void)
 	WiFiControlGpioInit();
 #endif
 	
-#ifdef FUNC_AMP_MUTE_EN
-	GpioAmpMuteEnable();
-#endif
 	
 #ifdef FUNC_5VIN_TRIM_LDO3V3   	
 	SarAdcTrimLdo3V3();   //attention! only used in Power = 5V
@@ -192,7 +174,7 @@ int32_t main(void)
 	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 500);//200ms
 #endif
 #ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
-	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 2000); //2s
+	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 1000); //2s
 #endif
 
 	SpiFlashInfoInit();		//Flash RD/WR/ER/LOCK initialization
@@ -233,7 +215,6 @@ int32_t main(void)
 #else
 	OsSetDebugFlag(0);
 #endif
-	APP_DBG ("poweron>>>>SystemWakeUpFlag = 0x%08X;\n", gWakeUpFlag);
 
 #if (!defined(FUNC_USB_AUDIO_EN) && !defined(FUNC_USB_READER_EN) && !defined(FUNC_USB_AUDIO_READER_EN))
 #undef PC_PORT_NUM
@@ -360,8 +341,9 @@ int32_t main(void)
 	APP_DBG("Driver Ver       :%s\n", GetLibVersionDriver());
 	APP_DBG("FreeRTOS Ver     :%s\n", GetLibVersionFreertos());
 	APP_DBG("FS Ver           :%s\n", GetLibVersionFs());
+	APP_DBG("poweron>>>>SystemWakeUpSource = 0x%08X;\n", gSys.WakeUpSource);
 	APP_DBG("****************************************************************\n");
-
+	
 	//系统启动后先获取MCU版本号，防止在非WiFi模式开机，WIFI获取的MCU版本错误。
 	McuSoftSdkVerNum = GetSdkVer() >> 24;
 	
@@ -394,8 +376,7 @@ int32_t main(void)
 	DispInit(FALSE);
 #endif
 #ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_POWER_ON, TRUE, LED_DISPLAY_ONCE);
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE, LED_DISPLAY_LOOP);
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE);
 #endif
 
 	DBG("Start Detect External Device(Keypad, U disk, SD card, FM,...)\n");
@@ -470,29 +451,45 @@ int32_t main(void)
 //注意：原定时关机功能是在定时器1中处理，因定时器中断处理过多代码会出现
 //蓝牙协议栈阻塞，所以将定时关机改到主任务中处理。
 #ifdef FUNC_SLEEP_EN
-	if((gSys.SleepTime != 0) && (gSys.CurModuleID != MODULE_ID_RTC))
-	{
-		if(gSys.SleepTimeCnt > 6000*gSys.SleepTime)
-		{		   
-			WiFiRequestMcuPowerOff();
-			gSys.SleepTime = FALSE;
-			gSys.SleepTimeCnt = FALSE;
+		if(GetSilenceMuteFlag() && (gSys.CurModuleID != MODULE_ID_RTC)
+#ifdef OPTION_CHARGER_DETECT
+		&& !IsInCharge()
+#endif
+		) {
+			if(!gSys.SleepStartPowerOff)
+			{
+				gSys.SleepTimeCnt++;
+				if(gSys.SleepTimeCnt > 6000*SLEEP_POWEROFF_TMR)
+				{		   
+					WiFiRequestMcuPowerOff();
+					gSys.SleepStartPowerOff = TRUE;
+				}
+			}
 		}
 		else
 		{
-			gSys.SleepTimeCnt++;
+			gSys.SleepStartPowerOff = FALSE;
+			gSys.SleepTimeCnt = 0;
 		}
-	}
 #endif
 		
 #ifdef FUNC_SLEEP_LEDOFF_EN
-		if(gSys.SleepLedOffCnt >= (6000*SLEEP_LED_OFF_TMR))
-		{
-			gSys.SleepLedOffFlag = TRUE;
+		if (GetSilenceMuteFlag()
+#ifdef OPTION_CHARGER_DETECT
+		&& !IsInCharge()
+#endif
+		) {
+			if(gSys.SleepLedOffCnt < (6000*SLEEP_LED_OFF_TMR))
+			{
+				gSys.SleepLedOffCnt++;
+				if (gSys.SleepLedOffCnt >= (6000*SLEEP_LED_OFF_TMR)) {
+					gSys.SleepLedOffFlag = TRUE;
+					MsgSend(MSG_SOUND_SLEEP_ON);
+				}
+			}
 		}
-		else
-		{
-			gSys.SleepLedOffCnt++;
+		else {
+			gSys.SleepLedOffCnt = 0;
 		}
 #endif
 	}

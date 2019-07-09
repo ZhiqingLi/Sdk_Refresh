@@ -1,0 +1,3118 @@
+# depslib dependency file v1.0
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_audio.c
+	"include.h"
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\typedef.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\macro.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\clib.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\sfr.h
+
+1543051083 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1542958239 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\config_define.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\xcfg.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\config_extra.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_device.h"
+	"api_fs.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1541488599 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_btstack.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_cm.h
+
+1540206716 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_music.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_sd.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_rtc.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_usb.h
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_device.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_fs.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_sdadc.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_update.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_dac.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_sysclk.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_msg.h
+
+1540206716 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_saradc.h
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_fmrx.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_sys.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_pwr.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_key.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_gpio.h
+
+1542959339 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_uart.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\api_karaok.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_bt.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_bt_hid.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_clock.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_idle.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_music.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_usbdev.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_aux.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_speaker.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_record.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_record_play.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_lowpwr.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_fmrx.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_fmam_freq.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_update.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_piano.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_aux.h"
+	"bsp_i2c.h"
+	"bsp_karaok.h"
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_sys.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_key.h
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_dac.h
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_param.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_ir.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_audio.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_music.h
+
+1540206716 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_led.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_fs.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_bt.h
+
+1539690406 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_eq.h
+
+1540206716 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_charge.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_piano.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_id3_tag.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_record.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_aux.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_i2c.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_karaok.h
+
+1539669459 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+
+1543042368 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_common.h
+
+1543050811 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+	"ledseg/ledseg_7p3s_HBS7642.h"
+
+1542959986 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p7s.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\plugin\multi_lang.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_pwm.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_linein.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_led.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_sd.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_earphone.h
+
+1542080002 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_mic.h
+
+1539669458 f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\res.h
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_aux.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_ble.c
+	"include.h"
+	"api.h"
+
+1541488599 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1540206716 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540612317 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_cm.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206716 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1540206716 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_fs.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_iap.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_ir.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1540612317 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_lcd.c
+	"include.h"
+	"bsp_lcd.h"
+
+1540612317 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_lcd.h
+
+1540612317 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_music.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_param.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_piano.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_record.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_spp.c
+	"include.h"
+
+1540612317 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_sys.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540612317 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1541488599 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1540206717 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1540206717 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1539669459 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1543048144 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\libs\strong_symbol.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\config.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1543047989 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\main.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1541488599 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1540206718 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\plugin\plugin.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_earphone.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_ir.c
+	"include.h"
+
+1540206718 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_key.c
+	"include.h"
+
+1540206718 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_led.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_linein.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_mic.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_mute.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_pwm.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_sd.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_sd1.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\port\port_update.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\projects\standard\ram.ld
+
+1543041864 f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p3s_hbs7642.h
+
+1542957331 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\bsp\bsp_key.c
+	"include.h"
+
+1543051969 source:f:\work\work2018\ab53xx\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p3s_hbs7642.c
+	"ledseg_common.h"
+	"ledseg_7p3s_HBS7642.h"
+
+1543564350 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_audio.c
+	"include.h"
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\typedef.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\macro.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\clib.h
+
+1545640465 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\sfr.h
+
+1545802774 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1543565059 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\config_define.h
+
+1543215646 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\xcfg.h
+
+1543565091 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\config_extra.h
+
+1543565126 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_device.h"
+	"api_fs.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1543217963 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_btstack.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_cm.h
+
+1542179068 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_music.h
+
+1542105779 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_sd.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_rtc.h
+
+1542189064 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_usb.h
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_device.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_fs.h
+
+1542358499 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_sdadc.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_update.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_dac.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_sysclk.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_msg.h
+
+1540206716 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_saradc.h
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_fmrx.h
+
+1542940204 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_sys.h
+
+1542963909 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_pwr.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_key.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_gpio.h
+
+1542959339 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_uart.h
+
+1543225503 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\api_karaok.h
+
+1543564780 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+	"func_spdif.h"
+
+1543564851 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_bt.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_bt_hid.h
+
+1545729083 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_clock.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_idle.h
+
+1543564992 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_music.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_usbdev.h
+
+1543564830 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_aux.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_speaker.h
+
+1543565030 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_record.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_record_play.h
+
+1543564965 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_lowpwr.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_fmrx.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_fmam_freq.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_update.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_piano.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_aux.h"
+	"bsp_i2c.h"
+	"bsp_karaok.h"
+
+1543564742 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_sys.h
+
+1543564549 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_key.h
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_dac.h
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1543479390 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_param.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_ir.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_audio.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_music.h
+
+1540206716 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_led.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_fs.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_bt.h
+
+1539690406 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_eq.h
+
+1540206716 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_charge.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_piano.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_id3_tag.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_record.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_aux.h
+
+1539669459 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_i2c.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_karaok.h
+
+1543481127 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+
+1543042368 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_common.h
+
+1543565174 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+	"ledseg/ledseg_7p3s_HBS7642.h"
+
+1542959986 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p7s.h
+
+1545363473 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p3s_hbs7642.h
+
+1543565240 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\plugin\multi_lang.h
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_pwm.h
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_linein.h
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_led.h
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_sd.h
+
+1539669458 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_earphone.h
+
+1542080002 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_mic.h
+
+1543492335 f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\res.h
+
+1543564368 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_aux.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_ble.c
+	"include.h"
+	"api.h"
+
+1543564384 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1543564389 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540612317 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_cm.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206716 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1540206716 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1543564415 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_fs.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_iap.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_ir.c
+	"include.h"
+
+1543564427 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1545802818 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_key.c
+	"include.h"
+
+1540612317 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_lcd.c
+	"include.h"
+	"bsp_lcd.h"
+
+1540612317 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_lcd.h
+
+1543564571 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1543800728 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_music.c
+	"include.h"
+
+1543479702 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_param.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_piano.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_record.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_spp.c
+	"include.h"
+
+1545802894 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\bsp_sys.c
+	"include.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540612317 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1545364096 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func.c
+	"include.h"
+
+1543564823 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1543564846 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1545376133 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1543383615 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1545803735 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1543564983 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1542080002 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1543565001 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1543567169 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565019 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565026 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1543481288 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1539669459 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1543559373 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1543293577 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\libs\strong_symbol.c
+	"include.h"
+
+1543565283 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\config.c
+	"include.h"
+
+1543385082 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1543385089 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543803072 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543385147 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543388189 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1543565156 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\main.c
+	"include.h"
+
+1543390866 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1543390876 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543391076 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543390882 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543565221 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1543565235 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\plugin\plugin.c
+	"include.h"
+
+1543565247 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_earphone.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_ir.c
+	"include.h"
+
+1545802621 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_key.c
+	"include.h"
+
+1540206718 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_led.c
+	"include.h"
+
+1543387077 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1543565261 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_linein.c
+	"include.h"
+
+1543565265 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_mic.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_mute.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_pwm.c
+	"include.h"
+
+1543565272 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_sd.c
+	"include.h"
+
+1543565277 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_sd1.c
+	"include.h"
+
+1539669458 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\port\port_update.c
+	"include.h"
+
+1542080002 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\ram.ld
+
+1545730824 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\gui\ledseg\ledseg_7p3s_hbs7642.c
+	"ledseg_common.h"
+	"ledseg_7p3s_HBS7642.h"
+
+1543293577 f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_spdif.h
+
+1543293577 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1543293577 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1543293577 source:f:\work\work2018\ab532x\yhd\y-s5\project\app\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1543564350 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_audio.c
+	"include.h"
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\typedef.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\macro.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\clib.h
+
+1545640465 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\sfr.h
+
+1552481388 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1543565059 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\config_define.h
+
+1543215646 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\xcfg.h
+
+1552480019 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\config_extra.h
+
+1543565126 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_device.h"
+	"api_fs.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1543217963 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_btstack.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_cm.h
+
+1542179068 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_music.h
+
+1542105779 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_sd.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_rtc.h
+
+1542189064 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_usb.h
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_device.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_fs.h
+
+1542358499 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_sdadc.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_update.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_dac.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_sysclk.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_msg.h
+
+1540206716 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_saradc.h
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_fmrx.h
+
+1542940204 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_sys.h
+
+1542963909 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_pwr.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_key.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_gpio.h
+
+1542959339 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_uart.h
+
+1543225503 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\api_karaok.h
+
+1543564780 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+	"func_spdif.h"
+
+1543564851 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_bt.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_bt_hid.h
+
+1545729083 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_clock.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_idle.h
+
+1543564992 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_music.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_usbdev.h
+
+1543564830 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_aux.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_speaker.h
+
+1543565030 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_record.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_record_play.h
+
+1543564965 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_lowpwr.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_fmrx.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_fmam_freq.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_update.h
+
+1543293577 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_spdif.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_piano.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_aux.h"
+	"bsp_i2c.h"
+	"bsp_karaok.h"
+
+1552465816 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_sys.h
+
+1543564549 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_key.h
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_dac.h
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1543479390 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_param.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_ir.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_audio.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_music.h
+
+1540206716 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_led.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_fs.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_bt.h
+
+1539690406 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_eq.h
+
+1540206716 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_charge.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_piano.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_id3_tag.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_record.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_aux.h
+
+1539669459 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_i2c.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_karaok.h
+
+1543481127 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+
+1543042368 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_common.h
+
+1543565174 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+	"ledseg/ledseg_7p3s_HBS7642.h"
+
+1542959986 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_7p7s.h
+
+1545363473 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_7p3s_hbs7642.h
+
+1543565240 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\plugin\multi_lang.h
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_pwm.h
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_linein.h
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_led.h
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_sd.h
+
+1539669458 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_earphone.h
+
+1542080002 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_mic.h
+
+1543492335 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\res.h
+
+1543564368 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_aux.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_ble.c
+	"include.h"
+	"api.h"
+
+1543564384 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1543564389 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540612317 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_cm.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206716 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1540206716 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1543564415 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_fs.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_iap.c
+	"include.h"
+
+1542080002 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_ir.c
+	"include.h"
+
+1543564427 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1552467407 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_key.c
+	"include.h"
+
+1540612317 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_lcd.c
+	"include.h"
+	"bsp_lcd.h"
+
+1540612317 e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_lcd.h
+
+1543564571 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1543800728 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_music.c
+	"include.h"
+
+1543479702 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_param.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_piano.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_record.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_spp.c
+	"include.h"
+
+1545802894 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\bsp_sys.c
+	"include.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540612317 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1552465905 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func.c
+	"include.h"
+
+1543564823 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1543564846 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1545376133 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1543383615 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552481319 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543564983 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1543293577 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1542080002 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1543565001 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1543567169 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565019 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565026 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1543481288 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1552468922 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_7p3s_hbs7642.c
+	"ledseg_common.h"
+	"ledseg_7p3s_HBS7642.h"
+
+1539669459 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1552481353 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1543293577 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\libs\strong_symbol.c
+	"include.h"
+
+1552475043 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\config.c
+	"include.h"
+
+1543385082 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1543385089 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543803072 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543385147 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543388189 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293577 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1552478757 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\main.c
+	"include.h"
+
+1543390866 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1543390876 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543391076 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543390882 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552480935 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543565221 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293577 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1543565235 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\plugin\plugin.c
+	"include.h"
+
+1543565247 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_earphone.c
+	"include.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_ir.c
+	"include.h"
+
+1545802621 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_key.c
+	"include.h"
+
+1540206718 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_led.c
+	"include.h"
+
+1543387077 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1543565261 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_linein.c
+	"include.h"
+
+1543565265 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_mic.c
+	"include.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_mute.c
+	"include.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_pwm.c
+	"include.h"
+
+1543565272 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_sd.c
+	"include.h"
+
+1543565277 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_sd1.c
+	"include.h"
+
+1539669458 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\port\port_update.c
+	"include.h"
+
+1542080002 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\projects\standard\ram.ld
+
+1552465846 source:e:\lanxun\chuannengwei\ab532x_y-s5-v1.0\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1543564350 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_audio.c
+	"include.h"
+
+1540612317 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\typedef.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\macro.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\clib.h
+
+1545640465 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\sfr.h
+
+1561532622 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1543565059 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\config_define.h
+
+1543215646 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\xcfg.h
+
+1552480019 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\config_extra.h
+
+1543565126 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_device.h"
+	"api_fs.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1544605190 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_btstack.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_cm.h
+
+1543887905 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_music.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_sd.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_rtc.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_usb.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_device.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_fs.h
+
+1543887905 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_sdadc.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_update.h
+
+1543887905 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_dac.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_sysclk.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_msg.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_saradc.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_fmrx.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_sys.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_pwr.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_key.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_gpio.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_uart.h
+
+1543477102 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\api_karaok.h
+
+1543564780 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+	"func_spdif.h"
+
+1543564851 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_bt.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_bt_hid.h
+
+1545729083 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_clock.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_idle.h
+
+1543564992 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_music.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_usbdev.h
+
+1543564830 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_aux.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_speaker.h
+
+1543565030 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_record.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_record_play.h
+
+1543564965 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_lowpwr.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_fmrx.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_fmam_freq.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_update.h
+
+1543293577 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_spdif.h
+
+1542080002 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_piano.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_aux.h"
+	"bsp_i2c.h"
+	"bsp_karaok.h"
+
+1552523121 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_sys.h
+
+1543564549 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_key.h
+
+1540612317 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_dac.h
+
+1540612317 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540612317 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1543479390 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_param.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_ir.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_audio.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_music.h
+
+1540206716 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_led.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_fs.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_bt.h
+
+1539690406 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_eq.h
+
+1540206716 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_charge.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_piano.h
+
+1542080002 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_id3_tag.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_record.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_aux.h
+
+1539669459 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_i2c.h
+
+1542080002 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_karaok.h
+
+1543481127 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+
+1543042368 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_common.h
+
+1543565174 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+	"ledseg/ledseg_7p3s_HBS7642.h"
+
+1542959986 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_7p7s.h
+
+1545363473 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_7p3s_hbs7642.h
+
+1543565240 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\plugin\multi_lang.h
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_pwm.h
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_linein.h
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_led.h
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_sd.h
+
+1539669458 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_earphone.h
+
+1542080002 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_mic.h
+
+1543492335 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\res.h
+
+1543564368 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_aux.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_ble.c
+	"include.h"
+	"api.h"
+
+1543564384 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1543564389 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540612317 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_cm.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206716 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1540206716 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1543564415 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_fs.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_iap.c
+	"include.h"
+
+1542080002 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_ir.c
+	"include.h"
+
+1543564427 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1552467407 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_key.c
+	"include.h"
+
+1540612317 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_lcd.c
+	"include.h"
+	"bsp_lcd.h"
+
+1540612317 f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_lcd.h
+
+1543564571 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1543479702 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_param.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_piano.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_record.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_spp.c
+	"include.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540612317 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1543564823 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1561532845 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1545376133 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1558485746 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552523186 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1552523212 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1543564983 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1543293577 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1542080002 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1543565001 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1553053538 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565019 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565026 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1543481288 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1552468922 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_7p3s_hbs7642.c
+	"ledseg_common.h"
+	"ledseg_7p3s_HBS7642.h"
+
+1539669459 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1552523229 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1545276200 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\libs\strong_symbol.c
+	"include.h"
+
+1552523129 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\config.c
+	"include.h"
+
+1543385082 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1543385089 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543803072 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543385147 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543388189 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293577 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1561536416 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\main.c
+	"include.h"
+
+1543390866 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1543390876 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543391076 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543390882 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552523238 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543565221 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293577 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1543565235 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\plugin\plugin.c
+	"include.h"
+
+1543565247 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_earphone.c
+	"include.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_ir.c
+	"include.h"
+
+1545802621 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_key.c
+	"include.h"
+
+1540206718 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_led.c
+	"include.h"
+
+1543387077 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1543565261 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_linein.c
+	"include.h"
+
+1543565265 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_mic.c
+	"include.h"
+
+1558485632 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_mute.c
+	"include.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_pwm.c
+	"include.h"
+
+1543565272 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_sd.c
+	"include.h"
+
+1543565277 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_sd1.c
+	"include.h"
+
+1539669458 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\port\port_update.c
+	"include.h"
+
+1542080002 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\projects\standard\ram.ld
+
+1561531482 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_music.c
+	"include.h"
+
+1561531472 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\bsp\bsp_sys.c
+	"include.h"
+
+1561531484 source:f:\work\work2019\yhd\ab532x\y-s5s\ԭʼ\ab532x_y-s5s-v1.0\platform\functions\func.c
+	"include.h"
+
+1543564350 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_audio.c
+	"include.h"
+
+1540612317 f:\soft_sdk\ab532x_clock _v2.1\platform\header\include.h
+	"global.h"
+	"config.h"
+	"io_def.h"
+	"api.h"
+	"func.h"
+	"bsp.h"
+	"gui.h"
+	"plugin.h"
+	"res.h"
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\header\global.h
+	<stddef.h>
+	<stdarg.h>
+	<stdbool.h>
+	<stdlib.h>
+	<string.h>
+	"typedef.h"
+	"macro.h"
+	"clib.h"
+	"sfr.h"
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\header\typedef.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\header\macro.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\header\clib.h
+
+1545640464 f:\soft_sdk\ab532x_clock _v2.1\platform\header\sfr.h
+
+1562212170 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\config.h
+	"config_define.h"
+	"xcfg.h"
+	"config_extra.h"
+
+1543565059 f:\soft_sdk\ab532x_clock _v2.1\platform\header\config_define.h
+
+1543215647 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\xcfg.h
+
+1552480018 f:\soft_sdk\ab532x_clock _v2.1\platform\header\config_extra.h
+
+1543565126 f:\soft_sdk\ab532x_clock _v2.1\platform\header\io_def.h
+	"global.h"
+	"config.h"
+	"sfr.h"
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api.h
+	"api_btstack.h"
+	"api_cm.h"
+	"api_music.h"
+	"api_sd.h"
+	"api_rtc.h"
+	"api_usb.h"
+	"api_device.h"
+	"api_fs.h"
+	"api_sdadc.h"
+	"api_update.h"
+	"api_dac.h"
+	"api_sysclk.h"
+	"api_msg.h"
+	"api_saradc.h"
+	"api_fmrx.h"
+	"api_sys.h"
+	"api_pwr.h"
+	"api_key.h"
+	"api_gpio.h"
+	"api_uart.h"
+	"api_karaok.h"
+
+1544605190 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_btstack.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_cm.h
+
+1543887905 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_music.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_sd.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_rtc.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_usb.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_device.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_fs.h
+
+1543887905 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_sdadc.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_update.h
+
+1543887905 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_dac.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_sysclk.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_msg.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_saradc.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_fmrx.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_sys.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_pwr.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_key.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_gpio.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_uart.h
+
+1543477103 f:\soft_sdk\ab532x_clock _v2.1\platform\libs\api_karaok.h
+
+1543564780 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func.h
+	"func_bt.h"
+	"func_bt_hid.h"
+	"func_clock.h"
+	"func_idle.h"
+	"func_music.h"
+	"func_usbdev.h"
+	"func_aux.h"
+	"func_speaker.h"
+	"sfunc_record.h"
+	"sfunc_record_play.h"
+	"func_lowpwr.h"
+	"func_fmrx.h"
+	"func_fmam_freq.h"
+	"func_update.h"
+	"func_spdif.h"
+
+1543564850 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_bt.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_bt_hid.h
+
+1545729082 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_clock.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_idle.h
+
+1543564993 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_music.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_usbdev.h
+
+1543564830 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_aux.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_speaker.h
+
+1543565031 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_record.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_record_play.h
+
+1543564964 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_lowpwr.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_fmrx.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_fmam_freq.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_update.h
+
+1543293576 f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_spdif.h
+
+1542080003 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp.h
+	"bsp_sys.h"
+	"bsp_key.h"
+	"bsp_dac.h"
+	"bsp_fmrx.h"
+	"bsp_param.h"
+	"bsp_ir.h"
+	"bsp_audio.h"
+	"bsp_music.h"
+	"bsp_led.h"
+	"bsp_fs.h"
+	"bsp_bt.h"
+	"bsp_eq.h"
+	"bsp_charge.h"
+	"bsp_piano.h"
+	"bsp_id3_tag.h"
+	"bsp_record.h"
+	"bsp_aux.h"
+	"bsp_i2c.h"
+	"bsp_karaok.h"
+
+1552523121 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_sys.h
+
+1543564548 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_key.h
+
+1540612316 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_dac.h
+
+1540612316 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_fmrx.h
+	"fmrx/fmrx_external.h"
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\fmrx\fmrx_external.h
+	"qn8035.h"
+
+1540612316 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\fmrx\qn8035.h
+	<include.h>
+
+1543479391 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_param.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_ir.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_audio.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_music.h
+
+1540206717 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_led.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_fs.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_bt.h
+
+1539690406 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_eq.h
+
+1540206717 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_charge.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_piano.h
+
+1542080003 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_id3_tag.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_record.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_aux.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_i2c.h
+
+1542080003 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_karaok.h
+
+1543481126 f:\soft_sdk\ab532x_clock _v2.1\platform\gui\gui.h
+	"ledseg/ledseg_common.h"
+	"ledseg/display_ledseg.h"
+
+1543042368 f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_common.h
+
+1543565174 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\ledseg\display_ledseg.h
+	"ledseg/ledseg_7p7s.h"
+	"ledseg/ledseg_7p3s_HBS7642.h"
+
+1542959986 f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_7p7s.h
+
+1545363472 f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_7p3s_hbs7642.h
+
+1543565240 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\plugin\plugin.h
+	"multi_lang.h"
+	"port_pwm.h"
+	"port_linein.h"
+	"port_led.h"
+	"port_sd.h"
+	"port_earphone.h"
+	"port_mic.h"
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\plugin\multi_lang.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_pwm.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_linein.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_led.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_sd.h
+
+1539669458 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_earphone.h
+
+1542080002 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_mic.h
+
+1543492335 f:\soft_sdk\ab532x_clock _v2.1\projects\standard\res.h
+
+1543564368 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_aux.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_ble.c
+	"include.h"
+	"api.h"
+
+1543564385 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_bt.c
+	"include.h"
+	"api.h"
+
+1543564389 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_charge.c
+	"include.h"
+
+1540612316 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_cm.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_dac.c
+	"include.h"
+	"bsp_dac.h"
+
+1540206717 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_eq.c
+	"include.h"
+	"bsp_eq.h"
+
+1540206717 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_fmrx.c
+	"include.h"
+
+1543564415 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_fs.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_i2c.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_i2s.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_i2s_ta5711.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_i2s_wm8978.c
+	"include.h"
+	"bsp_i2c.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_iap.c
+	"include.h"
+
+1542080003 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_id3_tag.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_ir.c
+	"include.h"
+
+1543564426 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_karaok.c
+	"include.h"
+
+1552467407 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_key.c
+	"include.h"
+
+1540612316 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_lcd.c
+	"include.h"
+	"bsp_lcd.h"
+
+1540612316 f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_lcd.h
+
+1543564571 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_led.c
+	"include.h"
+	"bsp_led.h"
+
+1561531482 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_music.c
+	"include.h"
+
+1543479703 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_param.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_piano.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_record.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_spp.c
+	"include.h"
+
+1562213034 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\bsp_sys.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\fmrx\fmrx_external.c
+	"include.h"
+	"fmrx_external.h"
+
+1540612316 source:f:\soft_sdk\ab532x_clock _v2.1\platform\bsp\fmrx\qn8035.c
+	"include.h"
+	"qn8035.h"
+
+1562213008 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func.c
+	"include.h"
+
+1543564822 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_aux.c
+	"include.h"
+	"func.h"
+	"func_aux.h"
+
+1561532845 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_bt_hid.c
+	"include.h"
+	"func.h"
+	"func_bt_hid.h"
+
+1562225440 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_fmam_freq.c
+	"include.h"
+	"func.h"
+	"func_fmam_freq.h"
+
+1558485746 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552523186 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1552523212 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_lowpwr.c
+	"include.h"
+	"func.h"
+
+1543564983 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1543293576 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_spdif.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_speaker.c
+	"include.h"
+	"func.h"
+	"func_speaker.h"
+
+1542080003 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_update.c
+	"include.h"
+	"func.h"
+	"func_update.h"
+
+1543565000 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\func_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1553053538 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_bt_call.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565019 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_bt_ring.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543565026 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\functions\sfunc_record_play.c
+	"include.h"
+
+1543481288 source:f:\soft_sdk\ab532x_clock _v2.1\platform\gui\gui.c
+	"include.h"
+	"gui.h"
+
+1552468923 source:f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_7p3s_hbs7642.c
+	"ledseg_common.h"
+	"ledseg_7p3s_HBS7642.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_7p7s.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1552523228 source:f:\soft_sdk\ab532x_clock _v2.1\platform\gui\ledseg\ledseg_common.c
+	"include.h"
+	"ledseg_common.h"
+	"ledseg_7p7s.h"
+
+1545276200 source:f:\soft_sdk\ab532x_clock _v2.1\platform\libs\strong_symbol.c
+	"include.h"
+
+1562212981 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\config.c
+	"include.h"
+
+1543385082 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_aux.c
+	"include.h"
+	"func.h"
+
+1543385088 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1543803073 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543385146 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543388188 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293576 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_spdif.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\display_usbdev.c
+	"include.h"
+	"func.h"
+	"func_usbdev.h"
+
+1561536559 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\display\ledseg\display_ledseg.c
+	"include.h"
+	"ledseg/display_ledseg.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\main.c
+	"include.h"
+
+1543390867 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_aux.c
+	"include.h"
+	"func.h"
+
+1543390877 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_bt.c
+	"include.h"
+	"func.h"
+	"func_bt.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_fmam_freq.c
+	"include.h"
+	"func.h"
+
+1543390882 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_fmrx.c
+	"include.h"
+	"func.h"
+	"func_fmrx.h"
+
+1552523238 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_idle.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1543565220 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_music.c
+	"include.h"
+	"func.h"
+	"func_music.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_record.c
+	"include.h"
+	"func.h"
+	"sfunc_record.h"
+
+1543293576 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_spdif.c
+	"include.h"
+	"func.h"
+	"func_spdif.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_speaker.c
+	"include.h"
+	"func.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_usbdev.c
+	"include.h"
+	"func.h"
+	"func_idle.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\plugin\eq_table.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\plugin\multi_lang.c
+	"include.h"
+
+1543565235 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\plugin\plugin.c
+	"include.h"
+
+1543565247 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_earphone.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_ir.c
+	"include.h"
+
+1545802621 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_key.c
+	"include.h"
+
+1540206719 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_led.c
+	"include.h"
+
+1543387076 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_ledseg.c
+	"include.h"
+
+1543565260 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_linein.c
+	"include.h"
+
+1543565265 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_mic.c
+	"include.h"
+
+1558485632 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_mute.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_pwm.c
+	"include.h"
+
+1543565273 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_sd.c
+	"include.h"
+
+1543565277 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_sd1.c
+	"include.h"
+
+1539669458 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\port\port_update.c
+	"include.h"
+
+1562213463 source:f:\soft_sdk\ab532x_clock _v2.1\projects\standard\message\msg_clock.c
+	"include.h"
+	"func.h"
+	"func_clock.h"
+

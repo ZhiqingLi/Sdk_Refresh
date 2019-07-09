@@ -1,8 +1,8 @@
 .PHONY: clean All
 
 All:
-	@echo "----------Building project:[ MXQ - BuildSet ]----------"
-	@cd "MXQ" && make -f  "MXQ.mk"
+	@echo "----------Building project:[ KS_taideng - BuildSet ]----------"
+	@cd "KS_taideng" && make -f  "KS_taideng.mk"
 clean:
-	@echo "----------Cleaning project:[ MXQ - BuildSet ]----------"
-	@cd "MXQ" && make -f  "MXQ.mk" clean
+	@echo "----------Cleaning project:[ KS_taideng - BuildSet ]----------"
+	@cd "KS_taideng" && make -f  "KS_taideng.mk" clean

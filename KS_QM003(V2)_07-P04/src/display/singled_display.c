@@ -25,10 +25,6 @@
 
 //==============================================================================
 static SINGLE_LED_DISP_STRU Led;
-static SINGLE_LED_CB_STRU* Led_Cb;
-static SINGLE_LED_CB_STRU Led_Cb_Once;
-static SINGLE_LED_CB_STRU Led_Cb_Loop;
-static SINGLE_LED_CB_STRU Led_Cb_Keep;
 static TIMER SingleLedScanTime;
 static TIMER SingleLedChangeTime;
 
@@ -83,120 +79,63 @@ static void SingleLedChangeDutyFunc(void)
 	SINGLE_RLED_SETTING(Led.RledDuty);
 }
 
-static void SingleLedCfg(uint8_t Bled, uint8_t Rled, uint8_t StepUp, uint32_t DispTime)
-{
-	memset(&Led, 0x00, sizeof(SINGLE_LED_DISP_STRU));
-
-	Led.BledFlag = Bled;
-	Led.RledFlag = Rled;
-	Led.StepUpDuty = StepUp;
-	Led.MinDispDuty = StepUp%SINGLE_LED_MAX_DUTY;
-	Led.DispChangeTime = DispTime/SINGLE_LED_DISP_SCAN_CNT;
-	Led_Cb->DisplayTimer = DispTime;
-}
-
-static void SingleLedDisplayCfg(void)
-{
-	static SINGLE_LED_CB_STRU Led_Cb_Back;
-	
-	if(Led_Cb_Once.CurDisplayMode)
-	{
-		Led_Cb = &Led_Cb_Once;
-	}
-	else if(Led_Cb_Keep.CurDisplayMode)
-	{
-		Led_Cb = &Led_Cb_Keep;
-	}
-	else
-	{
-		Led_Cb = &Led_Cb_Loop;
-	}
-
-	if(memcmp(&Led_Cb_Back, Led_Cb, sizeof(SINGLE_LED_CB_STRU)) == 0)
-	{
-		return;
-	}
-	Led_Cb_Back = *Led_Cb;
-
-	if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_TLAK_ON))
-	{
-		SingleLedCfg(0x00, 0x00, 100, 0);
-	}
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_CHARGING))
-	{
-		SingleLedCfg(0x00, 0x00, 100, 0);
-	}
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_LOWBATTER))
-	{
-		SingleLedCfg(0x00, 0xAA, 100/SINGLE_LED_DISP_SCAN_CNT, 1500);
-	}
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_POWER_ON))
-	{
-		SingleLedCfg(0xDB, 0x00, 100, 800);
-	}
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_WPSCONNECT))
-	{
-		SingleLedCfg(0x00, 0xAA, 100/SINGLE_LED_DISP_SCAN_CNT, 1500);
-	}
-	/*else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_ALARM_CLOCK))
-	{
-		SingleLedCfg(0x88, 0x22, 100/SINGLE_LED_DISP_SCAN_CNT, 1000);
-		Led.MinDispDuty = SINGLE_LED_MIN_DUTY;
-	}*/
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_BREATHING))
-	{
-		SingleLedCfg(0xAA, 0x00, 100/SINGLE_LED_DISP_SCAN_CNT, 1500);
-	}
-	else if(Led_Cb->CurDisplayMode&(1<<LED_DISPLAY_MODE_NIGHTLAMP))
-	{
-		SingleLedCfg(0xFF, 0x00, 100, 0);
-	}
-	else
-	{
-		SingleLedCfg(0x00, 0x00, 100, 0);
-	}
-}
-
-void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff, LED_DISPLAY_STATUS IsBackup)
+void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 {	
 	if(gDisplayMode == DISP_DEV_SLED)
 	{
-		SINGLE_LED_CB_STRU* Led_P = NULL;
-
-		if(LED_DISPLAY_KEEP == IsBackup)
-		{
-			Led_P = &Led_Cb_Keep;
-		}
-		else if(LED_DISPLAY_LOOP == IsBackup)
-		{
-			Led_P = &Led_Cb_Loop;
-		}
-		else
-		{
-			Led_P = &Led_Cb_Once;
-		}
-
-		if((Led_P->CurDisplayMode&(1<<DisplayMode)) == IsOnOff)
+		if((Led.CurDisplayMode&(1<<DisplayMode)) == IsOnOff)
 		{
 			return;
 		}
 
 		if(IsOnOff)
 		{
-			Led_P->CurDisplayMode |= (1<<DisplayMode);
+			Led.CurDisplayMode |= (1<<DisplayMode);
 		}
 		else
 		{
-			Led_P->CurDisplayMode &= ~(1<<DisplayMode);
+			Led.CurDisplayMode &= ~(1<<DisplayMode);
 		}
-		Led_P->DispStatus = IsBackup;
 
-		SingleLedDisplayCfg();       
+		if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_LOWBATTER)) {
+			Led.RledFlag = 0xAA;
+			Led.StepUpDuty = SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT;
+			Led.DispBitCnt = 0;
+			Led.MinDispDuty = Led.StepUpDuty;
+			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
+			Led.DisplayTime = 1500;
+		}
+		else {
+			Led.RledFlag = 0x00;
+		}
+
+		if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_WPSCONNECT)) {
+			Led.BledFlag = 0xAA;
+			Led.StepUpDuty = SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT;
+			Led.DispBitCnt = 0;
+			Led.MinDispDuty = Led.StepUpDuty;
+			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
+			Led.DisplayTime = 1500;
+		}
+		else if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_NIGHTLAMP)) {
+			Led.BledFlag = 0xFF;
+		}
+		else {
+			Led.BledFlag = 0x00;
+		}
 	}
 }
 
 void LedFlushDisp(void)
 {
+#ifdef FUNC_SLEEP_LEDOFF_EN
+	if (gSys.SleepLedOffFlag) {
+		SINGLE_RLED_SETTING(0);
+		SINGLE_BLED_SETTING(0);
+		return;
+	}
+#endif
+	
 	if(IsTimeOut(&SingleLedChangeTime))
 	{
 		SingleLedChangeDutyFunc();
@@ -207,26 +146,18 @@ void LedFlushDisp(void)
 	{
 		return;
 	}
-	TimeOutSet(&SingleLedScanTime, Led_Cb->DisplayTimer);
+	TimeOutSet(&SingleLedScanTime, Led.DisplayTime);
 	
 	Led.DispBitCnt++;
 	if(Led.DispBitCnt >= 8)
 	{
 		Led.DispBitCnt = 0;
-		if(LED_DISPLAY_ONCE == Led_Cb->DispStatus)
-		{
-			memset(&Led_Cb_Once, 0, sizeof(SINGLE_LED_CB_STRU));
-			SingleLedDisplayCfg();
-		}
 	}
 }
 
 void SingleLedFlushDispInit(void)
 {
-	memset(&Led_Cb, 0, sizeof(SINGLE_LED_CB_STRU));
-	memset(&Led_Cb_Once, 0, sizeof(SINGLE_LED_CB_STRU));
-	memset(&Led_Cb_Loop, 0, sizeof(SINGLE_LED_CB_STRU));
-	memset(&Led_Cb_Keep, 0, sizeof(SINGLE_LED_CB_STRU));
+	memset(&Led, 0, sizeof(SINGLE_LED_DISP_STRU));
 
 	TimeOutSet(&SingleLedChangeTime, 0);
 	TimeOutSet(&SingleLedScanTime, 0);
@@ -236,7 +167,7 @@ void SingleLedFlushDispInit(void)
 
 bool GetSingleLedDispMode(LED_MODE_TYPE Mode)
 {
-	return (Led_Cb->CurDisplayMode&(1<<Mode));
+	return (Led.CurDisplayMode&(1<<Mode));
 }
 #endif
 

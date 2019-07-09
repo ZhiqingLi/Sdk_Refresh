@@ -323,10 +323,10 @@ void SYSCON_CONFIG(void)
 	SYSCON_General_CMD(DISABLE,ENDIS_EMOSC);									//enable or disable EMOSC茂录聦EMOSC=ext crystal
 	SystemCLK_HCLKDIV_PCLKDIV_Config(SYSCLK_IMOSC,HCLK_DIV_1,PCLK_DIV_1);       //system clock set, Hclk div ,Pclk div  set system clock=SystemCLK/Hclk div/Pclk div
 //------------  WDT FUNTION  --------------------------------/
-    SYSCON_IWDCNT_Config(DISABLE_IWDT_SHORT,IWDT_TIME_1S,IWDT_INTW_DIV_1);      //WDT TIME 1s,WDT alarm interrupt time=1s-1s*1/8=0.875S
-    SYSCON_WDT_CMD(DISABLE);                                                   //enable WDT		
-    //SYSCON_IWDCNT_Reload();                                                   //reload WDT
-	//IWDT_Int_Enable();														//Enable WDT INT
+    SYSCON_IWDCNT_Config(DISABLE_IWDT_SHORT,IWDT_TIME_3S,IWDT_INTW_DIV_1);      //WDT TIME 1s,WDT alarm interrupt time=1s-1s*1/8=0.875S
+    SYSCON_WDT_CMD(ENABLE);                                                   //enable WDT		
+    SYSCON_IWDCNT_Reload();                                                   //reload WDT
+	IWDT_Int_Enable();														//Enable WDT INT
 	//SYSCON_WakeUp_Enable();													//Enable WDT wakeup INT
 //------------  LVD FUNTION  --------------------------------/ 
     //SYSCON_LVD_Config(ENABLE_LVDEN,INTDET_LVL_3_0V,RSTDET_LVL_2_2V,ENABLE_LVD_INT);
@@ -390,11 +390,11 @@ void ASM32S003_init(void)
 #endif
 //------------------------------------------------------------/
 //系统滴答定时器初始化，所有软定时器均基于此实现，所以时钟配
-//置完成后必须立即启动，不要修改这个部分
+//置完成后必须立即启动，不要修改这个部�?
 //------------------------------------------------------------/
 	CORET_CONFIG();
 //------------------------------------------------------------/
-//系统开关机初始化及开机检测
+//系统开关机初始化及开机检�?
 //如果不满足开机条件，则程序不会返回，直接进入休眠
 //------------------------------------------------------------/
 #ifdef FUNC_GPIO_POWER_CONTROL_EN
@@ -426,13 +426,13 @@ void ASM32S003_init(void)
 #endif /* FUNC_IIC_EN */
     //UART_CONFIG();                                                //UART initial 
 //------------------------------------------------------------/
-//按键功能初始化
+//按键功能初始�?
 //------------------------------------------------------------/
 #ifdef FUNC_KEY_EN
 	KeyInit();
 #endif
 //------------------------------------------------------------/
-//PWM功能初始化
+//PWM功能初始�?
 //------------------------------------------------------------/
 #ifdef FUNC_PWM_EN
 	GTC_PwmControl_Init();
