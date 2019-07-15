@@ -60,7 +60,7 @@ TIMER BtBatteryDetTim;
    #define LDOIN_VOLTAGE_LOW			2500
    #define LDOIN_VOLTAGE_OFF			2400	//注意：这里是ADC值，Vol=log/4095*3.41,单位V
 #else
-   #define LDOIN_VOLTAGE_FULL			4200
+   #define LDOIN_VOLTAGE_FULL			4150
    #define LDOIN_VOLTAGE_HIGH			3800
    #define LDOIN_VOLTAGE_MID			3600
    #define LDOIN_VOLTAGE_LOW			3400
@@ -694,7 +694,7 @@ void SystemPowerOffControl(void)
 #ifdef FUNC_WATCHDOG_EN
 	WdgDis();				// disable watch dog
 #endif
-	WaitMs(50);
+	WaitMs(100);
 #ifdef FUNC_WIFI_POWER_KEEP_ON
 	WiFiPowerOff();
 #endif

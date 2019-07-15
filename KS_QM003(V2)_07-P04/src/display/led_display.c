@@ -30,6 +30,7 @@ extern uint8_t		EchoDepthStep;
 #include "seg_panel.h"
 #include "seg_led_disp.h"
 #include "aip1629a.h"
+#include "singled_display.h"
 #ifdef FUNC_SEG_LCD_EN
 #include "seg_lcd_disp.h"
 #include "lcd_seg.h" 
@@ -291,6 +292,9 @@ void DispInit(bool IsStandBy)
 		ClearScreen();
 		DispSendMessage(POWERON_INTERVL, DISP_MSG_PWR_ON);
 	}
+#endif
+#ifdef FUNC_SINGLE_LED_EN
+	SingleLedFlushDispInit();
 #endif
 }
 

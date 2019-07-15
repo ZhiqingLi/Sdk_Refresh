@@ -57,24 +57,6 @@
 #define SINGLE_LED_MAX_DUTY				100
 #define SINGLE_LED_MIN_DUTY				0
 
-#define SINGLE_BLED_INIT()				do{\
-										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
-										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
-										}while(0)
-#define SINGLE_RLED_INIT()				do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 100);\
-										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
-										}while(0)
-										
-#define SINGLE_BLED_SETTING(Duty)		do{\
-										PwmConfig(PWM_CH3_A10_B24, 1200, 1200*Duty/100);\
-										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
-										}while(0)
-#define SINGLE_RLED_SETTING(Duty)		do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*(100-Duty)/100);\
-										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
-										}while(0)
-
 //LEDÏÔÊ¾Ä£Ê½
 typedef enum _LED_MODE_TYPE_
 {

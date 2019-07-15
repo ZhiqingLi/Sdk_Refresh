@@ -36,9 +36,9 @@ extern "C" {
 //****************************************************************************************
 //					用户项目定义
 //****************************************************************************************
-//#define FUNC_D5_WiFi_EN 
 #define FUNC_ALEXA_WIFI_EN
 //#define FUNC_POWERON_USB_UPDATA_EN						//开机检查U盘升级
+#define FUNC_SPI_SLAVE_EN   
 
 //****************************************************************************************
 //                 			WiFi 模组控制硬件配置        
@@ -233,34 +233,39 @@ extern "C" {
 //                 			WiFi 电源控制GPIO 配置       
 //****************************************************************************************
 #ifdef FUNC_ALEXA_WIFI_EN
-#define WIFI_POWER_PORT_OUT				GPIO_B_OUT
-#define WIFI_POWER_PORT_BIT				GPIOB23
+	#ifdef FUNC_SPI_SLAVE_EN
+	#define WIFI_POWER_PORT_OUT				GPIO_A_OUT
+	#define WIFI_POWER_PORT_BIT				GPIOA24
+	#else
+	#define WIFI_POWER_PORT_OUT				GPIO_B_OUT
+	#define WIFI_POWER_PORT_BIT				GPIOB23
+	#endif
 #endif
 #ifdef WIFI_POWER_PORT_BIT
-#define WIFI_POWER_PORT_IE				(WIFI_POWER_PORT_OUT + 1)
-#define WIFI_POWER_PORT_OE				(WIFI_POWER_PORT_OUT + 2)
-#define WIFI_POWER_PORT_PU				(WIFI_POWER_PORT_OUT + 5)
-#define WIFI_POWER_PORT_PD				(WIFI_POWER_PORT_OUT + 6)
+	#define WIFI_POWER_PORT_IE				(WIFI_POWER_PORT_OUT + 1)
+	#define WIFI_POWER_PORT_OE				(WIFI_POWER_PORT_OUT + 2)
+	#define WIFI_POWER_PORT_PU				(WIFI_POWER_PORT_OUT + 5)
+	#define WIFI_POWER_PORT_PD				(WIFI_POWER_PORT_OUT + 6)
 
-#define WiFiPowerOn()				do{\
-										GpioSetRegOneBit(WIFI_POWER_PORT_PU, WIFI_POWER_PORT_BIT);\
-										GpioClrRegOneBit(WIFI_POWER_PORT_PD, WIFI_POWER_PORT_BIT);\
-										GpioClrRegOneBit(WIFI_POWER_PORT_IE, WIFI_POWER_PORT_BIT);\
-										GpioSetRegOneBit(WIFI_POWER_PORT_OE, WIFI_POWER_PORT_BIT);\
-										GpioSetRegOneBit(WIFI_POWER_PORT_OUT, WIFI_POWER_PORT_BIT);\
-										APP_DBG("WiFi Power On.................................\n");\
-									}while(0)
+	#define WiFiPowerOn()					do{\
+											GpioSetRegOneBit(WIFI_POWER_PORT_PU, WIFI_POWER_PORT_BIT);\
+											GpioClrRegOneBit(WIFI_POWER_PORT_PD, WIFI_POWER_PORT_BIT);\
+											GpioClrRegOneBit(WIFI_POWER_PORT_IE, WIFI_POWER_PORT_BIT);\
+											GpioSetRegOneBit(WIFI_POWER_PORT_OE, WIFI_POWER_PORT_BIT);\
+											GpioSetRegOneBit(WIFI_POWER_PORT_OUT, WIFI_POWER_PORT_BIT);\
+											APP_DBG("WiFi Power On.................................\n");\
+											}while(0)
 									
-#define WiFiPowerOff()			do{\
-										GpioSetRegOneBit(WIFI_POWER_PORT_PU, WIFI_POWER_PORT_BIT);\
-										GpioClrRegOneBit(WIFI_POWER_PORT_PD, WIFI_POWER_PORT_BIT);\
-										GpioClrRegOneBit(WIFI_POWER_PORT_IE, WIFI_POWER_PORT_BIT);\
-										GpioSetRegOneBit(WIFI_POWER_PORT_OE, WIFI_POWER_PORT_BIT);\
-										GpioClrRegOneBit(WIFI_POWER_PORT_OUT, WIFI_POWER_PORT_BIT);\
-									}while(0)
+	#define WiFiPowerOff()					do{\
+											GpioSetRegOneBit(WIFI_POWER_PORT_PU, WIFI_POWER_PORT_BIT);\
+											GpioClrRegOneBit(WIFI_POWER_PORT_PD, WIFI_POWER_PORT_BIT);\
+											GpioClrRegOneBit(WIFI_POWER_PORT_IE, WIFI_POWER_PORT_BIT);\
+											GpioSetRegOneBit(WIFI_POWER_PORT_OE, WIFI_POWER_PORT_BIT);\
+											GpioClrRegOneBit(WIFI_POWER_PORT_OUT, WIFI_POWER_PORT_BIT);\
+											}while(0)
 #else
-#define WiFiPowerOn()
-#define WiFiPowerOff()
+	#define WiFiPowerOn()
+	#define WiFiPowerOff()
 #endif
 
 //****************************************************************************************
@@ -758,7 +763,7 @@ extern "C" {
 //****************************************************************************************
 //                 earphone模式配置 
 //****************************************************************************************
-	#define FUNC_EARPHONE_EN   					// Linein
+//	#define FUNC_EARPHONE_EN   					// Linein
 	#ifdef FUNC_EARPHONE_EN
 		#define EARPHONE_DETECT_PORT_IN		GPIO_A_IN
 		#define EARPHONE_DETECT_PORT_OE		GPIO_A_OE
@@ -767,6 +772,25 @@ extern "C" {
 		#define EARPHONE_DETECT_PORT_PD		GPIO_A_PD
 		#define EARPHONE_DETECT_PORT_DS		GPIO_A_DS
 		#define EARPHONE_DETECT_BIT_MASK	GPIOA24
+	#endif
+
+//****************************************************************************************
+//                 SPI 从机控制配置 
+//****************************************************************************************					
+	#ifdef FUNC_SPI_SLAVE_EN
+		#include "spi_slave.h"
+		
+		#define SPI_SLAVE_PORT_SEL			(3)
+		#define SPI_SLAVE_CS_PORT_EN
+		
+		#ifdef SPI_SLAVE_CS_PORT_EN
+			#define SPI_SLAVE_CS_PORT_OE	GPIO_B_OE
+			#define SPI_SLAVE_CS_PORT_IE	GPIO_B_IE
+			#define SPI_SLAVE_CS_PORT_PU	GPIO_B_PU
+			#define SPI_SLAVE_CS_PORT_PD	GPIO_B_PD
+			#define SPI_SLAVE_CS_PORT_OUT	GPIO_B_OUT
+			#define SPI_SLAVE_CS_BIT_MASK	GPIOB26
+		#endif
 	#endif
 
 //****************************************************************************************
@@ -797,6 +821,25 @@ extern "C" {
 		#define AMP_MUTE_PORT_PU				(AMP_MUTE_PORT_OUT + 5)
 		#define AMP_MUTE_PORT_PD				(AMP_MUTE_PORT_OUT + 6)
 
+		
+		#ifdef FUNC_SPI_SLAVE_EN
+		
+		#define GpioAmpMuteEnable() 			do{\
+												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
+												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												}while(0)
+		
+		#define GpioAmpMuteDisable()			do{\
+												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
+												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
+												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												}while(0)
+		#else
 		#define GpioAmpMuteEnable()				do{\
 												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
@@ -812,6 +855,7 @@ extern "C" {
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
+		#endif
 	#else
 	
 		#define GpioAmpMuteEnable()	
@@ -1151,7 +1195,11 @@ extern "C" {
 
 	#define FUNC_ADC_ADJUST_VOLUME_EN               		//打开该宏定义，支持ADC检测调整音量
 	#ifdef FUNC_ADC_ADJUST_VOLUME_EN
+	#ifdef FUNC_SPI_SLAVE_EN
+		#define ADC_ADJUST_VOLUME_PORT	  ADC_CHANNEL_B23 
+	#else
 		#define ADC_ADJUST_VOLUME_PORT    ADC_CHANNEL_B22 
+	#endif
 	#endif
 
 //	#define ADC_POWER_MONITOR_EN               				//打开该宏定义，则电源检测在ADC检测电池电压

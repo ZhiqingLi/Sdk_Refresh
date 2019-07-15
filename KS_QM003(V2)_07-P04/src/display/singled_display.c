@@ -22,6 +22,46 @@
 #include "aip1629a.h"
 #include "singled_display.h"
 
+#ifdef FUNC_SPI_SLAVE_EN
+#define SINGLE_BLED_INIT()				do{\
+										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
+										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
+										}while(0)
+#define SINGLE_RLED_INIT()				do{\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 0);\
+										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
+										}while(0)
+										
+#define SINGLE_BLED_SETTING(Duty)		do{\
+										PwmConfig(PWM_CH3_A10_B24, 1200, 1200*Duty/100);\
+										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
+										}while(0)
+#define SINGLE_RLED_SETTING(Duty)		do{\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*Duty/100);\
+										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
+										}while(0)
+#else
+#define SINGLE_BLED_INIT()				do{\
+										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
+										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
+										}while(0)
+#define SINGLE_RLED_INIT()				do{\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 100);\
+										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
+										}while(0)
+										
+#define SINGLE_BLED_SETTING(Duty)		do{\
+										PwmConfig(PWM_CH3_A10_B24, 1200, 1200*Duty/100);\
+										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
+										}while(0)
+#define SINGLE_RLED_SETTING(Duty)		do{\
+										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*(100-Duty)/100);\
+										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
+										}while(0)
+
+#endif
+
+
 
 //==============================================================================
 static SINGLE_LED_DISP_STRU Led;
@@ -32,48 +72,36 @@ static void SingleLedChangeDutyFunc(void)
 {
 	if(Led.BledFlag&(1<<Led.DispBitCnt))
 	{
-		if((SINGLE_LED_MAX_DUTY-Led.BledDuty) >= Led.StepUpDuty)
-		{
-			Led.BledDuty += Led.StepUpDuty;
-		}
-		else if(SINGLE_LED_MAX_DUTY > Led.StepUpDuty)
+		Led.BledDuty += Led.StepUpDuty;
+	
+		if(SINGLE_LED_MAX_DUTY <= Led.BledDuty)
 		{
 			Led.BledDuty = SINGLE_LED_MAX_DUTY;
 		}
 	}
 	else if(!(Led.BledFlag&(1<<Led.DispBitCnt)))
 	{
-		if((Led.BledDuty-Led.MinDispDuty) >= Led.StepUpDuty)
+		if(Led.BledDuty >= Led.StepUpDuty)
 		{
 			Led.BledDuty -= Led.StepUpDuty;
-		}
-		else if(Led.BledDuty > Led.MinDispDuty)
-		{
-			Led.BledDuty = Led.MinDispDuty;
 		}
 	}
 	SINGLE_BLED_SETTING(Led.BledDuty);
 
 	if(Led.RledFlag&(1<<Led.DispBitCnt))
 	{
-		if((SINGLE_LED_MAX_DUTY-Led.RledDuty) >= Led.StepUpDuty)
-		{
-			Led.RledDuty += Led.StepUpDuty;
-		}
-		else if(SINGLE_LED_MAX_DUTY > Led.StepUpDuty)
+		Led.RledDuty += Led.StepUpDuty;
+		
+		if(SINGLE_LED_MAX_DUTY <= Led.StepUpDuty)
 		{
 			Led.RledDuty = SINGLE_LED_MAX_DUTY;
 		}
 	}
 	else if(!(Led.RledFlag&(1<<Led.DispBitCnt)))
 	{
-		if((Led.RledDuty-Led.MinDispDuty) >= Led.StepUpDuty)
+		if(Led.RledDuty >= Led.StepUpDuty)
 		{
 			Led.RledDuty -= Led.StepUpDuty;
-		}
-		else if(Led.RledDuty > Led.MinDispDuty)
-		{
-			Led.RledDuty = Led.MinDispDuty;
 		}
 	}
 	SINGLE_RLED_SETTING(Led.RledDuty);
@@ -119,6 +147,11 @@ void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 		}
 		else if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_NIGHTLAMP)) {
 			Led.BledFlag = 0xFF;
+			Led.StepUpDuty = SINGLE_LED_MAX_DUTY;
+			Led.DispBitCnt = 0;
+			Led.MinDispDuty = Led.StepUpDuty;
+			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
+			Led.DisplayTime = 1500;
 		}
 		else {
 			Led.BledFlag = 0x00;

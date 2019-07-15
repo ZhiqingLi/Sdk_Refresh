@@ -114,12 +114,14 @@ void GuiTaskEntrance(void)
 #endif
 	)
 	{
+	#ifndef FUNC_SPI_SLAVE_EN
 		if (gSys.IsWiFiRepeatPowerOn) {
 			SoundRemind(repeat_poweron_remind[GetRandNum(6)-1]);
 		}
 		else {
 			SoundRemind(frist_poweron_remind[GetRandNum(3)-1]);
 		}
+	#endif
 	}
 
 

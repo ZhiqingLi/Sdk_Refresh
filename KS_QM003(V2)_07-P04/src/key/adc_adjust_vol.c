@@ -47,7 +47,7 @@ uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 // return: 0---no key, else---key msg
 void AdcAdjustVolScan(void)
 {
-	static uint8_t	CurVolumeIndex = MAX_VOLUME;
+	static uint8_t	CurVolumeIndex = 0;
 	static uint16_t PrevAverageValue = 0;
 
 	if(AdcAdjustSampleCnt > 0)
@@ -67,8 +67,10 @@ void AdcAdjustVolScan(void)
 		{
 			CurVolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
 			gSys.Volume = CurVolumeIndex;
-			SetSysVol();
-			McuSyncWiFiVolume(gSys.Volume);
+			if (WIFI_PLAY_KAISHU_RADIO_SLEEP != gWiFi.KaiShuRadio) {
+				SetSysVol();
+				McuSyncWiFiVolume(gSys.Volume);
+			}
 			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", PrevAverageValue, AdcAdjustLevelAverage, gSys.Volume);
 			PrevAverageValue = AdcAdjustLevelAverage;
 		}

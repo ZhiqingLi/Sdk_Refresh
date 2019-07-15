@@ -717,9 +717,9 @@ bool WiFiKaiShuChildLockStateGet(void)
 void WiFiKaiShuVolumeMaxSet(  uint8_t       Vol)
 {
 	gWiFi.KaiShuVolumeMax = Vol;
-	if(gWiFi.KaiShuVolumeMax < ((100 / MAX_VOLUME) * gSys.Volume))
+	if(gWiFi.KaiShuVolumeMax < ((gSys.Volume*100)/MAX_VOLUME))
 	{
-		gSys.Volume = (MAX_VOLUME * gWiFi.KaiShuVolumeMax) / 100;
+		gSys.Volume = (gWiFi.KaiShuVolumeMax/(100/MAX_VOLUME));
 		SetSysVol();
 		Mcu_SendCmdToWiFi(MCU_CUR_VOL, &gWiFi.KaiShuVolumeMax);
 	}
@@ -767,6 +767,7 @@ uint8_t WiFiKaiShuSleepModeDeal(bool IsEnter, bool IsPushOut)
 			MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
 			MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
 			APP_DBG("Kai shu sleep mode volume down!!! %d;\n", TempVol);
+			McuSyncWiFiVolume(TempVol);
 		}
 		else {
 			Mcu_SendCmdToWiFi(MCU_SLP_PWR, NULL);
@@ -1041,14 +1042,7 @@ void WiFiGetMcuVolume(void)
 {
 	uint8_t Temp;
 	
-	if(gSys.Volume >= MAX_VOLUME)
-	{
-		Temp = 100;						
-	}
-	else
-	{
-		Temp = gSys.Volume * (100 / MAX_VOLUME);
-	}
+	Temp = ((gSys.Volume*100)/MAX_VOLUME);
 	Mcu_SendCmdToWiFi(MCU_CUR_VOL, &Temp);
 }
 
@@ -1079,7 +1073,7 @@ void WiFiMuteStateSet(uint8_t State)
 		gSys.MuteFlag = State;
 		
 #ifdef FUNC_WIFI_TALK_QUICK_OPEN_MIC_EN	
-		//DacVolumeSet(DAC_DIGITAL_VOL, DAC_DIGITAL_VOL);
+		DacVolumeSet(DAC_DIGITAL_VOL, DAC_DIGITAL_VOL);
 #endif
 	}
 }
@@ -1282,7 +1276,7 @@ void McuSyncWiFiVolume(uint8_t Vol)
 	}
 	else
 	{
-		TempVol = Vol * (100 / MAX_VOLUME);
+		TempVol = ((Vol*100)/MAX_VOLUME);
 	}
 
 	if(TempVol > WiFiKaiShuVolumeMaxGet())
@@ -2681,7 +2675,7 @@ uint32_t WiFiControl(void)
 		//凯叔哄睡模式音量调整。
 		if(IsTimeOut(&KaiShuSleepTimer) && (WIFI_PLAY_KAISHU_RADIO_SLEEP == gWiFi.KaiShuRadio))
 		{
-			SetTimerVal = 3600000/WiFiKaiShuSleepModeDeal(FALSE,FALSE);
+			SetTimerVal = 1800000/WiFiKaiShuSleepModeDeal(FALSE,FALSE);
 			TimeOutSet(&KaiShuSleepTimer, SetTimerVal);
 		}
 

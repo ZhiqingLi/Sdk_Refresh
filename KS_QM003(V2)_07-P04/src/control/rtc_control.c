@@ -495,6 +495,15 @@ void RtcTimerCB(uint32_t unused)
 		DisplayLunarDate();
 #endif
 		APP_DBG("\n");
+		
+#ifdef FUNC_SPI_SLAVE_EN
+		if (gSys.IsWiFiRepeatPowerOn) {
+			Spi_SendCmdToSlave(MAS_SET_RBT);
+		}
+		else {
+			Spi_SendCmdToSlave(MAS_CLR_RBT);
+		}
+#endif
 	}
 	else if((RTC_STATE_SET_TIME == sRtcControl->State) && (sRtcControl->SubState != RTC_SET_IDLE))
 	{

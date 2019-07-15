@@ -139,18 +139,10 @@ int32_t main(void)
 #ifdef FUNC_AMP_MUTE_EN
 	GpioAmpMuteEnable();
 #endif
-
-#ifdef FUNC_GPIO_POWER_ON_EN
-	SysPowerOnControl(TRUE);
-#endif
 	
 #if defined(FUNC_ALEXA_PWM_LED_EN)
 	LED_ALL_MODE_OFF();
 	LED_ALL_POWER_OFF();
-#endif
-
-#ifdef FUNC_SINGLE_LED_EN
-	SingleLedFlushDispInit();
 #endif
 
 #ifdef FUNC_WIFI_POWER_KEEP_ON
@@ -244,6 +236,9 @@ int32_t main(void)
 	//FlashLock(FLASH_LOCK_RANGE_HALF);		// if need, Lock range setting see function description
 	
 	SysVarInit();                  //全局变量初始化，注意在BP_LoadInfo之后调用
+#ifdef FUNC_SPI_SLAVE_EN
+	Spi_SlaveInit();
+#endif
 
 #if (defined(FUNC_ADC_KEY_EN) || defined(FUNC_IR_KEY_EN) || defined(FUNC_CODING_KEY_EN) || defined(FUNC_IIC_KEY_EN))
 	KeyInit();
@@ -387,6 +382,10 @@ int32_t main(void)
 
 #ifdef FUNC_AMP_POWER_EN
 	AmpPowerEnable();
+#endif
+
+#ifdef FUNC_GPIO_POWER_ON_EN
+	SysPowerOnControl(TRUE);
 #endif
 
 	while(1)

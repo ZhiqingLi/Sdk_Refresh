@@ -1772,8 +1772,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 
 		case AXX_BURNING:
 			WiFiWorkStateSet(WIFI_STATUS_INITING);
-			gSys.Volume = DEFAULT_VOLUME;
-			AudioSysInfoSetBreakPoint();
+
 			WiFiFirmwareUpgradeStateSet(1);
 			if(gSys.CurModuleID != MODULE_ID_WIFI)
 			{
@@ -1826,7 +1825,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 				WiFiStationStateSet(WIFI_STATUS_STATION_DISCONNECTED);
 				if(gWiFi.WPSState == WIFI_STATUS_WPS_SCANNING)
 				{
-					Mcu_SendCmdToWiFi(MCU_WIF_EPS, NULL);
+					//Mcu_SendCmdToWiFi(MCU_WIF_EPS, NULL);
 					WiFiWpsStateSet(WIFI_STATUS_WPS_SCAN_STOP);					
 				}
 			}			

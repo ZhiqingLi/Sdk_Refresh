@@ -42,10 +42,11 @@
 //     ---|        |--------|		 |-------------------
 //B       |        |        |		 |
 //        |--------|        |--------|
-
+#define		CODING_KEY_JITTER_TIME		100
 
 static uint8_t		ClockWiseCnt;
 static uint8_t		CounterClockWiseCnt;
+static TIMER		CodingKeyJitterTimer;
 
 // Initialize coding key scan (GPIO) operation.
 // Config interrupt at negative edge of signal-A
@@ -66,6 +67,7 @@ void CodingKeyInit(void)
 	GpioIntEn(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT, GPIO_NEG_EDGE_TRIGGER);
 	ClockWiseCnt = 0;
 	CounterClockWiseCnt = 0;
+	TimeOutSet(&CodingKeyJitterTimer, 0);
 
 	//enable gpio irqc
 	NVIC_EnableIRQ(GPIO_IRQn);
@@ -83,6 +85,7 @@ __attribute__((section(".driver.isr"))) void GpioInterrupt(void)
 			//counterclockwise rotation
 			CounterClockWiseCnt++;
 		}
+		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
 	}
 
 	if(GpioIntFlagGet(CODING_KEY_B_PORT_INT) == CODING_KEY_B_BIT)
@@ -93,6 +96,7 @@ __attribute__((section(".driver.isr"))) void GpioInterrupt(void)
 			//clockwise rotation
 			ClockWiseCnt++;
 		}
+		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
 	}
 }
 
@@ -101,16 +105,16 @@ uint16_t CodingKeyScan(void)
 {
 	uint16_t Msg = MSG_NONE;
 
-	if(ClockWiseCnt)
-	{
-		Msg = MSG_WIFI_PREV_CH;
+	if (IsTimeOut(&CodingKeyJitterTimer)) {
+		if(ClockWiseCnt) {
+			Msg = MSG_WIFI_PREV_CH;
+		}
+		else if(CounterClockWiseCnt) {
+			Msg = MSG_WIFI_NEXT_CH;
+		}
+		ClockWiseCnt = 0;
+		CounterClockWiseCnt = 0;
 	}
-	else if(CounterClockWiseCnt)
-	{
-		Msg = MSG_WIFI_NEXT_CH;
-	}
-	ClockWiseCnt = 0;
-	CounterClockWiseCnt = 0;
 
 	return Msg;
 }
