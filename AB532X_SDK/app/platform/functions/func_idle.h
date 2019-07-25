@@ -11,16 +11,13 @@
 #define GUI_WORK_TIMER					2000				
 #define GUI_ERRO_TIMER					500
 #define RGB_SWAP_TIMER					3000			//全彩颜色切换时间
-#define RGB_STOP_TIMER					5000			//全彩颜色停留时间
+#define RGB_STOP_TIMER					7000			//全彩颜色停留时间
 
 enum {
 	COLOUR_IDLE = 0,
-	COLOUR_RED,
 	COLOUR_ORANGE,
 	COLOUR_YELLOW,
-	COLOUR_GREEN,
 	COLOUR_CYAN,
-	COLOUR_BLUE,
 	COLOUR_PURPLE,
 	COLOUR_WHITE,
 	COLOUR_MAX,
@@ -41,6 +38,8 @@ extern func_idle_t		f_idle;
 
 void func_idle_message(u16 msg);
 void func_water_pump_process(bool work);
+uint8_t func_idle_work_state_get(void);
+
 
 #if (GUI_SELECT != GUI_NO)
 void func_idle_display(void);

@@ -58,7 +58,7 @@ void Spi_SlaveInit(void)
 	SPI_SLAVE_SPIS_INIT();
 	GpioSpimIoConfig(SPI_SLAVE_PORT_SEL);
 	SpiMasterInit(0, SPIM_CLK_DIV_325K);
-	Spi_SendCmdToSlave(MAS_BOT_DON);
+	//Spi_SendCmdToSlave(MAS_BOT_DON);
 	APP_DBG("Spi slave device init;\n");
 }
 
@@ -69,8 +69,8 @@ static bool Spi_SlaveWaitSync(void)
 	
 	memset(&recv_data, 0x00, sizeof(recv_data));
 	SPI_SLAVE_SPIS_ENABLE();
+	WaitMs(2);
 	for (recv_index=0; recv_index<12; recv_index++) {
-		WaitMs(10);
 		recv_data[recv_index] = SpiMasterRecvByte();
 	}
 	SPI_SLAVE_SPIS_DISABLE();
@@ -88,11 +88,11 @@ static void Spi_SlaveSendData(uint8_t *data, uint8_t len)
 	uint8_t send_index;
 	TIMER	SpiWaitTimer;
 	
-	TimeOutSet(&SpiWaitTimer, 1000);
+	TimeOutSet(&SpiWaitTimer, 20);
 	do {
 		SPI_SLAVE_SPIS_ENABLE();
+		WaitMs(2);
 		for (send_index=0; send_index<len; send_index++) {
-			WaitMs(10);
 			SpiMasterSendByte(*data);
 			data++;
 		}

@@ -854,45 +854,6 @@ bool is_dcin_status(void)
 	return !(0 == (GPIOE&BIT(6)));
 }
 
-void remind_power_on(void){
-	if (!is_dcin_status()) {
-		uint8_t remind_id;
-		
-		if (!param_exit_state_read()) {
-			remind_id = get_random(3);
-			if (0 == remind_id){
-				mp3_res_play(RES_BUF_POWERON_1_MP3, RES_LEN_POWERON_1_MP3);
-			}
-			else if (1 == remind_id) {
-				mp3_res_play(RES_BUF_POWERON_2_MP3, RES_LEN_POWERON_2_MP3);
-			}
-			else {
-				mp3_res_play(RES_BUF_POWERON_3_MP3, RES_LEN_POWERON_3_MP3);
-			}
-		}
-		else {
-			remind_id = get_random(6);
-			if (0 == remind_id){
-				mp3_res_play(RES_BUF_POWER_REBOOT_1_MP3, RES_LEN_POWER_REBOOT_1_MP3);
-			}
-			else if (1 == remind_id) {
-				mp3_res_play(RES_BUF_POWER_REBOOT_2_MP3, RES_LEN_POWER_REBOOT_2_MP3);
-			}
-			else if (2 == remind_id) {
-				mp3_res_play(RES_BUF_POWER_REBOOT_3_MP3, RES_LEN_POWER_REBOOT_3_MP3);
-			}
-			else if (3 == remind_id) {
-				mp3_res_play(RES_BUF_POWER_REBOOT_4_MP3, RES_LEN_POWER_REBOOT_4_MP3);
-			}
-			else if (4 == remind_id) {
-				mp3_res_play(RES_BUF_POWER_REBOOT_5_MP3, RES_LEN_POWER_REBOOT_5_MP3);
-			}
-			else {
-				mp3_res_play(RES_BUF_POWER_REBOOT_6_MP3, RES_LEN_POWER_REBOOT_6_MP3);
-			}
-		}
-	}
-}
 #endif
 
 AT(.text.bsp.sys.init)
@@ -969,8 +930,9 @@ void bsp_sys_init(void)
 #endif
 
 #if WARNING_POWER_ON
-    //mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);
-    remind_power_on();
+	if (!is_dcin_status() && !get_extern_on_state()) {
+		mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);
+	}
 #endif // WARNING_POWER_ON
 
     if (PWRON_ENTER_BTMODE_EN) {

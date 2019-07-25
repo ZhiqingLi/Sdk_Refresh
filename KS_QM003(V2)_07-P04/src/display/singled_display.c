@@ -161,14 +161,16 @@ void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 
 void LedFlushDisp(void)
 {
+	if ((gSys.CurModuleID >= MODULE_ID_END)
 #ifdef FUNC_SLEEP_LEDOFF_EN
-	if (gSys.SleepLedOffFlag) {
+	|| (gSys.SleepLedOffFlag) 
+#endif
+	) {
 		SINGLE_RLED_SETTING(0);
 		SINGLE_BLED_SETTING(0);
 		return;
 	}
-#endif
-	
+
 	if(IsTimeOut(&SingleLedChangeTime))
 	{
 		SingleLedChangeDutyFunc();

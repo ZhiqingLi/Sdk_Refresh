@@ -1691,7 +1691,7 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 	
 
 	CmdBuf[Len] = '\0';
-	APP_DBG("Send gWiFiCmd is:%s\n", CmdBuf);
+	APP_DBG("Send WiFi Cmd is:%s\n", CmdBuf);
 	
 #ifdef WIFI_SELECT_BUART_COM
 	BuartSend(CmdBuf, Len);
@@ -1724,8 +1724,6 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			
 		case AXX_MCU_RDY:
 			WiFiWorkStateSet(WIFI_STATUS_INIT_END);
-			//通知凯叔app，小夜灯在开启状态
-			Mcu_SendCmdToWiFi(MCU_LGT__ON, NULL);
 			//Mcu_SendCmdToWiFi(MCU_MMC_GET, NULL);
 			break;
 
@@ -1761,7 +1759,16 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 
 			WiFiFactoryStateSet(1);
 			WiFiMicOn();
-			BP_InfoInit();
+#ifdef FUNC_BREAKPOINT_EN
+		{
+			BP_SYS_INFO *pBpSysInfo;
+
+			gSys.IsWiFiRepeatPowerOn = FALSE;
+			pBpSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+			BP_SET_ELEMENT(pBpSysInfo->IsWiFiRepeatPowerOn, gSys.IsWiFiRepeatPowerOn);
+			BP_SaveInfo(BP_SAVE2NVM_FLASH);
+		}
+#endif
 			if(gSys.CurModuleID != MODULE_ID_WIFI)
 			{
 				gSys.NextModuleID = MODULE_ID_WIFI;
@@ -2117,11 +2124,11 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_SLP__ON:
-			WiFiKaiShuSleepModeDeal(TRUE, FALSE);
+			WiFiKaiShuSleepModeSet(TRUE);
 			break;
 
 		case AXX_SLP_OFF:
-			WiFiKaiShuSleepModeDeal(FALSE, TRUE);
+			WiFiKaiShuSleepModeSet(FALSE);
 			break;
 			
 #ifdef	FUNC_WIFI_UART_UPGRADE
@@ -2534,7 +2541,7 @@ void WiFi_CmdProcess(void)
 	gSys.SleepLedOffCnt = FALSE;
 	gSys.SleepLedOffFlag = FALSE;
 #endif
-	APP_DBG("Rcv gWiFiCmd is:%s\n", gWiFiCmd);
+	APP_DBG("Recv WiFi Cmd is:%s\n", gWiFiCmd);
 
 	if(WiFiDataRcvStartFlag != TRUE)
 	{

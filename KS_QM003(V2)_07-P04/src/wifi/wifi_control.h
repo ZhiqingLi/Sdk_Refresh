@@ -146,6 +146,7 @@ typedef struct _WIFI_WORK_STATE_
 	uint8_t  KaiShuVolumeMax;		//凯叔音量限制;
 	bool	 KaiShuChildLock;		//凯叔儿童锁状态。
 	bool	 KaiShuLightState;		//凯叔小夜灯状态。
+	bool	 KaiShuSleepState;		//凯叔睡眠状态。
 	WIFI_AVS_STATUS MicState; 		//MIC状态（000 空闲 001 录音中  002 语义识别中  003 语音回复中 004 MIC错误 ）
 	bool     VisInfState; 			//WiFi消息通知状态
 	bool	 WiFiNotifyChangeModeFlag;
@@ -190,7 +191,8 @@ const static WIFI_WORK_STATE InitgWiFi =
 	WIFI_PLAY_KAISHU_RADIO_DEFAULT,   //默认凯叔电台
 	100,							  //凯叔默认限制音量。
 	FALSE,							  //凯叔儿童锁
-	TRUE,                             //凯叔小夜灯状态
+	FALSE,							  //凯叔小夜灯状态
+	FALSE,							  //凯叔睡眠状态。
 	WIFI_AVS_STATUS_IDLE,             //MIC状态（000 空闲 001 录音中  002 语义识别中  003 语音回复中 004 MIC错误 ）
 	0,                                //WiFi消息通知状态
 	0,
@@ -278,8 +280,10 @@ extern void WiFiKaiShuChildLockStateSet(bool State);
 extern bool WiFiKaiShuChildLockStateGet(void);
 extern void WiFiKaiShuVolumeMaxSet(uint8_t Vol);
 extern uint8_t WiFiKaiShuVolumeMaxGet(void);
-extern void WiFiKaiShuRadioSet(  uint8_t val);
-extern uint8_t WiFiKaiShuSleepModeDeal(bool IsEnter, bool IsPushOut);
+extern void WiFiKaiShuRadioSet(uint8_t val);
+extern void WiFiKaiShuSleepModeSet(bool State);
+extern bool WiFiKaiShuSleepModeGet(void);
+
 #ifdef __cplusplus
 }
 #endif//__cplusplus

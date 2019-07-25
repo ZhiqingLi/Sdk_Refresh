@@ -17,6 +17,10 @@ extern "C" {
 void KeyInit(void);
 void KeyScan(void);
 
+#ifdef FUNC_GPIO_KEY_EN 
+extern void InterruptGpioKeyScan(void);
+#endif
+
 #ifdef FUNC_KEY_CPH_EN
 #ifdef FUNC_ADC_KEY_EN
 extern uint16_t GetAdcKeyState(void);
@@ -43,7 +47,6 @@ extern uint8_t GetI2cKeyIndex(void);
 #ifdef FUNC_GPIO_KEY_EN 
 extern uint8_t GetGpioKeyIndex(void);
 #endif
-
 #endif
 
 #ifdef __cplusplus

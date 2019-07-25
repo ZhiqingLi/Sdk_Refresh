@@ -60,18 +60,20 @@ typedef enum _GPIO_KEY_STATE
 
 TIMER			GpioKeyWaitTimer;
 GPIO_KEY_STATE	GpioKeyState;
+uint16_t		GpioKeyMsg;
 										
 static const uint16_t GpioKeyEvent[2][5] = 
 {
 //	PDS(按键开始)				SPR(短按松开)			CPS(长按开始)			CPH(长按保持)			  	CPR(长按松开)
-	{MSG_NONE,				MSG_WIFI_PREV_CH,	MSG_NONE,			 MSG_NONE,			  	MSG_NONE	},	//SW1
-	{MSG_NONE,				MSG_WIFI_NEXT_CH,   MSG_NONE,            MSG_NONE,			  	MSG_NONE  	},	//SW5
+	{MSG_NONE,				MSG_WIFI_PREV_CH,	MSG_WIFI_PREV_CH,	 MSG_NONE,			  	MSG_NONE	},	//SW1
+	{MSG_NONE,				MSG_WIFI_NEXT_CH,   MSG_WIFI_NEXT_CH,    MSG_NONE,			  	MSG_NONE  	},	//SW5
 };	
 
 // Initialize POWER_KEY scan operation.
 void GpioKeyScanInit(void)
 {
 	GpioKeyState = GPIO_KEY_STATE_IDLE;
+	GpioKeyMsg = MSG_NONE;
 #ifdef GPIO_KEY1_PORT_BIT
 	GpioClrRegOneBit(GPIO_KEY1_PORT_OE, GPIO_KEY1_PORT_BIT);
 	GpioClrRegOneBit(GPIO_KEY1_PORT_PU, GPIO_KEY1_PORT_BIT);
@@ -103,7 +105,7 @@ uint8_t GetGpioKeyIndex(void)
 	return 0xff;
 }
 
-uint16_t GpioKeyScan(void)							
+void InterruptGpioKeyScan(void)							
 {
 	static uint8_t PrevGpioKeyIndex = 0xff;
 	uint8_t GpioKeyIndex = 0xff;
@@ -116,7 +118,6 @@ uint16_t GpioKeyScan(void)
 			if(GpioKeyIndex == 0xff)
 			{
 				PrevGpioKeyIndex = 0xff;
-				return MSG_NONE;
 			}
 			else
 			{	
@@ -135,7 +136,7 @@ uint16_t GpioKeyScan(void)
 			{
 				GpioKeyState = GPIO_KEY_STATE_PRESS_DOWN;
 				TimeOutSet(&GpioKeyWaitTimer, GPIO_KEY_CP_TIME);
-				return GpioKeyEvent[PrevGpioKeyIndex][0];			//return key sp value
+				//GpioKeyMsg = GpioKeyEvent[PrevGpioKeyIndex][0];			//return key sp value
 			}
 			break;
 			
@@ -143,12 +144,12 @@ uint16_t GpioKeyScan(void)
 			if(PrevGpioKeyIndex != GpioKeyIndex)
 			{
 				GpioKeyState = GPIO_KEY_STATE_IDLE;
-				return GpioKeyEvent[PrevGpioKeyIndex][1];
+				GpioKeyMsg = GpioKeyEvent[PrevGpioKeyIndex][1];
 			}
 			else if(IsTimeOut(&GpioKeyWaitTimer))
 			{
 				GpioKeyState = GPIO_KEY_STATE_CP;
-				return GpioKeyEvent[PrevGpioKeyIndex][2];
+				GpioKeyMsg = GpioKeyEvent[PrevGpioKeyIndex][2];
 			}
 			break;
 			
@@ -157,11 +158,6 @@ uint16_t GpioKeyScan(void)
 			if(PrevGpioKeyIndex != GpioKeyIndex)
 			{
 				GpioKeyState = GPIO_KEY_STATE_IDLE;
-				return GpioKeyEvent[PrevGpioKeyIndex][4];//return MSG_NONE;				
-			}
-			else 
-			{
-				//do no thing
 			}
 			break;
 			
@@ -169,7 +165,19 @@ uint16_t GpioKeyScan(void)
 			GpioKeyState = GPIO_KEY_STATE_IDLE;
 			break;
 	}
-	return MSG_NONE;
+}
+
+
+uint16_t GpioKeyScan(void)							
+{
+	uint16_t Msg = MSG_NONE;
+	
+	if (MSG_NONE != GpioKeyMsg) {
+		Msg = GpioKeyMsg;
+		GpioKeyMsg = MSG_NONE;
+	}
+
+	return Msg;
 }
 
 #endif

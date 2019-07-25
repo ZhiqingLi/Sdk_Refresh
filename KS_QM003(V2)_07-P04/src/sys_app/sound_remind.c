@@ -171,17 +171,7 @@ static const SOUND_TABLE_ITEM SoundTable[] =
 	{SOUND_ALARM_RING3,			    	STR_TO_UINT("NZS3"),	STR_TO_UINT("NZS3")},	//150
 	{SOUND_ALARM_RING4,			    	STR_TO_UINT("NZS4"),	STR_TO_UINT("NZS4")},	//200  	
 	{SOUND_ALARM_RING5,			    	STR_TO_UINT("NZS5"),	STR_TO_UINT("NZS5")},	//200  	
-	{SOUND_PWKON_RING1,				    STR_TO_UINT("KJS1"),	STR_TO_UINT("PWK1")},	//开机提示音1
-	{SOUND_PWKON_RING2,			    	STR_TO_UINT("KJS2"),	STR_TO_UINT("PWK2")},	//开机提示音2
-	{SOUND_PWKON_RING3,			    	STR_TO_UINT("KJS3"),	STR_TO_UINT("PWK3")},	//开机提示音3
-	{SOUND_PWKON_RING4,			    	STR_TO_UINT("KJS4"),	STR_TO_UINT("PWK4")},	//开机提示音4 	
-	{SOUND_PWKON_RING5,			    	STR_TO_UINT("KJS5"),	STR_TO_UINT("PWK5")},	//开机提示音5  	
-	{SOUND_PWKON_RING6,			    	STR_TO_UINT("KJS6"),	STR_TO_UINT("PWK6")},	//开机提示音6
-	{SOUND_PWKON_RING7,			    	STR_TO_UINT("KJS7"),	STR_TO_UINT("PWK7")},	//开机提示音7
-	{SOUND_PWKON_RING8,			    	STR_TO_UINT("KJS8"),	STR_TO_UINT("PWK8")},	//开机提示音8	
-	{SOUND_PWKON_RING9,			    	STR_TO_UINT("KJS9"),	STR_TO_UINT("PWK9")},	//开机提示音9  	
-	{SOUND_SLEEP_RING1,			    	STR_TO_UINT("XMS1"),	STR_TO_UINT("SLP1")},	//开机提示音8	
-	{SOUND_SLEEP_RING2,			    	STR_TO_UINT("XMS2"),	STR_TO_UINT("SLP2")},	//开机提示音9  	
+	{SOUND_SLEEP_RING,			    	STR_TO_UINT("XMSY"),	STR_TO_UINT("SLPY")},	//开机提示音8	
 };
 
 typedef struct _SOUND_REMIND_CONTROL
@@ -281,7 +271,7 @@ void SoundRemind(uint16_t SoundId)
 #endif
 	//wifi语音中禁止播放提示音。
 	if(!gSys.SoundRemindOn || ((gWiFi.MicState != WIFI_AVS_STATUS_IDLE) && (gSys.CurModuleID == MODULE_ID_WIFI))
-		|| (WiFiFirmwareUpgradeStateGet() == TRUE))
+		|| WiFiFirmwareUpgradeStateGet())
 	{
 		return;
 	}
@@ -354,7 +344,7 @@ void SoundRemind(uint16_t SoundId)
 	SoundRemindFillStream();
 
 	// 检查是否有指定的消息
-	if(IsMsgInQueue())
+	if(0)//IsMsgInQueue())
 	{
 		SoundRemindControl.IsRunning = 0;
         //resume the audio task before returning to deal message -Robert 20150204
@@ -404,6 +394,7 @@ void SoundRemind(uint16_t SoundId)
 	}
 #endif
 	SoundRemindControl.IsRunning = 0;
+	ResetSoundRemindStopFlag();
 
 #ifdef FUNC_AUDIO_VB_EFFECT_EN
 	if(gSys.AudioVbEffectFlag)
@@ -434,19 +425,21 @@ bool IsMsgInQueue(void)
 {
 	bool	ret = FALSE;
 	
-	if(MsgCheck(MSG_BT_HF_OUT_MODE) 
-		|| MsgCheck(MSG_BT_HF_INTO_MODE)
-		|| MsgCheck(MSG_USB_PLUGIN)
-		|| MsgCheck(MSG_USB_PLUGOUT)
-		|| MsgCheck(MSG_SD_PLUGIN)
-		|| MsgCheck(MSG_SD_PLUGOUT)
-		|| MsgCheck(MSG_LINEIN_PLUGIN)
-		|| MsgCheck(MSG_LINEIN_PLUGOUT)
-		|| MsgCheck(MSG_MIC_PLUGIN)
-		|| MsgCheck(MSG_MIC_PLUGOUT)
-		|| MsgCheck(MSG_PC_PLUGIN)
-		|| MsgCheck(MSG_PC_PLUGOUT)	)
-	{
+	if(MsgCheck(MSG_USB_PLUGIN)
+	|| MsgCheck(MSG_USB_PLUGOUT)
+	|| MsgCheck(MSG_SD_PLUGIN)
+	|| MsgCheck(MSG_SD_PLUGOUT)
+	|| MsgCheck(MSG_LINEIN_PLUGIN)
+	|| MsgCheck(MSG_LINEIN_PLUGOUT)
+	|| MsgCheck(MSG_MIC_PLUGIN)
+	|| MsgCheck(MSG_MIC_PLUGOUT)
+	|| MsgCheck(MSG_PC_PLUGIN)
+	|| MsgCheck(MSG_PC_PLUGOUT)	
+#ifdef FUNC_BT_HF_EN
+	|| MsgCheck(MSG_BT_HF_OUT_MODE) 
+	|| MsgCheck(MSG_BT_HF_INTO_MODE)
+#endif
+	) {
 		ret = TRUE;
 	}
 

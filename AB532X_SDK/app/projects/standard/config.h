@@ -14,11 +14,11 @@
  *****************************************************************************/
 #define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
 #define FUNC_CLOCK_EN                   0   //是否打开时钟功能
-#define FUNC_FMRX_EN                    1   //是否打开FM功能
+#define FUNC_FMRX_EN                    0   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
-#define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
-#define FUNC_AUX_EN                     1   //是否打开AUX功能
-#define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
+#define FUNC_BTHID_EN                   0   //是否打开独立自拍器模式
+#define FUNC_AUX_EN                     0   //是否打开AUX功能
+#define FUNC_USBDEV_EN                  0   //是否打开USB DEVICE功能
 #define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能

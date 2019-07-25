@@ -12,15 +12,15 @@
 
 #ifdef FUNC_ADC_ADJUST_VOLUME_EN
 
-#define 	ADC_ADJUST_VOL_SCAN_COUNT	5
+#define 	ADC_ADJUST_VOL_SCAN_COUNT	10
 
 static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] = 
 {
 	50,
-	156, 	251, 	316, 	422, 	529, 	628, 	725, 	818,
-	931, 	1027,	1125,	1227,	1333,	1434,	1540,	1652,
-	1752,	1851,	1970,	2091,	2206,	2318,	2430,	2545,
-	2668,	2773,	2886,	3001,	3124,	3236,	3350,	3460
+	356, 	651, 	935, 	1212, 	1475, 	1702, 	1915, 	2108,
+	2280, 	2437,	2555,	2657,	2727,	2787,	2845,	2897,
+	2950,	2991,	3032,	3066,	3099,	3105,	3139,	3180,
+	3219,	3259,	3290,	3322,	3355,	3386,	3410,	3440
 };	
 
 uint32_t AdcAdjustSampleSum = 0; 
@@ -47,8 +47,8 @@ uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 // return: 0---no key, else---key msg
 void AdcAdjustVolScan(void)
 {
-	static uint8_t	CurVolumeIndex = 0;
 	static uint16_t PrevAverageValue = 0;
+	uint16_t AverageVal, AdcVolVal;
 
 	if(AdcAdjustSampleCnt > 0)
 	{
@@ -58,20 +58,30 @@ void AdcAdjustVolScan(void)
 
 	if(AdcAdjustSampleCnt == 0)
 	{
+		uint8_t VolumeIndex = 0;
+		
 		AdcAdjustLevelAverage = (AdcAdjustSampleSum/ADC_ADJUST_VOL_SCAN_COUNT);
 		AdcAdjustSampleCnt = ADC_ADJUST_VOL_SCAN_COUNT;
 		AdcAdjustSampleSum = 0;
 
-		if((abs(AdcAdjustLevelAverage - PrevAverageValue) > 100)
-		&& (CurVolumeIndex != GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage)))
+		VolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
+		AverageVal = abs(AdcAdjustLevelAverage-PrevAverageValue);
+		if (VolumeIndex >= gSys.Volume) {
+			AdcVolVal = (AdcAdjustVolIndexVal[gSys.Volume+1]-AdcAdjustVolIndexVal[gSys.Volume]);
+		}
+		else {
+			AdcVolVal = (AdcAdjustVolIndexVal[gSys.Volume]-AdcAdjustVolIndexVal[gSys.Volume-1]);
+		}
+		
+		if(((AverageVal >= AdcVolVal) || !VolumeIndex || (VolumeIndex >= MAX_VOLUME))
+		&& (gSys.Volume != VolumeIndex) && !IS_RTC_WAKEUP())
 		{
-			CurVolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
-			gSys.Volume = CurVolumeIndex;
-			if (WIFI_PLAY_KAISHU_RADIO_SLEEP != gWiFi.KaiShuRadio) {
+			gSys.Volume = VolumeIndex;
+			if (!WiFiKaiShuSleepModeGet()) {
 				SetSysVol();
 				McuSyncWiFiVolume(gSys.Volume);
 			}
-			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", PrevAverageValue, AdcAdjustLevelAverage, gSys.Volume);
+			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", AverageVal, AdcVolVal, gSys.Volume);
 			PrevAverageValue = AdcAdjustLevelAverage;
 		}
 	}

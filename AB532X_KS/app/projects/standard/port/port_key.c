@@ -55,10 +55,10 @@ u8 check_key_double_configure(u16 key_val)
 #if (USER_ADKEY || USER_ADKEY_MUX_SDCLK)
 #if ADKEY_PU10K_EN
 /******************************************************************
-*                   内部10K上拉的table表
-* 1、不复用SDCLK时，最多支持7个按键，按键电阻0R, 2K, 5.1K, 10K, 22K, 56K, 150K
-* 2、复用SDCLK时, 需要从2K电阻的按键开始，最多6个按键
-* 3、150K电阻也可以用于插入检测
+*                   内部10K上拉的table�?
+* 1、不复用SDCLK时，最多支�?个按键，按键电阻0R, 2K, 5.1K, 10K, 22K, 56K, 150K
+* 2、复用SDCLK�? 需要从2K电阻的按键开始，最�?个按�?
+* 3�?50K电阻也可以用于插入检�?
 *******************************************************************/
 AT(.com_text.adkey.table)
 const adkey_tbl_t adkey_table[] = {
@@ -75,8 +75,8 @@ const adkey_tbl_t adkey_table[] = {
 
 #if USER_ADKEY_MUX_LED
 /******************************************************************
-*                   ADKEY复用LED的table表（外部100K上拉, 蓝灯）
-* 1、最多支持7个按键
+*                   ADKEY复用LED的table表（外部100K上拉, 蓝灯�?
+* 1、最多支�?个按�?
 *******************************************************************/
 AT(.com_text.adkey.table)
 const adkey_tbl_t adkey_table[] = {
@@ -91,10 +91,10 @@ const adkey_tbl_t adkey_table[] = {
 };
 #else
 /******************************************************************
-*                   外部10K上拉的table表
-* 1、最多支持12个按键
-* 2、复用SDCLK时, 需要从2K电阻的按键开始或ADKEY先串个10K电阻到IO
-* 3、100K电阻也可以用于插入检测
+*                   外部10K上拉的table�?
+* 1、最多支�?2个按�?
+* 2、复用SDCLK�? 需要从2K电阻的按键开始或ADKEY先串�?0K电阻到IO
+* 3�?00K电阻也可以用于插入检�?
 *******************************************************************/
 AT(.com_text.adkey.table)
 const adkey_tbl_t adkey_table[] = {
@@ -131,7 +131,7 @@ u8 *get_adkey_configure(u8 num)
 #endif // USER_ADKEY
 
 #if USER_ADKEY2
-///最多支持12个按键, 以0xff结束
+///最多支�?2个按�? �?xff结束
 AT(.com_text.adkey2.table)
 const adkey_tbl_t adkey2_table[] = {
     {0x0A, KEY_NUM_0},
@@ -161,7 +161,7 @@ u8 *get_adkey2_configure(u8 num)
 #endif // USER_ADKEY2
 
 #if USER_PWRKEY
-///最多支持5个按键。数组元数总数请保持不变。不需要的按键改为NO_KEY
+///最多支�?个按键。数组元数总数请保持不变。不需要的按键改为NO_KEY
 AT(.com_text.pwrkey.table)
 const adkey_tbl_t pwrkey_table[6] = {
     {0x08, KEY_PLAY_POWER},     //P/P POWER     0
@@ -190,14 +190,14 @@ u8 *get_pwrkey_configure(u8 num)
 #endif // USER_PWRKEY
 
 #if USER_IOKEY
-//工具配置的IO初始化
+//工具配置的IO初始�?
 gpio_t iokey0_gpio;
 gpio_t iokey1_gpio;
 gpio_t iokey2_gpio;
 gpio_t iokey3_gpio;
 gpio_t iokey4_gpio;
 
-//工具配置的IO初始化
+//工具配置的IO初始�?
 AT(.text.key.init)
 void iokey_cfg_port_init(gpio_t *g)
 {
@@ -249,7 +249,7 @@ bool iokey_cfg_midkey_pressed(gpio_t *g0, gpio_t *g1)
 AT(.text.key.init)
 void io_key_init(void)
 {
-    //配置工具是否使能了IOKEY？
+    //配置工具是否使能了IOKEY�?
     if (!xcfg_cb.user_iokey_en) {
         return;
     }
@@ -280,7 +280,7 @@ u8 get_iokey(void)
 {
     u8 key_val = NO_KEY;
 
-    //配置工具是否使能了IOKEY？
+    //配置工具是否使能了IOKEY�?
     if (!xcfg_cb.user_iokey_en) {
         return NO_KEY;
     }
@@ -319,7 +319,6 @@ u8 get_iokey(void)
 
 #if USER_EXT_POWERON_EN
 static gpio_t pwr_gpio;
-static bool power_gpio_state = 0;
 
 bool get_extern_on_state(void)
 {
@@ -327,30 +326,22 @@ bool get_extern_on_state(void)
 	GPIOBDIR |= BIT(4); 
 	GPIOBFEN &= ~BIT(4);
     GPIOBPD |= BIT(4);
-    delay_5ms(2);
-    //printf ("extern gpio state %d;\n", (GPIOB & BIT(4)));
-    return ((GPIOB & BIT(4)) || power_gpio_state);
+    delay_5ms(1);
+    printf ("extern gpio state %d;\n", (GPIOB & BIT(4)));
+    return (GPIOB & BIT(4));
 }
 
 void external_power_gpio_poweron(u8 io_num)
 {
 	gpio_t *p = &pwr_gpio;
 	
-	power_gpio_state = 0;
     bsp_gpio_cfg_init(p, io_num);
     if (p->sfr == NULL) {
     	return;
     }
     p->sfr[GPIOxDE] |= BIT(p->num);
     p->sfr[GPIOxDIR] &= ~BIT(p->num);
-    if (get_extern_on_state()) {
-		p->sfr[GPIOxCLR] = BIT(p->num);
-		power_gpio_state = 0xff;
-	}
-	else {
-		p->sfr[GPIOxSET] = BIT(p->num);
-		power_gpio_state = 0;
-	}
+	p->sfr[GPIOxSET] = BIT(p->num);
 }
 
 void external_power_gpio_powerdown(u8 io_num)

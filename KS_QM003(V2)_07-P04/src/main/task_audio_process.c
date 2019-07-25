@@ -377,7 +377,7 @@ void AudioProcessTaskEntrance(void)
 					MixerForRecoder((void*)AduioBuf, (void*)(AudioI2SBuf), I2SIN_SampleCnt, 0x03);	
 #endif
 					MixerSetData(MIXER_SOURCE_MIC, (void*)AduioBuf, SampleCnt); 	//单声道MIC数据
-
+					
 #ifdef FUNC_SPEC_TRUM_EN
 					SpecTrumProc((void*)(AudioI2SBuf), I2SIN_SampleCnt);
 #endif

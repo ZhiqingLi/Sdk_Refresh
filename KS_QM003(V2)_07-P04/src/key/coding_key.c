@@ -42,7 +42,7 @@
 //     ---|        |--------|		 |-------------------
 //B       |        |        |		 |
 //        |--------|        |--------|
-#define		CODING_KEY_JITTER_TIME		100
+#define		CODING_KEY_JITTER_TIME		500
 
 static uint8_t		ClockWiseCnt;
 static uint8_t		CounterClockWiseCnt;
@@ -80,23 +80,25 @@ __attribute__((section(".driver.isr"))) void GpioInterrupt(void)
 	if(GpioIntFlagGet(CODING_KEY_A_PORT_INT) == CODING_KEY_A_BIT)
 	{
 		GpioIntClr(CODING_KEY_A_PORT_INT, CODING_KEY_A_BIT);
-		if(!(GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) && !ClockWiseCnt)
+		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
+
+ 		if (!(GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) && (ClockWiseCnt == 0))
 		{
 			//counterclockwise rotation
 			CounterClockWiseCnt++;
 		}
-		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
 	}
 
 	if(GpioIntFlagGet(CODING_KEY_B_PORT_INT) == CODING_KEY_B_BIT)
 	{
 		GpioIntClr(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT);
-		if(!(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT) && !CounterClockWiseCnt)
+		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
+		
+		if (!(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT) && (CounterClockWiseCnt == 0))
 		{
 			//clockwise rotation
 			ClockWiseCnt++;
 		}
-		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
 	}
 }
 
@@ -106,10 +108,12 @@ uint16_t CodingKeyScan(void)
 	uint16_t Msg = MSG_NONE;
 
 	if (IsTimeOut(&CodingKeyJitterTimer)) {
-		if(ClockWiseCnt) {
+		if(ClockWiseCnt) 
+		{
 			Msg = MSG_WIFI_PREV_CH;
 		}
-		else if(CounterClockWiseCnt) {
+		else if(CounterClockWiseCnt) 
+		{
 			Msg = MSG_WIFI_NEXT_CH;
 		}
 		ClockWiseCnt = 0;

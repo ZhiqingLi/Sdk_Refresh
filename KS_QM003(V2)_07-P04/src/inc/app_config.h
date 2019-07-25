@@ -1221,7 +1221,7 @@ extern "C" {
 	#endif
 
 	//GPIO按键定义
-	//#define FUNC_GPIO_KEY_EN   								//GPIO按键
+	#define FUNC_GPIO_KEY_EN   								//GPIO按键
 	#ifdef FUNC_GPIO_KEY_EN
 		#define GPIO_KEY1_PORT_OUT			GPIO_A_OUT		
 		#define GPIO_KEY1_PORT_BIT			GPIOA19	
@@ -1231,21 +1231,21 @@ extern "C" {
 	#endif
 
 	//CODING KEY定义
-	#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
+	//#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
 	#ifdef FUNC_CODING_KEY_EN
-		#define 	CODING_KEY_A_PORT_IN	GPIO_A_IN	
-		#define		CODING_KEY_A_PORT_OE	GPIO_A_OE 			
-		#define		CODING_KEY_A_PORT_PU	GPIO_A_PU 
-		#define		CODING_KEY_A_PORT_PD	GPIO_A_PD 					
-		#define		CODING_KEY_A_PORT_INT	GPIO_A_INT 				
-		#define		CODING_KEY_A_BIT		(1 << 19)		//GPIO_B[21] for signal A 
+		#define 	CODING_KEY_A_PORT_IN	GPIO_B_IN	
+		#define		CODING_KEY_A_PORT_OE	GPIO_B_OE 			
+		#define		CODING_KEY_A_PORT_PU	GPIO_B_PU 
+		#define		CODING_KEY_A_PORT_PD	GPIO_B_PD 					
+		#define		CODING_KEY_A_PORT_INT	GPIO_B_INT 				
+		#define		CODING_KEY_A_BIT		(1 << 2)		//GPIO_B[21] for signal A 
 
-		#define		CODING_KEY_B_PORT_IN	GPIO_B_IN 				
-		#define		CODING_KEY_B_PORT_OE	GPIO_B_OE 			
-		#define		CODING_KEY_B_PORT_PU	GPIO_B_PU 
-		#define		CODING_KEY_B_PORT_PD	GPIO_B_PD 	
-		#define 	CODING_KEY_B_PORT_INT	GPIO_B_INT				
-		#define		CODING_KEY_B_BIT		(1 << 2)	//GPIO_B[20] for signal B
+		#define		CODING_KEY_B_PORT_IN	GPIO_A_IN 				
+		#define		CODING_KEY_B_PORT_OE	GPIO_A_OE 			
+		#define		CODING_KEY_B_PORT_PU	GPIO_A_PU 
+		#define		CODING_KEY_B_PORT_PD	GPIO_A_PD 	
+		#define 	CODING_KEY_B_PORT_INT	GPIO_A_INT				
+		#define		CODING_KEY_B_BIT		(1 << 19)	//GPIO_B[20] for signal B
 	#endif
 
 //	#define FUNC_POWER_KEY_EN							//POWER KEY宏开关，软开关复用功能
@@ -1442,12 +1442,12 @@ enum EnumModuleID
     //////////////////////////////////////////////////////////////
     // DO NOT MODIFY FOLLOWINGS
     MODULE_ID_END,				// end of moduleID
+    MODULE_ID_IDLE,
     // 以下应用模式不能通过mode键切换进入，而是根据实际用途 通过快捷键或特殊条件满足时才会进入
 
     //MODULE_ID_ALARM_REMIND,		// alarm remind
     MODULE_ID_POWEROFF,			// faked module ID for Power OFF
     MODULE_ID_STANDBY,			// faked module ID for StandBy mode
-	MODULE_ID_IDLE,
 #ifdef FUNC_REC_PLAYBACK_EN
     MODULE_ID_REC_BACK_PLAY,	// 录音回放模式
 #endif

@@ -42,7 +42,7 @@ static TIMER RtcAutoOutTimer;
 #define RTC_ALARM_MAX_COUNT          3                     //闹钟循环最大次数
 
 ////////////////////////////////////
-const RTC_DATE_TIME gSysCurDate = {2019, 06, 01, 01, 23, 59, 59};
+const RTC_DATE_TIME gSysCurDate = {2019, 07, 01, 01, 23, 59, 59};
 const uint8_t Alarm_Ring[7] = {0xff, SOUND_ALARM_RING1, SOUND_ALARM_RING2, SOUND_ALARM_RING3, SOUND_ALARM_RING4, SOUND_ALARM_RING5, 0xff};
 
 
@@ -483,7 +483,14 @@ void SyncMcuAlarmTimeToBpInfo(ALARM_BP_INFO *AlarmInfo,uint8_t AlarmNum)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void RtcTimerCB(uint32_t unused)
 {
+	static TIMER RtcPrintfTimer;
+	
 	RtcGetCurrTime(&sRtcControl->DataTime);
+
+	if (!IsTimeOut(&RtcPrintfTimer)) {
+		return;
+	}
+	TimeOutSet(&RtcPrintfTimer, 10000);
 
 	if((RTC_STATE_IDLE == sRtcControl->State) || (sRtcControl->SubState == RTC_SET_IDLE))
 	{
@@ -497,11 +504,13 @@ void RtcTimerCB(uint32_t unused)
 		APP_DBG("\n");
 		
 #ifdef FUNC_SPI_SLAVE_EN
-		if (gSys.IsWiFiRepeatPowerOn) {
-			Spi_SendCmdToSlave(MAS_SET_RBT);
-		}
-		else {
-			Spi_SendCmdToSlave(MAS_CLR_RBT);
+		if (!WiFiFirmwareUpgradeStateGet() && !IS_RTC_WAKEUP()) {
+			if (gSys.IsWiFiRepeatPowerOn) {
+				Spi_SendCmdToSlave(MAS_SET_RBT);
+			}
+			else {
+				Spi_SendCmdToSlave(MAS_CLR_RBT);
+			}
 		}
 #endif
 	}
@@ -599,6 +608,7 @@ bool RtcInitialize(void)
 #else
 	RtcInit(NULL, 0); // 该函数必须调用
 #endif	
+	
 	if(sRtcControl != NULL)
 	{
 		APP_DBG("Init fail: RTC is running\n");
@@ -624,7 +634,7 @@ bool RtcInitialize(void)
 	
 	// 定时器
 	TimeOutSet(&RtcAutoOutTimer, 0);
-	InitTimer((SW_TIMER*)&sRtcControl->TimerHandle, 30000, (TIMER_CALLBACK)RtcTimerCB);
+	InitTimer((SW_TIMER*)&sRtcControl->TimerHandle, 1000, (TIMER_CALLBACK)RtcTimerCB);
 	StartTimer(&sRtcControl->TimerHandle);
 #ifdef FUNC_RTC_ALARM	
 #ifdef FUNC_RTC_ALARM_SAVE2FLASH
@@ -1629,7 +1639,13 @@ __attribute__((section(".driver.isr"), weak)) void RtcInterrupt(void)
     /* 新闹钟时间到，先停掉正在闹响的闹钟 */
     RtcCurAlarmSleepAndStop(RTC_ALARM_STATE_STOP);
 	sRtcControl->CurAlarmNum = RtcCheckAlarmFlag();
+	APP_DBG("RTC ALARM(%d) COME!\n", sRtcControl->CurAlarmNum);
 	sRtcControl->CurAlarmNum = 0;
+	if (MODULE_ID_END <= gSys.CurModuleID) {
+		gSys.WakeUpSource |= WAKEUP_FLAG_POR_RTC;
+		gSys.NextModuleID = MODULE_ID_WIFI;
+		MsgSend(MSG_COMMON_CLOSE);
+	}
 	RtcAlarmIntClear();// 清除闹钟提醒中断
 }
 #endif

@@ -96,6 +96,9 @@ __attribute__((section(".driver.isr"))) void Timer1Interrupt(void)
 #if (defined(FUNC_SINGLE_LED_EN) || defined(FUNC_7PIN_SEG_LED_EN) || defined(FUNC_6PIN_SEG_LED_EN))
 	//LedFlushDisp();
 #endif
+#ifdef FUNC_GPIO_KEY_EN
+	InterruptGpioKeyScan();
+#endif
 
 #ifdef FUNC_WIFI_BT_CONTROL_EN
 	if(BtCtrl.ScanEnable_Timer != FALSE)
@@ -371,7 +374,7 @@ int32_t main(void)
 	DispInit(FALSE);
 #endif
 #ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE);
+	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
 #endif
 
 	DBG("Start Detect External Device(Keypad, U disk, SD card, FM,...)\n");
@@ -421,7 +424,7 @@ int32_t main(void)
 		DeviceDetect(); // 设备检测接口
 		
 #if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
-		if(((!GetSilenceMuteFlag() && gSys.CurModuleID != MODULE_ID_IDLE)
+		if(((!GetSilenceMuteFlag() && (MODULE_ID_END > gSys.CurModuleID))
 #ifdef FUNC_SOUND_REMIND
 		|| IsSoundRemindPlaying()
 #endif
@@ -429,7 +432,7 @@ int32_t main(void)
 		|| (GetHfTransferState() == TRUE)	
 #endif
 #ifdef FUNC_WIFI_EN
-		|| IsWiFiSoundRemindPlaying()
+		//|| IsWiFiSoundRemindPlaying()
 #endif
 #ifdef FUNC_KEY_BEEP_SOUND_EN
 		|| !IsBeepSoundEnd()
@@ -451,18 +454,26 @@ int32_t main(void)
 //蓝牙协议栈阻塞，所以将定时关机改到主任务中处理。
 #ifdef FUNC_SLEEP_EN
 		if(GetSilenceMuteFlag() && (gSys.CurModuleID != MODULE_ID_RTC)
+#ifdef FUNC_WIFI_EN
+		&& !WiFiFirmwareUpgradeStateGet()
+#endif
 #ifdef OPTION_CHARGER_DETECT
 		&& !IsInCharge()
 #endif
 		) {
-			if(!gSys.SleepStartPowerOff)
+			if(gSys.SleepTimeCnt >= 6000*SLEEP_POWEROFF_TMR)
 			{
-				gSys.SleepTimeCnt++;
-				if(gSys.SleepTimeCnt > 6000*SLEEP_POWEROFF_TMR)
+				if(MODULE_ID_POWEROFF != gSys.NextModuleID)
 				{		   
-					WiFiRequestMcuPowerOff();
+					//WiFiRequestMcuPowerOff();
+					gSys.NextModuleID = MODULE_ID_POWEROFF;
+					MsgSend(MSG_COMMON_CLOSE);
 					gSys.SleepStartPowerOff = TRUE;
 				}
+			}
+			else 
+			{
+				gSys.SleepTimeCnt++;
 			}
 		}
 		else
@@ -484,11 +495,30 @@ int32_t main(void)
 				if (gSys.SleepLedOffCnt >= (6000*SLEEP_LED_OFF_TMR)) {
 					gSys.SleepLedOffFlag = TRUE;
 					MsgSend(MSG_SOUND_SLEEP_ON);
+					APP_DBG("Enter sleep mode;\n");
 				}
 			}
 		}
 		else {
 			gSys.SleepLedOffCnt = 0;
+		}
+#endif
+
+#ifdef FUNC_GPIO_POWER_ON_EN
+		{
+			static uint16_t RtcOffDelay = 0;
+		
+			if (!IS_RTC_WAKEUP() && !PowerkeyGetOnkeyReg()) {
+				if (1000 > RtcOffDelay) {
+					RtcOffDelay++;
+				}
+				else {
+					SysPowerOnControl(FALSE);
+				}
+			}
+			else {
+				RtcOffDelay = 0;
+			}
 		}
 #endif
 	}

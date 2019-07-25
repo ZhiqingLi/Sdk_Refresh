@@ -28,7 +28,7 @@ void lowpower_vbat_process(void)
         return;
     }
 
-    //低电提示音播放
+    //低电提示音播�?
     sys_cb.vbat_nor_cnt = 0;
     if (sys_cb.lpwr_warning_cnt > xcfg_cb.lpwr_warning_period) {
         sys_cb.lpwr_warning_cnt = 0;
@@ -117,7 +117,7 @@ void func_message(u16 msg)
         case KU_VOL_UP:
         case KU_VOL_NEXT_PREV:
             if (msg == KU_VOL_NEXT_PREV) {
-                //循环音量加, 最大音量后提示下, 然后从0开始。
+                //循环音量�? 最大音量后提示�? 然后�?开始�?
                 if (sys_cb.vol == VOL_MAX) {
                     bsp_set_volume(0);
                 } else {
@@ -168,7 +168,7 @@ void func_message(u16 msg)
             break;
 
 
-        //长按PP/POWER软关机(通过PWROFF_PRESS_TIME控制长按时间)
+        //长按PP/POWER软关�?通过PWROFF_PRESS_TIME控制长按时间)
         case KLH_PLAY_POWER:
         case KLH_MODE_POWER:
         case KLH_HSF_POWER:
@@ -371,14 +371,14 @@ void func_message(u16 msg)
 #endif
     }
 
-    //调节音量，3秒后写入flash
+    //调节音量�?秒后写入flash
     if ((sys_cb.cm_vol_change) && (sys_cb.cm_times >= 6)) {
         sys_cb.cm_vol_change = 0;
         cm_sync();
     }
 }
 
-///进入一个功能的总入口
+///进入一个功能的总入�?
 AT(.text.func)
 void func_enter(void)
 {
@@ -389,7 +389,7 @@ void func_enter(void)
     func_cb.mp3_res_play = NULL;
     func_cb.set_vol_callback = NULL;
     bsp_clr_mute_sta();
-    sys_cb.voice_evt_brk_en = 1;    //播放提示音时，快速响应事件。
+    sys_cb.voice_evt_brk_en = 1;    //播放提示音时，快速响应事件�?
     AMPLIFIER_SEL_D();
 #if SYS_KARAOK_EN
     karaok_voice_rm_disable();
@@ -408,7 +408,7 @@ void func_exit(void)
             break;
         }
     }
-    func_num++;                                     //切换到下一个任务
+    func_num++;                                     //切换到下一个任�?
     if (func_num >= funcs_total) {
         func_num = 0;
     }

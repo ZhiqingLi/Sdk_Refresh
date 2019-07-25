@@ -128,6 +128,13 @@ void func_water_pump_process(bool work)
 }
 
 AT(.text.func.idle)
+uint8_t func_idle_work_state_get(void)
+{
+	return f_idle.cur_status;
+}
+
+
+AT(.text.func.idle)
 void func_idle_process(void)
 {
     func_process();
@@ -139,6 +146,11 @@ void func_idle_process(void)
             break;
             
         case 2:
+            pwm_gui_setting(GUI_WORK_TIMER);
+            pwm_rgb_setting(COLOUR_YELLOW, DEF_SCAN_TIMER);
+            break;
+
+		case 3:
         	if (tick_check_expire(f_idle.rgb_blink, RGB_SWAP_TIMER+RGB_STOP_TIMER)) {
         		f_idle.rgb_blink = tick_get();
         		f_idle.rgb_colour++;
@@ -149,11 +161,6 @@ void func_idle_process(void)
         		pwm_rgb_setting(f_idle.rgb_colour, RGB_SWAP_TIMER);
         	}
             pwm_gui_setting(GUI_WORK_TIMER);
-            break;
-            
-        case 3:
-            pwm_gui_setting(GUI_WORK_TIMER);
-            pwm_rgb_setting(COLOUR_BLUE, DEF_SCAN_TIMER);
             break;
             
         case 4:

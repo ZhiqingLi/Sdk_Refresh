@@ -56,21 +56,6 @@ extern uint32_t GetNextModeId(uint32_t CurModeId);
 
 extern int32_t BtTaskHandle;
 
-const uint8_t frist_poweron_remind[3] = {
-	SOUND_PWR_ON,
-	SOUND_PWKON_RING1,
-	SOUND_PWKON_RING2,
-};
-
-const uint8_t repeat_poweron_remind[6] = {
-	SOUND_PWKON_RING3,
-	SOUND_PWKON_RING4,
-	SOUND_PWKON_RING5,
-	SOUND_PWKON_RING6,
-	SOUND_PWKON_RING7,
-	SOUND_PWKON_RING8,
-};
-
 //main entrance of main task
 //主任务程序入口，可按需在对应入口处增加对应的模块调用
 void GuiTaskEntrance(void)
@@ -78,11 +63,6 @@ void GuiTaskEntrance(void)
 	#ifdef FUNC_BT_EN
 	uint16_t i;
 	#endif
-	
-
-#ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
-#endif
 
 	APP_DBG("main task Init...\n");
 	SetSysVol();
@@ -115,15 +95,9 @@ void GuiTaskEntrance(void)
 	)
 	{
 	#ifndef FUNC_SPI_SLAVE_EN
-		if (gSys.IsWiFiRepeatPowerOn) {
-			SoundRemind(repeat_poweron_remind[GetRandNum(6)-1]);
-		}
-		else {
-			SoundRemind(frist_poweron_remind[GetRandNum(3)-1]);
-		}
+		SoundRemind(SOUND_PWR_ON);
 	#endif
 	}
-
 
 	OSRescheduleTimeout(500);
 
@@ -168,9 +142,18 @@ void GuiTaskEntrance(void)
 	//Task main loop
 	while(1)
 	{
+#ifdef FUNC_WIFI_POWER_KEEP_ON
+		//进入一个模式前，如果不是正常工作模式，关闭WiFi电源：20190725
+		if (MODULE_ID_END <= gSys.CurModuleID) {
+			WiFiControlGpioInit();	
+			WaitMs(100);
+		}
+#endif
+
 		gSys.NextModuleID = MODULE_ID_UNKNOWN;	//init the flag	
 		MsgClearClass(MSG_MAIN_CLASS);			    //进入一个模式前，先清空主消息队列
-		
+		MsgClearClass(MSG_DEV_CLASS);			    //进入一个模式前，先清空主消息队列
+
 #ifdef BT_RF_POWER_ON_OFF
 		if(gSys.CurModuleID == MODULE_ID_BLUETOOTH)
 		{
@@ -361,8 +344,8 @@ void GuiTaskEntrance(void)
 				break;
 			
 			default:
-				IdleControl();
 				APP_DBG("Enter Module error");
+				IdleControl();
 				break;
 		}
 		//from cache list or top-frame, update gCurBackModuleID for two UI task's mode
@@ -377,9 +360,6 @@ void GuiTaskEntrance(void)
 		
 		gSys.CurModuleID = gSys.NextModuleID;//set mode to the next mode
 
-		if (MODULE_ID_END <= gSys.CurModuleID) {
-			
-		}
 		// quick response
 		SetQuickResponseFlag(FALSE);
 #ifdef FUNC_BREAKPOINT_EN		

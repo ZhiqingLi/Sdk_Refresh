@@ -24,7 +24,7 @@
         <add key="lpwr_warning_count" value="3" />
         <add key="vol_max" value="16级音量" />
         <add key="sys_init_vol" value="5" />
-        <add key="warning_volume" value="12" />
+        <add key="warning_volume" value="15" />
         <add key="osc_both_cap" value="0PF" />
         <add key="osci_cap" value="23" />
         <add key="osco_cap" value="23" />
@@ -36,7 +36,7 @@
         <add key="dac_ldoh_sel" value="5" />
         <add key="dac_vcm_less_en" value="True" />
         <add key="dacvdd_bypass_en" value="False" />
-        <add key="dac_max_gain" value="-3DB" />
+        <add key="dac_max_gain" value="0DB" />
         <add key="bt_call_max_gain" value="-6DB" />
         <add key="charge_en" value="False" />
         <add key="charge_trick_en" value="True" />
@@ -48,7 +48,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="FLY_B" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="00:00:00:00:00:9B" />
+        <add key="bt_addr" value="00:00:00:00:00:A6" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="FF:FF:FF:FF:FF:FF" />

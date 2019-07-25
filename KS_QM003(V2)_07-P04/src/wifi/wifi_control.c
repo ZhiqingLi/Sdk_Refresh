@@ -82,7 +82,7 @@ uint8_t WiFiLedFlashCnt; 				//WiFi LED指示灯闪烁计数
 uint16_t PassThroughDataLen = 0;  		//透传数据长度,此数值不为0表示有透传数据接收
 uint8_t PassThroughDataState = 0; 		//透传数据状态
 int8_t  ChangeSystemTimeZoneFlag = 0;	//MCU修改时区时是否有日期变更，用于修改周设置
-
+static uint8_t WiFiKaiShuSleepVolume;	//凯叔睡眠模式音量
 
 #ifdef	FUNC_WIFI_UART_UPGRADE
 #define UPGRADE_CODE_BANK_ADDR	0x100000	//升级代码在Spi Flash中存放的起始地址
@@ -601,9 +601,11 @@ void WiFiUpgradeMcuSoftRunning(uint8_t* UpdateData)
 			CheckSumErrCnt = 0;
 			UpgradeSoftRecvLen += DataLen;
 			DualBankDataSaveFlash(DataLen);
+			
+			APP_DBG("UpgradeSoftRecvLen = %d;\n", UpgradeSoftRecvLen); 
 			if(UpgradeSoftRecvLen >= UpgradeSoftTotalSize)
 			{
-			  APP_DBG("UpgradeSoftRecvLen = %d, UpgradeSoftTotalSize = %d\n", UpgradeSoftRecvLen,UpgradeSoftTotalSize);	
+				APP_DBG("UpgradeSoftRecvLen = %d, UpgradeSoftTotalSize = %d\n", UpgradeSoftRecvLen,UpgradeSoftTotalSize);	
 				//代码是否加密判断
 				//Flash bin文件: 地址0x000000FC的值不同, 未加密是0xFFFFFFFF; 加密是0xFFFFFF55 
 				//MVA升级文件:	地址0x00000112的值不同, 未加密是0xFFFFFFFF;  加密是0xFFFFFF55	
@@ -717,12 +719,7 @@ bool WiFiKaiShuChildLockStateGet(void)
 void WiFiKaiShuVolumeMaxSet(  uint8_t       Vol)
 {
 	gWiFi.KaiShuVolumeMax = Vol;
-	if(gWiFi.KaiShuVolumeMax < ((gSys.Volume*100)/MAX_VOLUME))
-	{
-		gSys.Volume = (gWiFi.KaiShuVolumeMax/(100/MAX_VOLUME));
-		SetSysVol();
-		Mcu_SendCmdToWiFi(MCU_CUR_VOL, &gWiFi.KaiShuVolumeMax);
-	}
+	SetSysVol();
 }
 
 //WiFi 获取凯叔故事机儿童锁状态
@@ -737,41 +734,44 @@ void WiFiKaiShuRadioSet(  uint8_t val)
 	gWiFi.KaiShuRadio = val;
 }
 
+//WiFi 凯叔故事机睡眠状态设置
+void WiFiKaiShuSleepModeSet(  bool State)
+{
+	if (State) {
+		APP_DBG("Kai shu Enter sleep mode!!!\n");
+		WiFiKaiShuSleepVolume = gSys.Volume;
+	}
+	else {
+		APP_DBG("Kai shu push out sleep mode!!!\n");
+		WiFiKaiShuSleepVolume = 0;
+		SetSysVol();
+		McuSyncWiFiVolume(gSys.Volume);
+	}
+	
+	gWiFi.KaiShuSleepState = State;
+}
+
+//WiFi 凯叔故事机睡眠状态设置
+bool WiFiKaiShuSleepModeGet(  void)
+{
+	return gWiFi.KaiShuSleepState;
+}
+
 //WiFi 凯叔故事机哄睡模式处理
-uint8_t WiFiKaiShuSleepModeDeal(bool IsEnter, bool IsPushOut)
+uint8_t WiFiKaiShuSleepModeDeal(void)
 {
 	#define SLEEP_VOLUME_VAL      3
-	static uint8_t TempVol = 0;
-	static bool IsSleepModeOn = FALSE;
 	extern const uint16_t gAnaVolArr[MAX_VOLUME + 1];
 
-	if((TRUE == IsEnter) && (FALSE == IsPushOut))
-	{
-		TempVol = gSys.Volume;	
-		IsSleepModeOn = TRUE;
-		APP_DBG("Kai shu Enter sleep mode!!!\n");
+	if(WiFiKaiShuSleepVolume >= SLEEP_VOLUME_VAL) {
+		APP_DBG("Kai shu sleep mode volume down!!! %d;\n", WiFiKaiShuSleepVolume);
+		MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[WiFiKaiShuSleepVolume], gAnaVolArr[WiFiKaiShuSleepVolume]);
+		MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[WiFiKaiShuSleepVolume], gAnaVolArr[WiFiKaiShuSleepVolume]); 
+		McuSyncWiFiVolume(WiFiKaiShuSleepVolume);
+		WiFiKaiShuSleepVolume--;
 	}
-	else if((FALSE == IsEnter) && (TRUE == IsPushOut))
-	{
-		SetSysVol();
-		TempVol = FALSE;
-		IsSleepModeOn = FALSE;
-		APP_DBG("Kai shu push out sleep mode!!!\n");
-	}
-	else if (IsSleepModeOn)
-	{
-		TempVol--;
-		TempVol %= gSys.Volume;
-		
-		if(TempVol > SLEEP_VOLUME_VAL) {
-			MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
-			MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
-			APP_DBG("Kai shu sleep mode volume down!!! %d;\n", TempVol);
-			McuSyncWiFiVolume(TempVol);
-		}
-		else {
-			Mcu_SendCmdToWiFi(MCU_SLP_PWR, NULL);
-		}
+	else {
+		Mcu_SendCmdToWiFi(MCU_SLP_PWR, NULL);
 	}
 
 	return gSys.Volume-SLEEP_VOLUME_VAL;
@@ -798,17 +798,19 @@ void WiFiEthStateSet(uint8_t State)
 //WiFi模组互联网络连接状态设置
 void WiFiWwwStateSet(uint8_t State)
 {
+	if (WIFI_STATUS_WWW_ENABLE == State) {
 #ifdef FUNC_BREAKPOINT_EN	
-	BP_SYS_INFO *pSysInfo;
+		BP_SYS_INFO *pSysInfo;
 
-	pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
-	gSys.IsWiFiRepeatPowerOn = TRUE;
-	BP_SET_ELEMENT(pSysInfo->IsWiFiRepeatPowerOn, gSys.IsWiFiRepeatPowerOn);
-	BP_SaveInfo(BP_SAVE2NVM);
+		pSysInfo = (BP_SYS_INFO *)BP_GetInfo(BP_SYS_INFO_TYPE);
+		gSys.IsWiFiRepeatPowerOn = TRUE;
+		BP_SET_ELEMENT(pSysInfo->IsWiFiRepeatPowerOn, gSys.IsWiFiRepeatPowerOn);
+		BP_SaveInfo(BP_SAVE2NVM);
 #ifdef BP_SAVE_TO_FLASH // 掉电记忆
-	BP_SaveInfo(BP_SAVE2FLASH);
+		BP_SaveInfo(BP_SAVE2FLASH);
 #endif
 #endif
+	}
 
 	gWiFi.WWWState = State;
 }
@@ -871,7 +873,7 @@ void WiFiRequestMcuPowerOff(void)
 {
 	static uint8_t PowerOffCnt = 0;
 	
-	if(WiFiFirmwareUpgradeStateGet() != TRUE)
+	if(!WiFiFirmwareUpgradeStateGet())
 	{	
 		//断点信息保存
 		AudioSysInfoSetBreakPoint();
@@ -1279,13 +1281,6 @@ void McuSyncWiFiVolume(uint8_t Vol)
 		TempVol = ((Vol*100)/MAX_VOLUME);
 	}
 
-	if(TempVol > WiFiKaiShuVolumeMaxGet())
-	{
-		TempVol = WiFiKaiShuVolumeMaxGet();
-		gSys.Volume = TempVol / (100 / MAX_VOLUME);
-		SetSysVol();
-	}
-
 	Mcu_SendCmdToWiFi(MCU_CUR_VOL, &TempVol);
 }
 
@@ -1498,7 +1493,8 @@ void WiFiTalkStateSet(bool State)
 		}	
 		PcmFifoClear();
 		PhubPathClose(ALL_PATH_CLOSE); 
-		PhubPathSel(ADCIN2PMEM_IISIN2DACOUT_PCMFIFO2IISOUT);				
+		PhubPathSel(ADCIN2PMEM_IISIN2DACOUT_PCMFIFO2IISOUT);	
+		//PhubPathSel(ADCIN2PMEM_PCMFIFO2DACOUT);
 		MixerUnmute(MIXER_SOURCE_MIC);
 		MixerUnmute(MIXER_SOURCE_ANA_STERO);
 		gSys.MicEnable = TRUE;		
@@ -1709,6 +1705,11 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 			TimeSecond += (SecondData[RcvCnt-1] - 0x30) * Times;
 			Times *= 10;
 		}
+
+		if (60 >= TimeSecond) {
+			TimeSecond = 70;
+			APP_DBG("change alarm time to 70S;\n");
+		}
 		
 		WiFiDataRcvStartFlag = FALSE;
 		sRtcControl->AlarmNum = 1;
@@ -1731,13 +1732,6 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 			}
 		}
 #if 1
-		//RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
-
-		AlarmTime.WDay = sRtcControl->AlarmTime.WDay;
-		AlarmTime.Year = sRtcControl->AlarmTime.Year;
-		AlarmTime.Mon = sRtcControl->AlarmTime.Mon;
-		AlarmTime.Date = sRtcControl->AlarmTime.Date;
-
 		CurRtcTimeSecond = (sRtcControl->DataTime.Hour * 3600) + (sRtcControl->DataTime.Min * 60) + sRtcControl->DataTime.Sec;
 		
 		APP_DBG("Time(%d/%d; %02d:%02d:%02d)!!!\n", TimeSecond, CurRtcTimeSecond, sRtcControl->DataTime.Hour, sRtcControl->DataTime.Min, sRtcControl->DataTime.Sec);
@@ -1752,10 +1746,12 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 
 		RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &AlarmTime);
 		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
-		APP_DBG("WifiSerRtcAralmTime(AralmNum:%d; %02d:%02d:%02d)!!!\n", sRtcControl->AlarmNum, 
+		APP_DBG("WifiSetRtcAralmTime(AralmNum:%d; %02d:%02d:%02d)!!!\n", sRtcControl->AlarmNum, 
 	        	sRtcControl->AlarmTime.Hour, sRtcControl->AlarmTime.Min, sRtcControl->AlarmTime.Sec);
+#ifdef FUNC_RTC_ALARM		
+		NvmWrite(RTC_NVM_START_ADDR, (uint8_t *)&sNvmRtcInfo, sizeof(NVM_RTC_INFO));
 #endif
-
+#endif
 	}
 #endif
 #endif
@@ -2154,7 +2150,7 @@ void WiFiStateCheck(void)
 		return;
 	}
 	
-	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (gSys.CurModuleID <= MODULE_ID_END))
+	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (MODULE_ID_END > gSys.CurModuleID))
 	{
 		WiFiRequestMcuPowerOff();	
 	}		
@@ -2184,33 +2180,29 @@ void WiFiStateCheck(void)
 	
 	if(IsTimeOut(&WiFiCmdRespTimer))
 	{
-		if(!(WiFiFactoryStateGet() || WiFiFirmwareUpgradeStateGet()))
+		gWiFi.BatPowerPercent = GetCurBatterLevelAverage();
+		if(gWiFi.BatPowerPercentBak == 0)
 		{
-			
-			gWiFi.BatPowerPercent = GetCurBatterLevelAverage();
-			if(gWiFi.BatPowerPercentBak == 0)
-			{
-				gWiFi.BatPowerPercentBak = gWiFi.BatPowerPercent;
-			}
-			APP_DBG("Get Cur Batter Level Average = %d\n", gWiFi.BatPowerPercent);
-
-			if(gWiFi.ChargeStatusFlag && (gWiFi.BatPowerPercentBak < gWiFi.BatPowerPercent)) 
-			{
-				gWiFi.BatPowerPercentBak++;
-			}
-			else if(!gWiFi.ChargeStatusFlag && (gWiFi.BatPowerPercentBak > gWiFi.BatPowerPercent)) 
-			{
-				gWiFi.BatPowerPercentBak--;
-			}
-			
-			if(gWiFi.BatPowerPercentBak <= 1)
-			{
-				gWiFi.BatPowerPercentBak = 1;
-				Mcu_SendCmdToWiFi(MCU_BAT_LOW, NULL);
-			}
-			WaitMs(10);
-			Mcu_SendCmdToWiFi(MCU_BAT_VAL, &gWiFi.BatPowerPercentBak);
+			gWiFi.BatPowerPercentBak = gWiFi.BatPowerPercent;
 		}
+		APP_DBG("Get Cur Batter Level Average = %d\n", gWiFi.BatPowerPercent);
+
+		if(gWiFi.ChargeStatusFlag && (gWiFi.BatPowerPercentBak < gWiFi.BatPowerPercent)) 
+		{
+			gWiFi.BatPowerPercentBak++;
+		}
+		else if(!gWiFi.ChargeStatusFlag && (gWiFi.BatPowerPercentBak > gWiFi.BatPowerPercent)) 
+		{
+			gWiFi.BatPowerPercentBak--;
+		}
+
+		if(gWiFi.BatPowerPercentBak <= 1)
+		{
+			gWiFi.BatPowerPercentBak = 1;
+			Mcu_SendCmdToWiFi(MCU_BAT_LOW, NULL);
+		}
+		WaitMs(10);
+		Mcu_SendCmdToWiFi(MCU_BAT_VAL, &gWiFi.BatPowerPercentBak);
 		TimeOutSet(&WiFiCmdRespTimer, WIFI_STATE_CHECK_TIME);
 	}
 #endif
@@ -2378,7 +2370,7 @@ void WiFiLedCb(void* Param)
 	}
 	
 	LedBlinkCnt++;
-	if((WiFiFirmwareUpgradeStateGet() == TRUE) || (WiFiFactoryStateGet() == TRUE))
+	if(WiFiFirmwareUpgradeStateGet() || WiFiFactoryStateGet())
 	{
 		LED_WHITE_MODE_OFF();
 		TimeOutSet(&WiFiLedBlinkTimer, 400);
@@ -2540,7 +2532,6 @@ uint32_t WiFiControl(void)
 	SW_TIMER WiFiInTimer;
 	//凯叔哄睡设置参数
 	TIMER KaiShuSleepTimer;
-	uint32_t SetTimerVal;
 #ifndef FUNC_WIFI_POWER_KEEP_ON
 	uint8_t WiFiInitStep;
 #endif
@@ -2673,9 +2664,9 @@ uint32_t WiFiControl(void)
 			Mcu_SendCmdToWiFi(MCU_TALK_ON, NULL);
 		}
 		//凯叔哄睡模式音量调整。
-		if(IsTimeOut(&KaiShuSleepTimer) && (WIFI_PLAY_KAISHU_RADIO_SLEEP == gWiFi.KaiShuRadio))
+		if(IsTimeOut(&KaiShuSleepTimer) && WiFiKaiShuSleepModeGet())
 		{
-			SetTimerVal = 1800000/WiFiKaiShuSleepModeDeal(FALSE,FALSE);
+			uint32_t SetTimerVal = 1800000/WiFiKaiShuSleepModeDeal();
 			TimeOutSet(&KaiShuSleepTimer, SetTimerVal);
 		}
 
@@ -2685,10 +2676,10 @@ uint32_t WiFiControl(void)
 		{	
 			case MSG_COMMON_CLOSE:  //WiFi模式只有收到这个消息才会退出
 			case MSG_MODE:        //working mode changing
-				if(WiFiFirmwareUpgradeStateGet() == TRUE)
+				if(WiFiFirmwareUpgradeStateGet())
 				{
 					gSys.NextModuleID = MODULE_ID_UNKNOWN;
-				  Msg = MSG_NONE;
+					Msg = MSG_NONE;
 				}
 				else
 				{
@@ -2752,17 +2743,11 @@ uint32_t WiFiControl(void)
 				break;
 
 			case MSG_WIFI_GROUP:
-				if(gSys.CurModuleID == MODULE_ID_WIFI)
-				{
-					Mcu_SendCmdToWiFi(MCU_JNGROUP, NULL);
-				}
+				Mcu_SendCmdToWiFi(MCU_JNGROUP, NULL);
 				break;
 
 			case MSG_WIFI_UNGROUP:
-				if(gSys.CurModuleID == MODULE_ID_WIFI)
-				{
-					Mcu_SendCmdToWiFi(MCU_UNGROUP, NULL);
-				}
+				Mcu_SendCmdToWiFi(MCU_UNGROUP, NULL);
 				break;
 
 			case MSG_REPEAT:
@@ -2828,10 +2813,7 @@ uint32_t WiFiControl(void)
 				break;
 
 			case MSG_WIFI_SAVE:
-				if(gSys.CurModuleID == MODULE_ID_WIFI)
-				{
-					Mcu_SendCmdToWiFi(MCU_PLY_LKE, NULL);
-				}
+				Mcu_SendCmdToWiFi(MCU_PLY_LKE, NULL);
 				break;
 
 			default:

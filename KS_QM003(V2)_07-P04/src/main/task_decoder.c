@@ -277,6 +277,9 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
         MixerMute(MIXER_SOURCE_DEC);
         WaitMs(100);
 	}
+
+	//20190716,提示音播放中重新设置音频通路，避免音频通路异常。
+	AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC : AUDIO_CH_NONE);	
 	
 #ifdef FUNC_WIFI_EN
 #ifdef FUNC_OUTPUT_CHANNEL_AUTO_CHANGE		
@@ -292,6 +295,7 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
 		}
 	}
 #endif
+
 #ifdef FUNC_KEEP_ON_MIC_IN_I2S_OUT_EN
 	if((gSys.CurModuleID == MODULE_ID_I2SIN) || (gSys.CurModuleID == MODULE_ID_WIFI) 
 	|| (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_SD)|| (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_USB))
@@ -375,6 +379,7 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
 		Mcu_SendCmdToWiFi(MCU_PLY_PLA, NULL);
 	}
 #endif
+	
 #ifdef FUNC_KEEP_ON_MIC_IN_I2S_OUT_EN
 	if((gSys.CurModuleID == MODULE_ID_I2SIN) || (gSys.CurModuleID == MODULE_ID_WIFI) 
 	|| (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_SD)|| (gSys.CurModuleID == MODULE_ID_PLAYER_WIFI_USB))
@@ -409,6 +414,39 @@ bool DecoderTaskSyncPlay(void* FileHandle, uint8_t FileType)
 	MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[TempVol], gDecVolArr[TempVol]);
 	MixerSetFadeSpeed(MIXER_SOURCE_DEC, DEC_FADEIN_TIME, 10);
 	MixerUnmute(MIXER_SOURCE_DEC);
+
+	//20190716,提示音播放中重新设置音频通路，避免音频通路异常。
+	switch (gSys.CurModuleID)
+	{
+		case MODULE_ID_LINEIN:
+			AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC_LINEIN : AUDIO_CH_LINEIN);
+			break;
+
+		case MODULE_ID_RADIO:
+			AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC_FM : AUDIO_CH_FM);
+			break;
+
+		case MODULE_ID_PLAYER_SD:  // enter into module player
+		case MODULE_ID_PLAYER_USB: // enter into module player		
+		case MODULE_ID_BLUETOOTH:  // BT shares the same entry func.
+			AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC : AUDIO_CH_NONE);
+			break;
+
+		case MODULE_ID_I2SIN:
+		case MODULE_ID_WIFI:
+		case MODULE_ID_PLAYER_WIFI_SD:
+		case MODULE_ID_PLAYER_WIFI_USB:
+		#ifdef FUNC_WIFI_TALK_AND_AUDIO_EFFECT_EN
+			AudioAnaSetChannel(AUDIO_CH_MIC_I2SIN); 
+		#else
+			AudioAnaSetChannel(AUDIO_CH_I2SIN); 
+		#endif
+			break;
+
+		default:
+			AudioAnaSetChannel(gSys.MicEnable ? AUDIO_CH_MIC : AUDIO_CH_NONE);	
+			break;
+	}
 	
 	if(DecoderTaskState_Bak != DECODER_STATE_STOP)
 	{

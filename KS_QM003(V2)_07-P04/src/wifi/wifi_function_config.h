@@ -40,8 +40,13 @@ extern "C" {
 //#define FUNC_WIFI_SPOTIFY_NEED_EN 					//打开此宏定义，支持Spotify认证
 //#define FUNC_WIFI_I2S_BYPASS_NEED_EN 				//打开此宏定义，支持I2SBypass模式
 #define FUNC_WIFI_PASS_THROUGH_DATA_EN				//打开此宏定义，支持WiFi 透传数据功能
-
+#define FUNC_KAI_SHU_VOLUME_MAX_EN					//凯叔项目，音量围栏
 #endif
+
+#ifdef __cplusplus
+extern "C" {
+#endif//__cplusplus
+
 #endif
 
 

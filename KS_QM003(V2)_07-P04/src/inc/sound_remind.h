@@ -136,18 +136,7 @@ typedef enum _SOUND_ID
 	SOUND_ALARM_RING4,	            //闹钟铃声4
 	SOUND_ALARM_RING5,				//闹钟铃声5
 
-	SOUND_PWKON_RING1,	            //开机提示音1
-	SOUND_PWKON_RING2,	            //开机提示音2
-	SOUND_PWKON_RING3,	            //开机提示音3
-	SOUND_PWKON_RING4,	            //开机提示音4
-	SOUND_PWKON_RING5,				//开机提示音5
-	SOUND_PWKON_RING6,	            //开机提示音2
-	SOUND_PWKON_RING7,	            //开机提示音3
-	SOUND_PWKON_RING8,	            //开机提示音4
-	SOUND_PWKON_RING9,				//开机提示音5
-
-	SOUND_SLEEP_RING1,				//睡眠提示音1
-	SOUND_SLEEP_RING2,				//睡眠提示音2
+	SOUND_SLEEP_RING,				//睡眠提示音1
 	
 	SOUND_BT_STATE_READY_RING,
 	SOUND_BT_STATE_UNREADY_RING,

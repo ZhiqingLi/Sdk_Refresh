@@ -130,11 +130,11 @@ const uint16_t gHfVolArr[MAX_BTHF_VOLUME + 1] =
 //decoder音量表
 const uint16_t gDecVolArr[MAX_VOLUME + 1] =
 {
-	0,
-	46,		81,		116,	162,	209,	258,	307,	368,
-	521,	607,	685,	747,	803,	884,	940,	1035,
-	1132,	1281,	1460,	1581,	1736,	1948,	2180,	2435,
-	2618,	2833,	3086,	3204,	3434,	3606,	3800,	4096
+	80,
+	196,	308,	420,	538,	640,	755,	865,	978,
+	1086,	1198,	1315,	1435,	1532,	1644,	1732,	1845,
+	1932,	2011,	2170,	2321,	2486,	2608,	2750,	2885,
+	3028,	3163,	3296,	3444,	3604,	3766,	3920,	4096
 };
 
 #ifdef FUNC_REC_PLAYBACK_EN
@@ -152,11 +152,11 @@ const uint16_t gRecPlayVolArr[MAX_VOLUME + 1] =
 //LINEIN、FM音量表
 const uint16_t gAnaVolArr[MAX_VOLUME + 1] =
 {
-	0,
-	46,		81,		116,	162,	209,	258,	307,	368,
-	521,	607,	685,	747,	803,	884,	940,	1035,
-	1132,	1281,	1460,	1581,	1736,	1948,	2180,	2435,
-	2618,	2833,	3086,	3204,	3434,	3606,	3800,	4096
+	80,
+	196,	308,	420,	538,	640,	755,	865,	978,
+	1086,	1198,	1315,	1435,	1532,	1644,	1732,	1845,
+	1932,	2011,	2170,	2321,	2486,	2608,	2750,	2885,
+	3028,	3163,	3296,	3444,	3604,	3766,	3920,	4096
 };
 
 #ifdef FUNC_MIC_EN
@@ -176,6 +176,9 @@ void SetSysVol(void)
 	uint16_t LeftVol;
 	uint16_t RightVol;
 	uint8_t TempVol;
+#ifdef FUNC_KAI_SHU_VOLUME_MAX_EN
+	uint8_t KaiShuVolMax = WiFiKaiShuVolumeMaxGet();
+#endif
 	
 	if(gSys.Volume > MAX_VOLUME)
 	{
@@ -217,6 +220,16 @@ void SetSysVol(void)
 		MixerConfigVolume(MIXER_SOURCE_DEC, gRecPlayVolArr[gSys.Volume], gRecPlayVolArr[gSys.Volume]);
 	}
 #endif
+#ifdef FUNC_KAI_SHU_VOLUME_MAX_EN
+	else
+	{
+		MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[TempVol]*KaiShuVolMax/100, gDecVolArr[TempVol]*KaiShuVolMax/100);
+	}
+	
+	MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol]*KaiShuVolMax/100, gAnaVolArr[TempVol]*KaiShuVolMax/100);
+	MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol]*KaiShuVolMax/100, gAnaVolArr[TempVol]*KaiShuVolMax/100);
+	APP_DBG("Kaishu volume max : %d;\n", KaiShuVolMax);
+#else
 	else
 	{
 		MixerConfigVolume(MIXER_SOURCE_DEC, gDecVolArr[TempVol], gDecVolArr[TempVol]);
@@ -224,6 +237,7 @@ void SetSysVol(void)
 	
 	MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]);
 	MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[TempVol], gAnaVolArr[TempVol]); 
+#endif
 
 #ifdef FUNC_MIC_EN	
 	if(gSys.MicVolume > MAX_MICIN_VOLUME)
@@ -1341,18 +1355,12 @@ void CommonMsgProccess(uint16_t Msg)
 
 		//低电提示音
 		case MSG_BAT_LOW_PWR:
-			{
-				const uint8_t low_power_remind[2] = {SOUND_BAT_LOW_PWR, SOUND_BAT_LOW_PWR1};
-				SoundRemind(low_power_remind[GetRandNum(2)-1]);
-			}
+			SoundRemind(SOUND_BAT_LOW_PWR);
 			break;
 
 		//休眠提示音
 		case MSG_SOUND_SLEEP_ON:
-			{
-				const uint8_t sleep_remind[2] = {SOUND_SLEEP_RING1, SOUND_SLEEP_RING2};
-				SoundRemind(sleep_remind[GetRandNum(2)-1]);
-			}
+			SoundRemind(SOUND_SLEEP_RING);
 			break;
 
 		//童锁提示音

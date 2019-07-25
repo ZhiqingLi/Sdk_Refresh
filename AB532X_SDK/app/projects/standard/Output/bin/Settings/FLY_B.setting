@@ -48,7 +48,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="FLY_B" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="00:00:00:00:00:09" />
+        <add key="bt_addr" value="00:00:00:00:00:0F" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="FF:FF:FF:FF:FF:FF" />
@@ -98,8 +98,8 @@
         <add key="music_flac_support" value="False" />
         <add key="music_sdcard_en" value="False" />
         <add key="music_udisk_en" value="False" />
-        <add key="sddet_iosel" value="19" />
-        <add key="sd1det_iosel" value="28" />
+        <add key="sddet_iosel" value="0" />
+        <add key="sd1det_iosel" value="0" />
         <add key="fmrx_rfcap_val" value="0" />
         <add key="fmrx_threshold_val" value="128" />
         <add key="aux_2_sdadc_en" value="True" />
@@ -109,7 +109,7 @@
         <add key="aux_dig_gain" value="0" />
         <add key="auxl_sel" value="4" />
         <add key="auxr_sel" value="4" />
-        <add key="linein_det_iosel" value="30" />
+        <add key="linein_det_iosel" value="0" />
         <add key="user_pwrkey_en" value="True" />
         <add key="user_adkey_en" value="False" />
         <add key="user_adkey2_en" value="False" />

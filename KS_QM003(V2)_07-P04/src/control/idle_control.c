@@ -34,8 +34,7 @@ void IdleControl(void)
 
 	if (IsInCharge()) {
 		SoundRemind(SOUND_CHARGING);
-	} 
-
+	}
 
 #ifdef FUNC_AMP_MUTE_EN
 	AmpMuteControl(TRUE);
@@ -50,15 +49,12 @@ void IdleControl(void)
 	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, FALSE);
 	SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, FALSE);
 #endif
-	
+
+	AudioAnaSetChannel(AUDIO_CH_NONE);
 	TimeOutSet(&ChargeLedTmr, 0);
 	SetModeSwitchState(MODE_SWITCH_STATE_DONE);
-	//while(Msg != MSG_COMMON_CLOSE)
-	while (IsInCharge())
+	while(Msg != MSG_COMMON_CLOSE)
 	{
-#ifdef FUNC_WIFI_POWER_KEEP_ON
-		WiFiPowerOff();
-#endif
 		Msg = MsgRecv(20);// 消息接收，无消息阻塞20ms，有消息立即返回
 		
 		if(IsTimeOut(&ChargeLedTmr))
@@ -85,28 +81,19 @@ void IdleControl(void)
 	}
 	
 	APP_DBG("Exit Idle\n");
-	
-#ifdef FUNC_WIFI_POWER_KEEP_ON
-	WiFiControlGpioInit();	
-	WaitMs(500);
-	WiFiPowerOn();
-#endif
 
+	if (MODULE_ID_END > gSys.NextModuleID) {
 #ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_NIGHTLAMP, TRUE);
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
 #endif
-
-	if(!IS_RTC_WAKEUP())
-	{
-		extern const uint8_t frist_poweron_remind[3];
-		extern const uint8_t repeat_poweron_remind[6];
-		
-		if (gSys.IsWiFiRepeatPowerOn) {
-			SoundRemind(repeat_poweron_remind[GetRandNum(6)-1]);
-		}
-		else {
-			SoundRemind(frist_poweron_remind[GetRandNum(3)-1]);
-		}
-	}	
+#ifdef FUNC_WIFI_POWER_KEEP_ON
+		WiFiControlGpioInit();	
+		WaitMs(500);
+		WiFiPowerOn();
+#endif
+		if(!IS_RTC_WAKEUP())
+		{
+			SoundRemind(SOUND_PWR_ON);
+		}	
+	}
 }

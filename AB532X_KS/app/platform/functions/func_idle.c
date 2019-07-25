@@ -27,7 +27,7 @@ static u8 spi1_getbyte(void)
     return SPI1BUF;
 }
 
-//SPI接口发送1Byte数据
+//SPI接口发�?Byte数据
 AT(.text.func.idle)
 static void spi1_sendbyte(u8 data)
 {
@@ -198,7 +198,7 @@ void func_idle_process(void)
 static void func_idle_enter(void)
 {
 #if PLUGIN_FUNC_IDLE_ENTER_CHECK
-    if (!plugin_func_idle_enter_check()) {  //可以处理开机, 判断是否要停在idle模式, 等待设备插入的方案.
+    if (!plugin_func_idle_enter_check()) {  //可以处理开�? 判断是否要停在idle模式, 等待设备插入的方�?
         return;
     }
 #endif
@@ -206,7 +206,9 @@ static void func_idle_enter(void)
     spi1_init(SPI_BAUD);
     spi1_cs_init();
 #if USER_EXT_POWERON_EN
-	EXT_GPIO_POWERON(); 					//20190224，进入开机时打开外部电源�?
+	if (!get_extern_on_state()) {
+		EXT_GPIO_POWERON(); 					//20190224，进入开机时打开外部电源�?
+	}
 #endif //USER_EXT_POWERON_EN
 }
 

@@ -41,7 +41,7 @@ extern "C" {
 #define CFG_VOLUME_DAC_ANALOG                  (   47)  //47: 1.66 dB
 #define CFG_VOLUME_DAC_DIGITAL                 (  255)  //255: 0.000 dB
 //The following volume macros are defined for SDK
-#define VOLUME_ADC_ANA_MIC                     (   11)
+#define VOLUME_ADC_ANA_MIC                     (   31)
 #define VOLUME_ADC_ANA_LIN1                    (    5)
 #define VOLUME_ADC_ANA_LIN23                   (   16)
 #define VOLUME_ADC_DIGITAL                     ( 4095)

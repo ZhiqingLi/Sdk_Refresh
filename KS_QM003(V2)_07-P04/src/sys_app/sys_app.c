@@ -145,7 +145,7 @@ void SysVarInit(void)
 	gSys.Volume = BP_GET_ELEMENT(pBpSysInfo->Volume);
 	gSys.Eq = BP_GET_ELEMENT(pBpSysInfo->Eq);
 #ifndef POWERON_DEFAULT_VOLUME_EN
-	if(gSys.Volume > MAX_VOLUME || gSys.Volume < 7)
+	if(gSys.Volume > MAX_VOLUME || gSys.Volume < 7 || IS_RTC_WAKEUP())
 #endif
 	{
 		gSys.Volume = DEFAULT_VOLUME;
@@ -396,7 +396,7 @@ bool MsgCheck(uint16_t Msg)
 {
 	int32_t		ret = 0;
 	ret = OSQueueMsgIOCtl(MSGQ_IOCTL_PEEK_TASKMSG, Msg);
-	//APP_DBG("检查指定消息Msg = %x，ret = %d!\n", Msg, ret);
+	APP_DBG("检查指定消息Msg = %x，ret = %d!\n", Msg, ret);
 	return (ret == 0 ? FALSE:TRUE);
 }
 
