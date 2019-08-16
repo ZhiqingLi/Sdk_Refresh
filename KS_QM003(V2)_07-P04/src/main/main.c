@@ -152,7 +152,6 @@ int32_t main(void)
 	WiFiControlGpioInit();
 #endif
 	
-	
 #ifdef FUNC_5VIN_TRIM_LDO3V3   	
 	SarAdcTrimLdo3V3();   //attention! only used in Power = 5V
 #endif
@@ -319,6 +318,9 @@ int32_t main(void)
 #ifdef FUNC_SOUND_REMIND
 	SoundRemindInit();
 #endif
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+	IsRmsPcmDataRemindInit();
+#endif
 #ifdef FUNC_SOFT_ADJUST_EN
 	SoftAdjustInit(2);
 #endif
@@ -390,7 +392,6 @@ int32_t main(void)
 #ifdef FUNC_GPIO_POWER_ON_EN
 	SysPowerOnControl(TRUE);
 #endif
-
 	while(1)
 	{
 		//feed watch dog ever 10 ms
@@ -428,11 +429,11 @@ int32_t main(void)
 #ifdef FUNC_SOUND_REMIND
 		|| IsSoundRemindPlaying()
 #endif
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+		|| IsRmsPcmDataReminding()
+#endif
 #ifdef FUNC_BT_HF_EN
 		|| (GetHfTransferState() == TRUE)	
-#endif
-#ifdef FUNC_WIFI_EN
-		//|| IsWiFiSoundRemindPlaying()
 #endif
 #ifdef FUNC_KEY_BEEP_SOUND_EN
 		|| !IsBeepSoundEnd()
@@ -463,9 +464,11 @@ int32_t main(void)
 		) {
 			if(gSys.SleepTimeCnt >= 6000*SLEEP_POWEROFF_TMR)
 			{
-				if(MODULE_ID_POWEROFF != gSys.NextModuleID)
+				extern TIMER PowerOffDetectTimer;
+				if((MODULE_ID_POWEROFF != gSys.CurModuleID) && IsTimeOut(&PowerOffDetectTimer))
 				{		   
 					//WiFiRequestMcuPowerOff();
+					TimeOutSet(&PowerOffDetectTimer, 500);
 					gSys.NextModuleID = MODULE_ID_POWEROFF;
 					MsgSend(MSG_COMMON_CLOSE);
 					gSys.SleepStartPowerOff = TRUE;
@@ -520,6 +523,10 @@ int32_t main(void)
 				RtcOffDelay = 0;
 			}
 		}
+#endif
+
+#ifdef FUNC_WIFI_POWER_KEEP_ON
+		WiFiPowerOnInitProcess();		   //ÎªÁËÅäÖÃWiFi´®¿Ú
 #endif
 	}
 }

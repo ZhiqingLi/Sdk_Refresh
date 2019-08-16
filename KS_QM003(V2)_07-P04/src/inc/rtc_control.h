@@ -104,13 +104,25 @@ typedef struct _RTC_CONTROL_
 	SW_TIMER TimerHandle;
 } RTC_CONTROL;
 
-// 默认 自动闹铃3次、闹铃间隔5分钟
-// 闹钟闹铃信息，这部分由客户自行完成
+///////////////////////////////////////////////////////////
+//掉电记忆相关，该部分代码仅仅保存于NVM，不会保存于Flash
+//标志SDK未去实现闹钟响铃处理，该部分代码由客户自己添加完成
+typedef struct _NVM_ALARM_INFO_
+{	
+	uint8_t RingType : 4; // 铃声类型 INTER_RING_TYPE - 内置铃声、USB_RING_TYPE - U盘铃声、SD_RING_TYPE - SD卡铃声
+	uint8_t Duration : 2; // 闹铃持续时间 0 - 30s、1 - 1分钟、2 - 2分钟、3 - 3分钟
+	uint8_t RepeatCnt: 2; // 重复次数
+	uint32_t FileAddr;    // 文件扇区号
+	uint8_t CRC8;         // 文件名校验码
+	
+} ALARM_RING_INFO;
 
+
+// 默认 自动闹铃3次、闹铃间隔5分钟
 typedef struct _NVM_RTC_INFO_
 {
-	uint8_t 		AlarmVolume[MAX_ALARM_NUM+1];   // 闹钟铃声音量
-	uint8_t			RingType[MAX_ALARM_NUM+1]; 		// 铃声类型 INTER_RING_TYPE - 内置铃声、USB_RING_TYPE - U盘铃声、SD_RING_TYPE - SD卡铃声
+	uint8_t 		AlarmVolume;					// 闹钟铃声音量
+	ALARM_RING_INFO	AlarmRingList[MAX_ALARM_NUM];	// 闹钟闹铃信息，这部分由客户自行完成
 	ALARM_TIME_INFO AlarmTimeList[MAX_ALARM_NUM];	// 闹钟时间信息
 	
 } NVM_RTC_INFO;

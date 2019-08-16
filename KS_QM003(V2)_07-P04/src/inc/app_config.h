@@ -32,13 +32,15 @@ extern "C" {
 #include "wifi_init_setting.h"
 #include "wifi_mcu_command.h"
 #include "wifi_wifi_command.h"
+#ifdef FUNC_RTC_AT8563T_EN
+#include "rtc_at8563.h"
+#endif
 
 //****************************************************************************************
 //					用户项目定义
 //****************************************************************************************
 #define FUNC_ALEXA_WIFI_EN
 //#define FUNC_POWERON_USB_UPDATA_EN						//开机检查U盘升级
-#define FUNC_SPI_SLAVE_EN   
 
 //****************************************************************************************
 //                 			WiFi 模组控制硬件配置        
@@ -233,13 +235,8 @@ extern "C" {
 //                 			WiFi 电源控制GPIO 配置       
 //****************************************************************************************
 #ifdef FUNC_ALEXA_WIFI_EN
-	#ifdef FUNC_SPI_SLAVE_EN
 	#define WIFI_POWER_PORT_OUT				GPIO_A_OUT
 	#define WIFI_POWER_PORT_BIT				GPIOA24
-	#else
-	#define WIFI_POWER_PORT_OUT				GPIO_B_OUT
-	#define WIFI_POWER_PORT_BIT				GPIOB23
-	#endif
 #endif
 #ifdef WIFI_POWER_PORT_BIT
 	#define WIFI_POWER_PORT_IE				(WIFI_POWER_PORT_OUT + 1)
@@ -524,9 +521,17 @@ extern "C" {
 //****************************************************************************************
 //获取一个随机数，原是在player_control.c中定义的，为了方便使用，改为定义在app_config.h中
 //****************************************************************************************
+	#define GetRandNum(MaxValue) ((OSSysTickGet()%MaxValue) + 1) 
 
-  #define GetRandNum(MaxValue) ((OSSysTickGet()%MaxValue) + 1) 
-	
+//****************************************************************************************
+//此功能用于音乐播放中MIX提示音。
+//****************************************************************************************
+	//#define CFG_WAV_REMINDSOUND_MIX_EN
+
+	#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+		#include "audio_file.h"	
+	#endif
+
 //****************************************************************************************
 //                  系统默认音量配置         
 //****************************************************************************************
@@ -777,6 +782,8 @@ extern "C" {
 //****************************************************************************************
 //                 SPI 从机控制配置 
 //****************************************************************************************					
+	#define FUNC_SPI_SLAVE_EN 
+	
 	#ifdef FUNC_SPI_SLAVE_EN
 		#include "spi_slave.h"
 		
@@ -820,9 +827,6 @@ extern "C" {
 		#define AMP_MUTE_PORT_OE				(AMP_MUTE_PORT_OUT + 2)
 		#define AMP_MUTE_PORT_PU				(AMP_MUTE_PORT_OUT + 5)
 		#define AMP_MUTE_PORT_PD				(AMP_MUTE_PORT_OUT + 6)
-
-		
-		#ifdef FUNC_SPI_SLAVE_EN
 		
 		#define GpioAmpMuteEnable() 			do{\
 												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
@@ -839,23 +843,6 @@ extern "C" {
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
 												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
-		#else
-		#define GpioAmpMuteEnable()				do{\
-												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
-												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
-												}while(0)
-
-		#define GpioAmpMuteDisable()			do{\
-												GpioSetRegOneBit(AMP_MUTE_PORT_PU, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
-												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
-												}while(0)
-		#endif
 	#else
 	
 		#define GpioAmpMuteEnable()	
@@ -955,7 +942,7 @@ extern "C" {
 	#ifdef FUNC_RTC_EN
 		#define FUNC_RTC_ALARM 				//alarm功能
 		#define FUNC_RTC_LUNAR
-		#define FUNC_RTC_ALARM_SAVE2FLASH 	//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
+		//#define FUNC_RTC_ALARM_SAVE2FLASH 	//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
 		#define IS_RTC_WAKEUP()				(WAKEUP_FLAG_POR_RTC&gSys.WakeUpSource)
 		#define RTC_WAKEUP_FLAG_CLR()		(gSys.WakeUpSource &= ~WAKEUP_FLAG_POR_RTC)
 	#endif
@@ -1195,11 +1182,7 @@ extern "C" {
 
 	#define FUNC_ADC_ADJUST_VOLUME_EN               		//打开该宏定义，支持ADC检测调整音量
 	#ifdef FUNC_ADC_ADJUST_VOLUME_EN
-	#ifdef FUNC_SPI_SLAVE_EN
 		#define ADC_ADJUST_VOLUME_PORT	  ADC_CHANNEL_B23 
-	#else
-		#define ADC_ADJUST_VOLUME_PORT    ADC_CHANNEL_B22 
-	#endif
 	#endif
 
 //	#define ADC_POWER_MONITOR_EN               				//打开该宏定义，则电源检测在ADC检测电池电压

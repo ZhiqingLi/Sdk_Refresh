@@ -1899,7 +1899,7 @@ void DispRtc(bool DispState)
 				break;
 				
 			case RTC_SET_ALARM_SOURCE:
-				if(sNvmRtcInfo.RingType[sRtcControl->AlarmNum] == RTC_RING_SDCARD_TYPE)
+				if(sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType == RTC_RING_SDCARD_TYPE)
 				{
 					DispString("S-SD");
 				}
@@ -1907,8 +1907,8 @@ void DispRtc(bool DispState)
 				{
 					DispChar('S', 0);
 					DispChar('-', 1);
-					DispChar((sNvmRtcInfo.RingType[sRtcControl->AlarmNum]/10), 2);
-					DispChar((sNvmRtcInfo.RingType[sRtcControl->AlarmNum]%10), 3);
+					DispChar((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType/10), 2);
+					DispChar((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType%10), 3);
 				}
 				DispIcon(ICON_COLON, LIGHT_OFF);
 				break;

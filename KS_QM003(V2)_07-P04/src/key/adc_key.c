@@ -35,7 +35,7 @@
 static const uint16_t AdcKeyEvent[][5] = 
 {
 //	PDS(按键开始)			SPR(短按松开)		  	CPS(长按开始)		  	 CPH(长按保持)			  CPR(长按松开)
-	{MSG_NONE,			MSG_WIFI_FACTORY,	MSG_WIFI_FACTORY,	 MSG_NONE,	  		  MSG_NONE  	},
+	{MSG_NONE,			MSG_NONE,			MSG_WIFI_FACTORY,	 MSG_WIFI_FACTORY,	  MSG_NONE  	},
 	{MSG_NONE,			MSG_NONE,			MSG_WIFI_WPS,      	 MSG_WIFI_WPS,		  MSG_NONE		},	//SW1
 	{MSG_NONE,			MSG_NEXT,  			MSG_NONE, 		     MSG_NONE, 		      MSG_NONE		},	//SW2
 	{MSG_NONE,			MSG_PRE,       		MSG_NONE, 	   	     MSG_NONE,	  		  MSG_NONE		},	//SW3
@@ -175,7 +175,9 @@ uint16_t AdcKeyScan(void)
 				//return key sp value
 				//DBG("ADC KEY SP%bu\n", PreKeyIndex);
 				AdcKeyState = ADC_KEY_STATE_IDLE;
-				return AdcKeyEvent[PreKeyIndex][1];
+				if (KeyIndex == 0xFF) {
+					return AdcKeyEvent[PreKeyIndex][1];
+				}
 			}
 			else if(IsTimeOut(&AdcKeyWaitTimer))
 			{

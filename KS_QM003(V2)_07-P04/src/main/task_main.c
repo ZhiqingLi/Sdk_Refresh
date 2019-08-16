@@ -126,6 +126,10 @@ void GuiTaskEntrance(void)
 #endif
 #endif
 
+#ifdef FUNC_RTC_AT8563T_EN
+	RtcAt8563tInit();
+#endif
+
 	if(gSys.NextModuleID != MODULE_ID_UNKNOWN) // 开机的过程中插入U盘、SD卡，需要做合理的模式切换
 	{
 		gSys.CurModuleID = gSys.NextModuleID;

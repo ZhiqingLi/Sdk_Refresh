@@ -6,7 +6,7 @@
         <add key="func_aux_en" value="False" />
         <add key="func_fmrx_en" value="False" />
         <add key="powkey_10s_reset" value="False" />
-        <add key="ext_power_io_sel" value="None" />
+        <add key="ext_power_io_sel" value="PB4" />
         <add key="spk_mute_en" value="True" />
         <add key="spk_mute_io_sel" value="PE0" />
         <add key="high_mute" value="False" />
@@ -48,7 +48,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="FLY_B" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="00:00:00:00:00:0F" />
+        <add key="bt_addr" value="00:00:00:00:00:18" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="FF:FF:FF:FF:FF:FF" />

@@ -274,7 +274,17 @@ void AudioProcessTaskEntrance(void)
 				if(MixerIsDone(MIXER_SOURCE_MIC) && MixerIsDone(MIXER_SOURCE_ANA_MONO))
 				{
 					//ADC的两个声道数据分开放，前SampleCnt个采样点是ADC一个声道，后SampleCnt个采样点是ADC另一个声道
-					SampleCnt = AdcPcmDataRead((void*)AduioBuf, SampleCnt, 0x04);
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+					if(IsRmsPcmDataReminding())
+					{
+						SampleCnt = MIC_BUF_LEN;
+						SampleCnt = RmsPcmDataRead((void*)AduioBuf, SampleCnt);
+					}
+					else
+#endif
+					{
+						SampleCnt = AdcPcmDataRead((void*)AduioBuf, SampleCnt, 0x04);
+					}
 
 #ifdef FUNC_DC_BLOCKER
 					if(init_dcb_channel != 1)
@@ -358,7 +368,17 @@ void AudioProcessTaskEntrance(void)
 				if(MixerIsDone(MIXER_SOURCE_MIC) && MixerIsDone(MIXER_SOURCE_ANA_STERO))
 				{
 					//ADC的两个声道数据分开放，前SampleCnt个采样点是ADC一个声道，后SampleCnt个采样点是ADC另一个声道
-					SampleCnt = AdcPcmDataRead((void*)AduioBuf, SampleCnt, 0x04);
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+					if(IsRmsPcmDataReminding())
+					{
+						SampleCnt = MIC_BUF_LEN;
+						SampleCnt = RmsPcmDataRead((void*)AduioBuf, SampleCnt);
+					}
+					else
+#endif
+					{
+						SampleCnt = AdcPcmDataRead((void*)AduioBuf, SampleCnt, 0x04);
+					}
 #ifdef FUNC_MIC_ECHO_EN
 					if(!OldMicEnable)
 					{

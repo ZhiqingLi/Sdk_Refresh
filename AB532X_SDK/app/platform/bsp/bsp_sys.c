@@ -902,10 +902,6 @@ void bsp_sys_init(void)
     led_init();
     key_init();
 
-#if USER_EXT_POWERON_EN
-	EXT_GPIO_POWERON();						//20190224，进入开机时打开外部电源�?
-#endif //USER_EXT_POWERON_EN
-
     gui_init();
 #if PWM_RGB_EN
     pwm_init();
@@ -929,6 +925,12 @@ void bsp_sys_init(void)
 #if EX_SPIFLASH_SUPPORT
     exspiflash_init();
 #endif
+
+#if USER_EXT_POWERON_EN
+#if !FUNC_IDLE_EN
+	EXT_GPIO_POWERON(); 					//20190224，进入开机时打开外部电源
+#endif
+#endif //USER_EXT_POWERON_EN
 
 #if WARNING_POWER_ON
     mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);

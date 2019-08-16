@@ -124,8 +124,8 @@ void plugin_saradc_init(u16 *adc_ch)
 
 #if USER_ADC_DETECT_EN
 const uint16_t tbl_adc_detect_val[5][2] = {
-    {0x07, EVT_ADC_DET_IDE},
-    {0x0c, EVT_ADC_DET_LOW}, 
+    {0x01, EVT_ADC_DET_IDE},
+    {0x05, EVT_ADC_DET_LOW}, 
     {0x3f, EVT_ADC_DET_MID},
     {0x7f, EVT_ADC_DET_HIG},
     {0xff, EVT_ADC_DET_HIG},
@@ -140,7 +140,7 @@ void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
 	static uint32_t all_adc_val;
 	static uint16_t jitter_cnt = 0;
 
-	if ((func_idle_work_state_get() >= 1) || (func_idle_work_state_get() <= 3)) {
+	if ((func_idle_work_state_get() >= 1) && (func_idle_work_state_get() <= 3)) {
 		if (jitter_cnt < ADC_JITTER_VAL) {
 			all_adc_val += adc_val;
 			jitter_cnt++;
@@ -151,7 +151,7 @@ void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
 			average_val = all_adc_val/jitter_cnt;
 			printf ("adc detect value = %d;\n", average_val);
 			
-			while (average_val > (u8)tbl_adc_detect_val[adc_index][0]) {
+			while (average_val >= (u8)tbl_adc_detect_val[adc_index][0]) {
 				adc_index++;
 			}
 			
@@ -163,6 +163,7 @@ void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
 	else {
 		all_adc_val = 0;
 		jitter_cnt = 0;
+		*adc_event = EVT_ADC_DET_IDE;
 	}
 }
 #endif

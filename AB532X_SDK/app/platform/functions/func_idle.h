@@ -32,6 +32,8 @@ typedef struct {
 	uint8_t		wave_cnt;
 	uint8_t		cur_status;
 	bool		out_level;
+	bool		is_wave_wait;
+	uint32_t	wave_wait_timer;
 }func_idle_t;
 
 extern func_idle_t		f_idle;

@@ -98,7 +98,10 @@ void spi1_send_cmd_to_master(uint8_t cmd)
 		default:
 			break;
 	}
-
+	while (!IS_SPI1_CS_ENABLE()) {
+		WDT_CLR();
+	}
+	
 	for(send_index = 0; send_index != len; send_index++) {
 		spi1_sendbyte(cmd_buf[send_index]);
 	}
@@ -210,6 +213,9 @@ static void func_idle_enter(void)
 		EXT_GPIO_POWERON(); 					//20190224，进入开机时打开外部电源�?
 	}
 #endif //USER_EXT_POWERON_EN
+
+	delay_5ms(20);
+	GPIOFDE |= BIT(0);	GPIOFDIR &= ~BIT(0); GPIOFSET |= BIT(0);
 }
 
 static void func_idle_exit(void)

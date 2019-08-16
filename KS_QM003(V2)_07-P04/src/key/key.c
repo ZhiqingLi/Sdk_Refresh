@@ -299,9 +299,22 @@ void KeyScan(void)
 		if(Msg == MSG_WIFI_WPS)
 		{
 			KeyCpCount++;
-			if(KeyCpCount == 10)
+			if(KeyCpCount == 8)
 			{
 				Msg = MSG_WIFI_WPS;
+			}
+			else
+			{
+				Msg = MSG_NONE;
+			}
+		}
+
+		if(Msg == MSG_WIFI_FACTORY)
+		{
+			KeyCpCount++;
+			if(KeyCpCount == 23)
+			{
+				Msg = MSG_WIFI_FACTORY;
 			}
 			else
 			{
@@ -420,7 +433,7 @@ void KeyScan(void)
 #endif
 		
 #ifdef FUNC_WIFI_EN                             
-		if (WiFiKaiShuChildLockStateGet()) {
+		if (WiFiKaiShuChildLockStateGet() && (MSG_WIFI_FACTORY != Msg)) {
 			MsgSend(MSG_SOUND_LOCK_ON);
 			return;
 		}

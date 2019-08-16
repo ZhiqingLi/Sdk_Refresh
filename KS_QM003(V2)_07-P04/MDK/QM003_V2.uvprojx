@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\Libraries\audio\inc;..\src\inc;..\Libraries\bluetooth\inc;..\Libraries\driver\inc;..\Libraries\fs\inc;..\Libraries\os\inc;..\Libraries\character_encoding\inc;..\src\du_params;..\src\slave_uart;..\src\wifi</IncludePath>
+              <IncludePath>..\Libraries\audio\inc;..\src\inc;..\Libraries\bluetooth\inc;..\Libraries\fs\inc;..\Libraries\os\inc;..\Libraries\character_encoding\inc;..\src\du_params;..\src\slave_uart;..\src\wifi;..\Libraries\driver\inc;..\src\fm_driver</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -884,6 +884,16 @@
               <FileName>spi_slave.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\sys_app\spi_slave.c</FilePath>
+            </File>
+            <File>
+              <FileName>rtc_at8563.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\sys_app\rtc_at8563.c</FilePath>
+            </File>
+            <File>
+              <FileName>audio_file.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\src\sys_app\audio_file.c</FilePath>
             </File>
           </Files>
         </Group>

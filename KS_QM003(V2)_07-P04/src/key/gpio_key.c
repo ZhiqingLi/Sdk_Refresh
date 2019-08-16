@@ -29,7 +29,7 @@
 #define 	GPIO_KEY_JITTER_TIME		10			//消抖时间，该时间和软开关开关机硬件时间有关
 #define 	GPIO_KEY_CP_TIME			500		
 #define 	GPIO_KEY_PWRON_TIME			10000	
-
+#define 	GPIO_KEY_SCAN_JITTER		500			
 
 #ifdef FUNC_GPIO_KEY_EN
 
@@ -59,6 +59,7 @@ typedef enum _GPIO_KEY_STATE
 } GPIO_KEY_STATE;
 
 TIMER			GpioKeyWaitTimer;
+TIMER			GpioKeyScanTimer;
 GPIO_KEY_STATE	GpioKeyState;
 uint16_t		GpioKeyMsg;
 										
@@ -111,6 +112,10 @@ void InterruptGpioKeyScan(void)
 	uint8_t GpioKeyIndex = 0xff;
 
 	GpioKeyIndex = GetGpioKeyIndex();
+
+	if (0xff != GpioKeyIndex) {
+		TimeOutSet(&GpioKeyScanTimer, GPIO_KEY_SCAN_JITTER);
+	}
 	
 	switch(GpioKeyState)
 	{
@@ -172,7 +177,7 @@ uint16_t GpioKeyScan(void)
 {
 	uint16_t Msg = MSG_NONE;
 	
-	if (MSG_NONE != GpioKeyMsg) {
+	if ((MSG_NONE != GpioKeyMsg) && IsTimeOut(&GpioKeyScanTimer)) {
 		Msg = GpioKeyMsg;
 		GpioKeyMsg = MSG_NONE;
 	}

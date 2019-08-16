@@ -176,30 +176,45 @@ void func_idle_process(void)
     }
 
 	if (!f_idle.cur_status || (4 == f_idle.cur_status)) {
+#if USER_EXT_POWERON_EN
+		EXT_GPIO_POWEROFF(); 			
+#endif //USER_EXT_POWERON_EN
+
+		if (f_idle.is_wave_wait) {
+			f_idle.is_wave_wait = 0;
+			f_idle.wave_wait_timer = tick_get();
+		}
+		//水泵延时0.5S关闭
+		if (!f_idle.is_wave_wait && tick_check_expire(f_idle.wave_wait_timer, 500)) {
+			func_water_pump_process(0);
+		}
 		bsp_loudspeaker_mute();
-		func_water_pump_process(0);
     	f_idle.wave_cnt = 0;
     	f_idle.out_level = 0;
-    	if (NULL != f_idle.wave_gpio.sfr) {
-    		f_idle.wave_gpio.sfr[GPIOxDE] |= BIT(f_idle.wave_gpio.num);
-    		f_idle.wave_gpio.sfr[GPIOxDIR] &= ~BIT(f_idle.wave_gpio.num);
-    		f_idle.wave_gpio.sfr[GPIOxCLR] = BIT(f_idle.wave_gpio.num);
-    	}
-    	return;
     }
     else {
+#if USER_EXT_POWERON_EN
+		EXT_GPIO_POWERON();			
+#endif //USER_EXT_POWERON_EN
     	func_water_pump_process(1);
     	bsp_loudspeaker_unmute();
-    }
 
-	if (tick_check_expire(f_idle.wave_timer, wave_tbl[f_idle.wave_cnt].Timer)) {
-		f_idle.wave_cnt++;
-		f_idle.wave_cnt %= WAVE_MAX_OPERATION;
-		f_idle.wave_timer = tick_get();
-		f_idle.wave_freq = wave_tbl[f_idle.wave_cnt].Freq;
+    	if (!f_idle.is_wave_wait) {
+    		f_idle.is_wave_wait = 1;
+    		f_idle.wave_wait_timer = tick_get();
+    	}
+    	//喇叭输出延时3S启动
+		if (f_idle.is_wave_wait && tick_check_expire(f_idle.wave_wait_timer, 3000)) {
+			if (tick_check_expire(f_idle.wave_timer, wave_tbl[f_idle.wave_cnt].Timer)) {
+				f_idle.wave_cnt++;
+				f_idle.wave_cnt %= WAVE_MAX_OPERATION;
+				f_idle.wave_timer = tick_get();
+				f_idle.wave_freq = wave_tbl[f_idle.wave_cnt].Freq;
+			}
+
+			func_pwm_wave_process();
+		}
 	}
-
-    func_pwm_wave_process();
 }
 
 static void func_idle_enter(void)
@@ -217,7 +232,9 @@ static void func_idle_enter(void)
 	bsp_bt_pwrkey5s_clr();
 #endif
 
+	memset(&f_idle, 0, sizeof(func_idle_t));
 	f_idle.wave_timer = tick_get();
+	f_idle.wave_wait_timer = tick_get();
 	f_idle.wave_freq = wave_tbl[f_idle.wave_cnt].Freq;
 	timer3_init();
     led_idle();

@@ -121,7 +121,7 @@ void BP_LoadInfo(void)
 {
 	bool ret = TRUE;
 
-	APP_DBG("BP_LoadInfo\n");
+	APP_DBG("BP_LoadInfo: %d \n", sizeof(bp_info));
 
 	ASSERT(sizeof(bp_info) <= BP_MAX_SIZE);
 

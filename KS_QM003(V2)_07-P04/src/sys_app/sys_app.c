@@ -48,13 +48,7 @@ SYS_INFO gSys;
 void SysVarInit(void)
 {
 	memset(&gSys, 0, sizeof(gSys));
-#ifdef FUNC_WIFI_EN
-	memset(&gWiFi, 0, sizeof(gWiFi));
-	memcpy((void*)&gWiFi, (void*)&InitgWiFi, sizeof(WIFI_WORK_STATE));
-#ifdef FUNC_WIFI_BT_CONTROL_EN
-	memset(&BtCtrl, 0, sizeof(BtCtrl));
-#endif
-#endif
+	
 #if defined(FUNC_USB_AUDIO_EN) || defined(FUNC_USB_READER_EN) || defined(FUNC_USB_AUDIO_READER_EN)
 	memset(&OTGCircularBuf, 0, sizeof(OTGCircularBuf));
 #endif

@@ -32,7 +32,7 @@
 
 1543484477 f:\soft_sdk\ab532x_sdk\app\platform\header\sfr.h
 
-1563431195 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
+1565014720 f:\soft_sdk\ab532x_sdk\app\projects\standard\config.h
 	"config_define.h"
 	"xcfg.h"
 	"config_extra.h"
@@ -136,7 +136,7 @@
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_clock.h
 
-1563421530 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_idle.h
+1565011782 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_idle.h
 
 1543477102 f:\soft_sdk\ab532x_sdk\app\platform\functions\func_music.h
 
@@ -351,7 +351,7 @@
 1543477103 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_spp.c
 	"include.h"
 
-1561990006 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
+1565010726 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\bsp_sys.c
 	"include.h"
 
 1543477102 source:f:\soft_sdk\ab532x_sdk\app\platform\bsp\fmrx\fmrx_external.c
@@ -395,7 +395,7 @@
 	"func.h"
 	"func_fmrx.h"
 
-1563421740 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_idle.c
+1565014155 source:f:\soft_sdk\ab532x_sdk\app\platform\functions\func_idle.c
 	"include.h"
 	"func.h"
 	"func_idle.h"
@@ -590,7 +590,7 @@
 1543477104 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\multi_lang.c
 	"include.h"
 
-1563421638 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\plugin.c
+1565010403 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\plugin\plugin.c
 	"include.h"
 
 1552307509 source:f:\soft_sdk\ab532x_sdk\app\projects\standard\port\port_earphone.c

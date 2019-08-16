@@ -50,6 +50,7 @@ TIMER BtBatteryDetTim;
 
 //低电检测延时时间参数，用于消抖和提示音播放。
 #define LOW_POWEROFF_DELAY			(1000)	//单位：10ms
+#define POWER_OFF_JITTER_TIMER		500
 
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置
 #ifdef ADC_POWER_MONITOR_EN 
@@ -91,6 +92,8 @@ TIMER PowerMonitorTimer;
 uint32_t LdoinSampleSum = 0; 
 uint16_t  LdoinSampleCnt = LDOIN_SAMPLE_COUNT;
 uint32_t LdoinLevelAverage = 0;		//当前LDOIN电压平均值
+//用于关机检查变量
+TIMER PowerOffDetectTimer;
 
 #ifdef FUNC_SOUND_REMIND
 #include "sound_remind.h"
@@ -117,7 +120,7 @@ bool IsInCharge(void)
 	return FALSE;
 }
 #endif
-#ifdef	OPTION_CHARGER_DETECT
+#ifdef	OPTION_CHAR_FUL_DETECT
 /*****************************************************************************
  函 数 名  : IsChargeFul
  功能描述  : 电池充满电检测
@@ -133,7 +136,7 @@ bool IsInCharge(void)
     修改内容   : 新生成函数
 
 *****************************************************************************/
-bool IsChargeFul(void)
+bool IsChargeFull(void)
 {
 //设为输入，无上下拉
 
@@ -254,9 +257,7 @@ void PowerMonitorDisp(void)
 //监测LDOIN的电压值，执行对应检测点的处理
 //PowerOnInitFlag: TRUE--第一次上电执行电源监控检测
 static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
-{	
-	static bool IsPowerOff = FALSE;
-	
+{		
 	if(LdoinSampleCnt > 0)
 	{
 	#ifdef ADC_POWER_MONITOR_EN
@@ -369,15 +370,13 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			&& (!WiFiFirmwareUpgradeStateGet())
 #endif
 			) {
-				if(MODULE_ID_POWEROFF != gSys.NextModuleID)	/*MSG_COMMON_CLOSE only need send once*/
+				if((MODULE_ID_POWEROFF != gSys.CurModuleID) && IsTimeOut(&PowerOffDetectTimer))	/*MSG_COMMON_CLOSE only need send once*/
 				{
-				/*if use push button, send message, for task's saving info.*/
+					/*if use push button, send message, for task's saving info.*/
 					APP_DBG("Low level voltage detected->send message common close\n");
+					TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
 				#if 0 //def FUNC_WIFI_POWER_KEEP_ON
-					if (!IsPowerOff) {
-						IsPowerOff = TRUE;
-						WiFiRequestMcuPowerOff();
-					}
+					WiFiRequestMcuPowerOff();
 				#else
 					gSys.NextModuleID = MODULE_ID_POWEROFF;
 					MsgSend(MSG_COMMON_CLOSE);
@@ -386,8 +385,6 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			}
 		}
 		else {
-			IsPowerOff = FALSE;
-			IsPowerOff = IsPowerOff;//去除编译警告
 			IsSystemPowerLow = FALSE;
 			LowPowerSoundCnt = LOW_POWER_DET_COUNT;
 			LowPowerDetCnt = 0;
@@ -404,7 +401,8 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 //实现系统启动过程中的低电压检测处理，以及初始化充电设备接入检测IO等
 void PowerMonitorInit(void)
 {
-	TimeOutSet(&PowerMonitorTimer, 0);	
+	TimeOutSet(&PowerMonitorTimer, 0);
+	TimeOutSet(&PowerOffDetectTimer, 0);
 	
 #ifdef ADC_POWER_MONITOR_EN
 	SarAdcGpioSel(ADC_POWER_MONITOR_PORT);
@@ -480,6 +478,8 @@ void PowerMonitor(void)
 {	
 	if(IsTimeOut(&PowerMonitorTimer))
 	{
+		static bool IsBatterFull = FALSE;
+		
 		TimeOutSet(&PowerMonitorTimer, LDOIN_SAMPLE_PERIOD);
 #ifdef OPTION_CHARGER_DETECT
 		if(IsInCharge()) {		//充电器已经接入的处理	
@@ -490,14 +490,23 @@ void PowerMonitor(void)
 				gSys.NextModuleID = MODULE_ID_IDLE;
 				MsgSend(MSG_COMMON_CLOSE);
 			}
+#ifdef OPTION_CHAR_FUL_DETECT
+			if (IsChargeFull() && !IsBatterFull) {
+				//提示充满电
+				IsBatterFull = TRUE;
+				MsgSend(MSG_BAT_FUL_PWR);
+			}
+#endif
 		}
 		else {
+			IsBatterFull = FALSE;
 			if ((MODULE_ID_END <= gSys.CurModuleID) && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
 				gSys.NextModuleID = MODULE_ID_WIFI;
 				MsgSend(MSG_COMMON_CLOSE);
 			}
 		}
 #endif
+		IsBatterFull = IsBatterFull;	//去除编译警告。
 		//没有采样够LDOIN_SAMPLE_COUNT次数，继续采样
 		PowerLdoinLevelMonitor(FALSE);
 	}
@@ -567,7 +576,6 @@ bool SoftPowerKeyDetect(void)
 		PowerKeyLinkState++;
 	}
 	else {		
-		//APP_DBG("wakeup flag 0x%x;\n", IS_RTC_WAKEUP());
 		if (IS_RTC_WAKEUP()) {
 			if (!CurPowerKeyState) {
 				RTC_WAKEUP_FLAG_CLR();
@@ -623,7 +631,6 @@ void SystemPowerOffDetect(void)
 #endif 
 	
 #ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
-	static bool IsPowerOff = FALSE;
 #ifdef FUNC_POWERKEY_SOFT_POWERON_EN
 	if(SoftPowerKeyDetect()
 #else
@@ -635,10 +642,11 @@ void SystemPowerOffDetect(void)
 #endif
 	)
 	{
-		if(MODULE_ID_POWEROFF != gSys.NextModuleID)	/*MSG_COMMON_CLOSE only need send once*/
+		if((MODULE_ID_POWEROFF != gSys.CurModuleID) && IsTimeOut(&PowerOffDetectTimer))	/*MSG_COMMON_CLOSE only need send once*/
 		{
 			/*if use push button, send message, for task's saving info.*/
 			APP_DBG("PowerKeyDetect->send message common close;\n");
+			TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
 		#if 0//def FUNC_WIFI_POWER_KEEP_ON
 			if (!IsPowerOff) {
 				IsPowerOff = TRUE;
@@ -649,10 +657,6 @@ void SystemPowerOffDetect(void)
 			MsgSend(MSG_COMMON_CLOSE);
 		#endif
 		}
-	}
-	else {
-		IsPowerOff = FALSE;
-		IsPowerOff = IsPowerOff;//去除编译警告
 	}
 #endif	
 	

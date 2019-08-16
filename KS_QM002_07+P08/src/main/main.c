@@ -1,0 +1,404 @@
+//  maintainer: Halley
+#include "type.h"
+#include "app_config.h"
+#include "os.h"
+#include "msgq.h"
+#include "app_msg.h"
+#include "uart.h"
+#include "key.h"
+#include "clk.h"
+#include "spi_flash.h"
+#include "cache.h"
+#include "gpio.h"
+#include "dac.h"
+#include "audio_adc.h"
+#include "wakeup.h"
+#include "timer.h"
+#include "sys_app.h"
+#include "power_management.h"
+#include "rtc.h"
+#include "adc.h"
+#include "ir.h"
+#include "host_hcd.h"
+#include "host_stor.h"
+#include "watchdog.h"
+#include "mixer.h"
+#include "breakpoint.h"
+#include "dev_detect_driver.h"
+#include "sys_vol.h"
+#include "eq.h"
+#include "lcd_seg.h"
+#include "eq_params.h"
+#include "sound_remind.h"
+#include "sw_uart.h"
+#include "debug.h"
+#include "bt_stack_api.h"
+#include "audio_decoder.h"
+#include "get_bootup_info.h"
+#include "fsinfo.h"
+#include "sys_vol.h"
+#include "micro_adjust.h"
+#include "fat_file.h"
+#include "task_decoder.h"
+#include "presearch.h"
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+#include "audio_file.h"
+#endif
+
+int32_t BtTaskHandle = 0;
+int32_t MainTaskHandle = 0;
+xTaskHandle AudioProcessHandle;
+
+extern SwEqContext * p_gSwEq;
+#ifdef FLASH_ERASE_IN_TCM
+SPI_FLASH_INFO gFlashInfo;
+#endif
+
+#ifdef FUNC_SPI_UPDATE_EN
+extern void BootUpgradeChk(void);
+#endif
+extern void AudioProcessTaskEntrance(void);
+
+//extern uint8_t UpgradeFileFound;
+
+extern void DetectMassTestCondition(void);
+extern bool GetMassTestFlag(void);
+
+extern bool FlshBTInfoAreaInit(void);
+
+#ifdef FUNC_BT_HF_EN
+extern bool GetHfTransferState(void);
+#endif
+
+#ifdef FUNC_KEY_BEEP_SOUND_EN
+extern bool IsKeyBeepSoundPlaying(void);
+#endif
+
+__attribute__((section(".driver.isr"))) void Timer1Interrupt(void)
+{
+	Timer1IntClr();
+#if (defined(FUNC_USB_EN) || defined(FUNC_USB_AUDIO_EN) || defined(FUNC_USB_READER_EN) || defined(FUNC_USB_AUDIO_READER_EN))
+	OTGLinkCheck();
+#endif
+#if (defined(CFG_WAV_REMINDSOUND_MIX_EN) && defined(CFG_WAV_REMIND_DET_ADC_EN))
+	AdcRemindDetScan();
+#elif (defined(CFG_WAV_REMINDSOUND_MIX_EN) && defined(CFG_WAV_REMIND_DET_GPIO_EN))
+	GpioRemindDetScan();
+#endif
+
+	SystemPowerOffDetect();
+}
+
+////注意boot版本，如果是boot5.0版本
+//GPIOA0做为普通GPIO使用时请请main最开头代码使能
+int32_t main(void)
+{
+	extern void GuiTaskEntrance(void);
+//	extern void DecoderTaskEntrance(void);
+	extern void BTEntrance(void);
+	extern void ShellCommand(void);
+	
+	//boot5.0芯片，GPIO做为普通GPIO使用时，请打开下面这行代码
+	GpioA0SetMode(A0_FOR_GPIO);
+	//flash clock IO 电流驱动能力配置为弱驱动（默认为强驱动力）
+	GpioClrRegOneBit(GPIO_A_OUTDS, GPIOA14);
+
+#ifdef FUNC_GPIO_POWER_ON_EN
+	SysPowerOnControlEnable();
+#endif
+
+#ifdef FUNC_AMP_MUTE_EN 
+	GpioAmpMuteEnable();
+#endif
+    
+#ifdef FUNC_AMP_POWER_EN
+    AmpPowerEnable();
+#endif
+
+#ifdef FUNC_SINGLE_LED_EN
+#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
+	BlueLedOff();
+	RedLedOff();
+#else
+	BlueLedOn();
+#endif
+#endif
+
+#ifdef FUNC_5VIN_TRIM_LDO3V3   	
+	SarAdcTrimLdo3V3();   //attention! only used in Power = 5V
+#endif
+		
+	ClkModuleEn(ALL_MODULE_CLK_SWITCH);	
+	ClkModuleGateEn(ALL_MODULE_CLK_GATE_SWITCH);        //open all clk gating
+	CacheInit();
+	
+//	SysGotoPowerDown();
+
+	SysGetWakeUpFlag(); //get wake up flag, DO NOT remove this!!
+
+#ifdef USE_POWERKEY_SLIDE_SWITCH
+	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 500);//500ms
+#endif
+#ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
+#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
+	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 500); //500ms
+#else
+	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 2000); //2s
+#endif
+#endif
+
+	SpiFlashInfoInit();		//Flash RD/WR/ER/LOCK initialization
+#ifdef FLASH_ERASE_IN_TCM
+	SpiFlashGetInfo(&gFlashInfo);
+#endif
+ 
+	ClkPorRcToDpll(0); 		//clock src is 32768hz OSC
+	
+	//GD flash，选择SYS CLK或DPLL80Mhz，可以开启HPM，其他型号建议关闭HPM
+	SpiFlashClkSet(FLASHCLK_SYSCLK_SEL, TRUE);
+	
+#ifdef FUNC_RADIO_DIV_CLK_EN
+	ClkDpllClkGatingEn(1);
+#endif
+	SarAdcLdoinVolInit();    //do NOT remove this
+	LcdCtrlRegInit();        //do NOT remove this
+	/*
+	 * Now, uart has been initialized automatically by OS.
+	 * if you want to customize debug uart setting(defaut 115200-8-N-1),
+	 * you can invoke the function at any place you want(for example here).
+	 */
+#ifdef FUNC_DEBUG_EN
+//	SwUartTxInit(SWUART_GPIO_PORT_A, 24, 115200);
+//	EnableSwUartAsFuart(TRUE);
+
+	OsSetDebugFlag(1);
+	GpioFuartRxIoConfig(FUART_RX_PORT);
+	GpioFuartTxIoConfig(FUART_TX_PORT);
+	OSDBGUartInit(115200, 8, 0, 1);
+#else
+	OsSetDebugFlag(0);
+#endif
+
+
+#if (!defined(FUNC_USB_AUDIO_EN) && !defined(FUNC_USB_READER_EN) && !defined(FUNC_USB_AUDIO_READER_EN))
+#undef PC_PORT_NUM
+#define PC_PORT_NUM    0
+#endif
+
+#ifdef FUNC_SPI_UPDATE_EN
+	BootUpgradeChk();	//boot upgrade check upgrade for the last time
+#endif
+
+	Osc32kExtCapCalibrate();//32KHz external oscillator calibration
+#ifdef FUNC_BREAKPOINT_EN
+	BP_LoadInfo();// 检查、装载（如果第一次上电）基本配置信息，DO NOT remove this code!!!
+#endif
+
+	OSStartKernel();                //start initialize os kernel
+
+#ifdef MASS_PRODUCTION_TEST_FUNC
+	DetectMassTestCondition();
+#endif
+
+	OSStartSchedule();              //Start the scheduler.
+
+	OSTaskPrioSet(NULL, 4);
+
+	FlashUnlock();
+	//FlashLock(FLASH_LOCK_RANGE_HALF);		// if need, Lock range setting see function description
+	
+	SysVarInit();                  //全局变量初始化，注意在BP_LoadInfo之后调用
+
+#if (defined(FUNC_ADC_KEY_EN) || defined(FUNC_IR_KEY_EN) || defined(FUNC_CODING_KEY_EN))
+	KeyInit();
+#endif
+
+#ifdef FUNC_CARD_EN
+#ifndef CARD_DETECT_BIT_MASK
+	GpioSdIoConfig(SD_PORT_NUM);	// set sd port
+#endif
+	IsCardLink();
+#endif
+#ifdef FUNC_USB_EN
+	Usb1SetDetectMode((UDISK_PORT_NUM == 1), (PC_PORT_NUM == 1)); // usb1 port host/device mode set
+	Usb2SetDetectMode((UDISK_PORT_NUM == 2), (PC_PORT_NUM == 2)); // usb2 port host/device mode set
+	UsbSetCurrentPort(UDISK_PORT_NUM); // set usb host port
+#endif
+	InitDeviceDetect();                 // 上电时，设备状态扫描消抖
+
+//#ifdef FUNC_RTC_EN
+//	RtcInit(AlarmWorkMem, sizeof(AlarmWorkMem));
+//	NVIC_EnableIRQ(RTC_IRQn);           // 打开闹钟提醒中断
+//#endif
+
+//	SystemOn();
+//如果电能控制功能打开，此处将启动第1次低电压检测和充电设备接入检测等
+#ifdef FUNC_POWER_MONITOR_EN
+	PowerMonitorInit();
+#endif
+	//DacNoUseCapacityToPlay();
+
+	AudioAnaInit();	//模拟通道初始化
+	DacVolumeSet(DAC_DIGITAL_VOL, DAC_DIGITAL_VOL);
+	AdcVolumeSet(ADC_DIGITAL_VOL, ADC_DIGITAL_VOL);
+	MixerInit((void*)PCM_FIFO_ADDR, PCM_FIFO_LEN);
+    AudioOutputInit();//输出通道初始化
+    
+#ifdef FUNC_MIXER_SRC_EN
+	MixerSrcEnable(TRUE);
+#else
+	MixerSrcEnable(FALSE);
+#endif
+	MixerSetFadeSpeed(MIXER_SOURCE_DEC, DEC_FADEIN_TIME, 10);
+
+#ifdef FUNC_AUDIO_EQ_EN
+	gSys.Eq = (EQ_STYLE_CNT-1);         //配置为最后一个自定义EQ
+#else
+	gSys.Eq = 2;						//配置为Flat EQ
+#endif
+	EqStyleInit(p_gSwEq);
+	EqStyleSelect(p_gSwEq, 44100, gSys.Eq);
+	APP_DBG("System EqStyleSelect Eq: %d\n", gSys.Eq);
+//#ifdef FUNC_TREB_BASS_EN
+//	TrebBassSet(gSys.TrebVal, gSys.BassVal);
+//#endif
+#ifdef FUNC_SOUND_REMIND
+	SoundRemindInit();
+#endif
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+	MixerSoundRemindInit();
+#endif
+#ifdef FUNC_SOFT_ADJUST_EN
+    SoftAdjustInit(2);
+#endif
+	SetDriverTerminateFuc(GetQuickResponseFlag);
+	SetFsTerminateFuc(GetQuickResponseFlag);
+	
+	APP_DBG("****************************************************************\n");
+	APP_DBG("System Clock     :%d MHz(%d)\n", ClkGetCurrentSysClkFreq() / 1000000, ClkGetCurrentSysClkFreq());
+	APP_DBG("Flash Clock      :%d MHz(%d)\n", ClkGetFshcClkFreq() / 1000000, ClkGetFshcClkFreq());
+	APP_DBG("BOOT Version     :%d.%d.%d%c\n", GetBootVersion(), GetPatchVersion() / 10, GetPatchVersion() % 10,GetBootVersionEx());
+	APP_DBG("SDK  Version     :%d.%d.%d\n", (GetSdkVer() >> 8) & 0xFF, (GetSdkVer() >> 16) & 0xFF, GetSdkVer() >> 24);
+	APP_DBG("Free Memory      :%d(%d KB)\n", OSMMMIoCtl(MMM_IOCTL_GETSZ_INALL, 0), OSMMMIoCtl(MMM_IOCTL_GETSZ_INALL, 0) / 1024);
+	APP_DBG("Code Size        :%d(%d KB)\n", GetCodeSize(), GetCodeSize() / 1024);
+	APP_DBG("Code Encrypted   :%s\n", GetCodeEncryptedInfo());
+	APP_DBG("Wakeup Source    :%s(0x%08X)\n", GetWakeupSrcName(gWakeUpFlag), gWakeUpFlag);
+	APP_DBG("BT Lib Ver       :%s\n", GetLibVersionBt());
+	APP_DBG("AudioDecoder Ver :%s\n", GetLibVersionAudioDecoder());
+	APP_DBG("Driver Ver       :%s\n", GetLibVersionDriver());
+	APP_DBG("FreeRTOS Ver     :%s\n", GetLibVersionFreertos());
+	APP_DBG("FS Ver           :%s\n", GetLibVersionFs());
+	APP_DBG("****************************************************************\n");
+
+	FlshBTInfoAreaInit();	//BT data aera init. do NOT move this
+	
+#ifdef	CFG_SHELL_DEBUG
+	OSTaskCreate(ShellCommand, "SHELL", 720, NULL, 3, NULL);
+#endif	//CFG_SHELL_DEBUG
+	OSTaskCreate(DecoderTaskEntrance, "Decoder", 2048, NULL, 3, NULL);
+	OSTaskCreate(GuiTaskEntrance, "MainTask", 1280, NULL, 2, &MainTaskHandle);
+	OSTaskCreate(AudioProcessTaskEntrance, "AudioProcessTask", 1024, NULL, 3, &AudioProcessHandle);
+#ifdef FUNC_BT_EN
+	OSTaskCreate(BTEntrance, "BT", 1920, NULL, 3, &BtTaskHandle);
+#endif
+	
+	//init timer0/1 interrupt
+	NVIC_EnableIRQ(TMR1_IRQn);
+	Timer1Set(1000);
+
+	DBG("Start Detect External Device(Keypad, U disk, SD card, FM,...)\n");
+	OSQueueMsgIOCtl(MSGQ_IOCTL_DEL_PENDMSG, 0);
+#ifndef FUNC_WATCHDOG_EN
+	WdgDis();				// disable watch dog
+#endif
+	while(1)
+	{
+		//feed watch dog ever 10 ms
+#ifdef FUNC_WATCHDOG_EN
+		WdgFeed();
+#endif
+#ifdef FUNC_POWER_MONITOR_EN
+		//执行电池电压检测、充电设备接入检测及其附属的显示和系统关闭处理等
+		PowerMonitor();
+#endif
+#ifdef FUNC_SPI_UPDATE_EN
+		if(UpgradeFileFound
+#ifdef FUNC_UPDATE_DONE_DELETE_FILE
+		&& gSys.UpgradeDoneDeleteFile
+#endif
+		)
+		{
+			//upgrade file found,try to upgrade it
+			BootUpgradeChk();
+		}
+#endif
+		MsgRecv(10);    
+#if (defined(FUNC_ADC_KEY_EN) || defined(FUNC_IR_KEY_EN) || defined(FUNC_CODING_KEY_EN))
+		KeyScan();
+#endif
+#ifdef MASS_PRODUCTION_TEST_FUNC
+		if(GetMassTestFlag())
+		{
+			continue;
+		}
+#endif
+		DeviceDetect(); // 设备检测接口
+
+#if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
+		if(!GetSilenceMuteFlag()
+#ifdef FUNC_SOUND_REMIND
+		|| IsSoundRemindPlaying()
+#endif
+#ifdef FUNC_BT_HF_EN
+		|| (GetHfTransferState() == TRUE)	
+#endif
+#ifdef FUNC_WIFI_EN
+		|| IsWiFiSoundRemindPlaying()
+#endif
+#ifdef FUNC_KEY_BEEP_SOUND_EN
+		|| IsKeyBeepSoundPlaying()
+#endif
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+		|| IsRmsPcmDataReminding()
+#endif
+		)
+		{
+			AmpMuteControl(0);
+		}
+		else
+		{
+			AmpMuteControl(1);
+		}
+#endif
+
+		//定时关机改到主任务中处理。
+#ifdef FUNC_SLEEP_EN
+		if((gSys.SleepTime != 0) && (gSys.CurModuleID != MODULE_ID_RTC))
+		{
+			if(gSys.SleepTimeCnt > 6000*gSys.SleepTime)
+			{		   
+				gSys.NextModuleID = MODULE_ID_IDLE;
+				MsgSend(MSG_COMMON_CLOSE);
+			}
+			else
+			{
+				gSys.SleepTimeCnt++;
+			}
+		}
+#endif
+			
+#ifdef FUNC_SLEEP_LEDOFF_EN
+		if(gSys.SleepLedOffCnt >= (6000*SLEEP_LED_OFF_TMR))
+		{
+			gSys.SleepLedOffFlag = TRUE;
+		}
+		else
+		{
+			gSys.SleepLedOffCnt++;
+		}
+#endif
+
+	}
+}
+
+

@@ -931,9 +931,12 @@ void bsp_sys_init(void)
 
 #if WARNING_POWER_ON
 	if (!is_dcin_status() && !get_extern_on_state()) {
+		GPIOFDE |= BIT(0);	GPIOFDIR &= ~BIT(0); GPIOFCLR |= BIT(0);
 		mp3_res_play(RES_BUF_POWERON_MP3, RES_LEN_POWERON_MP3);
 	}
 #endif // WARNING_POWER_ON
+
+	bsp_loudspeaker_mute();
 
     if (PWRON_ENTER_BTMODE_EN) {
         func_cb.sta = FUNC_BT;

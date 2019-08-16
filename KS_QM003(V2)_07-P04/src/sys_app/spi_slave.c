@@ -69,7 +69,7 @@ static bool Spi_SlaveWaitSync(void)
 	
 	memset(&recv_data, 0x00, sizeof(recv_data));
 	SPI_SLAVE_SPIS_ENABLE();
-	WaitMs(2);
+	WaitMs(5);
 	for (recv_index=0; recv_index<12; recv_index++) {
 		recv_data[recv_index] = SpiMasterRecvByte();
 	}
@@ -91,7 +91,7 @@ static void Spi_SlaveSendData(uint8_t *data, uint8_t len)
 	TimeOutSet(&SpiWaitTimer, 20);
 	do {
 		SPI_SLAVE_SPIS_ENABLE();
-		WaitMs(2);
+		WaitMs(5);
 		for (send_index=0; send_index<len; send_index++) {
 			SpiMasterSendByte(*data);
 			data++;

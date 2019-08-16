@@ -20,7 +20,7 @@ static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] =
 	356, 	651, 	935, 	1212, 	1475, 	1702, 	1915, 	2108,
 	2280, 	2437,	2555,	2657,	2727,	2787,	2845,	2897,
 	2950,	2991,	3032,	3066,	3099,	3105,	3139,	3180,
-	3219,	3259,	3290,	3322,	3355,	3386,	3410,	3440
+	3209,	3229,	3250,	3282,	3325,	3366,	3390,	3440
 };	
 
 uint32_t AdcAdjustSampleSum = 0; 
@@ -81,7 +81,7 @@ void AdcAdjustVolScan(void)
 				SetSysVol();
 				McuSyncWiFiVolume(gSys.Volume);
 			}
-			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", AverageVal, AdcVolVal, gSys.Volume);
+			APP_DBG("AdcAdjustvolume = %d:%d:%d;\n", AdcAdjustLevelAverage, AverageVal, gSys.Volume);
 			PrevAverageValue = AdcAdjustLevelAverage;
 		}
 	}

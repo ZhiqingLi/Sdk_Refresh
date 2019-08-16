@@ -1720,6 +1720,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			Temp = gWiFi.WiFiPowerOffRequestFlag;
 			memcpy((void*)&gWiFi, (void*)&InitgWiFi, sizeof(WIFI_WORK_STATE));
 			gWiFi.WiFiPowerOffRequestFlag = (uint8_t)Temp;
+			WiFiWorkStateSet(WIFI_STATUS_INIT_END);
 			break;
 			
 		case AXX_MCU_RDY:
@@ -1778,8 +1779,6 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_BURNING:
-			WiFiWorkStateSet(WIFI_STATUS_INITING);
-
 			WiFiFirmwareUpgradeStateSet(1);
 			if(gSys.CurModuleID != MODULE_ID_WIFI)
 			{
@@ -2532,15 +2531,6 @@ void WiFi_CmdProcess(void)
 	}
 #endif
 	
-#ifdef FUNC_SLEEP_EN
-	gSys.SleepTimeCnt = 0;
-	gSys.SleepStartPowerOff = FALSE;
-#endif
-	
-#ifdef FUNC_SLEEP_LEDOFF_EN
-	gSys.SleepLedOffCnt = FALSE;
-	gSys.SleepLedOffFlag = FALSE;
-#endif
 	APP_DBG("Recv WiFi Cmd is:%s\n", gWiFiCmd);
 
 	if(WiFiDataRcvStartFlag != TRUE)

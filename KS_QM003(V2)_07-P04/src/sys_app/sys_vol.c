@@ -130,11 +130,11 @@ const uint16_t gHfVolArr[MAX_BTHF_VOLUME + 1] =
 //decoder音量表
 const uint16_t gDecVolArr[MAX_VOLUME + 1] =
 {
-	80,
-	196,	308,	420,	538,	640,	755,	865,	978,
-	1086,	1198,	1315,	1435,	1532,	1644,	1732,	1845,
-	1932,	2011,	2170,	2321,	2486,	2608,	2750,	2885,
-	3028,	3163,	3296,	3444,	3604,	3766,	3920,	4096
+	10,
+	56,		108,	170,	238,	290,	355,	425,	498,
+	546,	598,	655,	715,	776,	834,	892,	965,
+	1032,	1121,	1260,	1391,	1546,	1708,	1920,	2055,
+	2278,	2403,	2676,	2924,	3284,	3566,	3810,	4096
 };
 
 #ifdef FUNC_REC_PLAYBACK_EN
@@ -152,11 +152,11 @@ const uint16_t gRecPlayVolArr[MAX_VOLUME + 1] =
 //LINEIN、FM音量表
 const uint16_t gAnaVolArr[MAX_VOLUME + 1] =
 {
-	80,
-	196,	308,	420,	538,	640,	755,	865,	978,
-	1086,	1198,	1315,	1435,	1532,	1644,	1732,	1845,
-	1932,	2011,	2170,	2321,	2486,	2608,	2750,	2885,
-	3028,	3163,	3296,	3444,	3604,	3766,	3920,	4096
+	10,
+	56,		108,	170,	238,	290,	355,	425,	498,
+	546,	598,	655,	715,	776,	834,	892,	965,
+	1032,	1121,	1260,	1391,	1546,	1708,	1920,	2055,
+	2278,	2403,	2676,	2924,	3284,	3566,	3810,	4096
 };
 
 #ifdef FUNC_MIC_EN
@@ -1358,6 +1358,11 @@ void CommonMsgProccess(uint16_t Msg)
 			SoundRemind(SOUND_BAT_LOW_PWR);
 			break;
 
+		//充满电提示音
+		case MSG_BAT_FUL_PWR:
+			SoundRemind(SOUND_BAT_FULL);
+			break;
+
 		//休眠提示音
 		case MSG_SOUND_SLEEP_ON:
 			SoundRemind(SOUND_SLEEP_RING);
@@ -1410,7 +1415,7 @@ void CommonMsgProccess(uint16_t Msg)
 		{
 			if(gWiFi.MicState != WIFI_AVS_STATUS_LSN)
 			{
-			    Mcu_SendCmdToWiFi(MCU_TALK_ON, NULL);
+				Mcu_SendCmdToWiFi(MCU_TALK_ON, NULL);
 			}
 		}
 		else if(Msg == MSG_WIFI_WPS)
@@ -1419,14 +1424,32 @@ void CommonMsgProccess(uint16_t Msg)
 			Mcu_SendCmdToWiFi(MCU_WIF_WPS, NULL);
 		}
 	}
-	OtherModulePlayWiFiSoundRemind(IsWiFiSoundRemindPlaying());	
+	
+	//OtherModulePlayWiFiSoundRemind(IsWiFiSoundRemindPlaying()); 
 #endif
+
 	WiFi_CmdProcess();
 	WiFiStateCheck();
+	//wifi加载前提示音
+	if (!gWiFi.InitState && (MODULE_ID_END > gSys.CurModuleID) && !IS_RTC_WAKEUP()) {
+#ifdef CFG_WAV_REMINDSOUND_MIX_EN
+		if (!IsRmsPcmDataReminding()) {
+			MixerSoundRemind(SOUND_WIFI_LOAD);
+		}
+#else 
+		if (!IsSoundRemindPlaying()) {
+			SoundRemind(SOUND_WIFI_LOAD);
+		}
+#endif
+	}
+	
 #ifdef FUNC_WIFI_SUPPORT_RTC_EN
 #ifdef FUNC_RTC_EN
 	RtcControlProcess();
 #endif
+#endif
+#ifdef FUNC_RTC_AT8563T_EN
+	RtcAt8563tControlProcess();
 #endif
 #endif
 }

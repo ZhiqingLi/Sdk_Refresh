@@ -4202,68 +4202,68 @@ LOAD Output\obj\projects\standard\port\port_update.o
                 0x0000000010011502        0x4 Output\obj\platform\bsp\bsp_spp.o
                 0x0000000010011502                spp_rx_callback
  .text.bsp.sys.init
-                0x0000000010011506      0x3ca Output\obj\platform\bsp\bsp_sys.o
+                0x0000000010011506      0x3f4 Output\obj\platform\bsp\bsp_sys.o
                 0x000000001001165c                rtc_init
                 0x0000000010011732                bsp_update_init
                 0x000000001001179c                bsp_sys_init
- .text.bsp.sys  0x00000000100118d0       0x92 Output\obj\platform\bsp\bsp_sys.o
-                0x00000000100118d0                bsp_sys_mute
-                0x0000000010011904                bsp_sys_unmute
-                0x0000000010011942                bsp_clr_mute_sta
+ .text.bsp.sys  0x00000000100118fa       0x92 Output\obj\platform\bsp\bsp_sys.o
+                0x00000000100118fa                bsp_sys_mute
+                0x000000001001192e                bsp_sys_unmute
+                0x000000001001196c                bsp_clr_mute_sta
  .text.uart0_mapping_sel
-                0x0000000010011962       0x90 Output\obj\platform\bsp\bsp_sys.o
-                0x0000000010011962                uart0_mapping_sel
+                0x000000001001198c       0x90 Output\obj\platform\bsp\bsp_sys.o
+                0x000000001001198c                uart0_mapping_sel
  .text.bsp_get_xosc_xcfg
-                0x00000000100119f2       0x20 Output\obj\platform\bsp\bsp_sys.o
-                0x00000000100119f2                bsp_get_xosc_xcfg
+                0x0000000010011a1c       0x20 Output\obj\platform\bsp\bsp_sys.o
+                0x0000000010011a1c                bsp_get_xosc_xcfg
  .text.spiflash_speed_up_en
-                0x0000000010011a12        0x4 Output\obj\platform\bsp\bsp_sys.o
-                0x0000000010011a12                spiflash_speed_up_en
+                0x0000000010011a3c        0x4 Output\obj\platform\bsp\bsp_sys.o
+                0x0000000010011a3c                spiflash_speed_up_en
  .text.is_dcin_status
-                0x0000000010011a16       0x4c Output\obj\platform\bsp\bsp_sys.o
-                0x0000000010011a16                is_dcin_status
+                0x0000000010011a40       0x4c Output\obj\platform\bsp\bsp_sys.o
+                0x0000000010011a40                is_dcin_status
  .text.func.process
-                0x0000000010011a62        0x8 Output\obj\platform\functions\func.o
-                0x0000000010011a62                func_process
+                0x0000000010011a8c        0x8 Output\obj\platform\functions\func.o
+                0x0000000010011a8c                func_process
  .text.func.msg
-                0x0000000010011a6a      0x2f0 Output\obj\platform\functions\func.o
-                0x0000000010011a6a                func_message
- .text.func     0x0000000010011d5a      0x11e Output\obj\platform\functions\func.o
-                0x0000000010011d5a                func_enter
-                0x0000000010011daa                func_exit
-                0x0000000010011e02                func_run
- *fill*         0x0000000010011e78        0x8 
+                0x0000000010011a94      0x2f0 Output\obj\platform\functions\func.o
+                0x0000000010011a94                func_message
+ .text.func     0x0000000010011d84      0x11e Output\obj\platform\functions\func.o
+                0x0000000010011d84                func_enter
+                0x0000000010011dd4                func_exit
+                0x0000000010011e2c                func_run
+ *fill*         0x0000000010011ea2       0x1e 
  .text.func_bt_chkclr_warning
-                0x0000000010011e80       0x80 Output\obj\platform\functions\func_bt.o
-                0x0000000010011e80                func_bt_chkclr_warning
+                0x0000000010011ec0       0x80 Output\obj\platform\functions\func_bt.o
+                0x0000000010011ec0                func_bt_chkclr_warning
  .text.func_bt_set_dac
-                0x0000000010011f00       0x3e Output\obj\platform\functions\func_bt.o
-                0x0000000010011f00                func_bt_set_dac
+                0x0000000010011f40       0x3e Output\obj\platform\functions\func_bt.o
+                0x0000000010011f40                func_bt_set_dac
  .text.func_bt_mp3_res_play
-                0x0000000010011f3e       0x40 Output\obj\platform\functions\func_bt.o
-                0x0000000010011f3e                func_bt_mp3_res_play
+                0x0000000010011f7e       0x40 Output\obj\platform\functions\func_bt.o
+                0x0000000010011f7e                func_bt_mp3_res_play
  .text.func_bt_switch_voice_lang
-                0x0000000010011f7e        0x2 Output\obj\platform\functions\func_bt.o
-                0x0000000010011f7e                func_bt_switch_voice_lang
+                0x0000000010011fbe        0x2 Output\obj\platform\functions\func_bt.o
+                0x0000000010011fbe                func_bt_switch_voice_lang
  .text.func_bt_warning
-                0x0000000010011f80       0x7a Output\obj\platform\functions\func_bt.o
-                0x0000000010011f80                func_bt_warning
+                0x0000000010011fc0       0x7a Output\obj\platform\functions\func_bt.o
+                0x0000000010011fc0                func_bt_warning
  .text.func_bt_disp_status
-                0x0000000010011ffa       0xbe Output\obj\platform\functions\func_bt.o
-                0x0000000010011ffa                func_bt_disp_status
- .text.func.bt  0x00000000100120b8      0x1ec Output\obj\platform\functions\func_bt.o
-                0x00000000100120b8                func_bt_status
-                0x00000000100120e0                func_bt
- .text.bthid    0x00000000100122a4       0x18 Output\obj\platform\functions\func_bt_hid.o
-                0x00000000100122a4                is_bthid_mode
+                0x000000001001203a       0xbe Output\obj\platform\functions\func_bt.o
+                0x000000001001203a                func_bt_disp_status
+ .text.func.bt  0x00000000100120f8      0x1ec Output\obj\platform\functions\func_bt.o
+                0x00000000100120f8                func_bt_status
+                0x0000000010012120                func_bt
+ .text.bthid    0x00000000100122e4       0x18 Output\obj\platform\functions\func_bt_hid.o
+                0x00000000100122e4                is_bthid_mode
  .text.func.idle
-                0x00000000100122bc      0x426 Output\obj\platform\functions\func_idle.o
-                0x00000000100122bc                spi1_init
-                0x0000000010012398                get_spi1_recv_buffer_data
-                0x00000000100123da                spi1_send_cmd_to_master
-                0x000000001001246a                func_idle_process
-                0x000000001001264a                func_idle
- *fill*         0x00000000100126e2      0x11e 
+                0x00000000100122fc      0x462 Output\obj\platform\functions\func_idle.o
+                0x00000000100122fc                spi1_init
+                0x00000000100123d8                get_spi1_recv_buffer_data
+                0x000000001001241a                spi1_send_cmd_to_master
+                0x00000000100124ba                func_idle_process
+                0x000000001001269a                func_idle
+ *fill*         0x000000001001275e       0xa2 
  .text.lowpwr.sleep
                 0x0000000010012800      0x6da Output\obj\platform\functions\func_lowpwr.o
                 0x0000000010012800                sleep_process

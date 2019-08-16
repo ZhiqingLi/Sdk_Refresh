@@ -1989,14 +1989,14 @@
 
 1553655029 source:f:\soft_sdk\ab532x_ks\app\projects\standard\ram.ld
 
-1563956252 source:f:\soft_sdk\ab532x_ks\app\platform\bsp\bsp_sys.c
+1565094946 source:f:\soft_sdk\ab532x_ks\app\platform\bsp\bsp_sys.c
 	"include.h"
 
-1563956437 source:f:\soft_sdk\ab532x_ks\app\platform\functions\func_idle.c
+1565094973 source:f:\soft_sdk\ab532x_ks\app\platform\functions\func_idle.c
 	"include.h"
 	"func.h"
 	"func_idle.h"
 
-1563957988 source:f:\soft_sdk\ab532x_ks\app\projects\standard\port\port_key.c
+1563958180 source:f:\soft_sdk\ab532x_ks\app\projects\standard\port\port_key.c
 	"include.h"
 

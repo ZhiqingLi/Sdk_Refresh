@@ -271,7 +271,7 @@
 #define USER_KEY_KNOB_EN                0           //旋钮的使用，0为不使用
 #define USER_KEY_KNOB_LEVEL             16          //旋钮的级数
 
-#define USER_ADC_DETECT_EN				1           //自定义ADC检测，0为不使用;20190624
+#define USER_ADC_DETECT_EN				0           //自定义ADC检测，0为不使用;20190624
 
 #define USER_KEY_DOUBLE_EN              1           //按键双击使能
 #define USER_KEY_THRICE_EN              0           //按键三击功能，需要先开双击功能

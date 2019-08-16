@@ -42,7 +42,7 @@ static TIMER RtcAutoOutTimer;
 #define RTC_ALARM_MAX_COUNT          3                     //闹钟循环最大次数
 
 ////////////////////////////////////
-const RTC_DATE_TIME gSysCurDate = {2019, 07, 01, 01, 23, 59, 59};
+const RTC_DATE_TIME gSysCurDate = {2019, 8, 9, 5, 0, 0, 0};
 const uint8_t Alarm_Ring[7] = {0xff, SOUND_ALARM_RING1, SOUND_ALARM_RING2, SOUND_ALARM_RING3, SOUND_ALARM_RING4, SOUND_ALARM_RING5, 0xff};
 
 
@@ -494,7 +494,7 @@ void RtcTimerCB(uint32_t unused)
 
 	if((RTC_STATE_IDLE == sRtcControl->State) || (sRtcControl->SubState == RTC_SET_IDLE))
 	{
-		APP_DBG("RtcTime(%04d-%02d-%02d %02d:%02d:%02d) Week:%d ",
+		APP_DBG("AP8048C RtcTime(%04d-%02d-%02d %02d:%02d:%02d) Week:%d ",
 	        sRtcControl->DataTime.Year, sRtcControl->DataTime.Mon, sRtcControl->DataTime.Date,
 	        sRtcControl->DataTime.Hour, sRtcControl->DataTime.Min, sRtcControl->DataTime.Sec,
 	        sRtcControl->DataTime.WDay);
@@ -503,7 +503,7 @@ void RtcTimerCB(uint32_t unused)
 #endif
 		APP_DBG("\n");
 		
-#ifdef FUNC_SPI_SLAVE_EN
+#if defined(FUNC_SPI_SLAVE_EN) && !defined(FUNC_RTC_AT8563T_EN)
 		if (!WiFiFirmwareUpgradeStateGet() && !IS_RTC_WAKEUP()) {
 			if (gSys.IsWiFiRepeatPowerOn) {
 				Spi_SendCmdToSlave(MAS_SET_RBT);
@@ -560,7 +560,7 @@ void RtcTimerCB(uint32_t unused)
 					break;
 		}
 
-		switch(sNvmRtcInfo.RingType[sRtcControl->AlarmNum])
+		switch(sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType)
 		{
 				case RTC_RING_SOUND1_TYPE:
 					APP_DBG("铃声类型:铃声一;");
@@ -591,7 +591,7 @@ void RtcTimerCB(uint32_t unused)
 					break;
 		}
 
-		APP_DBG("铃声音量:%d;", sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum]);
+		APP_DBG("铃声音量:%d;", sNvmRtcInfo.AlarmVolume);
 		APP_DBG("闹钟状态:%s;",     sRtcControl->AlarmState == ALARM_STATUS_OPENED?"ON":"OFF");
 		APP_DBG("AlarmTime(%02d:%02d:%02d)\n", sRtcControl->AlarmTime.Hour, sRtcControl->AlarmTime.Min, sRtcControl->AlarmTime.Sec);	
 	}
@@ -601,7 +601,8 @@ void RtcTimerCB(uint32_t unused)
 // RTC初始化
 bool RtcInitialize(void)
 {
-	APP_DBG("RtcInitialize\n");
+	
+	APP_DBG("RtcInitialize: %d\n", RTC_NVM_START_ADDR);
 #ifdef FUNC_RTC_ALARM
 	NvmRead(RTC_NVM_START_ADDR, (uint8_t*)&sNvmRtcInfo, sizeof(NVM_RTC_INFO));
 	RtcInit((void *)(sNvmRtcInfo.AlarmTimeList), sizeof(ALARM_TIME_INFO) * MAX_ALARM_NUM);//硬件初始化，不要删除
@@ -645,8 +646,8 @@ bool RtcInitialize(void)
 		{
             if(GetNearAlarmTimeFromBpInfo(&BpAlarmInfo, sRtcControl->AlarmNum-1))      
             {
-			    sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = BpAlarmInfo.RingType;
-    			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = BpAlarmInfo.AlarmVolume;
+			    sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = BpAlarmInfo.RingType;
+    			sNvmRtcInfo.AlarmVolume = BpAlarmInfo.AlarmVolume;
     			sRtcControl->AlarmMode = BpAlarmInfo.AlarmMode; 
     			sRtcControl->AlarmTime = BpAlarmInfo.AlarmTime;
     			sRtcControl->AlarmState = BpAlarmInfo.AlarmState;
@@ -814,18 +815,18 @@ bool RtcSwitchNextSubState(void)
 			//根据设置状态，设置相关参数
 			if(sRtcControl->SubState == RTC_SET_ALARM_VOLUME)
 			{
-				if((sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] > MAX_VOLUME)
-				|| (sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] == FALSE))
+				if((sNvmRtcInfo.AlarmVolume > MAX_VOLUME)
+				|| (sNvmRtcInfo.AlarmVolume == FALSE))
 				{
-					sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = DEFAULT_VOLUME;
+					sNvmRtcInfo.AlarmVolume = DEFAULT_VOLUME;
 				}
 			}
 			else if(sRtcControl->SubState == RTC_SET_ALARM_SOURCE)
 			{
-				if((sNvmRtcInfo.RingType[sRtcControl->AlarmNum] >= RTC_RING_TYPE_MAX)
-				|| (sNvmRtcInfo.RingType[sRtcControl->AlarmNum] < RTC_RING_SOUND1_TYPE))
+				if((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType >= RTC_RING_TYPE_MAX)
+				|| (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType < RTC_RING_SOUND1_TYPE))
 				{
-					sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = RTC_RING_SOUND1_TYPE;
+					sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = RTC_RING_SOUND1_TYPE;
 				}
 			}
 			break;
@@ -855,8 +856,8 @@ void RtcControlEnterSetMode(void)
             /* 设置闹钟常量 */
     		sRtcControl->AlarmMode = AlarmInfo->AlarmMode;
     		sRtcControl->AlarmState = AlarmInfo->AlarmState;
-    		sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = AlarmInfo->AlarmVolume;
-    		sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = AlarmInfo->RingType;
+    		sNvmRtcInfo.AlarmVolume = AlarmInfo->AlarmVolume;
+    		sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = AlarmInfo->RingType;
     		sRtcControl->AlarmTime = AlarmInfo->AlarmTime;
             /* 判断时间数据是否合法 */
             if(sRtcControl->AlarmTime.Hour > 24)
@@ -880,16 +881,16 @@ void RtcControlEnterSetMode(void)
 				sRtcControl->AlarmMode = ALARM_MODE_ONCE_ONLY;
 			}
             /* 判断闹钟音量是否合法 */
-			if((sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] > MAX_VOLUME)
-			|| (sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] == FALSE))
+			if((sNvmRtcInfo.AlarmVolume > MAX_VOLUME)
+			|| (sNvmRtcInfo.AlarmVolume == FALSE))
 			{
-				sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = DEFAULT_VOLUME;
+				sNvmRtcInfo.AlarmVolume = DEFAULT_VOLUME;
 			}
             /* 判断闹钟铃声是否合法 */
-			if((sNvmRtcInfo.RingType[sRtcControl->AlarmNum] > RTC_RING_TYPE_MAX)
-			|| (sNvmRtcInfo.RingType[sRtcControl->AlarmNum] < RTC_RING_SOUND1_TYPE))
+			if((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType > RTC_RING_TYPE_MAX)
+			|| (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType < RTC_RING_SOUND1_TYPE))
 			{
-				sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = RTC_RING_SOUND1_TYPE;
+				sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = RTC_RING_SOUND1_TYPE;
 			}
 #else
             sRtcControl->AlarmTime = sRtcControl->DataTime;
@@ -917,8 +918,8 @@ void RtcControlEnterSetMode(void)
         /* 设置闹钟常量 */
 		AlarmInfo.AlarmMode = sRtcControl->AlarmMode;
 		AlarmInfo.AlarmState = sRtcControl->AlarmState;
-		AlarmInfo.AlarmVolume = sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum];
-		AlarmInfo.RingType = sNvmRtcInfo.RingType[sRtcControl->AlarmNum];
+		AlarmInfo.AlarmVolume = sNvmRtcInfo.AlarmVolume;
+		AlarmInfo.RingType = sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType;
 		AlarmInfo.AlarmTime = sRtcControl->AlarmTime;
 
 		/* 闹钟数据存放到MCU闹钟记忆区 */
@@ -929,8 +930,8 @@ void RtcControlEnterSetMode(void)
 		{
 		    if(GetNearAlarmTimeFromBpInfo(&AlarmInfo, sRtcControl->AlarmNum-1) == TRUE)
 		    {
-    			sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = AlarmInfo.RingType;
-    			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = AlarmInfo.AlarmVolume;
+    			sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = AlarmInfo.RingType;
+    			sNvmRtcInfo.AlarmVolume = AlarmInfo.AlarmVolume;
     			sRtcControl->AlarmMode = AlarmInfo.AlarmMode; 
     			sRtcControl->AlarmTime = AlarmInfo.AlarmTime;
     			sRtcControl->AlarmState = AlarmInfo.AlarmState;
@@ -976,16 +977,16 @@ void RtcControlSetParm(void)
 				sRtcControl->AlarmMode = ALARM_MODE_ONCE_ONLY;
 			}
 			/* 判断闹钟音量是否合法 */
-			if((sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] > MAX_VOLUME)
-			|| (sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] == FALSE))
+			if((sNvmRtcInfo.AlarmVolume > MAX_VOLUME)
+			|| (sNvmRtcInfo.AlarmVolume == FALSE))
 			{
-				sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = DEFAULT_VOLUME;
+				sNvmRtcInfo.AlarmVolume = DEFAULT_VOLUME;
 			}
             /* 判断闹钟铃声是否合法 */
-			if((sNvmRtcInfo.RingType[sRtcControl->AlarmNum] > RTC_RING_WIFISD_TYPE)
-			|| (sNvmRtcInfo.RingType[sRtcControl->AlarmNum] < RTC_RING_SOUND1_TYPE))
+			if((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType > RTC_RING_WIFISD_TYPE)
+			|| (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType < RTC_RING_SOUND1_TYPE))
 			{
-				sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = RTC_RING_SOUND1_TYPE;
+				sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = RTC_RING_SOUND1_TYPE;
 			}
 
 			sRtcControl->State = RTC_STATE_SET_ALARM;
@@ -1162,10 +1163,10 @@ void RtcSetTimeUp(void)
 		}
 		else if(RTC_SET_ALARM_SOURCE == sRtcControl->SubState)         //设置闹钟提示音音源
 		{
-			sNvmRtcInfo.RingType[sRtcControl->AlarmNum]++;
-			if(sNvmRtcInfo.RingType[sRtcControl->AlarmNum] >= RTC_RING_TYPE_MAX)
+			sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType++;
+			if(sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType >= RTC_RING_TYPE_MAX)
 			{
-			  sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = RTC_RING_SOUND1_TYPE;
+			  sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = RTC_RING_SOUND1_TYPE;
 			}
 		}
 		else if(RTC_SET_ALARM_ONOFF == sRtcControl->SubState)          //设置闹钟开关
@@ -1181,10 +1182,10 @@ void RtcSetTimeUp(void)
 		}
 		else if(RTC_SET_ALARM_VOLUME == sRtcControl->SubState)         //设置闹钟提示音音量
 		{
-			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum]++;
-			if(sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] >= MAX_VOLUME)
+			sNvmRtcInfo.AlarmVolume++;
+			if(sNvmRtcInfo.AlarmVolume >= MAX_VOLUME)
 			{
-			  sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = 0;
+			  sNvmRtcInfo.AlarmVolume = 0;
 			}
 		}
 		else
@@ -1250,11 +1251,11 @@ void RtcSetTimeDown(void)
 		}
 		else if(RTC_SET_ALARM_SOURCE == sRtcControl->SubState)         //设置闹钟提示音音源
 		{
-			sNvmRtcInfo.RingType[sRtcControl->AlarmNum]--;
-			if((sNvmRtcInfo.RingType[sRtcControl->AlarmNum] >= RTC_RING_TYPE_MAX)
-			|| (sNvmRtcInfo.RingType[sRtcControl->AlarmNum] < RTC_RING_SOUND1_TYPE))
+			sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType--;
+			if((sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType >= RTC_RING_TYPE_MAX)
+			|| (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType < RTC_RING_SOUND1_TYPE))
 			{
-			  sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = (RTC_RING_TYPE_MAX-1);
+				sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = (RTC_RING_TYPE_MAX-1);
 			}
 		}
 		else if(RTC_SET_ALARM_ONOFF == sRtcControl->SubState)          //设置闹钟开关
@@ -1270,10 +1271,10 @@ void RtcSetTimeDown(void)
 		}
 		else if(RTC_SET_ALARM_VOLUME == sRtcControl->SubState)         //设置闹钟提示音音量
 		{
-			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum]--;
-			if(sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] > MAX_VOLUME)
+			sNvmRtcInfo.AlarmVolume--;
+			if(sNvmRtcInfo.AlarmVolume > MAX_VOLUME)
 			{
-			  sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = MAX_VOLUME;
+			  sNvmRtcInfo.AlarmVolume = MAX_VOLUME;
 			}
 		}
 		else
@@ -1346,7 +1347,7 @@ bool RtcCurAlarmSleepAndStop(RTC_ALARM_STATE state)
 			if(sRtcControl->CurRingDuration == FALSE)
 			{
 				CurVolumeBackUp = gSys.Volume;
-				gSys.Volume = sNvmRtcInfo.AlarmVolume[sRtcControl->CurAlarmNum];
+				gSys.Volume = sNvmRtcInfo.AlarmVolume;
 				SetSysVol();
 			}
 		}
@@ -1549,8 +1550,8 @@ bool RtcControlProcess(void)
         		{
         		    if(GetNearAlarmTimeFromBpInfo(&BpAlarmInfo, sRtcControl->AlarmNum-1) == TRUE)
         		    {
-            			sNvmRtcInfo.RingType[sRtcControl->AlarmNum] = BpAlarmInfo.RingType;
-            			sNvmRtcInfo.AlarmVolume[sRtcControl->AlarmNum] = BpAlarmInfo.AlarmVolume;
+            			sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = BpAlarmInfo.RingType;
+            			sNvmRtcInfo.AlarmVolume = BpAlarmInfo.AlarmVolume;
                         sRtcControl->AlarmMode = BpAlarmInfo.AlarmMode;
                         sRtcControl->AlarmState = BpAlarmInfo.AlarmState;
                         sRtcControl->AlarmTime = BpAlarmInfo.AlarmTime;
@@ -1582,7 +1583,7 @@ bool RtcControlProcess(void)
 				sRtcControl->AlarmTime.Hour, sRtcControl->AlarmTime.Min, sRtcControl->AlarmTime.Sec);
 				RtcAlarmArrivedProcess();
 				//如果闹钟铃声为WiFi SD卡，则自动切换SD模式
-				if(IsWiFiCardLink() && (sNvmRtcInfo.RingType[sRtcControl->CurAlarmNum] == RTC_RING_SDCARD_TYPE))
+				if(IsWiFiCardLink() && (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType == RTC_RING_SDCARD_TYPE))
 				{
 					gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;	
 					MsgSend(MSG_MODE);	
@@ -1590,7 +1591,7 @@ bool RtcControlProcess(void)
 					sRtcControl->CurAlarmNum = FALSE;
 				}
 				//如果闹钟为WiFI端闹钟，当前网络连接正常，本地不闹响当前闹钟
-				else if((RTC_RING_WIFISD_TYPE == sNvmRtcInfo.RingType[sRtcControl->CurAlarmNum])
+				else if((RTC_RING_WIFISD_TYPE == sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType)
 				&& (WIFI_STATUS_WWW_ENABLE == WiFiWwwStateGet()))
 				{
 					sRtcControl->CurAlarmRun = FALSE;
@@ -1598,9 +1599,9 @@ bool RtcControlProcess(void)
 				}
 				else
 				{
-					if(sNvmRtcInfo.RingType[sRtcControl->CurAlarmNum] >= RTC_RING_SDCARD_TYPE)
+					if(sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType >= RTC_RING_SDCARD_TYPE)
 					{
-						sNvmRtcInfo.RingType[sRtcControl->CurAlarmNum] = RTC_RING_SOUND1_TYPE;
+						sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType = RTC_RING_SOUND1_TYPE;
 					}
 					sRtcControl->CurAlarmRun = TRUE;
 				}
@@ -1614,7 +1615,7 @@ bool RtcControlProcess(void)
 				if(RtcCurAlarmSleepAndStop(RTC_ALARM_STATE_IDLE))
 				{
 					//播放闹铃提示音。
-					SoundRemind(Alarm_Ring[sNvmRtcInfo.RingType[sRtcControl->CurAlarmNum]]);
+					SoundRemind(Alarm_Ring[sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType]);
 				}
 			}
 		}
@@ -1623,9 +1624,9 @@ bool RtcControlProcess(void)
 	if((RTC_STATE_SET_ALARM == sRtcControl->State) && !IsSoundRemindPlaying())
 	{
 		if((RTC_SET_ALARM_SOURCE == sRtcControl->SubState)
-		&& (sNvmRtcInfo.RingType[sRtcControl->AlarmNum] < RTC_RING_SDCARD_TYPE))
+		&& (sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType < RTC_RING_SDCARD_TYPE))
 		{
-			SoundRemind(Alarm_Ring[sNvmRtcInfo.RingType[sRtcControl->AlarmNum]]);
+			SoundRemind(Alarm_Ring[sNvmRtcInfo.AlarmRingList[sRtcControl->AlarmNum-1].RingType]);
 		}
 	}
 #endif

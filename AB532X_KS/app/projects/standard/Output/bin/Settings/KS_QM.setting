@@ -48,7 +48,7 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="FLY_B" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="00:00:00:00:00:A6" />
+        <add key="bt_addr" value="00:00:00:00:00:AA" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="FF:FF:FF:FF:FF:FF" />

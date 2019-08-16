@@ -12,6 +12,7 @@
 #include "eq.h"
 #include "eq_params.h"
 #include "sys_vol.h"
+#include "wifi_control.h"
 
 #ifdef FUNC_POWER_MONITOR_EN
 #include "power_management.h"
@@ -22,7 +23,6 @@
 #include "aip1629a.h"
 #include "singled_display.h"
 
-#ifdef FUNC_SPI_SLAVE_EN
 #define SINGLE_BLED_INIT()				do{\
 										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
 										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
@@ -40,28 +40,6 @@
 										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*Duty/100);\
 										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
 										}while(0)
-#else
-#define SINGLE_BLED_INIT()				do{\
-										PwmConfig(PWM_CH3_A10_B24, 1200, 100);\
-										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
-										}while(0)
-#define SINGLE_RLED_INIT()				do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 100);\
-										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
-										}while(0)
-										
-#define SINGLE_BLED_SETTING(Duty)		do{\
-										PwmConfig(PWM_CH3_A10_B24, 1200, 1200*Duty/100);\
-										PwmEnableChannel(PWM_CH3_A10_B24, PWM_IO_SEL0, PWM_MODE_OUT);\
-										}while(0)
-#define SINGLE_RLED_SETTING(Duty)		do{\
-										PwmConfig(PWM_CH0_A0_B27, 1200, 1200*(100-Duty)/100);\
-										PwmEnableChannel(PWM_CH0_A0_B27, PWM_IO_SEL1, PWM_MODE_OUT);\
-										}while(0)
-
-#endif
-
-
 
 //==============================================================================
 static SINGLE_LED_DISP_STRU Led;
@@ -168,6 +146,23 @@ void LedFlushDisp(void)
 	) {
 		SINGLE_RLED_SETTING(0);
 		SINGLE_BLED_SETTING(0);
+		return;
+	}
+	//LED≤‚ ‘ƒ£ Ω°£
+	if(gWiFi.TestModeState) {
+		static bool IsLedOn = FALSE;
+		if (IsTimeOut(&SingleLedChangeTime)) {
+			TimeOutSet(&SingleLedChangeTime, 500);
+			IsLedOn = !IsLedOn;
+			if(IsLedOn) {
+				SINGLE_RLED_SETTING(100);
+				SINGLE_BLED_SETTING(100);
+			}
+			else {
+				SINGLE_RLED_SETTING(0);
+				SINGLE_BLED_SETTING(0);
+			}
+		}
 		return;
 	}
 
