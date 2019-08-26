@@ -195,6 +195,21 @@ void mp3_res_play(u32 addr, u32 len)
             break;
         }
 #endif // LINEIN_DETECT_EN
+#if		1
+		//已经最大音量时，提示音中忽略音量按键
+		if (((msg == KL_NEXT_VOL_UP) || (msg == KH_NEXT_VOL_UP) || (msg == KL_VOL_UP)
+        || (msg == KH_VOL_UP) || (msg == KU_VOL_UP_NEXT) || (msg == KU_VOL_UP)) 
+        && (sys_cb.vol >= VOL_MAX)) {
+        	continue;
+		}
+		if (((msg == KL_PREV_VOL_DOWN) || (msg == KH_PREV_VOL_DOWN) || (msg == KU_VOL_DOWN_PREV)
+        || (msg == KH_VOL_DOWN) || (msg == KL_VOL_DOWN) || (msg == KU_VOL_DOWN)) 
+        && (sys_cb.vol == 0)) {
+        	continue;
+		}
+		printf ("res player ignore msg VOL_UP/VOL_DOWN;\n");
+#endif
+		
         if ((msg != NO_MSG) && ((msg & KEY_TYPE_MASK) != KEY_HOLD)) {
             msg_enqueue(msg);       //还原未处理的消息
         }

@@ -324,7 +324,7 @@ void external_power_gpio_poweron(u8 io_num)
 {
 	gpio_t *p = &pwr_gpio;
     bsp_gpio_cfg_init(p, io_num);
-    if (p->sfr == NULL) {
+    if (p->sfr == NULL || !xcfg_cb.ext_power_io_en) {
     	return;
     }
     p->sfr[GPIOxDE] |= BIT(p->num);
@@ -336,7 +336,7 @@ void external_power_gpio_powerdown(u8 io_num)
 {
 	gpio_t *p = &pwr_gpio;
     bsp_gpio_cfg_init(p, io_num);
-    if (p->sfr == NULL) {
+    if (p->sfr == NULL || !xcfg_cb.ext_power_io_en) {
     	return;
     }
     p->sfr[GPIOxDE] |= BIT(p->num);

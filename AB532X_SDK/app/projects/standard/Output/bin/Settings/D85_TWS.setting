@@ -48,13 +48,13 @@
         <add key="charge_trickle_curr" value="30mA" />
         <add key="bt_name" value="D85" />
         <add key="bt_addr_mode" value="单次递增" />
-        <add key="bt_addr" value="41:42:00:00:01:14" />
+        <add key="bt_addr" value="41:42:00:00:01:40" />
         <add key="bt_addr_start" value="41:42:00:00:00:00" />
         <add key="bt_addr_step" value="00:00:00:00:00:01" />
         <add key="bt_addr_end" value="41:42:FF:FF:FF:FF" />
         <add key="bt_txpwr" value="+2DBM" />
         <add key="bt_rf_param" value="255" />
-        <add key="bt_2acl_en" value="True" />
+        <add key="bt_2acl_en" value="False" />
         <add key="bt_a2dp_en" value="True" />
         <add key="bt_a2dp_vol_ctrl_en" value="True" />
         <add key="bt_sco_en" value="True" />
@@ -87,7 +87,7 @@
         <add key="music_ape_support" value="False" />
         <add key="music_flac_support" value="False" />
         <add key="music_sdcard_en" value="True" />
-        <add key="music_udisk_en" value="False" />
+        <add key="music_udisk_en" value="True" />
         <add key="sddet_iosel" value="28" />
         <add key="sd1det_iosel" value="0" />
         <add key="fmrx_rfcap_val" value="0" />
@@ -99,7 +99,7 @@
         <add key="aux_dig_gain" value="0" />
         <add key="auxl_sel" value="4" />
         <add key="auxr_sel" value="4" />
-        <add key="linein_det_iosel" value="29" />
+        <add key="linein_det_iosel" value="30" />
         <add key="user_pwrkey_en" value="True" />
         <add key="user_adkey_en" value="False" />
         <add key="user_adkey2_en" value="False" />
@@ -112,16 +112,16 @@
         <add key="pwron_press_time" value="2.5秒" />
         <add key="pwroff_press_time" value="2.5秒" />
         <add key="key_double_config_en" value="True" />
-        <add key="dblkey_num0" value="PLAY/HSF" />
+        <add key="dblkey_num0" value="MODE" />
         <add key="dblkey_num1" value="P/P" />
         <add key="dblkey_num2" value="None" />
         <add key="dblkey_num3" value="None" />
         <add key="dblkey_num4" value="None" />
         <add key="pwrkey_config_en" value="True" />
         <add key="pwrkey_num0" value="MODE" />
-        <add key="pwrkey_num1" value="NEXT/VOL+" />
-        <add key="pwrkey_num2" value="PREV/VOL-" />
-        <add key="pwrkey_num3" value="PLAY/HSF" />
+        <add key="pwrkey_num1" value="VOL+/NEXT" />
+        <add key="pwrkey_num2" value="VOL-/PREV" />
+        <add key="pwrkey_num3" value="P/P" />
         <add key="pwrkey_num4" value="None" />
         <add key="adkey_config_en" value="False" />
         <add key="adkey1_num0" value="P/P" />
@@ -218,7 +218,7 @@
         <add key="led_lowbat_bluepat" value="0" />
         <add key="led_lowbat_unit" value="6" />
         <add key="led_lowbat_cycle" value="0" />
-        <add key="RESOURCE_DIR_SEL" value="D19" />
+        <add key="RESOURCE_DIR_SEL" value="test" />
         <add key="powkey_soft_on_off" value="False" />
         <add key="bt_user_param_en" value="False" />
         <add key="rf_captune" value="7" />
@@ -230,7 +230,7 @@
         <add key="bt_pwrkey_nsec_discover" value="不支持" />
         <add key="bt_dis_reconnect_en" value="False" />
         <add key="bt_dis_reconnect_cnt" value="15" />
-        <add key="bt_key_discon_en" value="False" />
+        <add key="bt_key_discon_en" value="True" />
         <add key="bt_key_discon_mode" value="1" />
         <add key="led_tws_main_config_en" value="False" />
         <add key="led_tws_main_conn_redpat" value="0" />
@@ -242,5 +242,9 @@
         <add key="led_tws_slave_conn_bluepat" value="2" />
         <add key="led_tws_slave_conn_unit" value="2" />
         <add key="led_tws_slave_conn_cycle" value="86" />
+        <add key="reset_factory_en" value="True" />
+        <add key="reset_key_num" value="MODE" />
+        <add key="reset_key_mode" value="长按5秒" />
+        <add key="ext_power_io_en" value="False" />
     </appSettings>
 </configuration>

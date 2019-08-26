@@ -5,11 +5,13 @@
 #include "clk.h"
 #include "gpio.h"
 #include "rtc_control.h"
+#include "sys_app.h"
 
 #ifdef FUNC_RTC_AT8563T_EN
 
 #define AT8563T_CHIP_ADDR 	0xA2
 #define AT8563T_BASE_ADDR 	0x00
+#define AT8563T_REG_LEN		16
 
 #define AT8563T_TIME_ADDR 	0x02
 #define AT8563T_TIME_LEN 	0x07
@@ -17,11 +19,31 @@
 #define AT8563T_ALARM_ADDR 	0x09
 #define AT8563T_ALARM_LEN 	0x04
 
+#define AT8563T_SYSTEM_CONTROL_ADDR		0x00
+#define AT8563T_STATE_CONTROL_ADDR		0x01
+
+#define AT8563T_TIMER_SEC_ADDR			0x02
+#define AT8563T_TIMER_MIN_ADDR			0x03
+#define AT8563T_TIMER_HOUR_ADDR			0x04
+#define AT8563T_TIMER_WDAY_ADDR			0x06
+#define AT8563T_TIMER_DATE_ADDR			0x05
+#define AT8563T_TIMER_MON_ADDR			0x07
+#define AT8563T_TIMER_YEAR_ADDR			0x08
+
+#define AT8563T_ALARM_MIN_ADDR			0x09
+#define AT8563T_ALARM_HOUR_ADDR			0x0A
+#define AT8563T_ALARM_DATE_ADDR			0x0B
+#define AT8563T_ALARM_WDAY_ADDR			0x0C
+
+#define AT8563T_CLKOUT_CONTROL_ADDR		0x0D
+#define AT8563T_TIMER_CONTROL_ADDR		0x0E
+#define AT8563T_TIMER_COUNT_ADDR		0x0F
+
 static void * RtcI2cHandler = NULL;
-//RTC初始化时间：2019.8.9 星期5，0：0：0
-static const uint8_t InitTime[] = {0x00, 0x00, 0x00, 0x09, 0x05, 0x08, 0x19};
-static uint8_t CurRtcTime[7];
-static TIMER	RtcScanTimer;
+//RTC初始化时间：2019.8.9 星期5，0：0：0					//系统：状态：秒 ：分钟：小时：日期：星期：月份：年份：警分：警时：警日：警星：时钟：计时：计数
+static const uint8_t	InitTime[AT8563T_REG_LEN] =  {0x00, 0x00, 0x00, 0x00, 0x00, 0x20, 0x02, 0x08, 0x19, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00, 0x00};
+static uint8_t			CurRtcTime[AT8563T_REG_LEN];
+static bool				IsAt8563tInitOk = FALSE, IsSecondAlarm = FALSE;	
 /*****************************************************************************
  Prototype    : RtcAt8563tReadTime
  Description  : 读RTC时间
@@ -37,16 +59,16 @@ static TIMER	RtcScanTimer;
     Modification : Created function
 
 *****************************************************************************/
-bool RtcAt8563tReadTime(uint8_t *Time)
+static bool RtcAt8563tReadParam(void)
 {
-	if (I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_TIME_ADDR, Time, AT8563T_TIME_LEN)) {
-		*Time &= 0x7f;			//秒
-		*(Time+1) &= 0x7f;		//分钟
-		*(Time+2) &= 0x3f;		//小时
-		*(Time+3) &= 0x3f;		//日期
-		*(Time+4) &= 0x07;		//星期
-		*(Time+5) &= 0x9f;		//月份,保留世纪位
-		*(Time+6) &= 0xff;		//年份
+	if (I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_BASE_ADDR, CurRtcTime, AT8563T_REG_LEN)) {
+		CurRtcTime[AT8563T_TIMER_SEC_ADDR] &= 0x7f;			//秒
+		CurRtcTime[AT8563T_TIMER_MIN_ADDR] &= 0x7f;			//分钟
+		CurRtcTime[AT8563T_TIMER_HOUR_ADDR] &= 0x3f;		//小时
+		CurRtcTime[AT8563T_TIMER_DATE_ADDR] &= 0x3f;		//日期
+		CurRtcTime[AT8563T_TIMER_WDAY_ADDR] &= 0x07;		//星期
+		CurRtcTime[AT8563T_TIMER_MON_ADDR] &= 0x9f;			//月份,保留世纪位
+		CurRtcTime[AT8563T_TIMER_YEAR_ADDR] &= 0xff;		//年份
 		return TRUE;
 	}
 	return FALSE;
@@ -67,33 +89,9 @@ bool RtcAt8563tReadTime(uint8_t *Time)
     Modification : Created function
 
 *****************************************************************************/
-bool RtcAt8563tWriteTime(uint8_t *Time)
+static bool RtcAt8563tWriteParam(void)
 {
-	if (I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_TIME_ADDR, Time, AT8563T_TIME_LEN)) {
-		return TRUE;
-	}
-	return FALSE;
-}
-
-/*****************************************************************************
- Prototype    : RtcAt8563tPowerOn
- Description  : 第一次上电信息初始化
- Input        : void  
- Output       : None
- Return Value : 
- Calls        : 
- Called By    : 
- 
-  History        :
-  1.Date         : 2019/8/9
-    Author       : qing
-    Modification : Created function
-
-*****************************************************************************/
-bool RtcAt8563tPowerOn(void)
-{
-	uint8_t PowerInit[] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x09, 0x05, 0x08, 0x19, 0x80, 0x80, 0x80, 0x80, 0x00, 0x00};
-	if (I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_BASE_ADDR, PowerInit, 15)) {
+	if (I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_BASE_ADDR, CurRtcTime, AT8563T_REG_LEN)) {
 		return TRUE;
 	}
 	return FALSE;
@@ -115,22 +113,100 @@ bool RtcAt8563tPowerOn(void)
 
 *****************************************************************************/
 void WiFiSetAt8563tSystemTime(RTC_DATE_TIME* CurTime)
-{
-	uint8_t Time[7];
+{	
+	if (!IsAt8563tInitOk) {
+		return;
+	}
 	
-	Time[0] = ((CurTime->Sec/10 << 4) + CurTime->Sec%10);
-	Time[1] = ((CurTime->Min/10 << 4) + CurTime->Min%10);
-	Time[2] = ((CurTime->Hour/10 << 4) + CurTime->Hour%10);
-	Time[3] = ((CurTime->Date/10 << 4) + CurTime->Date%10);
-	Time[4] = (CurTime->WDay%10);
+	CurRtcTime[AT8563T_TIMER_SEC_ADDR] = ((CurTime->Sec/10 << 4) + CurTime->Sec%10);
+	CurRtcTime[AT8563T_TIMER_MIN_ADDR] = ((CurTime->Min/10 << 4) + CurTime->Min%10);
+	CurRtcTime[AT8563T_TIMER_HOUR_ADDR] = ((CurTime->Hour/10 << 4) + CurTime->Hour%10);
+	CurRtcTime[AT8563T_TIMER_DATE_ADDR] = ((CurTime->Date/10 << 4) + CurTime->Date%10);
+	CurRtcTime[AT8563T_TIMER_WDAY_ADDR] = (CurTime->WDay%10);
 	if (CurTime->Year/100 >= 20) {
-		Time[5] = ((CurTime->Mon/10 << 4) + CurTime->Mon%10);
+		CurRtcTime[AT8563T_TIMER_MON_ADDR] = ((CurTime->Mon/10 << 4) + CurTime->Mon%10);
 	}
 	else {	
-		Time[5] = ((CurTime->Mon/10 << 4) + CurTime->Mon%10)|0x80;
+		CurRtcTime[AT8563T_TIMER_MON_ADDR] = ((CurTime->Mon/10 << 4) + CurTime->Mon%10)|0x80;
 	}
-	Time[6] = ((CurTime->Year%100/10 << 4) + CurTime->Year%10);
-	RtcAt8563tWriteTime(Time);
+	CurRtcTime[AT8563T_TIMER_YEAR_ADDR] = ((CurTime->Year%100/10 << 4) + CurTime->Year%10);
+	if (!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_TIME_ADDR, &CurRtcTime[AT8563T_TIME_ADDR], AT8563T_TIME_LEN)) {
+		APP_DBG("AT8563T alarm set fail!!!\n");
+	}
+}
+
+/*****************************************************************************
+ Prototype    : WiFiGetAt8563tSystemTime
+ Description  : WiFi获取RTC时间
+ Input        : RTC_DATE_TIME* SystemTime  
+ Output       : None
+ Return Value : 
+ Calls        : 
+ Called By    : 
+ 
+  History        :
+  1.Date         : 2019/8/20
+    Author       : qing
+    Modification : Created function
+
+*****************************************************************************/
+void WiFiGetAt8563tSystemTime(RTC_DATE_TIME* SystemTime)
+{
+	if (!IsAt8563tInitOk) {
+		return;
+	}
+	
+	if (RtcAt8563tReadParam()) {
+		SystemTime->Sec = CurRtcTime[AT8563T_TIMER_SEC_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_SEC_ADDR]%16;
+		SystemTime->Min = CurRtcTime[AT8563T_TIMER_MIN_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_MIN_ADDR]%16;
+		SystemTime->Hour = CurRtcTime[AT8563T_TIMER_HOUR_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_HOUR_ADDR]%16;
+		SystemTime->WDay = CurRtcTime[AT8563T_TIMER_WDAY_ADDR]%16;
+		SystemTime->Date = CurRtcTime[AT8563T_TIMER_DATE_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_DATE_ADDR]%16;
+		SystemTime->Mon = (CurRtcTime[AT8563T_TIMER_MON_ADDR]&0x1F)/16*10 + CurRtcTime[AT8563T_TIMER_MON_ADDR]%16;
+		if (CurRtcTime[AT8563T_TIMER_MON_ADDR]&0x80) {
+			SystemTime->Year = CurRtcTime[AT8563T_TIMER_YEAR_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_YEAR_ADDR]%16 + 1900;
+		}
+		else {
+			SystemTime->Year = CurRtcTime[AT8563T_TIMER_YEAR_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_YEAR_ADDR]%16 + 2000;
+		}
+		//闹钟时间到，
+		if (RtcAt8563tAlarmCome()) {
+			RTC_DATE_TIME AlarmTime;
+
+			APP_DBG("AT8563T alarm in comeing!!!\n");
+#ifdef FUNC_GPIO_POWER_ON_EN
+			SysPowerOnControl(TRUE);
+#endif
+			gSys.WakeUpSource = WAKEUP_FLAG_POR_RTC;
+
+			if (!IsSecondAlarm) {
+				IsSecondAlarm = TRUE;
+				//第一次闹响，设置1分钟后的闹钟，防止闹钟唤醒后WiFi未启动而用户关机
+				memset (&AlarmTime, 0x00, sizeof(RTC_DATE_TIME));
+				AlarmTime.Min = CurRtcTime[AT8563T_TIMER_MIN_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_MIN_ADDR]%16;
+				AlarmTime.Hour = CurRtcTime[AT8563T_TIMER_HOUR_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_HOUR_ADDR]%16;
+				AlarmTime.WDay = CurRtcTime[AT8563T_TIMER_WDAY_ADDR]%16;
+				AlarmTime.Date = CurRtcTime[AT8563T_TIMER_DATE_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_DATE_ADDR]%16;
+				//分钟加1；
+				AlarmTime.Min++;
+				if (AlarmTime.Min >= 60) {
+					AlarmTime.Hour++;
+					AlarmTime.Min %= 60;
+					AlarmTime.Hour %= 24;
+				}
+
+				WiFiSetAt8563tAlarmTime(TRUE, &AlarmTime);
+			}
+			else {
+				//第二次闹钟闹响，关闭闹钟
+				IsSecondAlarm = FALSE;
+				WiFiSetAt8563tAlarmTime(FALSE, NULL);
+			}
+		}
+	}
+	else {
+		APP_DBG("Read at8563t system time erro!!!\n");
+	}
 }
 
 /*****************************************************************************
@@ -150,29 +226,45 @@ void WiFiSetAt8563tSystemTime(RTC_DATE_TIME* CurTime)
 *****************************************************************************/
 void WiFiSetAt8563tAlarmTime(bool IsOnOff, RTC_DATE_TIME* AlarmTime)
 {
-	uint8_t Time[4], AlarmCmd;
+	uint8_t AlarmCmd;
 
-	memset(Time, 0x80, sizeof(Time));
-	if (IsOnOff) {
-		Time[0] = ((AlarmTime->Min/10 << 4) + AlarmTime->Min%10);
-		Time[1] = ((AlarmTime->Hour/10 << 4) + AlarmTime->Hour%10);
-		Time[2] = ((AlarmTime->Date/10 << 4) + AlarmTime->Date%10)|0x80;
-		Time[3] = (AlarmTime->WDay%10)|0x80;
+	if (!IsAt8563tInitOk) {
+		return;
 	}
-	if (!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_ALARM_ADDR, Time, AT8563T_ALARM_LEN)) {
+	//因为闹钟只能到分钟，所以秒大于30，分钟增加一分钟
+	if (AlarmTime->Sec > 30) {
+		AlarmTime->Min++;
+		if (AlarmTime->Min >= 60) {
+			AlarmTime->Hour++;
+			AlarmTime->Min %= 60;
+			AlarmTime->Hour %= 24;
+		}
+	}
+	
+	if (IsOnOff) {
+		CurRtcTime[AT8563T_ALARM_MIN_ADDR] = ((AlarmTime->Min/10 << 4) + AlarmTime->Min%10);
+		CurRtcTime[AT8563T_ALARM_HOUR_ADDR] = ((AlarmTime->Hour/10 << 4) + AlarmTime->Hour%10);
+		CurRtcTime[AT8563T_ALARM_DATE_ADDR] = ((AlarmTime->Date/10 << 4) + AlarmTime->Date%10)|0x80;
+		CurRtcTime[AT8563T_ALARM_WDAY_ADDR] = (AlarmTime->WDay%10)|0x80;
+		CurRtcTime[AT8563T_STATE_CONTROL_ADDR] = 0x02;					//清楚报警并打开报警中断，
+	}
+	else {
+		CurRtcTime[AT8563T_ALARM_MIN_ADDR] = 0x80;
+		CurRtcTime[AT8563T_ALARM_HOUR_ADDR] = 0x80;
+		CurRtcTime[AT8563T_ALARM_DATE_ADDR] = 0x80;
+		CurRtcTime[AT8563T_ALARM_WDAY_ADDR] = 0x80;
+		CurRtcTime[AT8563T_STATE_CONTROL_ADDR] = 0x00;					//清楚报警并关闭报警中断
+		IsSecondAlarm = FALSE;
+	}
+
+	if ((!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_ALARM_ADDR, &CurRtcTime[AT8563T_ALARM_ADDR], AT8563T_ALARM_LEN))
+	|| (!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &CurRtcTime[AT8563T_STATE_CONTROL_ADDR], 1))){
 		APP_DBG("AT8563T alarm set fail!!!\n");
 	}
 
-	if (IsOnOff) {
-		//打开报警及报警中断，
-		AlarmCmd = 0x02;
-		I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, 0x01, &AlarmCmd, 1);
-	}
-	else {
-		//关闭报警及报警中断，
-		AlarmCmd = 0x00;
-		I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, 0x01, &AlarmCmd, 1);
-	}
+	AlarmCmd = 0xff;
+	I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &AlarmCmd, 1);
+	APP_DBG("AT8563T alarm set: %d : %d!!!\n", IsOnOff, AlarmCmd);
 }
 
 /*****************************************************************************
@@ -194,22 +286,24 @@ bool RtcAt8563tInit(void)
 {
 	DBG("AT8563T Init\n");
 
-	TimeOutSet(&RtcScanTimer, 0);
+	memset (CurRtcTime, 0x00, sizeof(CurRtcTime));
 	if(!RtcI2cHandler)
 	{
-		RtcI2cHandler = I2cMasterCreate(PORT_C, 3, PORT_C, 4);
+		RtcI2cHandler = I2cMasterCreate(PORT_B, 20, PORT_B, 21);
 	}
 	
 	if(RtcI2cHandler)
 	{
-		if (RtcAt8563tReadTime(CurRtcTime)) {
-			if (CurRtcTime[5]&0x80) {
+		if (RtcAt8563tReadParam()) {
+			if (CurRtcTime[AT8563T_TIMER_MON_ADDR]&0x80) {
 				APP_DBG("AT8563T power on time : %x: %x: %x: %x: %x: %x: %x\n",
-				CurRtcTime[6], CurRtcTime[5], CurRtcTime[3], CurRtcTime[4], CurRtcTime[2], CurRtcTime[1], CurRtcTime[0]);
-				RtcAt8563tPowerOn();
-				RtcAt8563tWriteTime((uint8_t *)InitTime);
-				RtcAt8563tReadTime(CurRtcTime);
+				CurRtcTime[AT8563T_TIMER_YEAR_ADDR], CurRtcTime[AT8563T_TIMER_MON_ADDR], CurRtcTime[AT8563T_TIMER_DATE_ADDR], 
+				CurRtcTime[AT8563T_TIMER_WDAY_ADDR], CurRtcTime[AT8563T_TIMER_HOUR_ADDR], CurRtcTime[AT8563T_TIMER_MIN_ADDR], CurRtcTime[AT8563T_TIMER_SEC_ADDR]);
+				memcpy(CurRtcTime, InitTime, sizeof(CurRtcTime));
+				RtcAt8563tWriteParam();
+				RtcAt8563tReadParam();
 			}
+			IsAt8563tInitOk = TRUE;
 		}
 		else {
 			APP_DBG("Rtc AT8563T read erro!!!\n");
@@ -221,6 +315,7 @@ bool RtcAt8563tInit(void)
 		APP_DBG("RtcI2cMasterCreate Fail!\n");
 		return FALSE;
 	}
+
 	return TRUE;
 }
 
@@ -240,49 +335,11 @@ bool RtcAt8563tInit(void)
 
 *****************************************************************************/
 bool RtcAt8563tAlarmCome(void) 
-{
-	uint8_t AlarmMask;
-
-	I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, 0x01, &AlarmMask, 1);
-
-	if (AlarmMask&(1<<3)) {
-		return TRUE;
+{	
+	if (!IsAt8563tInitOk) {
+		return FALSE;
 	}
-	return FALSE;
-}
-/*****************************************************************************
- Prototype    : RtcAt8563tControlProcess
- Description  : RTC 事件轮询
- Input        : void  
- Output       : None
- Return Value : 
- Calls        : 
- Called By    : 
- 
-  History        :
-  1.Date         : 2019/8/9
-    Author       : qing
-    Modification : Created function
-
-*****************************************************************************/
-void RtcAt8563tControlProcess(void) 
-{
-	if (IsTimeOut(&RtcScanTimer)) {
-		TimeOutSet(&RtcScanTimer, 10000);
-		if (RtcAt8563tReadTime(CurRtcTime)) {
-			APP_DBG("AT8563T RtcTime(20%02x-%02x-%02x %02x:%02x:%02x) Week:%x;",
-			CurRtcTime[6], CurRtcTime[5], CurRtcTime[3], CurRtcTime[2], CurRtcTime[1], CurRtcTime[0], CurRtcTime[4]);
-		}
-		else {
-			APP_DBG("I2c read AT8563T erro!!!");
-		}
-
-		if (RtcAt8563tAlarmCome()) {
-			APP_DBG("ALARM COME!!!");
-		}
-
-		APP_DBG("\n");
-	}
+	return (CurRtcTime[AT8563T_STATE_CONTROL_ADDR]&(1<<3));
 }
 
 #endif	//#ifdef FUNC_RTC_AT8563T_EN

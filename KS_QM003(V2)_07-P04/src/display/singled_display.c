@@ -139,7 +139,7 @@ void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 
 void LedFlushDisp(void)
 {
-	if ((gSys.CurModuleID >= MODULE_ID_END)
+	if ((!IS_CUR_WORK_MODULE())
 #ifdef FUNC_SLEEP_LEDOFF_EN
 	|| (gSys.SleepLedOffFlag) 
 #endif

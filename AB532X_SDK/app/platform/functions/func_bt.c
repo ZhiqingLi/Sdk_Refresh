@@ -9,7 +9,7 @@ uint8_t bt_tws_get_force_role(void);
 func_bt_t f_bt;
 
 ALIGNED(64)
-bool func_bt_chkclr_warning(u8 bits)
+bool func_bt_chkclr_warning(u16 bits)
 {
     GLOBAL_INT_DISABLE();
     if(f_bt.warning_status & bits) {
@@ -245,6 +245,16 @@ void func_bt_warning(void)
 			func_cb.mp3_res_play(RES_BUF_TWS_PAIR_MP3, RES_LEN_TWS_PAIR_MP3);
 		}
 #endif
+#if WARNING_BT_TWS_DISCON
+		if (func_bt_chkclr_warning(BT_WARN_TWS_DISCON)) {
+			func_cb.mp3_res_play(RES_BUF_TWS_DISCON_MP3, RES_LEN_TWS_DISCON_MP3);
+		}
+#endif
+#if WARNING_BT_TWS_WAIT_PAIR
+		if (func_bt_chkclr_warning(BT_WARN_TWS_WAIT_PAIR)) {
+			func_cb.mp3_res_play(RES_BUF_TWS_WAIT_MP3, RES_LEN_TWS_WAIT_MP3);
+		}
+#endif
 
         if(left_warning) { //left channel       //slave
             func_cb.mp3_res_play(RES_BUF_LEFT_CH_MP3, RES_LEN_LEFT_CH_MP3);
@@ -304,7 +314,15 @@ void func_bt_disp_status(void)
             break;
         case BT_STA_INITING:
         case BT_STA_IDLE:
-            led_bt_idle();
+#if BT_TWS_EN
+			if (bt_tws_is_connected()) {
+				if (!bt_nor_is_connected()) {
+					led_tws_main_connected();
+					break;
+				}
+			}
+#endif
+	        led_bt_idle();
 #if WARNING_BT_PAIR
             if(f_bt.need_pairing && f_bt.disp_status == BT_STA_IDLE) {
                 f_bt.need_pairing = 0;
@@ -312,13 +330,6 @@ void func_bt_disp_status(void)
                     f_bt.warning_status |= BT_WARN_PAIRING;
                 }
             }
-#endif
-#if BT_TWS_EN
-			if (bt_tws_is_connected()) {
-				if (!bt_nor_is_connected()) {
-					led_tws_main_connected();
-				}
-			}
 #endif
             break;
         case BT_STA_SCANNING:

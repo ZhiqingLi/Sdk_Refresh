@@ -88,15 +88,13 @@ void GuiTaskEntrance(void)
 	}
 	else
 #endif
-	if((MODULE_ID_END > gSys.CurModuleID) && !IS_RTC_WAKEUP()
+	if((IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP()
 #ifdef OPTION_CHARGER_DETECT
 	&& !IsInCharge()
 #endif
 	)
 	{
-	#ifndef FUNC_SPI_SLAVE_EN
 		SoundRemind(SOUND_PWR_ON);
-	#endif
 	}
 
 	OSRescheduleTimeout(500);
@@ -119,17 +117,6 @@ void GuiTaskEntrance(void)
 	}
 #endif
 
-#ifdef FUNC_WIFI_SUPPORT_RTC_EN
-#ifdef FUNC_RTC_EN
-	RtcInitialize();
-	//gSys.CurModuleID = MODULE_ID_RTC;
-#endif
-#endif
-
-#ifdef FUNC_RTC_AT8563T_EN
-	RtcAt8563tInit();
-#endif
-
 	if(gSys.NextModuleID != MODULE_ID_UNKNOWN) // 开机的过程中插入U盘、SD卡，需要做合理的模式切换
 	{
 		gSys.CurModuleID = gSys.NextModuleID;
@@ -148,7 +135,7 @@ void GuiTaskEntrance(void)
 	{
 #ifdef FUNC_WIFI_POWER_KEEP_ON
 		//进入一个模式前，如果不是正常工作模式，关闭WiFi电源：20190725
-		if (MODULE_ID_END <= gSys.CurModuleID) {
+		if (!IS_CUR_WORK_MODULE()) {
 			WiFiControlGpioInit();	
 			WaitMs(100);
 		}
@@ -367,7 +354,7 @@ void GuiTaskEntrance(void)
 		// quick response
 		SetQuickResponseFlag(FALSE);
 #ifdef FUNC_BREAKPOINT_EN		
-		if((gSys.CurModuleID < MODULE_ID_END) 
+		if((IS_CUR_WORK_MODULE()) 
 		&& (gSys.CurModuleID != MODULE_ID_BT_HF)) 
 		{
 			BP_SYS_INFO *pSysInfo;

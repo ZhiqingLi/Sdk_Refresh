@@ -82,7 +82,7 @@ void IdleControl(void)
 	
 	APP_DBG("Exit Idle\n");
 
-	if (MODULE_ID_END > gSys.NextModuleID) {
+	if (IS_NEXT_WORK_MODULE()) {
 #ifdef FUNC_SINGLE_LED_EN
 		SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
 #endif

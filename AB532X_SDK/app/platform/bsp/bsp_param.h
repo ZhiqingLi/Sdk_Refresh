@@ -25,7 +25,7 @@
 #define RTCRAM_PWROFF_FLAG          63         //软关机的标识放在RTCRAM的最后一BYTE
 
 
-
+void param_reset_factory(void);
 void param_init(bool reset);
 void param_sync(void);
 void param_msc_num_write(void);

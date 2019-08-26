@@ -33,7 +33,6 @@ extern "C" {
 #endif
 //#define FUNC_WIFI_MULTIROOM_PLAY_EN					//打开此宏定义，支持多房间播放功能，所有音源通过通过I2S 输出到WiFi
 #define FUNC_WIFI_SUPPORT_RTC_EN					//打开此宏定义，支持RTC功能
-//#define FUNC_RTC_AT8563T_EN							//打开此宏，支持外部8563 RTC芯片
 #define FUNC_WIFI_SUPPORT_ALARM_EN					//打开此宏定义，支持闹钟功能
 //#define FUNC_WIFI_ALI_PROJECT_EN	 				//打开此宏定义，支持阿里项目特殊功能
 //#define FUNC_WIFI_ALEXA_PROJECT_EN	 			//打开此宏定义，支持亚马逊项目

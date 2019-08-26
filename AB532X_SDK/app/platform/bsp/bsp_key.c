@@ -843,6 +843,38 @@ u16 bsp_key_process(u16 key_val)
 }
 
 AT(.com_text.bsp.key)
+u16 bsp_reset_key_process(u16 key_msg, u8 key_val)
+{
+    u16 key_return = key_msg;
+    u16 reset_key = key_config_table[xcfg_cb.reset_key_num];
+	static uint32_t reset_key_timer;
+	static bool		reset_state = 0;
+	
+	if (NO_KEY != key_val) {
+		if (!xcfg_cb.reset_key_mode) {
+			if ((key_msg == (reset_key|KEY_DOUBLE)) && !reset_state) {
+				key_return = NO_KEY;
+				reset_state = 1;
+				msg_enqueue(EVT_SYS_FACTORY);
+			}
+		}
+		else if (tick_check_expire(reset_key_timer, 1000*xcfg_cb.reset_key_mode)) {
+			if (((key_msg&0xff) == reset_key) && !reset_state) {
+				key_return = NO_KEY;
+				reset_state = 1;
+				msg_enqueue(EVT_SYS_FACTORY);
+			}
+		}
+	}
+	else {
+		reset_key_timer = tick_get();
+		reset_state = 0;
+	}
+
+    return key_return;
+}
+
+AT(.com_text.bsp.key)
 u8 bsp_key_scan(void)
 {
     u8 key_val = NO_KEY;
@@ -895,8 +927,13 @@ u8 bsp_key_scan(void)
 #endif // USER_ADKEY_MUX_SDCLK
 
     key = bsp_key_process(key_val);
+	//恢复出厂设置按键逻辑转换。
+    if (xcfg_cb.reset_factory_en) {
+		bsp_reset_key_process(key, key_val);
+    }
+    
     if (key != NO_KEY) {
-        //printf("enqueue: %04x\n", key);
+		printf("current enqueue key msg: %x\n", key);
         if ((key & KEY_TYPE_MASK) == KEY_LONG_UP) {
             msg_queue_detach(key | KEY_HOLD);       //长按抬键，先清掉HOLD按键消息
         }

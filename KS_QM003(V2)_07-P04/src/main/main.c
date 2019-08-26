@@ -238,8 +238,20 @@ int32_t main(void)
 	//FlashLock(FLASH_LOCK_RANGE_HALF);		// if need, Lock range setting see function description
 	
 	SysVarInit();                  //全局变量初始化，注意在BP_LoadInfo之后调用
-#ifdef FUNC_SPI_SLAVE_EN
-	Spi_SlaveInit();
+
+#ifdef FUNC_WIFI_SUPPORT_RTC_EN
+#ifdef FUNC_RTC_AT8563T_EN
+	RtcAt8563tInit();
+#endif
+
+#ifdef FUNC_RTC_EN
+	RtcInitialize();
+#endif
+	if (IS_RTC_WAKEUP())
+	{
+		gSys.Volume = DEFAULT_VOLUME;
+		APP_DBG("RTC wakeup system gSys.Volume = %d\n", gSys.Volume);
+	}
 #endif
 
 #if (defined(FUNC_ADC_KEY_EN) || defined(FUNC_IR_KEY_EN) || defined(FUNC_CODING_KEY_EN) || defined(FUNC_IIC_KEY_EN))
@@ -392,6 +404,7 @@ int32_t main(void)
 #ifdef FUNC_GPIO_POWER_ON_EN
 	SysPowerOnControl(TRUE);
 #endif
+
 	while(1)
 	{
 		//feed watch dog ever 10 ms
@@ -425,7 +438,7 @@ int32_t main(void)
 		DeviceDetect(); // 设备检测接口
 		
 #if defined(FUNC_AMP_MUTE_EN) && defined(AMP_SILENCE_MUTE_EN)
-		if(((!GetSilenceMuteFlag() && (MODULE_ID_END > gSys.CurModuleID))
+		if((!GetSilenceMuteFlag()
 #ifdef FUNC_SOUND_REMIND
 		|| IsSoundRemindPlaying()
 #endif
@@ -439,14 +452,10 @@ int32_t main(void)
 		|| !IsBeepSoundEnd()
 #endif
 			)
-		&& !IsEarphoneLink()
-		)
-		
-		{
+		&& !IsEarphoneLink() && (gSys.Volume > 0)) {
 			AmpMuteControl(0);
 		}
-		else
-		{
+		else {
 			AmpMuteControl(1);
 		}
 #endif
@@ -504,24 +513,6 @@ int32_t main(void)
 		}
 		else {
 			gSys.SleepLedOffCnt = 0;
-		}
-#endif
-
-#ifdef FUNC_GPIO_POWER_ON_EN
-		{
-			static uint16_t RtcOffDelay = 0;
-		
-			if (!IS_RTC_WAKEUP() && !PowerkeyGetOnkeyReg()) {
-				if (1000 > RtcOffDelay) {
-					RtcOffDelay++;
-				}
-				else {
-					SysPowerOnControl(FALSE);
-				}
-			}
-			else {
-				RtcOffDelay = 0;
-			}
 		}
 #endif
 

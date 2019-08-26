@@ -32,9 +32,6 @@ extern "C" {
 #include "wifi_init_setting.h"
 #include "wifi_mcu_command.h"
 #include "wifi_wifi_command.h"
-#ifdef FUNC_RTC_AT8563T_EN
-#include "rtc_at8563.h"
-#endif
 
 //****************************************************************************************
 //					用户项目定义
@@ -780,27 +777,6 @@ extern "C" {
 	#endif
 
 //****************************************************************************************
-//                 SPI 从机控制配置 
-//****************************************************************************************					
-	#define FUNC_SPI_SLAVE_EN 
-	
-	#ifdef FUNC_SPI_SLAVE_EN
-		#include "spi_slave.h"
-		
-		#define SPI_SLAVE_PORT_SEL			(3)
-		#define SPI_SLAVE_CS_PORT_EN
-		
-		#ifdef SPI_SLAVE_CS_PORT_EN
-			#define SPI_SLAVE_CS_PORT_OE	GPIO_B_OE
-			#define SPI_SLAVE_CS_PORT_IE	GPIO_B_IE
-			#define SPI_SLAVE_CS_PORT_PU	GPIO_B_PU
-			#define SPI_SLAVE_CS_PORT_PD	GPIO_B_PD
-			#define SPI_SLAVE_CS_PORT_OUT	GPIO_B_OUT
-			#define SPI_SLAVE_CS_BIT_MASK	GPIOB26
-		#endif
-	#endif
-
-//****************************************************************************************
 //                 功放配置        
 //****************************************************************************************
 #define FUNC_AMP_MUTE_EN         //功放Mute功能配置										
@@ -833,7 +809,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
 		
 		#define GpioAmpMuteDisable()			do{\
@@ -841,7 +817,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
 	#else
 	
@@ -936,17 +912,21 @@ extern "C" {
 //                 RTC功能配置        
 //****************************************************************************************
 #ifdef FUNC_WIFI_SUPPORT_RTC_EN
-	#define FUNC_RTC_EN						//rtc1|?ü
+	#define FUNC_RTC_EN								//rtc1|?ü
+	#define FUNC_RTC_AT8563T_EN						//打开此宏，支持外部8563 RTC芯片
 #endif
 
 	#ifdef FUNC_RTC_EN
-		#define FUNC_RTC_ALARM 				//alarm功能
+		#define FUNC_RTC_ALARM						//alarm功能
 		#define FUNC_RTC_LUNAR
-		//#define FUNC_RTC_ALARM_SAVE2FLASH 	//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
+		//#define FUNC_RTC_ALARM_SAVE2FLASH			//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
 		#define IS_RTC_WAKEUP()				(WAKEUP_FLAG_POR_RTC&gSys.WakeUpSource)
 		#define RTC_WAKEUP_FLAG_CLR()		(gSys.WakeUpSource &= ~WAKEUP_FLAG_POR_RTC)
 	#endif
 
+	#ifdef FUNC_RTC_AT8563T_EN
+		#include "rtc_at8563.h"
+	#endif
 
 //****************************************************************************************
 //                 蓝牙模式配置        
@@ -1116,8 +1096,8 @@ extern "C" {
 // 该功能宏打开后，默认包含电池电压检测功能，有关电池电压检测的其它可定义参数，请详见power_monitor.c文件
 
 //USE_POWERKEY_SLIDE_SWITCH 和USE_POWERKEY_SOFT_PUSH_BUTTON 两个宏不要同时定义
-//	#define USE_POWERKEY_SLIDE_SWITCH           //for slide switch case ONLY
-	#define USE_POWERKEY_SOFT_PUSH_BUTTON       //for soft push button case ONLY
+	#define USE_POWERKEY_SLIDE_SWITCH           //for slide switch case ONLY
+//	#define USE_POWERKEY_SOFT_PUSH_BUTTON       //for soft push button case ONLY
 
 	#define	POWERON_DETECT_VOLTAGE              //开机检测电池电压，低于关机电压则直接进入关机流程
 	#define	FUNC_POWER_MONITOR_EN
@@ -1204,7 +1184,7 @@ extern "C" {
 	#endif
 
 	//GPIO按键定义
-	#define FUNC_GPIO_KEY_EN   								//GPIO按键
+	//#define FUNC_GPIO_KEY_EN   								//GPIO按键
 	#ifdef FUNC_GPIO_KEY_EN
 		#define GPIO_KEY1_PORT_OUT			GPIO_A_OUT		
 		#define GPIO_KEY1_PORT_BIT			GPIOA19	
@@ -1214,7 +1194,7 @@ extern "C" {
 	#endif
 
 	//CODING KEY定义
-	//#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
+	#define FUNC_CODING_KEY_EN								//CODING KEY宏开关			
 	#ifdef FUNC_CODING_KEY_EN
 		#define 	CODING_KEY_A_PORT_IN	GPIO_B_IN	
 		#define		CODING_KEY_A_PORT_OE	GPIO_B_OE 			
@@ -1437,6 +1417,8 @@ enum EnumModuleID
     MODULE_ID_USER_PLUS,		// 用户扩展起始ID
 };
 
+#define IS_CUR_WORK_MODULE()				(MODULE_ID_END > gSys.CurModuleID)
+#define IS_NEXT_WORK_MODULE()				(MODULE_ID_END > gSys.NextModuleID)
 
 //****************************************************************************************
 //                 MEM分配        

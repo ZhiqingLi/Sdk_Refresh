@@ -69,7 +69,6 @@
 ".\output\browser.o"
 ".\output\micro_adjust.o"
 ".\output\mcu_circular_buf.o"
-".\output\spi_slave.o"
 ".\output\rtc_at8563.o"
 ".\output\audio_file.o"
 ".\output\get_bootup_info.o"

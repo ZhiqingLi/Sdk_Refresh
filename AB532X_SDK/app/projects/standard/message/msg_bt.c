@@ -45,37 +45,50 @@ void func_bt_message(u16 msg)
         break;
         
     case KL_PLAY:
-    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 1)) {
+    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 2)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {
-	        	bt_disconnect();
+	        	bt_nor_disconnect();
 	        } else {
-	        	bt_connect();
+	        	bt_nor_connect();
 	        }
         }
         break;
 
     case KL_HSF:
-    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 2)) {
+    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 3)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {
-	        	bt_disconnect();
+	        	bt_nor_disconnect();
 	        } else {
-	        	bt_connect();
+	        	bt_nor_connect();
 	        }
         }
         break;
 
 
 	case KU_HSF:
+#if BT_TWS_EN
 		if(xcfg_cb.bt_tws_en && xcfg_cb.bt_tws_pair_mode == 3) {
 			if(bt_tws_is_connected()) {
 				bt_tws_disconnect();
 			} else {
 				bt_tws_search_slave();
+				f_bt.warning_status |= BT_WARN_TWS_WAIT_PAIR;
 			}
 		}
+#endif
 		break;
+
+	case KD_HSF:
+#if BT_TWS_EN
+		if(xcfg_cb.bt_tws_en && xcfg_cb.bt_tws_pair_mode == 3) {
+			bt_set_tws_scan(1);
+			f_bt.warning_status |= BT_WARN_TWS_WAIT_PAIR;
+		}
+#endif
+		break;
+
 
     case KD_PLAY:
 	case KD_PLAY_HSF:
@@ -91,12 +104,24 @@ void func_bt_message(u16 msg)
                 bt_tws_disconnect();
             } else {
                 bt_tws_search_slave();
+				f_bt.warning_status |= BT_WARN_TWS_WAIT_PAIR;
             }
 #endif
         } else {
             func_bt_switch_voice_lang();            //切换提示音语言
         }
         break;
+        
+	case KD_MODE:
+    	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 1)) {
+	    	bsp_clr_mute_sta();
+	    	if (bt_nor_is_connected()) {
+	        	bt_nor_disconnect();
+	        } else {
+	        	bt_nor_connect();
+	        }
+        }
+		break;
 
 #if BT_TWS_EN
     case KL_MODE:
@@ -105,6 +130,7 @@ void func_bt_message(u16 msg)
                 bt_tws_disconnect();
             } else {
                 bt_tws_search_slave();
+                f_bt.warning_status |= BT_WARN_TWS_WAIT_PAIR;
             }
         }
         break;

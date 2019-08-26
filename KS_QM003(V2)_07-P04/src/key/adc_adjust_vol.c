@@ -20,7 +20,7 @@ static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] =
 	356, 	651, 	935, 	1212, 	1475, 	1702, 	1915, 	2108,
 	2280, 	2437,	2555,	2657,	2727,	2787,	2845,	2897,
 	2950,	2991,	3032,	3066,	3099,	3105,	3139,	3180,
-	3209,	3229,	3250,	3282,	3325,	3366,	3390,	3440
+	3209,	3229,	3250,	3282,	3325,	3366,	3385,	3400
 };	
 
 uint32_t AdcAdjustSampleSum = 0; 
@@ -66,18 +66,13 @@ void AdcAdjustVolScan(void)
 
 		VolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
 		AverageVal = abs(AdcAdjustLevelAverage-PrevAverageValue);
-		if (VolumeIndex >= gSys.Volume) {
-			AdcVolVal = (AdcAdjustVolIndexVal[gSys.Volume+1]-AdcAdjustVolIndexVal[gSys.Volume]);
-		}
-		else {
-			AdcVolVal = (AdcAdjustVolIndexVal[gSys.Volume]-AdcAdjustVolIndexVal[gSys.Volume-1]);
-		}
+		AdcVolVal = abs(AdcAdjustVolIndexVal[VolumeIndex]-AdcAdjustVolIndexVal[gSys.Volume]);
 		
-		if(((AverageVal >= AdcVolVal) || !VolumeIndex || (VolumeIndex >= MAX_VOLUME))
+		if(((AverageVal >= AdcVolVal) || !VolumeIndex)
 		&& (gSys.Volume != VolumeIndex) && !IS_RTC_WAKEUP())
 		{
 			gSys.Volume = VolumeIndex;
-			if (!WiFiKaiShuSleepModeGet()) {
+			if (1) {	//!WiFiKaiShuSleepModeGet()) {
 				SetSysVol();
 				McuSyncWiFiVolume(gSys.Volume);
 			}

@@ -98,7 +98,7 @@ void KeyInit(void)
 #ifdef FUNC_KEY_BEEP_SOUND_EN
 bool IsBeepSoundEnd(void)
 {
-	if(MODULE_ID_END > gSys.CurModuleID)
+	if(!IS_CUR_WORK_MODULE())
 	{
 		return TRUE;
 	}

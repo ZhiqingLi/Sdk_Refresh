@@ -1431,7 +1431,7 @@ void CommonMsgProccess(uint16_t Msg)
 	WiFi_CmdProcess();
 	WiFiStateCheck();
 	//wifi加载前提示音
-	if (!gWiFi.InitState && (MODULE_ID_END > gSys.CurModuleID) && !IS_RTC_WAKEUP()) {
+	if (!gWiFi.InitState && (IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP()) {
 #ifdef CFG_WAV_REMINDSOUND_MIX_EN
 		if (!IsRmsPcmDataReminding()) {
 			MixerSoundRemind(SOUND_WIFI_LOAD);
@@ -1447,9 +1447,6 @@ void CommonMsgProccess(uint16_t Msg)
 #ifdef FUNC_RTC_EN
 	RtcControlProcess();
 #endif
-#endif
-#ifdef FUNC_RTC_AT8563T_EN
-	RtcAt8563tControlProcess();
 #endif
 #endif
 }

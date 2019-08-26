@@ -484,8 +484,13 @@ void SyncMcuAlarmTimeToBpInfo(ALARM_BP_INFO *AlarmInfo,uint8_t AlarmNum)
 void RtcTimerCB(uint32_t unused)
 {
 	static TIMER RtcPrintfTimer;
-	
+
+#ifdef FUNC_RTC_AT8563T_EN
+	// 读取at8563t中的：时间日期等信息
+	WiFiGetAt8563tSystemTime(&sRtcControl->DataTime);
+#else
 	RtcGetCurrTime(&sRtcControl->DataTime);
+#endif
 
 	if (!IsTimeOut(&RtcPrintfTimer)) {
 		return;
@@ -494,7 +499,7 @@ void RtcTimerCB(uint32_t unused)
 
 	if((RTC_STATE_IDLE == sRtcControl->State) || (sRtcControl->SubState == RTC_SET_IDLE))
 	{
-		APP_DBG("AP8048C RtcTime(%04d-%02d-%02d %02d:%02d:%02d) Week:%d ",
+		APP_DBG("RtcTime(%04d-%02d-%02d %02d:%02d:%02d) Week:%d ",
 	        sRtcControl->DataTime.Year, sRtcControl->DataTime.Mon, sRtcControl->DataTime.Date,
 	        sRtcControl->DataTime.Hour, sRtcControl->DataTime.Min, sRtcControl->DataTime.Sec,
 	        sRtcControl->DataTime.WDay);
@@ -502,17 +507,6 @@ void RtcTimerCB(uint32_t unused)
 		DisplayLunarDate();
 #endif
 		APP_DBG("\n");
-		
-#if defined(FUNC_SPI_SLAVE_EN) && !defined(FUNC_RTC_AT8563T_EN)
-		if (!WiFiFirmwareUpgradeStateGet() && !IS_RTC_WAKEUP()) {
-			if (gSys.IsWiFiRepeatPowerOn) {
-				Spi_SendCmdToSlave(MAS_SET_RBT);
-			}
-			else {
-				Spi_SendCmdToSlave(MAS_CLR_RBT);
-			}
-		}
-#endif
 	}
 	else if((RTC_STATE_SET_TIME == sRtcControl->State) && (sRtcControl->SubState != RTC_SET_IDLE))
 	{
@@ -620,6 +614,18 @@ bool RtcInitialize(void)
 	ASSERT(sRtcControl != NULL);
 	memset(sRtcControl, 0, sizeof(RTC_CONTROL));
 
+#ifdef FUNC_RTC_AT8563T_EN
+	// 读取at8563t中的：时间日期等信息
+	WiFiGetAt8563tSystemTime(&sRtcControl->DataTime);
+	//判断是否第一次上电，第一次上电则初始化系统时间
+	if(sRtcControl->DataTime.Year < gSysCurDate.Year)
+	{
+		memcpy(&sRtcControl->DataTime, &gSysCurDate, sizeof(RTC_DATE_TIME));
+		WiFiSetAt8563tSystemTime(&sRtcControl->DataTime);
+	}
+	
+	RtcSetCurrTime(&sRtcControl->DataTime);
+#else
 	// 读取eprom或nvram中的：时间日期等信息
 	RtcGetCurrTime(&sRtcControl->DataTime);
 	//判断是否第一次上电，第一次上电则初始化系统时间
@@ -628,6 +634,7 @@ bool RtcInitialize(void)
 		memcpy(&sRtcControl->DataTime, &gSysCurDate, sizeof(RTC_DATE_TIME));
 		RtcSetCurrTime(&sRtcControl->DataTime);
 	}
+#endif
 	
 #ifdef FUNC_RTC_ALARM
 	NVIC_EnableIRQ(RTC_IRQn);           // 打开闹钟提醒中断,必须在sRtcControl内存分配之后
@@ -1642,7 +1649,7 @@ __attribute__((section(".driver.isr"), weak)) void RtcInterrupt(void)
 	sRtcControl->CurAlarmNum = RtcCheckAlarmFlag();
 	APP_DBG("RTC ALARM(%d) COME!\n", sRtcControl->CurAlarmNum);
 	sRtcControl->CurAlarmNum = 0;
-	if (MODULE_ID_END <= gSys.CurModuleID) {
+	if (!IS_CUR_WORK_MODULE()) {
 		gSys.WakeUpSource |= WAKEUP_FLAG_POR_RTC;
 		gSys.NextModuleID = MODULE_ID_WIFI;
 		MsgSend(MSG_COMMON_CLOSE);

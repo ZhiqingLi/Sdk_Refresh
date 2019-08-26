@@ -6,12 +6,12 @@
   File Name     : rtc_at8563.h
   Version       : Initial Draft
   Author        : qing
-  Created       : 2019/8/9
+  Created       : 2019/8/21
   Last Modified :
   Description   : rtc_at8563.c header file
   Function List :
   History       :
-  1.Date        : 2019/8/9
+  1.Date        : 2019/8/21
     Author      : qing
     Modification: Created file
 
@@ -59,12 +59,11 @@ extern "C"{
 #endif
 #endif /* __cplusplus */
 
-extern void RtcAt8563tControlProcess(void);
+extern bool RtcAt8563tAlarmCome(void);
 extern bool RtcAt8563tInit(void);
-extern bool RtcAt8563tReadTime(uint8_t *Time);
-extern bool RtcAt8563tWriteTime(uint8_t *Time);
-extern void WiFiSetAt8563tSystemTime(RTC_DATE_TIME* CurTime);
+extern void WiFiGetAt8563tSystemTime(RTC_DATE_TIME* SystemTime);
 extern void WiFiSetAt8563tAlarmTime(bool IsOnOff, RTC_DATE_TIME* AlarmTime);
+extern void WiFiSetAt8563tSystemTime(RTC_DATE_TIME* CurTime);
 
 #ifdef __cplusplus
 #if __cplusplus

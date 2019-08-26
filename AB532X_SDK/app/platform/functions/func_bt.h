@@ -9,10 +9,13 @@
 #define BT_WARN_HID_DISCON      BIT(5)
 #define BT_WARN_PAIRING         BIT(6)
 #define BT_WARN_TBOX_BUZZER     BIT(7)
+//20190824,增加TWS配对提示音
+#define BT_WARN_TWS_DISCON      BIT(8)
+#define BT_WARN_TWS_WAIT_PAIR	BIT(9)
 
 typedef struct{
     u8 disp_status;
-    u8 warning_status;
+    u16 warning_status;			//20190824,增加TWS提示音
     u8 hid_menu_flag;
     u8 hid_discon_flag;
     u8 tws_status;
@@ -38,7 +41,7 @@ void func_bt_status(void);
 void func_bt_message(u16 msg);
 void func_bt_mp3_res_play(u32 addr, u32 len);
 void func_bt_switch_voice_lang(void);
-bool func_bt_chkclr_warning(u8 bits);
+bool func_bt_chkclr_warning(u16 bits);
 void bt_music_rec_init(void);
 void func_bt_sco_rec_init(void);
 

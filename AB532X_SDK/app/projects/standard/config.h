@@ -14,15 +14,15 @@
  *****************************************************************************/
 #define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
 #define FUNC_CLOCK_EN                   0   //是否打开时钟功能
-#define FUNC_FMRX_EN                    0   //是否打开FM功能
+#define FUNC_FMRX_EN                    1   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
-#define FUNC_BTHID_EN                   0   //是否打开独立自拍器模式
-#define FUNC_AUX_EN                     0   //是否打开AUX功能
-#define FUNC_USBDEV_EN                  0   //是否打开USB DEVICE功能
+#define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
+#define FUNC_AUX_EN                     1   //是否打开AUX功能
+#define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
 #define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
-#define FUNC_IDLE_EN                    1   //是否打开IDLE功能
+#define FUNC_IDLE_EN                    0   //是否打开IDLE功能
 
 /*****************************************************************************
  * Module    : 系统功能选择配置
@@ -34,7 +34,7 @@
 #define SYS_ADJ_DIGVOL_EN               0                       //系统是否调数字音量
 #define GUI_SELECT                      GUI_NO					//GUI Display Select
 #define FLASH_SIZE                      FSIZE_512K              //LQFP48芯片内置1MB，其它封装芯片内置512KB(实际导出prd文件要小于492K)
-#define UART0_PRINTF_SEL                PRINTF_PB3             //选择UART打印信息输出IO，或关闭打印信息输出
+#define UART0_PRINTF_SEL                PRINTF_NONE             //选择UART打印信息输出IO，或关闭打印信息输出
 #define SPIFLASH_SPEED_UP_EN            1                       //SPI FLASH提速。注意5327A,5327C,5325F不支持提速，这三颗芯请配置成0
 /*****************************************************************************
  * Module    : 音乐功能配置
@@ -58,7 +58,7 @@
 #define MUSIC_PLAYDEV_BOX_EN            1   //是否显示“USB”, "SD"界面
 #define MUSIC_ID3_TAG_EN                0   //是否获取MP3 ID3信息
 #define MUSIC_REC_FILE_FILTER           0   //是否区分录音文件与非录音文件分别播放
-#define MUSIC_ENCRYPT_EN                0   //是否支持加密MP3文件播放(使用MusicEncrypt.exe工具进行MP3加密)
+#define MUSIC_ENCRYPT_EN                1   //是否支持加密MP3文件播放(使用MusicEncrypt.exe工具进行MP3加密)
 
 #define MUSIC_ENCRYPT_KEY               12345   //MusicEncrypt.exe工具上填的加密KEY
 
@@ -378,7 +378,7 @@
 #define RGB_SERIAL_EN                   0           //RGB串行推灯功能
 #define PWM_RGB_EN                      0           //PWM RGB三色灯功能
 #define ENERGY_LED_EN                   0           //能量灯软件PWM显示,声音越大,点亮的灯越多.
-#define	PWM_TIMER_EN					1			//定时器PWM功能开关
+#define	PWM_TIMER_EN					0			//定时器PWM功能开关
 //PWM占用定时器选择,注意用Timer3时遥控功能不能实现，用Timer4/5时 TWS不能实现
 #define PWM_TIMER_SEL					(PWM_TIMER4|PWM_TIMER5)	
 #define SYS_PARAM_RTCRAM                0           //是否系统参数保存到RTCRAM
@@ -402,7 +402,7 @@
  *****************************************************************************/
 #define LED_DISP_EN                     1           //是否使用LED指示灯(蓝灯)
 #define LED_PWR_EN                      1           //充电及电源指示灯(红灯)
-#define LED_LOWBAT_EN                   0                           //电池低电是否闪红灯
+#define LED_LOWBAT_EN                   1                           //电池低电是否闪红灯
 #define BLED_CHARGE_FULL_EN             xcfg_cb.charge_full_bled    //充电满是否亮蓝灯
 #define BT_RECONN_LED_EN                xcfg_cb.bt_reconn_led_en    //蓝牙回连状态是否不同的闪灯方式
 
@@ -490,7 +490,8 @@
 #define WARNING_BTHID_CONN              0            //BTHID模式是否有独立的连接/断开提示音
 #define WARNING_BT_PAIR                 0            //BT PAIRING提示音
 #define WARNING_BT_TWS_PAIR				1            //BT TWS PAIRING提示音
-
+#define WARNING_BT_TWS_DISCON			1            //BT TWS DISCONNECT提示音
+#define WARNING_BT_TWS_WAIT_PAIR		1            //BT TWS 等待配对提示音
 
 #include "config_extra.h"
 

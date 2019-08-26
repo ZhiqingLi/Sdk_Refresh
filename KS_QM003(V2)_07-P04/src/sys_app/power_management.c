@@ -47,9 +47,10 @@ TIMER BtBatteryDetTim;
 #define LOW_POWER_DET_COUNT 		3		//低电检测报警次数
 #define LOW_POWER_SOUND_CNT 		300		//低电报警提示音间隔时间(单位s)
 #define LOW_POWEROFF_VOLTAGE		3		//低电关机电池电量百分比
+#define LOW_POWER_RESET_VOLTAGE		30		//低电检测恢复电池电量百分比
 
 //低电检测延时时间参数，用于消抖和提示音播放。
-#define LOW_POWEROFF_DELAY			(1000)	//单位：10ms
+#define LOW_POWEROFF_DELAY			(500)	//单位：10ms
 #define POWER_OFF_JITTER_TIMER		500
 
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置
@@ -299,9 +300,12 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 		if(IsInCharge())		//充电器已经接入的处理
 		{	
 			//DBG("IsInCharge\n");
-		#ifdef FUNC_SINGLE_LED_EN
+			IsSystemPowerLow = FALSE;
+			LowPowerSoundCnt = LOW_POWER_DET_COUNT;
+			LowPowerDetCnt = (LOW_POWER_SOUND_CNT*100-LOW_POWEROFF_DELAY);
+#ifdef FUNC_SINGLE_LED_EN
 			SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, FALSE);
-		#endif
+#endif
 			return;
 		}
 #endif
@@ -352,7 +356,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			    
 			if(LowPowerDetCnt >= (LOW_POWER_SOUND_CNT*100))
 			{
-				if (IsSystemPowerLow && LowPowerSoundCnt) {
+				if (LowPowerSoundCnt) {
 					APP_DBG("PowerMonitor, Low Voltage sound remind!!!!");
 					MsgSend(MSG_BAT_LOW_PWR);
 					LowPowerSoundCnt--;
@@ -365,7 +369,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				LowPowerDetCnt = 0;
 			}
 			
-			if(!LowPowerSoundCnt && (LowPowerDetCnt >= LOW_POWEROFF_DELAY)
+			if(!LowPowerSoundCnt && (LowPowerDetCnt >= LOW_POWEROFF_DELAY*2)
 #ifdef FUNC_WIFI_EN
 			&& (!WiFiFirmwareUpgradeStateGet())
 #endif
@@ -384,10 +388,10 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				}
 			}
 		}
-		else {
+		else if (!IsSystemPowerLow || (LOW_POWER_RESET_VOLTAGE <= GetCurBatterLevelAverage())){
 			IsSystemPowerLow = FALSE;
 			LowPowerSoundCnt = LOW_POWER_DET_COUNT;
-			LowPowerDetCnt = 0;
+			LowPowerDetCnt = (LOW_POWER_SOUND_CNT*100-LOW_POWEROFF_DELAY);
 		#ifdef FUNC_SINGLE_LED_EN
 			SingleLedDisplayModeSet(LED_DISPLAY_MODE_LOWBATTER, FALSE);
 		#endif
@@ -485,7 +489,7 @@ void PowerMonitor(void)
 		if(IsInCharge()) {		//充电器已经接入的处理	
 			if (!IS_RTC_WAKEUP()
 			&& !WiFiFirmwareUpgradeStateGet()
-			&& (MODULE_ID_END > gSys.CurModuleID)
+			&& (IS_CUR_WORK_MODULE())
 			&& (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
 				gSys.NextModuleID = MODULE_ID_IDLE;
 				MsgSend(MSG_COMMON_CLOSE);
@@ -500,7 +504,7 @@ void PowerMonitor(void)
 		}
 		else {
 			IsBatterFull = FALSE;
-			if ((MODULE_ID_END <= gSys.CurModuleID) && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
+			if ((!IS_CUR_WORK_MODULE()) && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
 				gSys.NextModuleID = MODULE_ID_WIFI;
 				MsgSend(MSG_COMMON_CLOSE);
 			}
@@ -548,7 +552,7 @@ void LowPowerDetProc(void)
 *****************************************************************************/
 
 #ifdef FUNC_POWERKEY_SOFT_POWERON_EN
-#define SOFT_SWITCH_ONTIME				300
+#define SOFT_SWITCH_ONTIME				500
 
 bool SoftPowerKeyDetect(void)
 {
@@ -589,6 +593,45 @@ bool SoftPowerKeyDetect(void)
 	return ret;
 }
 #endif
+
+// 进入deep sleep，为了降低功耗，默认设置为输入上拉。
+// 客户可以根据需要进行一些定制化配置
+void SysGotoDeepSleepGpioCfg(void)
+{
+	GpioSetRegBits(GPIO_A_IE, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_A_OE, 0xFFFFFFFF);
+	GpioSetRegBits(GPIO_A_PU, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_A_PD, 0xFFFFFFFF);
+
+	GpioSetRegBits(GPIO_B_IE, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_B_OE, 0xFFFFFFFF);
+	GpioSetRegBits(GPIO_B_PU, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_B_PD, 0xFFFFFFFF);
+
+	GpioSetRegBits(GPIO_C_IE, 0x7FFF);
+	GpioClrRegBits(GPIO_C_OE, 0x7FFF);
+	GpioSetRegBits(GPIO_C_PU, 0x7FFF);
+	GpioClrRegBits(GPIO_C_PD, 0x7FFF);
+
+	// BT close, not arbitrarily modify
+	BTDevicePowerOff();
+}
+
+// 进入PowerDown，为了芯片能进入，默认设置为输出下拉。
+void SysGotoPowerDownGpioCfg(void)
+{
+	GpioSetRegBits(GPIO_A_OE, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_A_OUT, 0xFFFFFFFF);
+
+	GpioSetRegBits(GPIO_B_OE, 0xFFFFFFFF);
+	GpioClrRegBits(GPIO_B_OUT, 0xFFFFFFFF);
+
+	GpioSetRegBits(GPIO_C_OE, 0x7FFF);
+	GpioClrRegBits(GPIO_C_OUT, 0x7FFF);
+	// BT close, not arbitrarily modify
+	BTDevicePowerOff();
+}
+
 /**
  * @brief 		system power off detect function
  *			this function should be called in timer INT function or systick function for periodically detecting
@@ -602,10 +645,15 @@ void SystemPowerOffDetect(void)
 {
 
 #ifdef USE_POWERKEY_SLIDE_SWITCH
-#define SLIDE_SWITCH_ONTIME 200
+#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
+	#define SLIDE_SWITCH_ONTIME 2
 	static uint16_t  slide_switch_pd_cnt = SLIDE_SWITCH_ONTIME;//消抖时间0.5s，见PowerKeyDetect()描述
-
+	if(SoftPowerKeyDetect() && IsTimeOut(&PowerOffDetectTimer))
+#else
+	#define SLIDE_SWITCH_ONTIME 500
+	static uint16_t  slide_switch_pd_cnt = SLIDE_SWITCH_ONTIME;//消抖时间0.5s，见PowerKeyDetect()描述
 	if(PowerKeyDetect())
+#endif
 	{
 		if((slide_switch_pd_cnt-- == 0)
 #ifdef FUNC_WIFI_EN                             //WiFi升级中禁止关机
@@ -614,14 +662,16 @@ void SystemPowerOffDetect(void)
 		)
 		{
 			/*if slide switch, power down system directly*/
-		#ifdef FUNC_WIFI_POWER_KEEP_ON
-			WiFiRequestMcuPowerOff();
-		#else
 			APP_DBG("PowerKeyDetect->go to PowerDown\n");
-			SysSetWakeUpSrcInPowerDown(WAKEUP_SRC_PD_RTC);//(WAKEUP_SRC_PD_POWERKEY);
+#ifdef FUNC_GPIO_POWER_ON_EN
+			TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
+			SysPowerOnControl(FALSE);
+			SysGotoPowerDownGpioCfg();
+#else
+			SysSetWakeUpSrcInPowerDown(WAKEUP_SRC_PD_POWERKEY);
 			SysGotoPowerDown(); 
 			while(1);
-		#endif
+#endif
 		}
 	}
 	else
@@ -662,42 +712,6 @@ void SystemPowerOffDetect(void)
 	
 }
 
-// 进入deep sleep，为了降低功耗，默认设置为输入上拉。
-// 客户可以根据需要进行一些定制化配置
-void SysGotoDeepSleepGpioCfg(void)
-{
-	GpioSetRegBits(GPIO_A_IE, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_A_OE, 0xFFFFFFFF);
-	GpioSetRegBits(GPIO_A_PU, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_A_PD, 0xFFFFFFFF);
-
-	GpioSetRegBits(GPIO_B_IE, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_B_OE, 0xFFFFFFFF);
-	GpioSetRegBits(GPIO_B_PU, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_B_PD, 0xFFFFFFFF);
-
-	GpioSetRegBits(GPIO_C_IE, 0x7FFF);
-	GpioClrRegBits(GPIO_C_OE, 0x7FFF);
-	GpioSetRegBits(GPIO_C_PU, 0x7FFF);
-	GpioClrRegBits(GPIO_C_PD, 0x7FFF);
-
-	// BT close, not arbitrarily modify
-	BTDevicePowerOff();
-}
-
-// 进入PowerDown，为了芯片能进入，默认设置为输出下拉。
-void SysGotoPowerDownGpioCfg(void)
-{
-	GpioSetRegBits(GPIO_A_OE, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_A_OUT, 0xFFFFFFFF);
-
-	GpioSetRegBits(GPIO_B_OE, 0xFFFFFFFF);
-	GpioClrRegBits(GPIO_B_OUT, 0xFFFFFFFF);
-
-	GpioSetRegBits(GPIO_C_OE, 0x7FFF);
-	GpioClrRegBits(GPIO_C_OUT, 0x7FFF);
-}
-
 /**
  * @brief 		system power off flow
  *			user can add other functions before SysGotoPowerDown()
@@ -710,11 +724,6 @@ void SystemPowerOffControl(void)
 #ifdef FUNC_AMP_MUTE_EN
 	gSys.MuteFlag = TRUE;
 	GpioAmpMuteEnable();
-#endif
-
-#ifdef FUNC_GPIO_POWER_ON_EN
-	//为了让副机关机
-	SysPowerOnControl(TRUE);
 #endif
 	WaitMs(50);
 	APP_DBG("SystemPowerOffControl->system will power off soon!\n");

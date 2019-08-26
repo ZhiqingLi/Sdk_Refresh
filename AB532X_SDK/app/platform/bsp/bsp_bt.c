@@ -381,6 +381,7 @@ void bt_emit_notice(uint evt, u32 param)
             if(param & 0xc0) {
                 f_bt.tws_status &= ~0xc0;
                 bt_tws_disconnect();
+                f_bt.warning_status |= BT_WARN_TWS_DISCON;
                 break;                      //tws断线不播报提示音
             } else {
                 f_bt.tws_status &= ~0x01;
@@ -461,10 +462,10 @@ void bt_emit_notice(uint evt, u32 param)
         break;
 
     case BT_NOTICE_TWS_USER_KEY:
-    	if(BT_STA_TWS_CONN == param) {
+    	if(BT_STA_TWS_CONN == param) {						//从机收到主机蓝牙连接成功			
     		led_bt_connected();
     	}
-    	else if(BT_STA_TWS_DISCONN == param) {
+    	else if(BT_STA_TWS_DISCONN == param) {				//从机收到主机手机断开连接
     		if(bt_tws_is_connected() && bt_tws_is_slave()) {
     			led_tws_slave_connected();
     		}

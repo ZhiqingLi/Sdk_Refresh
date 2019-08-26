@@ -193,8 +193,8 @@ void func_message(u16 msg)
             }
             else if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 0)) {
             	if (bt_nor_is_connected()) {
-	            	printf ("bt_disconnect();\n");
-	            	bt_disconnect();
+	            	printf ("bt_nor_disconnect();\n");
+	            	bt_nor_disconnect();
             	}
             }
             break;
@@ -369,6 +369,15 @@ void func_message(u16 msg)
             karaok_mic_mute();
             break;
 #endif
+
+		case EVT_SYS_FACTORY:
+			param_reset_factory();
+			if (func_cb.mp3_res_play) {
+				func_cb.mp3_res_play(RES_BUF_FACTORY_MP3, RES_LEN_FACTORY_MP3);
+			}
+			func_cb.sta = FUNC_BT;			//回到蓝牙状态
+			break;
+			
     }
 
     //调节音量�?秒后写入flash

@@ -26,6 +26,54 @@
     #define param_sync_do()         cm_sync()
 #endif
 
+AT(.text.bsp.param)
+void param_reset_factory(void)
+{
+	printf ("param reset factory;\n");
+	f_msc.file_num = 1;
+	param_write((u8 *)&f_msc.file_num, PARAM_MSC_NUM_SD, 2);
+	param_write((u8 *)&f_msc.file_num, PARAM_MSC_NUM_USB, 2);
+	sys_cb.vol = SYS_INIT_VOLUME;
+	sys_cb.hfp_vol = SYS_INIT_VOLUME / sys_cb.hfp2sys_mul;
+	param_sys_vol_write();
+
+	fmrx_cb.ch_cur = 1;
+	fmrx_cb.ch_cnt = 1;
+	param_fmrx_chcur_write();
+	param_fmrx_chcnt_write();
+	memset(fmrx_cb.buf, 0, 26);
+	param_fmrx_chbuf_write();
+
+#if (LANG_SELECT == LANG_EN_ZH)
+	if (xcfg_cb.lang_id == 2) {
+		sys_cb.lang_id = 0;             //出厂默认英文
+	} else if (xcfg_cb.lang_id == 3) {
+		sys_cb.lang_id = 1;             //出厂默认中文
+	} else {
+		sys_cb.lang_id = xcfg_cb.lang_id;
+	}
+	param_lang_id_write();
+#endif
+
+#if MUSIC_BREAKPOINT_EN
+	memset(&f_msc.brkpt, 0, 10);
+	param_write((u8 *)&f_msc.brkpt, PARAM_MSC_BRKPT_SD, 10);
+	param_write((u8 *)&f_msc.brkpt, PARAM_MSC_BRKPT_USB, 10);
+#endif // MUSIC_BREAKPOINT_EN
+
+#if BT_LOCAL_ADDR
+	param_random_key_write();
+#endif
+	param_sync();
+	bsp_set_volume(SYS_INIT_VOLUME);
+	if (func_cb.set_vol_callback) {
+		func_cb.set_vol_callback(1);
+	}
+	bsp_bt_vol_change();
+	bt_disconnect();
+	bt_tws_delete_link_info();
+	bt_nor_delete_link_info();             //删除手机配对信息
+}
 
 AT(.text.bsp.param)
 void param_init(bool reset)

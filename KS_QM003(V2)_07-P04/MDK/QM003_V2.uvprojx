@@ -881,11 +881,6 @@
               <FilePath>..\src\sys_app\mcu_circular_buf.c</FilePath>
             </File>
             <File>
-              <FileName>spi_slave.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\src\sys_app\spi_slave.c</FilePath>
-            </File>
-            <File>
               <FileName>rtc_at8563.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\src\sys_app\rtc_at8563.c</FilePath>

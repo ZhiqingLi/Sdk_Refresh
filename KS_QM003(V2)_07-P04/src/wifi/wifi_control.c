@@ -739,11 +739,11 @@ void WiFiKaiShuSleepModeSet(  bool State)
 {
 	if (!State) {
 		APP_DBG("Kai shu push out sleep mode!!!\n");
-		WiFiKaiShuSleepVolume = 0;
 		SetSysVol();
 		McuSyncWiFiVolume(gSys.Volume);
 	}
-	
+
+	WiFiKaiShuSleepVolume = 0;
 	gWiFi.KaiShuSleepState = State;
 }
 
@@ -761,6 +761,7 @@ void WiFiKaiShuSleepModeDeal(void)
 	extern const uint16_t gAnaVolArr[MAX_VOLUME + 1];
 	static TIMER KaiShuSleepTimer;
 
+#if 0
 	if (!WiFiKaiShuSleepVolume) {					//刚进入睡眠
 		if (SLEEP_VOLUME_VAL < gSys.Volume) {
 			WiFiKaiShuSleepVolume = gSys.Volume;
@@ -774,7 +775,6 @@ void WiFiKaiShuSleepModeDeal(void)
 	}
 
 	if (IsTimeOut(&KaiShuSleepTimer)) {
-		TimeOutSet(&KaiShuSleepTimer, SLEEP_TIMER_LEN/(gSys.Volume-SLEEP_VOLUME_VAL));
 		if(WiFiKaiShuSleepVolume > SLEEP_VOLUME_VAL) {
 			uint8_t KaiShuVolMax = WiFiKaiShuVolumeMaxGet();
 
@@ -783,11 +783,28 @@ void WiFiKaiShuSleepModeDeal(void)
 			MixerConfigVolume(MIXER_SOURCE_ANA_MONO, gAnaVolArr[WiFiKaiShuSleepVolume]*KaiShuVolMax/100, gAnaVolArr[WiFiKaiShuSleepVolume]*KaiShuVolMax/100);
 			MixerConfigVolume(MIXER_SOURCE_ANA_STERO, gAnaVolArr[WiFiKaiShuSleepVolume]*KaiShuVolMax/100, gAnaVolArr[WiFiKaiShuSleepVolume]*KaiShuVolMax/100); 
 			APP_DBG("Kai shu sleep mode volume down!!! %d:Max volume %d;\n", WiFiKaiShuSleepVolume, KaiShuVolMax);
+			TimeOutSet(&KaiShuSleepTimer, SLEEP_TIMER_LEN/(gSys.Volume-SLEEP_VOLUME_VAL));
 		}
 		else {
+			APP_DBG("Kai shu sleep mode power off!!!\n");
+			TimeOutSet(&KaiShuSleepTimer, 500);
 			Mcu_SendCmdToWiFi(MCU_POW_OFF, NULL);
 		}
 	}
+#endif
+
+#if 1
+	if (!WiFiKaiShuSleepVolume) {					//刚进入睡眠
+		WiFiKaiShuSleepVolume = gSys.Volume;
+		TimeOutSet(&KaiShuSleepTimer, SLEEP_TIMER_LEN);
+	}
+
+	if (IsTimeOut(&KaiShuSleepTimer)) {
+		APP_DBG("Kai shu sleep mode power off!!!\n");
+		TimeOutSet(&KaiShuSleepTimer, 500);
+		Mcu_SendCmdToWiFi(MCU_POW_OFF, NULL);
+	}
+#endif
 }
 
 //WiFi模组WPS搜索状态设置
@@ -1734,11 +1751,6 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 			TimeSecond += (SecondData[RcvCnt-1] - 0x30) * Times;
 			Times *= 10;
 		}
-
-		if (60 >= TimeSecond) {
-			TimeSecond = 70;
-			APP_DBG("change alarm time to 70S;\n");
-		}
 		
 		WiFiDataRcvStartFlag = FALSE;
 		sRtcControl->AlarmNum = 1;
@@ -2184,7 +2196,7 @@ void WiFiStateCheck(void)
 		return;
 	}
 	
-	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (MODULE_ID_END > gSys.CurModuleID))
+	if(gWiFi.WiFiPowerOffRequestFlag && (IsTimeOut(&WiFiPowerOffTimer)) && (IS_CUR_WORK_MODULE()))
 	{
 		WiFiRequestMcuPowerOff();	
 	}		
@@ -2623,7 +2635,6 @@ uint32_t WiFiControl(void)
 
 	gWiFi.WiFiNotifyChangeModeFlag = FALSE;
 
-	AudioAnaSetChannel(AUDIO_CH_NONE); 
 	AudioSysInfoSetBreakPoint();
 	SetModeSwitchState(MODE_SWITCH_STATE_DONE);
 	WiFiTalkOnFlag = FALSE;
@@ -2692,9 +2703,8 @@ uint32_t WiFiControl(void)
 			gSys.OtherModuleTalkOn = FALSE;
 			Mcu_SendCmdToWiFi(MCU_TALK_ON, NULL);
 		}
-		//凯叔哄睡模式音量调整。
-		if(WiFiKaiShuSleepModeGet())
-		{
+		//凯叔睡眠音量处理
+		if (WiFiKaiShuSleepModeGet()) {
 			WiFiKaiShuSleepModeDeal();
 		}
 

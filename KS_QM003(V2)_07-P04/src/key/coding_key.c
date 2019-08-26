@@ -64,7 +64,7 @@ void CodingKeyInit(void)
 
 	//enable int
 	GpioIntEn(CODING_KEY_A_PORT_INT, CODING_KEY_A_BIT, GPIO_NEG_EDGE_TRIGGER);
-	GpioIntEn(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT, GPIO_NEG_EDGE_TRIGGER);
+
 	ClockWiseCnt = 0;
 	CounterClockWiseCnt = 0;
 	TimeOutSet(&CodingKeyJitterTimer, 0);
@@ -80,27 +80,25 @@ __attribute__((section(".driver.isr"))) void GpioInterrupt(void)
 	if(GpioIntFlagGet(CODING_KEY_A_PORT_INT) == CODING_KEY_A_BIT)
 	{
 		GpioIntClr(CODING_KEY_A_PORT_INT, CODING_KEY_A_BIT);
-		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
-
- 		if (!(GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) && (ClockWiseCnt == 0))
-		{
-			//counterclockwise rotation
-			CounterClockWiseCnt++;
+		if((GpioGetReg(CODING_KEY_A_PORT_IN) & CODING_KEY_A_BIT) || (ClockWiseCnt != 0) || (CounterClockWiseCnt != 0))
+		{			
+			return;
 		}
-	}
 
-	if(GpioIntFlagGet(CODING_KEY_B_PORT_INT) == CODING_KEY_B_BIT)
-	{
-		GpioIntClr(CODING_KEY_B_PORT_INT, CODING_KEY_B_BIT);
-		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
-		
-		if (!(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT) && (CounterClockWiseCnt == 0))
+		if(GpioGetReg(CODING_KEY_B_PORT_IN) & CODING_KEY_B_BIT)
 		{
 			//clockwise rotation
 			ClockWiseCnt++;
 		}
+		else
+		{
+			//counterclockwise rotation
+			CounterClockWiseCnt++;
+		}
+		TimeOutSet(&CodingKeyJitterTimer, CODING_KEY_JITTER_TIME);
 	}
 }
+
 
 // Key process, image key value to key event.
 uint16_t CodingKeyScan(void)
