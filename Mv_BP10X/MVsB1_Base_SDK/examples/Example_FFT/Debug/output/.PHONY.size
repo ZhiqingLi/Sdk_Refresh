@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  38902 (28986 +   9916)	    160	  20520	  59582	   e8be	Example_FFT.adx

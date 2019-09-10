@@ -124,44 +124,83 @@ void plugin_saradc_init(u16 *adc_ch)
 
 #if USER_ADC_DETECT_EN
 const uint16_t tbl_adc_detect_val[5][2] = {
-    {0x01, EVT_ADC_DET_IDE},
+    {0x02, EVT_ADC_DET_LOW},
     {0x05, EVT_ADC_DET_LOW}, 
     {0x3f, EVT_ADC_DET_MID},
     {0x7f, EVT_ADC_DET_HIG},
     {0xff, EVT_ADC_DET_HIG},
 };
 
+static u16 jitter_cnt = 0;
+static u16 adc_max[5] = {0,0,0,0,0};
+static u16 adc_val_cnt[5] = {0,0,0,0,0};
+
 //每5ms检测一次
 AT(.com_text.port.key)
 void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
 {
-	#define ADC_JITTER_VAL				1000
-	
-	static uint32_t all_adc_val;
-	static uint16_t jitter_cnt = 0;
+	//水泵电流是交流峰值，检测1/5最大值
+    #define ADC_JITTER_VAL (5000/5)   //峰值判断5S
+    uint8_t adc_index = 0, val_index = 0;
 
 	if ((func_idle_work_state_get() >= 1) && (func_idle_work_state_get() <= 3)) {
-		if (jitter_cnt < ADC_JITTER_VAL) {
-			all_adc_val += adc_val;
-			jitter_cnt++;
-		}
-		else {
-			uint8_t adc_index = 0, average_val = 0;
+		if (jitter_cnt++ < ADC_JITTER_VAL) {
+			//数据按照大到小排序
+			for (adc_index = 0; adc_index < 5; adc_index++) {
+	        	if (adc_max[adc_index] <= adc_val) {
+	        		break;
+	        	}
+	        }
+	        //数据放入队列
+	        if ((adc_index < 5) && (adc_max[adc_index] != adc_val)) {
+	        	val_index = adc_index;
 
-			average_val = all_adc_val/jitter_cnt;
-			printf ("adc detect value = %d;\n", average_val);
-			
-			while (average_val >= (u8)tbl_adc_detect_val[adc_index][0]) {
-				adc_index++;
+	        	for (adc_index = 4; adc_index    > val_index; adc_index--) {
+	        		adc_max[adc_index] = adc_max[adc_index-1];
+	        		adc_val_cnt[adc_index] = adc_val_cnt[adc_index-1];
+	        	}
+	            adc_max[val_index] = adc_val;
+	            adc_val_cnt[val_index] = 0;
+	        }
+
+	        for (adc_index = 0; adc_index < 5; adc_index++) {
+	        	if (adc_max[adc_index] == adc_val) {
+	        		adc_val_cnt[adc_index]++;
+	        		break;
+	        	}
+	        }
+	        
+			//printf ("adc value = %d; \n", adc_val);
+	    } 
+	    else {
+	    	//查找最多数据的值
+	    	for (adc_index = 0; adc_index < 4; adc_index++) {
+				if (adc_val_cnt[adc_index] >= ADC_JITTER_VAL/5) {
+					val_index = adc_index;
+					break;
+				}
+	        } 
+
+	        for (adc_index = 0; adc_index < 5; adc_index++) {
+				printf ("adc_max[%d]= %d; adc_val_cnt[%d] = %d;\n",
+				adc_index, adc_max[adc_index], adc_index, adc_val_cnt[adc_index]);
+			}
+
+			for (adc_index = 0; adc_index < 5; adc_index++) {
+				if (adc_max[val_index] < (u8)tbl_adc_detect_val[adc_index][0]) {
+					break;
+				}
 			}
 			
 			*adc_event = tbl_adc_detect_val[adc_index][1];
-			all_adc_val = 0;
-			jitter_cnt = 0;
-		}
+	        memset(adc_max, 0x00, sizeof(adc_max));
+	        memset(adc_val_cnt, 0x00, sizeof(adc_val_cnt));
+	        jitter_cnt = 0;
+	    }
 	}
 	else {
-		all_adc_val = 0;
+		memset(adc_max, 0x00, sizeof(adc_max));
+		memset(adc_val_cnt, 0x00, sizeof(adc_val_cnt));
 		jitter_cnt = 0;
 		*adc_event = EVT_ADC_DET_IDE;
 	}
@@ -202,7 +241,7 @@ void plugin_saradc_sel_channel(u16 *adc_ch)
 #endif
 
 #if USER_ADC_DETECT_EN
-	static uint16_t prev_detect_event = 0, detect_event = 0;
+	static uint16_t prev_detect_event = EVT_ADC_DET_IDE, detect_event = EVT_ADC_DET_IDE;
 
 	adc_detect_process(&detect_event, (u8)(adc_cb.sfr[ADCCH_PE6] >> 2));
 	

@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+toolChain/nds32le-elf-mculib-v3s/ldscript/__executable_start=500000
+toolChain/nds32le-elf-mculib-v3s/ldscript/_stack=3000000
+toolChain/nds32le-elf-mculib-v3s/ldscript/fileName=C\:\\Andestech\\AndeSight300RDS\\toolchains\\nds32le-elf-mculib-v3s\\nds32le-elf\\lib\\ldscripts\\nds32elf.x
+toolChain/nds32le-elf-mculib-v3s/ldscript/lastModified=1489662779000

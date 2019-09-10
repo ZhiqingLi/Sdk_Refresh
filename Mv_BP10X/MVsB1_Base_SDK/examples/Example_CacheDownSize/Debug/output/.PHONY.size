@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  23382 (21674 +   1708)	    136	     40	  23558	   5c06	Example_CacheDownSize.adx

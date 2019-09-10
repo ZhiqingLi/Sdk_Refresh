@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+ 187446 (149858 +  37588)	   1056	  37568	 226070	  37316	Demo_RemindSound.adx

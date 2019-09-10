@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  26752 (24524 +   2228)	   1048	   8232	  36032	   8cc0	Example_SPIM.adx

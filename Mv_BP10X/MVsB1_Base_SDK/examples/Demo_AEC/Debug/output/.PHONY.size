@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  68378 (64114 +   4264)	   1040	 105024	 174442	  2a96a	Demo_AEC.adx

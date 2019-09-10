@@ -1,0 +1,270 @@
+00000000 a EILM_BEGIN
+00000000 a NDS_SAG_LMA_EILM
+00000000 W _ITB_BASE_
+00000000 W _RELAX_END_	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 T _start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 t exception_vector	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+000000a4 t exception_vector_end	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:350
+000000a4 T stub	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:349
+00000104 t flash_udelay
+0000011e t flash_delayms
+00000138 t FshcGpioSet
+0000015a t FshcInit
+00000174 t FshcFlashBusyStatusSet
+0000018e t FshcSendCmd
+000001c2 t FshcSpiIOModeCfg
+000003f4 t SpiFlashResetCRM
+0000043c t SpiFlashHpmModeSet
+00000518 t SpiFlashReadId
+00000624 t SpiFlashReadStatus
+000006da t SpiFlashIsBusy
+00000708 t SpiFlashWriteStatus
+00000892 t SpiFlashIOModeCfg
+00000972 t SpiFlashDeepPowerDown
+000009ec t SpiFlashReleaseFromDeepPowerDown
+00000a58 t SpiFlashWriteLock
+00000be8 t Flash_GIE_DISABLE
+00000bf6 t Flash_GIE_ENABLE
+00000c00 T FshcClkSwitch
+00000c8a T SpiFlashResumDelaySet
+00000cfe T SpiFlashClkSwitch
+00000d12 T ByteRecombineToDword
+00000d2e t SpiFlashWriteUnLock
+00000ee8 T SpiFlashRead
+000010ba T SpiFlashEraseResume
+00001120 T SpiFlashWrite
+0000146e T SpiFlashGetStatus
+000014a6 T SpiFlashFshcStatusSetIdle
+000014f6 T SpiFlashResume
+00001538 T SpiFlashErase
+00001660 T FlashErase
+00001724 T SpiFlashInit
+000017f2 T SpiFlashInfoGet
+000017f8 T SpiFlashIOCtrl
+000018c8 r SpiFlash
+00001a8c T Clock_CoreClkDivSet
+00001aa4 T Clock_CoreClkDivGet
+00001aae T Clock_SysClkDivGet
+00001acc T Clock_PllFreqGet
+00001ad2 T Clock_APllFreqGet
+00001ad8 T Clock_CoreClockFreqGet
+00001b44 T Clock_SysClockFreqGet
+00001b7a T Clock_SysClkDivSet
+00001bd4 T GPIO_RegOneBitSet
+00001be4 T GPIO_RegOneBitClear
+00001bf8 T __udelay
+00001c4a T DelayMs
+00001ca0 T DMA0_Interrupt
+00001d20 T DMA1_Interrupt
+00001dba T DMA2_Interrupt
+00001e54 T DMA3_Interrupt
+00001eee T DMA4_Interrupt
+00001f88 T DMA5_Interrupt
+00002022 T DMA6_Interrupt
+000020bc T DMA7_Interrupt
+00002156 T GetSysTick1MsCnt
+0000215c T PastTimeGet
+00002170 T TimeOutSet
+00002190 T IsTimeOut
+00002246 W UART1_Interrupt
+000022cc T SPIM_DMA_Done_Clear	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:28
+000022e0 T SPIM_DMA_FullDone	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:41
+00002328 T SPIM_DMA_HalfDone	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:62
+00002358 T SPIM_DMA_Send_Recive_Start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:86
+000023ba T SPIM_DMA_Send_Start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:110
+000023f6 T SPIM_DMA_Recv_Start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/spim_interface.c:129
+00002432 T UART0_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:31
+00002444 T UART1_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:36
+00002456 T UART0_RecvWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:41
+00002468 T UART1_RecvWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:46
+0000247a T UART0_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:90
+0000248c T UART1_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:103
+0000249e t Wait4Datum4Ever	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:92
+000024c4 T SpimSetting	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:113
+00002590 T SpimDataSendByMcu	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:135
+0000261c T SpimDataRevByMcu	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:159
+0000268e T SpimDataSendByDMA	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:180
+0000272a T SpimDataRevByDMA	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:207
+000027ac T SpimDataTxAndRxTest	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:228
+00002844 T main	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:256
+000029b4 W BLE_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W BT_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 t Default_Handler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:47
+000029b4 W FFTInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W GpioInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W I2C_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W I2sInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W IRInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W OS_Trap_Interrupt_SWI	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W RtcInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W SDIO0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W SPIM_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W SPIS_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W SWInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W SpdifInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W Timer2Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W Timer3Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W Timer4Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W Timer5Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W Timer6Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W UART0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W UsbInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b4 W WakeupInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+000029b6 T ExceptionCommHandler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:53
+00002bde T __c_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:186
+00002c12 T __cpu_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:213
+00002cb4 T HardwareStackProtectEnable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:316
+00002cda T __init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:336
+00002cfc T GIE_ENABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:16
+00002d06 T GIE_DISABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:21
+00002d14 T GIE_STATE_GET	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:27
+00002d1c T NVIC_EnableIRQ	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:70
+00002d34 W SwUartSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:24
+00002d36 T putchar	/cygdrive/c/Andestech/AndeSight300RDS/toolchains/nds32le-elf-mculib-v3s/nds32le-elf/include/stdio.h:212
+00002da6 T nds_write	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:61
+00002dc6 T DbgUartInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:70
+00002dea T Chip_MemInit
+00002df6 T Clock_Config
+00002e66 T WaitOscillateWork
+00002e80 T Clock_RcFreqGet
+00002f26 T Clock_PllLock
+00003040 T Clock_SysClkSelect
+000030ce T Clock_UARTClkSelect
+00003126 T Clock_Module1Enable
+00003136 T Clock_Module2Enable
+00003146 T Clock_Module3Enable
+00003156 T EnableMPU
+000031b8 T EnableIDCache
+000031fa T DataCacheInvalidAll
+00003204 T DataCacheRangeInvalid
+0000326a T DMA_ChannelAllocTableSet
+0000327c T DMA_ChannelEnable
+000032a8 T DMA_ChannelDisable
+000032d6 T DMA_InterruptFlagGet
+0000332a T DMA_InterruptFlagClear
+000033d0 T DMA_BlockConfig
+0000356e T DMA_BlockBufSet
+00003650 T Efuse_ReadData
+000036b6 T GPIO_PortAModeSet
+00004340 T Remap_AddrRemapSet
+000043da T Remap_InitTcm
+0000440c T SPIM_Init
+000044f4 T SPIM_IoConfig
+0000459a T SPIM_Send
+0000460a T SPIM_Recv
+00004678 T SPIM_DMAStart
+000046b2 T SPIM_GetIntFlag
+000046be T SPIM_ClrIntFlag
+000046d0 T SPIM_SetDmaEn
+000046e8 T SysTickInit
+00004712 W SystickInterrupt
+0000472a T ClockFreqGet
+00004758 T Timer_Config
+000048f0 T Timer_Start
+00004968 t UART_BaudClkGet
+000049be T UART0_Init
+00004b7e T UART1_Init
+00004d3e T UART0_Recv
+00004d98 T UART1_Recv
+00004df2 T UART0_SendByte
+00004e32 T UART1_SendByte
+00004e72 T WDG_Disable
+00004e98 T __divdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:451
+00004ed8 t fudiv_qrnnd	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:961
+00004f30 T __udivmoddi4	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:1152
+00005088 T memcpy
+000050b4 T memset
+000050e4 T printf
+000050ee T puts
+0000513e t vprintf_help
+00005172 T vprintf
+000051c0 T do_printf
+00005668 t sep_frac
+0000569a T _printf_float
+00005d6c T strcpy
+00005d80 T strlen
+00005d8c T abs
+00005d94 T _write
+00005dac T __lshrdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:403
+00005dd4 T __ashldi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:431
+00005dfc t ISR_TABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:52
+00005e78 t OS_Trap_TLB_Fill	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:94
+00005e88 t OS_Trap_PTE_Not_Present	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:103
+00005e98 t OS_Trap_TLB_Misc	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:111
+00005ea8 t OS_Trap_TLB_VLPT_Miss	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:120
+00005eb8 t OS_Trap_Machine_Error	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:128
+00005ec8 t OS_Trap_Debug_Related	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:136
+00005ed8 t OS_Trap_General_Exception	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:144
+00005ee8 t OS_Trap_Syscall	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:152
+00005ef8 t OS_Trap_Int_Comm	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:159
+00005fe2 t OS_Trap_Interrupt_HW0	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:169
+00005fec t OS_Trap_Interrupt_HW1	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:174
+00005ff6 t OS_Trap_Interrupt_HW2	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:179
+00006000 t OS_Trap_Interrupt_HW3	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:184
+0000600a t OS_Trap_Interrupt_HW4	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:189
+00006014 t OS_Trap_Interrupt_HW5	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:200
+0000603a t OS_Trap_Interrupt_HW6	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:205
+00006044 t OS_Trap_Interrupt_HW7	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:210
+0000604e t OS_Trap_Interrupt_HW8	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:215
+00006058 t OS_Trap_Interrupt_HW9	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:220
+00006062 t OS_Trap_Interrupt_HW10	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:225
+0000606c t OS_Trap_Interrupt_HW11	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:230
+00006076 t OS_Trap_Interrupt_HW12	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:235
+00006080 t OS_Trap_Interrupt_HW13	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:240
+0000608a t OS_Trap_Interrupt_HW14	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:245
+00006094 t OS_Trap_Interrupt_HW15	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:250
+0000609e t OS_Trap_Interrupt_HW16	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:255
+000060a8 t OS_Trap_Interrupt_HW17	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:260
+000060b2 t OS_Trap_Interrupt_HW18	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:265
+000060bc t OS_Trap_Interrupt_HW19	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:270
+000060c6 t OS_Trap_Interrupt_HW20	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:275
+000060d0 t OS_Trap_Interrupt_HW21	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:280
+000060da t OS_Trap_Interrupt_HW22	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:285
+000060e4 t OS_Trap_Interrupt_HW23	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:290
+000060ee t OS_Trap_Interrupt_HW24	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:295
+000060f8 t OS_Trap_Interrupt_HW25	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:300
+00006102 t OS_Trap_Interrupt_HW26	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:305
+0000610c t OS_Trap_Interrupt_HW27	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:310
+00006116 t OS_Trap_Interrupt_HW28	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:315
+00006120 t OS_Trap_Interrupt_HW29	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:320
+0000612a t OS_Trap_Interrupt_HW30	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:325
+00006134 t OS_Trap_Interrupt_HW31	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:330
+00006140 t ___start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:350
+00006790 R MPUConfigTable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:379
+00006880 A __data_lmastart
+00006c98 A EILM_SIZE
+20004000 D UARTS_SendByte_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:255
+20004000 D __data_start
+20004000 A _stack
+20004008 D UARTS_Recv_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:252
+20004010 D UARTS_Init_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:251
+20004018 D spimIO	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:104
+20004038 d DmaChannelMap_SPIM	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:58
+20004054 D spimRate	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:45
+20004055 D spimPort	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:44
+20004056 D IsApllFreeRun
+20004057 D IsDpllFreeRun
+20004058 D rc_clk_freq
+2000405c D gSOCInFreq
+20004060 D gAPLLWorkFreq
+20004064 D gPLLWorkFreq
+20004068 D DMAEintTable
+20004088 D DMATintTable
+200040a8 D DMADintTable
+200040c8 d DMAConfigTable
+200043f4 d DMAChannelAllocMap
+20004418 B __bss_start
+20004418 B _edata
+20004418 B spimMode	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:46
+20004419 B IsSwUartActedAsUARTFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:16
+2000441a B DebugPrintPort	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:13
+2000441c b SpiFlashInfo
+20004430 B gSysTick
+20004434 b output_idx
+20004438 b output_buff
+2000443c B _NDS32_REENT__errno
+20004440 B SpimBuf_RX	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:48
+20005220 W _FP_BASE_
+20005220 W _SDA_BASE_
+20005440 B SpimBuf_TX	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_SPIM/Debug/../src/SpiMasterExample.c:47
+20006440 B _end

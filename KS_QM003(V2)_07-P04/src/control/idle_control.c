@@ -34,6 +34,10 @@ void IdleControl(void)
 
 	if (IsInCharge()) {
 		SoundRemind(SOUND_CHARGING);
+		if (IS_RTC_WAKEUP()) {
+			RTC_WAKEUP_FLAG_CLR();
+			APP_DBG ("Charge clr RTC wakeup flag;\n");
+		}
 	}
 
 #ifdef FUNC_AMP_MUTE_EN
@@ -53,6 +57,7 @@ void IdleControl(void)
 	AudioAnaSetChannel(AUDIO_CH_NONE);
 	TimeOutSet(&ChargeLedTmr, 0);
 	SetModeSwitchState(MODE_SWITCH_STATE_DONE);
+	
 	while(Msg != MSG_COMMON_CLOSE)
 	{
 		Msg = MsgRecv(20);// 消息接收，无消息阻塞20ms，有消息立即返回

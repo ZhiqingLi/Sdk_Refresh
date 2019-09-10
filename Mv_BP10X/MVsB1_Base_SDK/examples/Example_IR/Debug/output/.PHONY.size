@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  32278 (29214 +   3064)	    144	     92	  32514	   7f02	Example_IR.adx

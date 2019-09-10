@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  25900 (23824 +   2076)	   1040	   8232	  35172	   8964	Example_SPIS.adx

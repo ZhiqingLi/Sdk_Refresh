@@ -483,16 +483,25 @@ void PowerMonitor(void)
 	if(IsTimeOut(&PowerMonitorTimer))
 	{
 		static bool IsBatterFull = FALSE;
+		static bool IsFristCharge = FALSE;
 		
 		TimeOutSet(&PowerMonitorTimer, LDOIN_SAMPLE_PERIOD);
 #ifdef OPTION_CHARGER_DETECT
 		if(IsInCharge()) {		//充电器已经接入的处理	
-			if (!IS_RTC_WAKEUP()
+			if (IS_CUR_WORK_MODULE()
+			//&& !IS_RTC_WAKEUP()
 			&& !WiFiFirmwareUpgradeStateGet()
-			&& (IS_CUR_WORK_MODULE())
 			&& (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
 				gSys.NextModuleID = MODULE_ID_IDLE;
 				MsgSend(MSG_COMMON_CLOSE);
+			}
+
+			if (IsFristCharge) {
+				IsFristCharge = FALSE;
+				if (IS_RTC_WAKEUP()) {
+					RTC_WAKEUP_FLAG_CLR();
+					APP_DBG ("Charge clr RTC wakeup flag;\n");
+				}
 			}
 #ifdef OPTION_CHAR_FUL_DETECT
 			if (IsChargeFull() && !IsBatterFull) {
@@ -504,7 +513,8 @@ void PowerMonitor(void)
 		}
 		else {
 			IsBatterFull = FALSE;
-			if ((!IS_CUR_WORK_MODULE()) && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
+			IsFristCharge = TRUE;
+			if (!IS_CUR_WORK_MODULE() && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
 				gSys.NextModuleID = MODULE_ID_WIFI;
 				MsgSend(MSG_COMMON_CLOSE);
 			}
@@ -556,7 +566,7 @@ void LowPowerDetProc(void)
 
 bool SoftPowerKeyDetect(void)
 {
-	static uint16_t PowerKeyLinkState = 0;
+	static uint16_t PowerKeyLinkState = 0, IsStateChange = 0xffff;
 	static bool PrevPowerKeyState = FALSE;
 	bool CurPowerKeyState = FALSE, ret = FALSE;
 
@@ -573,21 +583,26 @@ bool SoftPowerKeyDetect(void)
 	if (CurPowerKeyState != PrevPowerKeyState) {
 		PowerKeyLinkState = 0;
 		PrevPowerKeyState = CurPowerKeyState;
+		if (0xffff != IsStateChange) {
+			IsStateChange = 0x00FF;
+		}
 	}
 
 	if (PowerKeyLinkState < SOFT_SWITCH_ONTIME)
 	{
 		PowerKeyLinkState++;
 	}
-	else {		
+	else {	
 		if (IS_RTC_WAKEUP()) {
-			if (!CurPowerKeyState) {
+			if (0x00FF == IsStateChange) {
 				RTC_WAKEUP_FLAG_CLR();
+				APP_DBG ("Switch change clr RTC wakeup flag;\n");
 			}
 		}
 		else {
 			ret = CurPowerKeyState;
 		}
+		IsStateChange = 0;
 	}
 
 	return ret;
@@ -743,6 +758,9 @@ void SystemPowerOffControl(void)
 	SetModeSwitchState(MODE_SWITCH_STATE_DONE);
 	//关机失败，软件重启芯片。20190722
 	//NVIC_SystemReset();
+#ifdef FUNC_WATCHDOG_EN
+	WdgEn(WDG_STEP_3S);
+#endif
 	while(1);
 }
 

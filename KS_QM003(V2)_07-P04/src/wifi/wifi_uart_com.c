@@ -600,7 +600,17 @@ void Mcu_SendCmdToWiFi(uint16_t McuCmd, uint8_t* DataBuf)
 		case MCU_PLY_PRV:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+PLY+PRV", 11);
 			Len = 11;
-			break;			
+			break;	
+
+		case MCU_PLQ_NEXT:	
+			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+PLQ+NXT", 11);
+			Len = 11;
+			break;	
+
+		case MCU_PLQ_PREV:	
+			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+PLQ+PRV", 11);
+			Len = 11;
+			break;
 
 		case MCU_VOL_ADD:	
 			memcpy((void*)&CmdBuf[Temp], (void*)"MCU+VOL+", 8);

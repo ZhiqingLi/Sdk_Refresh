@@ -1,0 +1,5 @@
+AbstractTextEditor.Color.Background=192,192,192
+AbstractTextEditor.Color.Background.SystemDefault=false
+eclipse.preferences.version=1
+overviewRuler_migration=migrated_3.1
+spellingEngine=org.eclipse.jdt.internal.ui.text.spelling.DefaultSpellingEngine

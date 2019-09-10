@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  27448 (25124 +   2324)	    144	     40	  27632	   6bf0	Example_PWC.adx

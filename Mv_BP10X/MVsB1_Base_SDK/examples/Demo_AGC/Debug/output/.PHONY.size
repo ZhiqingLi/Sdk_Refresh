@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  33326 (31442 +   1884)	   1008	   6184	  40518	   9e46	Demo_AGC.adx

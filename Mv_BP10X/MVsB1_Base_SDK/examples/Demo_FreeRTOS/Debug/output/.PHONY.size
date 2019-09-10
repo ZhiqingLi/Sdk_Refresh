@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  29098 (27350 +   1748)	    144	    872	  30114	   75a2	Demo_FreeRTOS.adx

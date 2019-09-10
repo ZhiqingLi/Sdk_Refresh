@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="installedFeatures">
+		<item value="com.andestech.ide.api.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.cdt.managedbuilder.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.dsf.profile.targetboard.feature:2.1.0.201703291100"/>
+		<item value="com.andestech.ide.dsf.rds.feature:2.1.0.201703291100"/>
+		<item value="com.andestech.ide.flash.realboard.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.launch.rds.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.ldsag.feature:2.1.0.201703291100"/>
+		<item value="com.andestech.ide.license.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.linuxtools.gcov.feature:2.1.0.201703291100"/>
+		<item value="com.andestech.ide.rds.feature:3.0.0.201703291100"/>
+		<item value="com.andestech.ide.tm.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.tracer.feature:3.0.0.201703291100"/>
+		<item value="com.andestech.ide.util.feature:2.0.0.201703291100"/>
+		<item value="com.andestech.ide.vep.rds.feature:2.0.0.201703291100"/>
+		<item value="gnu.io.rxtx:2.1.7.4_v20071016-7B57e7UAXMAAqGAGf"/>
+		<item value="org.eclipse.cdt.debug.gdbjtag:8.7.0.201703281314"/>
+		<item value="org.eclipse.cdt.gdb:8.7.0.201703281314"/>
+		<item value="org.eclipse.draw2d:3.10.0.201506200205"/>
+		<item value="org.eclipse.emf.common:2.11.1.v20160208-0816"/>
+		<item value="org.eclipse.emf.ecore:2.11.2.v20160208-0816"/>
+		<item value="org.eclipse.gef:3.10.0.201506200205"/>
+		<item value="org.eclipse.help:2.1.2.v20160212-1500"/>
+		<item value="org.eclipse.platform:4.5.2.v20160212-1500"/>
+		<item value="org.eclipse.rcp:4.5.2.v20160212-1500"/>
+		<item value="org.eclipse.rse.core:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse.dstore:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse.ftp:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse.local:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse.ssh:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse.telnet:3.7.0.201505221634"/>
+		<item value="org.eclipse.rse:3.7.0.201505221634"/>
+		<item value="org.eclipse.tm.terminal.control.feature:4.1.0.201606052351"/>
+		<item value="org.eclipse.tm.terminal.feature:4.1.0.201606052351"/>
+		<item value="org.eclipse.tm.terminal.view.feature:4.1.0.201606052351"/>
+		<item value="org.eclipse.tm.terminal.view.rse.feature:4.1.0.201606052351"/>
+	</list>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
+		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="F:\Soft_sdk\Mv_BP10X"/>
+		</list>
+		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
+		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item value="581" key="DIALOG_WIDTH"/>
+		<item value="true" key="BUILD_NOW"/>
+		<item value="183" key="DIALOG_Y_ORIGIN"/>
+		<item value="true" key="BUILD_ALL"/>
+		<item value="670" key="DIALOG_X_ORIGIN"/>
+		<item value="498" key="DIALOG_HEIGHT"/>
+		<item value="true" key="TOGGLE_SELECTED"/>
+	</section>
+</section>

@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  28706 (26850 +   1856)	   1296	   8232	  38234	   955a	Example_DAC.adx

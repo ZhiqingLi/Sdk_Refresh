@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  25142 (23378 +   1764)	   1008	   4144	  30294	   7656	Example_DMA.adx

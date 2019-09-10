@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  27958 (24938 +   3020)	    144	     60	  28162	   6e02	Example_PWM.adx

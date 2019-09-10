@@ -84,7 +84,7 @@ void IsRmsPcmDataRemindInit(void)
 //检查是否正在播放提示音
 bool IsRmsPcmDataReminding(void)
 {
-	if(gSys.CurModuleID >= MODULE_ID_IDLE)
+	if(!IS_CUR_WORK_MODULE())
 	{
 		return FALSE;
 	}

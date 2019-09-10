@@ -64,6 +64,7 @@ extern bool RtcAt8563tInit(void);
 extern void WiFiGetAt8563tSystemTime(RTC_DATE_TIME* SystemTime);
 extern void WiFiSetAt8563tAlarmTime(bool IsOnOff, RTC_DATE_TIME* AlarmTime);
 extern void WiFiSetAt8563tSystemTime(RTC_DATE_TIME* CurTime);
+extern void SetAt8563tSecondAlarm(bool SecondAlarm);
 
 #ifdef __cplusplus
 #if __cplusplus

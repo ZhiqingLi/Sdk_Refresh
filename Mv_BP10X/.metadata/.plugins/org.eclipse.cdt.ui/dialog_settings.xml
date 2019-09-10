@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="m" key="org.eclipse.cdt.utils.ui.controls.FileListControl"/>
+	<item value="false" key="LexicalSortingAction.sort"/>
+	<section name="completion_proposal_size">
+	</section>
+	<section name="PDOMSearchPage">
+		<item value="227191" key="searchFlags"/>
+		<item value="false" key="caseSensitive"/>
+		<list key="previousPatterns">
+			<item value="MainApp:exitstoppedOK"/>
+		</list>
+	</section>
+	<section name="org.eclipse.cdt.internal.ui.text.QuickOutline">
+		<item value="916" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_X_ORIGIN"/>
+		<item value="424" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_Y_ORIGIN"/>
+		<item value="600" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_HEIGHT"/>
+		<item value="true" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_USE_PERSISTED_SIZE"/>
+		<item value="550" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_WIDTH"/>
+		<item value="true" key="org.eclipse.cdt.internal.ui.text.COutlineInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
+	</section>
+	<section name="org.eclipse.cdt.ui.text.hover.CMacroExpansionExploration">
+	</section>
+</section>

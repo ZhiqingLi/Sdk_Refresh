@@ -42,7 +42,7 @@ static TIMER RtcAutoOutTimer;
 #define RTC_ALARM_MAX_COUNT          3                     //闹钟循环最大次数
 
 ////////////////////////////////////
-const RTC_DATE_TIME gSysCurDate = {2019, 8, 9, 5, 0, 0, 0};
+const RTC_DATE_TIME gSysCurDate = {2019, 9, 1, 0, 0, 0, 0};
 const uint8_t Alarm_Ring[7] = {0xff, SOUND_ALARM_RING1, SOUND_ALARM_RING2, SOUND_ALARM_RING3, SOUND_ALARM_RING4, SOUND_ALARM_RING5, 0xff};
 
 
@@ -1649,11 +1649,6 @@ __attribute__((section(".driver.isr"), weak)) void RtcInterrupt(void)
 	sRtcControl->CurAlarmNum = RtcCheckAlarmFlag();
 	APP_DBG("RTC ALARM(%d) COME!\n", sRtcControl->CurAlarmNum);
 	sRtcControl->CurAlarmNum = 0;
-	if (!IS_CUR_WORK_MODULE()) {
-		gSys.WakeUpSource |= WAKEUP_FLAG_POR_RTC;
-		gSys.NextModuleID = MODULE_ID_WIFI;
-		MsgSend(MSG_COMMON_CLOSE);
-	}
 	RtcAlarmIntClear();// 清除闹钟提醒中断
 }
 #endif

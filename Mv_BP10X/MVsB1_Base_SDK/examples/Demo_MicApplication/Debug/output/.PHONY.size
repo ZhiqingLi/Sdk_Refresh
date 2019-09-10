@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+ 234678 (56598 + 178080)	   1064	  34320	 270062	  41eee	Demo_MicApplication.adx

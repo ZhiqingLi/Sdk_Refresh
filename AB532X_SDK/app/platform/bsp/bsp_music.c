@@ -200,14 +200,15 @@ void mp3_res_play(u32 addr, u32 len)
 		if (((msg == KL_NEXT_VOL_UP) || (msg == KH_NEXT_VOL_UP) || (msg == KL_VOL_UP)
         || (msg == KH_VOL_UP) || (msg == KU_VOL_UP_NEXT) || (msg == KU_VOL_UP)) 
         && (sys_cb.vol >= VOL_MAX)) {
+        	printf ("res player ignore msg VOL_UP;\n");
         	continue;
 		}
 		if (((msg == KL_PREV_VOL_DOWN) || (msg == KH_PREV_VOL_DOWN) || (msg == KU_VOL_DOWN_PREV)
         || (msg == KH_VOL_DOWN) || (msg == KL_VOL_DOWN) || (msg == KU_VOL_DOWN)) 
         && (sys_cb.vol == 0)) {
+        	printf ("res player ignore msg VOL_DOWN;\n");
         	continue;
 		}
-		printf ("res player ignore msg VOL_UP/VOL_DOWN;\n");
 #endif
 		
         if ((msg != NO_MSG) && ((msg & KEY_TYPE_MASK) != KEY_HOLD)) {

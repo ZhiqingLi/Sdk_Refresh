@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  35090 (32958 +   2132)	   1016	  63016	  99122	  18332	Example_I2S.adx

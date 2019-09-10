@@ -61,6 +61,10 @@ void PowerMonitorDisp(void);
 
 uint8_t GetCurBatterLevelAverage(void);
 
+#ifdef FUNC_POWERKEY_SOFT_POWERON_EN
+bool SoftPowerKeyDetect(void);				
+#endif
+
 #ifdef __cplusplus
 }
 #endif//__cplusplus

@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  34856 (30536 +   4320)	   1016	   4144	  40016	   9c50	Example_GPIO.adx

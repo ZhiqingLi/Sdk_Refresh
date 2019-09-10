@@ -1,0 +1,635 @@
+ELF Header:
+  Magic:   7f 45 4c 46 01 01 01 00 00 00 00 00 00 00 00 00 
+  Class:                             ELF32
+  Data:                              2's complement, little endian
+  Version:                           1 (current)
+  OS/ABI:                            UNIX - System V
+  ABI Version:                       0
+  Type:                              EXEC (Executable file)
+  Machine:                           Andes Technology compact code size embedded RISC processor family
+  Version:                           0x1
+  Entry point address:               0x0
+  Start of program headers:          52 (bytes into file)
+  Start of section headers:          166680 (bytes into file)
+  Flags:                             0x30808a52, ABI2 FP+, Andes ELF V1.4, Andes Star v3.0, PERF1, FPU_SP, FPU_REG:32/16, STR
+  Size of this header:               52 (bytes)
+  Size of program headers:           32 (bytes)
+  Number of program headers:         2
+  Size of section headers:           40 (bytes)
+  Number of section headers:         25
+  Section header string table index: 22
+
+Section Headers:
+  [Nr] Name              Type            Addr     Off    Size   ES Flg Lk Inf Al
+  [ 0]                   NULL            00000000 000000 000000 00      0   0  0
+  [ 1] .vector           PROGBITS        00000000 001000 0000a4 00  AX  0   0  4
+  [ 2] .stub_section     PROGBITS        000000a4 0010a4 000060 00  AX  0   0  2
+  [ 3] .text_*spi_flash. PROGBITS        00000104 001104 0017c4 00  AX  0   0  4
+  [ 4] .rodata_*spi_flas PROGBITS        000018c8 0028c8 0001c4 00   A  0   0  4
+  [ 5] .tcm_section      PROGBITS        00001a8c 002a8c 000214 00  AX  0   0  4
+  [ 6] .driver.isr       PROGBITS        00001ca0 002ca0 00062c 00  AX  0   0  2
+  [ 7] .text             PROGBITS        000022cc 0032cc 003874 00  AX  0   0  4
+  [ 8] .startup_section  PROGBITS        00005b40 006b40 000394 00  AX  0   0  4
+  [ 9] .rodata           PROGBITS        00005ed4 006ed4 000658 00   A  0   0  4
+  [10] .data             PROGBITS        20004000 008000 000410 00  WA  0   0  4
+  [11] .bss              NOBITS          20004410 008410 002028 00  WA  0   0  4
+  [12] .comment          PROGBITS        00000000 008410 00002f 01  MS  0   0  1
+  [13] .debug_aranges    PROGBITS        00000000 008440 0003c8 00      0   0  8
+  [14] .debug_info       PROGBITS        00000000 008808 00540d 00      0   0  1
+  [15] .debug_abbrev     PROGBITS        00000000 00dc15 000b33 00      0   0  1
+  [16] .debug_line       PROGBITS        00000000 00e748 002f77 00      0   0  1
+  [17] .debug_frame      PROGBITS        00000000 0116c0 0009f8 00      0   0  4
+  [18] .debug_str        PROGBITS        00000000 0120b8 011d14 01  MS  0   0  1
+  [19] .debug_loc        PROGBITS        00000000 023dcc 001457 00      0   0  1
+  [20] .debug_ranges     PROGBITS        00000000 025228 0002f0 00      0   0  8
+  [21] .debug_macro      PROGBITS        00000000 025518 0034e5 00      0   0  1
+  [22] .shstrtab         STRTAB          00000000 0289fd 000118 00      0   0  1
+  [23] .symtab           SYMTAB          00000000 028f00 002300 10     24 380  4
+  [24] .strtab           STRTAB          00000000 02b200 00116e 00      0   0  1
+Key to Flags:
+  W (write), A (alloc), X (execute), M (merge), S (strings)
+  I (info), L (link order), G (group), T (TLS), E (exclude), x (unknown)
+  O (extra OS processing required) o (OS specific), p (processor specific)
+
+There are no section groups in this file.
+
+Program Headers:
+  Type           Offset   VirtAddr   PhysAddr   FileSiz MemSiz  Flg Align
+  LOAD           0x001000 0x00000000 0x00000000 0x0652c 0x0652c R E 0x1000
+  LOAD           0x008000 0x20004000 0x00006540 0x00410 0x02438 RW  0x1000
+
+ Section to Segment mapping:
+  Segment Sections...
+   00     .vector .stub_section .text_*spi_flash.o .rodata_*spi_flash.o .tcm_section .driver.isr .text .startup_section .rodata 
+   01     .data .bss 
+
+There is no dynamic section in this file.
+
+There are no relocations in this file.
+
+The decoding of unwind sections for machine type Andes Technology compact code size embedded RISC processor family is not currently supported.
+
+Symbol table '.symtab' contains 560 entries:
+   Num:    Value  Size Type    Bind   Vis      Ndx Name
+     0: 00000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 00000000     0 SECTION LOCAL  DEFAULT    1 
+     2: 000000a4     0 SECTION LOCAL  DEFAULT    2 
+     3: 00000104     0 SECTION LOCAL  DEFAULT    3 
+     4: 000018c8     0 SECTION LOCAL  DEFAULT    4 
+     5: 00001a8c     0 SECTION LOCAL  DEFAULT    5 
+     6: 00001ca0     0 SECTION LOCAL  DEFAULT    6 
+     7: 000022cc     0 SECTION LOCAL  DEFAULT    7 
+     8: 00005b40     0 SECTION LOCAL  DEFAULT    8 
+     9: 00005ed4     0 SECTION LOCAL  DEFAULT    9 
+    10: 20004000     0 SECTION LOCAL  DEFAULT   10 
+    11: 20004410     0 SECTION LOCAL  DEFAULT   11 
+    12: 00000000     0 SECTION LOCAL  DEFAULT   12 
+    13: 00000000     0 SECTION LOCAL  DEFAULT   13 
+    14: 00000000     0 SECTION LOCAL  DEFAULT   14 
+    15: 00000000     0 SECTION LOCAL  DEFAULT   15 
+    16: 00000000     0 SECTION LOCAL  DEFAULT   16 
+    17: 00000000     0 SECTION LOCAL  DEFAULT   17 
+    18: 00000000     0 SECTION LOCAL  DEFAULT   18 
+    19: 00000000     0 SECTION LOCAL  DEFAULT   19 
+    20: 00000000     0 SECTION LOCAL  DEFAULT   20 
+    21: 00000000     0 SECTION LOCAL  DEFAULT   21 
+    22: 00000000     0 FILE    LOCAL  DEFAULT  ABS ./startup/crt0.o
+    23: 00000000     0 NOTYPE  LOCAL  DEFAULT    1 $c
+    24: 00000000     0 NOTYPE  LOCAL  DEFAULT    1 exception_vector
+    25: 00005e84     0 NOTYPE  LOCAL  DEFAULT    8 ___start
+    26: 00005bbc     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_TLB_Fill
+    27: 00005bcc     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_PTE_Not_Present
+    28: 00005bdc     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_TLB_Misc
+    29: 00005bec     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_TLB_VLPT_Miss
+    30: 00005bfc     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Machine_Error
+    31: 00005c0c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Debug_Related
+    32: 00005c1c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_General_Exception
+    33: 00005c2c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Syscall
+    34: 00005d26     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW0
+    35: 00005d30     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW1
+    36: 00005d3a     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW2
+    37: 00005d44     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW3
+    38: 00005d4e     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW4
+    39: 00005d58     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW5
+    40: 00005d7e     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW6
+    41: 00005d88     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW7
+    42: 00005d92     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW8
+    43: 00005d9c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW9
+    44: 00005da6     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW10
+    45: 00005db0     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW11
+    46: 00005dba     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW12
+    47: 00005dc4     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW13
+    48: 00005dce     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW14
+    49: 00005dd8     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW15
+    50: 00005de2     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW16
+    51: 00005dec     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW17
+    52: 00005df6     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW18
+    53: 00005e00     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW19
+    54: 00005e0a     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW20
+    55: 00005e14     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW21
+    56: 00005e1e     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW22
+    57: 00005e28     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW23
+    58: 00005e32     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW24
+    59: 00005e3c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW25
+    60: 00005e46     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW26
+    61: 00005e50     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW27
+    62: 00005e5a     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW28
+    63: 00005e64     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW29
+    64: 00005e6e     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW30
+    65: 00005e78     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Interrupt_HW31
+    66: 000000a4     0 NOTYPE  LOCAL  DEFAULT    1 exception_vector_end
+    67: 00005b40     0 NOTYPE  LOCAL  DEFAULT    8 $c
+    68: 00005b40     0 NOTYPE  LOCAL  DEFAULT    8 ISR_TABLE
+    69: 00005b40     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    70: 00005b44     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    71: 00005b48     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    72: 00005b4c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    73: 00005b50     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    74: 00005b54     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    75: 00005b58     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    76: 00005b5c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    77: 00005b60     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    78: 00005b64     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    79: 00005b68     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    80: 00005b6c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    81: 00005b70     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    82: 00005b74     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    83: 00005b78     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    84: 00005b7c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    85: 00005b80     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    86: 00005b84     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    87: 00005b88     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    88: 00005b8c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    89: 00005b90     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    90: 00005b94     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    91: 00005b98     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    92: 00005b9c     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    93: 00005ba0     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    94: 00005ba4     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    95: 00005ba8     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    96: 00005bac     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    97: 00005bb0     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    98: 00005bb4     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+    99: 00005bb8     0 NOTYPE  LOCAL  DEFAULT    8 $d2
+   100: 00005bbc     0 NOTYPE  LOCAL  DEFAULT    8 $c
+   101: 00005c3c     0 NOTYPE  LOCAL  DEFAULT    8 OS_Trap_Int_Comm
+   102: 00000000     0 FILE    LOCAL  DEFAULT  ABS init-default.c
+   103: 00002664     2 FUNC    LOCAL  DEFAULT    7 Default_Handler
+   104: 00002664     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   105: 00002666     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   106: 0000288e     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   107: 000028c2     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   108: 00002964     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   109: 0000298a     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   110: 000000a4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   111: 000000a8     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   112: 000000ac     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   113: 000000b0     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   114: 000000b4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   115: 000000b8     0 NOTYPE  LOCAL  DEFAULT    2 $d0
+   116: 000000b9     0 NOTYPE  LOCAL  DEFAULT    2 $d0
+   117: 000000ba     0 NOTYPE  LOCAL  DEFAULT    2 $d0
+   118: 000000bb     0 NOTYPE  LOCAL  DEFAULT    2 $d0
+   119: 000000bc     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   120: 000000c0     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   121: 000000c4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   122: 000000c8     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   123: 000000cc     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   124: 000000d0     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   125: 000000d4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   126: 000000d8     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   127: 000000dc     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   128: 000000e0     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   129: 000000e4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   130: 000000e8     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   131: 000000ec     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   132: 000000f0     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   133: 000000f4     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   134: 000000f8     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   135: 000000fc     0 NOTYPE  LOCAL  DEFAULT    2 $d2
+   136: 00000100     0 NOTYPE  LOCAL  DEFAULT    2 $d1
+   137: 00000102     0 NOTYPE  LOCAL  DEFAULT    2 $c
+   138: 00000000     0 FILE    LOCAL  DEFAULT  ABS spi_flash.c
+   139: 00000104    26 FUNC    LOCAL  DEFAULT    3 flash_udelay
+   140: 00000104     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   141: 0000011e    26 FUNC    LOCAL  DEFAULT    3 flash_delayms
+   142: 0000011e     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   143: 00000138    34 FUNC    LOCAL  DEFAULT    3 FshcGpioSet
+   144: 00000138     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   145: 0000015a    26 FUNC    LOCAL  DEFAULT    3 FshcInit
+   146: 0000015a     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   147: 00000174    26 FUNC    LOCAL  DEFAULT    3 FshcFlashBusyStatusSet
+   148: 00000174     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   149: 0000018e    52 FUNC    LOCAL  DEFAULT    3 FshcSendCmd
+   150: 0000018e     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   151: 000001c2   562 FUNC    LOCAL  DEFAULT    3 FshcSpiIOModeCfg
+   152: 000001c2     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   153: 20004414    18 OBJECT  LOCAL  DEFAULT   11 SpiFlashInfo
+   154: 000003f4    70 FUNC    LOCAL  DEFAULT    3 SpiFlashResetCRM
+   155: 000003f4     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   156: 0000043c   220 FUNC    LOCAL  DEFAULT    3 SpiFlashHpmModeSet
+   157: 0000043c     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   158: 00000474     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   159: 00000478     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   160: 0000047c     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   161: 00000480     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   162: 00000484     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   163: 00000518   268 FUNC    LOCAL  DEFAULT    3 SpiFlashReadId
+   164: 00000518     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   165: 000018c8   450 OBJECT  LOCAL  DEFAULT    4 SpiFlash
+   166: 00000624   182 FUNC    LOCAL  DEFAULT    3 SpiFlashReadStatus
+   167: 00000624     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   168: 000006da    46 FUNC    LOCAL  DEFAULT    3 SpiFlashIsBusy
+   169: 000006da     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   170: 00000708   394 FUNC    LOCAL  DEFAULT    3 SpiFlashWriteStatus
+   171: 00000708     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   172: 00000892   224 FUNC    LOCAL  DEFAULT    3 SpiFlashIOModeCfg
+   173: 00000892     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   174: 00000972   122 FUNC    LOCAL  DEFAULT    3 SpiFlashDeepPowerDown
+   175: 00000972     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   176: 000009ec   106 FUNC    LOCAL  DEFAULT    3 SpiFlashReleaseFromDeepPo
+   177: 000009ec     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   178: 00000a58   398 FUNC    LOCAL  DEFAULT    3 SpiFlashWriteLock
+   179: 00000a58     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   180: 00000a78     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   181: 00000a7c     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   182: 00000a80     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   183: 00000a84     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   184: 00000a88     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   185: 00000be8    14 FUNC    LOCAL  DEFAULT    3 Flash_GIE_DISABLE
+   186: 00000be8     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   187: 00000bf6    10 FUNC    LOCAL  DEFAULT    3 Flash_GIE_ENABLE
+   188: 00000bf6     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   189: 00000c00     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   190: 00000c8a     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   191: 00000cfe     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   192: 00000d12     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   193: 00000d2e   442 FUNC    LOCAL  DEFAULT    3 SpiFlashWriteUnLock
+   194: 00000d2e     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   195: 00000ee8     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   196: 000010ba     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   197: 00001120     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   198: 0000146e     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   199: 000014a6     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   200: 000014f6     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   201: 00001538     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   202: 00001660     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   203: 00001724     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   204: 000017f2     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   205: 000017f8     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   206: 00001814     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   207: 00001818     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   208: 0000181c     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   209: 00001820     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   210: 00001824     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   211: 00001828     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   212: 0000182c     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   213: 00001830     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   214: 00001834     0 NOTYPE  LOCAL  DEFAULT    3 $d2
+   215: 00001838     0 NOTYPE  LOCAL  DEFAULT    3 $c
+   216: 00000000     0 FILE    LOCAL  DEFAULT  ABS clk.c
+   217: 00002aa6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   218: 00002b16     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   219: 00001a8c     0 NOTYPE  LOCAL  DEFAULT    5 $c
+   220: 00002b30     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   221: 00002bd6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   222: 00002cf0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   223: 00002d7e     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   224: 00002dd6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   225: 00002de6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   226: 00002df6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   227: 00000000     0 FILE    LOCAL  DEFAULT  ABS gpio.c
+   228: 00001bd4     0 NOTYPE  LOCAL  DEFAULT    5 $c
+   229: 00003366     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   230: 00000000     0 FILE    LOCAL  DEFAULT  ABS timeout.c
+   231: 00004452     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   232: 0000447c     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   233: 00002156     0 NOTYPE  LOCAL  DEFAULT    6 $c
+   234: 00001bf8     0 NOTYPE  LOCAL  DEFAULT    5 $c
+   235: 00000000     0 FILE    LOCAL  DEFAULT  ABS dma.c
+   236: 00001ca0     0 NOTYPE  LOCAL  DEFAULT    6 $c
+   237: 200043ec    29 OBJECT  LOCAL  DEFAULT   10 DMAChannelAllocMap
+   238: 00002f1a     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   239: 00002f2c     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   240: 00002f58     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   241: 00002f86     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   242: 00002fda     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   243: 00003080     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   244: 200040c0   812 OBJECT  LOCAL  DEFAULT   10 DMAConfigTable
+   245: 0000321e     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   246: 00000000     0 FILE    LOCAL  DEFAULT  ABS uarts.c
+   247: 000046d0    86 FUNC    LOCAL  DEFAULT    7 UART_BaudClkGet
+   248: 000046d0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   249: 000021c0     0 NOTYPE  LOCAL  DEFAULT    6 $c
+   250: 00004726     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   251: 000048e6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   252: 00004aa6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   253: 00004b00     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   254: 00004b40     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   255: 00000000     0 FILE    LOCAL  DEFAULT  ABS uarts_interface.c
+   256: 000022cc     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   257: 000022de     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   258: 000022f0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   259: 00002302     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   260: 00000000     0 FILE    LOCAL  DEFAULT  ABS SpiSlaveExample.c
+   261: 00002314    36 FUNC    LOCAL  DEFAULT    7 Wait4Datum4Ever
+   262: 00002314     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   263: 00002338     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   264: 000023c4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   265: 000024ec     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   266: 000024f0     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   267: 000024f4     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   268: 000024f8     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   269: 000024fc     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   270: 00002500     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   271: 00000000     0 FILE    LOCAL  DEFAULT  ABS interrupt.c
+   272: 000029ac     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   273: 000029b6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   274: 000029c4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   275: 000029cc     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   276: 00000000     0 FILE    LOCAL  DEFAULT  ABS retarget.c
+   277: 000029e4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   278: 000029e6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   279: 00002a56     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   280: 00002a76     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   281: 00000000     0 FILE    LOCAL  DEFAULT  ABS chip_info.c
+   282: 00002a9a     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   283: 00000000     0 FILE    LOCAL  DEFAULT  ABS core_d1088.c
+   284: 00002e06     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   285: 00002e68     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   286: 00002eaa     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   287: 00002eb4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   288: 00000000     0 FILE    LOCAL  DEFAULT  ABS efuse.c
+   289: 00003300     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   290: 00000000     0 FILE    LOCAL  DEFAULT  ABS remap.c
+   291: 00003ff0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   292: 0000408a     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   293: 00000000     0 FILE    LOCAL  DEFAULT  ABS spis.c
+   294: 000040ba     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   295: 00004160     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   296: 00004170     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   297: 00004174     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   298: 00004178     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   299: 0000417c     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   300: 00004180     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   301: 0000420c     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   302: 00004278     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   303: 000042ce     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   304: 000042e0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   305: 000042f2     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   306: 0000430e     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   307: 00004342     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   308: 00004380     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   309: 000043b8     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   310: 000043f6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   311: 00000000     0 FILE    LOCAL  DEFAULT  ABS timer.c
+   312: 00004494     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   313: 000044c0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   314: 000044d8     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   315: 000044dc     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   316: 000044e0     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   317: 000044e4     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   318: 000044e8     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   319: 000044ec     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   320: 000044f0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   321: 00004658     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   322: 00004668     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   323: 0000466c     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   324: 00004670     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   325: 00004674     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   326: 00004678     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   327: 0000467c     0 NOTYPE  LOCAL  DEFAULT    7 $d2
+   328: 00004680     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   329: 00000000     0 FILE    LOCAL  DEFAULT  ABS watchdog.c
+   330: 00004b80     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   331: 00000000     0 FILE    LOCAL  DEFAULT  ABS _divdi3.o
+   332: 00004ba4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   333: 00000000     0 FILE    LOCAL  DEFAULT  ABS _udivmoddi4.o
+   334: 00004be4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   335: 00004be4    88 FUNC    LOCAL  DEFAULT    7 fudiv_qrnnd
+   336: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib_a-memcmp.o
+   337: 00004d94     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   338: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib_a-memcpy.o
+   339: 00004dcc     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   340: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib_a-memset.o
+   341: 00004df8     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   342: 00000000     0 FILE    LOCAL  DEFAULT  ABS printf.c
+   343: 00004e28     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   344: 00000000     0 FILE    LOCAL  DEFAULT  ABS puts.c
+   345: 00004e32     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   346: 00000000     0 FILE    LOCAL  DEFAULT  ABS vprintf.c
+   347: 00004e82    52 FUNC    LOCAL  DEFAULT    7 vprintf_help
+   348: 00004e82     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   349: 2000442c     4 OBJECT  LOCAL  DEFAULT   11 output_idx
+   350: 20004430     4 OBJECT  LOCAL  DEFAULT   11 output_buff
+   351: 00004eb6     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   352: 00000000     0 FILE    LOCAL  DEFAULT  ABS do_printf.c
+   353: 00004f04     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   354: 00004f3c     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   355: 00004f3e     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   356: 00004f40     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   357: 00004f42     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   358: 00004f44     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   359: 00004f46     0 NOTYPE  LOCAL  DEFAULT    7 $d1
+   360: 00004f48     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   361: 00000000     0 FILE    LOCAL  DEFAULT  ABS printf_f.c
+   362: 000053ac    50 FUNC    LOCAL  DEFAULT    7 sep_frac
+   363: 000053ac     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   364: 000053de     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   365: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib_a-strcpy.o
+   366: 00005ab0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   367: 00000000     0 FILE    LOCAL  DEFAULT  ABS lib_a-strlen.o
+   368: 00005ac4     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   369: 00000000     0 FILE    LOCAL  DEFAULT  ABS abs.c
+   370: 00005ad0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   371: 00000000     0 FILE    LOCAL  DEFAULT  ABS _write.o
+   372: 00005ad8     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   373: 00000000     0 FILE    LOCAL  DEFAULT  ABS libgcc2.c
+   374: 00005af0     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   375: 00000000     0 FILE    LOCAL  DEFAULT  ABS libgcc2.c
+   376: 00005b18     0 NOTYPE  LOCAL  DEFAULT    7 $c
+   377: 00000000     0 FILE    LOCAL  DEFAULT  ABS 
+   378: 00000000     0 NOTYPE  LOCAL  DEFAULT  ABS NDS_SAG_LMA_EILM
+   379: 00000000     0 NOTYPE  LOCAL  DEFAULT  ABS EILM_BEGIN
+   380: 0000215c    20 FUNC    GLOBAL DEFAULT    6 PastTimeGet
+   381: 000029e6   112 FUNC    GLOBAL DEFAULT    7 putchar
+   382: 000029cc    24 FUNC    GLOBAL DEFAULT    7 NVIC_EnableIRQ
+   383: 00004380    56 FUNC    GLOBAL DEFAULT    7 SPIS_DMA_StartRecv
+   384: 00005ab0    18 FUNC    GLOBAL DEFAULT    7 strcpy
+   385: 00005b18    38 FUNC    GLOBAL HIDDEN     7 __ashldi3
+   386: 00001c4a    84 FUNC    GLOBAL DEFAULT    5 DelayMs
+   387: 00002664     2 FUNC    WEAK   DEFAULT    7 SpdifInterrupt
+   388: 20004411     1 OBJECT  GLOBAL DEFAULT   11 IsSwUartActedAsUARTFlag
+   389: 00001bf8    82 FUNC    GLOBAL DEFAULT    5 __udelay
+   390: 00004ba4    62 FUNC    GLOBAL HIDDEN     7 __divdi3
+   391: 20004428     4 OBJECT  GLOBAL DEFAULT   11 gSysTick
+   392: 00002e06    98 FUNC    GLOBAL DEFAULT    7 EnableMPU
+   393: 00001120   846 FUNC    GLOBAL DEFAULT    3 SpiFlashWrite
+   394: 00004e28    10 FUNC    GLOBAL DEFAULT    7 printf
+   395: 00002cf0   142 FUNC    GLOBAL DEFAULT    7 Clock_SysClkSelect
+   396: 000014f6    66 FUNC    GLOBAL DEFAULT    3 SpiFlashResume
+   397: 00002664     2 FUNC    WEAK   DEFAULT    7 I2C_Interrupt
+   398: 00004b80    36 FUNC    GLOBAL DEFAULT    7 WDG_Disable
+   399: 00001724   206 FUNC    GLOBAL DEFAULT    3 SpiFlashInit
+   400: 000044c0   408 FUNC    GLOBAL DEFAULT    7 Timer_Config
+   401: 000029e4     2 FUNC    WEAK   DEFAULT    7 SwUartSend
+   402: 000042ce    18 FUNC    GLOBAL DEFAULT    7 SPIS_ClrRxFIFO
+   403: 200040a0    32 OBJECT  GLOBAL DEFAULT   10 DMADintTable
+   404: 20004000     8 OBJECT  GLOBAL DEFAULT   10 UARTS_SendByte_MAP
+   405: 00004278    86 FUNC    GLOBAL DEFAULT    7 SPIS_Recv
+   406: 00001eee   154 FUNC    GLOBAL DEFAULT    6 DMA4_Interrupt
+   407: 00004160   172 FUNC    GLOBAL DEFAULT    7 SPIS_Init
+   408: 00002338   140 FUNC    GLOBAL DEFAULT    7 SpisSetting
+   409: 00004452    42 FUNC    GLOBAL DEFAULT    7 SysTickInit
+   410: 00002aa6   112 FUNC    GLOBAL DEFAULT    7 Clock_Config
+   411: 000017f2     6 FUNC    GLOBAL DEFAULT    3 SpiFlashInfoGet
+   412: 00002664     2 FUNC    WEAK   DEFAULT    7 BLE_Interrupt
+   413: 000042f2    28 FUNC    GLOBAL DEFAULT    7 SPIS_BlockDMA_Init
+   414: 00004dcc    44 FUNC    GLOBAL DEFAULT    7 memcpy
+   415: 000029ac    10 FUNC    GLOBAL DEFAULT    7 GIE_ENABLE
+   416: 00004e32    80 FUNC    GLOBAL DEFAULT    7 puts
+   417: 20004412     1 OBJECT  GLOBAL DEFAULT   11 DebugPrintPort
+   418: 00004342    62 FUNC    GLOBAL DEFAULT    7 SPIS_DMA_SendState
+   419: 0000408a    48 FUNC    GLOBAL DEFAULT    7 Remap_InitTcm
+   420: 00002b16    26 FUNC    GLOBAL DEFAULT    7 WaitOscillateWork
+   421: 00006950     0 NOTYPE  GLOBAL DEFAULT  ABS EILM_SIZE
+   422: 00002dd6    16 FUNC    GLOBAL DEFAULT    7 Clock_Module1Enable
+   423: 00002eaa    10 FUNC    GLOBAL DEFAULT    7 DataCacheInvalidAll
+   424: 00001aa4    10 FUNC    GLOBAL DEFAULT    5 Clock_CoreClkDivGet
+   425: 00004c3c   344 FUNC    GLOBAL HIDDEN     7 __udivmoddi4
+   426: 000028c2   162 FUNC    GLOBAL DEFAULT    7 __cpu_init
+   427: 00002a76    36 FUNC    GLOBAL DEFAULT    7 DbgUartInit
+   428: 00002f86    84 FUNC    GLOBAL DEFAULT    7 DMA_InterruptFlagGet
+   429: 00004658   118 FUNC    GLOBAL DEFAULT    7 Timer_Start
+   430: 20004010    32 OBJECT  GLOBAL DEFAULT   10 spisIO
+   431: 20004058     4 OBJECT  GLOBAL DEFAULT   10 gAPLLWorkFreq
+   432: 0000447c    24 FUNC    WEAK   DEFAULT    7 SystickInterrupt
+   433: 00002664     2 FUNC    WEAK   DEFAULT    7 GpioInterrupt
+   434: 00002170    32 FUNC    GLOBAL DEFAULT    6 TimeOutSet
+   435: 00000d12    28 FUNC    GLOBAL DEFAULT    3 ByteRecombineToDword
+   436: 00002664     2 FUNC    WEAK   DEFAULT    7 SWInterrupt
+   437: 00002664     2 FUNC    WEAK   DEFAULT    7 SDIO0_Interrupt
+   438: 00002246   134 FUNC    WEAK   DEFAULT    6 UART1_Interrupt
+   439: 20004054     4 OBJECT  GLOBAL DEFAULT   10 gSOCInFreq
+   440: 000029c4     8 FUNC    GLOBAL DEFAULT    7 GIE_STATE_GET
+   441: 00002664     2 FUNC    WEAK   DEFAULT    7 FFTInterrupt
+   442: 00003080   414 FUNC    GLOBAL DEFAULT    7 DMA_BlockConfig
+   443: 20004030    28 OBJECT  GLOBAL DEFAULT   10 DmaChannelMapSPIS
+   444: 2000404c     1 OBJECT  GLOBAL DEFAULT   10 spisPort
+   445: 00004f04  1190 FUNC    GLOBAL DEFAULT    7 do_printf
+   446: 00002022   154 FUNC    GLOBAL DEFAULT    6 DMA6_Interrupt
+   447: 0000146e    56 FUNC    GLOBAL DEFAULT    3 SpiFlashGetStatus
+   448: 00001ad8   108 FUNC    GLOBAL DEFAULT    5 Clock_CoreClockFreqGet
+   449: 00002b30   166 FUNC    GLOBAL DEFAULT    7 Clock_RcFreqGet
+   450: 00002664     2 FUNC    WEAK   DEFAULT    7 IRInterrupt
+   451: 00002664     2 FUNC    WEAK   DEFAULT    7 OS_Trap_Interrupt_SWI
+   452: 00001ca0   128 FUNC    GLOBAL DEFAULT    6 DMA0_Interrupt
+   453: 0000298a    34 FUNC    GLOBAL DEFAULT    7 __init
+   454: 00001ad2     6 FUNC    GLOBAL DEFAULT    5 Clock_APllFreqGet
+   455: 00003ff0   154 FUNC    GLOBAL DEFAULT    7 Remap_AddrRemapSet
+   456: 000010ba   102 FUNC    GLOBAL DEFAULT    3 SpiFlashEraseResume
+   457: 20004060    32 OBJECT  GLOBAL DEFAULT   10 DMAEintTable
+   458: 00005af0    40 FUNC    GLOBAL HIDDEN     7 __lshrdi3
+   459: 20004080    32 OBJECT  GLOBAL DEFAULT   10 DMATintTable
+   460: 0000643c   224 OBJECT  GLOBAL DEFAULT    9 MPUConfigTable
+   461: 00002666   552 FUNC    GLOBAL DEFAULT    7 ExceptionCommHandler
+   462: 00004eb6    76 FUNC    GLOBAL DEFAULT    7 vprintf
+   463: 00002f2c    44 FUNC    GLOBAL DEFAULT    7 DMA_ChannelEnable
+   464: 20005218     0 NOTYPE  WEAK   DEFAULT   10 _FP_BASE_
+   465: 20004438  4096 OBJECT  GLOBAL DEFAULT   11 SpisRecvBuf
+   466: 00002bd6   282 FUNC    GLOBAL DEFAULT    7 Clock_PllLock
+   467: 0000430e    52 FUNC    GLOBAL DEFAULT    7 SPIS_DMA_StartSend
+   468: 000053de  1746 FUNC    GLOBAL DEFAULT    7 _printf_float
+   469: 00001a8c    24 FUNC    GLOBAL DEFAULT    5 Clock_CoreClkDivSet
+   470: 00004726   448 FUNC    GLOBAL DEFAULT    7 UART0_Init
+   471: 00000000   108 FUNC    GLOBAL DEFAULT    1 _start
+   472: 20005218     0 NOTYPE  WEAK   DEFAULT   10 _SDA_BASE_
+   473: 00002a9a    12 FUNC    GLOBAL DEFAULT    7 Chip_MemInit
+   474: 00002664     2 FUNC    WEAK   DEFAULT    7 I2sInterrupt
+   475: 000029b6    14 FUNC    GLOBAL DEFAULT    7 GIE_DISABLE
+   476: 00002d7e    88 FUNC    GLOBAL DEFAULT    7 Clock_UARTClkSelect
+   477: 00000cfe    20 FUNC    GLOBAL DEFAULT    3 SpiFlashClkSwitch
+   478: 00001bd4    16 FUNC    GLOBAL DEFAULT    5 GPIO_RegOneBitSet
+   479: 00002664     2 FUNC    WEAK   DEFAULT    7 UART0_Interrupt
+   480: 00004d94    56 FUNC    GLOBAL DEFAULT    7 memcmp
+   481: 00004494    44 FUNC    GLOBAL DEFAULT    7 ClockFreqGet
+   482: 00002f1a    18 FUNC    GLOBAL DEFAULT    7 DMA_ChannelAllocTableSet
+   483: 00002664     2 FUNC    WEAK   DEFAULT    7 Timer4Interrupt
+   484: 00002964    38 FUNC    GLOBAL DEFAULT    7 HardwareStackProtectEnabl
+   485: 00000000     0 NOTYPE  WEAK   DEFAULT    1 _RELAX_END_
+   486: 00002664     2 FUNC    WEAK   DEFAULT    7 Timer2Interrupt
+   487: 00001660   196 FUNC    GLOBAL DEFAULT    3 FlashErase
+   488: 20004410     0 NOTYPE  GLOBAL DEFAULT   11 __bss_start
+   489: 00004df8    46 FUNC    GLOBAL DEFAULT    7 memset
+   490: 000023c4   672 FUNC    GLOBAL DEFAULT    7 main
+   491: 00002664     2 FUNC    WEAK   DEFAULT    7 Timer6Interrupt
+   492: 000022de    18 FUNC    GLOBAL DEFAULT    7 UART1_InitWpr
+   493: 00004b40    64 FUNC    GLOBAL DEFAULT    7 UART1_SendByte
+   494: 00002de6    16 FUNC    GLOBAL DEFAULT    7 Clock_Module2Enable
+   495: 0000321e   226 FUNC    GLOBAL DEFAULT    7 DMA_BlockBufSet
+   496: 00003366  3210 FUNC    GLOBAL DEFAULT    7 GPIO_PortAModeSet
+   497: 00002f58    46 FUNC    GLOBAL DEFAULT    7 DMA_ChannelDisable
+   498: 00002df6    16 FUNC    GLOBAL DEFAULT    7 Clock_Module3Enable
+   499: 000022cc    18 FUNC    GLOBAL DEFAULT    7 UART0_InitWpr
+   500: 20004434     4 OBJECT  GLOBAL DEFAULT   11 _NDS32_REENT__errno
+   501: 00001f88   154 FUNC    GLOBAL DEFAULT    6 DMA5_Interrupt
+   502: 00003300   102 FUNC    GLOBAL DEFAULT    7 Efuse_ReadData
+   503: 00002664     2 FUNC    WEAK   DEFAULT    7 WakeupInterrupt
+   504: 00001dba   154 FUNC    GLOBAL DEFAULT    6 DMA2_Interrupt
+   505: 2000404e     1 OBJECT  GLOBAL DEFAULT   10 IsDpllFreeRun
+   506: 000043f6    92 FUNC    GLOBAL DEFAULT    7 SPIS_DMA_StartSendRecv
+   507: 00002664     2 FUNC    WEAK   DEFAULT    7 SPIS_Interrupt
+   508: 00002156     6 FUNC    GLOBAL DEFAULT    6 GetSysTick1MsCnt
+   509: 00002190    48 FUNC    GLOBAL DEFAULT    6 IsTimeOut
+   510: 00004b00    64 FUNC    GLOBAL DEFAULT    7 UART0_SendByte
+   511: 000000a4    96 FUNC    GLOBAL DEFAULT    2 stub
+   512: 00001b44    54 FUNC    GLOBAL DEFAULT    5 Clock_SysClockFreqGet
+   513: 00000000     0 NOTYPE  WEAK   DEFAULT  ABS _ITB_BASE_
+   514: 00001aae    30 FUNC    GLOBAL DEFAULT    5 Clock_SysClkDivGet
+   515: 00006540     0 NOTYPE  GLOBAL DEFAULT  ABS __data_lmastart
+   516: 00005ad8    24 FUNC    GLOBAL DEFAULT    7 _write
+   517: 00001b7a    90 FUNC    GLOBAL DEFAULT    5 Clock_SysClkDivSet
+   518: 20004410     0 NOTYPE  GLOBAL DEFAULT   11 _edata
+   519: 20006438     0 NOTYPE  GLOBAL DEFAULT   11 _end
+   520: 00002eb4   102 FUNC    GLOBAL DEFAULT    7 DataCacheRangeInvalid
+   521: 00000c00   138 FUNC    GLOBAL DEFAULT    3 FshcClkSwitch
+   522: 20004008     8 OBJECT  GLOBAL DEFAULT   10 UARTS_Init_MAP
+   523: 00002302    18 FUNC    GLOBAL DEFAULT    7 UART1_SendByteWpr
+   524: 00002fda   166 FUNC    GLOBAL DEFAULT    7 DMA_InterruptFlagClear
+   525: 000017f8   206 FUNC    GLOBAL DEFAULT    3 SpiFlashIOCtrl
+   526: 0000288e    52 FUNC    GLOBAL DEFAULT    7 __c_init
+   527: 00000ee8   466 FUNC    GLOBAL DEFAULT    3 SpiFlashRead
+   528: 2000404d     1 OBJECT  GLOBAL DEFAULT   10 IsApllFreeRun
+   529: 0000420c   108 FUNC    GLOBAL DEFAULT    7 SPIS_Send
+   530: 000022f0    18 FUNC    GLOBAL DEFAULT    7 UART0_SendByteWpr
+   531: 00002664     2 FUNC    WEAK   DEFAULT    7 RtcInterrupt
+   532: 000040ba   166 FUNC    GLOBAL DEFAULT    7 SPIS_IoConfig
+   533: 00002664     2 FUNC    WEAK   DEFAULT    7 BT_Interrupt
+   534: 00002e68    66 FUNC    GLOBAL DEFAULT    7 EnableIDCache
+   535: 000014a6    80 FUNC    GLOBAL DEFAULT    3 SpiFlashFshcStatusSetIdle
+   536: 00001d20   154 FUNC    GLOBAL DEFAULT    6 DMA1_Interrupt
+   537: 2000405c     4 OBJECT  GLOBAL DEFAULT   10 gPLLWorkFreq
+   538: 00002664     2 FUNC    WEAK   DEFAULT    7 SPIM_Interrupt
+   539: 00005ac4    12 FUNC    GLOBAL DEFAULT    7 strlen
+   540: 20004000     0 NOTYPE  GLOBAL DEFAULT  ABS _stack
+   541: 000020bc   154 FUNC    GLOBAL DEFAULT    6 DMA7_Interrupt
+   542: 00001e54   154 FUNC    GLOBAL DEFAULT    6 DMA3_Interrupt
+   543: 00005ad0     6 FUNC    GLOBAL DEFAULT    7 abs
+   544: 20004410     1 OBJECT  GLOBAL DEFAULT   11 spisMode
+   545: 20004000     0 NOTYPE  GLOBAL DEFAULT   10 __data_start
+   546: 00001538   296 FUNC    GLOBAL DEFAULT    3 SpiFlashErase
+   547: 00002a56    32 FUNC    GLOBAL DEFAULT    7 nds_write
+   548: 00001acc     6 FUNC    GLOBAL DEFAULT    5 Clock_PllFreqGet
+   549: 000042e0    18 FUNC    GLOBAL DEFAULT    7 SPIS_ClrTxFIFO
+   550: 000043b8    62 FUNC    GLOBAL DEFAULT    7 SPIS_DMA_RecvState
+   551: 00000c8a   116 FUNC    GLOBAL DEFAULT    3 SpiFlashResumDelaySet
+   552: 20004050     4 OBJECT  GLOBAL DEFAULT   10 rc_clk_freq
+   553: 000048e6   448 FUNC    GLOBAL DEFAULT    7 UART1_Init
+   554: 20005438  4096 OBJECT  GLOBAL DEFAULT   11 SpisSendBuf
+   555: 00004aa6    90 FUNC    GLOBAL DEFAULT    7 UART1_Recv
+   556: 00002664     2 FUNC    WEAK   DEFAULT    7 Timer5Interrupt
+   557: 00002664     2 FUNC    WEAK   DEFAULT    7 UsbInterrupt
+   558: 00002664     2 FUNC    WEAK   DEFAULT    7 Timer3Interrupt
+   559: 00001be4    18 FUNC    GLOBAL DEFAULT    5 GPIO_RegOneBitClear
+
+No version information found in this file.

@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  26374 (23826 +   2548)	    136	   5752	  32262	   7e06	Example_Flash.adx

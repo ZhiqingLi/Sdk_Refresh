@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  31880 (29128 +   2752)	    144	     92	  32116	   7d74	Example_PowerConsumption.adx

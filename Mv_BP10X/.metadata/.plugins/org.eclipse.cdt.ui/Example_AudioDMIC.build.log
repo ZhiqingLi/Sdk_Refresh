@@ -1,0 +1,68 @@
+11:57:17 **** 构建 of configuration Debug for project Example_AudioDMIC ****
+make all 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"driver/driver_api/src/adc_interface.d" -MT"driver/driver_api/src/adc_interface.d driver/driver_api/src/adc_interface.o" -o "driver/driver_api/src/adc_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"driver/driver_api/src/dac_interface.d" -MT"driver/driver_api/src/dac_interface.d driver/driver_api/src/dac_interface.o" -o "driver/driver_api/src/dac_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"driver/driver_api/src/uarts_interface.d" -MT"driver/driver_api/src/uarts_interface.d driver/driver_api/src/uarts_interface.o" -o "driver/driver_api/src/uarts_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+ 
+正在构建文件： ../src/dmic_example.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"src/dmic_example.d" -MT"src/dmic_example.d src/dmic_example.o" -o "src/dmic_example.o" "../src/dmic_example.c"
+已结束构建： ../src/dmic_example.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/crt0.d" -MT"startup/crt0.d startup/crt0.o" -o "startup/crt0.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/init-default.d" -MT"startup/init-default.d startup/init-default.o" -o "startup/init-default.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/interrupt.d" -MT"startup/interrupt.d startup/interrupt.o" -o "startup/interrupt.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/retarget.d" -MT"startup/retarget.d startup/retarget.o" -o "startup/retarget.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+ 
+正在构建目标： Example_AudioDMIC.adx
+正在调用： Andes C Linker
+nds32le-elf-gcc -Og -nostartfiles -static -L"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver" -mcmodel=medium -ldsp -mext-dsp -T"../nds32-ae210p.ld" -Wl,--gc-sections -mvh -o "Example_AudioDMIC.adx"  ./driver/driver_api/src/adc_interface.o ./driver/driver_api/src/dac_interface.o ./driver/driver_api/src/uarts_interface.o  ./src/dmic_example.o  ./startup/crt0.o ./startup/init-default.o ./startup/interrupt.o ./startup/retarget.o   -lDriver
+已结束构建目标： Example_AudioDMIC.adx
+ 
+正在调用： NM (symbol listing)
+nds32le-elf-nm -n -l -C "Example_AudioDMIC.adx" > output/symbol.txt
+已结束构建： output/symbol.txt
+ 
+正在调用： Readelf (ELF info listing)
+nds32le-elf-readelf -a "Example_AudioDMIC.adx" > output/readelf.txt
+已结束构建： output/readelf.txt
+ 
+正在调用： Objcopy (object content copy)
+nds32le-elf-objcopy -S -O binary "Example_AudioDMIC.adx" output/Example_AudioDMIC.bin
+已结束构建： output/Example_AudioDMIC.bin
+ 
+正在调用： Size (section size listing)
+nds32le-elf-size  "Example_AudioDMIC.adx" | tee output/.PHONY.size
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  31682 (29822 +   1860)	   1008	  10280	  42970	   a7da	Example_AudioDMIC.adx
+已结束构建： output/.PHONY.size
+ 
+
+11:57:31 Build Finished (took 14s.767ms)
+

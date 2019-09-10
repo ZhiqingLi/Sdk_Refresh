@@ -1,0 +1,13 @@
+16:32:07 **** Incremental Build of configuration Release for project Demo_AEC ****
+make all 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -Os -mcmodel=medium -Wall -mcpu=d1088-spu -c -fmessage-length=0 -MMD -MP -MF"driver/driver_api/src/adc_interface.d" -MT"driver/driver_api/src/adc_interface.d driver/driver_api/src/adc_interface.o" -o "driver/driver_api/src/adc_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c"
+/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:2:18: fatal error: type.h: No such file or directory
+ #include "type.h"
+                  ^
+compilation terminated.
+make: *** [driver/driver_api/src/subdir.mk:59: driver/driver_api/src/adc_interface.o] Error 1
+
+16:32:09 Build Finished (took 1s.535ms)
+

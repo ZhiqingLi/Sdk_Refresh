@@ -10,7 +10,7 @@ typedef struct {
     u8  eq_mode;
     u8  cur_dev;
     u8  lang_id;
-    u8  lpwr_warning_cnt;
+    u32 lpwr_warning_cnt;		//20190827,修改报警检测时间
     u8  lpwr_warning_times;     //播报低电次数，0xff表示一直播
     u8  vbat_nor_cnt;
     s8  anl_gain_offset;        //用于动态修改模拟音量表

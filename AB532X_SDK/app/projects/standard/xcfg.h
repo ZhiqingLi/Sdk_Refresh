@@ -29,7 +29,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 lowpower_warning_en              : 1;   //低电提示
     u8 lpwr_warning_vbat;                       //低电语音提示电压: 0:2.8V, 1:2.9V, 2:3.0V, 3:3.1V, 4:3.2V, 5:3.3V, 6:3.4V, 7:3.5V, 8:3.6V, 9:3.7V
     u8 lpwr_off_vbat;                           //低电关机电压: 0:不关机, 1:2.8V, 2:2.9V, 3:3.0V, 4:3.1V, 5:3.2V, 6:3.3V, 7:3.4V, 8:3.5V, 9:3.6V, 10:3.7V
-    u8 lpwr_warning_period;                     //低电语音播报周期(秒)
+    u32 lpwr_warning_period;                    //低电语音播报周期(秒)
     u8 lpwr_warning_count;                      //低电语音播报次数
     u8 vol_max;                                 //音量级数: 0:16级音量, 1:30级音量, 2:32级音量, 3:50级音量
     u8 sys_init_vol;                            //开机默认音量
@@ -270,6 +270,27 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
         u8 unit;
         u8 cycle;
     } led_calling;                              //通话闪灯控制
+    u32 led_musicplay_config_en          : 1;   //USB/SD播放状态配置LED
+    struct __attribute__((packed)) {
+        u8 redpat;
+        u8 bluepat;
+        u8 unit;
+        u8 cycle;
+    } led_usb_sd_play;                          //通话闪灯控制
+    u32 led_auxplay_config_en            : 1;   //AUX播放状态配置LED
+    struct __attribute__((packed)) {
+        u8 redpat;
+        u8 bluepat;
+        u8 unit;
+        u8 cycle;
+    } led_aux_playing;                          //通话闪灯控制
+    u32 led_fmplay_config_en             : 1;   //FM播放状态配置LED
+    struct __attribute__((packed)) {
+        u8 redpat;
+        u8 bluepat;
+        u8 unit;
+        u8 cycle;
+    } led_fm_playing;                           //通话闪灯控制
     u32 led_lowbat_config_en             : 1;   //低电状态配置LED
     struct __attribute__((packed)) {
         u8 redpat;

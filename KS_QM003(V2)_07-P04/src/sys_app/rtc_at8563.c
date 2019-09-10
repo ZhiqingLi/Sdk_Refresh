@@ -6,6 +6,8 @@
 #include "gpio.h"
 #include "rtc_control.h"
 #include "sys_app.h"
+#include "power_management.h"
+#include "nvm.h"
 
 #ifdef FUNC_RTC_AT8563T_EN
 
@@ -98,6 +100,25 @@ static bool RtcAt8563tWriteParam(void)
 }
 
 /*****************************************************************************
+ Prototype    : ResetAt8563tSecondAlarm
+ Description  : Reset second alarm
+ Input        : void  
+ Output       : None
+ Return Value : 
+ Calls        : 
+ Called By    : 
+ 
+  History        :
+  1.Date         : 2019/9/2
+    Author       : qing
+    Modification : Created function
+
+*****************************************************************************/
+void SetAt8563tSecondAlarm(bool SecondAlarm) 
+{
+	IsSecondAlarm = SecondAlarm;
+}
+/*****************************************************************************
  Prototype    : WiFiSetAt8563tSystemTime
  Description  : WiFi同步当前系统时间
  Input        : RTC_DATE_TIME* CurTime  
@@ -171,22 +192,27 @@ void WiFiGetAt8563tSystemTime(RTC_DATE_TIME* SystemTime)
 		}
 		//闹钟时间到，
 		if (RtcAt8563tAlarmCome()) {
-			RTC_DATE_TIME AlarmTime;
-
 			APP_DBG("AT8563T alarm in comeing!!!\n");
 #ifdef FUNC_GPIO_POWER_ON_EN
 			SysPowerOnControl(TRUE);
 #endif
-			gSys.WakeUpSource = WAKEUP_FLAG_POR_RTC;
+			if (!IS_CUR_WORK_MODULE()) {
+				APP_DBG("AT8563T alarm wakeup WiFi!!!\n");
+				gSys.NextModuleID = MODULE_ID_WIFI;
+				MsgSend(MSG_COMMON_CLOSE);
+				gSys.WakeUpSource = WAKEUP_FLAG_POR_RTC;
+			}
 
-			if (!IsSecondAlarm) {
-				IsSecondAlarm = TRUE;
+			if (!IsSecondAlarm && (GetCurBatterLevelAverage() >= 10)
+#ifdef OPTION_CHARGER_DETECT
+			&& !IsInCharge()
+#endif
+			) {
+				RTC_DATE_TIME AlarmTime;
+				
+				SetAt8563tSecondAlarm(TRUE);
 				//第一次闹响，设置1分钟后的闹钟，防止闹钟唤醒后WiFi未启动而用户关机
-				memset (&AlarmTime, 0x00, sizeof(RTC_DATE_TIME));
-				AlarmTime.Min = CurRtcTime[AT8563T_TIMER_MIN_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_MIN_ADDR]%16;
-				AlarmTime.Hour = CurRtcTime[AT8563T_TIMER_HOUR_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_HOUR_ADDR]%16;
-				AlarmTime.WDay = CurRtcTime[AT8563T_TIMER_WDAY_ADDR]%16;
-				AlarmTime.Date = CurRtcTime[AT8563T_TIMER_DATE_ADDR]/16*10 + CurRtcTime[AT8563T_TIMER_DATE_ADDR]%16;
+				memcpy((void*)&AlarmTime, (void*)SystemTime, sizeof(RTC_DATE_TIME));
 				//分钟加1；
 				AlarmTime.Min++;
 				if (AlarmTime.Min >= 60) {
@@ -194,13 +220,24 @@ void WiFiGetAt8563tSystemTime(RTC_DATE_TIME* SystemTime)
 					AlarmTime.Min %= 60;
 					AlarmTime.Hour %= 24;
 				}
+				AlarmTime.Sec = 0;
 
 				WiFiSetAt8563tAlarmTime(TRUE, &AlarmTime);
+				//闹钟数据同时设置到AP80
+				sRtcControl->AlarmNum = 1;
+				sRtcControl->AlarmMode = ALARM_MODE_ONCE_ONLY;
+				RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &AlarmTime);
+				RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
+				APP_DBG("SetSecondAralmTime(AralmNum:%d; %02d:%02d:%02d)!!!\n", sRtcControl->AlarmNum, 
+						sRtcControl->AlarmTime.Hour, sRtcControl->AlarmTime.Min, sRtcControl->AlarmTime.Sec);
+#ifdef FUNC_RTC_ALARM		
+				NvmWrite(RTC_NVM_START_ADDR, (uint8_t *)&sNvmRtcInfo, sizeof(NVM_RTC_INFO));
+#endif
 			}
 			else {
 				//第二次闹钟闹响，关闭闹钟
-				IsSecondAlarm = FALSE;
 				WiFiSetAt8563tAlarmTime(FALSE, NULL);
+				SetAt8563tSecondAlarm(FALSE);
 			}
 		}
 	}
@@ -257,14 +294,18 @@ void WiFiSetAt8563tAlarmTime(bool IsOnOff, RTC_DATE_TIME* AlarmTime)
 		IsSecondAlarm = FALSE;
 	}
 
-	if ((!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_ALARM_ADDR, &CurRtcTime[AT8563T_ALARM_ADDR], AT8563T_ALARM_LEN))
-	|| (!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &CurRtcTime[AT8563T_STATE_CONTROL_ADDR], 1))){
+	if (!I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_ALARM_ADDR, &CurRtcTime[AT8563T_ALARM_ADDR], AT8563T_ALARM_LEN)) {
 		APP_DBG("AT8563T alarm set fail!!!\n");
 	}
 
-	AlarmCmd = 0xff;
-	I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &AlarmCmd, 1);
-	APP_DBG("AT8563T alarm set: %d : %d!!!\n", IsOnOff, AlarmCmd);
+	do {
+		AlarmCmd = 0xff;
+		WaitMs(10);
+		I2cWriteNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &CurRtcTime[AT8563T_STATE_CONTROL_ADDR], 1);
+		I2cReadNByte(RtcI2cHandler, AT8563T_CHIP_ADDR, AT8563T_STATE_CONTROL_ADDR, &AlarmCmd, 1);
+	} while (AlarmCmd&0x03 != CurRtcTime[AT8563T_STATE_CONTROL_ADDR]);
+	
+	APP_DBG("AT8563T alarm set: %d : %d!!!\n", IsOnOff, AlarmCmd&0x03);
 }
 
 /*****************************************************************************
@@ -303,7 +344,13 @@ bool RtcAt8563tInit(void)
 				RtcAt8563tWriteParam();
 				RtcAt8563tReadParam();
 			}
+			
 			IsAt8563tInitOk = TRUE;
+			//闹钟唤醒开机。
+			if (RtcAt8563tAlarmCome()) {	
+				gSys.WakeUpSource = WAKEUP_FLAG_POR_RTC;
+				APP_DBG("AT8563T alarm wakeup system;\n");
+			}
 		}
 		else {
 			APP_DBG("Rtc AT8563T read erro!!!\n");

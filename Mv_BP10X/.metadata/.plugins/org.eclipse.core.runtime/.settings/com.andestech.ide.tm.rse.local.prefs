@@ -1,0 +1,6 @@
+connectType=ICE
+connectionTimeoutICE=15
+eclipse.preferences.version=1
+iceman.misc.args=-A -N reset-hold-script.tpl \u2013H
+recordExpand=[]
+targetURI=rse\://LOCALHOST/~target/Virtual-D1088-FPU

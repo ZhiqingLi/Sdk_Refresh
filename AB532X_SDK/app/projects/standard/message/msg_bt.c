@@ -113,6 +113,7 @@ void func_bt_message(u16 msg)
         break;
         
 	case KD_MODE:
+	case KD_MODE_POWER:
     	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 1)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {

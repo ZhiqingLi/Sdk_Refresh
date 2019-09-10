@@ -1,0 +1,117 @@
+11:55:04 **** 构建 of configuration Debug for project Demo_FreeRTOS ****
+make all 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"driver/driver_api/src/uarts_interface.d" -MT"driver/driver_api/src/uarts_interface.d driver/driver_api/src/uarts_interface.o" -o "driver/driver_api/src/uarts_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/croutine.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/croutine.d" -MT"middleware/rtos/freertos/src/croutine.d middleware/rtos/freertos/src/croutine.o" -o "middleware/rtos/freertos/src/croutine.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/croutine.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/croutine.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/event_groups.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/event_groups.d" -MT"middleware/rtos/freertos/src/event_groups.d middleware/rtos/freertos/src/event_groups.o" -o "middleware/rtos/freertos/src/event_groups.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/event_groups.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/event_groups.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/heap_5s.d" -MT"middleware/rtos/freertos/src/heap_5s.d middleware/rtos/freertos/src/heap_5s.o" -o "middleware/rtos/freertos/src/heap_5s.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/list.d" -MT"middleware/rtos/freertos/src/list.d middleware/rtos/freertos/src/list.o" -o "middleware/rtos/freertos/src/list.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/os_cpu_a.S
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/os_cpu_a.d" -MT"middleware/rtos/freertos/src/os_cpu_a.d middleware/rtos/freertos/src/os_cpu_a.o" -o "middleware/rtos/freertos/src/os_cpu_a.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/os_cpu_a.S"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/os_cpu_a.S
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/port.d" -MT"middleware/rtos/freertos/src/port.d middleware/rtos/freertos/src/port.o" -o "middleware/rtos/freertos/src/port.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/portISR.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/portISR.d" -MT"middleware/rtos/freertos/src/portISR.d middleware/rtos/freertos/src/portISR.o" -o "middleware/rtos/freertos/src/portISR.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/portISR.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/portISR.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/queue.d" -MT"middleware/rtos/freertos/src/queue.d middleware/rtos/freertos/src/queue.o" -o "middleware/rtos/freertos/src/queue.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/tasks.d" -MT"middleware/rtos/freertos/src/tasks.d middleware/rtos/freertos/src/tasks.o" -o "middleware/rtos/freertos/src/tasks.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/timers.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/freertos/src/timers.d" -MT"middleware/rtos/freertos/src/timers.d middleware/rtos/freertos/src/timers.o" -o "middleware/rtos/freertos/src/timers.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/timers.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/timers.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"middleware/rtos/rtos_api/rtos_api.d" -MT"middleware/rtos/rtos_api/rtos_api.d middleware/rtos/rtos_api/rtos_api.o" -o "middleware/rtos/rtos_api/rtos_api.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c
+ 
+正在构建文件： ../src/demo_freertos.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"src/demo_freertos.d" -MT"src/demo_freertos.d src/demo_freertos.o" -o "src/demo_freertos.o" "../src/demo_freertos.c"
+已结束构建： ../src/demo_freertos.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/crt0.d" -MT"startup/crt0.d startup/crt0.o" -o "startup/crt0.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/init-default.d" -MT"startup/init-default.d startup/init-default.o" -o "startup/init-default.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/interrupt.d" -MT"startup/interrupt.d startup/interrupt.o" -o "startup/interrupt.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/retarget.d" -MT"startup/retarget.d startup/retarget.o" -o "startup/retarget.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+ 
+正在构建目标： Demo_FreeRTOS.adx
+正在调用： Andes C Linker
+nds32le-elf-gcc -Og -nostartfiles -static -L"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver" -mcmodel=medium -ldsp -mext-dsp -T"../nds32-ae210p.ld" -Wl,--gc-sections -mvh -o "Demo_FreeRTOS.adx"  ./driver/driver_api/src/uarts_interface.o  ./middleware/rtos/freertos/src/croutine.o ./middleware/rtos/freertos/src/event_groups.o ./middleware/rtos/freertos/src/heap_5s.o ./middleware/rtos/freertos/src/list.o ./middleware/rtos/freertos/src/os_cpu_a.o ./middleware/rtos/freertos/src/port.o ./middleware/rtos/freertos/src/portISR.o ./middleware/rtos/freertos/src/queue.o ./middleware/rtos/freertos/src/tasks.o ./middleware/rtos/freertos/src/timers.o  ./middleware/rtos/rtos_api/rtos_api.o  ./src/demo_freertos.o  ./startup/crt0.o ./startup/init-default.o ./startup/interrupt.o ./startup/retarget.o   -lDriver
+已结束构建目标： Demo_FreeRTOS.adx
+ 
+正在调用： NM (symbol listing)
+nds32le-elf-nm -n -l -C "Demo_FreeRTOS.adx" > output/symbol.txt
+已结束构建： output/symbol.txt
+ 
+正在调用： Readelf (ELF info listing)
+nds32le-elf-readelf -a "Demo_FreeRTOS.adx" > output/readelf.txt
+已结束构建： output/readelf.txt
+ 
+正在调用： Objdump (disassembly)
+nds32le-elf-objdump -x -d -C "Demo_FreeRTOS.adx" > output/objdump.txt
+已结束构建： output/objdump.txt
+ 
+正在调用： Objcopy (object content copy)
+nds32le-elf-objcopy -S -O binary "Demo_FreeRTOS.adx" output/Demo_FreeRTOS.bin
+已结束构建： output/Demo_FreeRTOS.bin
+ 
+正在调用： Size (section size listing)
+nds32le-elf-size  "Demo_FreeRTOS.adx" | tee output/.PHONY.size
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  29098 (27350 +   1748)	    144	    872	  30114	   75a2	Demo_FreeRTOS.adx
+已结束构建： output/.PHONY.size
+ 
+
+11:55:31 Build Finished (took 26s.971ms)
+

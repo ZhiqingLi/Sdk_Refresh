@@ -1459,7 +1459,7 @@ static TIMER MuteSilenceDetTmr;
 
 bool GetSilenceMuteFlag(void)
 {
-	if((gSys.Volume == 0) || gSys.MuteFlag || !SysMuteDetStart)
+	if(gSys.MuteFlag || !SysMuteDetStart)
 	{
 		return TRUE;
 	}

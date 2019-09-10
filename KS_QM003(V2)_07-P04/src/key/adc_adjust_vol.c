@@ -16,11 +16,11 @@
 
 static const uint16_t AdcAdjustVolIndexVal[MAX_VOLUME+1] = 
 {
-	50,
-	356, 	651, 	935, 	1212, 	1475, 	1702, 	1915, 	2108,
+	5,
+	50, 	351, 	655, 	952, 	1275, 	1562, 	1885, 	2108,
 	2280, 	2437,	2555,	2657,	2727,	2787,	2845,	2897,
-	2950,	2991,	3032,	3066,	3099,	3105,	3139,	3180,
-	3209,	3229,	3250,	3282,	3325,	3366,	3385,	3400
+	2900,	2951,	3002,	3046,	3080,	3115,	3149,	3185,
+	3209,	3229,	3250,	3272,	3305,	3336,	3355,	3380
 };	
 
 uint32_t AdcAdjustSampleSum = 0; 
@@ -31,9 +31,9 @@ uint8_t GetAdcAdjustVolIndexVal(uint32_t AdcAdjustSampleVal)
 {
 	uint8_t KeyIndex = 0;
 
-	for (KeyIndex = 0; KeyIndex < MAX_VOLUME; KeyIndex++)
+	for (KeyIndex = MAX_VOLUME; KeyIndex > 0; KeyIndex--)
 	{
-	   if(AdcAdjustSampleVal <= AdcAdjustVolIndexVal[KeyIndex])
+	   if(AdcAdjustSampleVal >= AdcAdjustVolIndexVal[KeyIndex])
 	   {
 	   		break;
 	   }
@@ -64,10 +64,16 @@ void AdcAdjustVolScan(void)
 		AdcAdjustSampleCnt = ADC_ADJUST_VOL_SCAN_COUNT;
 		AdcAdjustSampleSum = 0;
 
+		if (VolumeIndex > gSys.Volume) {
+			AdcVolVal = abs(AdcAdjustVolIndexVal[gSys.Volume+1]-AdcAdjustVolIndexVal[gSys.Volume]);
+		}
+		else if (VolumeIndex <   gSys.Volume) {
+			AdcVolVal = abs(AdcAdjustVolIndexVal[gSys.Volume]-AdcAdjustVolIndexVal[gSys.Volume-1]);
+		}
+		
 		VolumeIndex = GetAdcAdjustVolIndexVal(AdcAdjustLevelAverage);
 		AverageVal = abs(AdcAdjustLevelAverage-PrevAverageValue);
-		AdcVolVal = abs(AdcAdjustVolIndexVal[VolumeIndex]-AdcAdjustVolIndexVal[gSys.Volume]);
-		
+
 		if(((AverageVal >= AdcVolVal) || !VolumeIndex)
 		&& (gSys.Volume != VolumeIndex) && !IS_RTC_WAKEUP())
 		{

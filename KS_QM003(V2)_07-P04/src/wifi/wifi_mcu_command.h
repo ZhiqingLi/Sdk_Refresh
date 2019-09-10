@@ -318,6 +318,8 @@ extern "C" {
 #define MCU_SLP_OFF  			0x1C08	//- MCU通知WIFI退出哄睡模式
 #define MCU_SLP_PWR				0x1C09	//- MCU通知WIFI哄睡完成关机
 #define MCU_POW_NNN				0x1C0A	//- MCU回复模块开机模式
+#define MCU_PLQ_PREV			0x1C0B	//- MCU通知WIFI切换上一个专辑
+#define MCU_PLQ_NEXT			0x1C0C	//- MCU通知WIFI切换下一个专辑
 
 #ifdef __cplusplus
 }

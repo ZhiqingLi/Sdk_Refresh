@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  28000 (25700 +   2300)	   5104	  16456	  49560	   c198	Example_SDIO.adx

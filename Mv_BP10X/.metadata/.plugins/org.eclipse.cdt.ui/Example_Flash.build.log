@@ -1,0 +1,103 @@
+11:58:54 **** 构建 of configuration Debug for project Example_Flash ****
+make all 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"driver/driver_api/src/uarts_interface.d" -MT"driver/driver_api/src/uarts_interface.d driver/driver_api/src/uarts_interface.o" -o "driver/driver_api/src/uarts_interface.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c
+ 
+正在构建文件： ../src/flash_example.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"src/flash_example.d" -MT"src/flash_example.d src/flash_example.o" -o "src/flash_example.o" "../src/flash_example.c"
+../src/flash_example.c: In function 'GetFlashGD':
+../src/flash_example.c:86:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n", FlashCapacity);
+         ^
+../src/flash_example.c:86:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashWinBound':
+../src/flash_example.c:135:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:135:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashPct':
+../src/flash_example.c:169:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:169:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashEon':
+../src/flash_example.c:234:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:234:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashBg':
+../src/flash_example.c:274:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:274:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashEsmt':
+../src/flash_example.c:319:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:319:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashPuya':
+../src/flash_example.c:349:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:349:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetFlashMD':
+../src/flash_example.c:379:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+         APP_DBG("0x%08X\r\n",FlashCapacity);
+         ^
+../src/flash_example.c:379:9: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'uint32_t' [-Wformat=]
+../src/flash_example.c: In function 'GetDidInfo':
+../src/flash_example.c:393:2: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'int32_t' [-Wformat=]
+  APP_DBG("%02X\r\n",protect);
+  ^
+../src/flash_example.c:393:2: warning: format '%X' expects argument of type 'unsigned int', but argument 2 has type 'int32_t' [-Wformat=]
+已结束构建： ../src/flash_example.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/crt0.d" -MT"startup/crt0.d startup/crt0.o" -o "startup/crt0.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/init-default.d" -MT"startup/init-default.d startup/init-default.o" -o "startup/init-default.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/interrupt.d" -MT"startup/interrupt.d startup/interrupt.o" -o "startup/interrupt.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c
+ 
+正在构建文件： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+正在调用： Andes C Compiler
+nds32le-elf-gcc -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc" -I"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/mv_utils/inc" -Og -mcmodel=medium -g3 -Wall -mcpu=d1088-spu -c -fmessage-length=0 -ldsp -mext-dsp -fsingle-precision-constant -ffunction-sections -fdata-sections -MMD -MP -MF"startup/retarget.d" -MT"startup/retarget.d startup/retarget.o" -o "startup/retarget.o" "/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c"
+已结束构建： /cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c
+ 
+正在构建目标： Example_Flash.adx
+正在调用： Andes C Linker
+nds32le-elf-gcc -Og -nostartfiles -static -L"/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver" -mcmodel=medium -ldsp -mext-dsp -T"../nds32-ae210p.ld" -Wl,--gc-sections -mvh -o "Example_Flash.adx"  ./driver/driver_api/src/uarts_interface.o  ./src/flash_example.o  ./startup/crt0.o ./startup/init-default.o ./startup/interrupt.o ./startup/retarget.o   -lDriver
+已结束构建目标： Example_Flash.adx
+ 
+正在调用： NM (symbol listing)
+nds32le-elf-nm -n -l -C "Example_Flash.adx" > output/symbol.txt
+已结束构建： output/symbol.txt
+ 
+正在调用： Readelf (ELF info listing)
+nds32le-elf-readelf -a "Example_Flash.adx" > output/readelf.txt
+已结束构建： output/readelf.txt
+ 
+正在调用： Objcopy (object content copy)
+nds32le-elf-objcopy -S -O binary "Example_Flash.adx" output/Example_Flash.bin
+已结束构建： output/Example_Flash.bin
+ 
+正在调用： Size (section size listing)
+nds32le-elf-size  "Example_Flash.adx" | tee output/.PHONY.size
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  26374 (23826 +   2548)	    136	   5752	  32262	   7e06	Example_Flash.adx
+已结束构建： output/.PHONY.size
+ 
+
+11:59:06 Build Finished (took 12s.274ms)
+

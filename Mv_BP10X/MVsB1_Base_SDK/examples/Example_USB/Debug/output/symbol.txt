@@ -1,0 +1,487 @@
+00000000 a EILM_BEGIN
+00000000 a NDS_SAG_LMA_EILM
+00000000 W _ITB_BASE_
+00000000 W _RELAX_END_	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 T _start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 t exception_vector	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+000000a4 t exception_vector_end	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:350
+000000a4 T stub	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:349
+00000104 t flash_udelay	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:607
+0000011e t flash_delayms	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:611
+00000138 t FshcGpioSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:613
+0000015a t FshcInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:618
+00000174 t FshcFlashBusyStatusSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:645
+0000018e t FshcSendCmd	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:648
+000001c2 t FshcSpiIOModeCfg	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:631
+000003f4 t SpiFlashResetCRM
+0000043c t SpiFlashHpmModeSet
+00000518 t SpiFlashReadId
+00000624 t SpiFlashReadStatus
+000006da t SpiFlashIsBusy
+00000708 t SpiFlashWriteStatus
+00000892 t SpiFlashIOModeCfg
+00000972 t SpiFlashDeepPowerDown
+000009ec t SpiFlashReleaseFromDeepPowerDown
+00000a58 t SpiFlashWriteLock
+00000be8 t Flash_GIE_DISABLE
+00000bf6 t Flash_GIE_ENABLE
+00000c00 T FshcClkSwitch
+00000c8a T SpiFlashResumDelaySet
+00000cfe T SpiFlashClkSwitch
+00000d12 T ByteRecombineToDword
+00000d2e t SpiFlashWriteUnLock
+00000ee8 T SpiFlashRead
+000010ba T SpiFlashEraseResume
+00001120 T SpiFlashWrite
+0000146e T SpiFlashGetStatus
+000014a6 T SpiFlashFshcStatusSetIdle
+000014f6 T SpiFlashResume
+00001538 T SpiFlashErase
+00001660 T FlashErase
+00001724 T SpiFlashInit
+000017f2 T SpiFlashInfoGet
+000017f8 T SpiFlashIOCtrl
+000018c8 r SpiFlash
+00001a8c t ISR_TABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:52
+00001b08 t OS_Trap_TLB_Fill	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:94
+00001b18 t OS_Trap_PTE_Not_Present	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:103
+00001b28 t OS_Trap_TLB_Misc	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:111
+00001b38 t OS_Trap_TLB_VLPT_Miss	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:120
+00001b48 t OS_Trap_Machine_Error	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:128
+00001b58 t OS_Trap_Debug_Related	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:136
+00001b68 t OS_Trap_General_Exception	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:144
+00001b78 t OS_Trap_Syscall	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:152
+00001b88 t OS_Trap_Int_Comm	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:159
+00001c72 t OS_Trap_Interrupt_HW0	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:169
+00001c7c t OS_Trap_Interrupt_HW1	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:174
+00001c86 t OS_Trap_Interrupt_HW2	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:179
+00001c90 t OS_Trap_Interrupt_HW3	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:184
+00001c9a t OS_Trap_Interrupt_HW4	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:189
+00001ca4 t OS_Trap_Interrupt_HW5	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:200
+00001cca t OS_Trap_Interrupt_HW6	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:205
+00001cd4 t OS_Trap_Interrupt_HW7	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:210
+00001cde t OS_Trap_Interrupt_HW8	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:215
+00001ce8 t OS_Trap_Interrupt_HW9	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:220
+00001cf2 t OS_Trap_Interrupt_HW10	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:225
+00001cfc t OS_Trap_Interrupt_HW11	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:230
+00001d06 t OS_Trap_Interrupt_HW12	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:235
+00001d10 t OS_Trap_Interrupt_HW13	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:240
+00001d1a t OS_Trap_Interrupt_HW14	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:245
+00001d24 t OS_Trap_Interrupt_HW15	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:250
+00001d2e t OS_Trap_Interrupt_HW16	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:255
+00001d38 t OS_Trap_Interrupt_HW17	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:260
+00001d42 t OS_Trap_Interrupt_HW18	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:265
+00001d4c t OS_Trap_Interrupt_HW19	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:270
+00001d56 t OS_Trap_Interrupt_HW20	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:275
+00001d60 t OS_Trap_Interrupt_HW21	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:280
+00001d6a t OS_Trap_Interrupt_HW22	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:285
+00001d74 t OS_Trap_Interrupt_HW23	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:290
+00001d7e t OS_Trap_Interrupt_HW24	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:295
+00001d88 t OS_Trap_Interrupt_HW25	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:300
+00001d92 t OS_Trap_Interrupt_HW26	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:305
+00001d9c t OS_Trap_Interrupt_HW27	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:310
+00001da6 t OS_Trap_Interrupt_HW28	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:315
+00001db0 t OS_Trap_Interrupt_HW29	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:320
+00001dba t OS_Trap_Interrupt_HW30	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:325
+00001dc4 t OS_Trap_Interrupt_HW31	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:330
+00001dd0 t ___start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:350
+00001e20 T Clock_DeepSleepSysClkSelect
+00001f24 T Clock_CoreClkDivSet
+00001f3c T Clock_CoreClkDivGet
+00001f46 T Clock_SysClkDivGet
+00001f64 T Clock_PllFreqGet
+00001f6a T Clock_APllFreqGet
+00001f70 T Clock_CoreClockFreqGet
+00001fdc T Clock_SysClockFreqGet
+00002012 T Clock_SysClkDivSet
+0000206c T GPIO_RegOneBitSet
+0000207c T GPIO_RegOneBitClear
+00002090 T __udelay
+000020e2 T DelayMs
+00002138 T DMA0_Interrupt
+000021b8 T DMA1_Interrupt
+00002252 T DMA2_Interrupt
+000022ec T DMA3_Interrupt
+00002386 T DMA4_Interrupt
+00002420 T DMA5_Interrupt
+000024ba T DMA6_Interrupt
+00002554 T DMA7_Interrupt
+000025ee T GetSysTick1MsCnt
+000025f4 T PastTimeGet
+00002608 T TimeOutSet
+00002628 T IsTimeOut
+000026de W UART1_Interrupt
+00002764 T AudioADC_DigitalInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:35
+00002936 T AudioADC_DataGet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:159
+00002998 T AudioDAC_Init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c:14
+00002bec T AudioDAC_DataSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c:248
+00002c1a T CardPortInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:59
+00002d42 T SDCard_ControllerInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:108
+00002d6a T SDIO_CmdSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:131
+00002db8 t SDCard_SendAppCommand	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:161
+00002df4 T SDCard_Detect	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:180
+00002e96 T SDCard_Identify	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:219
+0000314e T SDCard_Init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:387
+000031a2 T SDCard_CapacityGet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:663
+000031a8 T SwUartDelay	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:106
+000031e8 T SwUartSendByte	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:138
+000032a4 T SwUartSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:198
+000032c0 T UART0_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:31
+000032d2 T UART1_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:36
+000032e4 T UART0_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:90
+000032f6 T UART1_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:103
+00003308 T OTG_DeviceModeSel	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:68
+0000335a T OTG_DeviceSendResp	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:137
+00003378 T OTG_DeviceGetDescriptor	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:148
+00003504 T OTG_DeviceStandardRequest	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:260
+0000363c T OTG_DeviceOtherRequest	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:491
+00003650 T hid_send_data	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:604
+0000366c T OTG_DeviceClassRequest	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:388
+000036d0 T OTG_DeviceRequestProcess	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:507
+0000377c T DeviceStorIsCardLink	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:181
+00003780 T DeviceStorSendCSW	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:208
+000037a4 T DeviceStorReadFmtCapacity	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:219
+00003810 T DeviceStorReadCapacity	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:244
+00003888 T DeviceStorRead10	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:267
+00003a38 T DeviceStorWrite10	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:345
+00003bf8 T DeviceStorModeSense	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:430
+00003cbc T OTG_DeviceStorProcess	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:522
+00003f40 T UsbAudioMicDacInit	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/audio_api.c:31
+00003fd4 T SpeakerMuteGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:182
+00003fda T MicMuteGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:292
+00003fe0 T SpeakerSampleRateGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:153
+00003ff4 T SpeakerSampleRateSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:162
+00004034 T SpeakerMuteSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:187
+00004052 T SpeakerLeftVolumeGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:205
+0000407a T SpeakerRightVolumeGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:218
+000040a2 T SpeakerLeftVolumeSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:231
+000040fe T SpeakerRigthVolumeSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:248
+0000415a T MicSampleRateGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:265
+0000416e T MicSampleRateSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:274
+000041ae T MicMuteSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:297
+000041cc T MicLeftVolumeGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:315
+000041f4 T MicRightVolumeGet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:343
+0000421c T MicLeftVolumeSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:328
+00004258 T MicRigthVolumeSet	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:356
+00004294 T OnDeviceAudioRcvIsoPacket	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:113
+000042c2 T OnDeviceAudioSendIsoPacket	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:140
+000042ec T OTG_DeviceAudioInit	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:372
+000043a4 T OTG_DeviceAudioRequest	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:405
+0000462c T usb_device_example	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:153
+00004696 T main	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:184
+0000478a T UsbAudioTimer1msProcess	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:247
+00004822 T Timer2Interrupt	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:49
+00004840 W BLE_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W BT_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 t Default_Handler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:47
+00004840 W FFTInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W GpioInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W I2C_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W I2sInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W IRInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W OS_Trap_Interrupt_SWI	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W RtcInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W SDIO0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W SPIM_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W SPIS_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W SWInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W SpdifInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W Timer3Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W Timer4Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W Timer5Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W Timer6Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W UART0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004840 W WakeupInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00004842 T ExceptionCommHandler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:53
+00004a6a T __c_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:186
+00004a9e T __cpu_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:213
+00004b40 T HardwareStackProtectEnable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:316
+00004b66 T __init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:336
+00004b88 T GIE_ENABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:16
+00004b92 T GIE_DISABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:21
+00004ba0 T GIE_STATE_GET	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:27
+00004ba8 T NVIC_EnableIRQ	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:70
+00004bc0 T putchar	/cygdrive/c/Andestech/AndeSight300RDS/toolchains/nds32le-elf-mculib-v3s/nds32le-elf/include/stdio.h:212
+00004c30 T nds_write	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:61
+00004c50 T DbgUartInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:70
+00004c74 T AudioADC_LREnable
+00004d76 T AudioADC_Enable
+00004d94 T AudioADC_Disable
+00004dde T AudioADC_HighPassFilterConfig
+00004df2 T AudioADC_HighPassFilterSet
+00004e28 T AudioADC_Clear
+00004e3e T AudioADC_SampleRateGet
+00004ec2 T AudioADC_SampleRateSet
+00004ff8 T AudioADC_FadeTimeSet
+00005054 T AudioADC_FadeEnable
+0000508a T AudioADC_SoftMute
+00005116 T AudioADC_VolSet
+00005174 T AudioADC_VolGet
+000051a6 T AudioADC_VolSetChannel
+0000521c T AudioADC_AnaInit
+0000525c T AudioADC_PGASel
+00005424 T AudioADC_PGAGainSet
+00005590 T AudioADC_MicBias1Enable
+000055a6 T AudioADC_VcomConfig
+000055ca T AudioADC_DynamicElementMatch
+0000562a T AudioADC_IsOverflow
+00005642 T AudioADC_OverflowClear
+00005664 T Chip_VMIDDetectDisable
+00005676 T Chip_Init
+0000570c T Chip_MemInit
+00005718 T Clock_Config
+00005788 T WaitOscillateWork
+000057a2 T Clock_USBClkDivSet
+000057b4 T Clock_RcFreqGet
+0000585a T Clock_PllLock
+00005974 T Clock_APllLock
+00005a8e T Clock_SysClkSelect
+00005b1c T Clock_USBClkSelect
+00005b48 T Clock_UARTClkSelect
+00005ba0 T Clock_Timer3ClkSelect
+00005bca T Clock_Module1Enable
+00005bda T Clock_Module2Enable
+00005bea T Clock_Module3Enable
+00005bfa T Clock_AudioPllClockSet
+00005d8e T Clock_AudioMclkSel
+00005e66 T EnableMPU
+00005ec8 T EnableIDCache
+00005f0a T DataCacheInvalidAll
+00005f14 T DataCacheRangeInvalid
+00005f7a t AudioDAC0_ChannelEnable
+00005fe2 t AudioDAC1_ChannelEnable
+00006026 T AudioDAC_Enable
+00006044 T AudioDAC_DitherDisable
+00006062 T AudioDAC_ScrambleDisable
+00006080 T AudioDAC_DoutModeSet
+000060c0 T AudioDAC_EdgeSet
+00006106 T AudioDAC_DsmOutdisModeSet
+00006134 T AudioDAC_ZeroNumSet
+00006148 T AudioDAC_SampleRateGet
+000061cc T AudioDAC_SampleRateSet
+00006312 T AudioDAC_Reset
+00006334 T AudioDAC_FadeTimeSet
+0000639c T AudioDAC_FadeEnable
+000063ce T AudioDAC_SoftMute
+0000643a T AudioDAC_VolSet
+00006480 T AudioDAC_VolGet
+000064aa T AudioDAC_VmidChargeOp
+000064e0 t AudioDAC0_PowerOn
+000065dc t AudioDAC1_PowerOn
+00006690 T AudioDAC_ClkEnable
+000066be T AudioDAC_FuncReset
+000066ec T AudioDAC_VIMDControl
+000066fe T AudioDAC_SCFMute
+00006744 T AudioDAC_IBSelect
+0000678e T AudioDAC_AllPowerOn
+000068b2 T AudioDAC_AllChannelEnable
+0000693e T AudioDAC_PowerOn
+00006960 T AudioDAC_ChannelEnable
+0000697e T DMA_ChannelAllocTableSet
+00006990 T DMA_ChannelEnable
+000069bc T DMA_ChannelDisable
+000069ea T DMA_InterruptFlagGet
+00006a3e T DMA_InterruptFlagClear
+00006ae4 T DMA_BlockConfig
+00006c82 T DMA_BlockBufSet
+00006d64 T DMA_CircularConfig
+00006f48 T DMA_CircularDataLenGet
+00006fba T DMA_CircularSpaceLenGet
+0000709a T DMA_CircularWritePtrSet
+000070ce T DMA_CircularDataPut
+00007238 T DMA_CircularReadPtrSet
+0000726a T DMA_CircularDataGet
+00007410 T Efuse_ReadData
+00007476 T GPIO_PortAModeSet
+00008100 T OTG_PortGetDP
+0000810e T OTG_PortGetDM
+0000811c T OTG_PortEnableDPPullUp
+00008142 T OTG_PortDisableDPPullUp
+00008168 T OTG_PortIsEnableDPPullUp
+00008178 T OTG_PortEnablePullDown
+0000819e T OTG_PortDisablePullDown
+000081c4 T OTG_PortIsEnablePullDown
+000081d0 T OTG_PortEnablePullUp500K
+000081f6 T OTG_PortDisablePullUp500K
+0000821c T OTG_PortSetSpeed
+00008242 T OTG_PortLinkCheck
+00008466 t OTG_DeviceWaitEnd
+000084dc T OTG_DeviceStallSend
+0000853a T OTG_DeviceEndpointReset
+000085ee T OTG_DeviceAddressSet
+00008628 T OTG_DeviceInit
+000086aa T OTG_DeviceBusEventGet
+000086b4 T OTG_DeviceControlSend
+0000870e T OTG_DeviceControlReceive
+00008786 T OTG_DeviceSetupReceive
+000087dc T OTG_DeviceBulkSend
+0000883c T OTG_DeviceBulkReceive
+000088de T OTG_DeviceISOSend
+00008916 T OTG_DeviceISOReceive
+00008960 T UsbInterrupt
+000089bc T OTG_EndpointInterruptEnable
+000089f0 T LoadFIFOData
+00008a56 T UnloadFIFOData
+00008abc T Remap_AddrRemapSet
+00008b56 T Remap_InitTcm
+00008b86 T Reset_FunctionReset
+00008b9a T SDIO_ByteModeEnable
+00008bac T SDIO_SysToSdioDivSet
+00008bce T SDIO_ClkSet
+00008be8 T SDIO_ClkEnable
+00008c12 T SDIO_ClkDisable
+00008c3c T SDIO_Init
+00008c78 T SDIO_CmdStart
+00008d3a T SDIO_CmdIsDone
+00008d46 T SDIO_CmdStop
+00008d58 T SDIO_CmdRespGet
+00008df2 T SDIO_ClearClkHalt
+00008e10 T SDIO_SingleBlockConfig
+00008e80 T SDIO_DataTransfer
+00008e9c T SDIO_DataIsDone
+00008eaa T SDIO_IsDataLineBusy
+00008ebc T SysTickInit
+00008ee6 W SystickInterrupt
+00008efe T ClockFreqGet
+00008f2c T Timer_Config
+000090c4 T Timer_Start
+0000913c T Timer_InterruptFlagClear
+000091f0 t UART_BaudClkGet
+00009246 T UART0_Init
+00009406 T UART1_Init
+000095c6 T UART0_SendByte
+00009606 T UART1_SendByte
+00009646 T WDG_Disable
+0000966c T __divdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:451
+000096ac t fudiv_qrnnd	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:961
+00009704 T __udivmoddi4	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:1152
+0000985c T memcmp
+00009894 T memcpy
+000098c0 T memset
+000098f0 T printf
+000098fa T puts
+0000994a t vprintf_help
+0000997e T vprintf
+000099cc T do_printf
+00009e74 t sep_frac
+00009ea6 T _printf_float
+0000a578 T strcpy
+0000a58c T strlen
+0000a598 T abs
+0000a5a0 T _write
+0000a5b8 T __lshrdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:403
+0000a5e0 T __ashldi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:431
+0000a8d8 R DeviceString_LangID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:54
+0000a8dc R DeviceQualifier	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:47
+0000a8e8 R InterFaceNum_AUDIO_HID_KEY	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:360
+0000a8f0 R ConfigDescriptor_AUDIO_HID_KEY	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:328
+0000a99c R InterFaceNum_READER_AUDIO_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:325
+0000a9a4 R ConfigDescriptor_READER_AUDIO_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:277
+0000aab8 R InterFaceNum_AUDIO_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:271
+0000aac0 R ConfigDescriptor_AUDIO_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:228
+0000abbc R InterFaceNum_READER_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:223
+0000abc4 R ConfigDescriptor_READER_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:209
+0000abf8 R InterFaceNum_READER_ADUIO	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:205
+0000ac00 R ConfigDescriptor_READER_ADUIO	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:163
+0000ad00 R InterFaceNum_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:159
+0000ad08 R ConfigDescriptor_HID	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:150
+0000ad24 R InterFaceNum_AUDIO_ONLY_MIC	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:146
+0000ad2c R ConfigDescriptor_AUDIO_ONLY_MIC	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:90
+0000adb8 R InterFaceNum_AUDIO	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:88
+0000adc0 R ConfigDescriptor_AUDIO	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:49
+0000aea8 R InterFaceNum_READER	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:45
+0000aeb0 R ConfigDescriptor_READER	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:35
+0000aed0 R HidDataReportDescriptor	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:362
+0000aef4 R AudioCtrlReportDescriptor	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:386
+0000af48 R gRequestSenseReady	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:139
+0000af5c R gRequestSenseNotReady	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:132
+0000af70 R gModeSenseProtectPage	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:118
+0000b100 R SilentData	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:237
+0000b4cc R MPUConfigTable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:379
+0000b73c R CmdRespType
+0000b7e0 A __data_lmastart
+0000bc98 A EILM_SIZE
+20004000 D UARTS_SendByte_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:255
+20004000 D __data_start
+20004000 A _stack
+20004008 D UARTS_Init_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:251
+20004010 D gDeviceString_SerialNumber	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:64
+20004014 D gDeviceString_Manu	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:63
+20004018 D gDeviceProductString	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:62
+2000401c D InterFaceNumTab	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:437
+20004040 D ConfigDescriptorTab	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:424
+20004064 D DeviceDescriptor	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_descriptor.h:9
+20004078 D gCSW	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:148
+20004088 D gModeSenseAllPage	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:120
+20004094 D gCapacityData	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:108
+2000409c D gFmtCapacityData	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:98
+200040a8 D gInquiryData	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:83
+200040cc D IsUsbAudioMode	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:235
+200040d0 d DmaChannelMap	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/usb_example.c:58
+200040f0 D IsApllFreeRun
+200040f1 D IsDpllFreeRun
+200040f4 D rc_clk_freq
+200040f8 D gSOCInFreq
+200040fc D gAPLLWorkFreq
+20004100 D gPLLWorkFreq
+20004104 D DMAEintTable
+20004124 D DMATintTable
+20004144 D DMADintTable
+20004164 d DMAConfigTable
+20004490 d DMAChannelAllocMap
+200044b0 D OtgPortDeviceEnable
+200044b1 D OtgPortHostEnable
+200044b2 D OtgPortDeviceSofTimeOut
+200044b4 D OtgPortLinkState
+200044b8 S DeviceStorStoppedFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:153
+200044b8 S __bss_start
+200044b8 S _edata
+200044b9 S DeviceStorIsCardInitOK	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:162
+200044ba S DeviceStorPreventFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:150
+200044bb S DeviceStorCmdFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:154
+200044bc S OtgPortDeviceDetectTime
+200044be S OtgPortLinkHoldTime
+200044c0 S OutRegAddr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:26
+200044c4 S DelayLoops	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:26
+200044c8 S OutRegBitMsk	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sw_uart.c:26
+200044cc S InterfaceNum	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:61
+200044d0 S gDeviceString_Index	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:65
+200044d4 S hid_send	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:36
+200044d8 S Setup	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:56
+200044e0 S ConfigDescriptor	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:60
+200044e8 b sReaderState	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:164
+200044ec B AudioDACBuf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/audio_api.c:29
+200054ec B AudioADC0Buf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/audio_api.c:27
+20005700 W _FP_BASE_
+20005700 W _SDA_BASE_
+200064ec B AudioMicMuteFlag	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:151
+200064ed B AudioMuteFlag	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:150
+200064f0 b FramCount.5092
+200064f4 b IsUsbAduioInitFlag.5093
+200064f5 B IsSwUartActedAsUARTFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:16
+200064f6 B DebugPrintPort	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:13
+200064f7 b sIsDac1InitOK
+200064f8 b sIsDac0InitOK
+200064f9 B OtgPortDetectPause
+200064fa B gIsUsbRemove_USB1
+200064fb B UsbIntEn
+200064fc b SpiFlashInfo
+20006510 B gSysTick
+20006514 b output_idx
+20006518 b output_buff
+2000651c B _NDS32_REENT__errno
+20006520 B SDCardId	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:58
+20006534 B SDCard	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:57
+20006540 B Request	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:57
+20006640 B hid_tx_buf	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_standard_request.c:40
+20006740 B CARD_BUF_A	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:79
+20006940 B DeviceStorCmdTimer	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:155
+2000694c B gCBW	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:146
+2000698c B DeviceStorPreventTimer	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:151
+20006998 B CARD_BUF_B	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/device/otg_device_stor.c:80
+20006b98 B UsbAudioSpeaker	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:40
+20006bc0 B iso_adc_buf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:44
+20006cc0 B UsbAudioMic	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:41
+20006ce8 B iso_dac_buf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Example_USB/Debug/../src/otg_device_audio.c:43
+20006de8 B FpUsbIntProcess
+20006e00 B _end

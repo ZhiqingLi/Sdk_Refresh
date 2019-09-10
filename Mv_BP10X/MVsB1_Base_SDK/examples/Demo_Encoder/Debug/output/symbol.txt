@@ -1,0 +1,592 @@
+         U CtxSave
+00000000 a EILM_BEGIN
+00000000 a NDS_SAG_LMA_EILM
+00000000 W _ITB_BASE_
+00000000 W _RELAX_END_	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 T _start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+00000000 t exception_vector	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:19
+000000a4 t exception_vector_end	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:350
+000000a4 T stub	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:349
+00000104 t flash_udelay	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4331
+0000011e t flash_delayms	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4336
+00000138 t FshcGpioSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4340
+0000015a t FshcInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4343
+00000174 t FshcFlashBusyStatusSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4347
+0000018e t FshcSendCmd	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4356
+000001c2 t FshcSpiIOModeCfg	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4360
+000003f4 t SpiFlashResetCRM
+0000043c t SpiFlashHpmModeSet
+00000518 t SpiFlashReadId
+00000624 t SpiFlashReadStatus
+000006da t SpiFlashIsBusy
+00000708 t SpiFlashWriteStatus
+00000892 t SpiFlashIOModeCfg
+00000972 t SpiFlashDeepPowerDown
+000009ec t SpiFlashReleaseFromDeepPowerDown
+00000a58 t SpiFlashWriteLock
+00000be8 t Flash_GIE_DISABLE
+00000bf6 t Flash_GIE_ENABLE
+00000c00 T FshcClkSwitch
+00000c8a T SpiFlashResumDelaySet
+00000cfe T SpiFlashClkSwitch
+00000d12 T ByteRecombineToDword
+00000d2e t SpiFlashWriteUnLock
+00000ee8 T SpiFlashRead
+000010ba T SpiFlashEraseResume
+00001120 T SpiFlashWrite
+0000146e T SpiFlashGetStatus
+000014a6 T SpiFlashFshcStatusSetIdle
+000014f6 T SpiFlashResume
+00001538 T SpiFlashErase
+00001660 T FlashErase
+00001724 T SpiFlashInit
+000017f2 T SpiFlashInfoGet
+000017f8 T SpiFlashIOCtrl
+000018c8 r SpiFlash
+00001a8c T OS_Trap_Interrupt_SWI	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/os_cpu_a.S:94
+00001bd0 t ISR_TABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:52
+00001c4c t OS_Trap_TLB_Fill	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:94
+00001c5c t OS_Trap_PTE_Not_Present	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:103
+00001c6c t OS_Trap_TLB_Misc	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:111
+00001c7c t OS_Trap_TLB_VLPT_Miss	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:120
+00001c8c t OS_Trap_Machine_Error	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:128
+00001c9c t OS_Trap_Debug_Related	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:136
+00001cac t OS_Trap_General_Exception	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:144
+00001cbc t OS_Trap_Syscall	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:152
+00001ccc t OS_Trap_Int_Comm	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:159
+00001db6 t OS_Trap_Interrupt_HW0	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:169
+00001dc0 t OS_Trap_Interrupt_HW1	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:174
+00001dca t OS_Trap_Interrupt_HW2	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:179
+00001dd4 t OS_Trap_Interrupt_HW3	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:184
+00001dde t OS_Trap_Interrupt_HW4	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:189
+00001de8 t OS_Trap_Interrupt_HW5	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:200
+00001e0e t OS_Trap_Interrupt_HW6	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:205
+00001e18 t OS_Trap_Interrupt_HW7	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:210
+00001e22 t OS_Trap_Interrupt_HW8	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:215
+00001e2c t OS_Trap_Interrupt_HW9	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:220
+00001e36 t OS_Trap_Interrupt_HW10	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:225
+00001e40 t OS_Trap_Interrupt_HW11	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:230
+00001e4a t OS_Trap_Interrupt_HW12	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:235
+00001e54 t OS_Trap_Interrupt_HW13	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:240
+00001e5e t OS_Trap_Interrupt_HW14	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:245
+00001e68 t OS_Trap_Interrupt_HW15	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:250
+00001e72 t OS_Trap_Interrupt_HW16	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:255
+00001e7c t OS_Trap_Interrupt_HW17	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:260
+00001e86 t OS_Trap_Interrupt_HW18	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:265
+00001e90 t OS_Trap_Interrupt_HW19	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:270
+00001e9a t OS_Trap_Interrupt_HW20	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:275
+00001ea4 t OS_Trap_Interrupt_HW21	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:280
+00001eae t OS_Trap_Interrupt_HW22	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:285
+00001eb8 t OS_Trap_Interrupt_HW23	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:290
+00001ec2 t OS_Trap_Interrupt_HW24	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:295
+00001ecc t OS_Trap_Interrupt_HW25	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:300
+00001ed6 t OS_Trap_Interrupt_HW26	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:305
+00001ee0 t OS_Trap_Interrupt_HW27	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:310
+00001eea t OS_Trap_Interrupt_HW28	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:315
+00001ef4 t OS_Trap_Interrupt_HW29	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:320
+00001efe t OS_Trap_Interrupt_HW30	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:325
+00001f08 t OS_Trap_Interrupt_HW31	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:330
+00001f14 t ___start	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/crt0.S:350
+00001f64 T Clock_DeepSleepSysClkSelect
+00002068 T Clock_CoreClkDivSet
+00002080 T Clock_CoreClkDivGet
+0000208a T Clock_SysClkDivGet
+000020a8 T Clock_PllFreqGet
+000020ae T Clock_APllFreqGet
+000020b4 T Clock_CoreClockFreqGet
+00002120 T Clock_SysClockFreqGet
+00002156 T Clock_SysClkDivSet
+000021b0 T GPIO_RegOneBitSet
+000021c0 T GPIO_RegOneBitClear
+000021d4 T __udelay
+00002226 T DelayMs
+0000227c T SystickInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/portISR.c:100
+000022ac T DMA0_Interrupt
+0000232c T DMA1_Interrupt
+000023c6 T DMA2_Interrupt
+00002460 T DMA3_Interrupt
+000024fa T DMA4_Interrupt
+00002594 T DMA5_Interrupt
+0000262e T DMA6_Interrupt
+000026c8 T DMA7_Interrupt
+00002762 T GetSysTick1MsCnt
+00002768 T PastTimeGet
+0000277c T TimeOutSet
+0000279c T IsTimeOut
+00002852 W UART1_Interrupt
+000028d8 T AudioADC_DigitalInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:35
+00002aaa T AudioADC_DataLenGet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:141
+00002ad6 T AudioADC_DataGet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/adc_interface.c:159
+00002b38 T AudioDAC_Init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c:14
+00002d8c T AudioDAC_DataSet	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/dac_interface.c:248
+00002dba T SDCard_ControllerInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:108
+00002df2 T SDIO_CmdSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:131
+00002e44 t SDCard_SendAppCommand	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:161
+00002e80 T SDCard_Detect	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:180
+00002f22 T SDCard_Identify	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:219
+000031da T SDCard_Init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:387
+00003258 T SDCard_ReadBlock	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:430
+00003444 T SDCard_WriteBlock	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:536
+0000368c T UART0_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:31
+0000369e T UART1_InitWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:36
+000036b0 T UART0_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:90
+000036de T UART1_SendByteWpr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:103
+0000370c T UDiskDiscardPackets	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:89
+00003754 T UDiskBulkTransport	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:117
+000037f6 T UDiskReadBlock	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:340
+0000397c T UDiskWriteBlock	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:438
+00003a10 T mv_mopen	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:112
+00003a20 T mv_mread	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:140
+00003afa T mv_mwrite	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:214
+00003b8c T mv_msize	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:276
+00003ba0 T mv_mremain	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:283
+00003bbe T disk_status	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:27
+00003bca T disk_initialize	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:63
+00003bd6 T disk_read	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:91
+00003c18 T disk_write	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:133
+00003c56 T disk_ioctl	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:174
+00003c62 T get_fattime	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/diskio.c:206
+00003c68 t ld_word	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:569
+00003c74 t ld_dword	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:579
+00003c90 t ld_qword	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:592
+00003d16 t st_word	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:610
+00003d1e t st_dword	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:617
+00003d32 t st_qword	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:627
+00003d6c t mem_cpy	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:649
+00003d7c t mem_set	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:664
+00003d86 t chk_chr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:690
+00003d98 t dbc_1st	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:699
+00003db6 t dbc_2nd	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:720
+00003de4 t ld_clust	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1839
+00003e18 t st_clust	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1857
+00003e46 t pick_lfn	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1913
+00003ece t put_lfn	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1951
+00003f46 t gen_numname	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1989
+00003ff2 t sum_sfn	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2048
+0000400e t xdir_sum	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2071
+00004040 t init_alloc_info	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2227
+00004076 t get_ldnumber	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3144
+000040ca t sync_window	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1033
+00004126 t validate	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3464
+0000416c t xname_sum	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2093
+000041ae t create_xdir	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2307
+0000423c t cmp_lfn	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1877
+000042e4 t tchar2uni	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:745
+00004332 t create_name	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2857
+000045e8 t sync_fs	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1088
+0000467e T mem_cmp	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:675
+00004696 T move_window	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1056
+000046d4 t get_fat	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1144
+00004864 t check_fs	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3205
+000048fa t find_bitmap	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1288
+00004990 t change_bitmap	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1329
+00004a14 t put_fat	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1222
+00004b74 t fill_last_frag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1390
+00004ba6 t create_chain	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1511
+00004d76 t fill_first_frag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1366
+00004dae t remove_chain	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1416
+00004eea T clst2sect	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1126
+00004f08 t find_volume	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3238
+00005352 t dir_clear	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1646
+000053ae t dir_next	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1735
+000054a6 t load_xdir	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2175
+000055a4 t dir_read	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2354
+000056ac T dir_sdi	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1686
+00005780 t load_obj_xdir	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2245
+000057c2 t dir_find	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2433
+00005942 t follow_path	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3055
+00005a88 t dir_alloc	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:1796
+00005af6 t store_xdir	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2274
+00005b6c t dir_register	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:2515
+00005dac T f_mount	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3508
+00005e00 T f_open	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3556
+000060c8 T f_write	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3846
+00006308 T f_sync	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:3967
+00006462 T f_close	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:4048
+00006486 T ff_uni2oem	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ffunicode.c:15304
+000064e4 T ff_oem2uni	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ffunicode.c:15342
+00006530 T ff_wtoupper	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ffunicode.c:15495
+0000660c t prvInsertBlockIntoFreeList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:750
+00006652 T pvPortMalloc	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:170
+00006716 T vPortFree	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:474
+00006780 T vPortDefineHeapRegions	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:811
+0000685c T GetIPSR	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:911
+00006870 T GetCurrentTaskHandle	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:924
+0000688c T DeleteTaskMallocMem	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:934
+000068c4 T vListInitialise	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c:75
+000068d8 T vListInitialiseItem	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c:95
+000068de T vListInsertEnd	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c:102
+000068f6 T vListInsert	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c:121
+00006924 T uxListRemove	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/list.c:179
+00006946 T CtxRestore	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/os_cpu_a.S:70
+000069c4 T vPortEndScheduler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:242
+000069e0 T pxPortInitialiseStack	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:145
+00006a9c T xPortStartScheduler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:227
+00006ab4 T vPortYield	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:254
+00006ac2 T vPortEnterCritical	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:264
+00006af0 T vPortExitCritical	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:281
+00006b1a T ulPortSetInterruptMask	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:293
+00006b2e T vPortClearInterruptMask	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:314
+00006b38 W vPortISRStartFirstTask	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/portISR.c:80
+00006b4a t prvIsQueueFull	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1840
+00006b70 t prvIsQueueEmpty	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1801
+00006b92 t prvCopyDataToQueue	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1594
+00006c14 t prvCopyDataFromQueue	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1664
+00006c42 t prvUnlockQueue	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1686
+00006cb8 T xQueueGenericSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:593
+00006e12 T xQueueCreateMutex	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:376
+00006e7e T xQueueGenericReceive	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/queue.c:1169
+00006fe6 t prvTaskCheckFreeStackSpace	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3027
+00006ffc t prvListTaskWithinSingleList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2942
+0000708a t prvResetNextTaskUnblockTime	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3091
+000070b2 t prvDeleteTCB	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3075
+000070cc t prvAllocateTCBAndStack	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2903
+00007112 t prvInitialiseTCBVariables	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2692
+0000716e t prvInitialiseTaskLists	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2800
+000071bc t prvAddCurrentTaskToDelayedList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2873
+00007202 T xTaskGenericCreate	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:516
+0000730e T vTaskDelete	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:696
+0000738e T vTaskStartScheduler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1447
+000073ea T vTaskSuspendAll	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1536
+000073f6 T uxTaskGetNumberOfTasks	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1713
+000073fc T xTaskIncrementTick	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1842
+0000750e T xTaskResumeAll	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1574
+000075e0 T vTaskDelay	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:870
+0000762a t prvCheckTasksWaitingTermination	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2832
+00007678 t prvIdleTask	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2545
+00007696 T uxTaskGetSystemState	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:1738
+00007714 T vTaskSwitchContext	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2106
+000077b2 T vTaskPlaceOnEventList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2164
+000077ec T xTaskRemoveFromEventList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2334
+0000786a T vTaskSetTimeOutState	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2433
+0000788e T xTaskCheckForTimeOut	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2441
+000078f8 T vTaskMissedYield	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:2490
+00007900 T xTaskGetCurrentTaskHandle	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3118
+00007906 T xTaskGetSchedulerState	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3135
+0000791e T vTaskPriorityInherit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3163
+000079ac T vTaskPriorityDisinherit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:3226
+00007a00 T prvInitialiseHeap	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:124
+00007a28 T osSemaphoreMutexCreate	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:144
+00007a56 T vApplicationIdleHook	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:236
+00007b2c t AudioMicTask	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:151
+00007c38 T SdInitAndFsMount	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:99
+00007d0c T DumpTask	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:217
+00007df4 T main	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:282
+00007f16 W BLE_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W BT_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 t Default_Handler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:47
+00007f16 W FFTInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W GpioInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W I2C_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W I2sInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W IRInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W RtcInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W SDIO0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W SPIM_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W SPIS_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W SWInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W SpdifInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W Timer2Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W Timer3Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W Timer4Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W Timer5Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W Timer6Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W UART0_Interrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W UsbInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f16 W WakeupInterrupt	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:49
+00007f18 T ExceptionCommHandler	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:53
+00008140 T __c_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:186
+00008174 T __cpu_init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:213
+00008216 T HardwareStackProtectEnable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:316
+0000823c T __init	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:336
+0000825e T GIE_ENABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:16
+00008268 T GIE_DISABLE	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:21
+00008276 T GIE_STATE_GET	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:27
+0000827e T NVIC_EnableIRQ	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/interrupt.c:70
+00008296 W SwUartSend	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:24
+00008298 T putchar	/cygdrive/c/Andestech/AndeSight300RDS/toolchains/nds32le-elf-mculib-v3s/nds32le-elf/include/stdio.h:212
+00008308 T nds_write	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:61
+00008328 T DbgUartInit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:70
+0000834c T AudioADC_LREnable
+0000844e T AudioADC_Enable
+0000846c T AudioADC_Disable
+000084b6 T AudioADC_HighPassFilterConfig
+000084ca T AudioADC_HighPassFilterSet
+00008500 T AudioADC_Clear
+00008516 T AudioADC_SampleRateGet
+0000859a T AudioADC_SampleRateSet
+000086d0 T AudioADC_FadeTimeSet
+0000872c T AudioADC_FadeEnable
+00008762 T AudioADC_SoftMute
+000087ee T AudioADC_VolSet
+0000884c T AudioADC_AnaInit
+0000888c T AudioADC_PGASel
+00008a54 T AudioADC_PGAGainSet
+00008bc0 T AudioADC_MicBias1Enable
+00008bd6 T AudioADC_VcomConfig
+00008bfa T AudioADC_IsOverflow
+00008c12 T AudioADC_OverflowClear
+00008c34 T Chip_VMIDDetectDisable
+00008c46 T Chip_Init
+00008cdc T Chip_MemInit
+00008ce8 T Clock_Config
+00008d58 T WaitOscillateWork
+00008d72 T Clock_RcFreqGet
+00008e18 T Clock_PllLock
+00008f32 T Clock_APllLock
+0000904c T Clock_SysClkSelect
+000090da T Clock_UARTClkSelect
+00009132 T Clock_Module1Enable
+00009142 T Clock_Module2Enable
+00009152 T Clock_Module3Enable
+00009162 T Clock_AudioPllClockSet
+000092f6 T Clock_AudioMclkSel
+000093ce T EnableMPU
+00009430 T EnableIDCache
+00009472 T DataCacheInvalidAll
+0000947c T DataCacheRangeInvalid
+000094e2 t AudioDAC0_ChannelEnable
+0000954a t AudioDAC1_ChannelEnable
+0000958e T AudioDAC_Enable
+000095ac T AudioDAC_DitherDisable
+000095ca T AudioDAC_ScrambleDisable
+000095e8 T AudioDAC_DoutModeSet
+00009628 T AudioDAC_EdgeSet
+0000966e T AudioDAC_DsmOutdisModeSet
+0000969c T AudioDAC_ZeroNumSet
+000096b0 T AudioDAC_SampleRateGet
+00009734 T AudioDAC_SampleRateSet
+0000987a T AudioDAC_Reset
+0000989c T AudioDAC_FadeTimeSet
+00009904 T AudioDAC_FadeEnable
+00009936 T AudioDAC_SoftMute
+000099a2 T AudioDAC_VolSet
+000099e8 T AudioDAC_VmidChargeOp
+00009a1e t AudioDAC0_PowerOn
+00009b1a t AudioDAC1_PowerOn
+00009bce T AudioDAC_ClkEnable
+00009bfc T AudioDAC_FuncReset
+00009c2a T AudioDAC_VIMDControl
+00009c3c T AudioDAC_SCFMute
+00009c82 T AudioDAC_IBSelect
+00009ccc T AudioDAC_AllPowerOn
+00009df0 T AudioDAC_AllChannelEnable
+00009e7c T AudioDAC_PowerOn
+00009e9e T AudioDAC_ChannelEnable
+00009ebc T DMA_ChannelAllocTableSet
+00009ece T DMA_ChannelEnable
+00009efa T DMA_ChannelDisable
+00009f28 T DMA_InterruptFlagGet
+00009f7c T DMA_InterruptFlagClear
+0000a022 T DMA_BlockConfig
+0000a1c0 T DMA_BlockBufSet
+0000a2a2 T DMA_CircularConfig
+0000a486 T DMA_CircularDataLenGet
+0000a4f8 T DMA_CircularSpaceLenGet
+0000a5d8 T DMA_CircularWritePtrSet
+0000a60c T DMA_CircularDataPut
+0000a776 T DMA_CircularReadPtrSet
+0000a7a8 T DMA_CircularDataGet
+0000a94e T Efuse_ReadData
+0000a9b4 T GPIO_PortAModeSet
+0000b63e T OTG_PortHostIsLink
+0000b64e T OTG_HostHaltClear
+0000b6f0 t OTG_HostWaitTransferEnd
+0000b8f8 T OTG_HostBulkRead
+0000ba14 T OTG_HostBulkWrite
+0000baae T Remap_AddrRemapSet
+0000bb48 T Remap_InitTcm
+0000bb78 T Reset_FunctionReset
+0000bb8c T SDIO_ByteModeEnable
+0000bb9e T SDIO_SysToSdioDivSet
+0000bbc0 T SDIO_ClkSet
+0000bbda T SDIO_ClkEnable
+0000bc04 T SDIO_ClkDisable
+0000bc2e T SDIO_Init
+0000bc6a T SDIO_CmdStart
+0000bd2c T SDIO_CmdIsDone
+0000bd38 T SDIO_CmdStop
+0000bd4a T SDIO_CmdRespGet
+0000bde4 T SDIO_CmdDoneCheckBusy
+0000bdfe T SDIO_ClearClkHalt
+0000be1c T SDIO_SingleBlockConfig
+0000be8c T SDIO_MultiBlockConfig
+0000bf04 T SDIO_DataTransfer
+0000bf20 T SDIO_DataIsDone
+0000bf2e T SDIO_MultiBlockTransferDone
+0000bf3c T SDIO_IsDataLineBusy
+0000bf4e T SysTickInit
+0000bf78 T SysTimerIntFlagClear
+0000bf86 T ClockFreqGet
+0000bfb4 T Timer_Config
+0000c14c T Timer_Start
+0000c1c4 t UART_BaudClkGet
+0000c21a T UART0_Init
+0000c3da T UART1_Init
+0000c59a T UART1_RecvByte
+0000c5c0 T UART0_SendByte
+0000c600 T UART1_SendByte
+0000c640 T WDG_Disable
+0000c664 T LoadFIFOData
+0000c6ca T UnloadFIFOData
+0000c730 T sbc_encoder_initialize
+0000c8cc T sbc_encoder_encode
+0000c934 t sbc_calculate_bits
+0000dea8 t sbc_unpack_frame
+0000f818 t msbc_unpack_frame
+00010bac t msbc_pack_frame
+00011034 t sbc_pack_frame
+000125d8 T sbc_init
+00012700 T sbc_init_msbc
+00012818 T sbc_encode
+00012f10 T sbc_finish
+00012f80 T sbc_get_frame_length
+00013010 T sbc_get_frame_duration
+0001309c T sbc_get_codesize
+000130f8 T sbc_get_implementation_info
+0001310c T sbc_reinit
+000131c0 t sbc_analyze_eight_simd
+00013554 t sbc_analyze_4b_8s_simd
+000135a0 t sbc_analyze_1b_8s_simd_odd
+000135c4 t sbc_analyze_1b_8s_simd_even
+000135e8 t sbc_calc_scalefactors_j
+00013b28 t sbc_calc_scalefactors
+00013d30 t sbc_enc_process_input_8s_be
+00014978 t sbc_enc_process_input_4s_be
+000153cc t sbc_enc_process_input_4s_le
+00015e24 t sbc_enc_process_input_8s_le
+00016a60 t sbc_analyze_4b_4s_simd
+00016e34 T sbc_init_primitives
+00016e8c T __divdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:451
+00016ecc T __udivdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:818
+00016ed0 t fudiv_qrnnd	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:961
+00016f28 T __udivmoddi4	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/config/nds32/lib1asmsrc-mculib.S:1152
+00017080 T memcpy
+000170ac T memset
+000170dc T printf
+000170e6 T puts
+00017138 T strlen
+00017144 t vprintf_help
+00017178 T vprintf
+000171c4 T do_printf
+0001766c t sep_frac
+0001769e T _printf_float
+00017d70 T strcpy
+00017d84 T abs
+00017d8c T _write
+00017da4 T __lshrdi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:403
+00017dcc T __ashldi3	/home/sqa/build-ast300/build-toolchain/build-2017-03-15/source-packages/gcc-4.9.3-bsp-v4_1_0-branch/libgcc/libgcc2.c:431
+0001805c r LfnOfs	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:468
+0001806c r cvt2.2049
+00018128 r cvt1.2048
+0001831c r oem2uni936	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ffunicode.c:4631
+0002d7a0 r uni2oem936	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ffunicode.c:1902
+0004316c R MPUConfigTable	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/init-default.c:379
+00043340 R CmdRespType
+000433c0 r crc_table
+000434c0 r sbc_offset8
+00043540 r sbc_offset4
+00043590 r analysis_consts_fixed8_simd_odd
+000436b0 r analysis_consts_fixed8_simd_even
+000437d0 r analysis_consts_fixed4_simd_odd
+00043840 r analysis_consts_fixed4_simd_even
+000438c0 A __data_lmastart
+00043cd8 A EILM_SIZE
+20004000 D UARTS_SendByte_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:255
+20004000 D __data_start
+20004000 A _stack
+20004008 D UARTS_Init_MAP	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/inc/uarts_interface.h:251
+20004010 D cbw	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:48
+20004030 d xNextTaskUnblockTime	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:226
+20004034 d DmaChannelMap	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:68
+20004050 D gSramEndAddr	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:14
+20004054 D IsApllFreeRun
+20004055 D IsDpllFreeRun
+20004058 D rc_clk_freq
+2000405c D gSOCInFreq
+20004060 D gAPLLWorkFreq
+20004064 D gPLLWorkFreq
+20004068 D DMAEintTable
+20004088 D DMATintTable
+200040a8 D DMADintTable
+200040c8 d DMAConfigTable
+200043f4 d DMAChannelAllocMap
+20004414 D OtgPortHostEnable
+20004415 D OtgPortLinkState
+20004418 S OtgPortDeviceDetectTime
+20004418 S __bss_start
+20004418 S _edata
+2000441a S OtgPortLinkHoldTime
+2000441c S SysemMipsPercent	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:232
+20004420 B SDIOMutex	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:27
+20004424 B UART1Mutex	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:26
+20004428 B UART0Mutex	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/uarts_interface.c:25
+2000442c B UDiskInitOK	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:42
+2000442e B gTailLen	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:41
+20004430 B gDataLen	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:40
+20004432 B gHeadLen	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:39
+20004434 B UDiskMutex	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:30
+20004438 b mv_mread_callback	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/audio/src/mvstdio.c:102
+2000443c b LfnBuf	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:475
+2000463c b DirBuf	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:473
+2000489c b CurrVol	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:436
+2000489e b Fsid	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:433
+200048a0 b FatFs	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/fatfs/src/ff.c:432
+200048a8 b xBlockAllocatedBit	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:167
+200048ac b xMinimumEverFreeBytesRemaining	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:161
+200048b0 b xFreeBytesRemaining	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:160
+200048b4 b pxEnd	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:156
+200048b8 b xStart	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:156
+200048cc b head	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/heap_5s.c:139
+200048e0 B psw_1	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:263
+200048e4 b psw_0	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:262
+200048e8 B ulCriticalNesting	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/port.c:261
+200048ec b ulTotalRunTime	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:241
+200048f0 b ulTaskSwitchedInTime	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:240
+200048f4 b uxSchedulerSuspended	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:236
+200048f8 b uxTaskNumber	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:225
+200048fc b xNumOfOverflows	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:224
+20004900 b xYieldPending	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:223
+20004904 b uxPendedTicks	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:222
+20004908 b xSchedulerRunning	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:221
+2000490c b uxTopReadyPriority	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:220
+20004910 b xTickCount	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:219
+20004914 b uxCurrentNumberOfTasks	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:218
+20004918 b uxTasksDeleted	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:201
+2000491c b xTasksWaitingTermination	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:200
+20004930 b xPendingReadyList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:196
+20004944 b pxOverflowDelayedTaskList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:195
+20004948 b pxDelayedTaskList	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:194
+2000494c b xDelayedTaskList2	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:193
+20004960 b xDelayedTaskList1	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:192
+20004974 b pxReadyTasksLists	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:191
+20004a3c B pxCurrentTCB	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/freertos/src/tasks.c:188
+20004a40 b UlTotalTimeOffset	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:234
+20004a44 b UlRunTimeCounterOffset	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/middleware/rtos/rtos_api/rtos_api.c:233
+20004a48 b msbc_ct	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:66
+20005a5c b data	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:59
+20005e5c b FileIOBuf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:58
+2000625c b PcmBuf1	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:57
+2000665c B gRecordFlg	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:54
+20006660 B AudioDACBuf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:52
+20006dd0 W _FP_BASE_
+20006dd0 W _SDA_BASE_
+20007660 B AudioADCBuf	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:51
+20008660 B IsSwUartActedAsUARTFlag	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:16
+20008661 B DebugPrintPort	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/startup/retarget.c:13
+20008662 b sIsDac1InitOK
+20008663 b sIsDac0InitOK
+20008664 b SpiFlashInfo
+20008678 B gSysTick
+2000867c b output_idx
+20008680 b output_buff
+20008684 B _NDS32_REENT__errno
+20008688 B SDCardId	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:58
+2000869c B SDCard	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/sd_card.c:57
+200086a8 B UDiskBuf	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:44
+200086d0 B gUDisk	/cygdrive/F/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/driver/driver_api/src/otg/host/otg_host_udisk.c:43
+200086e0 B pcm_buf_raw	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:60
+200096e0 B pcm_buffer	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:61
+200096f0 B gFil	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:64
+20009960 B gFatfs_sd	/cygdrive/f/Soft_sdk/Mv_BP10X/MVsB1_Base_SDK/examples/Demo_Encoder/Debug/../src/msbc_encoder_demo.c:63
+20009ba8 B _end

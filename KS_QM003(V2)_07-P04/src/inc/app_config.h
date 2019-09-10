@@ -809,7 +809,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
 		
 		#define GpioAmpMuteDisable()			do{\
@@ -817,7 +817,7 @@ extern "C" {
 												GpioClrRegOneBit(AMP_MUTE_PORT_PD, AMP_MUTE_PORT_BIT);\
 												GpioClrRegOneBit(AMP_MUTE_PORT_IE, AMP_MUTE_PORT_BIT);\
 												GpioSetRegOneBit(AMP_MUTE_PORT_OE, AMP_MUTE_PORT_BIT);\
-												GpioClrRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
+												GpioSetRegOneBit(AMP_MUTE_PORT_OUT, AMP_MUTE_PORT_BIT);\
 												}while(0)
 	#else
 	
@@ -922,6 +922,9 @@ extern "C" {
 		//#define FUNC_RTC_ALARM_SAVE2FLASH			//alarm闹钟参数保存到FLASH，用于没有电池的时钟产品
 		#define IS_RTC_WAKEUP()				(WAKEUP_FLAG_POR_RTC&gSys.WakeUpSource)
 		#define RTC_WAKEUP_FLAG_CLR()		(gSys.WakeUpSource &= ~WAKEUP_FLAG_POR_RTC)
+	#else
+		#define IS_RTC_WAKEUP() 			0
+		#define RTC_WAKEUP_FLAG_CLR()
 	#endif
 
 	#ifdef FUNC_RTC_AT8563T_EN
@@ -1404,7 +1407,7 @@ enum EnumModuleID
     // 以上应用模式，可以通过mode键循环切换进入
     //////////////////////////////////////////////////////////////
     // DO NOT MODIFY FOLLOWINGS
-    MODULE_ID_END,				// end of moduleID
+    MODULE_ID_END,				// end of moduleID  
     MODULE_ID_IDLE,
     // 以下应用模式不能通过mode键切换进入，而是根据实际用途 通过快捷键或特殊条件满足时才会进入
 

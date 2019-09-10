@@ -27,7 +27,7 @@
 
 #define 	ADC_KEY_SCAN_TIME			10
 #define 	ADC_KEY_JITTER_TIME			20
-#define 	ADC_KEY_CP_TIME				500
+#define 	ADC_KEY_CP_TIME				1000
 #define 	ADC_KEY_CPH_TIME			200
 #define		ADC_KEY_COUNT				11 			//key count per adc channel
 #define		ADC_KEY_FULL_VAL			4096		//
@@ -37,8 +37,8 @@ static const uint16_t AdcKeyEvent[][5] =
 //	PDS(按键开始)			SPR(短按松开)		  	CPS(长按开始)		  	 CPH(长按保持)			  CPR(长按松开)
 	{MSG_NONE,			MSG_NONE,			MSG_WIFI_FACTORY,	 MSG_WIFI_FACTORY,	  MSG_NONE  	},
 	{MSG_NONE,			MSG_NONE,			MSG_WIFI_WPS,      	 MSG_WIFI_WPS,		  MSG_NONE		},	//SW1
-	{MSG_NONE,			MSG_NEXT,  			MSG_NONE, 		     MSG_NONE, 		      MSG_NONE		},	//SW2
-	{MSG_NONE,			MSG_PRE,       		MSG_NONE, 	   	     MSG_NONE,	  		  MSG_NONE		},	//SW3
+	{MSG_NONE,			MSG_NEXT,  			MSG_WIFI_NEXT_PLQ,   MSG_NONE, 		      MSG_NONE		},	//SW2
+	{MSG_NONE,			MSG_PRE,       		MSG_WIFI_PREV_PLQ,   MSG_NONE,	  		  MSG_NONE		},	//SW3
 	{MSG_NONE,			MSG_WIFI_TALK,		MSG_WIFI_TALK,		 MSG_NONE,			  MSG_NONE  	},	//SW6
 	
 	{MSG_NONE,			MSG_RTC_SET_UP, 	MSG_RTC_SET_UP, 	 MSG_RTC_SET_UP,	  MSG_NONE		},  //无实际按键

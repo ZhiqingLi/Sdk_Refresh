@@ -83,6 +83,8 @@ enum
 	//WIFI消息
 	MSG_WIFI_NEXT_CH,		//CH频道切换下一个(APP切换音源)
 	MSG_WIFI_PREV_CH,		//CH频道切换上一个(APP切换音源)
+	MSG_WIFI_NEXT_PLQ,		//切换下一个专辑
+	MSG_WIFI_PREV_PLQ,		//切换上一个专辑
 	MSG_WIFI_CONNECT,
 	MSG_VER,	
 	MSG_WIFI_MODE,		//CH频道切换(APP切换音源)

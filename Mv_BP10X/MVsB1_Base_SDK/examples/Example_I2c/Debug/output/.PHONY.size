@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  24596 (22464 +   2132)	    136	    556	  25288	   62c8	Example_I2c.adx

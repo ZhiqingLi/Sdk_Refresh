@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+ 373258 (160870 + 212388)	   1056	  86800	 461114	  7093a	Demo_Decoder.adx

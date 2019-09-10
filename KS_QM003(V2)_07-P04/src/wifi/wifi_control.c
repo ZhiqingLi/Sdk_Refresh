@@ -1743,6 +1743,7 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 	{	
 		SecondData[RcvCnt] = '\0';
 		APP_DBG("WiFiNoticeMcuNextAlarmTime:%s\n", &SecondData[0]);
+		SetAt8563tSecondAlarm(FALSE);									//复位AT8563T第二次闹钟
 		
 		TimeSecond = 0;
 		Times = 1;
@@ -1782,12 +1783,19 @@ void WiFiNoticeMcuNextAlarmTime(uint8_t* SecondData)
 		APP_DBG("Time(%d/%d; %02d:%02d:%02d)!!!\n", TimeSecond, CurRtcTimeSecond, sRtcControl->DataTime.Hour, sRtcControl->DataTime.Min, sRtcControl->DataTime.Sec);
 		//计算闹钟时间
 		AlarmTime.Hour = (TimeSecond  + CurRtcTimeSecond) / 3600;
-		if(AlarmTime.Hour >= 24)
-		{
-			AlarmTime.Hour -= 24;
-		}
+		AlarmTime.Hour %= 24;
 		AlarmTime.Min = ((TimeSecond  + CurRtcTimeSecond) % 3600) / 60 ;		
 		AlarmTime.Sec = ((TimeSecond  + CurRtcTimeSecond) % 3600) % 60;
+		if ((AlarmTime.Sec >= 30) 
+		|| ((AlarmTime.Min == sRtcControl->DataTime.Min) && (AlarmTime.Hour == sRtcControl->DataTime.Hour))) {
+			AlarmTime.Sec = 0;
+			AlarmTime.Min += 1;
+			if (AlarmTime.Min >= 60) {
+				AlarmTime.Min %= 60;
+				AlarmTime.Hour += 1;
+				AlarmTime.Hour %= 24;
+			}
+		}
 
 		RtcSetAlarmTime(sRtcControl->AlarmNum, sRtcControl->AlarmMode, sRtcControl->AlarmData, &AlarmTime);
 		RtcGetAlarmTime(sRtcControl->AlarmNum, &sRtcControl->AlarmMode, &sRtcControl->AlarmData, &sRtcControl->AlarmTime);
@@ -2744,6 +2752,14 @@ uint32_t WiFiControl(void)
 			/*case MSG_REPEAT:
 				McuSetWiFiRepeatMode();				
 				break;*/
+
+			case MSG_WIFI_NEXT_PLQ:
+				Mcu_SendCmdToWiFi(MCU_PLQ_NEXT, NULL);
+				break;
+
+			case MSG_WIFI_PREV_PLQ:
+				Mcu_SendCmdToWiFi(MCU_PLQ_PREV, NULL);
+				break;
 
 			case MSG_WIFI_NEXT_CH:	//播放下一个按键预置歌单						
 				gWiFi.KaiShuRadio++;

@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  31682 (29822 +   1860)	   1008	  10280	  42970	   a7da	Example_AudioDMIC.adx

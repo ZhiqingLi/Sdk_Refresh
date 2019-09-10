@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  24680 (22672 +   2008)	    144	     40	  24864	   6120	Example_Clock.adx

@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  26690 (24266 +   2424)	   1064	   4664	  32418	   7ea2	Example_Uart.adx

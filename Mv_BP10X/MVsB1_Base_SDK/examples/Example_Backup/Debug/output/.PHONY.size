@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  25984 (23888 +   2096)	    136	     44	  26164	   6634	Example_Backup.adx

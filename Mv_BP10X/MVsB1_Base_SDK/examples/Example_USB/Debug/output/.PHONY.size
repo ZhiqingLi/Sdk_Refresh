@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  47050 (42050 +   5000)	   1208	  10568	  58826	   e5ca	Example_USB.adx

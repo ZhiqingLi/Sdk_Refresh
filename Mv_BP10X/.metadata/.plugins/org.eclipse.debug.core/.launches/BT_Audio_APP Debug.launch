@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="com.andestech.ide.dsf.gdb.launch.cross.platform.remoteLaunchConfigurationType">
+<booleanAttribute key="--nx" value="true"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.core.RESET" value="false"/>
+<stringAttribute key="com.andestech.ide.dsf.gdb.core.RTOS_PYTHON_SCRIPT_PATH" value="${AUTO}"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.core.SUPPORT_RTOS" value="false"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.core.TARGET_MANAGEMENT_SERVICE" value="true"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.core.VIRTUAL_HOSTING" value="false"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.coreTARGET.DOWNLOAD" value="true"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.coreTARGET.LOADER.CHECKING" value="true"/>
+<booleanAttribute key="com.andestech.ide.dsf.gdb.coreTRUST.READONLY.SECTIONS" value="true"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_NAME" value="${gdb}"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.DEBUG_ON_FORK" value="false"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEV" value="/dev/ttyS0"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.DEV_SPEED" value="115200"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.GDB_INIT" value="${.gdbinit}"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.HOST" value="localhost"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.NON_STOP" value="false"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.PORT" value="9900"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.REMOTE_TCP" value="true"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.REVERSE" value="false"/>
+<stringAttribute key="org.eclipse.cdt.dsf.gdb.TRACEPOINT_MODE" value="TP_NORMAL_ONLY"/>
+<booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
+<stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_ID" value="gdbserver"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_START_MODE" value="remote"/>
+<booleanAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.DEBUGGER_STOP_AT_MAIN_SYMBOL" value="main"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="Debug\BT_Audio_APP.adx"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="BT_Audio_APP"/>
+<booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="config.nds32le-elf-mculib-v3s.exe.debug.1519929465"/>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+<listEntry value="/BT_Audio_APP"/>
+</listAttribute>
+<listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+<listEntry value="4"/>
+</listAttribute>
+<stringAttribute key="process_factory_id" value="org.eclipse.cdt.dsf.gdb.GdbProcessFactory"/>
+</launchConfiguration>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="viewer_state_section">
+		<item value="0" key="horizontal_position"/>
+		<item value="0" key="vertical_position"/>
+		<list key="column_order">
+			<item value="0"/>
+			<item value="1"/>
+			<item value="2"/>
+		</list>
+		<section name="hide_show_section">
+			<item value="100" key="column_width_2"/>
+			<item value="1" key="column_state_0"/>
+			<item value="1" key="column_state_1"/>
+			<item value="1" key="column_state_2"/>
+			<item value="100" key="column_width_1"/>
+			<item value="250" key="column_width_0"/>
+		</section>
+		<section name="sorter_section">
+			<item value="1" key="sort_direction_1"/>
+			<item value="1" key="sort_priority_2"/>
+			<item value="1" key="sort_direction_2"/>
+			<item value="1" key="sort_direction_0"/>
+			<item value="0" key="sort_priority_1"/>
+			<item value="2" key="sort_priority_0"/>
+		</section>
+	</section>
+</section>

@@ -165,7 +165,7 @@ int32_t main(void)
 	SysGetWakeUpFlag(); //get wake up flag, DO NOT remove this!!
 
 #ifdef USE_POWERKEY_SLIDE_SWITCH
-	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 500);//200ms
+	SysPowerKeyInit(POWERKEY_MODE_SLIDE_SWITCH, 200);//200ms
 #endif
 #ifdef USE_POWERKEY_SOFT_PUSH_BUTTON
 	SysPowerKeyInit(POWERKEY_MODE_PUSH_BUTTON, 1000); //2s
@@ -451,8 +451,8 @@ int32_t main(void)
 #ifdef FUNC_KEY_BEEP_SOUND_EN
 		|| !IsBeepSoundEnd()
 #endif
-			)
-		&& !IsEarphoneLink() && (gSys.Volume > 0)) {
+		)
+		&& !IsEarphoneLink() && (gSys.Volume    > 0) && (MODULE_ID_POWEROFF != gSys.CurModuleID)) {
 			AmpMuteControl(0);
 		}
 		else {
@@ -496,7 +496,7 @@ int32_t main(void)
 #endif
 		
 #ifdef FUNC_SLEEP_LEDOFF_EN
-		if (GetSilenceMuteFlag()
+		if (GetSilenceMuteFlag() && !IS_RTC_WAKEUP()
 #ifdef OPTION_CHARGER_DETECT
 		&& !IsInCharge()
 #endif

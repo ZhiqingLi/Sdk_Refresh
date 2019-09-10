@@ -148,19 +148,34 @@ void led_music_busy(void)
 AT(.text.led_disp)
 void led_music_play(void)
 {
-    led_set_sta(0x00, 0xaa, 20, 0);           //¿∂µ∆1s÷‹∆⁄…¡À∏
+	// «∑Ò≈‰÷√USB/SD≤•∑≈◊¥Ã¨LED?
+    if (xcfg_cb.led_musicplay_config_en) {
+        led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_usb_sd_play);
+    } else {
+    	led_set_sta(0x00, 0xaa, 20, 0);           //¿∂µ∆1s÷‹∆⁄…¡À∏
+    }
 }
 
 AT(.text.led_disp)
 void led_aux_play(void)
 {
-    led_set_sta(0x00, 0xff, 1, 0);           //¿∂µ∆≥£¡¡
+	// «∑Ò≈‰÷√AUX≤•∑≈◊¥Ã¨LED?
+    if (xcfg_cb.led_auxplay_config_en) {
+        led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_aux_playing);
+    } else {
+		led_set_sta(0x00, 0xff, 1, 0);           //¿∂µ∆≥£¡¡
+	}
 }
 
 AT(.text.led_disp)
 void led_fm_play(void)
 {
-     led_set_sta(0x00, 0xaa, 20, 0);           //¿∂µ∆1s÷‹∆⁄…¡À∏
+	// «∑Ò≈‰÷√FM≤•∑≈◊¥Ã¨LED?
+    if (xcfg_cb.led_fmplay_config_en) {
+        led_cfg_set_sta((led_cfg_t *)&xcfg_cb.led_fm_playing);
+    } else {
+		led_set_sta(0x00, 0xaa, 20, 0);           //¿∂µ∆1s÷‹∆⁄…¡À∏
+	}
 }
 
 AT(.text.led_disp)

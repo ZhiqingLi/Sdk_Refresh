@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  24130 (22334 +   1796)	    144	     40	  24314	   5efa	Example_ADC.adx

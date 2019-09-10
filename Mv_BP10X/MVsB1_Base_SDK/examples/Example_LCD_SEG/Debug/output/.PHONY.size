@@ -1,0 +1,2 @@
+   text (code + rodata)	   data	    bss	    dec	    hex	filename
+  28690 (26946 +   1744)	    136	     40	  28866	   70c2	Example_LCD_SEG.adx

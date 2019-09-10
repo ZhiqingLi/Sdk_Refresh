@@ -264,8 +264,7 @@ void KeyScan(void)
 #endif	
 	
 #ifdef FUNC_KEY_DBCK_EN                                  //°´¼üË«»÷¹¦ÄÜ
-	if((Msg == MSG_NONE || Msg == MSG_RTC_SET_PARM)
-	&& (gSys.CurModuleID != MODULE_ID_IDLE && gSys.CurModuleID != MODULE_ID_RTC))
+	if(Msg == MSG_NONE || Msg == MSG_RTC_SET_PARM)
 	{
 		static uint16_t PrevKeyMsg = MSG_NONE;
 		static TIMER PowerKeyTimer;

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="C:\Andestech\AndeSight300RDS\jre_64" version="1.7.0_76">
+<bootpath>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\resources.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\rt.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\sunrsasign.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\jsse.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\jce.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\charsets.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\jfr.jar"/>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\ext"/>
+<entry path="C:\windows\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="C:\Andestech\AndeSight300RDS\jre_64\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>
