@@ -43,7 +43,6 @@
 
 //==============================================================================
 static SINGLE_LED_DISP_STRU Led;
-static TIMER SingleLedScanTime;
 static TIMER SingleLedChangeTime;
 
 static void SingleLedChangeDutyFunc(void)
@@ -64,13 +63,14 @@ static void SingleLedChangeDutyFunc(void)
 			Led.BledDuty -= Led.StepUpDuty;
 		}
 	}
+	//APP_DBG ("bled display duty = %d;\n", Led.BledDuty);
 	SINGLE_BLED_SETTING(Led.BledDuty);
 
 	if(Led.RledFlag&(1<<Led.DispBitCnt))
 	{
 		Led.RledDuty += Led.StepUpDuty;
 		
-		if(SINGLE_LED_MAX_DUTY <= Led.StepUpDuty)
+		if(SINGLE_LED_MAX_DUTY <= Led.RledDuty)
 		{
 			Led.RledDuty = SINGLE_LED_MAX_DUTY;
 		}
@@ -82,6 +82,7 @@ static void SingleLedChangeDutyFunc(void)
 			Led.RledDuty -= Led.StepUpDuty;
 		}
 	}
+	//APP_DBG ("rled display duty = %d;\n", Led.RledDuty);
 	SINGLE_RLED_SETTING(Led.RledDuty);
 }
 
@@ -105,11 +106,9 @@ void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 
 		if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_LOWBATTER)) {
 			Led.RledFlag = 0xAA;
-			Led.StepUpDuty = SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT;
+			Led.StepUpDuty = (SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT);
 			Led.DispBitCnt = 0;
-			Led.MinDispDuty = Led.StepUpDuty;
-			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
-			Led.DisplayTime = 1500;
+			Led.DispChangeTime = (1500/SINGLE_LED_DISP_SCAN_CNT);
 		}
 		else {
 			Led.RledFlag = 0x00;
@@ -117,19 +116,15 @@ void SingleLedDisplayModeSet(LED_MODE_TYPE DisplayMode, bool IsOnOff)
 
 		if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_WPSCONNECT)) {
 			Led.BledFlag = 0xAA;
-			Led.StepUpDuty = SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT;
+			Led.StepUpDuty = (SINGLE_LED_MAX_DUTY/SINGLE_LED_DISP_SCAN_CNT);
 			Led.DispBitCnt = 0;
-			Led.MinDispDuty = Led.StepUpDuty;
-			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
-			Led.DisplayTime = 1500;
+			Led.DispChangeTime = (1500/SINGLE_LED_DISP_SCAN_CNT);
 		}
 		else if (Led.CurDisplayMode&(1<<LED_DISPLAY_MODE_NIGHTLAMP)) {
 			Led.BledFlag = 0xFF;
 			Led.StepUpDuty = SINGLE_LED_MAX_DUTY;
 			Led.DispBitCnt = 0;
-			Led.MinDispDuty = Led.StepUpDuty;
-			Led.DispChangeTime = 1500/SINGLE_LED_DISP_SCAN_CNT;
-			Led.DisplayTime = 1500;
+			Led.DispChangeTime = (1500/SINGLE_LED_DISP_SCAN_CNT);
 		}
 		else {
 			Led.BledFlag = 0x00;
@@ -168,20 +163,16 @@ void LedFlushDisp(void)
 
 	if(IsTimeOut(&SingleLedChangeTime))
 	{
-		SingleLedChangeDutyFunc();
 		TimeOutSet(&SingleLedChangeTime, Led.DispChangeTime);
-	}
-	
-	if(!IsTimeOut(&SingleLedScanTime))
-	{
-		return;
-	}
-	TimeOutSet(&SingleLedScanTime, Led.DisplayTime);
-	
-	Led.DispBitCnt++;
-	if(Led.DispBitCnt >= 8)
-	{
-		Led.DispBitCnt = 0;
+		if(((0 == Led.RledDuty) || (SINGLE_LED_MAX_DUTY == Led.RledDuty))
+		&& ((0 == Led.BledDuty) || (SINGLE_LED_MAX_DUTY == Led.BledDuty))) {
+			Led.DispBitCnt++;
+			if(Led.DispBitCnt >= 8)
+			{
+				Led.DispBitCnt = 0;
+			}
+		}
+		SingleLedChangeDutyFunc();
 	}
 }
 
@@ -190,7 +181,6 @@ void SingleLedFlushDispInit(void)
 	memset(&Led, 0, sizeof(SINGLE_LED_DISP_STRU));
 
 	TimeOutSet(&SingleLedChangeTime, 0);
-	TimeOutSet(&SingleLedScanTime, 0);
 	SINGLE_BLED_INIT();
 	SINGLE_RLED_INIT();
 }

@@ -1,2 +1,0 @@
-RseFlashDriverModel=<?xml version\="1.0" encoding\="UTF-8" standalone\="yes"?><rseFlashDriverModel><addr>0x198000</addr><eraseAll>false</eraseAll><flashDriver>F\:\\Soft_sdk\\Mv_BP10X\\MVsB1_Base_SDK\\tools\\b1_download_v0.9.exe</flashDriver><imageFile>F\:\\Soft_sdk\\Mv_BP10X\\MVsB1_Base_SDK\\tools\\remind_script\\all.bin</imageFile><lock>false</lock><unlock>true</unlock><verify>false</verify></rseFlashDriverModel>
-eclipse.preferences.version=1

@@ -126,7 +126,7 @@ USERDATA	DCD	0xE8000
 SDK_VER_CHIPID	DCB		0x12	//MV chip ID
 SDK_VER_MAJOR	DCB		1		//MV SDK major version
 SDK_VER_MINOR	DCB		7		//MV SDK minor version
-SDK_VER_USER	DCB		207		//version
+SDK_VER_USER	DCB		211		//version
 
 	//code memory(exclude of this 4 bytes) crc
 	AREA    |.ARM.__at_0x00000098|, CODE, READONLY

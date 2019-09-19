@@ -41,6 +41,7 @@
 #include "powercontroller.h"
 //#include "OrioleReg.h"
 #include "audio_decoder_api.h"
+#include "hw_interface.h"
 
 #ifdef CFG_FUNC_DISPLAY_EN
 #include "display.h"
@@ -379,6 +380,9 @@ int main(void)
 #endif
 	NVIC_EnableIRQ(SWI_IRQn);
 	GIE_ENABLE();	//开启总中断
+
+	POWER_ON();		//打开外部电源
+	MUTE_OFF();		//打开功放MUTE，播放声音。
 
 #ifdef CFG_FUNC_LED_REFRESH
 	//默认优先级为0，旨在提高刷新速率，特别是断点记忆等写flash操作有影响刷屏，必须严格遵守所有timer6中断调用都是TCM代码，含调用的driver库代码

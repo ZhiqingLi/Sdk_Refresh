@@ -135,6 +135,7 @@ typedef struct _SYS_INFO_
 	bool IsWiFiRepeatPowerOn;
 #endif
 	uint32_t WakeUpSource;
+	bool IsRemindPowerOn;
 } SYS_INFO;
 
 extern SYS_INFO gSys;

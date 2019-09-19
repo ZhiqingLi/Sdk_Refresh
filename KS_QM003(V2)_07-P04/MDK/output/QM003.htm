@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\output\QM003.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\output\QM003.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Sep 10 16:03:07 2019
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Sep 19 12:16:24 2019
 <BR><P>
 <H3>Maximum Stack Usage =       2384 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -10131,8 +10131,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 5]<UL><LI> mecon.o(.text)
 <LI> mesec.o(.text)
-<LI> me.o(.text)
 <LI> mesco.o(.text)
+<LI> me.o(.text)
 <LI> meacc.o(.text)
 </UL>
 <P><STRONG><a name="[391]"></a>MeFindMatchingToken</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, me.o(.text))
@@ -10201,8 +10201,8 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 4]<UL><LI> mecon.o(.text)
 <LI> mesec.o(.text)
-<LI> me.o(.text)
 <LI> mesco.o(.text)
+<LI> me.o(.text)
 </UL>
 <P><STRONG><a name="[348]"></a>MeStartOperation</STRONG> (Thumb, 908 bytes, Stack size 8 bytes, me.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = MeStartOperation
@@ -14432,8 +14432,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[720]"></a>AdcAdjustVolInit</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, adc_adjust_vol.o(i.AdcAdjustVolInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
+<P><STRONG><a name="[720]"></a>AdcAdjustVolInit</STRONG> (Thumb, 218 bytes, Stack size 16 bytes, adc_adjust_vol.o(i.AdcAdjustVolInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 288 + Unknown Stack Size
 <LI>Call Chain = AdcAdjustVolInit &rArr; AdcAdjustVolScan &rArr; McuSyncWiFiVolume &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[721]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SarAdcGpioSel
@@ -14445,8 +14445,8 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[887]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;KeyInit
 </UL>
 
-<P><STRONG><a name="[723]"></a>AdcAdjustVolScan</STRONG> (Thumb, 262 bytes, Stack size 16 bytes, adc_adjust_vol.o(i.AdcAdjustVolScan))
-<BR><BR>[Stack]<UL><LI>Max Depth = 264 + Unknown Stack Size
+<P><STRONG><a name="[723]"></a>AdcAdjustVolScan</STRONG> (Thumb, 432 bytes, Stack size 24 bytes, adc_adjust_vol.o(i.AdcAdjustVolScan))
+<BR><BR>[Stack]<UL><LI>Max Depth = 272 + Unknown Stack Size
 <LI>Call Chain = AdcAdjustVolScan &rArr; McuSyncWiFiVolume &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[725]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetSysVol
@@ -14900,8 +14900,8 @@ Global Symbols
 <BR>[Calls]<UL><LI><a href="#[1dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NvmWrite
 <LI><a href="#[1de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NvmRead
 <LI><a href="#[789]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GpioPorSysReset
-<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[787]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsGetCurContext
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -16041,13 +16041,13 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> fsmount_buffermanager.o(.data)
 </UL>
 <P><STRONG><a name="[820]"></a>FSDeInit</STRONG> (Thumb, 66 bytes, Stack size 24 bytes, presearch.o(i.FSDeInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = FSDeInit &rArr; FsLock
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = FSDeInit &rArr; FsUnLock
 </UL>
-<BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[823]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsMount
+<BR>[Calls]<UL><LI><a href="#[823]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsMount
 <LI><a href="#[821]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsGetLogicIdByDeviceType
 <LI><a href="#[822]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsGetContextByDeviceType
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[8b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysDeviceMsgCtrl
 </UL>
@@ -16071,8 +16071,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1fc]"></a>FileClose</STRONG> (Thumb, 170 bytes, Stack size 16 bytes, fat_file.o(i.FileClose), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<BR><BR>[Calls]<UL><LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[829]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveFatSec
 <LI><a href="#[828]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveDirSec
 <LI><a href="#[7ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadDirSec
@@ -16094,8 +16094,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[82b]"></a>FileGetLongName</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, fat_file.o(i.FileGetLongName), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<BR><BR>[Calls]<UL><LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[817]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ExFatFileGetFullName
 <LI><a href="#[82c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLongName
 </UL>
@@ -16109,13 +16109,13 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[82d]"></a>FileOpenByNum</STRONG> (Thumb, 310 bytes, Stack size 24 bytes, fat_file.o(i.FileOpenByNum), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[830]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileGetType
+<BR><BR>[Calls]<UL><LI><a href="#[830]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileGetType
 <LI><a href="#[82f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RewindFolderStart
 <LI><a href="#[787]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsGetCurContext
 <LI><a href="#[7ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirGetNextEntry
 <LI><a href="#[7eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirEnterSonFolder
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[82e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ValidityCheck
 <LI><a href="#[826]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSINFO_InitOpenFile
 <LI><a href="#[82a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileGetInfo
@@ -16141,9 +16141,9 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
 <LI>Call Chain = FileSeek &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[833]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetEntryNoFatChain
+<BR>[Calls]<UL><LI><a href="#[833]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetEntryNoFatChain
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[792]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetNextClusNum
 <LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
@@ -16160,12 +16160,12 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[1f2]"></a>FileWrite</STRONG> (Thumb, 1064 bytes, Stack size 40 bytes, fat_file.o(i.FileWrite), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[81d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
+<BR><BR>[Calls]<UL><LI><a href="#[81d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_write
 <LI><a href="#[833]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetEntryNoFatChain
 <LI><a href="#[7f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirSetStartEntry
 <LI><a href="#[7ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirGetNextEntry
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[834]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ParseFat
 <LI><a href="#[835]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IsFolderNoFatChain
 <LI><a href="#[792]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetNextClusNum
@@ -16241,16 +16241,15 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[843]"></a>FolderGetLongName</STRONG> (Thumb, 46 bytes, Stack size 24 bytes, folder.o(i.FolderGetLongName), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<BR><BR>[Calls]<UL><LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[82c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetLongName
 </UL>
 <BR>[Called By]<UL><LI><a href="#[900]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SlaveFileSystemProcess
 </UL>
 
 <P><STRONG><a name="[844]"></a>FolderOpenByNum</STRONG> (Thumb, 716 bytes, Stack size 40 bytes, folder.o(i.FolderOpenByNum), UNUSED)
-<BR><BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[830]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileGetType
+<BR><BR>[Calls]<UL><LI><a href="#[830]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FileGetType
 <LI><a href="#[833]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetEntryNoFatChain
 <LI><a href="#[82f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RewindFolderStart
 <LI><a href="#[787]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsGetCurContext
@@ -16258,6 +16257,7 @@ Global Symbols
 <LI><a href="#[7ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirGetNextEntry
 <LI><a href="#[7eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DirEnterSonFolder
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[845]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetValidFolderNum
 <LI><a href="#[827]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FSINFO_InitOpenFolder
 <LI><a href="#[842]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FolderGetInfo
@@ -16721,7 +16721,7 @@ Global Symbols
 <LI><a href="#[874]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetOutputSCL
 </UL>
 
-<P><STRONG><a name="[d5]"></a>GuiTaskEntrance</STRONG> (Thumb, 516 bytes, Stack size 0 bytes, task_main.o(i.GuiTaskEntrance))
+<P><STRONG><a name="[d5]"></a>GuiTaskEntrance</STRONG> (Thumb, 552 bytes, Stack size 0 bytes, task_main.o(i.GuiTaskEntrance))
 <BR><BR>[Stack]<UL><LI>Max Depth = 488 + Unknown Stack Size
 <LI>Call Chain = GuiTaskEntrance &rArr; WiFiControl &rArr; CommonMsgProccess &rArr; WiFi_CmdProcess &rArr; Mcu_RcvWiFiCmd &rArr; Mcu_RcvWiFiDataProcess &rArr; WiFi_SendCmdToMcu &rArr; WiFiAppSetPlayMode &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -16981,7 +16981,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[746]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AudioAnaSetChannel
 </UL>
 
-<P><STRONG><a name="[861]"></a>IdleControl</STRONG> (Thumb, 298 bytes, Stack size 8 bytes, idle_control.o(i.IdleControl))
+<P><STRONG><a name="[861]"></a>IdleControl</STRONG> (Thumb, 300 bytes, Stack size 8 bytes, idle_control.o(i.IdleControl))
 <BR><BR>[Stack]<UL><LI>Max Depth = 456 + Unknown Stack Size
 <LI>Call Chain = IdleControl &rArr; CommonMsgProccess &rArr; WiFi_CmdProcess &rArr; Mcu_RcvWiFiCmd &rArr; Mcu_RcvWiFiDataProcess &rArr; WiFi_SendCmdToMcu &rArr; WiFiAppSetPlayMode &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -17168,7 +17168,7 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> dev_state_machine.o(.constdata)
 </UL>
 <P><STRONG><a name="[887]"></a>KeyInit</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, key.o(i.KeyInit))
-<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
 <LI>Call Chain = KeyInit &rArr; AdcAdjustVolInit &rArr; AdcAdjustVolScan &rArr; McuSyncWiFiVolume &rArr; Mcu_SendCmdToWiFi &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
 <BR>[Calls]<UL><LI><a href="#[7ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CodingKeyInit
@@ -17216,7 +17216,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[8f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SarAdcLoadParamFromOTP
 </UL>
 
-<P><STRONG><a name="[7f9]"></a>LedFlushDisp</STRONG> (Thumb, 300 bytes, Stack size 8 bytes, singled_display.o(i.LedFlushDisp))
+<P><STRONG><a name="[7f9]"></a>LedFlushDisp</STRONG> (Thumb, 308 bytes, Stack size 8 bytes, singled_display.o(i.LedFlushDisp))
 <BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = LedFlushDisp &rArr; SingleLedChangeDutyFunc &rArr; PwmEnableChannel &rArr; GpioClrRegOneBit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
@@ -17577,7 +17577,7 @@ Global Symbols
 <LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7e7]"></a>MsgSend</STRONG> (Thumb, 172 bytes, Stack size 16 bytes, sys_app.o(i.MsgSend))
+<P><STRONG><a name="[7e7]"></a>MsgSend</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, sys_app.o(i.MsgSend))
 <BR><BR>[Stack]<UL><LI>Max Depth = 368 + Unknown Stack Size
 <LI>Call Chain = MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -17783,7 +17783,7 @@ Global Symbols
 <LI><a href="#[732]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;AdcToPmem
 </UL>
 
-<P><STRONG><a name="[8c1]"></a>PowerMonitor</STRONG> (Thumb, 196 bytes, Stack size 8 bytes, power_management.o(i.PowerMonitor))
+<P><STRONG><a name="[8c1]"></a>PowerMonitor</STRONG> (Thumb, 220 bytes, Stack size 8 bytes, power_management.o(i.PowerMonitor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 384 + Unknown Stack Size
 <LI>Call Chain = PowerMonitor &rArr; PowerLdoinLevelMonitor &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -18652,14 +18652,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GuiTaskEntrance
 </UL>
 
-<P><STRONG><a name="[87b]"></a>SingleLedDisplayModeSet</STRONG> (Thumb, 200 bytes, Stack size 0 bytes, singled_display.o(i.SingleLedDisplayModeSet))
+<P><STRONG><a name="[87b]"></a>SingleLedDisplayModeSet</STRONG> (Thumb, 162 bytes, Stack size 0 bytes, singled_display.o(i.SingleLedDisplayModeSet))
 <BR><BR>[Called By]<UL><LI><a href="#[861]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;IdleControl
 <LI><a href="#[18]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[8bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerLdoinLevelMonitor
 <LI><a href="#[89c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WiFi_SendCmdToMcu
 </UL>
 
-<P><STRONG><a name="[7f6]"></a>SingleLedFlushDispInit</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, singled_display.o(i.SingleLedFlushDispInit))
+<P><STRONG><a name="[7f6]"></a>SingleLedFlushDispInit</STRONG> (Thumb, 72 bytes, Stack size 8 bytes, singled_display.o(i.SingleLedFlushDispInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 108<LI>Call Chain = SingleLedFlushDispInit &rArr; PwmEnableChannel &rArr; GpioClrRegOneBit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[110]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TimeOutSet
@@ -19137,7 +19137,7 @@ Global Symbols
 <LI><a href="#[85f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemPowerOffControl
 </UL>
 
-<P><STRONG><a name="[92b]"></a>SysVarInit</STRONG> (Thumb, 252 bytes, Stack size 16 bytes, sys_app.o(i.SysVarInit))
+<P><STRONG><a name="[92b]"></a>SysVarInit</STRONG> (Thumb, 258 bytes, Stack size 16 bytes, sys_app.o(i.SysVarInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
 <LI>Call Chain = SysVarInit &rArr; BP_SaveInfo &rArr; SaveBPInfoToFlash &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -19932,10 +19932,10 @@ Global Symbols
 <P><STRONG><a name="[831]"></a>_FileRead</STRONG> (Thumb, 574 bytes, Stack size 40 bytes, fat_file.o(i._FileRead))
 <BR><BR>[Stack]<UL><LI>Max Depth = 92<LI>Call Chain = _FileRead &rArr; ReadOneSec &rArr; SaveOneSec &rArr; disk_write
 </UL>
-<BR>[Calls]<UL><LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
-<LI><a href="#[81c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_read
+<BR>[Calls]<UL><LI><a href="#[81c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;disk_read
 <LI><a href="#[833]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SetEntryNoFatChain
 <LI><a href="#[824]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsUnLock
+<LI><a href="#[788]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FsLock
 <LI><a href="#[792]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetNextClusNum
 <LI><a href="#[818]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ReadOneSec
 <LI><a href="#[7ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GetSecNum
@@ -20309,7 +20309,7 @@ Global Symbols
 <LI><a href="#[683]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;af_convert_from_ieee_extended
 </UL>
 
-<P><STRONG><a name="[18]"></a>main</STRONG> (Thumb, 1988 bytes, Stack size 24 bytes, main.o(i.main))
+<P><STRONG><a name="[18]"></a>main</STRONG> (Thumb, 2004 bytes, Stack size 24 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 432 + Unknown Stack Size
 <LI>Call Chain = main &rArr; MsgRecv &rArr; SysDeviceMsgCtrl &rArr; GotoNextMode &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -21512,7 +21512,7 @@ Local Symbols
 <BR>[Called By]<UL><LI><a href="#[782]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SaveBPInfoToFlash
 </UL>
 
-<P><STRONG><a name="[8bd]"></a>PowerLdoinLevelMonitor</STRONG> (Thumb, 348 bytes, Stack size 8 bytes, power_management.o(i.PowerLdoinLevelMonitor))
+<P><STRONG><a name="[8bd]"></a>PowerLdoinLevelMonitor</STRONG> (Thumb, 386 bytes, Stack size 8 bytes, power_management.o(i.PowerLdoinLevelMonitor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 376 + Unknown Stack Size
 <LI>Call Chain = PowerLdoinLevelMonitor &rArr; MsgSend &rArr; msgq_msg_send_fromisr &rArr; mmm_malloc &rArr; __2printf &rArr; _printf_char_file &rArr; _printf_char_common &rArr; __printf
 </UL>

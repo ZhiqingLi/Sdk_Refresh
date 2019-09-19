@@ -98,7 +98,7 @@ void IdleControl(void)
 #endif
 		if(!IS_RTC_WAKEUP())
 		{
-			SoundRemind(SOUND_PWR_ON);
+			gSys.IsRemindPowerOn = TRUE;
 		}	
 	}
 }

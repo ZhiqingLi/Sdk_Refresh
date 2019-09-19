@@ -101,6 +101,7 @@ void SysVarInit(void)
 #endif
 	gSys.MuteFlag = TRUE;
 	gSys.WakeUpSource = gWakeUpFlag;
+	gSys.IsRemindPowerOn = TRUE;
 
 	// 装载断点信息，设置信息
 #ifdef FUNC_BREAKPOINT_EN
@@ -367,7 +368,7 @@ void MsgSend(uint16_t Msg)
 #ifdef FUNC_SOUND_REMIND
 	//这里判断Msg != MSG_VOL_UP/&& Msg != MSG_VOL_DW，是为了解决长安音量加，音量最大提示音出错问题
 	if(Msg != MSG_USB_DEVICE_INTERRUPT_CB && ((Msg != MSG_VOL_UP && Msg != MSG_VOL_DW)
-	|| (gSys.CurModuleID == MODULE_ID_RTC) || (gSys.CurModuleID == MODULE_ID_IDLE)))
+	|| (gSys.CurModuleID == MODULE_ID_RTC)))
 	{
 		if(IsSoundRemindPlaying())
 		{

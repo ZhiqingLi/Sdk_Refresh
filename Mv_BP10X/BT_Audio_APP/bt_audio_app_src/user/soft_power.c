@@ -122,12 +122,12 @@ void SoftKeyPowerOff(void)
 	while(1)
 	{
 #if CFG_WATCH_DOG_EN
-	WDG_Feed();
+		WDG_Feed();
 #endif
 #if CFG_LED_EN        
-	POWER_LED_OFF();
+		POWER_LED_OFF();
 #endif
-	POWER_OFF();	
+		POWER_OFF();	
 	}
 }
 #endif

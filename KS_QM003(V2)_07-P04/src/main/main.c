@@ -387,8 +387,11 @@ int32_t main(void)
 #endif
 	DispInit(FALSE);
 #endif
+
 #ifdef FUNC_SINGLE_LED_EN
-	SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
+	if (IS_CUR_WORK_MODULE() && IS_NEXT_WORK_MODULE()) {
+		SingleLedDisplayModeSet(LED_DISPLAY_MODE_WPSCONNECT, TRUE);
+	}
 #endif
 
 	DBG("Start Detect External Device(Keypad, U disk, SD card, FM,...)\n");

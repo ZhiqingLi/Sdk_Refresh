@@ -86,10 +86,8 @@ typedef struct SINGLE_LED_DISP
     uint8_t BledDuty;					//LED当前实时占空比
     uint8_t RledDuty;					//LED当前实时占空比
     uint8_t StepUpDuty;					//扫描占空比步进，利用这个实现灯光呼吸/闪烁等效果
-    uint8_t MinDispDuty;				//最小占空比，用于呼吸效果时防止占空比设置为0；
     uint8_t DispBitCnt;					//当前BIT位指针
     uint32_t DispChangeTime;			//每调整一个亮度等级的时间，单位：ms
-    uint32_t DisplayTime;				//每一个循环显示时间，单位：ms
 }SINGLE_LED_DISP_STRU;
 
 #ifdef __cplusplus

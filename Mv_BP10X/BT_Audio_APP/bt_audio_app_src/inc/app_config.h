@@ -67,7 +67,7 @@
 //****************************************************************************************
 
 /**UDisk播放模式**/
-#define	CFG_APP_USB_PLAY_MODE_EN
+//#define	CFG_APP_USB_PLAY_MODE_EN
 
 /**SD Card播放模式**/
 #define	CFG_APP_CARD_PLAY_MODE_EN
@@ -76,15 +76,15 @@
 #define	CFG_APP_LINEIN_MODE_EN
 
 #ifdef CFG_APP_LINEIN_MODE_EN
-//#define CFG_LINEIN_DET_EN
+#define CFG_LINEIN_DET_EN
 #ifdef	CFG_LINEIN_DET_EN
-	#define LINEIN_DET_GPIO					GPIOA9
-	#define LINEIN_DET_GPIO_IN 				GPIO_A_IN
-	#define LINEIN_DET_BIT_MASK				GPIO_INDEX9
-	#define LINEIN_DET_GPIO_IE 				GPIO_A_IE
-	#define LINEIN_DET_GPIO_OE 				GPIO_A_OE
-	#define LINEIN_DET_GPIO_PU 				GPIO_A_PU
-	#define LINEIN_DET_GPIO_PD 				GPIO_A_PD
+	#define LINEIN_DET_GPIO					GPIOB6
+	#define LINEIN_DET_GPIO_IN 				GPIO_B_IN
+	#define LINEIN_DET_BIT_MASK				GPIO_INDEX6
+	#define LINEIN_DET_GPIO_IE 				GPIO_B_IE
+	#define LINEIN_DET_GPIO_OE 				GPIO_B_OE
+	#define LINEIN_DET_GPIO_PU 				GPIO_B_PU
+	#define LINEIN_DET_GPIO_PD 				GPIO_B_PD
 #endif
 #endif
 
@@ -95,7 +95,7 @@
 #define CFG_APP_BT_MODE_EN
 
 /**收音机功能**/
-#define CFG_APP_RADIOIN_MODE_EN
+//#define CFG_APP_RADIOIN_MODE_EN
 #ifdef CFG_APP_RADIOIN_MODE_EN
 	#define	CFG_RADIO_CLK_M12
 	//#define CFG_RADIO_I2C_SD_SAME_PIN_EN//fm和sd复用data/clk
@@ -201,7 +201,7 @@
     #endif
 
 	#if CFG_RES_MIC_SELECT
-	#define	CFG_FUNC_MIC_KARAOKE_EN      //MIC karaoke功能选择
+		#define	CFG_FUNC_MIC_KARAOKE_EN      //MIC karaoke功能选择
 	#endif
 	
 	#ifdef CFG_FUNC_MIC_KARAOKE_EN
@@ -281,7 +281,7 @@
 //    1.录音支持2种情况，一是写入到SD卡/U盘；二是写入到Flash；
 //    2.以上2种情况不能同时支持，开启宏时注意一下
 //****************************************************************************************
-#define CFG_FUNC_RECORDER_EN
+//#define CFG_FUNC_RECORDER_EN
 #ifdef CFG_FUNC_RECORDER_EN
 	#define CFG_FUNC_RECORD_SD_UDISK	//录音到SD卡或者U盘
 	//#define CFG_FUNC_RECORD_FLASHFS 	//不可同时开启 CFG_FUNC_RECORD_SD_UDISK
@@ -547,14 +547,14 @@
 #define	CFG_FUNC_DEEPSLEEP_EN //app模式运行时 可反复睡眠/唤醒。
 #if defined(CFG_FUNC_DEEPSLEEP_EN) || defined(CFG_FUNC_MAIN_DEEPSLEEP_EN)
 	/**至少一个唤醒源**/ //Source(通道) 不可重复,唤醒IO和功能IO配置需一致。 参见:deepsleep.c
-		/*红外按键唤醒,注意CFG_PARA_WAKEUP_GPIO_IR和 唤醒键IR_KEY_POWER设置*/
+	/*红外按键唤醒,注意CFG_PARA_WAKEUP_GPIO_IR和 唤醒键IR_KEY_POWER设置*/
 //	#define CFG_PARA_WAKEUP_SOURCE_IR		SYSWAKEUP_SOURCE9_IR//固定source9
-		/*ADCKey唤醒 配合CFG_PARA_WAKEUP_GPIO_ADCKEY 唤醒键ADCKEYWAKEUP设置及其电平*/
+	/*ADCKey唤醒 配合CFG_PARA_WAKEUP_GPIO_ADCKEY 唤醒键ADCKEYWAKEUP设置及其电平*/
 	#define CFG_PARA_WAKEUP_SOURCE_ADCKEY	SYSWAKEUP_SOURCE1_GPIO//
 	#define CFG_PARA_WAKEUP_SOURCE_CEC		SYSWAKEUP_SOURCE2_GPIO//HDMI专用，CFG_PARA_WAKEUP_GPIO_CEC
 //	#define CFG_PARA_WAKEUP_SOURCE_RTC		SYSWAKEUP_SOURCE7_RTC//
-		/*注意:RTC唤醒默认是延时唤醒，影响rtc模式已设置的闹钟；如需指定时刻唤醒功能，请屏蔽下一行，在rtcmode设置闹钟。*/
-		#define CFG_PARA_WAKEUP_TIME_RTC	25//睡眠时长 秒	-
+	/*注意:RTC唤醒默认是延时唤醒，影响rtc模式已设置的闹钟；如需指定时刻唤醒功能，请屏蔽下一行，在rtcmode设置闹钟。*/
+	#define CFG_PARA_WAKEUP_TIME_RTC	25//睡眠时长 秒	-
 
 //	#define CFG_FUNC_WAKEUP_MCU_RESET		//唤醒后mcu复位
 #endif
@@ -578,14 +578,14 @@
 	//#define CFG_USE_SW_UART
 	
 	#ifdef CFG_USE_SW_UART
-		#define SW_UART_IO_PORT				    SWUART_GPIO_PORT_A//SWUART_GPIO_PORT_B
-		#define SW_UART_IO_PORT_PIN_INDEX	    1//bit num
+		#define SW_UART_IO_PORT				    SWUART_GPIO_PORT_B//SWUART_GPIO_PORT_B
+		#define SW_UART_IO_PORT_PIN_INDEX	    6//bit num
 		#define  CFG_UART_BANDRATE   			256000//DEBUG UART波特率设置
 	#else
 		#ifdef CFG_COMMUNICATION_BY_UART
 		#define CFG_UART_TX_PORT  				(1)//tx port  0--A6，1--A10, 2--A25
 		#else
-		#define CFG_UART_TX_PORT 				(2)//tx port  0--A6，1--A10, 2--A25
+		#define CFG_UART_TX_PORT 				(0)//tx port  0--A6，1--A10, 2--A25
 		#endif
 	#endif
 
@@ -685,7 +685,7 @@
 
 	#define CFG_RES_POWERKEY_ADC_EN         //power key脚上adc key功能使能，共5个key
 
-    #define CFG_RES_ADC_KEY_PORT_CH1		ADC_CHANNEL_GPIOA20_A23
+    //#define CFG_RES_ADC_KEY_PORT_CH1		ADC_CHANNEL_GPIOA20_A23
 	#define CFG_RES_ADC_KEY_CH1_ANA_EN		GPIO_A_ANA_EN
 	#define CFG_RES_ADC_KEY_CH1_ANA_MASK	GPIO_INDEX23
 	#define CFG_PARA_WAKEUP_GPIO_ADCKEY		WAKEUP_GPIOA23 //同步设置唤醒端口
@@ -697,11 +697,11 @@
 #endif //CFG_RES_ADC_KEY_USE
 
 /**IR按键**/
-#define CFG_RES_IR_KEY_SCAN				//启用device service Key扫描IRKey
+//#define CFG_RES_IR_KEY_SCAN				//启用device service Key扫描IRKey
 #if defined(CFG_RES_IR_KEY_SCAN) || defined(CFG_PARA_WAKEUP_SOURCE_IR)
 #define	CFG_RES_IR_KEY_USE
 
-#define CFG_RES_IR_NUMBERKEY //数字键操作功能
+	#define CFG_RES_IR_NUMBERKEY //数字键操作功能
 
 	#define CFG_RES_IR_PIN                  IR_GPIOB6//IR_GPIOB6,IR_GPIOB7,IR_GPIOA29
 	#define CFG_PARA_IR_SEL					IR_MODE_NEC

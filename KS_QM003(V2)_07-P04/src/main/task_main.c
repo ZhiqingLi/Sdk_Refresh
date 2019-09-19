@@ -88,12 +88,13 @@ void GuiTaskEntrance(void)
 	}
 	else
 #endif
-	if((IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP()
+	if((IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP() && gSys.IsRemindPowerOn
 #ifdef OPTION_CHARGER_DETECT
 	&& !IsInCharge()
 #endif
 	)
 	{
+		gSys.IsRemindPowerOn = FALSE;
 		SoundRemind(SOUND_PWR_ON);
 	}
 
@@ -350,6 +351,10 @@ void GuiTaskEntrance(void)
 		}
 		
 		gSys.CurModuleID = gSys.NextModuleID;//set mode to the next mode
+		if (gSys.IsRemindPowerOn) {
+			gSys.IsRemindPowerOn = FALSE;
+			SoundRemind(SOUND_PWR_ON);
+		}
 
 		// quick response
 		SetQuickResponseFlag(FALSE);

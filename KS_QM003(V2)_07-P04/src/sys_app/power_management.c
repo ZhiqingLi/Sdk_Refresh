@@ -50,7 +50,7 @@ TIMER BtBatteryDetTim;
 #define LOW_POWER_RESET_VOLTAGE		30		//低电检测恢复电池电量百分比
 
 //低电检测延时时间参数，用于消抖和提示音播放。
-#define LOW_POWEROFF_DELAY			(500)	//单位：10ms
+#define LOW_POWEROFF_DELAY			(1000)	//单位：10ms
 #define POWER_OFF_JITTER_TIMER		500
 
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置
@@ -66,7 +66,7 @@ TIMER BtBatteryDetTim;
    #define LDOIN_VOLTAGE_HIGH			3900
    #define LDOIN_VOLTAGE_MID			3650
    #define LDOIN_VOLTAGE_LOW			3500
-   #define LDOIN_VOLTAGE_OFF			3300	//低于此电压值进入关机powerdown状态
+   #define LDOIN_VOLTAGE_OFF			3400	//低于此电压值进入关机powerdown状态
 #endif
 
 //电压检测时不同的显示处理
@@ -299,7 +299,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 #ifdef	OPTION_CHARGER_DETECT
 		if(IsInCharge())		//充电器已经接入的处理
 		{	
-			//DBG("IsInCharge\n");
+			DBG("IsInCharge\n");
 			IsSystemPowerLow = FALSE;
 			LowPowerSoundCnt = LOW_POWER_DET_COUNT;
 			LowPowerDetCnt = (LOW_POWER_SOUND_CNT*100-LOW_POWEROFF_DELAY);
@@ -339,11 +339,11 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 		}
 #endif
 
-		if (LOW_POWEROFF_VOLTAGE >= GetCurBatterLevelAverage())
+		if ((LOW_POWEROFF_VOLTAGE >= GetCurBatterLevelAverage()) || IsSystemPowerLow)
 		{
 			//低于关机电压，进入关机流程
 			//停止正常工作流程，包括关显示、关DAC、关功放电源等动作
-			DBG("PowerMonitor, Low Voltage!PD. %d:%d\n", LowPowerDetCnt, LowPowerSoundCnt);
+			DBG("PowerMonitor, Low Voltage!PD. %d:%d:%d\n", LowPowerDetCnt, LowPowerSoundCnt, LdoinLevelAverage);
 			
 			//low level voltage detect in power on sequence, power down system directly
 			if(PowerOnInitFlag == TRUE)
@@ -352,6 +352,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				LowPowerSoundCnt = 1;
 				LowPowerDetCnt = (LOW_POWER_SOUND_CNT*100-LOW_POWEROFF_DELAY);
 				IsSystemPowerLow = TRUE; 
+				IsTimeOut(&PowerOffDetectTimer);	//先检测一次定时器，否则定时器检查会出错，很奇怪
 			}
 			    
 			if(LowPowerDetCnt >= (LOW_POWER_SOUND_CNT*100))
@@ -369,12 +370,13 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 				LowPowerDetCnt = 0;
 			}
 			
-			if(!LowPowerSoundCnt && (LowPowerDetCnt >= LOW_POWEROFF_DELAY*2)
+			if(((!LowPowerSoundCnt && (LowPowerDetCnt >= LOW_POWEROFF_DELAY))
+			|| (PowerOnInitFlag && (LdoinLevelAverage <= LDOIN_VOLTAGE_OFF)))
 #ifdef FUNC_WIFI_EN
-			&& (!WiFiFirmwareUpgradeStateGet())
+			&& !WiFiFirmwareUpgradeStateGet()
 #endif
 			) {
-				if((MODULE_ID_POWEROFF != gSys.CurModuleID) && IsTimeOut(&PowerOffDetectTimer))	/*MSG_COMMON_CLOSE only need send once*/
+				if(IsTimeOut(&PowerOffDetectTimer) && (MODULE_ID_POWEROFF != gSys.CurModuleID))	/*MSG_COMMON_CLOSE only need send once*/
 				{
 					/*if use push button, send message, for task's saving info.*/
 					APP_DBG("Low level voltage detected->send message common close\n");
@@ -428,7 +430,7 @@ void PowerMonitorInit(void)
 			LdoinSampleSum += (SarAdcChannelGetValue(ADC_POWER_MONITOR_PORT)*3400/4095);
 #else
 			LdoinSampleSum += SarAdcGetLdoinVoltage();		
-	  #endif	
+#endif	
 			WaitMs(5);
 		}		
 		//为后边的LDOIN检测初始化变量
@@ -491,7 +493,8 @@ void PowerMonitor(void)
 			if (IS_CUR_WORK_MODULE()
 			//&& !IS_RTC_WAKEUP()
 			&& !WiFiFirmwareUpgradeStateGet()
-			&& (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
+			&& IsTimeOut(&PowerOffDetectTimer)) {
+				TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
 				gSys.NextModuleID = MODULE_ID_IDLE;
 				MsgSend(MSG_COMMON_CLOSE);
 			}
@@ -514,7 +517,8 @@ void PowerMonitor(void)
 		else {
 			IsBatterFull = FALSE;
 			IsFristCharge = TRUE;
-			if (!IS_CUR_WORK_MODULE() && (MODULE_ID_UNKNOWN == gSys.NextModuleID)) {
+			if (!IS_CUR_WORK_MODULE() && IsTimeOut(&PowerOffDetectTimer)) {
+				TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
 				gSys.NextModuleID = MODULE_ID_WIFI;
 				MsgSend(MSG_COMMON_CLOSE);
 			}

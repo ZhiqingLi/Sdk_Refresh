@@ -29,7 +29,7 @@
 
 //蓝牙名称支持中文,需要使用URL编码
 //BLE的名称修改在ble广播数据中体现(ble_app_func.c)
-#define BT_NAME						"BP10_BT"
+#define BT_NAME						"BP_BT188"
 #define BT_NAME_SIZE				40//最大支持name size,不能修改
 #define BT_ADDR_SIZE				6
 

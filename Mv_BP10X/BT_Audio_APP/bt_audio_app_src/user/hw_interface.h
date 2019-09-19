@@ -28,8 +28,8 @@
 
 //------系统电源开关控制IO口选择--------------------------------------------//
 //GPIOB6做POWER ON,OFF控制
-#define POWER_CTL_PORT             B
-#define POWER_CTL_PIN              0//GPIO_INDEX31
+#define POWER_CTL_PORT             A
+#define POWER_CTL_PIN              GPIO_INDEX29
 //------------------------------------------------------------------------//
 
 //------外部软开关检测IO选择----------------------------------------------//
@@ -90,7 +90,7 @@
 
 //------MUTE电路或耳放MUTE控制IO选择--------------------------------------//
 #define MUTE_CTL_PORT              B
-#define MUTE_CTL_PIN               0//GPIO_INDEX21
+#define MUTE_CTL_PIN               GPIO_INDEX4
 
 //------------------------------------------------------------------------//
 
@@ -390,17 +390,20 @@
 //-------------------------------------------------------------------------------//
 
 //------外部MUTE电路或耳放控制相关宏定义-----------------------------------------//
-#if MUTE_CTL_PIN 
-#define MUTE_OFF()	  do{\
+#if 1
+//开功放
+#define MUTE_OFF()	  do{\													
 						 GPIO_RegOneBitClear(MUTE_CTL_IE, MUTE_CTL_PIN);\
 						 GPIO_RegOneBitSet(MUTE_CTL_OE, MUTE_CTL_PIN);\
 						 GPIO_RegOneBitSet(MUTE_CTL_OUT, MUTE_CTL_PIN);\
+						 DBG("GPIO--->amplifier unmute %d!!!\n", MUTE_CTL_PIN);\
 						 }while(0)
-						 
+//关功放						 
 #define MUTE_ON()	   do{\
 						 GPIO_RegOneBitClear(MUTE_CTL_IE, MUTE_CTL_PIN);\
 						 GPIO_RegOneBitSet(MUTE_CTL_OE, MUTE_CTL_PIN);\
 						 GPIO_RegOneBitClear(MUTE_CTL_OUT, MUTE_CTL_PIN);\
+						 DBG("GPIO--->amplifier mute %d!!!\n", MUTE_CTL_PIN);\
 						 }while(0)
 #else
 #define MUTE_OFF()
@@ -430,20 +433,22 @@
 
 
 //------外部总电源控制相关宏定义-------------------------------------------------//
-#if POWER_CTL_PIN==0
-#define POWER_ON()
-#define POWER_OFF()
-#else
+#if 1
 #define POWER_ON()     do{\
 						 GPIO_RegOneBitClear(POWER_CTL_IE, POWER_CTL_PIN);\
 						 GPIO_RegOneBitSet(POWER_CTL_OE, POWER_CTL_PIN);\
 						 GPIO_RegOneBitSet(POWER_CTL_OUT, POWER_CTL_PIN);\
+						 DBG("GPIO--->power on!\n");\
                          }while(0);
 #define POWER_OFF()     do{\
 						 GPIO_RegOneBitClear(POWER_CTL_IE, POWER_CTL_PIN);\
 						 GPIO_RegOneBitSet(POWER_CTL_OE, POWER_CTL_PIN);\
 						 GPIO_RegOneBitClear(POWER_CTL_OUT, POWER_CTL_PIN);\
+						 DBG("GPIO--->power off!!!\n");\
                          }while(0);
+#else
+#define POWER_ON()
+#define POWER_OFF()
 #endif
 //-------------------------------------------------------------------------------//
 
