@@ -509,7 +509,7 @@ int32_t main(void)
 				gSys.SleepLedOffCnt++;
 				if (gSys.SleepLedOffCnt >= (6000*SLEEP_LED_OFF_TMR)) {
 					gSys.SleepLedOffFlag = TRUE;
-					MsgSend(MSG_SOUND_SLEEP_ON);
+					//MsgSend(MSG_SOUND_SLEEP_ON);
 					APP_DBG("Enter sleep mode;\n");
 				}
 			}

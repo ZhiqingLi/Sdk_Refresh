@@ -50,7 +50,7 @@ TIMER BtBatteryDetTim;
 #define LOW_POWER_RESET_VOLTAGE		30		//低电检测恢复电池电量百分比
 
 //低电检测延时时间参数，用于消抖和提示音播放。
-#define LOW_POWEROFF_DELAY			(1000)	//单位：10ms
+#define LOW_POWEROFF_DELAY			(1200)	//单位：10ms
 #define POWER_OFF_JITTER_TIMER		500
 
 //以下定义不同的电压检测事件的触发电压(单位mV)，用户根据自身系统电池的特点来配置

@@ -85,7 +85,8 @@ typedef struct SINGLE_LED_DISP
     uint8_t RledFlag;					//利用每个bit控制LED闪烁，呼吸等
     uint8_t BledDuty;					//LED当前实时占空比
     uint8_t RledDuty;					//LED当前实时占空比
-    uint8_t StepUpDuty;					//扫描占空比步进，利用这个实现灯光呼吸/闪烁等效果
+    uint8_t BledStepUpDuty;				//扫描占空比步进，利用这个实现灯光呼吸/闪烁等效果
+    uint8_t RledStepUpDuty;					//扫描占空比步进，利用这个实现灯光呼吸/闪烁等效果
     uint8_t DispBitCnt;					//当前BIT位指针
     uint32_t DispChangeTime;			//每调整一个亮度等级的时间，单位：ms
 }SINGLE_LED_DISP_STRU;

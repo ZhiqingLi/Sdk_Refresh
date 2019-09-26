@@ -352,8 +352,8 @@ void func_fmrx_enter(void)
     bsp_karaok_exit(AUDIO_PATH_KARAOK);
 #endif
 #if BT_BACKSTAGE_EN
-  if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
-    }else
+	if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
+	}else
 #endif // BT_BACKSTAGE_EN
     {
         bsp_fmrx_init();
@@ -375,8 +375,8 @@ void func_fmrx_enter(void)
 
     fmrx_cb.sta = FMRX_PLAY;
 #if BT_BACKSTAGE_EN
-  if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
-    }else
+	if((func_cb.sta==FUNC_MUSIC)&&(dev_is_online(DEV_UDISK))&&(sys_cb.cur_dev==DEV_UDISK)) {
+	}else
 #endif // BT_BACKSTAGE_EN
     {
         bsp_fmrx_set_freq(fmrx_cb.freq);
@@ -421,7 +421,9 @@ void func_fmrx_exit(void)
     }
 
 #if (!SYS_KARAOK_EN)
-    set_sys_clk(fmrx_cb.sys_clk);   //时钟还原
+	if (is_func_fmrx_en()) {						//20190921，解决没有配置FM时时钟设置错误引起死机
+		set_sys_clk(fmrx_cb.sys_clk);   //时钟还原
+	}
 #endif
 
     MEMCON |= 0x3ff;                   // ram & rom memory standby when no peripheral access

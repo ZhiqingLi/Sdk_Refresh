@@ -88,13 +88,12 @@ void GuiTaskEntrance(void)
 	}
 	else
 #endif
-	if((IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP() && gSys.IsRemindPowerOn
+	if((IS_CUR_WORK_MODULE()) && !IS_RTC_WAKEUP()
 #ifdef OPTION_CHARGER_DETECT
 	&& !IsInCharge()
 #endif
 	)
 	{
-		gSys.IsRemindPowerOn = FALSE;
 		SoundRemind(SOUND_PWR_ON);
 	}
 

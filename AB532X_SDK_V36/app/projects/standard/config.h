@@ -12,17 +12,17 @@
 /*****************************************************************************
  * Module    : Function选择相关配置
  *****************************************************************************/
-#define FUNC_MUSIC_EN                   0   //是否打开MUSIC功能
+#define FUNC_MUSIC_EN                   1   //是否打开MUSIC功能
 #define FUNC_CLOCK_EN                   0   //是否打开时钟功能
-#define FUNC_FMRX_EN                    0   //是否打开FM功能
+#define FUNC_FMRX_EN                    1   //是否打开FM功能
 #define FUNC_BT_EN                      1   //是否打开蓝牙功能
-#define FUNC_BTHID_EN                   0   //是否打开独立自拍器模式
-#define FUNC_AUX_EN                     0   //是否打开AUX功能
-#define FUNC_USBDEV_EN                  0   //是否打开USB DEVICE功能
+#define FUNC_BTHID_EN                   1   //是否打开独立自拍器模式
+#define FUNC_AUX_EN                     1   //是否打开AUX功能
+#define FUNC_USBDEV_EN                  1   //是否打开USB DEVICE功能
 #define FUNC_SPEAKER_EN                 0   //是否打开Speaker模式
 #define FUNC_SPDIF_EN                   0   //是否打开SPDIF功能
 #define FUNC_FMAM_FREQ_EN               0   //是否打开FMAM读频率显示功能
-#define FUNC_IDLE_EN                    1   //是否打开IDLE功能
+#define FUNC_IDLE_EN                    0   //是否打开IDLE功能
 
 /*****************************************************************************
  * Module    : 系统功能选择配置
@@ -287,7 +287,7 @@
 #define USER_KEY_KNOB_EN                0           //旋钮的使用，0为不使用
 #define USER_KEY_KNOB_LEVEL             16          //旋钮的级数
 
-#define USER_ADC_DETECT_EN				1           //自定义ADC检测，0为不使用;20190624
+#define USER_ADC_DETECT_EN				0           //自定义ADC检测，0为不使用;20190624
 
 #define USER_KEY_DOUBLE_EN              1           //按键双击使能
 #define USER_KEY_THRICE_EN              0           //按键三击功能，需要先开双击功能
@@ -396,7 +396,7 @@
 #define RGB_SERIAL_EN                   0           //RGB串行推灯功能
 #define PWM_RGB_EN                      0           //PWM RGB三色灯功能
 #define ENERGY_LED_EN                   0           //能量灯软件PWM显示,声音越大,点亮的灯越多.
-#define	PWM_TIMER_EN					1			//定时器PWM功能开关
+#define	PWM_TIMER_EN					0			//定时器PWM功能开关
 //PWM占用定时器选择,注意用Timer3时遥控功能不能实现，用Timer4/5时 TWS不能实现
 #define PWM_TIMER_SEL					(PWM_TIMER4|PWM_TIMER5)	
 #define SYS_PARAM_RTCRAM                0           //是否系统参数保存到RTCRAM

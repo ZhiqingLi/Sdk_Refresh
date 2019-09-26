@@ -436,6 +436,15 @@ void KeyScan(void)
 			MsgSend(MSG_SOUND_LOCK_ON);
 			return;
 		}
+
+		/*if ((WiFiWwwStateGet() != WIFI_STATUS_WWW_ENABLE)
+		&& (MSG_WIFI_PREV_CH == Msg
+		||	MSG_WIFI_NEXT_CH == Msg
+		||	MSG_WIFI_TALK == Msg
+		||	MSG_WIFI_SAVE == Msg)) {
+			APP_DBG ("No wifi connected, ignore Msg = %x;\n", Msg);
+			return;
+		}*/
 		
 		if(!WiFiFirmwareUpgradeStateGet())				//WiFi升级中禁止按键操作
 #endif

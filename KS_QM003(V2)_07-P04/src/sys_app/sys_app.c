@@ -101,7 +101,7 @@ void SysVarInit(void)
 #endif
 	gSys.MuteFlag = TRUE;
 	gSys.WakeUpSource = gWakeUpFlag;
-	gSys.IsRemindPowerOn = TRUE;
+	gSys.IsRemindPowerOn = FALSE;
 
 	// 装载断点信息，设置信息
 #ifdef FUNC_BREAKPOINT_EN

@@ -36,6 +36,9 @@ void loudspeaker_mute(void)
     if (p->sfr == NULL) {
         return;
     }
+
+	p->sfr[GPIOxDE] |= BIT(p->num);
+	p->sfr[GPIOxDIR] &= ~BIT(p->num);	//输出
     if (xcfg_cb.high_mute) {
         p->sfr[GPIOxSET] = BIT(p->num);
     } else {
@@ -53,12 +56,16 @@ void loudspeaker_unmute(void)
     if (p->sfr == NULL) {
         return;
     }
-    if (xcfg_cb.high_mute) {
-        p->sfr[GPIOxCLR] = BIT(p->num);
-    } else {
-        p->sfr[GPIOxSET] = BIT(p->num);
-    }
-    if (xcfg_cb.ampabd_type && !xcfg_cb.high_mute) {
+    
+	p->sfr[GPIOxDE] |= BIT(p->num);
+	p->sfr[GPIOxDIR] &= ~BIT(p->num);	//输出
+	if (xcfg_cb.high_mute) {
+		p->sfr[GPIOxCLR] = BIT(p->num);
+	} else {
+		p->sfr[GPIOxSET] = BIT(p->num);
+	}
+	
+    if ((xcfg_cb.ampabd_type == 1) && !xcfg_cb.high_mute) {
         delay_5ms(4);           //先拉高20ms
         if (amp_conf_type) {    //AB类脉冲控制
             for (u32 i = 0; i < 4; i++) {
@@ -74,6 +81,27 @@ void loudspeaker_unmute(void)
                 p->sfr[GPIOxSET] = BIT(p->num);
                 delay_us(75);
             }
+        }
+    } else if (xcfg_cb.ampabd_type == 2) {
+    	 if (amp_conf_type) {    //AB类设置为输入10K上拉
+			p->sfr[GPIOxDE] |= BIT(p->num);
+			p->sfr[GPIOxDIR] |= BIT(p->num);	//输入
+			if (xcfg_cb.high_mute) {
+				p->sfr[GPIOxPU] &= ~BIT(p->num);
+				p->sfr[GPIOxPD] |= BIT(p->num);
+			} else {
+				p->sfr[GPIOxPU] |= BIT(p->num);
+				p->sfr[GPIOxPD] &= ~BIT(p->num);
+			}
+        } else {                //D类设置为输出10K上拉
+            p->sfr[GPIOxDE] |= BIT(p->num);
+			p->sfr[GPIOxDIR] &= ~BIT(p->num);	//输出
+			p->sfr[GPIOxPU] |= BIT(p->num);
+			if (xcfg_cb.high_mute) {
+				p->sfr[GPIOxCLR] = BIT(p->num);
+			} else {
+				p->sfr[GPIOxSET] |= BIT(p->num);
+			}
         }
     }
 }
@@ -99,12 +127,15 @@ void amp_sel_cfg_d(void)
     if (p->sfr == NULL) {
         return;
     }
-    p->sfr[GPIOxDE] |= BIT(p->num);
-    p->sfr[GPIOxDIR] &= ~BIT(p->num);
-	if (xcfg_cb.ampabd_level){				//20190224
-    	p->sfr[GPIOxSET] = BIT(p->num);
-    }else {
-		p->sfr[GPIOxCLR] = BIT(p->num);
+
+    if (0 == xcfg_cb.ampabd_type) {				//只实现IO控制模式切换，其他方式在解MUTE时设置
+	    p->sfr[GPIOxDE] |= BIT(p->num);
+	    p->sfr[GPIOxDIR] &= ~BIT(p->num);
+		if (xcfg_cb.ampabd_level){				//20190224
+	    	p->sfr[GPIOxSET] = BIT(p->num);
+	    }else {
+			p->sfr[GPIOxCLR] = BIT(p->num);
+		}
 	}
 }
 
@@ -124,12 +155,15 @@ void amp_sel_cfg_ab(void)
     if (p->sfr == NULL) {
         return;
     }
-    p->sfr[GPIOxDE] |= BIT(p->num);
-    p->sfr[GPIOxDIR] &= ~BIT(p->num);
-	if (xcfg_cb.ampabd_level){				//20190224
-    	p->sfr[GPIOxCLR] = BIT(p->num);
-    }else {
-		p->sfr[GPIOxSET] = BIT(p->num);
+
+    if (0 == xcfg_cb.ampabd_type) {				//只实现IO控制模式切换，其他方式在解MUTE时设置
+		p->sfr[GPIOxDE] |= BIT(p->num);
+		p->sfr[GPIOxDIR] &= ~BIT(p->num);
+		if (xcfg_cb.ampabd_level){				//20190224
+	    	p->sfr[GPIOxCLR] = BIT(p->num);
+	    }else {
+			p->sfr[GPIOxSET] = BIT(p->num);
+		}
 	}
 }
 

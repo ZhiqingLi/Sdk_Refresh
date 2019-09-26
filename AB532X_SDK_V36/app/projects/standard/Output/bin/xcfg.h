@@ -20,7 +20,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 high_mute                        : 1;   //高电平MUTE
     u8 spk_mute_io_sel;                         //功放MUTE控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
     u8 loudspeaker_unmute_delay;                //功放MUTE延时(单位5ms)
-    u8 ampabd_type;                             //功放AB/D控制模式: 0:独立IO电平控制, 1:mute脉冲控制
+    u8 ampabd_type;                             //功放AB/D控制模式: 0:独立IO电平控制, 1:mute脉冲控制, 2:GPIO输出电压控制
     u8 ampabd_io_sel;                           //功放AB/D控制IO选择: 0:None, 1:PA0, 2:PA1, 3:PA2, 4:PA3, 5:PA4, 6:PA5, 7:PA6, 8:PA7, 9:PB0, 10:PB1, 11:PB2, 12:PB3, 13:PB4, 14:PE0, 15:PE1, 16:PE2, 17:PE3, 18:PE4, 19:PE5, 20:PE6, 21:PE7, 22:PF0, 23:PF1, 24:PF2, 25:PF3, 26:PF4
     u32 ampabd_level                     : 1;   //D类高电平
     u32 earphone_det_iosel               : 6;   //耳机检测IO选择: None: 0, PA0: 1, PA1: 2, PA2: 3, PA3: 4, PA4: 5, PA5: 6, PA6: 7, PA7: 8, PB0: 9, PB1: 10, PB2: 11, PB3: 12, PB4: 13, PE0: 14, PE1: 15, PE2: 16, PE3: 17, PE4: 18, PE5: 19, PE6: 20, PE7: 21, PF0: 22, PF1: 23, PF2: 24, PF3: 25, PF4: 26, PF5: 27, 复用SDCLK检测: 28, 复用SDCMD检测: 29, 复用PWRKEY检测: 30
@@ -77,6 +77,7 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
     u32 bt_a2dp_en                       : 1;   //音乐播放功能
     u32 bt_a2dp_vol_ctrl_en              : 1;   //音乐音量同步
     u32 bt_sco_en                        : 1;   //通话功能
+    u32 bt_sco_key                       : 2;   //接听电话按键配置: NONE: 0, 点按PLAY键: 1, 点按HSF键: 2
     u32 bt_hfp_private_en                : 1;   //私密接听功能
     u32 bt_hfp_ring_number_en            : 1;   //来电报号功能
     u32 bt_spp_en                        : 1;   //串口功能
@@ -276,21 +277,21 @@ typedef struct __attribute__((packed)) _xcfg_cb_t {
         u8 bluepat;
         u8 unit;
         u8 cycle;
-    } led_usb_sd_play;                          //通话闪灯控制
+    } led_usb_sd_play;                          //USB/SD播放闪灯控制
     u32 led_auxplay_config_en            : 1;   //AUX播放状态配置LED
     struct __attribute__((packed)) {
         u8 redpat;
         u8 bluepat;
         u8 unit;
         u8 cycle;
-    } led_aux_playing;                          //通话闪灯控制
+    } led_aux_playing;                          //AUX播放闪灯控制
     u32 led_fmplay_config_en             : 1;   //FM播放状态配置LED
     struct __attribute__((packed)) {
         u8 redpat;
         u8 bluepat;
         u8 unit;
         u8 cycle;
-    } led_fm_playing;                           //通话闪灯控制
+    } led_fm_playing;                           //FM播放闪灯控制
     u32 led_lowbat_config_en             : 1;   //低电状态配置LED
     struct __attribute__((packed)) {
         u8 redpat;

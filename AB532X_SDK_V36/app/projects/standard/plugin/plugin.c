@@ -137,10 +137,6 @@ const uint16_t tbl_adc_detect_val[5][2] = {
     {0xff, EVT_ADC_DET_HIG},
 };
 
-static u16 jitter_cnt = 0;
-static u16 adc_max[5] = {0,0,0,0,0};
-static u16 adc_val_cnt[5] = {0,0,0,0,0};
-
 //每5Ms检测一次
 AT(.com_text.port.key)
 void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
@@ -148,6 +144,9 @@ void adc_detect_process(uint16_t *adc_event, uint8_t adc_val)
 	//水泵电流是交流峰值
     #define ADC_JITTER_VAL (5000/5)   //峰值判
     uint8_t adc_index = 0, val_index = 0;
+    static u16 jitter_cnt = 0;
+	static u16 adc_max[5] = {0,0,0,0,0};
+	static u16 adc_val_cnt[5] = {0,0,0,0,0};
 
 	if ((func_idle_work_state_get() >= 1) && (func_idle_work_state_get() <= 3)) {
 		if (jitter_cnt++ < ADC_JITTER_VAL) {

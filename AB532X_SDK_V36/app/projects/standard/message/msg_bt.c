@@ -48,9 +48,9 @@ void func_bt_message(u16 msg)
     	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 2)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {
-	        	bt_nor_disconnect();
+	        	bt_disconnect();
 	        } else {
-	        	bt_nor_connect();
+	        	bt_connect();
 	        }
         }
         break;
@@ -59,9 +59,9 @@ void func_bt_message(u16 msg)
     	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 3)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {
-	        	bt_nor_disconnect();
+	        	bt_disconnect();
 	        } else {
-	        	bt_nor_connect();
+	        	bt_connect();
 	        }
         }
         break;
@@ -117,9 +117,9 @@ void func_bt_message(u16 msg)
     	if (xcfg_cb.bt_key_discon_en && (xcfg_cb.bt_key_discon_mode == 1)) {
 	    	bsp_clr_mute_sta();
 	    	if (bt_nor_is_connected()) {
-	        	bt_nor_disconnect();
+	        	bt_disconnect();
 	        } else {
-	        	bt_nor_connect();
+	        	bt_connect();
 	        }
         }
 		break;
@@ -209,22 +209,40 @@ void sfunc_bt_ring_message(u16 msg)
 {
     switch (msg) {
     case KU_PLAY:
-    //case KU_HSF:                //接听
     case KU_PLAY_POWER:
     case KU_PLAY_MODE:
     case KU_PLAY_HSF:
-        bsp_clr_mute_sta();
-        bt_call_answer_incoming();
+    	if (xcfg_cb.bt_sco_key == 1) {
+	        bsp_clr_mute_sta();
+	        bt_call_answer_incoming();
+        }
         break;
 
     case KL_PLAY:
-    //case KL_HSF:
     case KL_PLAY_HSF:
     case KL_PLAY_POWER:
     case KL_PLAY_MODE:
-        bsp_clr_mute_sta();
-        bt_call_terminate();    //挂断
+    	if (xcfg_cb.bt_sco_key == 1) {
+	        bsp_clr_mute_sta();
+	        bt_call_terminate();    //挂断
+	    }
         break;
+
+	case KU_HSF:                //接听
+	case KU_HSF_POWER:
+		if (xcfg_cb.bt_sco_key == 2) {
+			bsp_clr_mute_sta();
+		    bt_call_answer_incoming();
+		}
+		break;
+
+	case KL_HSF:               
+	case KL_HSF_POWER:
+		if (xcfg_cb.bt_sco_key == 2) {
+			bsp_clr_mute_sta();
+			bt_call_terminate();    //挂断
+		}
+		break;
 
     case MSG_SYS_1S:
         bt_send_msg(BT_MSG_HFP_REPORT_BAT);
@@ -241,19 +259,34 @@ void sfunc_bt_call_message(u16 msg)
     u8 call_status;
     switch (msg) {
     case KU_PLAY:
-    //case KU_HSF:
 	case KU_PLAY_HSF:
     case KU_PLAY_POWER:
     case KU_PLAY_MODE:
-        bsp_clr_mute_sta();
-        call_status = bt_get_call_indicate();
-        if(call_status == BT_CALL_INCOMING) {
-            bt_call_answer_incoming();  //接听第2路通话
-        } else {
-            bt_call_terminate();        //挂断当前通话
-            func_bt_mp3_res_play(RES_BUF_CALLOUT_MP3, RES_LEN_CALLOUT_MP3);
+    	if (xcfg_cb.bt_sco_key == 1) {
+	        bsp_clr_mute_sta();
+	        call_status = bt_get_call_indicate();
+	        if(call_status == BT_CALL_INCOMING) {
+	            bt_call_answer_incoming();  //接听�?路通话
+	        } else {
+	            bt_call_terminate();        //挂断当前通话
+	            func_bt_mp3_res_play(RES_BUF_CALLOUT_MP3, RES_LEN_CALLOUT_MP3);
+	        }
         }
         break;
+
+	case KU_HSF:                
+	case KU_HSF_POWER:
+		if (xcfg_cb.bt_sco_key == 2) {
+			bsp_clr_mute_sta();
+	        call_status = bt_get_call_indicate();
+	        if(call_status == BT_CALL_INCOMING) {
+	            bt_call_answer_incoming();  //接听�?路通话
+	        } else {
+	            bt_call_terminate();        //挂断当前通话
+	            func_bt_mp3_res_play(RES_BUF_CALLOUT_MP3, RES_LEN_CALLOUT_MP3);
+	        }
+		}
+		break;
 
 	case KU_PREV_VOL_DOWN:
 	case KL_VOL_DOWN_PREV:
@@ -261,7 +294,6 @@ void sfunc_bt_call_message(u16 msg)
 	case KU_NEXT_VOL_UP:
 	case KL_VOL_UP_NEXT:
 	case KU_NEXT:
-    case KL_PLAY:
         bsp_clr_mute_sta();
 #if BT_HFP_CALL_PRIVATE_EN
         if (xcfg_cb.bt_hfp_private_en) {
@@ -271,15 +303,33 @@ void sfunc_bt_call_message(u16 msg)
 #endif // BT_HFP_CALL_PRIVATE_EN
         break;
 
-    /*case KL_HSF:
-        bsp_clr_mute_sta();
-        call_status = bt_get_call_indicate();
-        if(call_status == BT_CALL_INCOMING) {
-            bt_call_terminate();        //拒接第2路通话
-        } else if(call_status == BT_CALL_3WAY_CALL) {
-            bt_call_swap();             //切换两路通话
+    case KL_PLAY:
+    case KL_PLAY_HSF:
+    case KL_PLAY_POWER:
+    case KL_PLAY_MODE:
+    	if (xcfg_cb.bt_sco_key == 1) {
+			bsp_clr_mute_sta();
+			call_status = bt_get_call_indicate();
+			if(call_status == BT_CALL_INCOMING) {
+				bt_call_terminate();        //拒接�?路通话
+			} else if(call_status == BT_CALL_3WAY_CALL) {
+				bt_call_swap();             //切换两路通话
+			}
+	    }
+
+
+    case KL_HSF:
+    case KL_HSF_POWER:
+    	if (xcfg_cb.bt_sco_key == 2) {
+	        bsp_clr_mute_sta();
+	        call_status = bt_get_call_indicate();
+	        if(call_status == BT_CALL_INCOMING) {
+	            bt_call_terminate();        //拒接�?路通话
+	        } else if(call_status == BT_CALL_3WAY_CALL) {
+	            bt_call_swap();             //切换两路通话
+	        }
         }
-        break;*/
+        break;
 
     case KL_NEXT_VOL_UP:
     case KH_NEXT_VOL_UP:

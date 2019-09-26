@@ -42,7 +42,7 @@ void bsp_saradc_init(u16 adc_ch)
     adc_cb.sfr = (psfr_t)(&SADCDAT0);           //SADCDAT SFR
     adc_cb.channel = adc_ch;
     saradc_init(adc_cb.channel);
-    saradc_setup_time_set(VBAT2_ADCCH, 3);      //如通过IO检测电池电压, 当然上下拉分压电阻比较大,如500K, 需要加大采样的建立时间(采样延时)
+    saradc_setup_time_set(VBAT2_ADCCH, 3);      //如通过IO检测电池电�? 当然上下拉分压电阻比较大,�?00K, 需要加大采样的建立时间(采样延时)
 #if USER_ADKEY_MUX_LED
     saradc_baud_set(0x09);
     saradc_setup_time_set(ADKEY_CH, 3);
@@ -59,7 +59,7 @@ void bsp_saradc_init(u16 adc_ch)
     saradc_kick_start(adc_cb.channel, USER_ADKEY_MUX_LED);
 
 #if VBAT_DETECT_EN
-    while(!get_adc_val());                  //获取一次初值，再kick一次
+    while(!get_adc_val());                  //获取一次初值，再kick一�?
     adc_cb.vbat_val =  (uint)adc_cb.vbat2 * VBG_VOLTAGE / adc_cb.bg;
     adc_cb.vbat_total = adc_cb.vbat_val << 5;
     sys_cb.vbat = get_vbat_val();
@@ -180,7 +180,7 @@ static u8 get_adkey2(void)
     u8 num = 0;
     u8 *ptr;
 
-    //配置工具是否使能了第二组ADKEY2？
+    //配置工具是否使能了第二组ADKEY2�?
     if (!xcfg_cb.user_adkey2_en) {
         return NO_KEY;
     }
@@ -209,7 +209,7 @@ static u8 get_pwrkey(void)
     u16 key_val = ((u32)adc_cb.wko_val << 8) / adc_cb.vrtc_val;
     u8 *ptr;
 
-//    //配置工具是否使能了PWRKEY？
+//    //配置工具是否使能了PWRKEY�?
     if (!xcfg_cb.user_pwrkey_en) {
         return NO_KEY;
     }
@@ -264,10 +264,10 @@ u16 get_vbat_val(void)
 {
     static u16 vbat_bak = 0;
     u32 vbat = (u32)adc_cb.vbat2 * VBG_VOLTAGE / adc_cb.bg;
-    //不同方案可能采用不同 vbat 滤波算法, 在方案对应的plugin.c中处理
+    //不同方案可能采用不同 vbat 滤波算法, 在方案对应的plugin.c中处�?
     plugin_vbat_filter(&vbat);
-    //默认的取平均值算法.
-    adc_cb.vbat_total = adc_cb.vbat_total - adc_cb.vbat_val + vbat; //均值
+    //默认的取平均值算�?
+    adc_cb.vbat_total = adc_cb.vbat_total - adc_cb.vbat_val + vbat; //均�?
     adc_cb.vbat_val = adc_cb.vbat_total>>5;
 
     if(adc_cb.vbat_val > vbat_bak) {
@@ -293,7 +293,7 @@ int is_lowpower_vbat_warning(void)
                 return 1;       //VBAT低电关机
             }
         }
-        return 0;               //VBAT低电不关机
+        return 0;               //VBAT低电不关�?
     }
 #if WARNING_LOW_BATTERY
     else {
@@ -350,7 +350,7 @@ bool power_off_check(void)
                 pwrkey_pressed_flag = 1;
             }
             if (!sys_cb.poweron_flag) {
-                if (tick_check_expire(ticks, PWRON_PRESS_TIME)) {                   //长按开机时间配置
+                if (tick_check_expire(ticks, PWRON_PRESS_TIME)) {                   //长按开机时间配�?
                     sys_cb.poweron_flag = 1;
                 }
             }
@@ -385,7 +385,7 @@ bool power_off_check(void)
                 continue;
             }
 #endif // LINEIN_2_PWRDOWN_EN
-            //长按PP/POWER开机
+            //长按PP/POWER开�?
             gui_display(DISP_POWERON);
             led_power_up();
             dac_restart();
@@ -448,7 +448,7 @@ bool is_powron_frist_enable(void)
 }
 
 AT(.text.bsp.power)
-void charge_full_bled_on_time_check(void)  //1S调用 一次
+void charge_full_bled_on_time_check(void)  //1S调用 一�?
 {
     if (BLED_CHARGE_FULL_EN && LED_DISP_EN) {
         printf("ckcnt = %d\n",sys_cb.charge_full_bled_on_cnt);
@@ -498,7 +498,7 @@ void power_on_check(void)
     if (!xcfg_cb.user_pwrkey_en) {
         return;
     }
-    //第一次上电是否直接开机
+    //第一次上电是否直接开�?
     if (is_powron_frist_enable()) {
         return;
     }
@@ -509,7 +509,7 @@ void power_on_check(void)
     }
 #endif // USER_PWRKEY
     if (rtccon8 & BIT(0)) {
-        return;                                                     //长按PWRKEY 10S复位后直接开机。
+        return;                                                     //长按PWRKEY 10S复位后直接开机�?
     }
 #if CHARGE_FINISH_INTO_LOWPOWER
     if ((CHARGE_FINISH_2_LOWPOWER == xcfg_cb.charge_warehouse_set) || (CHARGE_OUT_2_POWERON == xcfg_cb.charge_warehouse_set)) {
@@ -539,7 +539,7 @@ void power_on_check(void)
                 pwrkey_pressed_flag = 1;
             }
             if (!sys_cb.poweron_flag) {
-                if (tick_check_expire(ticks, PWRON_PRESS_TIME)) {               //长按开机时间配置
+                if (tick_check_expire(ticks, PWRON_PRESS_TIME)) {               //长按开机时间配�?
                     sys_cb.poweron_flag = 1;
                 }
             }
@@ -574,7 +574,7 @@ void power_on_check(void)
                             sys_clk_restore(buf);
                         }
                         printf("charge finish\n");
-                        if (charge_finish_into_lowpower_check(1)) {  //充电完成后, 是否要进入低电模式
+                        if (charge_finish_into_lowpower_check(1)) {  //充电完成�? 是否要进入低电模�?
                             if (p111_en) {
                                 pll1_enable();
                             }
@@ -592,7 +592,7 @@ void power_on_check(void)
 
         if (sys_cb.poweron_flag) {
 #if VBAT_DETECT_EN
-            if (sys_cb.vbat <= 2950) {  //电压小于2.95v不开机
+            if (sys_cb.vbat <= 2950) {  //电压小于2.95v不开�?
                 continue;
             }
 #endif
@@ -604,7 +604,7 @@ void power_on_check(void)
                 continue;
             }
 #endif // LINEIN_2_PWRDOWN_EN
-            //长按PP/POWER开机
+            //长按PP/POWER开�?
 #if CHARGE_FINISH_INTO_LOWPOWER
             if(charge_into_rc_flag){
                 sys_clk_restore(buf);
@@ -615,7 +615,7 @@ void power_on_check(void)
 #endif // CHARGE_FINISH_INTO_LOWPOWER
             break;
         } else {
-            //PWKKEY松开，立刻开关
+            //PWKKEY松开，立刻开�?
             if (!pwrkey_pressed_flag) {
                 if (CHARGE_DC_IN()) {
                     continue;
@@ -625,7 +625,7 @@ void power_on_check(void)
                         sys_clk_restore(buf);
                     }
                      if (CHARGE_OUT_2_POWERON == xcfg_cb.charge_warehouse_set) {
-                        if ((rtccon8 & BIT(4)) || (rtccon3 & BIT(1))) {   //VUSB 唤醒直接开机.
+                        if ((rtccon8 & BIT(4)) || (rtccon3 & BIT(1))) {   //VUSB 唤醒直接开�?
                             if(!sys_cb.rtc_first_pwron){
                                 if (p111_en) {
                                     pll1_enable();
@@ -779,7 +779,7 @@ AT(.com_text.bsp.key)
 void key_knob_process(u16 adc_val, const u8 *knob_level, u8 *key_val)
 {
     u8 step = 0;
-    if (s_abs((int)knob_level[*key_val] - (int)adc_val) > 4) {    //取绝对值消抖
+    if (s_abs((int)knob_level[*key_val] - (int)adc_val) > 4) {    //取绝对值消�?
         while (adc_val > knob_level[step]) {
             step++;
         }
@@ -789,7 +789,7 @@ void key_knob_process(u16 adc_val, const u8 *knob_level, u8 *key_val)
 #endif
 
 #if USER_KEY_THRICE_EN
-//按键三击检测
+//按键三击检�?
 AT(.com_text.bsp.key)
 u16 key_three_press_process(u16 key_val)
 {
@@ -917,7 +917,7 @@ u8 bsp_key_scan(void)
 #endif // (IRRX_SW_EN || IRRX_HW_EN)
 
 #if USER_ADKEY_MUX_SDCLK
-    //需要放到最后处理,当没进行adc convert需要返回
+    //需要放到最后处�?当没进行adc convert需要返�?
     if (key_val == NO_KEY) {
         if (!adc_cb.sdclk_valid) {
             return NO_KEY;
@@ -927,13 +927,13 @@ u8 bsp_key_scan(void)
 #endif // USER_ADKEY_MUX_SDCLK
 
     key = bsp_key_process(key_val);
-	//恢复出厂设置按键逻辑转换。
+	//恢复出厂设置按键逻辑转换�?
     if (xcfg_cb.reset_factory_en) {
 		bsp_reset_key_process(key, key_val);
     }
     
     if (key != NO_KEY) {
-        //printf("enqueue: %04x\n", key);
+        printf("enqueue: %04x\n", key);
         if ((key & KEY_TYPE_MASK) == KEY_LONG_UP) {
             msg_queue_detach(key | KEY_HOLD);       //长按抬键，先清掉HOLD按键消息
         }

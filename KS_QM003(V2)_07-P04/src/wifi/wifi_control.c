@@ -2774,9 +2774,15 @@ uint32_t WiFiControl(void)
 					gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
 					MsgSend(MSG_COMMON_CLOSE);
 				}
+
+				if ((WIFI_PLAY_KAISHU_RADIO_SLEEP != gWiFi.KaiShuRadio)
+				&& WiFiKaiShuSleepModeGet())
+				{
+				    WiFiKaiShuSleepModeSet(FALSE);
+				}
 				break;
 
-			case MSG_WIFI_PREV_CH:	
+			case MSG_WIFI_PREV_CH:
 				if(WIFI_PLAY_KAISHU_SDCARD == gWiFi.KaiShuRadio)
 				{
 					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_RADIO_MAX;
@@ -2793,6 +2799,12 @@ uint32_t WiFiControl(void)
 					gWiFi.KaiShuRadio = WIFI_PLAY_KAISHU_SDCARD;
 					gSys.NextModuleID = MODULE_ID_PLAYER_WIFI_SD;
 					MsgSend(MSG_COMMON_CLOSE);
+				}
+
+				if ((WIFI_PLAY_KAISHU_RADIO_SLEEP != gWiFi.KaiShuRadio)
+				&& WiFiKaiShuSleepModeGet())
+				{
+				    WiFiKaiShuSleepModeSet(FALSE);
 				}
 				break;
 

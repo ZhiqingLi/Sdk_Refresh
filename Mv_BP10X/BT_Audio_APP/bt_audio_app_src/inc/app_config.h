@@ -334,7 +334,7 @@
 #ifdef CFG_RES_CARD_USE
 #include "sd_card.h"
 
-#define	CFG_RES_CARD_GPIO				SDIO_A20_A21_A22//SDIO_A15_A16_A17 //注意其他文件参数修改。
+#define	CFG_RES_CARD_GPIO				SDIO_A15_A16_A17//SDIO_A20_A21_A22 //注意其他文件参数修改。
 #define	CFG_FUNC_CARD_DETECT //检测sd卡插入弹出，电路配合
 #endif //CFG_RES_CARD_USE
 #endif
