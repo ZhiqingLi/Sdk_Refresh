@@ -1,9 +1,9 @@
-20:04:36 **** Incremental Build of configuration Debug for project BT_Audio_APP ****
+22:13:47 **** Incremental Build of configuration Debug for project BT_Audio_APP ****
 make pre-build main-build 
 ..\script.bat
 
 F:\Soft_sdk\Mv_BP10X\BT_Audio_APP\Debug>..\..\MVsB1_Base_SDK\tools\remind_script\MergeAudio2BinNew.exe -a 0x0 -i ..\..\..\BT_Audio_APP\remind_file 
-Thu Sep 19 20:04:39 2019
+Thu Sep 26 22:13:49 2019
 MergeAudio2Bin Tools version v4.0 for MVS SDK SoundRemind
 current path: F:\Soft_sdk\Mv_BP10X\MVsB1_Base_SDK\tools\remind_script
 inputdir=..\..\..\BT_Audio_APP\remind_file

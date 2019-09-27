@@ -72,10 +72,9 @@
           <tags>persp.viewSC:org.eclipse.cdt.codan.internal.ui.views.ProblemDetails</tags>
           <tags>persp.viewSC:org.eclipse.cdt.ui.CView</tags>
           <tags>persp.viewSC:org.eclipse.cdt.ui.includeBrowser</tags>
-          <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoJsjYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" selectedElement="_XLZoJ8jYEemumI9iz3TqpQ" horizontal="true">
+          <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoJsjYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" selectedElement="_XLZoMMjYEemumI9iz3TqpQ" horizontal="true">
             <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoJ8jYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="1780" selectedElement="_XLZoKMjYEemumI9iz3TqpQ">
               <children xsi:type="basic:PartStack" xmi:id="_XLZoKMjYEemumI9iz3TqpQ" elementId="topLeft" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="5223" selectedElement="_XLZoKcjYEemumI9iz3TqpQ">
-                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoKcjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributorURI="platform:/plugin/com.andestech.ide.deploy" ref="_XLaPfMjYEemumI9iz3TqpQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoKsjYEemumI9iz3TqpQ" elementId="org.eclipse.cdt.ui.CView" contributorURI="platform:/plugin/com.andestech.ide.deploy" toBeRendered="false" ref="_XLaPf8jYEemumI9iz3TqpQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoK8jYEemumI9iz3TqpQ" elementId="org.eclipse.ui.views.ResourceNavigator" contributorURI="platform:/plugin/com.andestech.ide.deploy" toBeRendered="false" ref="_XLaPgMjYEemumI9iz3TqpQ"/>
@@ -86,7 +85,7 @@
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoL8jYEemumI9iz3TqpQ" elementId="org.eclipse.ui.views.ContentOutline" contributorURI="platform:/plugin/com.andestech.ide.deploy" ref="_XLa2RcjYEemumI9iz3TqpQ"/>
               </children>
             </children>
-            <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoMMjYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="8220" selectedElement="_XLZoMcjYEemumI9iz3TqpQ">
+            <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoMMjYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="8220" selectedElement="_XLZoNcjYEemumI9iz3TqpQ">
               <children xsi:type="basic:PartSashContainer" xmi:id="_XLZoMcjYEemumI9iz3TqpQ" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="7374" selectedElement="_XLZoMsjYEemumI9iz3TqpQ" horizontal="true">
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoMsjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.editorss" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="7500" ref="_XLaPesjYEemumI9iz3TqpQ"/>
                 <children xsi:type="basic:PartStack" xmi:id="_XLZoM8jYEemumI9iz3TqpQ" elementId="topRight" contributorURI="platform:/plugin/com.andestech.ide.deploy" toBeRendered="false" containerData="2500">
@@ -96,6 +95,7 @@
               <children xsi:type="basic:PartStack" xmi:id="_XLZoNcjYEemumI9iz3TqpQ" elementId="bottom" contributorURI="platform:/plugin/com.andestech.ide.deploy" containerData="2626" selectedElement="_XLZoNsjYEemumI9iz3TqpQ">
                 <tags>C/C++</tags>
                 <tags>&#x5e38;&#x89c4;</tags>
+                <tags>active</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoNsjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.console.ConsoleView" contributorURI="platform:/plugin/com.andestech.ide.deploy" ref="_XLaPiMjYEemumI9iz3TqpQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoN8jYEemumI9iz3TqpQ" elementId="org.eclipse.ui.views.PropertySheet" contributorURI="platform:/plugin/com.andestech.ide.deploy" ref="_XLa2QsjYEemumI9iz3TqpQ"/>
                 <children xsi:type="advanced:Placeholder" xmi:id="_XLZoOMjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.views.ProblemView" contributorURI="platform:/plugin/com.andestech.ide.deploy" ref="_XLaPgsjYEemumI9iz3TqpQ"/>
@@ -421,7 +421,7 @@
         <tags>org.eclipse.e4.primaryDataStack</tags>
         <tags>EditorStack</tags>
         <children xsi:type="basic:Part" xmi:id="_x3SzUM94EemR4ZIgJfoqAg" elementId="org.eclipse.e4.ui.compatibility.editor" contributorURI="platform:/plugin/com.andestech.ide.deploy" contributionURI="bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityEditor" label="i2sin_mode.c" iconURI="platform:/plugin/org.eclipse.cdt.ui/icons/obj16/c_file_obj.gif" closeable="true">
-          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;i2sin_mode.c&quot; partName=&quot;i2sin_mode.c&quot; title=&quot;i2sin_mode.c&quot; tooltip=&quot;BT_Audio_APP/bt_audio_app_src/apps/i2sin_mode.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/BT_Audio_APP/bt_audio_app_src/apps/i2sin_mode.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;8748&quot; selectionTopPixel=&quot;7843&quot;/>&#xD;&#xA;&lt;/editor>"/>
+          <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;editor id=&quot;org.eclipse.cdt.ui.editor.CEditor&quot; name=&quot;i2sin_mode.c&quot; partName=&quot;i2sin_mode.c&quot; title=&quot;i2sin_mode.c&quot; tooltip=&quot;BT_Audio_APP/bt_audio_app_src/apps/i2sin_mode.c&quot;>&#xD;&#xA;&lt;input factoryID=&quot;org.eclipse.ui.part.FileEditorInputFactory&quot; path=&quot;/BT_Audio_APP/bt_audio_app_src/apps/i2sin_mode.c&quot;/>&#xD;&#xA;&lt;editorState selectionHorizontalPixel=&quot;0&quot; selectionLength=&quot;0&quot; selectionOffset=&quot;8748&quot; selectionTopPixel=&quot;7471&quot;/>&#xD;&#xA;&lt;/editor>"/>
           <tags>Editor</tags>
           <tags>org.eclipse.cdt.ui.editor.CEditor</tags>
           <tags>removeOnHide</tags>
@@ -438,8 +438,6 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view CommonNavigator.LINKING_ENABLED=&quot;0&quot; org.eclipse.cdt.ui.cview.groupincludes=&quot;false&quot; org.eclipse.cdt.ui.cview.groupmacros=&quot;false&quot; org.eclipse.cdt.ui.editor.CUChildren=&quot;true&quot; org.eclipse.ui.navigator.resources.workingSets.showTopLevelWorkingSets=&quot;0&quot;/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>active</tags>
-      <tags>activeOnClose</tags>
       <menus xmi:id="_XLaPfcjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.navigator.ProjectExplorer" contributorURI="platform:/plugin/com.andestech.ide.deploy">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -481,6 +479,8 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view/>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
+      <tags>active</tags>
+      <tags>activeOnClose</tags>
       <menus xmi:id="_XLa2QMjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.console.ConsoleView" contributorURI="platform:/plugin/com.andestech.ide.deploy">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -762,7 +762,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XLa2hMjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.workbench.file" contributorURI="platform:/plugin/com.andestech.ide.deploy">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_mMwO8NrVEemcKfMLzTNEoA" elementId="print" contributorURI="platform:/plugin/com.andestech.ide.deploy" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="&#x6253;&#x5370;" command="_XLfv0MjYEemumI9iz3TqpQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0nGIoOBnEem89bZ2UL3bGg" elementId="print" contributorURI="platform:/plugin/com.andestech.ide.deploy" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="&#x6253;&#x5370;" command="_XLfv0MjYEemumI9iz3TqpQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XLa2hsjYEemumI9iz3TqpQ" elementId="additions" contributorURI="platform:/plugin/com.andestech.ide.deploy" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -789,7 +789,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XLbdVcjYEemumI9iz3TqpQ" elementId="org.eclipse.ui.workbench.navigate" contributorURI="platform:/plugin/com.andestech.ide.deploy">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_mMyrMNrVEemcKfMLzTNEoA" elementId="org.eclipse.ui.window.pinEditor" contributorURI="platform:/plugin/com.andestech.ide.deploy" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="&#x9501;&#x5b9a;&#x7f16;&#x8f91;&#x5668;" type="Check" command="_XLfIDMjYEemumI9iz3TqpQ"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_0nJL8OBnEem89bZ2UL3bGg" elementId="org.eclipse.ui.window.pinEditor" contributorURI="platform:/plugin/com.andestech.ide.deploy" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="&#x9501;&#x5b9a;&#x7f16;&#x8f91;&#x5668;" type="Check" command="_XLfIDMjYEemumI9iz3TqpQ"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_XLbdV8jYEemumI9iz3TqpQ" elementId="group.editor" contributorURI="platform:/plugin/com.andestech.ide.deploy" toBeRendered="false">
         <tags>toolbarSeparator</tags>
