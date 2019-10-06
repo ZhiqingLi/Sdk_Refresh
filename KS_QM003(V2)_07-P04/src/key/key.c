@@ -446,7 +446,7 @@ void KeyScan(void)
 			return;
 		}*/
 		
-		if(!WiFiFirmwareUpgradeStateGet())				//WiFi升级中禁止按键操作
+		if(SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())				//WiFi升级中禁止按键操作
 #endif
 		{
 			APP_DBG("Key Msg : %x\n", Msg);

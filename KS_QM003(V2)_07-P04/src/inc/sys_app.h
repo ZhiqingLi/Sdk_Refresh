@@ -29,6 +29,15 @@ extern "C" {
 #include "spi_flash.h"
 #include "breakpoint.h"
 
+//系统升级状态
+enum
+{
+	SYS_UPGRADE_IDLE = 0,
+	SYS_UPGRADE_RUN = 1,
+	SYS_UPGRADE_SUCCEED = 2,
+	SYS_UPGRADE_FAIL = 3,
+};
+
 //语言类型
 typedef enum _LANG
 {

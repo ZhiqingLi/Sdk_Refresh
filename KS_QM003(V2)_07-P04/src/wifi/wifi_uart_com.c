@@ -1789,7 +1789,7 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_BURNING:
-			WiFiFirmwareUpgradeStateSet(1);
+			WiFiFirmwareUpgradeStateSet(SYS_UPGRADE_RUN);
 			if(gSys.CurModuleID != MODULE_ID_WIFI)
 			{
 				gSys.NextModuleID = MODULE_ID_WIFI;
@@ -1798,11 +1798,11 @@ void WiFi_SendCmdToMcu(uint16_t WiFiCmd, uint8_t* CmdData)
 			break;
 
 		case AXX_BURN002:
-			WiFiFirmwareUpgradeStateSet(2);
+			WiFiFirmwareUpgradeStateSet(SYS_UPGRADE_SUCCEED);
 			break;
 
 		case AXX_BURN003:
-			WiFiFirmwareUpgradeStateSet(3);
+			WiFiFirmwareUpgradeStateSet(SYS_UPGRADE_FAIL);
 			break;
 
 		case AXX_WPS_ON:	

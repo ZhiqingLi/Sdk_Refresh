@@ -272,7 +272,7 @@ void SoundRemind(uint16_t SoundId)
 #endif
 	//wifi语音中禁止播放提示音。
 	if(!gSys.SoundRemindOn || ((gWiFi.MicState != WIFI_AVS_STATUS_IDLE) && (gSys.CurModuleID == MODULE_ID_WIFI))
-		|| WiFiFirmwareUpgradeStateGet())
+		|| (SYS_UPGRADE_RUN == WiFiFirmwareUpgradeStateGet()))
 	{
 		return;
 	}

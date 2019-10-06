@@ -1061,7 +1061,7 @@ extern "C" {
 #ifdef FUNC_AUDIO_EFFECT_EN
 	#include "audio_effect_codec.h"
 	#define DIGITAL_PER_GAIN_EN                      //数字信号预增益设置，
-	#define DIGITAL_PER_GAIN_VAL              1640   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
+	#define DIGITAL_PER_GAIN_VAL              1320   //数字信号预增益值，Vout = DIGITAL_PER_GAIN_VAL/4095*1000mV
 	//#define FUNC_AUDIO_EFFECT_EQ_EN                  //EQ功能开关
 #endif
 

@@ -683,7 +683,7 @@ void WiFiWorkStateSet(uint8_t State)
 			break;
 
 		case WIFI_STATUS_REBOOT_MCU:
-			WiFiFirmwareUpgradeStateSet(0);
+			WiFiFirmwareUpgradeStateSet(SYS_UPGRADE_IDLE);
 #ifdef	FUNC_WIFI_UART_UPGRADE
 			if(UpgradeDataStartEnFlag == TRUE)
 			{
@@ -903,7 +903,7 @@ void WiFiRequestMcuPowerOff(void)
 {
 	static uint8_t PowerOffCnt = 0;
 	
-	if(!WiFiFirmwareUpgradeStateGet())
+	if(SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 	{	
 		//断点信息保存
 		AudioSysInfoSetBreakPoint();
@@ -2199,7 +2199,7 @@ void WiFiStateCheck(void)
 {
 	#define WIFI_STATE_CHECK_TIME	30000	//WiFi状态查询时间间隔(10s)	
 
-	if(WiFiFactoryStateGet() || WiFiFirmwareUpgradeStateGet())
+	if(WiFiFactoryStateGet() || (SYS_UPGRADE_RUN == WiFiFirmwareUpgradeStateGet()))
 	{
 		return;
 	}
@@ -2290,7 +2290,7 @@ void McuGetWiFiPlayStateParams(void)
 void WiFiGetProjectParams(void)
 {	
 	WiFiFactoryStateSet(0);
-	WiFiFirmwareUpgradeStateSet(0);
+	WiFiFirmwareUpgradeStateSet(SYS_UPGRADE_IDLE);
 		
 	Mcu_SendCmdToWiFi(MCU_CAP_PRJ, NULL);
 	WaitMs(10);
@@ -2429,7 +2429,7 @@ void WiFiLedCb(void* Param)
 	}
 	
 	LedBlinkCnt++;
-	if(WiFiFirmwareUpgradeStateGet() || WiFiFactoryStateGet())
+	if((SYS_UPGRADE_RUN == WiFiFirmwareUpgradeStateGet()) || WiFiFactoryStateGet())
 	{
 		LED_WHITE_MODE_OFF();
 		TimeOutSet(&WiFiLedBlinkTimer, 400);
@@ -2722,7 +2722,7 @@ uint32_t WiFiControl(void)
 		{	
 			case MSG_COMMON_CLOSE:  //WiFi模式只有收到这个消息才会退出
 			case MSG_MODE:        //working mode changing
-				if(WiFiFirmwareUpgradeStateGet())
+				if(SYS_UPGRADE_RUN == WiFiFirmwareUpgradeStateGet())
 				{
 					gSys.NextModuleID = MODULE_ID_UNKNOWN;
 					Msg = MSG_NONE;

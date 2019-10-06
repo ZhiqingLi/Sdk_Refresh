@@ -468,7 +468,7 @@ int32_t main(void)
 #ifdef FUNC_SLEEP_EN
 		if(GetSilenceMuteFlag() && (gSys.CurModuleID != MODULE_ID_RTC)
 #ifdef FUNC_WIFI_EN
-		&& !WiFiFirmwareUpgradeStateGet()
+		&& (SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 #endif
 #ifdef OPTION_CHARGER_DETECT
 		&& !IsInCharge()

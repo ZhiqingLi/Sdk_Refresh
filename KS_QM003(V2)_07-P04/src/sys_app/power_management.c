@@ -373,7 +373,7 @@ static void PowerLdoinLevelMonitor(bool PowerOnInitFlag)
 			if(((!LowPowerSoundCnt && (LowPowerDetCnt >= LOW_POWEROFF_DELAY))
 			|| (PowerOnInitFlag && (LdoinLevelAverage <= LDOIN_VOLTAGE_OFF)))
 #ifdef FUNC_WIFI_EN
-			&& !WiFiFirmwareUpgradeStateGet()
+			&& (SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 #endif
 			) {
 				if(IsTimeOut(&PowerOffDetectTimer) && (MODULE_ID_POWEROFF != gSys.CurModuleID))	/*MSG_COMMON_CLOSE only need send once*/
@@ -492,7 +492,7 @@ void PowerMonitor(void)
 		if(IsInCharge()) {		//充电器已经接入的处理	
 			if (IS_CUR_WORK_MODULE()
 			//&& !IS_RTC_WAKEUP()
-			&& !WiFiFirmwareUpgradeStateGet()
+			&& (SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 			&& IsTimeOut(&PowerOffDetectTimer)) {
 				TimeOutSet(&PowerOffDetectTimer, POWER_OFF_JITTER_TIMER);
 				gSys.NextModuleID = MODULE_ID_IDLE;
@@ -676,7 +676,7 @@ void SystemPowerOffDetect(void)
 	{
 		if((slide_switch_pd_cnt-- == 0)
 #ifdef FUNC_WIFI_EN                             //WiFi升级中禁止关机
-		&& (!WiFiFirmwareUpgradeStateGet())
+		&& (SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 #endif
 		)
 		{
@@ -707,7 +707,7 @@ void SystemPowerOffDetect(void)
 #endif
 #ifdef FUNC_WIFI_EN
 	//WiFi升级中禁止关机
-	&& (!WiFiFirmwareUpgradeStateGet())
+	&& (SYS_UPGRADE_RUN != WiFiFirmwareUpgradeStateGet())
 #endif
 	)
 	{
